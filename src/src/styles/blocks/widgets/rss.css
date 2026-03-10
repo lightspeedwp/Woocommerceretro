@@ -1,0 +1,44 @@
+/* ========================================
+   RSS BLOCK
+   ======================================== */
+
+.wp-block-rss {
+  padding-left: 0;
+  list-style: none;
+  /* Margin removed */
+}
+
+.wp-block-rss__item {
+  /* Margin removed */
+  padding-bottom: var(--wp--preset--spacing--40);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-block-rss__item:last-child {
+  border-bottom: none;
+  /* Margin removed */
+}
+
+.wp-block-rss__item-title {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--bold);
+  /* Margin removed */
+}
+
+.wp-block-rss__item-title a {
+  text-decoration: none;
+}
+
+.wp-block-rss__item-author,
+.wp-block-rss__item-publish-date {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  /* Margin removed */
+}
+
+.wp-block-rss__item-excerpt,
+.wp-block-rss__item-full-content {
+  /* Margin removed */
+  font-size: var(--wp--preset--font-size--normal);
+  color: var(--wp--preset--color--foreground);
+}

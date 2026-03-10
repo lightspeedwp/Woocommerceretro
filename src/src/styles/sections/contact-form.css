@@ -1,0 +1,155 @@
+/* ========================================
+   CONTACT FORM SECTION
+   ======================================== */
+
+.wp-contact-section {
+  width: 100%;
+}
+
+.wp-contact-section__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--80);
+}
+
+.wp-contact-section__heading {
+  margin-bottom: var(--wp--preset--spacing--40);
+  font-size: var(--wp--preset--font-size--heading-2);
+}
+
+.wp-contact-section__description {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--normal);
+}
+
+.wp-contact-section__grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--80);
+}
+
+@media (min-width: 1024px) {
+  .wp-contact-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Form */
+.wp-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-contact-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-contact-form__label {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-contact-form__required {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-contact-form__input,
+.wp-contact-form__textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--normal);
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-contact-form__input:focus,
+.wp-contact-form__textarea:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--accent);
+  box-shadow: 0 0 0 2px var(--wp--preset--color--accent-light);
+}
+
+.dark .wp-contact-form__input,
+.dark .wp-contact-form__textarea {
+  background-color: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border-medium);
+}
+
+.wp-contact-form__message {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-contact-form__message--success { color: var(--wp--preset--color--success); }
+.wp-contact-form__message--error { color: var(--wp--preset--color--error); }
+
+/* Contact Info */
+.wp-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-contact-info__heading {
+  margin-bottom: var(--wp--preset--spacing--60);
+  font-size: var(--wp--preset--font-size--heading-3);
+}
+
+.wp-contact-info__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-contact-info__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-contact-info__icon-wrapper {
+  padding: var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--lg);
+  background-color: var(--wp--preset--color--accent-light); /* Needs check */
+  color: var(--wp--preset--color--accent);
+}
+
+/* Fallback for accent-light if not defined */
+.wp-contact-info__icon-wrapper {
+  background-color: rgba(124, 58, 237, 0.1); 
+}
+
+.dark .wp-contact-info__icon-wrapper {
+  background-color: rgba(124, 58, 237, 0.2); 
+}
+
+.wp-contact-info__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.wp-contact-info__label {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  margin-bottom: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-contact-info__value {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-contact-info__link {
+  color: var(--wp--preset--color--muted-foreground);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-contact-info__link:hover {
+  color: var(--wp--preset--color--accent);
+}

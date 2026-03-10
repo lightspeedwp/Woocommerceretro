@@ -1,0 +1,47 @@
+/* ========================================
+   MEDIA & TEXT BLOCK
+   ======================================== */
+
+.wp-block-media-text {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .wp-block-media-text {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wp-block-media-text__media img,
+.wp-block-media-text__media video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.wp-block-media-text__content {
+  padding: var(--wp--preset--spacing--40);
+}
+
+.is-vertically-aligned-top .wp-block-media-text__content {
+  align-self: start;
+}
+
+.is-vertically-aligned-center .wp-block-media-text__content {
+  align-self: center;
+}
+
+.is-vertically-aligned-bottom .wp-block-media-text__content {
+  align-self: end;
+}
+
+.has-media-on-the-right {
+  direction: rtl;
+}
+
+.has-media-on-the-right .wp-block-media-text__content {
+  direction: ltr;
+}

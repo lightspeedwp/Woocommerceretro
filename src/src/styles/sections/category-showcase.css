@@ -1,0 +1,111 @@
+/* ========================================
+   CATEGORY SHOWCASE GRID
+   ======================================== */
+
+.wp-category-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  text-decoration: none;
+  background-color: var(--wp--preset--color--surface);
+}
+
+.wp-category-card__image-container {
+  width: 100%;
+  height: 100%;
+}
+
+.wp-category-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--wp--preset--transition--slow) ease;
+}
+
+.wp-category-card:hover .wp-category-card__image {
+  transform: scale(1.05);
+}
+
+.wp-category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--wp--preset--spacing--30); /* Mobile padding */
+  color: white;
+  transition: background var(--wp--preset--transition--base) ease;
+  
+  /* Using gap instead of margins for strict no-margin policy */
+  gap: var(--wp--preset--spacing--10);
+}
+
+@media (min-width: 640px) {
+  .wp-category-card__overlay {
+    padding: var(--wp--preset--spacing--40); /* Desktop padding */
+  }
+}
+
+.wp-category-card:hover .wp-category-card__overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.wp-category-card__name {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Margin removed in favor of gap in parent */
+  margin: 0;
+}
+
+.wp-category-card__description {
+  font-size: var(--wp--preset--font-size--small);
+  color: rgba(255, 255, 255, 0.9);
+  /* Margin removed */
+  margin: 0;
+  
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--wp--preset--transition--base) ease;
+  height: 0;
+  overflow: hidden;
+}
+
+.wp-category-card:hover .wp-category-card__description {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  /* Add gap-like spacing when visible via flex parent gap */
+}
+
+.wp-category-card__count {
+  font-size: var(--wp--preset--font-size--xs);
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  /* Margin removed */
+  margin: 0;
+}
+
+.wp-category-card__action {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: white;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all var(--wp--preset--transition--base) ease;
+  /* Margin handled by parent gap */
+}
+
+.wp-category-card:hover .wp-category-card__action {
+  opacity: 1;
+  transform: translateX(0);
+}

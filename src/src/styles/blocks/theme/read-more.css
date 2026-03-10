@@ -1,0 +1,14 @@
+/* ========================================
+   READ MORE BLOCK
+   ======================================== */
+
+.wp-block-read-more {
+  display: inline-block;
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+  /* Margin removed */
+}
+
+.wp-block-read-more:hover {
+  text-decoration: underline;
+}

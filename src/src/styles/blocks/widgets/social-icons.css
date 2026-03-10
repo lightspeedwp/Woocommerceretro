@@ -1,0 +1,53 @@
+/* ========================================
+   SOCIAL ICONS BLOCK
+   ======================================== */
+
+.wp-block-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  padding-left: 0;
+  list-style: none;
+  /* Margin removed */
+}
+
+.wp-block-social-links li {
+  margin: 0;
+}
+
+.wp-block-social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: currentColor;
+  text-decoration: none;
+  transition: opacity var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-social-links a:hover {
+  opacity: 0.8;
+}
+
+.wp-block-social-links svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+}
+
+/* Styles */
+.is-style-logos-only .wp-social-link {
+  background: none;
+}
+
+.is-style-pill-shape .wp-social-link {
+  border-radius: 9999px;
+  background-color: var(--wp--preset--color--surface);
+}
+
+.is-style-outline .wp-social-link {
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+}

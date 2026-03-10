@@ -1,0 +1,53 @@
+/* ========================================
+   TOAST (SONNER)
+   ======================================== */
+
+.toaster {
+  /* Container styles if needed */
+}
+
+.wp-toast {
+  /* Default toast styles */
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  border: 1px solid var(--wp--preset--color--border);
+  box-shadow: var(--wp--preset--shadow--lg);
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: var(--wp--preset--spacing--40);
+  font-size: var(--wp--preset--font-size--sm);
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.dark .wp-toast {
+  background-color: var(--wp--preset--color--surface);
+}
+
+.wp-toast-description {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+.wp-toast-action-button {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border-radius: var(--wp--preset--border-radius--sm);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--xs);
+  font-weight: var(--wp--preset--font-weight--medium);
+  transition: background-color var(--wp--preset--transition--base);
+}
+
+.wp-toast-action-button:hover {
+  opacity: 0.9;
+}
+
+.wp-toast-cancel-button {
+  background-color: var(--wp--preset--color--muted);
+  color: var(--wp--preset--color--muted-foreground);
+  border-radius: var(--wp--preset--border-radius--sm);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--xs);
+  font-weight: var(--wp--preset--font-weight--medium);
+}

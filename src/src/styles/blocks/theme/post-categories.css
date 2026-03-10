@@ -1,0 +1,23 @@
+/* ========================================
+   POST CATEGORIES BLOCK
+   ======================================== */
+
+.wp-block-post-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wp-block-post-categories a {
+  text-decoration: none;
+  color: var(--wp--preset--color--primary);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-block-post-categories a:hover {
+  text-decoration: underline;
+}

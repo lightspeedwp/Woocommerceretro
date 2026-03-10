@@ -1,0 +1,196 @@
+/**
+ * Light Mode Theme (Default)
+ * 
+ * This stylesheet provides default light mode styling.
+ * Most colors are already defined in theme-variables.css,
+ * but this file provides light-mode-specific adjustments.
+ */
+
+/* ========================================
+   LIGHT MODE BASE STYLES
+   ======================================== */
+
+/* Light mode is the default, so most variables are already set in theme-variables.css */
+/* This file provides any light-mode-specific overrides or adjustments */
+
+/* Ensure good contrast for text on light backgrounds */
+body {
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* ========================================
+   LIGHT MODE-SPECIFIC ADJUSTMENTS
+   ======================================== */
+
+/* Links in light mode */
+a {
+  color: var(--wp--preset--color--link);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+a:hover {
+  color: var(--wp--preset--color--link-hover);
+}
+
+a:focus-visible {
+  outline: var(--wp--preset--focus-ring--width) solid var(--wp--preset--focus-ring--color);
+  outline-offset: var(--wp--preset--focus-ring--offset);
+  border-radius: var(--wp--preset--border-radius--sm);
+}
+
+/* Input fields in light mode */
+input {
+  background-color: var(--wp--preset--color--background);
+  border: 1px solid var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+textarea {
+  background-color: var(--wp--preset--color--background);
+  border: 1px solid var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+select {
+  background-color: var(--wp--preset--color--background);
+  border: 1px solid var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+
+input::placeholder {
+  color: var(--wp--preset--color--muted-foreground);
+}
+textarea::placeholder {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--wp--preset--focus-ring--color);
+}
+textarea:focus {
+  outline: none;
+  border-color: var(--wp--preset--focus-ring--color);
+}
+select:focus {
+  outline: none;
+  border-color: var(--wp--preset--focus-ring--color);
+}
+
+/* Buttons in light mode */
+button {
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ========================================
+   LIGHT MODE SURFACE VARIATIONS
+   ======================================== */
+
+/* Slightly different surface colors for depth */
+.surface-elevated {
+  background-color: #ffffff;
+  box-shadow: var(--wp--preset--shadow--sm);
+}
+
+.surface-sunken {
+  background-color: #f9fafb;
+}
+
+/* ========================================
+   LIGHT MODE INTERACTIVE STATES
+   ======================================== */
+
+/* Hover states should be subtle in light mode */
+.wp-block-navigation-item__content:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Product cards on hover */
+.wc-block-grid__product:hover {
+  box-shadow: var(--wp--preset--shadow--md);
+}
+
+/* Button hover states */
+.wc-block-components-button--primary:hover {
+  filter: brightness(0.95);
+}
+
+.wc-block-components-button--secondary:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================
+   LIGHT MODE BORDERS
+   ======================================== */
+
+/* Ensure borders are subtle but visible */
+.has-border {
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+.has-border-top {
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.has-border-bottom {
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+/* ========================================
+   LIGHT MODE ACCESSIBILITY
+   ======================================== */
+
+/* Ensure focus states are always visible */
+*:focus-visible {
+  outline: var(--wp--preset--focus-ring--width) solid var(--wp--preset--focus-ring--color);
+  outline-offset: var(--wp--preset--focus-ring--offset);
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  :root {
+    --wp--preset--color--border: rgba(0, 0, 0, 0.3);
+    --wp--preset--color--border-strong: rgba(0, 0, 0, 0.5);
+  }
+  
+  button { border: 2px solid currentColor; }
+  .wp-block-button__link { border: 2px solid currentColor; }
+  .wc-block-components-button { border: 2px solid currentColor; }
+}
+
+/* ========================================
+   LIGHT MODE PRINT STYLES
+   ======================================== */
+
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  .wc-block-grid__product-actions { display: none; }
+  .wp-block-navigation { display: none; }
+  button { display: none; }
+  
+  /* Remove shadows and borders for cleaner print */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  /* Ensure links are visible */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}

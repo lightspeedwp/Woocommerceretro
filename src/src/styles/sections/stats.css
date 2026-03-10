@@ -1,0 +1,110 @@
+/* ========================================
+   STATS SECTION
+   ======================================== */
+
+.wp-stats-section {
+  width: 100%;
+  /* Flexbox for vertical spacing */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-stats-header {
+  text-align: center;
+  /* Margin removed */
+  margin: 0;
+  /* Use flexbox gap for internal spacing */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-stats-header__title {
+  /* Margin removed */
+  margin: 0;
+  font-size: var(--wp--preset--font-size--heading-2);
+}
+
+.wp-stats-header__description {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--normal);
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+  /* Margin removed */
+  margin: 0;
+}
+
+/* Layouts */
+.wp-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-stats-grid--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 768px) {
+  .wp-stats-grid--grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Stat Item */
+.wp-stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
+  /* Add gap for internal spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20); /* Increased from 10 to cover icon spacing */
+}
+
+.wp-stat-item__icon-wrapper {
+  /* Margin removed - relying on parent gap */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.wp-stat-item__icon {
+  color: var(--wp--preset--color--primary);
+}
+
+.dark .wp-stat-item__icon {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-stat-item__value {
+  font-size: var(--wp--preset--font-size--heading-1);
+  font-weight: var(--wp--preset--font-weight--bold);
+  /* Margin removed */
+  margin: 0;
+  line-height: 1.1;
+}
+
+.wp-stat-item__label {
+  font-size: var(--wp--preset--font-size--small);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Dark Mode Variants */
+.wp-stats-section--dark .wp-stats-header__title,
+.wp-stats-section--dark .wp-stat-item__value {
+  color: #ffffff;
+}
+
+.wp-stats-section--dark .wp-stats-header__description,
+.wp-stats-section--dark .wp-stat-item__label {
+  color: rgba(255, 255, 255, 0.7);
+}

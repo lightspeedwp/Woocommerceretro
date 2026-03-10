@@ -1,0 +1,52 @@
+/* ========================================
+   IMAGE BLOCK
+   ======================================== */
+
+.wp-block-image {
+  margin: 0;
+}
+
+.wp-block-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wp-block-image figcaption {
+  /* Margin removed */
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  text-align: center;
+}
+
+/* Alignments */
+.aligncenter {
+  text-align: center;
+  /* Margin removed */
+}
+
+.alignright {
+  float: right;
+  /* Margin removed */
+}
+
+.alignleft {
+  float: left;
+  /* Margin removed */
+}
+
+/* Image Fallback */
+.wp-image-fallback {
+  display: inline-block;
+  background-color: var(--wp--preset--color--muted);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wp-image-fallback__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}

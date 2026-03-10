@@ -1,0 +1,61 @@
+/* ========================================
+   BRAND LOGO GRID
+   ======================================== */
+
+.wp-brand-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--60);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .wp-brand-grid {
+    gap: var(--wp--preset--spacing--80);
+  }
+}
+
+.wp-brand-grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.wp-brand-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.wp-brand-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+.wp-brand-grid--cols-5 { grid-template-columns: repeat(5, 1fr); }
+.wp-brand-grid--cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+@media (min-width: 768px) {
+  .wp-brand-grid--md-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .wp-brand-grid--md-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .wp-brand-grid--lg-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .wp-brand-grid--lg-cols-5 { grid-template-columns: repeat(5, 1fr); }
+  .wp-brand-grid--lg-cols-6 { grid-template-columns: repeat(6, 1fr); }
+}
+
+.wp-brand-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--40);
+  transition: transform var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-item:hover {
+  transform: scale(1.05);
+}
+
+.wp-brand-image {
+  max-height: 3rem;
+  width: auto;
+  object-fit: contain;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-image--grayscale {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.wp-brand-image--grayscale:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}

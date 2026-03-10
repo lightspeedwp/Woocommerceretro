@@ -1,0 +1,67 @@
+/* ========================================
+   AVATAR BLOCK
+   ======================================== */
+
+.wp-block-avatar {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--wp--preset--border-radius--full, 9999px);
+  width: var(--wp--preset--spacing--40, 40px);
+  height: var(--wp--preset--spacing--40, 40px);
+  
+  /* Funky Redesign: Glassmorphism base */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform var(--wp--preset--transition--base) ease, box-shadow var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--wp--preset--color--neon-cyan, #00ffff);
+  border-color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.dark .wp-block-avatar {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.wp-block-avatar--sm {
+  width: var(--wp--preset--spacing--30, 30px);
+  height: var(--wp--preset--spacing--30, 30px);
+}
+
+.wp-block-avatar--lg {
+  width: var(--wp--preset--spacing--60, 60px);
+  height: var(--wp--preset--spacing--60, 60px);
+}
+
+.wp-block-avatar__image {
+  aspect-ratio: 1/1;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.wp-block-avatar__fallback {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--bold, 700);
+  text-transform: uppercase;
+  
+  /* Funky Redesign: Neon Gradient fallback */
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink, #ff00ff), var(--wp--preset--color--deep-purple, #2d0059));
+  color: var(--wp--preset--color--white);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}

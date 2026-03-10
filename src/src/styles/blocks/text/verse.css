@@ -1,0 +1,13 @@
+/* ========================================
+   VERSE BLOCK
+   ======================================== */
+
+.wp-block-verse {
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: var(--wp--preset--font-size--normal);
+  white-space: pre-wrap;
+  color: var(--wp--preset--color--foreground);
+  padding: var(--wp--preset--spacing--40);
+  background-color: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--md);
+}

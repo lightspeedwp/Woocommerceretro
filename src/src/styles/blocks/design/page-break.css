@@ -1,0 +1,19 @@
+/* ========================================
+   PAGE BREAK BLOCK
+   ======================================== */
+
+.wp-block-page-break {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--wp--preset--spacing--40) 0;
+  border-top: 1px solid var(--wp--preset--color--border);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  font-size: var(--wp--preset--font-size--small);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+}
+
+.wp-block-page-break::before {
+  content: 'Page Break';
+}

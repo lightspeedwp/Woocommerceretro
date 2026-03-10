@@ -1,0 +1,137 @@
+/* ========================================
+   VARIANT SELECTOR
+   Size, color, and dropdown selectors
+   ======================================== */
+
+.wc-block-variant-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wc-block-variant-selector__label {
+  display: block;
+  color: var(--wp--preset--color--foreground);
+}
+
+.wc-block-variant-selector__label-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wc-block-variant-selector__label-value {
+  margin-left: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Button Selector */
+.wc-block-variant-selector__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wc-block-variant-selector__button {
+  min-width: 44px;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  transition: all var(--wp--preset--transition--base);
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+  cursor: pointer;
+}
+
+.wc-block-variant-selector__button:hover {
+  border-color: var(--wp--preset--color--primary);
+}
+
+.wc-block-variant-selector__button--selected {
+  border-color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--primary-muted);
+  color: var(--wp--preset--color--primary);
+}
+
+.wc-block-variant-selector__button--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Swatch Selector */
+.wc-block-variant-selector__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wc-block-variant-selector__swatch {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--wp--preset--color--border);
+  transition: all var(--wp--preset--transition--base);
+  cursor: pointer;
+}
+
+.wc-block-variant-selector__swatch:hover {
+  border-color: var(--wp--preset--color--primary);
+}
+
+.wc-block-variant-selector__swatch--selected {
+  border-color: var(--wp--preset--color--primary);
+  transform: scale(1.1);
+}
+
+.wc-block-variant-selector__swatch--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.wc-block-variant-selector__swatch-check {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-block-variant-selector__swatch-check--light {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wc-block-variant-selector__swatch-check--dark {
+  color: #fff;
+}
+
+.wc-block-variant-selector__swatch-disabled-line {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-block-variant-selector__swatch-strike {
+  width: 100%;
+  height: 2px;
+  background-color: var(--wp--preset--color--muted-foreground);
+  transform: rotate(45deg);
+}
+
+/* Dropdown Select */
+.wc-block-variant-selector__select {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--normal);
+}
+
+.wc-block-variant-selector__select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--wp--preset--color--primary);
+  border-color: transparent;
+}

@@ -1,0 +1,152 @@
+/**
+ * Product Gallery - BEM CSS
+ * 
+ * Layout: Thumbnails on left, square main image on right
+ * Responsive: Stack thumbnails below on mobile
+ * 
+ * @see /src/app/components/blocks/single-product/ProductGallery.tsx
+ */
+
+/* ========================================
+   PRODUCT GALLERY - CONTAINER
+   ======================================== */
+
+.wc-product-gallery {
+  display: flex;
+  gap: var(--wp--preset--spacing--40);
+  width: 100%;
+}
+
+/* Mobile: Stack thumbnails below */
+@media (max-width: 768px) {
+  .wc-product-gallery {
+    flex-direction: column-reverse;
+  }
+}
+
+/* ========================================
+   PRODUCT GALLERY - THUMBNAILS (LEFT)
+   ======================================== */
+
+.wc-product-gallery__thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  flex-shrink: 0;
+}
+
+/* Mobile: Horizontal thumbnails row */
+@media (max-width: 768px) {
+  .wc-product-gallery__thumbnails {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: var(--wp--preset--spacing--20);
+  }
+}
+
+/* ========================================
+   PRODUCT GALLERY - THUMBNAIL BUTTON
+   ======================================== */
+
+.wc-product-gallery__thumbnail {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: var(--wp--preset--border-radius--sm);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  background: var(--wp--preset--color--surface);
+  padding: 0;
+}
+
+.wc-product-gallery__thumbnail:hover {
+  border-color: var(--wp--preset--color--border);
+}
+
+.wc-product-gallery__thumbnail--active {
+  border-color: var(--wp--preset--color--primary);
+}
+
+.dark .wc-product-gallery__thumbnail--active {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* ========================================
+   PRODUCT GALLERY - THUMBNAIL IMAGE
+   ======================================== */
+
+.wc-product-gallery__thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========================================
+   PRODUCT GALLERY - MAIN IMAGE (SQUARE)
+   ======================================== */
+
+.wc-product-gallery__main {
+  flex: 1;
+  position: relative;
+  /* Square aspect ratio container */
+  aspect-ratio: 1 / 1;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Mobile: Allow full width */
+@media (max-width: 768px) {
+  .wc-product-gallery__main {
+    max-width: 100%;
+  }
+}
+
+/* ========================================
+   PRODUCT GALLERY - INNER WRAPPER
+   (Already defined in single-product-blocks.css)
+   ======================================== */
+
+.wc-product-gallery__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+}
+
+/* ========================================
+   PRODUCT GALLERY - IMAGE
+   ======================================== */
+
+.wc-product-gallery__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========================================
+   DARK MODE ENHANCEMENTS
+   ======================================== */
+
+.dark .wc-product-gallery__main {
+  /* Subtle glow in dark mode */
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.dark .wc-product-gallery__thumbnail {
+  background: var(--wp--preset--color--surface);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .wc-product-gallery__thumbnail:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+}

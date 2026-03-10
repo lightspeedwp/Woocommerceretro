@@ -1,0 +1,36 @@
+/* ========================================
+   HOVER CARD
+   ======================================== */
+
+.wp-block-hover-card-content {
+  z-index: 50;
+  width: 16rem;
+  border-radius: var(--wp--preset--border-radius--md);
+  border: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--popover);
+  color: var(--wp--preset--color--popover-foreground);
+  padding: var(--wp--preset--spacing--40);
+  box-shadow: var(--wp--preset--shadow--md);
+  outline: none;
+  animation-duration: 200ms;
+}
+
+.wp-block-hover-card-content[data-state="open"] {
+  animation-name: hover-card-enter;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-hover-card-content[data-state="closed"] {
+  animation-name: hover-card-exit;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hover-card-enter {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hover-card-exit {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}

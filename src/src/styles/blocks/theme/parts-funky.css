@@ -1,0 +1,1166 @@
+/**
+ * Funky Global Parts CSS
+ * 
+ * Funky overrides for Header, Footer, MiniCart, MobileMenu, Breadcrumbs, and Mega Menus.
+ * Applies glassmorphism, neon accents, gradient dividers, glow effects.
+ * 
+ * Phase 2 of Funky Redesign Orchestrator.
+ * @see /guidelines/design-tokens/Funky-Woocommerce-Design-System.md
+ * @see /guidelines/parts/Funky-Global-Parts.md
+ * @see /src/styles/theme-funky.css (tokens, animations, utilities)
+ */
+
+/* ========================================
+   HEADER - Glassmorphism + Neon Nav Hovers
+   ======================================== */
+
+/* Override base header with glass effect */
+.wp-site-header--funky {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--funky-glass-border);
+  box-shadow: var(--funky-glass-shadow);
+}
+
+.dark .wp-site-header--funky {
+  border-bottom-color: var(--funky-glass-header-border);
+}
+
+/* Neon hover underline on desktop nav links */
+.wp-site-header--funky .wp-header-desktop__nav a {
+  position: relative;
+}
+
+.wp-site-header--funky .wp-header-desktop__nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--funky-interactive-underline-start), var(--funky-interactive-underline-end));
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: left;
+}
+
+.wp-site-header--funky .wp-header-desktop__nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Header action buttons - WCAG AA-safe hover */
+.wp-site-header--funky .wp-header-desktop__action-button:hover {
+  color: var(--funky-interactive-color);
+  background-color: var(--funky-interactive-bg);
+}
+.wp-site-header--funky .wp-header-desktop__account:hover {
+  color: var(--funky-interactive-color);
+  background-color: var(--funky-interactive-bg);
+}
+
+.dark .wp-site-header--funky .wp-header-desktop__action-button:hover {
+  color: var(--funky-interactive-color);
+  background-color: var(--funky-interactive-bg);
+}
+.dark .wp-site-header--funky .wp-header-desktop__account:hover {
+  color: var(--funky-interactive-color);
+  background-color: var(--funky-interactive-bg);
+}
+
+/* Mobile action buttons - WCAG AA-safe hover */
+.wp-site-header--funky .wp-header-mobile__menu-toggle:hover {
+  color: var(--funky-interactive-color);
+  background-color: var(--funky-interactive-bg);
+}
+.wp-site-header--funky .wp-header-mobile__search-toggle:hover {
+  color: var(--funky-interactive-color);
+  background-color: var(--funky-interactive-bg);
+}
+
+/* Focus-visible states - AA compliant ring */
+.wp-site-header--funky .wp-header-desktop__action-button:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--md); }
+.wp-site-header--funky .wp-header-desktop__account:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--md); }
+.wp-site-header--funky .wp-header-mobile__menu-toggle:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--md); }
+.wp-site-header--funky .wp-header-mobile__search-toggle:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--md); }
+.wp-site-header--funky .wp-header-mobile__search-clear:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--md); }
+
+/* Search input - AA-safe focus glow */
+.wp-site-header--funky .wp-header-desktop__search-input:focus {
+  outline: 2px solid var(--funky-interactive-focus);
+  border-color: transparent;
+  box-shadow: 0 0 0 4px var(--funky-interactive-bg);
+}
+.wp-site-header--funky .wp-header-mobile__search-input:focus {
+  outline: 2px solid var(--funky-interactive-focus);
+  border-color: transparent;
+  box-shadow: 0 0 0 4px var(--funky-interactive-bg);
+}
+
+.dark .wp-site-header--funky .wp-header-desktop__search-input:focus {
+  outline-color: var(--funky-interactive-focus);
+  box-shadow: 0 0 0 4px var(--funky-interactive-bg);
+}
+.dark .wp-site-header--funky .wp-header-mobile__search-input:focus {
+  outline-color: var(--funky-interactive-focus);
+  box-shadow: 0 0 0 4px var(--funky-interactive-bg);
+}
+
+/* ========================================
+   FOOTER - Gradient Divider + Glow Social
+   ======================================== */
+
+/* Replace top border with gradient divider */
+.wp-site-footer--funky {
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.wp-site-footer--funky::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), transparent);
+  opacity: 0.4;
+}
+
+.dark .wp-site-footer--funky::before {
+  opacity: 0.6;
+}
+
+/* Footer background glow orbs */
+.wp-site-footer__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wp-site-footer__glow--pink {
+  background: var(--wp--preset--color--neon-pink);
+  width: 16rem;
+  height: 16rem;
+  opacity: 0.06;
+  top: -4rem;
+  left: 20%;
+}
+
+.wp-site-footer__glow--cyan {
+  background: var(--wp--preset--color--neon-cyan);
+  width: 20rem;
+  height: 20rem;
+  opacity: 0.04;
+  bottom: -6rem;
+  right: 15%;
+}
+
+.dark .wp-site-footer__glow--pink { opacity: 0.1; }
+.dark .wp-site-footer__glow--cyan { opacity: 0.08; }
+
+@media (max-width: 640px) {
+  .wp-site-footer__glow--pink { opacity: 0.03; }
+  .wp-site-footer__glow--cyan { opacity: 0.03; }
+  .dark .wp-site-footer__glow--pink { opacity: 0.05; }
+  .dark .wp-site-footer__glow--cyan { opacity: 0.04; }
+}
+
+/* Footer links - AA-safe hover */
+.wp-site-footer--funky .wp-site-footer__link:hover {
+  color: var(--funky-interactive-color);
+}
+
+/* Footer heading - subtle gradient underline */
+.wp-site-footer--funky .wp-site-footer__heading {
+  position: relative;
+  display: inline-block;
+  padding-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-site-footer--funky .wp-site-footer__heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  opacity: 0.5;
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__heading::after {
+  opacity: 0.7;
+}
+
+/* Social icons - subtle lift on hover */
+.wp-site-footer--funky .wp-footer-social-icon:hover {
+  color: var(--funky-interactive-color);
+}
+
+.dark .wp-site-footer--funky .wp-footer-social-icon:hover {
+  color: var(--funky-interactive-color);
+}
+
+/* Footer newsletter input - neon focus */
+.wp-site-footer--funky .wp-site-footer__newsletter-input:focus {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__newsletter-input:focus {
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.3);
+}
+
+/* Footer newsletter button - neon gradient */
+.wp-site-footer--funky .wp-site-footer__newsletter-button {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  color: #000000;
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-site-footer--funky .wp-site-footer__newsletter-button:hover {
+  filter: brightness(1.1);
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+}
+
+/* Footer bottom divider - gradient */
+.wp-site-footer--funky .wp-site-footer__bottom {
+  border-top: none;
+  position: relative;
+}
+
+.wp-site-footer--funky .wp-site-footer__bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-cyan), transparent);
+  opacity: 0.2;
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__bottom::before {
+  opacity: 0.35;
+}
+
+/* Footer legal links - AA-safe hover */
+.wp-site-footer--funky .wp-site-footer__legal-link:hover {
+  color: var(--funky-interactive-color);
+}
+
+/* Footer contact icons - AA-safe colors */
+.wp-site-footer--funky .wp-site-footer__contact-icon {
+  color: var(--funky-interactive-color);
+}
+
+/* ========================================
+   MINI CART - Glass Panel + Neon Totals
+   ======================================== */
+
+/* Funky mini cart container */
+.woocommerce-mini-cart--funky {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid var(--funky-glass-border);
+}
+
+.dark .woocommerce-mini-cart--funky {
+  border-left-color: rgba(0, 255, 255, 0.15);
+}
+
+/* Cart badge - neon gradient */
+.woocommerce-mini-cart__badge--funky {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  color: #000000;
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+/* Subtotal amount - neon glow */
+.woocommerce-mini-cart__subtotal-amount--funky {
+  color: var(--funky-interactive-color);
+}
+
+.dark .woocommerce-mini-cart__subtotal-amount--funky {
+  color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+/* Cart footer - glass surface */
+.woocommerce-mini-cart__footer--funky {
+  background: var(--funky-glass-bg);
+  border-top: 1px solid var(--funky-glass-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Cart item image - subtle glow on hover */
+.woocommerce-mini-cart-item__image--funky {
+  transition: box-shadow 0.3s ease;
+}
+
+.woocommerce-mini-cart-item__image--funky:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+.dark .woocommerce-mini-cart-item__image--funky:hover {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.2);
+}
+
+/* Mini cart header divider - gradient */
+.woocommerce-mini-cart__header--funky {
+  border-bottom: none;
+  position: relative;
+}
+
+.woocommerce-mini-cart__header--funky::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: var(--wp--preset--spacing--50);
+  right: var(--wp--preset--spacing--50);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), transparent);
+  opacity: 0.3;
+}
+
+.dark .woocommerce-mini-cart__header--funky::after {
+  opacity: 0.5;
+}
+
+/* ========================================
+   MOBILE MENU - Gradient Overlay
+   ======================================== */
+
+/* Full-screen gradient overlay background */
+.woocommerce-mobile-menu--funky {
+  background: linear-gradient(180deg, var(--wp--preset--color--background) 0%, var(--wp--preset--color--surface) 100%);
+}
+
+.dark .woocommerce-mobile-menu--funky {
+  background: linear-gradient(180deg, rgba(3, 2, 19, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
+}
+
+/* Gradient top border (replaces inline style) */
+.woocommerce-mobile-menu__quick-links--funky {
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan)) 1;
+}
+
+/* Nav section label - gradient text (AA-safe) */
+.woocommerce-mobile-menu__nav-label--funky {
+  background: linear-gradient(135deg, #be185d, #0e7490);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .woocommerce-mobile-menu__nav-label--funky {
+  background: linear-gradient(135deg, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile search input - AA-safe focus */
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__search-input:focus {
+  outline: 2px solid var(--funky-interactive-focus, #0e7490);
+  box-shadow: 0 0 0 3px var(--funky-interactive-bg, rgba(14, 116, 144, 0.15)), 0 0 10px rgba(0, 255, 255, 0.08);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__search-input:focus {
+  outline-color: var(--funky-interactive-focus, #22d3ee);
+  box-shadow: 0 0 0 3px var(--funky-interactive-bg, rgba(34, 211, 238, 0.15)), 0 0 14px rgba(0, 255, 255, 0.12);
+}
+
+/* Section dividers - gradient */
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-item {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.15) 50%, transparent 100%) 1;
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-item {
+  border-image: linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.25) 50%, transparent 100%) 1;
+}
+
+/* Quick link cards - glow on hover */
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__quick-link:hover {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__quick-link:hover {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.2);
+}
+
+/* ========================================
+   BREADCRUMBS - Subtle Neon
+   ======================================== */
+
+/* Gradient bottom border */
+.wp-breadcrumbs-bar--funky {
+  border-bottom: none;
+  position: relative;
+}
+
+.wp-breadcrumbs-bar--funky::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.1), transparent);
+}
+
+.dark .wp-breadcrumbs-bar--funky::after {
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.25), rgba(255, 0, 255, 0.15), transparent);
+}
+
+/* Breadcrumb links - neon hover */
+.wp-breadcrumbs-bar--funky .wp-breadcrumbs-link:hover {
+  color: var(--funky-interactive-color);
+}
+
+/* Current page - subtle neon */
+.wp-breadcrumbs-bar--funky .wp-breadcrumbs-current {
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Home icon - neon on hover */
+.wp-breadcrumbs-bar--funky .wp-breadcrumbs-link:hover .wp-breadcrumbs-home-icon {
+  color: var(--funky-interactive-color);
+}
+
+/* ========================================
+   MEGA MENUS - Glassmorphism + Neon Accents
+   ======================================== */
+
+/* Dropdown panel - glass effect */
+.wp-site-header--funky .wp-mega-menu__content {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: var(--funky-glass-border);
+  box-shadow: var(--funky-glass-shadow), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__content {
+  border-color: rgba(0, 255, 255, 0.08);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.04), 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Section titles - gradient text (AA-safe) */
+.wp-site-header--funky .wp-mega-menu__section-title {
+  background: linear-gradient(135deg, #be185d, #0e7490);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__section-title {
+  background: linear-gradient(135deg, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Category links - AA-safe hover */
+.wp-site-header--funky .wp-mega-menu__link:hover {
+  color: var(--funky-interactive-color);
+  background: var(--funky-interactive-bg);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__link:hover {
+  color: var(--funky-interactive-color);
+  background: var(--funky-interactive-bg);
+}
+
+.wp-site-header--funky .wp-mega-menu__category-link:hover {
+  color: var(--funky-interactive-color);
+  background: var(--funky-interactive-bg);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__category-link:hover {
+  color: var(--funky-interactive-color);
+  background: var(--funky-interactive-bg);
+}
+
+/* Category icon - AA-safe colour */
+.wp-site-header--funky .wp-mega-menu__category-icon {
+  color: var(--funky-interactive-color);
+}
+
+/* Badge - neon gradient */
+.wp-site-header--funky .wp-mega-menu__badge {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  color: #000000;
+}
+
+/* Featured cards - neon border glow on hover */
+.wp-site-header--funky .wp-mega-menu__featured-card:hover {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.15);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__featured-card:hover {
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.25);
+}
+
+/* Featured card CTA - white on gradient bg */
+.wp-site-header--funky .wp-mega-menu__featured-cta {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Post cards - AA-safe hover */
+.wp-site-header--funky .wp-mega-menu__post-card:hover .wp-mega-menu__post-title {
+  color: var(--funky-interactive-color);
+}
+
+.wp-site-header--funky .wp-mega-menu__post-card:hover .wp-mega-menu__post-img {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__post-card:hover .wp-mega-menu__post-img {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.2);
+}
+
+/* Post category badge - AA-safe colour */
+.wp-site-header--funky .wp-mega-menu__post-category {
+  background: rgba(190, 24, 93, 0.1);
+  color: #be185d;
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__post-category {
+  background: rgba(244, 114, 182, 0.15);
+  color: #f472b6;
+}
+
+/* Section border - gradient */
+.wp-site-header--funky .wp-mega-menu__section--bordered {
+  border-top: none;
+  position: relative;
+}
+
+.wp-site-header--funky .wp-mega-menu__section--bordered::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.15), transparent);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__section--bordered::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.35), rgba(255, 0, 255, 0.2), transparent);
+}
+
+/* Footer view-all link - AA-safe */
+.wp-site-header--funky .wp-mega-menu__view-all {
+  color: var(--funky-interactive-color);
+}
+
+.wp-site-header--funky .wp-mega-menu__view-all:hover {
+  filter: brightness(0.85);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__view-all:hover {
+  filter: brightness(1.15);
+}
+
+/* Footer border - gradient */
+.wp-site-header--funky .wp-mega-menu__footer {
+  border-top: none;
+  position: relative;
+}
+
+.wp-site-header--funky .wp-mega-menu__footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__footer::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+}
+
+/* ========================================
+   STORE NOTICE - Neon Gradient Banner
+   ======================================== */
+
+/* Base store notice */
+.wp-store-notice {
+  position: relative;
+  z-index: 50;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.wp-store-notice__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-store-notice__content {
+  flex: 1;
+  text-align: center;
+}
+
+.wp-store-notice__link {
+  text-decoration: underline;
+  color: inherit;
+  transition: opacity var(--wp--preset--transition--base) ease;
+}
+
+.wp-store-notice__link:hover {
+  opacity: 0.8;
+}
+
+.wp-store-notice__dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--10);
+  color: inherit;
+  border-radius: var(--wp--preset--border-radius--sm);
+  transition: background-color var(--wp--preset--transition--base) ease;
+  cursor: pointer;
+}
+
+.wp-store-notice__dismiss:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.wp-store-notice__dismiss:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Funky store notice override - neon gradient background */
+.wp-store-notice--funky {
+  background: linear-gradient(90deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  color: #000000;
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.dark .wp-store-notice--funky {
+  background: linear-gradient(90deg, rgba(255, 0, 255, 0.85), rgba(0, 255, 255, 0.85));
+}
+
+.wp-store-notice--funky .wp-store-notice__link {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-store-notice--funky .wp-store-notice__dismiss:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   TYPOGRAPHY & COLOR CONSISTENCY (v2.6)
+   Ensures uniform font sizes, weights,
+   spacing, and dark mode colors across
+   ALL global parts.
+   ======================================== */
+
+/* --- Header typography --- */
+.wp-site-header--funky .wp-header-desktop__navigation a {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  line-height: var(--wp--preset--line-height--normal);
+}
+
+.dark .wp-site-header--funky .wp-header-desktop__navigation a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dark .wp-site-header--funky {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .wp-site-header--funky .wp-header-mobile__menu-toggle { color: rgba(255, 255, 255, 0.85); }
+.dark .wp-site-header--funky .wp-header-mobile__search-toggle { color: rgba(255, 255, 255, 0.85); }
+.dark .wp-site-header--funky .wp-header-mobile__cart { color: rgba(255, 255, 255, 0.85); }
+.dark .wp-site-header--funky .wp-header-desktop__action-button { color: rgba(255, 255, 255, 0.85); }
+.dark .wp-site-header--funky .wp-header-desktop__account { color: rgba(255, 255, 255, 0.85); }
+.dark .wp-site-header--funky .wp-header-desktop__cart { color: rgba(255, 255, 255, 0.85); }
+
+/* --- Footer typography consistency --- */
+.wp-site-footer--funky .wp-site-footer__heading {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__heading {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.wp-site-footer--funky .wp-site-footer__link {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--normal);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wp-site-footer--funky .wp-site-footer__description {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--normal);
+  line-height: var(--wp--preset--line-height--relaxed);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wp-site-footer--funky .wp-site-footer__contact-row {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__contact-row {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wp-site-footer--funky .wp-site-footer__newsletter-text {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__newsletter-text {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wp-site-footer--funky .wp-site-footer__newsletter-input {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--foreground);
+  background: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--border);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__newsletter-input {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.wp-site-footer--funky .wp-site-footer__copyright {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__copyright {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.wp-site-footer--funky .wp-site-footer__legal-link {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__legal-link {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .wp-site-footer--funky .wp-footer-social-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .wp-site-footer--funky {
+  border-top-color: transparent;
+  background: var(--wp--preset--color--background);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .wp-site-footer--funky .wp-site-footer__bottom {
+  background: var(--wp--preset--color--background);
+}
+
+/* --- Breadcrumbs typography & dark mode --- */
+.wp-breadcrumbs-bar--funky .wp-breadcrumbs-list {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-breadcrumbs-bar--funky .wp-breadcrumbs-list {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.dark .wp-breadcrumbs-bar--funky .wp-breadcrumbs-link {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .wp-breadcrumbs-bar--funky .wp-breadcrumbs-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.wp-breadcrumbs-bar--funky .wp-breadcrumbs-current {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .wp-breadcrumbs-bar--funky .wp-breadcrumbs-current {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .wp-breadcrumbs-bar--funky .wp-breadcrumbs-separator {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.dark .wp-breadcrumbs-bar--funky {
+  background: transparent;
+}
+
+/* --- Mobile menu typography & dark mode --- */
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-button {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-button {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__submenu-link {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--normal);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__submenu-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__submenu-link:hover {
+  color: var(--funky-interactive-color);
+}
+
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-link {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__quick-link-label {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__quick-link-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__contact-link {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__contact-link {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__contact-link:hover {
+  color: var(--funky-interactive-color);
+}
+
+/* --- Mega menu typography & dark mode --- */
+.wp-site-header--funky .wp-mega-menu__section-title {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.wp-site-header--funky .wp-mega-menu__link {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--normal);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.wp-site-header--funky .wp-mega-menu__category-link {
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__category-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.wp-site-header--funky .wp-mega-menu__category-title {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-site-header--funky .wp-mega-menu__category-description {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__category-description {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.wp-site-header--funky .wp-mega-menu__featured-title {
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.wp-site-header--funky .wp-mega-menu__featured-description {
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-site-header--funky .wp-mega-menu__post-title {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__post-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.wp-site-header--funky .wp-mega-menu__view-all {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+/* ========================================
+   REDUCED MOTION GUARD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .wp-site-header--funky .wp-header-desktop__nav a::after {
+    transition: none;
+  }
+  .woocommerce-mini-cart-item__image--funky {
+    transition: none;
+  }
+  .wp-site-header--funky .wp-mega-menu__featured-card {
+    transition: none;
+  }
+  .wp-site-header--funky .wp-mega-menu__post-card .wp-mega-menu__post-img {
+    transition: none;
+  }
+}
+
+/* ========================================
+   FOCUS-VISIBLE STATES - Neon Focus Rings
+   Ensures keyboard accessibility with
+   funky neon focus indicators across
+   ALL global parts.
+   ======================================== */
+
+/* Header focus-visible */
+.wp-site-header--funky .wp-header-desktop__action-button:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--sm); }
+.wp-site-header--funky .wp-header-desktop__account:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--sm); }
+.wp-site-header--funky .wp-header-mobile__menu-toggle:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--sm); }
+.wp-site-header--funky .wp-header-mobile__search-toggle:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--sm); }
+
+/* Footer focus-visible */
+.wp-site-footer--funky .wp-site-footer__link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.wp-site-footer--funky .wp-site-footer__legal-link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.wp-site-footer--funky .wp-footer-social-icon:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+
+.wp-site-footer--funky .wp-site-footer__newsletter-button:focus-visible {
+  outline: 2px solid var(--funky-interactive-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 12px var(--funky-interactive-bg);
+}
+
+/* Breadcrumb focus-visible */
+.wp-breadcrumbs-bar--funky .wp-breadcrumbs-link:focus-visible {
+  outline: 2px solid var(--funky-interactive-focus);
+  outline-offset: 2px;
+  border-radius: var(--wp--preset--border-radius--sm);
+}
+
+/* Mobile menu focus-visible */
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-button:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__submenu-link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__nav-link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.woocommerce-mobile-menu--funky .woocommerce-mobile-menu__quick-link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+
+/* Mega menu focus-visible */
+.wp-site-header--funky .wp-mega-menu__trigger:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; border-radius: var(--wp--preset--border-radius--sm); }
+.wp-site-header--funky .wp-mega-menu__link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.wp-site-header--funky .wp-mega-menu__category-link:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.wp-site-header--funky .wp-mega-menu__featured-card:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.wp-site-header--funky .wp-mega-menu__view-all:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+.wp-site-header--funky .wp-mega-menu__post-card:focus-visible { outline: 2px solid var(--funky-interactive-focus); outline-offset: 2px; }
+
+/* ========================================
+   ENHANCED DARK MODE - Stronger Contrast
+   Additional dark mode refinements for
+   improved readability and visual impact.
+   ======================================== */
+
+/* Header - stronger glass in dark mode */
+.dark .wp-site-header--funky {
+  background: rgba(3, 2, 19, 0.92);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 255, 255, 0.02);
+}
+
+/* Footer - stronger contact info visibility */
+.dark .wp-site-footer--funky .wp-site-footer__contact-row span {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Footer - stronger link hover contrast */
+.dark .wp-site-footer--funky .wp-site-footer__link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.25);
+}
+
+/* Footer - stronger legal link hover */
+.dark .wp-site-footer--funky .wp-site-footer__legal-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.2);
+}
+
+/* Mobile menu - stronger submenu link hover */
+.dark .woocommerce-mobile-menu--funky .woocommerce-mobile-menu__submenu-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* Mega menu - stronger link descriptions in dark */
+.dark .wp-site-header--funky .wp-mega-menu__link-description {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Mega menu - contact card dark mode improvements */
+.dark .wp-site-header--funky .wp-mega-menu__contact-card-title {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__contact-card-description {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__contact-card-detail {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Mega menu - hours banner dark mode */
+.dark .wp-site-header--funky .wp-mega-menu__hours-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__hours-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Mega menu - support link dark mode */
+.dark .wp-site-header--funky .wp-mega-menu__support-title {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__support-description {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__support-link:hover {
+  background: rgba(0, 255, 255, 0.08);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__support-link:hover .wp-mega-menu__support-title {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Mega menu - header section dark mode */
+.dark .wp-site-header--funky .wp-mega-menu__header-title {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__header-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Mega menu - image card overlays in dark */
+.dark .wp-site-header--funky .wp-mega-menu__image-card-title {
+  color: #ffffff;
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__image-card-description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Mega menu - deal card dark mode */
+.dark .wp-site-header--funky .wp-mega-menu__deal-card-title {
+  color: #ffffff;
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__deal-card-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .wp-site-header--funky .wp-mega-menu__deal-card-cta {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Promo badges dark mode */
+.dark .wp-site-header--funky .wp-mega-menu__promo-badge {
+  opacity: 0.9;
+}
+
+/* Contact badge dot glow in dark */
+.dark .wp-site-header--funky .wp-mega-menu__contact-badge-dot {
+  box-shadow: 0 0 6px rgba(0, 255, 0, 0.5);
+}
+
+/* ========================================
+   TRANSITION GUARDS - Performance
+   ======================================== */
+
+/* Ensure smooth transitions on theme toggle */
+.wp-site-header--funky,
+.wp-site-footer--funky,
+.wp-breadcrumbs-bar--funky {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wp-site-header--funky,
+  .wp-site-footer--funky,
+  .wp-breadcrumbs-bar--funky {
+    transition: none;
+  }
+}

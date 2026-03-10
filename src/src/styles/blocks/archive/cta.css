@@ -1,0 +1,64 @@
+/* ========================================
+   ARCHIVE CTA PATTERN
+   ======================================== */
+
+/**
+ * Archive CTA Pattern
+ * Conversion-focused CTA sections for archive templates
+ * 
+ * Uses section patterns (AccentSection, DarkSection, MutedSection)
+ * for wrapper styling. This file only styles inner content.
+ */
+
+/* ========================================
+   CTA DESCRIPTION
+   ======================================== */
+
+.wp-archive-cta__description {
+  /* Margin replaced by parent gap */
+  max-width: 42rem; /* 672px - max-w-2xl */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Default variant (MutedSection) */
+.wp-archive-cta__description--default {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Accent variants (AccentSection/DarkSection) */
+.wp-archive-cta__description--accent {
+  color: #e9d5ff; /* purple-100 */
+}
+
+.dark .wp-archive-cta__description--accent {
+  color: #f3e8ff; /* purple-200 */
+}
+
+/* ========================================
+   CTA BUTTON
+   ======================================== */
+
+.wp-archive-cta__button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.wp-archive-cta__button {
+  padding-left: var(--wp--preset--spacing--80);
+  padding-right: var(--wp--preset--spacing--80);
+}
+
+/* Light button (for dark/gradient variants) */
+.wp-archive-cta__button--light {
+  background: #ffffff;
+  color: #111827;
+  border: none;
+  padding-left: var(--wp--preset--spacing--80);
+  padding-right: var(--wp--preset--spacing--80);
+}
+
+.wp-archive-cta__button--light:hover {
+  background: #f9fafb;
+}

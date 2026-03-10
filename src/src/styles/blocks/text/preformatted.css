@@ -1,0 +1,15 @@
+/* ========================================
+   PREFORMATTED BLOCK
+   ======================================== */
+
+.wp-block-preformatted {
+  font-family: var(--wp--preset--font-family--mono);
+  font-size: var(--wp--preset--font-size--normal);
+  white-space: pre-wrap;
+  overflow-x: auto;
+  color: var(--wp--preset--color--foreground);
+  background-color: var(--wp--preset--color--surface);
+  padding: var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+}

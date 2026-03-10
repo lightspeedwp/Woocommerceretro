@@ -1,0 +1,221 @@
+/**
+ * Blog Archive - WordPress BEM Styles
+ * 
+ * Main blog archive page with post grid and pagination.
+ * Follows WordPress Query Loop and Query Pagination block patterns.
+ * 
+ * Component: /src/app/components/blog/BlogArchive.tsx
+ */
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+
+.wp-blog-archive__container {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 1024px) {
+  .wp-blog-archive__container {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+/* ========================================
+   ARCHIVE HEADER
+   ======================================== */
+
+.wp-blog-archive__header {
+  margin-bottom: 48px;
+  text-align: center;
+  max-width: 768px;
+  margin-inline: auto;
+}
+
+.wp-blog-archive__header h1 {
+  margin-bottom: 16px;
+}
+
+.wp-blog-archive__description {
+  font-size: var(--wp--preset--font-size--large);
+  color: var(--funky-text-secondary);
+}
+
+.dark .wp-blog-archive__description {
+  color: var(--funky-text-muted-on-dark);
+}
+
+/* ========================================
+   POST GRID (Query Loop Pattern)
+   ======================================== */
+
+.wp-post-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+@media (min-width: 768px) {
+  .wp-post-grid--three-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-post-grid--three-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================
+   PAGINATION (Query Pagination Block)
+   ======================================== */
+
+.wp-blog-archive__pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.wp-pagination-numbers {
+  display: flex;
+  gap: 8px;
+}
+
+/* ========================================
+   PAGINATION BUTTONS
+   ======================================== */
+
+.wp-pagination-button {
+  padding: 8px 16px;
+  border: 1px solid var(--funky-border-medium);
+  border-radius: var(--funky-radius-md);
+  background-color: var(--funky-surface-default);
+  color: var(--funky-text-primary);
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--medium);
+  cursor: pointer;
+  transition: background-color var(--funky-transition-base),
+              border-color var(--funky-transition-base),
+              color var(--funky-transition-base);
+}
+
+.wp-pagination-button:hover:not(:disabled) {
+  background-color: var(--funky-surface-subtle);
+}
+
+.wp-pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Dark mode */
+.dark .wp-pagination-button {
+  background-color: var(--funky-surface-panel);
+  border-color: var(--funky-border-medium);
+  color: var(--funky-text-muted-on-dark);
+}
+
+.dark .wp-pagination-button:hover:not(:disabled) {
+  background-color: var(--funky-surface-raised);
+}
+
+/* ========================================
+   ACTIVE PAGE BUTTON
+   ======================================== */
+
+.wp-pagination-button--active {
+  background-color: var(--funky-accent);
+  color: var(--funky-text-white);
+  border-color: var(--funky-accent);
+}
+
+.wp-pagination-button--active:hover {
+  background-color: var(--funky-accent-hover);
+  border-color: var(--funky-accent-hover);
+}
+
+.dark .wp-pagination-button--active {
+  background-color: var(--funky-accent-bright);
+  border-color: var(--funky-accent-bright);
+  color: var(--funky-surface-default);
+}
+
+.dark .wp-pagination-button--active:hover {
+  background-color: var(--funky-accent);
+  border-color: var(--funky-accent);
+}
+
+/* ========================================
+   CATEGORY BADGE
+   ======================================== */
+
+.wp-category-badge {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--funky-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.dark .wp-category-badge {
+  color: var(--funky-accent-bright);
+}
+
+/* ========================================
+   CATEGORY ARCHIVE TITLE
+   ======================================== */
+
+.wp-blog-archive__title {
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.wp-blog-archive__empty {
+  text-align: center;
+  padding: 48px 0;
+}
+
+.wp-blog-archive__empty-text {
+  font-size: var(--wp--preset--font-size--large);
+  color: var(--funky-text-secondary);
+  margin-bottom: 32px;
+}
+
+.dark .wp-blog-archive__empty-text {
+  color: var(--funky-text-muted-on-dark);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 640px) {
+  .wp-blog-archive__container {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  
+  .wp-blog-archive__header {
+    margin-bottom: 32px;
+  }
+  
+  .wp-post-grid {
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  
+  .wp-pagination-button {
+    padding: 6px 12px;
+    font-size: var(--wp--preset--font-size--small);
+  }
+}

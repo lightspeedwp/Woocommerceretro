@@ -1,0 +1,18 @@
+/* ========================================
+   POST FEATURED IMAGE BLOCK
+   ======================================== */
+
+.wp-block-post-featured-image {
+  margin: 0;
+}
+
+.wp-block-post-featured-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-post-featured-image a {
+  display: block;
+}

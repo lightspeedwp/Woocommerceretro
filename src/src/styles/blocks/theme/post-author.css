@@ -1,0 +1,35 @@
+/* ========================================
+   POST AUTHOR BLOCK
+   ======================================== */
+
+.wp-block-post-author {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  /* Margin removed */
+}
+
+.wp-block-post-author__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.wp-block-post-author__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.wp-block-post-author__name {
+  font-weight: var(--wp--preset--font-weight--bold);
+  font-size: var(--wp--preset--font-size--normal);
+  color: var(--wp--preset--color--foreground);
+  text-decoration: none;
+}
+
+.wp-block-post-author__bio {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  margin-top: var(--wp--preset--spacing--10);
+}

@@ -1,0 +1,2251 @@
+/**
+ * Account & Auth Pages - Funky Redesign CSS (Phase 6)
+ *
+ * BEM blocks:
+ *   .account-page     - Account layout wrapper & sidebar
+ *   .account-login    - Login / Register form
+ *   .account-dash     - Dashboard overview & stats
+ *   .account-orders   - Order history table
+ *   .account-order    - Single order detail view
+ *   .account-details  - Account details form
+ *   .account-addr     - Saved addresses
+ *   .account-wish     - Wishlist grid
+ *
+ * Colour identity:  Midnight (#1a1a2e) / Blue (#0055AA) / Cyan (#00ffff)
+ *
+ * Funky mode: CLEAN FUNKY
+ *   Dashboard:    Glow cards for stats, gradient text heading
+ *   Login:        Glassmorphism form, neon focus states, floating orbs
+ *   Orders:       Subtle glow on row hover, neon status badges
+ *   Forms:        Neon cyan focus states on all inputs
+ *   Sidebar:      Glass panel, neon active indicator
+ *   Wishlist:     Glow product cards
+ *
+ * @see /prompts/funky-redesign-orchestrator.md (Phase 10 / Account & Utility)
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITIES
+   ======================================== */
+
+.account-page {
+  --page-primary: #1a1a2e;
+  --page-secondary: #0055AA;
+  --page-accent: #00ffff;
+}
+
+.account-login {
+  --page-primary: #1a1a2e;
+  --page-secondary: #0055AA;
+  --page-accent: #00ffff;
+}
+
+/* ========================================
+   1. ACCOUNT LAYOUT - PAGE WRAPPER
+   ======================================== */
+
+.account-page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background: var(--wp--preset--color--background);
+}
+
+.dark .account-page {
+  background: var(--wp--preset--color--background);
+}
+
+.account-page__inner {
+  position: relative;
+  z-index: 2;
+  padding-block: var(--wp--preset--spacing--60);
+}
+
+.account-page__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--700);
+  font-weight: var(--wp--preset--font-weight--bold);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-cyan)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .account-page__title {
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-lime)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.account-page__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 768px) {
+  .account-page__layout {
+    grid-template-columns: 16rem 1fr;
+  }
+}
+
+/* ========================================
+   2. ACCOUNT SIDEBAR - GLASS NAVIGATION
+   ======================================== */
+
+.account-sidebar {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--funky-glass-border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  overflow: hidden;
+  align-self: start;
+}
+
+.account-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  padding: var(--wp--preset--spacing--20);
+  gap: var(--wp--preset--spacing--10);
+}
+
+.account-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--lg);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--muted-foreground);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border-left: 3px solid transparent;
+}
+
+.account-sidebar__item:hover {
+  background: rgba(0, 255, 255, 0.05);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-sidebar__item:hover {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-sidebar__item--active {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan);
+  border-left-color: var(--wp--preset--color--neon-cyan);
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.dark .account-sidebar__item--active {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.08);
+}
+
+.account-sidebar__item--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.account-sidebar__item--logout:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--wp--preset--color--error);
+}
+
+.dark .account-sidebar__item--logout:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.account-sidebar__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding-inline: var(--wp--preset--spacing--10);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--wp--preset--color--neon-cyan);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  margin-left: auto;
+}
+
+.account-sidebar__divider {
+  height: 1px;
+  border: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--wp--preset--color--neon-cyan),
+    transparent
+  );
+  opacity: 0.15;
+  margin-block: var(--wp--preset--spacing--10);
+}
+
+.dark .account-sidebar__divider {
+  opacity: 0.3;
+}
+
+/* ========================================
+   3. ACCOUNT CONTENT - MAIN PANEL
+   ======================================== */
+
+.account-content {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--funky-glass-border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--50);
+  min-height: 24rem;
+}
+
+@media (max-width: 767px) {
+  .account-content {
+    padding: var(--wp--preset--spacing--30);
+  }
+}
+
+/* ========================================
+   4. LOGIN PAGE - GLASSMORPHISM FORM
+   ======================================== */
+
+.account-login {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--wp--preset--color--background);
+}
+
+.dark .account-login {
+  background: var(--wp--preset--color--background);
+}
+
+.account-login__card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 28rem;
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--funky-glass-border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--60);
+  box-shadow: var(--funky-glass-shadow);
+}
+
+.dark .account-login__card {
+  box-shadow: 0 4px 32px rgba(0, 255, 255, 0.08);
+}
+
+.account-login__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--600);
+  font-weight: var(--wp--preset--font-weight--bold);
+  text-align: center;
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-login__title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.account-login__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.account-login__label {
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+}
+
+.dark .account-login__label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.account-login__input {
+  width: 100%;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  background: var(--funky-input-bg);
+  border: 1px solid var(--funky-input-border);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  outline: none;
+}
+
+.dark .account-login__input {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-login__input::placeholder {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-login__input:focus {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.15);
+}
+
+.dark .account-login__input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.25), 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+.account-login__submit {
+  width: 100%;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  background: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--background);
+  border: none;
+  border-radius: var(--wp--preset--border-radius--md);
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dark .account-login__submit {
+  background: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--primary);
+}
+
+.account-login__submit:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.dark .account-login__submit:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.account-login__submit:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-cyan);
+  outline-offset: 2px;
+}
+
+.account-login__toggle {
+  text-align: center;
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-login__toggle-btn {
+  background: none;
+  border: none;
+  color: var(--wp--preset--color--neon-cyan);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200);
+  transition: color 0.2s ease;
+}
+
+.account-login__toggle-btn:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.account-login__toggle-btn:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-cyan);
+  outline-offset: 2px;
+  border-radius: var(--wp--preset--border-radius--sm);
+}
+
+.account-login__trust {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 36rem;
+}
+
+/* Login page orbs */
+.account-login__orb--1 {
+  top: 10%;
+  right: -8%;
+  width: 20rem;
+  height: 20rem;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.08;
+}
+
+.account-login__orb--2 {
+  bottom: 10%;
+  left: -8%;
+  width: 16rem;
+  height: 16rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.06;
+}
+
+.dark .account-login__orb--1 { opacity: 0.15; }
+.dark .account-login__orb--2 { opacity: 0.12; }
+
+@media (max-width: 640px) {
+  .account-login__orb--1,
+  .account-login__orb--2 {
+    opacity: 0.04;
+  }
+  .dark .account-login__orb--1 { opacity: 0.08; }
+  .dark .account-login__orb--2 { opacity: 0.06; }
+}
+
+/* ========================================
+   5. DASHBOARD - STATS & WIDGETS
+   ======================================== */
+
+.account-dash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.account-dash__greeting-section {
+  /* spacing handled by parent gap */
+}
+
+.account-dash__greeting {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--600);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-dash__greeting {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-dash__greeting-name {
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-cyan)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .account-dash__greeting-name {
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-lime)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.account-dash__intro {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+  max-width: 40rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+.account-dash__link {
+  color: var(--wp--preset--color--neon-cyan);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.account-dash__link:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.account-dash__cards {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .account-dash__cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.account-dash__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--40);
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.account-dash__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.dark .account-dash__card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .account-dash__card:hover {
+  border-color: rgba(0, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.08);
+}
+
+.account-dash__card-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--full);
+  transition: transform 0.3s ease;
+}
+
+.account-dash__card:hover .account-dash__card-icon {
+  transform: scale(1.1);
+}
+
+.account-dash__card-icon--cyan {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-dash__card-icon--pink {
+  background: rgba(255, 0, 255, 0.08);
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.dark .account-dash__card-icon--cyan {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.dark .account-dash__card-icon--pink {
+  background: rgba(255, 0, 255, 0.1);
+}
+
+.account-dash__card-title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--400);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+  transition: color 0.2s ease;
+}
+
+.account-dash__card:hover .account-dash__card-title {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .account-dash__card-title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-dash__card-desc {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-dash__card-action {
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--neon-cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  transition: transform 0.2s ease;
+}
+
+.account-dash__card:hover .account-dash__card-action {
+  transform: translateX(4px);
+}
+
+/* -- Loyalty Widget (inline on Dashboard) ------------------------ */
+
+.account-dash__loyalty-widget {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: var(--wp--preset--spacing--50);
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.04), rgba(0, 255, 255, 0.02));
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dark .account-dash__loyalty-widget {
+  border-color: rgba(251, 191, 36, 0.3);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.06), rgba(0, 255, 255, 0.04));
+}
+
+.account-dash__loyalty-widget:hover {
+  border-color: rgba(251, 191, 36, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(251, 191, 36, 0.08);
+}
+
+.dark .account-dash__loyalty-widget:hover {
+  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.12);
+}
+
+.account-dash__loyalty-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.account-dash__loyalty-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(0, 255, 255, 0.08));
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wp--preset--color--neon-yellow, #fbbf24);
+}
+
+.dark .account-dash__loyalty-badge {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.16), rgba(0, 255, 255, 0.1));
+}
+
+.account-dash__loyalty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.account-dash__loyalty-widget:hover .account-dash__loyalty-cta {
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.dark .account-dash__loyalty-cta {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.account-dash__loyalty-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .account-dash__loyalty-stats {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.account-dash__loyalty-points {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.account-dash__loyalty-points-value {
+  font-size: var(--wp--preset--font-size--800, 2rem);
+  font-weight: var(--wp--preset--font-weight--bold);
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-yellow, #fbbf24), var(--wp--preset--color--neon-cyan, #00ffff));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.account-dash__loyalty-points-label {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.dark .account-dash__loyalty-points-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.account-dash__loyalty-progress-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.account-dash__loyalty-progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.dark .account-dash__loyalty-progress-info {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.account-dash__loyalty-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--wp--preset--color--border-light);
+  overflow: hidden;
+}
+
+.dark .account-dash__loyalty-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.account-dash__loyalty-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--wp--preset--color--neon-yellow, #fbbf24), var(--wp--preset--color--neon-cyan, #00ffff));
+  transition: width 0.6s ease;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .account-dash__loyalty-widget:hover {
+    transform: none;
+  }
+  .account-dash__loyalty-fill {
+    transition: none;
+  }
+}
+
+/* ========================================
+   6. ORDERS TABLE - NEON ACCENTS
+   ======================================== */
+
+.account-orders {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.account-orders__table-wrap {
+  overflow-x: auto;
+}
+
+.account-orders__th--actions,
+.account-orders__td--actions {
+  text-align: right;
+}
+
+.account-orders__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-orders__title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-orders__table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.account-orders__th {
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.account-orders__tr {
+  border-bottom: 1px solid var(--wp--preset--color--border-subtle);
+  transition: background 0.2s ease;
+}
+
+.account-orders__tr:hover {
+  background: rgba(0, 255, 255, 0.02);
+}
+
+.dark .account-orders__tr:hover {
+  background: rgba(0, 255, 255, 0.04);
+}
+
+.account-orders__td {
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+  vertical-align: middle;
+}
+
+.account-orders__id-link {
+  color: var(--wp--preset--color--neon-cyan);
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.account-orders__id-link:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* Status badges */
+.account-orders__status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  border: 1px solid;
+}
+
+.account-orders__status--completed {
+  background: rgba(0, 255, 0, 0.08);
+  color: #16a34a;
+  border-color: rgba(0, 255, 0, 0.2);
+}
+
+.dark .account-orders__status--completed {
+  background: rgba(0, 255, 0, 0.06);
+  color: var(--wp--preset--color--neon-lime);
+  border-color: rgba(0, 255, 0, 0.15);
+}
+
+.account-orders__status--shipped {
+  background: rgba(0, 255, 255, 0.08);
+  color: #0284c7;
+  border-color: rgba(0, 255, 255, 0.2);
+}
+
+.dark .account-orders__status--shipped {
+  background: rgba(0, 255, 255, 0.06);
+  color: var(--wp--preset--color--neon-cyan);
+  border-color: rgba(0, 255, 255, 0.15);
+}
+
+.account-orders__status--processing {
+  background: rgba(255, 0, 255, 0.08);
+  color: #7c3aed;
+  border-color: rgba(255, 0, 255, 0.2);
+}
+
+.dark .account-orders__status--processing {
+  background: rgba(255, 0, 255, 0.06);
+  color: var(--wp--preset--color--neon-pink);
+  border-color: rgba(255, 0, 255, 0.15);
+}
+
+.account-orders__status--pending,
+.account-orders__status--cancelled,
+.account-orders__status--refunded {
+  background: rgba(128, 128, 128, 0.08);
+  color: var(--wp--preset--color--muted-foreground);
+  border-color: rgba(128, 128, 128, 0.2);
+}
+
+.account-orders__view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.account-orders__view-btn:hover {
+  border-color: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .account-orders__view-btn {
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark .account-orders__view-btn:hover {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
+}
+
+/* Empty state */
+.account-orders__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--80);
+  text-align: center;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-orders__empty-link {
+  color: var(--wp--preset--color--neon-cyan);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.account-orders__empty-link:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* ========================================
+   7. ORDER DETAIL VIEW
+   ======================================== */
+
+.account-order {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.account-order__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--neon-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.account-order__back:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.account-order__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+@media (min-width: 768px) {
+  .account-order__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.account-order__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-order__title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-order__date {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-order__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.account-order__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.account-order__action-btn:hover {
+  border-color: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .account-order__action-btn {
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.account-order__action-btn--primary {
+  background: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--primary);
+  border-color: var(--wp--preset--color--neon-cyan);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.account-order__action-btn--primary:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
+  color: var(--wp--preset--color--primary);
+}
+
+/* Order status panel */
+.account-order__panel {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--40);
+}
+
+.dark .account-order__panel {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.account-order__status-icon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--full);
+  border: 1px solid;
+}
+
+.account-order__status-icon--success {
+  background: rgba(0, 255, 0, 0.08);
+  border-color: rgba(0, 255, 0, 0.2);
+  color: #16a34a;
+}
+
+.dark .account-order__status-icon--success {
+  color: var(--wp--preset--color--neon-lime);
+}
+
+.account-order__status-icon--transit {
+  background: rgba(0, 255, 255, 0.08);
+  border-color: rgba(0, 255, 255, 0.2);
+  color: #0284c7;
+}
+
+.dark .account-order__status-icon--transit {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Status row & label */
+.account-order__status-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.account-order__status-label {
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.account-order__status-label--success {
+  color: #16a34a;
+}
+
+.dark .account-order__status-label--success {
+  color: var(--wp--preset--color--neon-lime);
+}
+
+.account-order__status-label--transit {
+  color: #0284c7;
+}
+
+.dark .account-order__status-label--transit {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Tracking panel */
+.account-order__tracking-panel {
+  margin-top: var(--wp--preset--spacing--30);
+}
+
+.account-order__tracking-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.account-order__tracking-icon {
+  color: var(--wp--preset--color--muted-foreground);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.account-order__tracking-desc {
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+.account-order__tracking-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  flex-wrap: wrap;
+}
+
+.account-order__track-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--funky-interactive-color, var(--wp--preset--color--foreground));
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.account-order__track-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .account-order__track-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .account-order__track-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Tracking code */
+.account-order__tracking-code {
+  display: inline-block;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--wp--preset--color--border-subtle);
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-family: var(--wp--preset--font-family--mono);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .account-order__tracking-code {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Panel headings & subheadings */
+.account-order__panel-heading {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  padding-bottom: var(--wp--preset--spacing--30);
+  border-bottom: 1px solid var(--wp--preset--color--border-subtle);
+}
+
+.dark .account-order__panel-heading {
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.account-order__panel-subheading {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.dark .account-order__panel-subheading {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+/* Order items list */
+.account-order__items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  padding-top: var(--wp--preset--spacing--30);
+}
+
+.account-order__item {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.account-order__item-img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border-subtle);
+  flex-shrink: 0;
+}
+
+.dark .account-order__item-img {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.account-order__item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.account-order__item-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-order__item-name {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-order__item-meta {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-order__item-details {
+  flex: 1;
+}
+
+.account-order__item-pricing {
+  text-align: right;
+}
+
+.account-order__item-price {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  text-align: right;
+}
+
+.dark .account-order__item-price {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+/* Order totals */
+.account-order__totals-section {
+  padding-top: var(--wp--preset--spacing--30);
+  margin-top: var(--wp--preset--spacing--30);
+  border-top: 1px solid var(--wp--preset--color--border-subtle);
+}
+
+.dark .account-order__totals-section {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.account-order__shipping-free {
+  color: var(--wp--preset--color--neon-lime);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.account-order__totals {
+  max-width: 20rem;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.account-order__total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-order__total-row--final {
+  padding-top: var(--wp--preset--spacing--20);
+  border-top: 2px solid;
+  border-image: linear-gradient(
+    90deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-cyan)
+  ) 1;
+  font-weight: var(--wp--preset--font-weight--bold);
+  font-size: var(--wp--preset--font-size--400);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-order__total-row--final {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-order__total-value--neon {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Payment info */
+.account-order__payment-info {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-order__payment-icon {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Address cards in order */
+.account-order__addr-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .account-order__addr-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================
+   8. ACCOUNT DETAILS FORM - NEON FOCUS
+   ======================================== */
+
+.account-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.account-details__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-details__title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-details__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  max-width: 40rem;
+}
+
+.account-details__password-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.account-details__section-divider {
+  border: none;
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.dark .account-details__section-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.account-details__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .account-details__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.account-details__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.account-details__label {
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-details__required {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.account-details__input {
+  width: 100%;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  background: var(--funky-input-bg);
+  border: 1px solid var(--funky-input-border);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  outline: none;
+}
+
+.dark .account-details__input {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-details__input:focus {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.15);
+}
+
+.dark .account-details__input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.25), 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+.account-details__helper {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-details__section-divider {
+  height: 1px;
+  border: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--wp--preset--color--neon-cyan),
+    transparent
+  );
+  opacity: 0.2;
+}
+
+.dark .account-details__section-divider {
+  opacity: 0.35;
+}
+
+.account-details__subtitle {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--400);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-details__subtitle {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-details__submit {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--50);
+  background: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--primary);
+  border: none;
+  border-radius: var(--wp--preset--border-radius--md);
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--bold);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.account-details__submit:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
+}
+
+.account-details__submit:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-cyan);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   9. ADDRESSES - GLOW CARDS
+   ======================================== */
+
+.account-addr {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.account-addr__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+@media (min-width: 768px) {
+  .account-addr__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.account-addr__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-addr__title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-addr__desc {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-addr__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--neon-cyan);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--neon-cyan);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.account-addr__add-btn:hover {
+  background: rgba(0, 255, 255, 0.08);
+}
+
+.account-addr__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .account-addr__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.account-addr__card {
+  position: relative;
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--40);
+  transition: all 0.3s ease;
+}
+
+.account-addr__card:hover {
+  border-color: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.dark .account-addr__card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .account-addr__card:hover {
+  border-color: rgba(0, 255, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.08);
+}
+
+.account-addr__card--shipping:hover {
+  border-color: rgba(255, 0, 255, 0.2);
+}
+
+.dark .account-addr__card--shipping:hover {
+  border-color: rgba(255, 0, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(255, 0, 255, 0.08);
+}
+
+.account-addr__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--wp--preset--spacing--20);
+  border-bottom: 1px solid var(--wp--preset--color--border-subtle);
+}
+
+.dark .account-addr__card-header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.account-addr__card-type {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-addr__card-type--shipping {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.account-addr__card-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--wp--preset--color--muted-foreground);
+  transition: all 0.2s ease;
+}
+
+.account-addr__card-edit:hover {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-addr__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+  padding-top: var(--wp--preset--spacing--20);
+}
+
+.account-addr__card-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-addr__card-name {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-addr__card-line {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* ========================================
+   10. WISHLIST - GLOW PRODUCT CARDS
+   ======================================== */
+
+.account-wish {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.account-wish__card-prices {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  flex-wrap: wrap;
+}
+
+.account-wish__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+@media (min-width: 768px) {
+  .account-wish__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.account-wish__title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-wish__title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-wish__count {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-wish__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.account-wish__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-wish__action-btn {
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.account-wish__action-btn:hover {
+  border-color: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-wish__action-btn--danger {
+  color: var(--wp--preset--color--error);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.account-wish__action-btn--danger:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--wp--preset--color--error);
+  border-color: var(--wp--preset--color--error);
+}
+
+.account-wish__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 640px) {
+  .account-wish__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .account-wish__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.account-wish__card {
+  position: relative;
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  transition: all 0.3s ease;
+}
+
+.account-wish__card:hover {
+  border-color: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.dark .account-wish__card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .account-wish__card:hover {
+  border-color: rgba(0, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.08);
+}
+
+.account-wish__card-remove {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 3;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--wp--preset--border-radius--full);
+  color: var(--wp--preset--color--primary-foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.account-wish__card-remove:hover {
+  background: rgba(220, 38, 38, 0.6);
+}
+
+.account-wish__card-image {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .account-wish__card-image {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.account-wish__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.account-wish__card:hover .account-wish__card-image img {
+  transform: scale(1.05);
+}
+
+/* Out of stock overlay */
+.account-wish__oos-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-wish__oos-badge {
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #f87171;
+}
+
+.account-wish__card-body {
+  padding: var(--wp--preset--spacing--30);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.account-wish__card-category {
+  font-size: var(--wp--preset--font-size--100);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-wish__card-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.account-wish__card-name:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .account-wish__card-name {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-wish__card-price {
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-wish__card-price {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-wish__card-price--sale {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-wish__card-price--old {
+  color: var(--wp--preset--color--muted-foreground);
+  text-decoration: line-through;
+  font-weight: var(--wp--preset--font-weight--normal);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+.account-wish__card-atc {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: var(--wp--preset--font-weight--medium);
+  border: 1px solid var(--wp--preset--color--border);
+  background: transparent;
+  color: var(--wp--preset--color--foreground);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark .account-wish__card-atc {
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.account-wish__card:hover .account-wish__card-atc {
+  background: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--primary);
+  border-color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-wish__card-atc:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.account-wish__card:hover .account-wish__card-atc:disabled {
+  background: transparent;
+  color: var(--wp--preset--color--muted-foreground);
+  border-color: var(--wp--preset--color--border);
+}
+
+.account-wish__footer {
+  text-align: center;
+  padding-top: var(--wp--preset--spacing--50);
+}
+
+.account-wish__footer-link {
+  color: var(--wp--preset--color--neon-cyan);
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.account-wish__footer-link:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* Empty wishlist */
+.account-wish__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--80);
+  text-align: center;
+}
+
+.account-wish__empty-icon {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.account-wish__empty-title {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-wish__empty-title {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.account-wish__empty-desc {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+  max-width: 24rem;
+}
+
+.account-wish__empty-cta {
+  display: inline-block;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--50);
+  background: var(--wp--preset--color--neon-cyan);
+  color: var(--wp--preset--color--primary);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-weight: var(--wp--preset--font-weight--bold);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.account-wish__empty-cta:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
+}
+
+/* ========================================
+   ORBS - ACCOUNT PAGE BACKGROUND
+   ======================================== */
+
+.account-page__orb--1 {
+  top: -8rem;
+  right: -8rem;
+  width: 22rem;
+  height: 22rem;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.06;
+}
+
+.account-page__orb--2 {
+  bottom: -6rem;
+  left: -6rem;
+  width: 18rem;
+  height: 18rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.04;
+}
+
+.dark .account-page__orb--1 { opacity: 0.12; }
+.dark .account-page__orb--2 { opacity: 0.08; }
+
+@media (max-width: 640px) {
+  .account-page__orb--1,
+  .account-page__orb--2 {
+    opacity: 0.03;
+  }
+  .dark .account-page__orb--1 { opacity: 0.06; }
+  .dark .account-page__orb--2 { opacity: 0.04; }
+}
+
+/* ========================================
+   WISHLIST PAGE (Full Page - /wishlist)
+   ======================================== */
+
+.wishlist-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 50vh;
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wishlist-empty__icon-wrapper {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--wp--preset--spacing--50);
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+}
+
+.dark .wishlist-empty__icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.15), rgba(0, 255, 255, 0.15));
+}
+
+.wishlist-empty__icon { color: var(--wp--preset--color--neon-pink); }
+
+.wishlist-empty__text {
+  color: var(--wp--preset--color--text-secondary);
+  max-width: 28rem;
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.dark .wishlist-empty__text { color: rgba(255, 255, 255, 0.6); }
+
+.wishlist-page { padding-block: var(--wp--preset--spacing--60); }
+@media (min-width: 1024px) { .wishlist-page { padding-block: var(--wp--preset--spacing--80); } }
+
+.wishlist-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 640px) {
+  .wishlist-page__header { flex-direction: row; align-items: center; justify-content: space-between; }
+}
+
+@media (min-width: 1024px) {
+  .wishlist-page__header { margin-bottom: var(--wp--preset--spacing--70); }
+}
+
+.wishlist-page__count { color: var(--wp--preset--color--text-secondary); margin-top: var(--wp--preset--spacing--10); }
+.dark .wishlist-page__count { color: rgba(255, 255, 255, 0.5); }
+
+.wishlist-page__actions { display: flex; flex-wrap: wrap; gap: var(--wp--preset--spacing--20); }
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 640px) { .wishlist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .wishlist-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--wp--preset--spacing--60); } }
+@media (min-width: 1280px) { .wishlist-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.wishlist-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--background);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .wishlist-card { border-color: rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.03); }
+
+.wishlist-card:hover { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 24px rgba(0, 255, 255, 0.08); }
+.dark .wishlist-card:hover { box-shadow: 0 0 30px rgba(0, 255, 255, 0.15); }
+
+.wishlist-card__remove {
+  position: absolute;
+  top: var(--wp--preset--spacing--20);
+  right: var(--wp--preset--spacing--20);
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--text-secondary);
+  opacity: 0.9;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark .wishlist-card__remove { background: rgba(30, 30, 30, 0.9); color: rgba(255, 255, 255, 0.6); }
+.wishlist-card__remove:hover { background: var(--wp--preset--color--error); color: white; }
+
+.wishlist-card__image-link {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .wishlist-card__image-link { background: rgba(255, 255, 255, 0.04); }
+
+.wishlist-card__image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.wishlist-card:hover .wishlist-card__image { transform: scale(1.05); }
+.wishlist-card__image--oos { opacity: 0.6; filter: grayscale(1); }
+
+.wishlist-card__badges {
+  position: absolute;
+  top: var(--wp--preset--spacing--20);
+  left: var(--wp--preset--spacing--20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.wishlist-card__badge {
+  display: inline-block;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--small);
+  border-radius: var(--wp--preset--border-radius--sm, 4px);
+  color: white;
+}
+
+.wishlist-card__badge--sale { background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), #ff6b6b); }
+.wishlist-card__badge--oos { background: rgba(0, 0, 0, 0.7); }
+.dark .wishlist-card__badge--oos { background: rgba(255, 255, 255, 0.15); }
+
+.wishlist-card__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--wp--preset--spacing--40);
+}
+
+.wishlist-card__brand { color: var(--wp--preset--color--text-secondary); margin-bottom: var(--wp--preset--spacing--10); }
+.dark .wishlist-card__brand { color: rgba(255, 255, 255, 0.45); }
+
+.wishlist-card__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wishlist-card__title-link { color: var(--wp--preset--color--foreground); transition: color 0.2s ease; }
+.wishlist-card__title-link:hover { color: var(--wp--preset--color--neon-cyan); }
+
+.wishlist-card__price { margin-top: auto; margin-bottom: var(--wp--preset--spacing--30); }
+.wishlist-card__price-row { display: flex; align-items: center; gap: var(--wp--preset--spacing--20); }
+.wishlist-card__price--sale { color: var(--wp--preset--color--neon-pink); font-weight: var(--wp--preset--font-weight--semibold); }
+.wishlist-card__price--original { color: var(--wp--preset--color--text-secondary); text-decoration: line-through; }
+.dark .wishlist-card__price--original { color: rgba(255, 255, 255, 0.4); }
+.wishlist-card__price--current { color: var(--wp--preset--color--foreground); font-weight: var(--wp--preset--font-weight--semibold); }
+
+/* ========================================
+   REDUCED MOTION GUARD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .account-dash__card:hover,
+  .account-addr__card:hover,
+  .account-wish__card:hover,
+  .wishlist-card:hover {
+    transform: none;
+  }
+  .account-dash__card:hover .account-dash__card-icon,
+  .account-dash__card:hover .account-dash__card-action {
+    transform: none;
+  }
+  .account-wish__card:hover .account-wish__card-image img,
+  .wishlist-card:hover .wishlist-card__image {
+    transform: none;
+  }
+}

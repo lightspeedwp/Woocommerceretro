@@ -1,0 +1,17 @@
+/* ========================================
+   SPINNER
+   ======================================== */
+
+.wp-block-spinner {
+  display: inline-block;
+  border-radius: 9999px;
+  border: 2px solid var(--wp--preset--color--muted);
+  border-top-color: var(--wp--preset--color--primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

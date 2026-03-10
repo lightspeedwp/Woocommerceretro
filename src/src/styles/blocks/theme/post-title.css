@@ -1,0 +1,20 @@
+/* ========================================
+   POST TITLE BLOCK
+   ======================================== */
+
+.wp-block-post-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: var(--wp--preset--line-height--tight);
+  word-break: break-word;
+  /* Margin removed */
+}
+
+.wp-block-post-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.wp-block-post-title a:hover {
+  text-decoration: underline;
+}

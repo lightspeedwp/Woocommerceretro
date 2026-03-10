@@ -1,0 +1,13 @@
+/* ========================================
+   QUERY LOOP BLOCK
+   ======================================== */
+
+.wp-block-query {
+  /* Margin removed */
+}
+
+.wp-block-query ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

@@ -1,0 +1,29 @@
+/* ========================================
+   TOGGLE GROUP
+   ======================================== */
+
+.wp-block-toggle-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.wp-block-toggle-group-item {
+  /* Inherits toggle styles but modifies border radius */
+  border-radius: 0;
+}
+
+.wp-block-toggle-group-item:first-child {
+  border-top-left-radius: var(--wp--preset--border-radius--md);
+  border-bottom-left-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-toggle-group-item:last-child {
+  border-top-right-radius: var(--wp--preset--border-radius--md);
+  border-bottom-right-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-toggle-group-item:focus-visible {
+  z-index: 10;
+}

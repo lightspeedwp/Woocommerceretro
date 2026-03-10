@@ -1,0 +1,73 @@
+/* ========================================
+   POST NAVIGATION BLOCK
+   ======================================== */
+
+.wp-block-post-navigation {
+  /* margin-top removed for flow/gap */
+  padding-top: var(--wp--preset--spacing--50);
+  padding-bottom: var(--wp--preset--spacing--50);
+  border-top: 1px solid var(--wp--preset--color--border);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-block-post-navigation__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 768px) {
+  .wp-block-post-navigation__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wp-block-post-navigation__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  text-decoration: none;
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-post-navigation__link:hover {
+  border-color: var(--wp--preset--color--accent);
+}
+
+.wp-block-post-navigation__link--next {
+  text-align: right;
+}
+
+.wp-block-post-navigation__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-post-navigation__link--next .wp-block-post-navigation__meta {
+  justify-content: flex-end;
+}
+
+.wp-block-post-navigation__link:hover .wp-block-post-navigation__meta {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-block-post-navigation__title {
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-post-navigation__link:hover .wp-block-post-navigation__title {
+  color: var(--wp--preset--color--accent);
+}

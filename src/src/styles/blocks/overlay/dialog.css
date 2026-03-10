@@ -1,0 +1,136 @@
+/* ========================================
+   DIALOG (MODAL)
+   ======================================== */
+
+.wp-block-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  animation-duration: 200ms;
+}
+
+.wp-block-dialog__overlay[data-state="open"] {
+  animation-name: fade-in;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-dialog__overlay[data-state="closed"] {
+  animation-name: fade-out;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-dialog__content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 50;
+  display: grid;
+  width: 100%;
+  max-width: 32rem; /* lg */
+  transform: translate(-50%, -50%);
+  gap: var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--background);
+  padding: var(--wp--preset--spacing--50);
+  box-shadow: var(--wp--preset--shadow--lg);
+  animation-duration: 200ms;
+}
+
+@media (min-width: 640px) {
+  .wp-block-dialog__content {
+    border-radius: var(--wp--preset--border-radius--lg);
+  }
+}
+
+.wp-block-dialog__content[data-state="open"] {
+  animation-name: zoom-in;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-dialog__content[data-state="closed"] {
+  animation-name: zoom-out;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-dialog__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .wp-block-dialog__header {
+    text-align: left;
+  }
+}
+
+.wp-block-dialog__footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--wp--preset--spacing--20);
+}
+
+@media (min-width: 640px) {
+  .wp-block-dialog__footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+.wp-block-dialog__title {
+  font-size: var(--wp--preset--font-size--lg);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: 1;
+}
+
+.wp-block-dialog__description {
+  font-size: var(--wp--preset--font-size--sm);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-block-dialog__close {
+  position: absolute;
+  right: var(--wp--preset--spacing--40);
+  top: var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--sm);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-dialog__close:hover {
+  opacity: 1;
+  background-color: var(--wp--preset--color--accent);
+}
+
+.wp-block-dialog__close:focus {
+  outline: 2px solid var(--wp--preset--color--ring);
+  outline-offset: 2px;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zoom-in {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes zoom-out {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+}

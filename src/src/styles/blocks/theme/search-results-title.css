@@ -1,0 +1,10 @@
+/* ========================================
+   SEARCH RESULTS TITLE BLOCK
+   ======================================== */
+
+.wp-block-search-results-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: var(--wp--preset--font-size--xx-large);
+  font-weight: var(--wp--preset--font-weight--bold);
+  /* Margin removed */
+}

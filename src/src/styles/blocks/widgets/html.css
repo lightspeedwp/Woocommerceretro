@@ -1,0 +1,8 @@
+/* ========================================
+   CUSTOM HTML BLOCK
+   ======================================== */
+
+.wp-block-html {
+  /* No styles by default, just ensuring block formatting context */
+  display: block;
+}

@@ -1,0 +1,44 @@
+/* ========================================
+   FILE BLOCK
+   ======================================== */
+
+.wp-block-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--wp--preset--spacing--30);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-file__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.wp-block-file a {
+  text-decoration: none;
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-block-file__button {
+  display: inline-block;
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--small);
+  text-decoration: none;
+  transition: background-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-file__button:hover {
+  background-color: var(--wp--preset--color--primary-dark);
+}
+
+/* Dark Mode */
+.dark .wp-block-file {
+  background-color: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}

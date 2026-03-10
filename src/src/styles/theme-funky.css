@@ -1,0 +1,418 @@
+/**
+ * Funky Theme Tokens & Animations
+ * 
+ * Defines specific variables and keyframes for the "Funky" aesthetic.
+ * - Glassmorphism effects
+ * - Neon glow animations
+ * - Floating animations
+ */
+
+:root {
+  /* Light Mode Funky Variables */
+  --funky-glass-bg: rgba(255, 255, 255, 0.85);
+  --funky-glass-border: rgba(0, 0, 0, 0.1);
+  --funky-glass-header-border: rgba(0, 0, 0, 0.05);
+  --funky-glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --funky-text-muted: var(--wp--preset--color--text-secondary);
+  --funky-input-bg: rgba(0, 0, 0, 0.05);
+  --funky-input-border: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  /* Dark Mode Funky Variables */
+  --funky-glass-bg: rgba(3, 2, 19, 0.95);
+  --funky-glass-border: rgba(255, 255, 255, 0.1);
+  --funky-glass-header-border: rgba(0, 255, 255, 0.3);
+  --funky-glass-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  --funky-text-muted: rgba(255, 255, 255, 0.6);
+  --funky-input-bg: rgba(255, 255, 255, 0.1);
+  --funky-input-border: rgba(255, 255, 255, 0.2);
+}
+
+/* Text Utilities for Funky Neon Colors - WCAG AA-safe variants
+ * Light mode uses darker tints (4.5:1+ on white)
+ * Dark mode uses brighter tints (4.5:1+ on #0f0f0f)
+ * Raw neon values (#00ffff etc) are kept ONLY for decorative use (gradients, glows, borders) */
+.text-neon-pink { color: #be185d; }  /* Pink-700: 5.6:1 on white */
+.text-neon-cyan { color: #0e7490; }  /* Cyan-700: 5.4:1 on white */
+.text-neon-lime { color: #15803d; }  /* Green-700: 4.8:1 on white */
+.text-neon-yellow { color: #a16207; } /* Yellow-700: 4.6:1 on white */
+
+.dark .text-neon-pink { color: #f472b6; }  /* Pink-400: 7.6:1 on #0f0f0f */
+.dark .text-neon-cyan { color: #22d3ee; }  /* Cyan-400: 10.1:1 on #0f0f0f */
+.dark .text-neon-lime { color: #4ade80; }  /* Green-400: 9.5:1 on #0f0f0f */
+.dark .text-neon-yellow { color: #facc15; } /* Yellow-400: 13.1:1 on #0f0f0f */
+
+/* Hover Utilities - WCAG AA-safe */
+.hover-text-neon-cyan:hover { color: #0e7490; }
+.hover-text-neon-pink:hover { color: #be185d; }
+.dark .hover-text-neon-cyan:hover { color: #22d3ee; }
+.dark .hover-text-neon-pink:hover { color: #f472b6; }
+
+/* Gradient text utility - AA-safe
+ * Used on headings, icons, and decorative labels.
+ * Uses darker gradient endpoints that still read as "funky" but pass AA.
+ * Light mode: Pink-700 -> Cyan-700 (both 4.5:1+ on white)
+ * Dark mode: Pink-400 -> Cyan-400 (both 7:1+ on #0f0f0f) */
+.funky-text-neon {
+  background: linear-gradient(135deg, #be185d, #0e7490);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .funky-text-neon {
+  background: linear-gradient(135deg, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes funky-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes funky-glow-pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
+
+@keyframes funky-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Utility Classes */
+.funky-animate-float {
+  animation: funky-float 6s ease-in-out infinite;
+}
+
+.funky-animate-glow {
+  animation: funky-glow-pulse 3s ease-in-out infinite;
+}
+
+.funky-spring-hover {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.funky-spring-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Reduced Motion Guard */
+@media (prefers-reduced-motion: reduce) {
+  .funky-animate-float,
+  .funky-animate-glow,
+  .funky-spring-hover {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Funky Orbs */
+.funky-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Glass Panels */
+.funky-glass-panel {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--funky-glass-shadow);
+}
+
+.funky-glass-panel--header {
+  border-bottom: 1px solid var(--funky-glass-header-border);
+}
+
+.funky-glass-panel--footer {
+  border-top: 1px solid var(--funky-glass-border);
+}
+
+.dark .funky-glass-panel--footer {
+  border-top: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+/* Input Glow - uses AA-safe focus token for the border,
+ * with a subtle decorative glow shadow */
+.funky-input-glow {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.funky-input-glow:focus {
+  border-color: var(--funky-interactive-focus, #0e7490);
+  box-shadow: 0 0 0 3px var(--funky-interactive-bg, rgba(14, 116, 144, 0.15)), 0 0 10px rgba(0, 255, 255, 0.08);
+  outline: none;
+}
+
+.dark .funky-input-glow:focus {
+  border-color: var(--funky-interactive-focus, #22d3ee);
+  box-shadow: 0 0 0 3px var(--funky-interactive-bg, rgba(34, 211, 238, 0.15)), 0 0 14px rgba(0, 255, 255, 0.12);
+}
+
+/* Card Glow */
+.funky-card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.funky-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #00ff00);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.funky-card-glow:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
+   GRADIENT TEXT UTILITIES
+   ======================================== */
+
+/* AA-safe gradient text - for headings and labels on light backgrounds */
+.funky-gradient-text {
+  background: linear-gradient(135deg, #be185d, #0e7490);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+}
+
+/* Dark mode: brighter endpoints that still pass AA on dark bg */
+.dark .funky-gradient-text {
+  background: linear-gradient(135deg, #f472b6, #22d3ee, #4ade80);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sale gradient text (pink-orange-yellow) */
+.funky-gradient-text--sale {
+  background: var(--wp--preset--gradient--sale);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ========================================
+   ORB SIZE VARIANTS
+   ======================================== */
+
+.funky-orb--sm {
+  width: 10rem;
+  height: 10rem;
+  filter: blur(60px);
+}
+
+.funky-orb--md {
+  width: 20rem;
+  height: 20rem;
+  filter: blur(80px);
+}
+
+.funky-orb--lg {
+  width: 30rem;
+  height: 30rem;
+  filter: blur(100px);
+}
+
+.funky-orb--xl {
+  width: 40rem;
+  height: 40rem;
+  filter: blur(120px);
+}
+
+/* Orb colour shortcuts */
+.funky-orb--pink { background: var(--wp--preset--color--neon-pink); }
+.funky-orb--cyan { background: var(--wp--preset--color--neon-cyan); }
+.funky-orb--lime { background: var(--wp--preset--color--neon-lime); }
+.funky-orb--yellow { background: var(--wp--preset--color--neon-yellow); }
+.funky-orb--purple { background: var(--wp--preset--color--deep-purple); }
+
+/* Light mode: subtle orbs */
+.funky-orb--light-subtle { opacity: 0.1; }
+.funky-orb--light-medium { opacity: 0.15; }
+
+/* Dark mode: more visible orbs */
+.dark .funky-orb--light-subtle { opacity: 0.2; }
+.dark .funky-orb--light-medium { opacity: 0.3; }
+
+/* ========================================
+   NEON FOCUS RING
+   ======================================== */
+
+.funky-focus-ring:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.dark .funky-focus-ring:focus-visible {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
+
+/* Pink variant */
+.funky-focus-ring--pink:focus-visible {
+  outline-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+}
+
+.dark .funky-focus-ring--pink:focus-visible {
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
+}
+
+/* ========================================
+   GLOW BORDER VARIANTS
+   ======================================== */
+
+.funky-glow-border {
+  border: 1px solid var(--wp--preset--color--border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.funky-glow-border:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.08);
+}
+
+.dark .funky-glow-border:hover {
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+}
+
+/* Pink glow variant */
+.funky-glow-border--pink:hover {
+  border-color: rgba(255, 0, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.08);
+}
+
+.dark .funky-glow-border--pink:hover {
+  border-color: rgba(255, 0, 255, 0.4);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.15);
+}
+
+/* ========================================
+   ANIMATION DELAY UTILITIES
+   ======================================== */
+
+.funky-delay-0 { animation-delay: 0s; }
+.funky-delay-1 { animation-delay: -1s; }
+.funky-delay-2 { animation-delay: -2s; }
+.funky-delay-3 { animation-delay: -3s; }
+.funky-delay-4 { animation-delay: -4s; }
+.funky-delay-5 { animation-delay: -5s; }
+
+/* ========================================
+   FUNKY BADGE / TAG
+   ======================================== */
+
+.funky-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  text-transform: uppercase;
+}
+
+.funky-badge--neon {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--wp--preset--color--accent);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.dark .funky-badge--neon {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan);
+  border-color: rgba(0, 255, 255, 0.25);
+}
+
+.funky-badge--sale {
+  background: rgba(255, 0, 255, 0.1);
+  color: var(--wp--preset--color--error);
+  border: 1px solid rgba(255, 0, 255, 0.2);
+}
+
+.dark .funky-badge--sale {
+  background: rgba(255, 0, 255, 0.15);
+  color: var(--wp--preset--color--neon-pink);
+  border-color: rgba(255, 0, 255, 0.3);
+}
+
+/* ========================================
+   GRADIENT DIVIDER UTILITY
+   ======================================== */
+
+.funky-divider {
+  height: 2px;
+  border: none;
+  background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, transparent);
+  opacity: 0.3;
+  margin: 0;
+}
+
+.dark .funky-divider {
+  opacity: 0.5;
+}
+
+.funky-divider--subtle {
+  height: 1px;
+  opacity: 0.15;
+}
+
+.dark .funky-divider--subtle {
+  opacity: 0.3;
+}
+
+/* ========================================
+   SHIMMER ANIMATION (Loading / Attention)
+   ======================================== */
+
+@keyframes funky-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.funky-animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: funky-shimmer 3s ease-in-out infinite;
+}
+
+/* ========================================
+   EXPANDED REDUCED MOTION GUARD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .funky-animate-shimmer {
+    animation: none !important;
+  }
+  .funky-card-glow::before {
+    transition: none !important;
+  }
+  .funky-glow-border,
+  .funky-glow-border--pink {
+    transition: none !important;
+  }
+}

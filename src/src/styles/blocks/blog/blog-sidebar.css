@@ -1,0 +1,273 @@
+/* ========================================
+   BLOG SIDEBAR STYLES
+   ======================================== */
+
+/**
+ * Blog Sidebar Pattern
+ * WordPress & WooCommerce Aligned
+ * 
+ * Features:
+ * - Recent posts widget
+ * - Categories widget
+ * - Tags cloud
+ * - Newsletter signup
+ * - Complete dark mode support
+ */
+
+/* ========================================
+   SIDEBAR CONTAINER
+   ======================================== */
+
+.wp-blog-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+/* ========================================
+   SIDEBAR WIDGET (COMMON)
+   ======================================== */
+
+.wp-blog-sidebar__widget {
+  background: var(--wp--preset--color--background);
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.dark .wp-blog-sidebar__widget {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border-medium);
+}
+
+.wp-blog-sidebar__widget-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* Margin removed */
+}
+
+.wp-blog-sidebar__widget-icon {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-blog-sidebar__widget-title {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   RECENT POSTS WIDGET
+   ======================================== */
+
+.wp-blog-sidebar__posts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-blog-sidebar__post {
+  display: block;
+}
+
+.wp-blog-sidebar__post-inner {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.wp-blog-sidebar__post-image {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  border-radius: var(--wp--preset--border-radius--sm);
+  overflow: hidden;
+}
+
+.wp-blog-sidebar__post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.wp-blog-sidebar__post:hover .wp-blog-sidebar__post-image img {
+  transform: scale(1.1);
+}
+
+.wp-blog-sidebar__post-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wp-blog-sidebar__post-title {
+  color: var(--wp--preset--color--foreground);
+  transition: color var(--wp--preset--transition--base) ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* Margin removed */
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: 1.3;
+}
+
+.wp-blog-sidebar__post:hover .wp-blog-sidebar__post-title {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-blog-sidebar__post-date {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+/* ========================================
+   CATEGORIES WIDGET
+   ======================================== */
+
+.wp-blog-sidebar__categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wp-blog-sidebar__category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--wp--preset--border-radius--sm);
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-blog-sidebar__category:hover {
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .wp-blog-sidebar__category:hover {
+  background: var(--wp--preset--color--surface-elevated);
+}
+
+.wp-blog-sidebar__category-name {
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--small);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-blog-sidebar__category:hover .wp-blog-sidebar__category-name {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-blog-sidebar__category-count {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+/* ========================================
+   TAGS WIDGET
+   ======================================== */
+
+.wp-blog-sidebar__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.wp-blog-sidebar__tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+  border-radius: 9999px;
+  font-size: var(--wp--preset--font-size--small);
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.dark .wp-blog-sidebar__tag {
+  background: var(--wp--preset--color--surface-elevated);
+}
+
+.wp-blog-sidebar__tag:hover {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--wp--preset--color--accent);
+}
+
+.dark .wp-blog-sidebar__tag:hover {
+  background: rgba(124, 58, 237, 0.2);
+}
+
+/* ========================================
+   NEWSLETTER WIDGET
+   ======================================== */
+
+.wp-blog-sidebar__widget--newsletter {
+  background: rgba(124, 58, 237, 0.05);
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+.dark .wp-blog-sidebar__widget--newsletter {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.wp-blog-sidebar__newsletter-text {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+  /* Margin removed - relying on widget gap */
+}
+
+.wp-blog-sidebar__newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wp-blog-sidebar__newsletter-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--wp--preset--color--border);
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-size: var(--wp--preset--font-size--normal);
+}
+
+.wp-blog-sidebar__newsletter-input:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--accent);
+}
+
+.dark .wp-blog-sidebar__newsletter-input {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border-medium);
+}
+
+.wp-blog-sidebar__newsletter-button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: var(--wp--preset--color--accent);
+  color: var(--wp--preset--color--accent-foreground);
+  border: none;
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  cursor: pointer;
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-blog-sidebar__newsletter-button:hover {
+  background: var(--wp--preset--color--accent-dark);
+}
+
+.dark .wp-blog-sidebar__newsletter-button {
+  background: var(--wp--preset--color--accent);
+}
+
+.dark .wp-blog-sidebar__newsletter-button:hover {
+  background: var(--wp--preset--color--accent-light);
+}

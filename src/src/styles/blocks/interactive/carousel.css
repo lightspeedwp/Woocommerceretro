@@ -1,0 +1,76 @@
+/* ========================================
+   CAROUSEL BLOCK
+   ======================================== */
+
+.wp-block-carousel {
+  position: relative;
+  width: 100%;
+}
+
+.wp-block-carousel__content-wrapper {
+  overflow: hidden;
+}
+
+.wp-block-carousel__content {
+  display: flex;
+}
+
+.wp-block-carousel--horizontal .wp-block-carousel__content {
+  margin-left: calc(var(--wp--preset--spacing--40) * -1); /* -1rem / -16px */
+}
+
+.wp-block-carousel--vertical .wp-block-carousel__content {
+  margin-top: calc(var(--wp--preset--spacing--40) * -1);
+  flex-direction: column;
+}
+
+.wp-block-carousel__item {
+  min-width: 0;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: 100%;
+}
+
+.wp-block-carousel--horizontal .wp-block-carousel__item {
+  padding-left: var(--wp--preset--spacing--40);
+}
+
+.wp-block-carousel--vertical .wp-block-carousel__item {
+  padding-top: var(--wp--preset--spacing--40);
+}
+
+.wp-block-carousel__button {
+  position: absolute;
+  height: 2rem; /* 32px */
+  width: 2rem;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.wp-block-carousel--horizontal .wp-block-carousel__button--prev {
+  top: 50%;
+  left: -3rem; /* -12 tailwind -> -3rem */
+  transform: translateY(-50%);
+}
+
+.wp-block-carousel--horizontal .wp-block-carousel__button--next {
+  top: 50%;
+  right: -3rem;
+  transform: translateY(-50%);
+}
+
+.wp-block-carousel--vertical .wp-block-carousel__button--prev {
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.wp-block-carousel--vertical .wp-block-carousel__button--next {
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}

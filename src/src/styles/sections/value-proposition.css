@@ -1,0 +1,111 @@
+/* ========================================
+   VALUE PROPOSITION SECTION
+   ======================================== */
+
+.wp-value-prop {
+  display: grid;
+  gap: var(--wp--preset--spacing--60);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .wp-value-prop {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--80);
+  }
+}
+
+/* Content Column */
+.wp-value-prop__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Using gap for vertical spacing */
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-value-prop__subheading {
+  color: var(--wp--preset--color--accent);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  /* Margin removed */
+  margin: 0;
+}
+
+.wp-value-prop__heading {
+  /* Margin removed */
+  margin: 0;
+  font-size: var(--wp--preset--font-size--heading-2);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-value-prop__description {
+  color: var(--wp--preset--color--muted-foreground);
+  /* Margin removed */
+  margin: 0;
+  /* Use gap in parent for bottom spacing if needed, or add gap after description */
+  font-size: var(--wp--preset--font-size--large);
+}
+
+/* Features List */
+.wp-value-prop__features {
+  list-style: none;
+  padding: 0;
+  /* Margins removed */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  /* Add explicit gap between description and list via parent gap or specific class if needed */
+  /* Since .wp-value-prop__content has gap-30, we rely on that */
+  /* But features list needs gap from description which might be larger (50px originally). */
+  /* We can increase gap on content or add specific spacing utility */
+  margin-top: var(--wp--preset--spacing--20); /* Add a bit more if needed */
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-value-prop__feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-value-prop__feature-icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  background-color: var(--wp--preset--color--accent-light); /* Needs definition or fallback */
+  color: var(--wp--preset--color--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.125rem;
+}
+
+.wp-value-prop__feature-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.wp-value-prop__feature-text {
+  color: var(--wp--preset--color--foreground);
+  flex: 1;
+}
+
+/* Media Column */
+.wp-value-prop__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-value-prop__image,
+.wp-value-prop__video {
+  width: 100%;
+  height: auto;
+  border-radius: var(--wp--preset--border-radius--lg);
+  box-shadow: var(--wp--preset--shadow--xl);
+}

@@ -1,0 +1,257 @@
+/* ========================================
+   ARCHIVE PAGINATION PATTERN
+   ======================================== */
+
+/**
+ * Archive Pagination
+ * WordPress Query Pagination Block alignment
+ * 
+ * Features:
+ * - Page number buttons with active state
+ * - Previous/Next navigation
+ * - Ellipsis support for large page counts
+ * - Touch-friendly 44x44px tap targets
+ * - Complete dark mode support
+ * - Responsive design
+ */
+
+/* ========================================
+   FUNKY REDESIGN STYLES
+   ======================================== */
+
+.funky-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  margin-top: var(--wp--preset--spacing--60);
+}
+
+.funky-pagination-btn {
+  min-width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wp--preset--color--background);
+  border: 3px solid #000;
+  border-radius: 0;
+  color: #000;
+  font-weight: 800;
+  font-family: var(--wp--preset--font-family--heading);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 4px 4px 0px #000;
+  position: relative;
+}
+.funky-pagination-item {
+  min-width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wp--preset--color--background);
+  border: 3px solid #000;
+  border-radius: 0;
+  color: #000;
+  font-weight: 800;
+  font-family: var(--wp--preset--font-family--heading);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 4px 4px 0px #000;
+  position: relative;
+}
+
+.funky-pagination-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+  background: #0ff; /* Cyan */
+}
+.funky-pagination-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+  background: #0ff; /* Cyan */
+}
+
+.funky-pagination-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000;
+}
+.funky-pagination-item:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.funky-pagination-item--active {
+  background: #f0f !important; /* Magenta */
+  color: #fff !important;
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px #000;
+}
+
+.funky-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  filter: grayscale(1);
+}
+
+.dark .funky-pagination-btn {
+  background: #111;
+  border-color: #fff;
+  color: #fff;
+  box-shadow: 4px 4px 0px #fff;
+}
+.dark .funky-pagination-item {
+  background: #111;
+  border-color: #fff;
+  color: #fff;
+  box-shadow: 4px 4px 0px #fff;
+}
+
+.dark .funky-pagination-btn:hover:not(:disabled) {
+  box-shadow: 6px 6px 0px #fff;
+  background: #0ff; /* Cyan */
+  color: #000;
+}
+.dark .funky-pagination-item:hover {
+  box-shadow: 6px 6px 0px #fff;
+  background: #0ff; /* Cyan */
+  color: #000;
+}
+
+.dark .funky-pagination-item--active {
+  background: #f0f !important; /* Magenta */
+  color: #fff !important;
+  box-shadow: 8px 8px 0px #fff;
+}
+
+/* Original classes alignment */
+.wp-block-query-pagination {
+  display: flex;
+  gap: var(--wp--preset--spacing--20);
+  align-items: center;
+}
+
+/* ========================================
+   PAGINATION BUTTONS (Prev/Next)
+   ======================================== */
+
+.wp-archive-pagination__button {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  background: var(--wp--preset--color--background);
+  border-radius: var(--wp--preset--border-radius--sm);
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-archive-pagination__button:hover:not(:disabled) {
+  background: var(--wp--preset--color--surface);
+}
+
+.wp-archive-pagination__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wp-archive-pagination__button:disabled:hover {
+  background: var(--wp--preset--color--background);
+}
+
+/* Button Text - Hide on Mobile */
+.wp-archive-pagination__button-text {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .wp-archive-pagination__button-text {
+    display: inline;
+  }
+}
+
+/* ========================================
+   PAGE NUMBER BUTTONS
+   ======================================== */
+
+.wp-archive-pagination__page {
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--wp--preset--color--border);
+  background: var(--wp--preset--color--background);
+  border-radius: var(--wp--preset--border-radius--sm);
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-archive-pagination__page:hover {
+  background: var(--wp--preset--color--surface);
+}
+
+/* Active Page */
+.wp-archive-pagination__page--active {
+  background: var(--wp--preset--color--accent);
+  border-color: var(--wp--preset--color--accent);
+  color: #ffffff;
+}
+
+.wp-archive-pagination__page--active:hover {
+  background: var(--wp--preset--color--accent);
+}
+
+/* ========================================
+   ELLIPSIS
+   ======================================== */
+
+.wp-archive-pagination__ellipsis {
+  padding: 0 var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* ========================================
+   DARK MODE OVERRIDES
+   ======================================== */
+
+.dark .wp-archive-pagination__button {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}
+
+.dark .wp-archive-pagination__button:hover:not(:disabled) {
+  background: var(--wp--preset--color--background);
+}
+
+.dark .wp-archive-pagination__button:disabled:hover {
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .wp-archive-pagination__page {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}
+
+.dark .wp-archive-pagination__page:hover {
+  background: var(--wp--preset--color--background);
+}
+
+.dark .wp-archive-pagination__page--active {
+  background: var(--wp--preset--color--accent);
+  border-color: var(--wp--preset--color--accent);
+}
+
+.dark .wp-archive-pagination__page--active:hover {
+  background: var(--wp--preset--color--accent);
+}

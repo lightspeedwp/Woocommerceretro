@@ -1,0 +1,63 @@
+/* ========================================
+   PRODUCT SEARCH BLOCK
+   ======================================== */
+
+.wp-block-product-search {
+  width: 100%;
+  max-width: 32rem; /* lg */
+}
+
+.wp-block-product-search__container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+}
+
+.wp-block-product-search__input {
+  width: 100%;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  padding-right: 3rem; /* Space for button */
+  background-color: var(--wp--preset--color--background);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--full);
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--sm);
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-product-search__input:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--ring);
+  box-shadow: 0 0 0 2px var(--wp--preset--color--ring);
+}
+
+.wp-block-product-search__input::placeholder {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-block-product-search__submit {
+  position: absolute;
+  right: var(--wp--preset--spacing--10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  color: var(--wp--preset--color--muted-foreground);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-product-search__submit:hover {
+  color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--surface);
+}
+
+/* Dark Mode */
+.dark .wp-block-product-search__input {
+  background-color: var(--wp--preset--color--surface);
+}

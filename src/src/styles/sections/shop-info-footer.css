@@ -1,0 +1,291 @@
+/**
+ * Shop Info Footer - WordPress BEM Styles
+ * 
+ * Three-column shop footer with contact info, services, and map.
+ * Includes payment methods strip at bottom.
+ * 
+ * Component: /src/app/components/parts/ShopInfoFooter.tsx
+ */
+
+/* ========================================
+   ROOT CONTAINER
+   ======================================== */
+
+.wp-shop-info-footer {
+  width: 100%;
+}
+
+/* ========================================
+   COLUMNS LAYOUT
+   ======================================== */
+
+.wp-shop-info-footer__columns {
+  display: flex;
+  flex-direction: column;
+  min-height: 600px; /* ~hero height */
+}
+
+@media (min-width: 1024px) {
+  .wp-shop-info-footer__columns {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   COLUMN: CONTACT (Dark Background)
+   ======================================== */
+
+.wp-shop-info-footer__column--contact {
+  background-color: var(--funky-surface-raised);
+  color: var(--funky-text-white);
+  padding: var(--funky-spacing-fluid);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.dark .wp-shop-info-footer__column--contact {
+  background-color: #000000;
+}
+
+@media (min-width: 1024px) {
+  .wp-shop-info-footer__column--contact {
+    width: 33.333333%;
+  }
+}
+
+/* ========================================
+   COLUMN: SERVICES (Gold Background)
+   ======================================== */
+
+.wp-shop-info-footer__column--services {
+  background-color: var(--funky-brand-gold-light);
+  color: var(--funky-brand-brown);
+  padding: var(--funky-spacing-fluid);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .wp-shop-info-footer__column--services {
+    width: 33.333333%;
+  }
+}
+
+/* ========================================
+   COLUMN: MAP
+   ======================================== */
+
+.wp-shop-info-footer__column--map {
+  position: relative;
+  min-height: 288px; /* 18rem */
+}
+
+@media (min-width: 1024px) {
+  .wp-shop-info-footer__column--map {
+    width: 33.333333%;
+  }
+}
+
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
+
+.wp-shop-info-footer__contact-block {
+  margin-bottom: 48px;
+}
+
+.wp-shop-info-footer__heading {
+  color: var(--funky-brand-gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  margin-bottom: 24px;
+}
+
+.wp-shop-info-footer__text {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--funky-text-muted-on-dark);
+  line-height: 1.6;
+}
+
+/* ========================================
+   SOCIAL SECTION
+   ======================================== */
+
+.wp-shop-info-footer__social-block {
+  /* Spacing handled by parent */
+}
+
+.wp-shop-info-footer__social-icons {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.wp-shop-info-footer__social-icon {
+  color: var(--funky-text-white);
+  cursor: pointer;
+  transition: color var(--funky-transition-base);
+}
+
+.wp-shop-info-footer__social-icon:hover {
+  color: var(--funky-brand-gold-light);
+}
+
+/* ========================================
+   SERVICES SECTION
+   ======================================== */
+
+.wp-shop-info-footer__services-heading {
+  color: var(--funky-text-white);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  margin-bottom: 32px;
+}
+
+.wp-shop-info-footer__list {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wp-shop-info-footer__list li {
+  margin-bottom: 16px;
+}
+
+.wp-shop-info-footer__list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   MAP IFRAME
+   ======================================== */
+
+.wp-shop-info-footer__map-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(100%);
+}
+
+/* ========================================
+   PAYMENT STRIP
+   ======================================== */
+
+.wp-shop-info-footer__payment-strip {
+  background-color: var(--funky-surface-default);
+  padding: 24px 16px;
+  border-top: 1px solid var(--funky-border-subtle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.dark .wp-shop-info-footer__payment-strip {
+  background-color: var(--funky-surface-raised);
+  border-top-color: var(--funky-border-medium);
+}
+
+/* ========================================
+   PAYMENT LOGOS
+   ======================================== */
+
+.wp-shop-info-footer__payment-logo {
+  height: 32px;
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: all var(--funky-transition-base);
+}
+
+.wp-shop-info-footer__payment-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.wp-shop-info-footer__payment-logo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ========================================
+   PAYMENT BRAND TEXT
+   ======================================== */
+
+.wp-shop-info-footer__payment-brand {
+  height: 24px;
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: all var(--funky-transition-base);
+}
+
+.wp-shop-info-footer__payment-brand:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.wp-shop-info-footer__payment-brand--payfast {
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--funky-text-secondary);
+  font-size: var(--wp--preset--font-size--large);
+  font-style: italic;
+}
+
+.wp-shop-info-footer__payment-brand--snapscan {
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #1e40af; /* SnapScan blue */
+  font-size: var(--wp--preset--font-size--large);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .wp-shop-info-footer__columns {
+    min-height: auto;
+  }
+  
+  .wp-shop-info-footer__column--contact,
+  .wp-shop-info-footer__column--services {
+    padding: var(--funky-spacing-section);
+  }
+  
+  .wp-shop-info-footer__column--map {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wp-shop-info-footer__payment-strip {
+    gap: 16px;
+    padding: 20px 12px;
+  }
+  
+  .wp-shop-info-footer__payment-logo {
+    height: 24px;
+  }
+  
+  .wp-shop-info-footer__payment-brand {
+    height: 20px;
+  }
+}

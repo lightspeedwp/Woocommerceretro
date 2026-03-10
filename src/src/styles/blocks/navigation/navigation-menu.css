@@ -1,0 +1,133 @@
+/* ========================================
+   NAVIGATION BLOCK
+   ======================================== */
+
+.wp-block-navigation {
+  position: relative;
+  z-index: 20;
+}
+
+.wp-block-navigation__container {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--wp--preset--spacing--20); /* Default gap */
+}
+
+/* Orientations */
+.wp-block-navigation__container--horizontal {
+  flex-direction: row;
+  align-items: center;
+}
+
+.wp-block-navigation__container--vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Alignments */
+.wp-block-navigation__container--align-start { justify-content: flex-start; }
+.wp-block-navigation__container--align-center { justify-content: center; }
+.wp-block-navigation__container--align-end { justify-content: flex-end; }
+.wp-block-navigation__container--align-between { justify-content: space-between; }
+
+/* Spacing Modifiers */
+.wp-block-navigation__container--spacing-none { gap: 0; }
+.wp-block-navigation__container--spacing-xs { gap: var(--wp--preset--spacing--10); }
+.wp-block-navigation__container--spacing-sm { gap: var(--wp--preset--spacing--20); }
+.wp-block-navigation__container--spacing-md { gap: var(--wp--preset--spacing--30); }
+.wp-block-navigation__container--spacing-lg { gap: var(--wp--preset--spacing--40); }
+.wp-block-navigation__container--spacing-xl { gap: var(--wp--preset--spacing--50); }
+
+/* Navigation Item */
+.wp-block-navigation-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.wp-block-navigation-item__link {
+  display: flex;
+  align-items: center;
+  color: var(--wp--preset--color--foreground);
+  text-decoration: none;
+  font-weight: var(--wp--preset--font-weight--medium);
+  font-size: var(--wp--preset--font-size--small);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--border-radius--sm);
+  transition: color var(--wp--preset--transition--base), background-color var(--wp--preset--transition--base);
+}
+
+.wp-block-navigation-item__link:hover { color: var(--wp--preset--color--primary); background-color: var(--wp--preset--color--surface); }
+.wp-block-navigation-item__link:focus { color: var(--wp--preset--color--primary); background-color: var(--wp--preset--color--surface); }
+
+.wp-block-navigation-item__link--active {
+  color: var(--wp--preset--color--primary);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+/* Submenu Toggle */
+.wp-block-navigation-item__submenu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: var(--wp--preset--spacing--10);
+  cursor: pointer;
+  color: var(--wp--preset--color--foreground);
+  transition: transform var(--wp--preset--transition--base);
+}
+
+.wp-block-navigation-item__submenu-toggle:hover {
+  color: var(--wp--preset--color--primary);
+}
+
+.wp-block-navigation-item__submenu-toggle--open {
+  transform: rotate(180deg);
+}
+
+/* Submenu */
+.wp-block-navigation-submenu {
+  list-style: none;
+  margin: 0;
+  padding: var(--wp--preset--spacing--20);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  box-shadow: var(--wp--preset--shadow--md);
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+  z-index: 30;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wp-block-navigation-submenu--top-level {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--wp--preset--spacing--10);
+}
+
+.wp-block-navigation-submenu--nested {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: var(--wp--preset--spacing--10);
+}
+
+/* Mobile Toggle */
+.wp-block-navigation__mobile-toggle {
+  display: none; /* Handled by parent container usually, but style just in case */
+}
+
+/* Mega Menu Support (if embedded directly) */
+/* Mega menus usually replace the submenu standard styling */

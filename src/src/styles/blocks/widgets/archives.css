@@ -1,0 +1,21 @@
+/* ========================================
+   ARCHIVES BLOCK
+   ======================================== */
+
+.wp-block-archives {
+  padding-left: var(--wp--preset--spacing--40);
+  /* Margin removed */
+}
+
+.wp-block-archives li {
+  /* Margin removed */
+}
+
+.wp-block-archives-dropdown select {
+  width: 100%;
+  padding: var(--wp--preset--spacing--20);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+}

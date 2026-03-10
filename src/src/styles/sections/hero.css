@@ -1,0 +1,332 @@
+/* ========================================
+   SCROLL DOWN ARROW
+   ======================================== */
+
+.wp-hero-wrapper__scroll-arrow {
+  z-index: 30;
+  position: absolute;
+  bottom: 2rem; /* bottom-8 */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ========================================
+   HOMEPAGE HERO - DARK BACKGROUND
+   ======================================== */
+
+/**
+ * Dark Hero Section for Homepage
+ * Features:
+ * - Dark background with gradient
+ * - White text
+ * - Hero image on right side (desktop)
+ * - Centered on mobile
+ */
+
+.wp-hero-dark {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: var(--wp--preset--spacing--80) 0;
+  overflow: hidden;
+}
+
+.dark .wp-hero-dark {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.wp-hero-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .wp-hero-dark::before {
+    width: 100%;
+    opacity: 0.2;
+  }
+}
+
+.wp-hero-dark .wp-hero-content {
+  position: relative;
+  z-index: 10;
+  /* Flexbox for spacing instead of margins */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-hero-dark .wp-hero-text {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-hero-dark .wp-hero-title {
+  color: #ffffff;
+  /* Margin removed */
+  margin: 0;
+  font-size: var(--wp--preset--font-size--xxx-large);
+  line-height: var(--wp--preset--line-height--tight);
+}
+
+.wp-hero-dark .wp-hero-actions {
+  /* Margin removed */
+  margin: 0;
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Light outline button for dark hero backgrounds */
+.wp-hero-dark .wp-button-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  background: transparent;
+}
+
+.wp-hero-dark .wp-button-outline-light:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* ========================================
+   BRAND STORY BANNER
+   ======================================== */
+
+/**
+ * Full-width banner with background image
+ * Features:
+ * - Dark overlay
+ * - White text
+ * - CTA button
+ */
+
+.wp-brand-story-banner {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.wp-brand-story-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 100%);
+  padding: var(--wp--preset--spacing--80) 0;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.dark .wp-brand-story-overlay {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.wp-brand-story-overlay > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* ========================================
+   NEWSLETTER GRADIENT SECTION
+   ======================================== */
+
+/**
+ * Newsletter CTA with gradient background
+ * Features:
+ * - Purple/blue gradient
+ * - White text
+ * - Email signup form
+ */
+
+.wp-newsletter-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--wp--preset--spacing--80) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.dark .wp-newsletter-gradient {
+  background: linear-gradient(135deg, #5568d3 0%, #6439a0 100%);
+}
+
+.wp-newsletter-gradient *:not(input):not(button) {
+  color: #ffffff;
+}
+
+.wp-newsletter-gradient input {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.wp-newsletter-gradient input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wp-newsletter-gradient button {
+  background: #ffffff;
+  color: #667eea;
+}
+
+.wp-newsletter-gradient button:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   HERO SECTION PATTERN (merged from blocks/sections/hero.css)
+   ======================================== */
+
+.wp-hero-section {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* Default min-height if not specified via props */
+  min-height: 60vh; 
+}
+
+/* Min-height modifiers */
+.wp-hero-section--50vh { min-height: 50vh; }
+.wp-hero-section--60vh { min-height: 60vh; }
+.wp-hero-section--80vh { min-height: 80vh; }
+.wp-hero-section--100vh { min-height: 100vh; }
+
+.wp-hero-section--has-background {
+  /* Ensure text is visible on top of image */
+  color: #fff;
+}
+
+/* Fixed background modifier */
+.wp-hero-section--fixed-bg .wp-hero-section__background-image {
+  background-attachment: fixed;
+}
+
+/* On mobile, disable fixed background to prevent performance issues and weird scrolling behaviors */
+@media (max-width: 1024px) {
+  .wp-hero-section--fixed-bg .wp-hero-section__background-image {
+    background-attachment: scroll;
+  }
+}
+
+.wp-hero-section__background-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wp-hero-section__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 1;
+}
+
+.wp-hero-section__content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--wp--preset--layout--content-size);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  /* Using gap instead of margins for strict no-margin policy */
+  gap: var(--wp--preset--spacing--40); 
+}
+
+.wp-hero-section__content--centered {
+  align-items: center;
+  text-align: center;
+}
+
+.wp-hero-section__heading {
+  font-size: clamp(2.5rem, 5vw, 4.5rem); /* Fluid typography */
+  line-height: 1.1;
+  font-weight: var(--wp--preset--font-weight--bold);
+  letter-spacing: -0.02em;
+  /* Margin removed in favor of gap in parent */
+  margin: 0; 
+}
+
+.wp-hero-section__heading--white {
+  color: #ffffff;
+}
+
+.wp-hero-section__subheading {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  color: var(--wp--preset--color--text-secondary);
+  max-width: 65ch;
+  /* Margin removed */
+  margin: 0; 
+}
+
+.wp-hero-section__subheading--white {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.wp-hero-section__subheading--centered {
+  margin-inline: auto;
+}
+
+/* CTA Wrapper */
+.wp-hero-section__cta-wrapper {
+  display: flex;
+  flex-direction: column; /* Mobile first: Stack buttons */
+  gap: var(--wp--preset--spacing--30);
+  /* Margin removed */
+  margin: 0;
+  width: 100%;
+}
+
+.wp-hero-section__cta-wrapper > * {
+  width: 100%; /* Full width buttons on mobile */
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .wp-hero-section__cta-wrapper {
+    flex-direction: row; /* Desktop: Inline buttons */
+    width: auto;
+  }
+  
+  .wp-hero-section__cta-wrapper > * {
+    width: auto;
+  }
+}
+
+.wp-hero-section__cta-wrapper--centered {
+  align-items: center; /* Center items in flex column (mobile) */
+  justify-content: center; /* Center items in flex row (desktop) */
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .wp-hero-section__heading {
+    font-size: 2.5rem; /* Ensure readable on small screens */
+  }
+  
+  /* Make sure hero doesn't take up too much vertical space on landscape mobile */
+  .wp-hero-section--80vh,
+  .wp-hero-section--100vh {
+    min-height: auto;
+    padding-block: var(--wp--preset--spacing--80);
+  }
+}

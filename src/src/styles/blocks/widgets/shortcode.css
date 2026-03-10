@@ -1,0 +1,9 @@
+/* ========================================
+   SHORTCODE BLOCK
+   ======================================== */
+
+.wp-block-shortcode {
+  /* Shortcodes render dynamic content, so specific styling depends on the output.
+     Ensuring it doesn't break layout. */
+  display: block;
+}

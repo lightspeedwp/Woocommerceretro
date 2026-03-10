@@ -1,0 +1,16 @@
+/**
+ * Paragraph Block Styles
+ */
+
+.wp-block-paragraph {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--normal);
+  line-height: var(--wp--preset--line-height--relaxed);
+  color: var(--wp--preset--color--foreground);
+}
+p {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--normal);
+  line-height: var(--wp--preset--line-height--relaxed);
+  color: var(--wp--preset--color--foreground);
+}

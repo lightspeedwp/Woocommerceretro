@@ -1,0 +1,610 @@
+/**
+ * Loyalty Dashboard Page - Funky Redesign CSS
+ *
+ * Phase 11: PageLoyalty (personal loyalty dashboard)
+ *
+ * Colour identity: Gold #fbbf24 / Cyan #00ffff (achievement / loyalty)
+ *
+ * Funky treatments:
+ *   Hero:       gradient bg + orbs (reuses commerce-hero)
+ *   Dashboard:  glassmorphism stat cards + gradient progress bar
+ *   Actions:    glow-on-hover cards with gradient icon circles
+ *   Activity:   earn/redeem colour-coded rows
+ *   Tiers:      gradient upgrade banner + glow benefit icons
+ *
+ * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITY
+   ======================================== */
+
+.page-loyalty {
+  --page-hero-from: #fbbf24;
+  --page-hero-via: #030213;
+  --page-hero-to: #00ffff;
+}
+
+/* ========================================
+   LOYALTY - SECTION HEADING (shared)
+   ======================================== */
+
+.loyalty-section__heading {
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+/* ========================================
+   LOYALTY - DASHBOARD STATS
+   ======================================== */
+
+.loyalty-dashboard {
+  padding-block: var(--wp--preset--spacing--70);
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .loyalty-dashboard {
+  background: var(--wp--preset--color--background);
+}
+
+.loyalty-dashboard__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .loyalty-dashboard__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .loyalty-dashboard__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Stat Card */
+.loyalty-stat-card {
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--background);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .loyalty-stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.loyalty-stat-card:hover {
+  border-color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.dark .loyalty-stat-card:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.08);
+}
+
+/* Primary stat card (points balance) */
+.loyalty-stat-card--primary {
+  border-color: var(--wp--preset--color--neon-yellow, #fbbf24);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.04), rgba(0, 255, 255, 0.02));
+}
+
+.dark .loyalty-stat-card--primary {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.06), rgba(0, 255, 255, 0.04));
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.08);
+}
+
+.loyalty-stat-card__label {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dark .loyalty-stat-card__label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.loyalty-stat-card__value {
+  font-size: var(--wp--preset--font-size--xxx-large, 2rem);
+  font-weight: var(--wp--preset--font-weight--bold);
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-yellow, #fbbf24), var(--wp--preset--color--neon-cyan, #00ffff));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.loyalty-stat-card__value--tier {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.loyalty-stat-card__value--tier svg {
+  /* Override the gradient text for the icon */
+  -webkit-text-fill-color: initial;
+  color: var(--wp--preset--color--neon-yellow, #fbbf24);
+}
+
+.loyalty-stat-card__subtext {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.dark .loyalty-stat-card__subtext {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ========================================
+   LOYALTY - PROGRESS BAR
+   ======================================== */
+
+.loyalty-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+  margin-top: var(--wp--preset--spacing--20);
+}
+
+.loyalty-progress__track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--wp--preset--color--border-light);
+  overflow: hidden;
+}
+
+.dark .loyalty-progress__track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.loyalty-progress__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--wp--preset--color--neon-yellow, #fbbf24), var(--wp--preset--color--neon-cyan, #00ffff));
+  transition: width 0.6s ease;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
+.loyalty-progress__label {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.dark .loyalty-progress__label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   LOYALTY - QUICK ACTIONS
+   ======================================== */
+
+.loyalty-actions {
+  padding-block: var(--wp--preset--spacing--70);
+  background: var(--wp--preset--color--background);
+}
+
+.dark .loyalty-actions {
+  background: rgba(3, 2, 19, 0.4);
+}
+
+.loyalty-actions__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 640px) {
+  .loyalty-actions__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .loyalty-actions__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.loyalty-action-card {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--surface);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dark .loyalty-action-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.loyalty-action-card:hover {
+  border-color: var(--wp--preset--color--neon-cyan, #00ffff);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 255, 255, 0.06);
+}
+
+.dark .loyalty-action-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.12);
+}
+
+.loyalty-action-card__icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--md, 8px);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(0, 255, 255, 0.08));
+  color: var(--wp--preset--color--neon-yellow, #fbbf24);
+}
+
+.dark .loyalty-action-card__icon {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(0, 255, 255, 0.12));
+}
+
+.loyalty-action-card__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.loyalty-action-card__label {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .loyalty-action-card__label {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.loyalty-action-card__desc {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.dark .loyalty-action-card__desc {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.loyalty-action-card__arrow {
+  color: var(--wp--preset--color--text-secondary);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.loyalty-action-card:hover .loyalty-action-card__arrow {
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+  transform: translateX(3px);
+}
+
+/* ========================================
+   LOYALTY - RECENT ACTIVITY
+   ======================================== */
+
+.loyalty-activity {
+  padding-block: var(--wp--preset--spacing--70);
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .loyalty-activity {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.loyalty-activity__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+  max-width: 48rem;
+}
+
+.loyalty-activity-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--md, 8px);
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--background);
+  transition: border-color 0.2s ease;
+}
+
+.dark .loyalty-activity-row {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.loyalty-activity-row:hover {
+  border-color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.loyalty-activity-row__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.loyalty-activity-row__icon--earn {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.dark .loyalty-activity-row__icon--earn {
+  background: rgba(0, 255, 255, 0.12);
+}
+
+.loyalty-activity-row__icon--redeem {
+  background: rgba(255, 0, 255, 0.08);
+  color: var(--wp--preset--color--neon-pink, #ff00ff);
+}
+
+.dark .loyalty-activity-row__icon--redeem {
+  background: rgba(255, 0, 255, 0.12);
+}
+
+.loyalty-activity-row__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.loyalty-activity-row__action {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .loyalty-activity-row__action {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.loyalty-activity-row__date {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.dark .loyalty-activity-row__date {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.loyalty-activity-row__points {
+  flex-shrink: 0;
+  font-weight: var(--wp--preset--font-weight--semibold);
+  font-size: var(--wp--preset--font-size--normal);
+  white-space: nowrap;
+}
+
+.loyalty-activity-row__points--earn {
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.loyalty-activity-row__points--redeem {
+  color: var(--wp--preset--color--neon-pink, #ff00ff);
+}
+
+/* ========================================
+   LOYALTY - TIER BENEFITS
+   ======================================== */
+
+.loyalty-tiers {
+  padding-block: var(--wp--preset--spacing--70);
+  background: var(--wp--preset--color--background);
+}
+
+.dark .loyalty-tiers {
+  background: rgba(3, 2, 19, 0.4);
+}
+
+.loyalty-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 640px) {
+  .loyalty-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.loyalty-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--md, 8px);
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.dark .loyalty-benefit-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.loyalty-benefit-item__icon {
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   LOYALTY - UPGRADE BANNER
+   ======================================== */
+
+.loyalty-upgrade-banner {
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  padding: var(--wp--preset--spacing--50);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.04), rgba(0, 255, 255, 0.03));
+}
+
+.dark .loyalty-upgrade-banner {
+  border-color: rgba(251, 191, 36, 0.3);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.06), rgba(0, 255, 255, 0.05));
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.06);
+}
+
+.loyalty-upgrade-banner__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 768px) {
+  .loyalty-upgrade-banner__content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.loyalty-upgrade-banner__text h3 {
+  margin: 0 0 var(--wp--preset--spacing--10) 0;
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .loyalty-upgrade-banner__text h3 {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.loyalty-upgrade-banner__text p {
+  margin: 0;
+  color: var(--wp--preset--color--text-secondary);
+  max-width: 50ch;
+}
+
+.dark .loyalty-upgrade-banner__text p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================
+   GIFT CARD - ADD-TO-CART SUCCESS STATE
+   ======================================== */
+
+.gc-add-to-cart--added.gc-add-to-cart--added {
+  background: linear-gradient(90deg, var(--wp--preset--color--neon-cyan, #00ffff), var(--wp--preset--color--neon-lime, #ccff00));
+  color: #030213;
+  border-color: transparent;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
+}
+
+.gc-add-to-cart--added:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+/* ========================================
+   ACCOUNT LOYALTY - NESTED VIEW
+   ======================================== */
+
+.account-loyalty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.account-loyalty__header {
+  /* spacing handled by parent gap */
+}
+
+.account-loyalty__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  border-radius: 999px;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(0, 255, 255, 0.06));
+  color: var(--wp--preset--color--neon-yellow, #fbbf24);
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.dark .account-loyalty__badge {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(0, 255, 255, 0.1));
+}
+
+.account-loyalty__title {
+  margin: 0 0 var(--wp--preset--spacing--20) 0;
+}
+
+.account-loyalty__subtitle {
+  color: var(--wp--preset--color--text-secondary);
+  margin: 0;
+}
+
+.dark .account-loyalty__subtitle {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.account-loyalty__subtitle strong {
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .account-loyalty__subtitle strong {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.account-loyalty__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  margin-top: var(--wp--preset--spacing--60);
+  padding-top: var(--wp--preset--spacing--40);
+  border-top: 1px solid var(--wp--preset--color--border-light);
+  color: var(--wp--preset--color--neon-yellow, #fbbf24);
+}
+
+.dark .account-loyalty__footer {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.account-loyalty__footer-link {
+  color: var(--funky-interactive-color, var(--wp--preset--color--foreground));
+  text-decoration: none;
+  font-weight: var(--wp--preset--font-weight--medium);
+  transition: color 0.2s ease;
+}
+
+.account-loyalty__footer-link:hover {
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+}
+
+.dark .account-loyalty__footer-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .account-loyalty__footer-link:hover {
+  color: var(--wp--preset--color--neon-cyan, #00ffff);
+}

@@ -1,0 +1,966 @@
+/**
+ * Cart & Checkout Pages - Funky Redesign CSS (Phase 5)
+ *
+ * BEM blocks:
+ *   .cart-page      - Cart page funky overrides
+ *   .checkout-page  - Checkout page funky overrides
+ *
+ * Funky mode: CLEAN FUNKY (conversion focus)
+ *   Cart items:     Subtle glow border on hover
+ *   Cart totals:    Glassmorphism panel with gradient divider
+ *   Checkout form:  Neon focus states on inputs
+ *   Payment:        Glow border on selected method
+ *   Order summary:  Gradient accent on total line
+ *   DO NOT over-animate - conversion is priority
+ *
+ * @see /prompts/funky-redesign-orchestrator.md (Phase 5)
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITIES
+   ======================================== */
+
+.cart-page {
+  --page-primary: #030213;
+  --page-secondary: #00ffff;
+  --page-accent: #ff00ff;
+}
+
+.checkout-page {
+  --page-primary: #030213;
+  --page-secondary: #00ffff;
+  --page-accent: #ff00ff;
+}
+
+/* ========================================
+   1. CART PAGE - HEADER (GRADIENT TEXT)
+   ======================================== */
+
+.cart-page__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .cart-page__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ========================================
+   2. CART ITEM - SUBTLE GLOW ON HOVER
+   ======================================== */
+
+.cart-page .wp-cart-item {
+  border-radius: var(--wp--preset--border-radius--lg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-page .wp-cart-item:hover {
+  border-color: rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.04);
+}
+
+.dark .cart-page .wp-cart-item:hover {
+  border-color: rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.08);
+}
+
+/* Cart item image - subtle glow frame on hover */
+.cart-page .wp-cart-item__image {
+  transition: box-shadow 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.cart-page .wp-cart-item:hover .wp-cart-item__image {
+  border-color: rgba(0, 255, 255, 0.12);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.06);
+}
+
+.dark .cart-page .wp-cart-item:hover .wp-cart-item__image {
+  border-color: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+/* Cart item title - neon hover accent */
+.cart-page .wp-cart-item__title:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .cart-page .wp-cart-item__title:hover {
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
+}
+
+/* Cart item remove - neon error hover */
+.cart-page .wp-cart-item__remove:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.dark .cart-page .wp-cart-item__remove:hover {
+  text-shadow: 0 0 6px rgba(255, 0, 255, 0.3);
+}
+
+/* ========================================
+   3. CART TOTALS - GLASSMORPHISM PANEL
+   ======================================== */
+
+.cart-page .wp-cart-totals {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--funky-glass-border);
+  box-shadow: var(--funky-glass-shadow);
+}
+
+.dark .cart-page .wp-cart-totals {
+  border-color: rgba(0, 255, 255, 0.1);
+}
+
+/* Cart totals title - gradient text */
+.cart-page .wp-cart-totals__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .cart-page .wp-cart-totals__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cart totals - gradient divider above total row */
+.cart-page .wp-cart-totals__table-row--total {
+  border-top-width: 2px;
+  border-image: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-pink), transparent) 1;
+}
+
+/* Cart total value - accent colour */
+.cart-page .wp-cart-totals__table-row--total .wp-cart-totals__table-value {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .cart-page .wp-cart-totals__table-row--total .wp-cart-totals__table-value {
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+/* Coupon section - subtle gradient border */
+.cart-page .wp-cart-totals__coupons {
+  border-bottom-width: 2px;
+  border-image: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent) 1;
+}
+
+.dark .cart-page .wp-cart-totals__coupons {
+  border-image: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.35), transparent) 1;
+}
+
+/* Checkout button - neon glow on hover */
+.cart-page .wp-cart-totals__checkout-button .wp-block-button:hover {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.15);
+}
+
+.dark .cart-page .wp-cart-totals__checkout-button .wp-block-button:hover {
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.25);
+}
+
+/* Secure text - neon accent */
+.cart-page .wp-cart-totals__secure-text {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .cart-page .wp-cart-totals__secure-text {
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
+}
+
+/* ========================================
+   4. CART EMPTY - FUNKY ICON
+   ======================================== */
+
+.cart-page .wp-cart-empty__icon {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+}
+
+.dark .cart-page .wp-cart-empty__icon {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.cart-page .wp-cart-empty__divider {
+  background: linear-gradient(90deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  opacity: 0.3;
+}
+
+.dark .cart-page .wp-cart-empty__divider {
+  opacity: 0.5;
+}
+
+/* ========================================
+   5. CART TABLE HEADER - GRADIENT UNDERLINE
+   ======================================== */
+
+.cart-page .wp-cart-table-header {
+  border-bottom-width: 2px;
+  border-image: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-pink), transparent) 1;
+}
+
+/* ========================================
+   6. CHECKOUT PAGE - TITLE (GRADIENT TEXT)
+   ======================================== */
+
+.checkout-page .wp-checkout-page__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .checkout-page .wp-checkout-page__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ========================================
+   7. CHECKOUT STEP - NEON INDICATORS
+   ======================================== */
+
+/* Step circle - neon cyan border in dark mode */
+.checkout-page .wp-checkout-step__circle {
+  transition: all 0.3s ease;
+  border-width: var(--wp--custom--border-width--200);
+}
+
+.dark .checkout-page .wp-checkout-step__circle {
+  border-color: rgba(0, 255, 255, 0.3);
+}
+
+/* Active step circle - neon glow */
+.checkout-page .wp-checkout-step--open .wp-checkout-step__circle {
+  border-color: var(--wp--preset--color--neon-cyan);
+  border-width: var(--wp--custom--border-width--300);
+}
+
+.dark .checkout-page .wp-checkout-step--open .wp-checkout-step__circle {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* Step number - neon cyan */
+.checkout-page .wp-checkout-step__number {
+  color: var(--wp--preset--color--accent);
+}
+
+.dark .checkout-page .wp-checkout-step__number {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Completed step circle - gradient bg */
+.checkout-page .wp-checkout-step__circle--completed {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  border-color: transparent;
+}
+
+.dark .checkout-page .wp-checkout-step__circle--completed {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Connector line - gradient */
+.checkout-page .wp-checkout-step__connector {
+  background: linear-gradient(180deg, rgba(0, 255, 255, 0.2), var(--wp--preset--color--border));
+}
+
+.dark .checkout-page .wp-checkout-step__connector {
+  background: linear-gradient(180deg, rgba(0, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+}
+
+/* Step title - subtle neon on active */
+.checkout-page .wp-checkout-step--open .wp-checkout-step__title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.dark .checkout-page .wp-checkout-step--open .wp-checkout-step__title {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* ========================================
+   8. CHECKOUT INPUTS - NEON FOCUS STATES
+   ======================================== */
+
+/* Floating label inputs in checkout */
+.checkout-page .wp-checkout-floating-input:focus-within {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+}
+
+.dark .checkout-page .wp-checkout-floating-input:focus-within {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.25);
+}
+
+/* All checkout text inputs */
+.checkout-page input[type="text"]:focus { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.12); outline: none; }
+.checkout-page input[type="email"]:focus { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.12); outline: none; }
+.checkout-page input[type="tel"]:focus { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.12); outline: none; }
+.checkout-page input[type="number"]:focus { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.12); outline: none; }
+.checkout-page select:focus { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.12); outline: none; }
+.checkout-page textarea:focus { border-color: var(--wp--preset--color--neon-cyan); box-shadow: 0 0 10px rgba(0, 255, 255, 0.12); outline: none; }
+
+.dark .checkout-page input[type="text"]:focus { box-shadow: 0 0 14px rgba(0, 255, 255, 0.2); }
+.dark .checkout-page input[type="email"]:focus { box-shadow: 0 0 14px rgba(0, 255, 255, 0.2); }
+.dark .checkout-page input[type="tel"]:focus { box-shadow: 0 0 14px rgba(0, 255, 255, 0.2); }
+.dark .checkout-page input[type="number"]:focus { box-shadow: 0 0 14px rgba(0, 255, 255, 0.2); }
+.dark .checkout-page select:focus { box-shadow: 0 0 14px rgba(0, 255, 255, 0.2); }
+.dark .checkout-page textarea:focus { box-shadow: 0 0 14px rgba(0, 255, 255, 0.2); }
+
+/* ========================================
+   9. CHECKOUT DELIVERY TOGGLE - NEON ACTIVE
+   ======================================== */
+
+.checkout-page .wp-checkout-toggle-option.is-active {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 0 1px var(--wp--preset--color--neon-cyan);
+}
+
+.dark .checkout-page .wp-checkout-toggle-option.is-active {
+  box-shadow: 0 0 0 1px var(--wp--preset--color--neon-cyan),
+              0 0 10px rgba(0, 255, 255, 0.15);
+}
+
+.checkout-page .wp-checkout-toggle-option:hover:not(.is-active) {
+  border-color: rgba(0, 255, 255, 0.3);
+}
+
+/* ========================================
+   10. PAYMENT METHODS - GLOW ON SELECTED
+   ======================================== */
+
+/* Payment methods wrapper - glass bg */
+.checkout-page .wp-payment-methods {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--funky-glass-border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--60);
+  box-shadow: var(--funky-glass-shadow);
+}
+
+.dark .checkout-page .wp-payment-methods {
+  border-color: rgba(0, 255, 255, 0.08);
+}
+
+/* Payment option - glow on selected */
+.checkout-page .wp-payment-methods__option {
+  border: var(--wp--custom--border-width--200) solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  padding: var(--wp--preset--spacing--40);
+  display: block;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: var(--wp--preset--color--surface);
+}
+
+.checkout-page .wp-payment-methods__option:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+}
+
+.checkout-page .wp-payment-methods__option--active {
+  border-color: var(--wp--preset--color--neon-cyan);
+  border-width: var(--wp--custom--border-width--300);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+.dark .checkout-page .wp-payment-methods__option--active {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.2);
+}
+
+/* Payment option header layout */
+.checkout-page .wp-payment-methods__option-header {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Payment label group */
+.checkout-page .wp-payment-methods__label-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.checkout-page .wp-payment-methods__label {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Payment icon - neon cyan */
+.checkout-page .wp-payment-methods__icon {
+  color: var(--wp--preset--color--accent);
+}
+
+.dark .checkout-page .wp-payment-methods__icon {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Payment radio */
+.checkout-page .wp-payment-methods__radio {
+  accent-color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Payment details section */
+.checkout-page .wp-payment-methods__details {
+  padding-top: var(--wp--preset--spacing--40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Payment form grid */
+.checkout-page .wp-payment-methods__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.checkout-page .wp-payment-methods__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Payment submit button - neon glow */
+.checkout-page .wp-payment-methods__submit-button {
+  width: 100%;
+  padding: var(--wp--preset--spacing--40);
+  background: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border: none;
+  border-radius: var(--wp--preset--border-radius--lg);
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkout-page .wp-payment-methods__submit-button:hover {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.15);
+  opacity: 0.95;
+}
+
+.dark .checkout-page .wp-payment-methods__submit-button:hover {
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.25);
+}
+
+/* Order notes textarea */
+.checkout-page .wp-payment-methods__textarea {
+  width: 100%;
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: var(--wp--preset--spacing--30);
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200);
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checkout-page .wp-payment-methods__textarea:focus {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.12);
+  outline: none;
+}
+
+.dark .checkout-page .wp-payment-methods__textarea:focus {
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.2);
+}
+
+/* Payment privacy text */
+.checkout-page .wp-payment-methods__privacy {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+.checkout-page .wp-payment-methods__link {
+  color: var(--wp--preset--color--accent);
+  text-decoration: underline;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.checkout-page .wp-payment-methods__link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Payment description */
+.checkout-page .wp-payment-methods__description {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Payment notes section */
+.checkout-page .wp-payment-methods__notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.checkout-page .wp-payment-methods__label--block {
+  display: block;
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+/* Payment options container */
+.checkout-page .wp-payment-methods__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Payment checkbox wrapper */
+.checkout-page .wp-payment-methods__checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.checkout-page .wp-payment-methods__checkbox-label {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Payment message */
+.checkout-page .wp-payment-methods__message {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+/* Payment footer */
+.checkout-page .wp-payment-methods__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  padding-top: var(--wp--preset--spacing--40);
+}
+
+/* ========================================
+   11. ORDER SUMMARY - GRADIENT TOTAL ACCENT
+   ======================================== */
+
+/* Order summary container - glass panel */
+.checkout-page .wp-order-summary {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: var(--wp--custom--border-width--200) solid var(--funky-glass-border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--60);
+  box-shadow: var(--funky-glass-shadow);
+}
+
+.dark .checkout-page .wp-order-summary {
+  border-color: rgba(0, 255, 255, 0.08);
+}
+
+/* Order summary empty state */
+.wp-order-summary--empty {
+  text-align: center;
+  padding: var(--wp--preset--spacing--60);
+}
+
+.wp-order-summary--empty .wp-order-summary__title {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+/* Order summary header */
+.checkout-page .wp-order-summary__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--wp--preset--spacing--40);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+/* Order summary title - gradient text */
+.checkout-page .wp-order-summary__title {
+  margin: 0;
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .checkout-page .wp-order-summary__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Edit link */
+.checkout-page .wp-order-summary__edit-link {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--accent);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.checkout-page .wp-order-summary__edit-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Items list */
+.checkout-page .wp-order-summary__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  padding-block: var(--wp--preset--spacing--40);
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+/* Individual item */
+.checkout-page .wp-order-summary__item {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+  align-items: center;
+  padding-bottom: var(--wp--preset--spacing--30);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.checkout-page .wp-order-summary__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Item image wrapper */
+.checkout-page .wp-order-summary__item-image-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.checkout-page .wp-order-summary__item-image {
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--wp--preset--border-radius--md);
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+.checkout-page .wp-order-summary__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Quantity badge */
+.checkout-page .wp-order-summary__item-quantity {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: var(--wp--preset--color--neon-cyan);
+  color: var(--page-primary);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: var(--wp--preset--font-weight--bold);
+  z-index: 2;
+}
+
+.dark .checkout-page .wp-order-summary__item-quantity {
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+}
+
+/* Item details */
+.checkout-page .wp-order-summary__item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.checkout-page .wp-order-summary__item-header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.checkout-page .wp-order-summary__item-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checkout-page .wp-order-summary__item-price {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  flex-shrink: 0;
+}
+
+.checkout-page .wp-order-summary__item-meta {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+  margin: 0;
+}
+
+/* Totals section */
+.checkout-page .wp-order-summary__totals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  padding-top: var(--wp--preset--spacing--40);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.checkout-page .wp-order-summary__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-page .wp-order-summary__label {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+.checkout-page .wp-order-summary__value {
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+/* Discount row - success colour */
+.checkout-page .wp-order-summary__row--discount .wp-order-summary__label,
+.checkout-page .wp-order-summary__row--discount .wp-order-summary__value {
+  color: var(--wp--preset--color--success);
+}
+
+/* Divider - gradient */
+.checkout-page .wp-order-summary__divider {
+  height: 2px;
+  border: none;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-pink), transparent);
+  opacity: 0.3;
+}
+
+.dark .checkout-page .wp-order-summary__divider {
+  opacity: 0.5;
+}
+
+/* Total row - large, gradient accent */
+.checkout-page .wp-order-summary__row--total .wp-order-summary__label {
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.checkout-page .wp-order-summary__value--large {
+  font-size: var(--wp--preset--font-size--500);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .checkout-page .wp-order-summary__value--large {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+/* Coupon section */
+.checkout-page .wp-order-summary__coupon {
+  padding-top: var(--wp--preset--spacing--40);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+/* ========================================
+   12. CHECKOUT HEADER - SUBTLE FUNKY
+   ======================================== */
+
+/* Checkout header - subtle glass bg */
+.checkout-page .wp-checkout-header {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dark .checkout-page .wp-checkout-header {
+  border-bottom-color: rgba(0, 255, 255, 0.15);
+}
+
+/* Secure badge - neon cyan */
+.checkout-page .wp-checkout-header__secure-badge {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .checkout-page .wp-checkout-header__secure-badge {
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
+}
+
+/* Back to cart link - neon hover */
+.checkout-page .wp-checkout-header__back-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* ========================================
+   13. CHECKOUT FOOTER - SUBTLE FUNKY
+   ======================================== */
+
+.dark .checkout-page .wp-checkout-footer {
+  border-top-color: rgba(0, 255, 255, 0.1);
+}
+
+.checkout-page .wp-checkout-footer__link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Payment badges - subtle glass */
+.checkout-page .wp-checkout-footer__badge {
+  background: var(--funky-glass-bg);
+  border-color: var(--funky-glass-border);
+}
+
+/* ========================================
+   14. CHECKOUT STEP CONTENT - ANIMATION
+   ======================================== */
+
+/* Clickable header cursor */
+.checkout-page .wp-checkout-step__header--clickable {
+  cursor: pointer;
+}
+
+.checkout-page .wp-checkout-step__content--open {
+  max-height: 2000px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.checkout-page .wp-checkout-step__content--closed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+/* Chevron rotation */
+.checkout-page .wp-checkout-step__chevron {
+  color: var(--wp--preset--color--muted-foreground);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.checkout-page .wp-checkout-step__chevron--open {
+  transform: rotate(180deg);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Summary text for completed steps */
+.checkout-page .wp-checkout-step__summary-text {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--success);
+}
+
+/* Step login link - neon hover */
+.checkout-page .wp-checkout-step__login-link:hover {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* ========================================
+   15. CHECKOUT SHIPPING OPTION - GLOW ON SELECTED
+   ======================================== */
+
+.checkout-page .wp-checkout-shipping-option.is-selected {
+  border-color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .checkout-page .wp-checkout-shipping-option.is-selected {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.12);
+}
+
+/* ========================================
+   16. DEV CONTROL - SUBTLE FUNKY
+   ======================================== */
+
+.checkout-page .wp-dev-control {
+  background: var(--funky-glass-bg);
+  border-color: var(--funky-glass-border);
+}
+
+/* ========================================
+   REDUCED MOTION GUARD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-page .wp-cart-item,
+  .cart-page .wp-cart-item__image {
+    transition: none;
+  }
+
+  .cart-page .wp-cart-item:hover,
+  .cart-page .wp-cart-item:hover .wp-cart-item__image {
+    transform: none;
+  }
+
+  .checkout-page .wp-checkout-step__circle {
+    transition: none;
+  }
+
+  .checkout-page .wp-checkout-step__content--open,
+  .checkout-page .wp-checkout-step__content--closed {
+    transition: none;
+  }
+
+  .checkout-page .wp-checkout-step__chevron {
+    transition: none;
+  }
+
+  .checkout-page .wp-payment-methods__option {
+    transition: none;
+  }
+
+  .checkout-page .wp-payment-methods__submit-button {
+    transition: none;
+  }
+}
+
+/* ========================================
+   MOBILE BREAKPOINTS
+   ======================================== */
+
+@media (max-width: 640px) {
+  .cart-page .wp-cart-totals {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .checkout-page .wp-payment-methods {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: var(--wp--preset--spacing--40);
+  }
+
+  .checkout-page .wp-order-summary {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: var(--wp--preset--spacing--40);
+  }
+
+  .checkout-page .wp-payment-methods__row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,10 @@
+/* ========================================
+   TERM DESCRIPTION BLOCK
+   ======================================== */
+
+.wp-block-term-description {
+  font-size: var(--wp--preset--font-size--normal);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+  /* Margin removed */
+}

@@ -1,0 +1,137 @@
+/* ========================================
+   COMPONENT-SPECIFIC CLASSES
+   ======================================== */
+
+/* Section divider utility */
+.wp-section-divider {
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.dark .wp-section-divider {
+  border-top-color: var(--wp--preset--color--border);
+}
+
+/* ========================================
+   QUICK ENTRY TILES GRID
+   ======================================== */
+
+.wp-quick-entry-tiles-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--40);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+/* Tablet (2 columns) */
+@media (min-width: 640px) {
+  .wp-quick-entry-tiles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop (4 columns) */
+@media (min-width: 1024px) {
+  .wp-quick-entry-tiles-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Tile Item */
+.wp-quick-entry-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  text-decoration: none;
+  color: var(--wp--preset--color--foreground);
+  background-color: var(--wp--preset--color--base);
+  transition: all var(--wp--preset--transition--base) ease;
+  
+  /* Gap instead of margin */
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-quick-entry-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--wp--preset--shadow--300);
+}
+
+/* ========================================
+   FULL WIDTH SECTION
+   ======================================== */
+
+.wp-full-width-section {
+  width: 100%;
+}
+
+.wp-full-width-section--padded {
+  padding-block: var(--wp--preset--spacing--section);
+}
+
+.wp-full-width-section--relative {
+  position: relative;
+}
+
+.wp-full-width-section--overflow-hidden {
+  overflow: hidden;
+}
+
+.wp-full-width-section__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wp-full-width-section__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #000;
+}
+
+.wp-full-width-section__content {
+  position: relative;
+  z-index: 10;
+}
+
+.wp-quick-entry-tile__icon {
+  /* Margin removed */
+  margin: 0;
+  color: var(--wp--preset--color--primary);
+  width: 32px;
+  height: 32px;
+}
+
+.wp-quick-entry-tile__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wp-quick-entry-tile__title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  font-size: var(--wp--preset--font-size--500); /* Large/H5 equivalent */
+  /* Margin removed */
+  margin: 0;
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-quick-entry-tile__description {
+  font-family: var(--wp--preset--font-family--base);
+  font-size: var(--wp--preset--font-size--200); /* Base/Small */
+  color: var(--wp--preset--color--muted-foreground);
+  margin: 0;
+}
+
+/* Dark Mode Overrides */
+.dark .wp-quick-entry-tile {
+  background-color: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}
+
+.dark .wp-quick-entry-tile:hover {
+  border-color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--surface);
+}

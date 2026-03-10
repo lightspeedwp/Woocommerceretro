@@ -1,0 +1,159 @@
+/**
+ * Layout Grid & Flex Utilities
+ * WordPress-aligned utility classes for Grid and Flexbox layouts.
+ * 
+ * Mimics WordPress Gutenberg block supports and Tailwind-like utility patterns
+ * but strictly namespaced with `wp-` prefix.
+ */
+
+/* ========================================
+   GRID SYSTEM
+   ======================================== */
+
+.wp-grid {
+  display: grid;
+}
+
+/* Grid Columns (1-12) */
+.wp-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.wp-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.wp-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.wp-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.wp-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.wp-grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.wp-grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.wp-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+/* Grid Gaps */
+.wp-gap-0 { gap: 0px; }
+.wp-gap-1 { gap: 4px; }
+.wp-gap-2 { gap: 8px; }
+.wp-gap-4 { gap: 16px; }
+.wp-gap-5 { gap: 20px; }
+.wp-gap-6 { gap: 24px; }
+.wp-gap-8 { gap: 32px; }
+.wp-gap-10 { gap: 40px; }
+.wp-gap-12 { gap: 48px; }
+
+/* Column Gaps */
+.wp-column-gap-0 { column-gap: 0px; }
+.wp-column-gap-4 { column-gap: 16px; }
+.wp-column-gap-6 { column-gap: 24px; }
+.wp-column-gap-8 { column-gap: 32px; }
+
+/* Row Gaps */
+.wp-row-gap-0 { row-gap: 0px; }
+.wp-row-gap-4 { row-gap: 16px; }
+.wp-row-gap-6 { row-gap: 24px; }
+.wp-row-gap-8 { row-gap: 32px; }
+
+/* ========================================
+   FLEXBOX SYSTEM
+   ======================================== */
+
+.wp-flex { display: flex; }
+.wp-inline-flex { display: inline-flex; }
+
+/* Flex Direction */
+.wp-flex-row { flex-direction: row; }
+.wp-flex-col { flex-direction: column; }
+.wp-flex-row-reverse { flex-direction: row-reverse; }
+.wp-flex-col-reverse { flex-direction: column-reverse; }
+
+/* Flex Wrap */
+.wp-flex-wrap { flex-wrap: wrap; }
+.wp-flex-nowrap { flex-wrap: nowrap; }
+
+/* Flex Grow/Shrink */
+.wp-flex-1 { flex: 1 1 0%; }
+.wp-flex-auto { flex: 1 1 auto; }
+.wp-flex-none { flex: none; }
+.wp-grow { flex-grow: 1; }
+.wp-grow-0 { flex-grow: 0; }
+.wp-shrink { flex-shrink: 1; }
+.wp-shrink-0 { flex-shrink: 0; }
+
+/* Justify Content */
+.wp-justify-start { justify-content: flex-start; }
+.wp-justify-end { justify-content: flex-end; }
+.wp-justify-center { justify-content: center; }
+.wp-justify-between { justify-content: space-between; }
+.wp-justify-around { justify-content: space-around; }
+.wp-justify-evenly { justify-content: space-evenly; }
+
+/* Align Items */
+.wp-items-start { align-items: flex-start; }
+.wp-items-end { align-items: flex-end; }
+.wp-items-center { align-items: center; }
+.wp-items-baseline { align-items: baseline; }
+.wp-items-stretch { align-items: stretch; }
+
+/* Align Self */
+.wp-self-auto { align-self: auto; }
+.wp-self-start { align-self: flex-start; }
+.wp-self-end { align-self: flex-end; }
+.wp-self-center { align-self: center; }
+.wp-self-stretch { align-self: stretch; }
+
+/* ========================================
+   RESPONSIVE VARIANTS (Media Queries)
+   ======================================== */
+
+/* Tablet (sm: 640px) */
+@media (min-width: 640px) {
+  .sm-wp-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .sm-wp-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sm-wp-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sm-wp-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  
+  .sm-wp-flex-row { flex-direction: row; }
+  .sm-wp-flex-col { flex-direction: column; }
+  
+  .sm-wp-gap-4 { gap: 16px; }
+  .sm-wp-gap-6 { gap: 24px; }
+}
+
+/* Desktop (md: 768px) */
+@media (min-width: 768px) {
+  .md-wp-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .md-wp-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md-wp-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  
+  .md-wp-flex-row { flex-direction: row; }
+  .md-wp-flex-col { flex-direction: column; }
+}
+
+/* Large Desktop (lg: 1024px) */
+@media (min-width: 1024px) {
+  .lg-wp-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg-wp-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lg-wp-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lg-wp-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  
+  .lg-wp-gap-8 { gap: 32px; }
+}
+
+/* Extra Large (xl: 1280px) */
+@media (min-width: 1280px) {
+  .xl-wp-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ========================================
+   SIZING UTILITIES
+   ======================================== */
+
+.wp-w-full { width: 100%; }
+.wp-w-auto { width: auto; }
+.wp-w-screen { width: 100vw; }
+.wp-h-full { height: 100%; }
+.wp-h-auto { height: auto; }
+
+.wp-max-w-content { max-width: var(--wp--preset--layout--content-size); }
+.wp-max-w-wide { max-width: var(--wp--preset--layout--wide-size); }
+
+/* Sticky Positioning */
+.wp-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

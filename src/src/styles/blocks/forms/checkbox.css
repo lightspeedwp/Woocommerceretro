@@ -1,0 +1,43 @@
+/* ========================================
+   CHECKBOX
+   ======================================== */
+
+.wp-block-checkbox {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base);
+}
+
+.wp-block-checkbox:checked {
+  background-color: var(--wp--preset--color--primary);
+  border-color: var(--wp--preset--color--primary);
+  background-size: 0.75rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.wp-block-checkbox:focus-visible {
+  outline: 2px solid var(--wp--preset--color--ring);
+  outline-offset: 2px;
+}
+
+.wp-block-checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  cursor: pointer;
+}
+
+.wp-block-checkbox-label {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--foreground);
+  user-select: none;
+}

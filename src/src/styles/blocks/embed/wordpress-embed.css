@@ -1,0 +1,15 @@
+/* ========================================
+   WORDPRESS EMBED BLOCK
+   ======================================== */
+
+.wp-block-embed-wordpress {
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: var(--wp--preset--spacing--30);
+}
+
+.wp-block-embed-wordpress__title {
+  font-weight: var(--wp--preset--font-weight--bold);
+  /* Margin removed */
+}

@@ -1,0 +1,128 @@
+/* ========================================
+   PRODUCT GRID PATTERN STYLES
+   ======================================== */
+
+/**
+ * Product Grid Pattern
+ * WordPress & WooCommerce Aligned
+ * 
+ * Features:
+ * - Responsive grid layout
+ * - 4-2-1 column breakpoints
+ * - Proper gap spacing
+ * - Complete dark mode support
+ * - Optional horizontal scroll on mobile
+ * 
+ * Grid Layout:
+ * - Mobile (<640px): 1 column
+ * - Tablet (640-1023px): 2 columns
+ * - Desktop (>=1024px): 4 columns
+ */
+
+/* ========================================
+   PRODUCT GRID BASE
+   ======================================== */
+
+.wc-block-product-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--40);
+  width: 100%;
+}
+
+/* Mobile: 1 column (default above) */
+
+/* Tablet: 2 columns */
+@media (min-width: 640px) {
+  .wc-block-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 1024px) {
+  .wc-block-product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--60);
+  }
+}
+
+/* ========================================
+   PRODUCT GRID VARIANTS
+   ======================================== */
+
+/* Three column variant (for specific layouts) */
+.wc-block-product-grid--three-col {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--40);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wc-block-product-grid--three-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wc-block-product-grid--three-col {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--60);
+  }
+}
+
+/* Two column variant (for sidebar layouts) */
+.wc-block-product-grid--two-col {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--40);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wc-block-product-grid--two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+/* Horizontal Scroll Variant (Mobile Only) */
+@media (max-width: 639px) {
+  .wc-block-product-grid--scroll-mobile {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--wp--preset--spacing--40);
+    
+    /* Use gap for spacing between items */
+    gap: var(--wp--preset--spacing--20);
+    
+    /* Bleed to edge handling */
+    margin-right: calc(-1 * var(--wp--preset--spacing--container-padding)); 
+    padding-right: var(--wp--preset--spacing--container-padding); /* Padding for last item visibility */
+    
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+
+  .wc-block-product-grid--scroll-mobile::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+
+  .wc-block-product-grid--scroll-mobile .wc-block-product-grid__item {
+    flex: 0 0 85%; /* Show 85% of item width to encourage scroll */
+    min-width: 260px;
+    scroll-snap-align: start;
+    /* Removed padding-right in favor of gap on parent */
+    padding-right: 0;
+  }
+  
+  /* Remove right margin/padding if inside a container that handles it */
+  .container .wc-block-product-grid--scroll-mobile {
+    margin-right: -1rem; /* Adjust based on container padding */
+    padding-right: 1rem;
+  }
+}

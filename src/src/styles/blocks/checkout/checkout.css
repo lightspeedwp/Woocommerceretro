@@ -1,0 +1,619 @@
+/* ========================================
+   CHECKOUT PAGE STYLES
+   ======================================== */
+
+.wp-checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-checkout-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding-bottom: var(--wp--preset--spacing--30);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.dark .wp-checkout-section__header {
+  border-color: var(--wp--preset--color--border-medium);
+}
+
+.wp-checkout-section__icon {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-checkout-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .wp-checkout-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wp-checkout-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .wp-checkout-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.wp-checkout-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-checkout-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-checkout-checkbox-container {
+  margin-top: var(--wp--preset--spacing--20); /* Replaces wp-mt-2 */
+}
+
+/* Floating Label Input */
+.wp-checkout-floating-input {
+  position: relative;
+  width: 100%;
+  height: 3.5rem; /* h-14 */
+  background-color: var(--wp--preset--color--background);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--sm);
+  transition: border-color var(--wp--preset--transition--base);
+}
+
+.wp-checkout-floating-input:focus-within {
+  border-color: var(--wp--preset--color--ring);
+  box-shadow: 0 0 0 1px var(--wp--preset--color--ring);
+}
+
+.wp-checkout-floating-input__label {
+  position: absolute;
+  left: 0.75rem; /* left-3 */
+  top: 0.5rem; /* top-2 */
+  color: var(--wp--preset--color--muted-foreground);
+  pointer-events: none;
+  z-index: 10;
+  font-size: var(--wp--preset--font-size--100);
+}
+
+.wp-checkout-floating-input__field {
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem 0.75rem 0.25rem; /* pt-5 px-3 pb-1 */
+  background: transparent;
+  border: none;
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--foreground);
+  outline: none;
+  appearance: none;
+}
+
+/* Contact Information */
+.wp-checkout-contact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wp-checkout-contact-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--30);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+}
+
+.wp-checkout-contact-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: var(--wp--preset--color--primary-light);
+  color: var(--wp--preset--color--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.wp-checkout-contact-info {
+  flex: 1;
+}
+
+.wp-checkout-contact-name {
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--bold);
+  margin: 0;
+}
+
+.wp-checkout-contact-email {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--100);
+  margin: 0;
+}
+
+/* Payment Methods */
+.wp-checkout-payment-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  cursor: pointer;
+  background-color: var(--wp--preset--color--background);
+  transition: all 0.2s;
+}
+
+.wp-checkout-payment-option.is-selected {
+  border-color: var(--wp--preset--color--primary);
+  /* background-color: var(--wp--preset--color--surface); */
+  box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+}
+
+.wp-checkout-payment-option.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wp-checkout-payment-details {
+  padding: var(--wp--preset--spacing--40);
+  background-color: var(--wp--preset--color--surface);
+  border-top: 1px solid var(--wp--preset--color--border);
+  border-radius: 0 0 var(--wp--preset--radii--md) var(--wp--preset--radii--md);
+}
+
+/* Shipping Methods */
+.wp-checkout-shipping-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wp-checkout-shipping-option.is-selected {
+  border-color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--surface);
+}
+
+.wp-checkout-shipping-option.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Order Summary */
+.wp-checkout-summary {
+  background-color: var(--wp--preset--color--background);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--lg);
+  padding: var(--wp--preset--spacing--60);
+  position: sticky;
+  top: 6rem;
+}
+
+.wp-checkout-summary__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  max-height: 15rem;
+  overflow-y: auto;
+  padding-right: var(--wp--preset--spacing--20);
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.wp-checkout-line-item {
+  display: flex;
+  gap: var(--wp--preset--spacing--40);
+  padding-block: var(--wp--preset--spacing--40);
+  border-bottom: 1px solid var(--wp--preset--color--border-light);
+}
+
+.wp-checkout-line-item:last-child {
+  border-bottom: none;
+}
+
+.wp-checkout-item-image {
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--wp--preset--radii--md);
+  background-color: var(--wp--preset--color--surface);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.wp-checkout-item-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--wp--preset--color--text-secondary);
+  color: var(--wp--preset--color--white);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  z-index: 10;
+}
+
+.wp-checkout-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.wp-checkout-item-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wp-checkout-item-variant {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+  margin: 0;
+}
+
+.wp-checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--wp--preset--spacing--30);
+}
+
+/* Text Utilities */
+.wp-checkout-text-bold {
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.wp-checkout-text-medium {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.wp-checkout-text-subtle {
+  color: var(--wp--preset--color--text-secondary);
+  font-size: var(--wp--preset--font-size--100);
+  margin: 0;
+}
+
+.wp-checkout-price {
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Steps (Updated) */
+.wp-checkout-step {
+  display: flex;
+  gap: var(--wp--preset--spacing--40); /* gap-4 */
+  margin-bottom: var(--wp--preset--spacing--60);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .wp-checkout-step {
+    gap: var(--wp--preset--spacing--60); /* md:gap-6 */
+  }
+}
+
+.wp-checkout-step--last .wp-checkout-step__connector {
+  display: none;
+}
+
+.wp-checkout-step__indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 2rem; /* w-8 */
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .wp-checkout-step__indicator {
+    width: 2.5rem; /* md:w-10 */
+  }
+}
+
+.wp-checkout-step__circle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background-color: var(--wp--preset--color--surface);
+  border: 2px solid var(--wp--preset--color--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.wp-checkout-step__circle--completed {
+  background-color: var(--wp--preset--color--primary);
+  border-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.wp-checkout-step__check-icon {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.wp-checkout-step__connector {
+  width: 2px;
+  background-color: var(--wp--preset--color--border);
+  flex-grow: 1;
+  margin-top: 0.5rem;
+  min-height: 2rem;
+}
+
+.wp-checkout-step__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.wp-checkout-step__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--wp--preset--spacing--30);
+  min-height: 2rem;
+}
+
+.wp-checkout-step__header-main {
+  display: flex;
+  align-items: baseline;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-checkout-step__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-checkout-step__title {
+  font-size: var(--wp--preset--font-size--400);
+  margin: 0;
+}
+
+.wp-checkout-step__content {
+  overflow: hidden;
+}
+
+.wp-checkout-step__actions {
+  margin-top: var(--wp--preset--spacing--40); /* Replaces wp-mt-4 */
+}
+
+/* Coupon Input */
+.wp-coupon-input {
+  margin-top: var(--wp--preset--spacing--40);
+}
+
+.wp-coupon-input--applied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--wp--preset--color--surface-secondary);
+  padding: var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--radii--md);
+  border: 1px dashed var(--wp--preset--color--primary);
+}
+
+.wp-coupon-input__success-message {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--text-primary);
+}
+
+.wp-coupon-input__toggle {
+  width: 100%;
+  text-align: left;
+  color: var(--wp--preset--color--text-secondary);
+  font-size: var(--wp--preset--font-size--100);
+}
+
+.wp-coupon-input__toggle-link {
+  color: var(--wp--preset--color--primary);
+  text-decoration: underline;
+}
+
+.wp-coupon-input__toggle-link:hover {
+  text-decoration: none;
+}
+
+.wp-coupon-input__form {
+  margin-top: var(--wp--preset--spacing--30);
+}
+
+.wp-coupon-input__fields {
+  display: flex;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-coupon-input__field {
+  flex: 1;
+}
+
+.wp-coupon-input__submit {
+  flex-shrink: 0;
+}
+
+.wp-coupon-input__error {
+  margin-top: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--error);
+}
+
+/* Generic Layout */
+.wp-checkout-mb {
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.wp-checkout-text-light {
+  font-weight: var(--wp--preset--font-weight--light);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.wp-checkout-text-intro {
+  font-weight: var(--wp--preset--font-weight--light);
+  color: var(--wp--preset--color--text-secondary);
+  margin-bottom: var(--wp--preset--spacing--50); /* Replaces wp-mb-6 */
+}
+
+.wp-checkout-btn-secondary {
+  color: var(--wp--preset--color--primary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: var(--wp--preset--spacing--20); /* Replaces wp-mt-2 */
+  transition: color var(--wp--preset--transition--base);
+}
+
+.wp-checkout-btn-secondary:hover {
+  color: var(--wp--preset--color--primary-hover);
+  text-decoration: none;
+}
+
+.wp-checkout-btn-link {
+  color: var(--wp--preset--color--primary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color var(--wp--preset--transition--base);
+}
+
+.wp-checkout-btn-link:hover {
+  color: var(--wp--preset--color--primary-hover);
+  text-decoration: none;
+}
+
+/* Toggle Group (Delivery Method) */
+.wp-checkout-toggle-group {
+  display: flex;
+  background-color: var(--wp--preset--color--surface-secondary);
+  padding: var(--wp--preset--spacing--10);
+  border-radius: var(--wp--preset--radii--sm);
+}
+
+.wp-checkout-toggle-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+  padding-block: var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--radii--sm);
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  color: var(--wp--preset--color--text-secondary);
+  background: none;
+  cursor: pointer;
+}
+
+.wp-checkout-toggle-option.is-active {
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  box-shadow: var(--wp--preset--shadow--sm);
+  border-color: var(--wp--preset--color--border);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-checkout-toggle-option:hover:not(.is-active) {
+  background-color: var(--wp--preset--color--surface);
+}
+
+/* Payment Methods Container */
+.wp-checkout-payment-methods {
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--sm);
+  overflow: hidden;
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-payment-method-item {
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--surface);
+  padding: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-payment-method-item:last-child {
+  border-bottom: none;
+}
+
+.wp-checkout-payment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.wp-checkout-payment-content {
+  margin-top: var(--wp--preset--spacing--40);
+  padding-top: var(--wp--preset--spacing--40);
+  border-top: 1px solid var(--wp--preset--color--border);
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+/* Pickup Location */
+.wp-checkout-pickup-location {
+  border: 1px solid var(--wp--preset--color--border-strong);
+  padding: var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--radii--sm);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: var(--wp--preset--color--background);
+}
+
+.wp-checkout-pickup-details {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wp--preset--spacing--40);
+}
+
+/* Contact Info Box */
+.wp-checkout-logged-in-box {
+  padding: var(--wp--preset--spacing--40);
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--text-secondary);
+  border: 1px solid var(--wp--preset--color--border);
+  margin-bottom: var(--wp--preset--spacing--40);
+}

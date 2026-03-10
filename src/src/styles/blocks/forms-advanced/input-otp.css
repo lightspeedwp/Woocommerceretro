@@ -1,0 +1,81 @@
+/* ========================================
+   INPUT OTP
+   ======================================== */
+
+.wp-block-input-otp {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-block-input-otp--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wp-block-input-otp-group {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.wp-block-input-otp-slot {
+  position: relative;
+  display: flex;
+  height: 2.25rem; /* 9 -> 36px */
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--wp--preset--color--border);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  border-right: 1px solid var(--wp--preset--color--border);
+  font-size: var(--wp--preset--font-size--sm);
+  background-color: var(--wp--preset--color--background);
+  transition: all var(--wp--preset--transition--base);
+  outline: none;
+}
+
+.wp-block-input-otp-slot:first-child {
+  border-top-left-radius: var(--wp--preset--border-radius--md);
+  border-bottom-left-radius: var(--wp--preset--border-radius--md);
+  border-left: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-block-input-otp-slot:last-child {
+  border-top-right-radius: var(--wp--preset--border-radius--md);
+  border-bottom-right-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-input-otp-slot[data-active="true"] {
+  z-index: 10;
+  box-shadow: 0 0 0 3px var(--wp--preset--color--ring);
+  border-color: var(--wp--preset--color--ring);
+}
+
+.wp-block-input-otp-caret {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-block-input-otp-caret-blink {
+  height: 1rem;
+  width: 1px;
+  background-color: var(--wp--preset--color--foreground);
+  animation: caret-blink 1s ease-out infinite;
+}
+
+@keyframes caret-blink {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 1; }
+  20% { opacity: 0; }
+  50% { opacity: 0; }
+}
+
+.wp-block-input-otp-separator {
+  color: var(--wp--preset--color--muted-foreground);
+}

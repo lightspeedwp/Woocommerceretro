@@ -1,0 +1,13 @@
+/**
+ * Group Block Styles
+ */
+
+.wp-block-group {
+  /* Margin removed in favor of flow/gap */
+}
+
+.wp-block-group__inner-container {
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--40);
+}

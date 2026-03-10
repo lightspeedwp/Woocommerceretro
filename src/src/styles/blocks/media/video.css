@@ -1,0 +1,20 @@
+/* ========================================
+   VIDEO BLOCK
+   ======================================== */
+
+.wp-block-video {
+  width: 100%;
+}
+
+.wp-block-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wp-block-video figcaption {
+  /* Margin removed */
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  text-align: center;
+}

@@ -1,0 +1,643 @@
+/* ========================================
+   CHECKOUT PAGE LAYOUT
+   ======================================== */
+
+.wp-checkout-page {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wp-checkout-page__header {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-checkout-page__title {
+  margin: 0;
+}
+
+.wp-checkout-page__layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--80);
+}
+
+@media (min-width: 1024px) {
+  .wp-checkout-page__layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.wp-checkout-page__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+  min-width: 0;
+}
+
+.wp-checkout-page__sidebar {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .wp-checkout-page__sidebar {
+    width: 24rem;
+    position: sticky;
+    top: var(--wp--preset--spacing--60);
+  }
+}
+
+@media (min-width: 1280px) {
+  .wp-checkout-page__sidebar {
+    width: 28rem;
+  }
+}
+
+.wp-checkout-page__footer {
+  margin-top: var(--wp--preset--spacing--80);
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================================
+   WOOCOMMERCE CHECKOUT BLOCKS
+   ======================================== */
+
+/* General Layout */
+.wp-checkout-form {
+  width: 100%;
+}
+
+.wp-checkout-grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 768px) {
+  .wp-checkout-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Typography & Labels */
+.wp-checkout-label {
+  display: block;
+  margin-bottom: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-checkout-required {
+  color: var(--wp--preset--color--error);
+  margin-left: 0.25em;
+}
+
+.wp-checkout-error {
+  color: var(--wp--preset--color--error);
+  font-size: var(--wp--preset--font-size--small);
+  margin-top: var(--wp--preset--spacing--10);
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.wp-checkout-text-light {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-checkout-text-medium {
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-checkout-text-subtle {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Step Component */
+.wp-checkout-step {
+  display: flex;
+  gap: var(--wp--preset--spacing--40);
+  position: relative;
+}
+
+.wp-checkout-step__number {
+  flex-shrink: 0;
+  width: 3rem;
+  text-align: center;
+}
+
+.wp-checkout-step__divider {
+  position: absolute;
+  left: 1.5rem;
+  top: 3.5rem;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--wp--preset--color--border);
+  transform: translateX(-50%);
+}
+
+.wp-checkout-step:last-child .wp-checkout-step__divider {
+  display: none;
+}
+
+/* Summary Component */
+.wp-checkout-summary {
+  background-color: var(--wp--preset--color--surface-secondary);
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--radii--md);
+  height: 100%;
+}
+
+.wp-checkout-summary__list {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-line-item {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--30);
+  padding-bottom: var(--wp--preset--spacing--30);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  align-items: center;
+}
+
+.wp-checkout-item-image {
+  width: 4rem;
+  height: 4rem;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: var(--wp--preset--radii--sm);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-checkout-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wp-checkout-item-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: var(--wp--preset--color--primary-700);
+  color: white;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.wp-checkout-item-details {
+  flex: 1;
+}
+
+.wp-checkout-item-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  margin: 0;
+}
+
+.wp-checkout-item-variant {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  margin: 0;
+}
+
+.wp-checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--20);
+  align-items: baseline;
+}
+
+.wp-checkout-total-final {
+  border-top: 1px solid var(--wp--preset--color--border);
+  padding-top: var(--wp--preset--spacing--30);
+  margin-top: var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--large);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Payment Options */
+.wp-checkout-payment-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-checkout-payment-option {
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  padding: var(--wp--preset--spacing--30);
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base);
+  position: relative;
+  display: block;
+}
+
+.wp-checkout-payment-option:hover {
+  border-color: var(--wp--preset--color--primary);
+}
+
+.wp-checkout-payment-option.is-selected {
+  border-color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--surface-secondary);
+}
+
+.wp-checkout-payment-option.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--wp--preset--color--surface-tertiary);
+}
+
+.wp-checkout-payment-details {
+  margin-top: var(--wp--preset--spacing--30);
+  padding-top: var(--wp--preset--spacing--30);
+  border-top: 1px solid var(--wp--preset--color--border-light);
+}
+
+/* Form Inputs */
+.wp-checkout-select-wrapper {
+  position: relative;
+}
+
+.wp-checkout-select-icon {
+  position: absolute;
+  right: var(--wp--preset--spacing--30);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Contact Info Preview */
+.wp-checkout-contact-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--30);
+  background-color: var(--wp--preset--color--surface-secondary);
+  border-radius: var(--wp--preset--radii--md);
+}
+
+.wp-checkout-contact-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.wp-checkout-contact-info {
+  flex: 1;
+}
+
+.wp-checkout-contact-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  margin: 0;
+}
+
+.wp-checkout-contact-email {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-checkout-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  margin-top: var(--wp--preset--spacing--20);
+}
+
+.wp-checkout-link {
+  color: var(--wp--preset--color--accent);
+  text-decoration: none;
+}
+
+.wp-checkout-link:hover {
+  text-decoration: underline;
+}
+
+.wp-checkout-btn-link {
+  background: none;
+  border: none;
+  color: var(--wp--preset--color--accent);
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.wp-checkout-btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Shipping Option */
+.wp-checkout-shipping-option {
+  display: block;
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  padding: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--20);
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base);
+}
+
+.wp-checkout-shipping-option:hover {
+  border-color: var(--wp--preset--color--primary);
+}
+
+.wp-checkout-shipping-option.is-selected {
+  border-color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--surface-secondary);
+}
+
+.wp-checkout-shipping-option.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Toggle Group (Delivery Method) */
+.wp-checkout-toggle-group {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-toggle-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  background-color: var(--wp--preset--color--background);
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base);
+  color: var(--wp--preset--color--muted-foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-checkout-toggle-option:hover {
+  border-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary);
+}
+
+.wp-checkout-toggle-option.is-active {
+  border-color: var(--wp--preset--color--primary);
+  background-color: var(--wp--preset--color--surface-secondary);
+  color: var(--wp--preset--color--primary);
+  box-shadow: 0 0 0 1px var(--wp--preset--color--primary);
+}
+
+/* Pickup Details */
+.wp-checkout-pickup-location {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  background-color: var(--wp--preset--color--surface-secondary);
+}
+
+.wp-checkout-pickup-details {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-checkout-pickup-icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid var(--wp--preset--color--foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.wp-checkout-pickup-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--foreground);
+}
+
+/* ========================================
+   CHECKOUT HEADER
+   ======================================== */
+
+.wp-checkout-header {
+  border-bottom: 1px solid var(--wp--preset--color--border-light);
+  padding: var(--wp--preset--spacing--40) 0;
+  background-color: var(--wp--preset--color--background);
+}
+
+.wp-checkout-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wp-checkout-header__branding {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-checkout-header__logo-link {
+  display: flex;
+  align-items: center;
+  transition: opacity var(--wp--preset--transition--base) ease;
+}
+
+.wp-checkout-header__logo-link:hover {
+  opacity: 0.8;
+}
+
+.wp-checkout-header__logo {
+  height: 2rem;
+  width: auto;
+}
+
+.wp-checkout-header__secure-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--success);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-checkout-header__back-link {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--text-secondary);
+  font-size: var(--wp--preset--font-size--small);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-checkout-header__back-link:hover {
+  color: var(--wp--preset--color--primary);
+}
+
+/* ========================================
+   CHECKOUT FOOTER
+   ======================================== */
+
+.wp-checkout-footer {
+  padding: var(--wp--preset--spacing--60) 0;
+  border-top: 1px solid var(--wp--preset--color--border-light);
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-checkout-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 768px) {
+  .wp-checkout-footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.wp-checkout-footer__copyright {
+  margin: 0;
+}
+
+.wp-checkout-footer__links {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wp-checkout-footer__link {
+  color: var(--wp--preset--color--muted-foreground);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-checkout-footer__link:hover {
+  color: var(--wp--preset--color--foreground);
+  text-decoration: underline;
+}
+
+.wp-checkout-footer__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-checkout-footer__badge {
+  background-color: var(--wp--preset--color--surface-secondary);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--radii--sm);
+  font-size: 0.75rem;
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--text-secondary);
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+/* ========================================
+   CHECKOUT LOGIN PROMPT
+   ======================================== */
+
+.wp-checkout-step__login-link-wrapper {
+  margin-left: auto;
+}
+
+.wp-checkout-step__login-link {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--primary);
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+}
+
+.wp-checkout-step__login-link:hover {
+  text-decoration: underline;
+}
+
+/* ========================================
+   PROTOTYPE CONTROLS
+   ======================================== */
+
+.wp-dev-control {
+  background-color: var(--wp--preset--color--surface-secondary);
+  border: 1px solid var(--wp--preset--color--border);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--40);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-dev-control__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-size: 0.75rem;
+  font-weight: var(--wp--preset--font-weight--medium);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--wp--preset--transition--base);
+}
+
+.wp-dev-control__button--guest {
+  background-color: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.wp-dev-control__button--logged-in {
+  background-color: rgba(6, 95, 70, 0.1);
+  border-color: var(--wp--preset--color--success);
+  color: var(--wp--preset--color--success);
+}
+
+.dark .wp-dev-control__button--logged-in {
+  background-color: rgba(6, 95, 70, 0.2);
+  color: #4ade80; /* lighter success for dark mode */
+}
+
+.wp-dev-control__icon {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+}

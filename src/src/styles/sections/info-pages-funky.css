@@ -1,0 +1,289 @@
+/**
+ * Information Pages - Funky Redesign CSS
+ *
+ * Phase 7: PageAbout, PageOurStory, PageTeam, PageContact,
+ *          PageFAQ, PageCareers, PageStores, PagePressMedia,
+ *          PageSustainability
+ *
+ * Colour identity: Navy #0d1b2a / Cyan #00ffff / Pink #ff00ff
+ *
+ * Funky treatments per section (minimum 2 each):
+ *   Hero:       gradient overlay + orbs + glassmorphism badge
+ *   Info cards:  glow border + icon gradient circles + hover lift
+ *   Timeline:   gradient connector + glow markers
+ *   Stats:      gradient numbers + glass panels
+ *   Team cards: glow border + floating hover
+ *   FAQ:        glow on active accordion + gradient heading
+ *   CTA:        commerce gradient bg + orbs + neon input focus
+ *
+ * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITIES
+   ======================================== */
+
+.page-about,
+.page-story,
+.page-team,
+.page-sustainability {
+  --page-hero-from: #0d1b2a;
+  --page-hero-via: #030213;
+  --page-hero-to: #00ffff;
+}
+
+.page-contact,
+.page-faq {
+  --page-hero-from: #2d0059;
+  --page-hero-via: #030213;
+  --page-hero-to: #ff00ff;
+}
+
+.page-careers,
+.page-stores,
+.page-press {
+  --page-hero-from: #0d1b2a;
+  --page-hero-via: #1a0533;
+  --page-hero-to: #00ffff;
+}
+
+/* ========================================
+   1. SHARED INFO-PAGE HERO
+   ======================================== */
+
+.info-hero {
+  position: relative;
+  min-height: 50vh;
+  min-height: 50dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--page-hero-from);
+}
+
+.info-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.info-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(13, 27, 42, 0.6) 0%, rgba(3, 2, 19, 0.8) 50%, rgba(0, 255, 255, 0.15) 100%);
+}
+
+.dark .info-hero__overlay {
+  background: linear-gradient(135deg, rgba(13, 27, 42, 0.7) 0%, rgba(3, 2, 19, 0.9) 50%, rgba(0, 255, 255, 0.2) 100%);
+}
+
+/* Purple-tinted hero variant (contact, FAQ) */
+.info-hero--purple .info-hero__overlay {
+  background: linear-gradient(135deg, rgba(45, 0, 89, 0.5) 0%, rgba(3, 2, 19, 0.8) 50%, rgba(255, 0, 255, 0.12) 100%);
+}
+
+.dark .info-hero--purple .info-hero__overlay {
+  background: linear-gradient(135deg, rgba(45, 0, 89, 0.65) 0%, rgba(3, 2, 19, 0.9) 50%, rgba(255, 0, 255, 0.2) 100%);
+}
+
+.info-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 48rem;
+  padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* ========================================
+   2. STORY / SPLIT SECTIONS
+   ======================================== */
+
+.info-story {
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--background);
+}
+
+.info-story__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .info-story__grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--wp--preset--spacing--80);
+  }
+  
+  .info-story__grid--reverse {
+    direction: rtl;
+  }
+  
+  .info-story__grid--reverse > * {
+    direction: ltr;
+  }
+}
+
+.info-story__image-frame {
+  position: relative;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  border: 4px solid #000;
+  box-shadow: 12px 12px 0px #00ffff;
+  aspect-ratio: 4 / 3;
+}
+
+.dark .info-story__image-frame {
+  border-color: #fff;
+  box-shadow: 12px 12px 0px #ff00ff;
+}
+
+/* ========================================
+   3. INFO CARDS (Values, Testimonials)
+   ======================================== */
+
+.info-cards {
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--surface);
+}
+
+.info-cards--alt {
+  background: var(--wp--preset--color--background);
+}
+
+.info-cards__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 768px) {
+  .info-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .info-cards__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================
+   4. STATS SECTION
+   ======================================== */
+
+.info-stats {
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--primary);
+  color: white;
+}
+
+.info-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 1024px) {
+  .info-stats__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.info-stat-card {
+  text-align: center;
+  padding: var(--wp--preset--spacing--40);
+}
+
+.info-stat-card__number {
+  display: block;
+  font-size: var(--wp--preset--font-size--huge);
+  font-weight: 900;
+  background: linear-gradient(135deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+/* ========================================
+   5. TEAM SECTION
+   ======================================== */
+
+.info-team {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.info-team__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--wp--preset--spacing--60);
+}
+
+.team-card {
+  position: relative;
+  text-align: center;
+}
+
+.team-card__image-wrapper {
+  position: relative;
+  margin-bottom: var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  border: 3px solid #000;
+  transition: transform 0.3s ease;
+}
+
+.dark .team-card__image-wrapper {
+  border-color: #fff;
+}
+
+.team-card:hover .team-card__image-wrapper {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+}
+
+/* ========================================
+   6. CONTACT FORM SECTION
+   ======================================== */
+
+.info-contact {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.info-contact__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--80);
+}
+
+@media (min-width: 1024px) {
+  .info-contact__grid {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
+/* ========================================
+   7. CTA SECTION
+   ======================================== */
+
+.info-cta {
+  padding-block: var(--wp--preset--spacing--100);
+  background: linear-gradient(135deg, #030213, #1a0533, #0d1b2a);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}

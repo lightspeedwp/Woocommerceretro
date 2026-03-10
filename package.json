@@ -1,0 +1,46 @@
+{
+  "name": "WooCommerce Retro Prototype",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "...": "*",
+    "@phosphor-icons/react": "*",
+    "@radix-ui/react-accordion": "*",
+    "@radix-ui/react-avatar": "*",
+    "@radix-ui/react-visually-hidden": "*",
+    "@testing-library/react": "*",
+    "@vitejs/plugin-react-swc": "*",
+    "clsx": "*",
+    "cmdk": "*",
+    "embla-carousel-react": "^8.6.0",
+    "fs": "*",
+    "input-otp": "*",
+    "lodash": "*",
+    "lucide-react": "*",
+    "module": "*",
+    "package": "*",
+    "package-name": "*",
+    "path": "*",
+    "react": "^18.3.1",
+    "react-day-picker": "*",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.55.0",
+    "react-resizable-panels": "*",
+    "react-router": "*",
+    "react-router-dom": "*",
+    "react-slick": "*",
+    "recharts": "*",
+    "sonner": "^2.0.3",
+    "vite": "*",
+    "web-vitals": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@vitejs/plugin-react-swc": "^3.10.2",
+    "vite": "6.3.5"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}

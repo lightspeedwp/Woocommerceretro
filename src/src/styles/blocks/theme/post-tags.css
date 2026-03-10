@@ -1,0 +1,34 @@
+/* ========================================
+   POST TAGS BLOCK
+   ======================================== */
+
+.wp-block-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wp-block-post-tags a {
+  text-decoration: none;
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--sm);
+  padding: 2px 8px;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-post-tags a:hover {
+  border-color: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Dark Mode */
+.dark .wp-block-post-tags a {
+  background-color: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}

@@ -1,0 +1,207 @@
+/* ========================================
+   CALENDAR BLOCK
+   ======================================== */
+
+.wp-block-calendar {
+  text-align: center;
+}
+
+.wp-block-calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wp-block-calendar th,
+.wp-block-calendar td {
+  padding: var(--wp--preset--spacing--20);
+  border: 1px solid var(--wp--preset--color--border);
+  text-align: center;
+}
+
+.wp-block-calendar th {
+  background-color: var(--wp--preset--color--surface);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-block-calendar caption {
+  caption-side: top;
+  /* Margin removed */
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-calendar tfoot td {
+  border: none;
+  padding-top: var(--wp--preset--spacing--20);
+}
+
+.wp-calendar-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* React Day Picker Styles */
+.wp-block-calendar__picker {
+  padding: var(--wp--preset--spacing--30);
+}
+
+.wp-block-calendar__months {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+@media (min-width: 640px) {
+  .wp-block-calendar__months {
+    flex-direction: row;
+  }
+}
+
+.wp-block-calendar__month {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-block-calendar__caption {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--wp--preset--spacing--10);
+  position: relative;
+  align-items: center;
+  width: 100%;
+}
+
+.wp-block-calendar__caption-label {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-block-calendar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.wp-block-calendar__nav-button {
+  height: 1.75rem;
+  width: 1.75rem;
+  background-color: transparent;
+  padding: 0;
+  opacity: 0.5;
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.wp-block-calendar__nav-button:hover {
+  opacity: 1;
+  background-color: var(--wp--preset--color--surface);
+}
+
+.wp-block-calendar__nav-button--previous {
+  position: absolute;
+  left: 0.25rem;
+}
+
+.wp-block-calendar__nav-button--next {
+  position: absolute;
+  right: 0.25rem;
+}
+
+.wp-block-calendar__table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0 0.25rem;
+}
+
+.wp-block-calendar__head-row {
+  display: flex;
+}
+
+.wp-block-calendar__head-cell {
+  color: var(--wp--preset--color--muted-foreground);
+  border-radius: var(--wp--preset--border-radius--md);
+  width: 2rem;
+  font-weight: normal;
+  font-size: 0.8rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-block-calendar__row {
+  display: flex;
+  width: 100%;
+  margin-top: var(--wp--preset--spacing--20);
+}
+
+.wp-block-calendar__cell {
+  position: relative;
+  padding: 0;
+  text-align: center;
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-block-calendar__cell:focus-within {
+  position: relative;
+  z-index: 20;
+}
+
+.wp-block-calendar__day {
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  font-weight: normal;
+  border-radius: var(--wp--preset--border-radius--md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-calendar__day:hover {
+  background-color: var(--wp--preset--color--surface);
+}
+
+.wp-block-calendar__day[aria-selected="true"] {
+  opacity: 1;
+}
+
+.wp-block-calendar__day.day-selected {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.wp-block-calendar__day.day-today {
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-calendar__day.day-outside {
+  color: var(--wp--preset--color--muted-foreground);
+  opacity: 0.5;
+}
+
+.wp-block-calendar__day.day-disabled {
+  color: var(--wp--preset--color--muted-foreground);
+  opacity: 0.5;
+}
+
+.wp-block-calendar__day.day-range-middle {
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--foreground);
+  border-radius: 0;
+}
+
+.wp-block-calendar__day.day-hidden {
+  visibility: hidden;
+}
+

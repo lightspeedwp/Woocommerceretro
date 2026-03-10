@@ -1,0 +1,96 @@
+/* ========================================
+   COUNTDOWN TIMER
+   ======================================== */
+
+.wp-countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-countdown__label {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-countdown__expired {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--error);
+}
+
+/* Compact Format */
+.wp-countdown--compact {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-family: var(--wp--preset--font-family--mono);
+  font-size: var(--wp--preset--font-size--x-large);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Minimal/Full Container */
+.wp-countdown__units {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-countdown__separator {
+  font-size: var(--wp--preset--font-size--x-large);
+  color: var(--wp--preset--color--muted);
+}
+
+/* Time Unit */
+.wp-countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-countdown-unit__value {
+  background-color: var(--wp--preset--color--foreground); /* Inverted scheme */
+  color: var(--wp--preset--color--background);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--lg);
+  font-family: var(--wp--preset--font-family--mono);
+  font-size: var(--wp--preset--font-size--x-large);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+/* Dark Mode: Invert foreground/background */
+.dark .wp-countdown-unit__value {
+  background-color: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--background);
+}
+
+/* Funky Neon Digit Variant (flash sale countdown) */
+.wp-countdown-unit__value--neon {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.dark .wp-countdown-unit__value--neon {
+  background-color: var(--wp--preset--color--surface);
+  color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.wp-countdown-unit__label {
+  font-size: var(--wp--preset--font-size--100); /* Was hardcoded 0.75rem */
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+}

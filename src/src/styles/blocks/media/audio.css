@@ -1,0 +1,19 @@
+/* ========================================
+   AUDIO BLOCK
+   ======================================== */
+
+.wp-block-audio {
+  width: 100%;
+}
+
+.wp-block-audio audio {
+  width: 100%;
+  display: block;
+}
+
+.wp-block-audio figcaption {
+  /* Margin removed */
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  text-align: center;
+}

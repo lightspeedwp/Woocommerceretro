@@ -1,0 +1,1980 @@
+/* ========================================
+   TAILWIND CONTAMINATION SWEEP CLEANUP
+   Additional BEM classes for components
+   migrated from Tailwind utilities
+   ======================================== */
+
+/* --- Site Logo --- */
+.wp-block-site-logo__image {
+  max-width: 100%;
+  height: auto;
+}
+
+.wp-block-site-logo__link {
+  display: inline-block;
+}
+
+.wp-block-site-logo__wrapper {
+  display: inline-block;
+}
+
+/* --- Chart Tooltip Inner --- */
+.wp-block-chart-tooltip-value-row {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  line-height: 1;
+}
+
+.wp-block-chart-tooltip-value-row--nested {
+  align-items: flex-end;
+}
+
+.wp-block-chart-tooltip-value-row--inline {
+  align-items: center;
+}
+
+.wp-block-chart-tooltip-value-labels {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.wp-block-chart-tooltip-value-name {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-block-chart-tooltip-value-number {
+  color: var(--wp--preset--color--foreground);
+  font-family: var(--wp--preset--font-family--mono);
+  font-weight: var(--wp--preset--font-weight--medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-block-chart-tooltip-indicator--nested-dashed {
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+}
+
+/* --- Select Icon Sizing --- */
+.wp-block-select-icon {
+  height: 1rem;
+  width: 1rem;
+  opacity: 0.5;
+}
+
+.wp-block-select-icon--sm {
+  height: 0.875rem;
+  width: 0.875rem;
+}
+
+.wp-block-select-item-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wp-block-select-scroll-button {
+  display: flex;
+  cursor: default;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--10) 0;
+}
+
+/* --- Sidebar Desktop Wrapper --- */
+.wp-block-sidebar-desktop-wrapper {
+  display: none;
+  color: var(--sidebar-foreground, var(--wp--preset--color--foreground));
+}
+
+@media (min-width: 768px) {
+  .wp-block-sidebar-desktop-wrapper {
+    display: block;
+  }
+}
+
+.wp-block-sidebar-container--left {
+  left: 0;
+}
+
+.wp-block-sidebar-container--right {
+  right: 0;
+}
+
+.wp-block-sidebar-container--floating {
+  padding: var(--wp--preset--spacing--20);
+}
+
+/* --- Sidebar Skeleton --- */
+.wp-block-sidebar-skeleton-icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-sidebar-skeleton-text {
+  height: 1rem;
+  flex: 1;
+}
+
+/* --- Sidebar Menu Sub Button Sizes --- */
+.wp-block-sidebar-menu-sub-button--sm {
+  font-size: var(--wp--preset--font-size--xs);
+}
+
+.wp-block-sidebar-menu-sub-button--md {
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+/* --- Context Menu Indicator --- */
+.wp-block-context-menu-item-indicator {
+  position: absolute;
+  left: 0.5rem;
+  display: flex;
+  height: 0.875rem;
+  width: 0.875rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-block-context-menu-item-indicator__icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.wp-block-context-menu-item-indicator__icon--sm {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+/* --- Popover Wrapper --- */
+.wp-block-popover-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.wp-block-popover-trigger {
+  display: inline-block;
+}
+
+/* --- ComparisonBar Links --- */
+.wc-block-comparison-bar__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wc-block-comparison-bar__thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Instagram Feed Error --- */
+.wp-instagram-feed__error {
+  text-align: center;
+  padding: var(--wp--preset--spacing--60);
+  background-color: var(--wp--preset--color--error-muted, rgba(220, 38, 38, 0.05));
+  color: var(--wp--preset--color--error);
+  border-radius: var(--wp--preset--border-radius--lg);
+}
+
+/* --- Pricing Table Header --- */
+.wp-pricing-table__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--70);
+}
+
+.wp-pricing-table__cta-button {
+  width: 100%;
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+/* --- ProductTabs Review Inner --- */
+.woocommerce-product-tabs__review-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.woocommerce-product-tabs__review-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--skeleton);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--wp--preset--font-size--sm);
+  color: var(--wp--preset--color--foreground);
+}
+
+.woocommerce-product-tabs__review-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.woocommerce-product-tabs__review-author-name {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+.woocommerce-product-tabs__review-date-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.woocommerce-product-tabs__verified-badge {
+  font-size: var(--wp--preset--font-size--x-small);
+  color: var(--wp--preset--color--success);
+  font-weight: var(--wp--preset--font-weight--medium);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dark .woocommerce-product-tabs__verified-badge {
+  color: var(--wp--preset--color--success);
+}
+
+.woocommerce-product-tabs__no-reviews {
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.woocommerce-product-tabs__review-form-wrapper {
+  border-top: 1px solid var(--wp--preset--color--border);
+  padding-top: var(--wp--preset--spacing--60);
+  margin-top: var(--wp--preset--spacing--60);
+}
+
+.woocommerce-product-tabs__review-form-heading {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.woocommerce-product-tabs__review-form-note {
+  margin-bottom: var(--wp--preset--spacing--50);
+  font-size: var(--wp--preset--font-size--sm);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.woocommerce-product-tabs__review-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.woocommerce-product-tabs__review-form-label {
+  display: block;
+  margin-bottom: var(--wp--preset--spacing--20);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.woocommerce-product-tabs__review-textarea {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  background-color: transparent;
+  color: var(--wp--preset--color--foreground);
+  min-height: 120px;
+  font-size: var(--wp--preset--font-size--normal);
+  resize: vertical;
+}
+
+.woocommerce-product-tabs__review-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--wp--preset--color--primary);
+  border-color: transparent;
+}
+
+.woocommerce-product-tabs__review-item {
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+/* --- Hero Wrapper --- */
+.wp-hero-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- How It Works Minor --- */
+.wp-how-it-works__badge-wrapper {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-how-it-works__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+/* --- Sidebar Menu Action Hover --- */
+.wp-block-sidebar-menu-action--show-on-hover {
+  opacity: 0;
+  transition: opacity var(--wp--preset--transition--base);
+}
+
+.wp-block-sidebar-menu-item:hover .wp-block-sidebar-menu-action--show-on-hover {
+  opacity: 1;
+}
+
+/* --- Select Value Pointer Events --- */
+.wp-block-select-value {
+  pointer-events: none;
+}
+
+.wp-block-select-content--popper {
+  transform: translateY(0.25rem);
+}
+
+/* --- Context Menu Additional Styles --- */
+.wp-context-menu-item--inset {
+  padding-left: 2rem;
+}
+
+.wp-context-menu-checkbox-item {
+  padding-left: 2rem;
+  padding-right: 0.5rem;
+}
+
+.wp-block-context-menu-label {
+  padding: 0.375rem 0.5rem;
+  font-size: var(--wp--preset--font-size--sm);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-context-menu-label--inset {
+  padding-left: 2rem;
+}
+
+.wp-block-context-menu-separator {
+  margin: 0.25rem -0.25rem;
+  height: 1px;
+  background-color: var(--wp--preset--color--border);
+}
+
+.wp-block-context-menu-shortcut {
+  margin-left: auto;
+  font-size: var(--wp--preset--font-size--xs);
+  letter-spacing: 0.1em;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-context-menu-sub-trigger__icon {
+  margin-left: auto;
+  height: 1rem;
+  width: 1rem;
+}
+
+.wp-block-context-menu-item-indicator__icon--sm {
+  height: 0.5rem;
+  width: 0.5rem;
+  fill: currentColor;
+}
+
+/* --- Chart Legend Bottom Spacing --- */
+.wp-block-chart-legend--bottom {
+  padding-top: 0.75rem;
+}
+
+/* --- Hero Section Overlay --- */
+.wp-hero-section--relative {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- HowItWorks Step Card --- */
+.wp-how-it-works__step {
+  position: relative;
+}
+
+.wp-how-it-works__card-glow {
+  height: 100%;
+  width: 100%;
+}
+
+.wp-how-it-works__badge--animated {
+  transition: transform 500ms ease;
+}
+
+.wp-how-it-works__step:hover .wp-how-it-works__badge--animated {
+  transform: rotate(12deg);
+}
+
+/* --- Instagram Feed Follow Text --- */
+.wp-instagram-feed__follow-text {
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+/* --- Flash Sale Countdown Centered --- */
+.wp-flash-sale__countdown--centered {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- ArchiveCTA Text Center --- */
+.wp-archive-cta--centered {
+  text-align: center;
+}
+
+/* ========================================
+   SWEEP BATCH - Site Title / Tagline Links
+   ======================================== */
+
+.wp-block-site-title__link,
+.wp-block-site-tagline__link {
+  text-decoration: none;
+  transition: opacity var(--wp--preset--transition--fast, 150ms) ease;
+}
+
+.wp-block-site-title__link:hover,
+.wp-block-site-tagline__link:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   SWEEP BATCH - Navigation Menu Icon
+   ======================================== */
+
+.wp-block-navigation-menu-icon {
+  height: 1rem;
+  width: 1rem;
+  transition: transform 200ms ease;
+}
+
+[data-state="open"] > .wp-block-navigation-menu-icon {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   SWEEP BATCH - Sheet / Dialog Close Icons
+   ======================================== */
+
+.wp-sheet-close__icon,
+.wp-radix-close-button__icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* ========================================
+   SWEEP BATCH - Checkbox Indicator States
+   ======================================== */
+
+.wp-block-checkbox__indicator--visible {
+  display: flex;
+}
+
+.wp-block-checkbox__indicator--hidden {
+  display: none;
+}
+
+/* ========================================
+   SWEEP BATCH - Calendar Nav Icons
+   ======================================== */
+
+.wp-block-calendar__nav-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* ========================================
+   SWEEP BATCH - Breadcrumb Ellipsis Icon
+   ======================================== */
+
+.wp-block-breadcrumb__ellipsis-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* ========================================
+   SWEEP BATCH - Dropdown Menu Sub Content
+   ======================================== */
+
+.wp-block-dropdown-menu-sub-content {
+  display: none;
+}
+
+/* ========================================
+   SWEEP BATCH - 404 Search Hint
+   ======================================== */
+
+.wp-404-search-hint {
+  font-weight: var(--wp--preset--font-weight--medium, 500);
+}
+
+/* ========================================
+   SWEEP BATCH - Related Posts
+   ======================================== */
+
+.wp-related-posts {
+  padding-block: var(--wp--preset--spacing--60);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-related-posts__heading {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-related-posts__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 768px) {
+  .wp-related-posts__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-related-posts__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.wp-related-posts__card {
+  background: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  border: 1px solid var(--wp--preset--color--border);
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-related-posts__card:hover {
+  border-color: var(--wp--preset--color--accent);
+}
+
+.wp-related-posts__image-wrapper {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.wp-related-posts__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.wp-related-posts__card:hover .wp-related-posts__image {
+  transform: scale(1.05);
+}
+
+.wp-related-posts__content {
+  padding: var(--wp--preset--spacing--50);
+}
+
+.wp-related-posts__category {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-related-posts__category-label {
+  color: var(--wp--preset--color--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wp-related-posts__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-related-posts__card:hover .wp-related-posts__title {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-related-posts__excerpt {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-related-posts__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wp-related-posts__date {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-related-posts__read-more {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--accent);
+  transition: gap 200ms ease;
+}
+
+.wp-related-posts__card:hover .wp-related-posts__read-more {
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   SWEEP BATCH - Social Media Feed
+   ======================================== */
+
+.wp-social-feed__header {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-social-feed__heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-social-feed__heading-icon {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-social-feed__description {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-social-feed__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--social-cols-mobile, 3), 1fr);
+  gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .wp-social-feed__grid {
+    grid-template-columns: repeat(var(--social-cols-tablet, 4), 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-social-feed__grid {
+    grid-template-columns: repeat(var(--social-cols-desktop, 6), 1fr);
+  }
+}
+
+.wp-social-feed__post {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--skeleton, #e5e7eb);
+}
+
+.wp-social-feed__post:focus-visible {
+  outline: 2px solid var(--wp--preset--color--accent);
+  outline-offset: 2px;
+}
+
+.wp-social-feed__post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.wp-social-feed__post:hover .wp-social-feed__post-image {
+  transform: scale(1.1);
+}
+
+.wp-social-feed__post-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--40);
+  padding: var(--wp--preset--spacing--40);
+  transition: opacity 300ms ease;
+}
+
+.wp-social-feed__post:hover .wp-social-feed__post-overlay {
+  opacity: 1;
+}
+
+.wp-social-feed__post-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+  color: #fff;
+}
+
+.wp-social-feed__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-social-feed__caption {
+  color: #fff;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ========================================
+   SWEEP BATCH - Category Tiles Grid
+   ======================================== */
+
+.wp-category-tiles {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wp-category-tiles__heading {
+  color: var(--wp--preset--color--foreground);
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-category-tiles__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 768px) {
+  .wp-category-tiles__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-category-tiles__grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+.wp-category-tiles__tile {
+  background: var(--wp--preset--color--surface-alt, #f3f4f6);
+  border-radius: var(--wp--preset--border-radius--lg);
+  padding: var(--wp--preset--spacing--50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  height: 8rem;
+  transition: background-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-category-tiles__tile:hover {
+  background: var(--wp--preset--color--surface-hover, #e5e7eb);
+}
+
+.wp-category-tiles__label {
+  color: var(--wp--preset--color--foreground);
+}
+
+/* ========================================
+   SWEEP BATCH - Service Features Section
+   ======================================== */
+
+.wp-service-features {
+  background: var(--wp--preset--color--surface);
+  padding-block: var(--wp--preset--spacing--80);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-service-features__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 768px) {
+  .wp-service-features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-service-features__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wp-service-features__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wp-service-features__icon {
+  margin-bottom: var(--wp--preset--spacing--40);
+  color: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+.wp-service-features__title {
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  font-weight: var(--wp--preset--font-weight--bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--wp--preset--font-size--small);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-service-features__description {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+/* ========================================
+   SWEEP BATCH - Contact Follow Section
+   ======================================== */
+
+.wp-contact-follow {
+  background: var(--wp--preset--color--surface);
+  text-align: center;
+}
+
+.wp-contact-follow__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wp-contact-follow__heading {
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.wp-contact-follow__social-links {
+  display: flex;
+  gap: var(--wp--preset--spacing--50);
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.wp-contact-follow__social-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--wp--preset--color--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--muted-foreground);
+  text-decoration: none;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-contact-follow__social-icon:hover {
+  background: var(--wp--preset--color--brand-brown, var(--wp--preset--color--primary));
+  color: #fff;
+  border-color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--primary));
+}
+
+.wp-contact-follow__contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .wp-contact-follow__contact-row {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.wp-contact-follow__contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-contact-follow__contact-icon {
+  color: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+.wp-contact-follow__contact-link {
+  color: var(--wp--preset--color--muted-foreground);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-contact-follow__contact-link:hover {
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--primary));
+}
+
+/* ========================================
+   SWEEP BATCH - Shop Brand Grid
+   ======================================== */
+
+.wp-shop-brand-grid {
+  background: var(--wp--preset--color--background);
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wp-shop-brand-grid__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--70);
+}
+
+.wp-shop-brand-grid__title {
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  text-transform: uppercase;
+  font-family: var(--wp--preset--font-family--serif, serif);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-shop-brand-grid__divider {
+  height: 0.25rem;
+  width: 5rem;
+  background: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+  margin: var(--wp--preset--spacing--40) auto 0;
+}
+
+.wp-shop-brand-grid__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+@media (min-width: 1280px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.wp-brand-card__inner {
+  text-align: center;
+}
+
+.wp-brand-card__name {
+  font-family: var(--wp--preset--font-family--serif, serif);
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-card:hover .wp-brand-card__name {
+  color: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+.wp-brand-card__divider {
+  height: 1px;
+  width: 2rem;
+  background: var(--wp--preset--color--border);
+  margin: var(--wp--preset--spacing--20) auto;
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-card:hover .wp-brand-card__divider {
+  background: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+.wp-brand-card__established {
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wp--preset--color--muted-foreground);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-card:hover .wp-brand-card__established {
+  color: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+/* ========================================
+   SWEEP BATCH - Account Dashboard
+   ======================================== */
+
+.wp-account-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-account-dashboard__welcome-subtitle {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-account-dashboard__stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 640px) {
+  .wp-account-dashboard__stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-account-dashboard__stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wp-account-stat-card {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  padding: var(--wp--preset--spacing--50);
+  transition: box-shadow var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-stat-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.wp-account-stat-card__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-account-stat-card__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wp-account-stat-card__icon--purple {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.1));
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-account-stat-card__icon--green {
+  background: var(--wp--preset--color--success-muted, rgba(22, 163, 74, 0.1));
+  color: var(--wp--preset--color--success);
+}
+
+.wp-account-stat-card__icon--yellow {
+  background: var(--wp--preset--color--warning-muted, rgba(217, 119, 6, 0.1));
+  color: var(--wp--preset--color--warning);
+}
+
+.wp-account-stat-card__icon--blue {
+  background: var(--wp--preset--color--info-muted, rgba(37, 99, 235, 0.1));
+  color: var(--wp--preset--color--info, #2563eb);
+}
+
+.wp-account-stat-card__value {
+  font-size: var(--wp--preset--font-size--xx-large, 1.75rem);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-account-stat-card__label {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Membership bar */
+.wp-account-dashboard__membership-bar {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.05));
+  border: 1px solid var(--wp--preset--color--accent-border, rgba(124, 58, 237, 0.2));
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  padding: var(--wp--preset--spacing--50);
+}
+
+.wp-account-dashboard__membership-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-account-dashboard__membership-label {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+.wp-account-dashboard__membership-value {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Orders section */
+.wp-account-dashboard__orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.wp-account-dashboard__empty-orders {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  padding: var(--wp--preset--spacing--70);
+  text-align: center;
+}
+
+.wp-account-dashboard__empty-icon {
+  margin: 0 auto var(--wp--preset--spacing--40);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-account-dashboard__empty-text {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-account-dashboard__orders-table-wrapper {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  overflow: hidden;
+}
+
+.wp-account-dashboard__orders-desktop {
+  display: none;
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  .wp-account-dashboard__orders-desktop {
+    display: block;
+  }
+}
+
+.wp-account-dashboard__orders-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .wp-account-dashboard__orders-mobile {
+    display: none;
+  }
+}
+
+.wp-account-dashboard__table {
+  width: 100%;
+}
+
+.wp-account-dashboard__table-head {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-account-dashboard__table-th {
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+  text-align: left;
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wp-account-dashboard__table-th--right {
+  text-align: right;
+}
+
+.wp-account-dashboard__table-body > tr + tr {
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-account-dashboard__table-row {
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-dashboard__table-row:hover {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+}
+
+.wp-account-dashboard__table-td {
+  padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+}
+
+.wp-account-dashboard__table-td--muted {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-account-dashboard__table-td--bold {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-account-dashboard__table-td--right {
+  text-align: right;
+}
+
+.wp-account-dashboard__order-link {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--accent);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-dashboard__order-link:hover {
+  color: var(--wp--preset--color--accent-hover, #6d28d9);
+}
+
+.wp-account-dashboard__view-icon {
+  margin-right: var(--wp--preset--spacing--20);
+}
+
+/* Status badges */
+.wp-account-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: 9999px;
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--medium);
+  border: 1px solid;
+}
+
+.wp-account-badge--completed {
+  background: var(--wp--preset--color--success-muted, rgba(22, 163, 74, 0.1));
+  color: var(--wp--preset--color--success);
+  border-color: var(--wp--preset--color--success-border, rgba(22, 163, 74, 0.2));
+}
+
+.wp-account-badge--processing {
+  background: var(--wp--preset--color--info-muted, rgba(37, 99, 235, 0.1));
+  color: var(--wp--preset--color--info, #2563eb);
+  border-color: var(--wp--preset--color--info-border, rgba(37, 99, 235, 0.2));
+}
+
+.wp-account-badge--shipped {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.1));
+  color: var(--wp--preset--color--accent);
+  border-color: var(--wp--preset--color--accent-border, rgba(124, 58, 237, 0.2));
+}
+
+.wp-account-badge--pending {
+  background: var(--wp--preset--color--warning-muted, rgba(217, 119, 6, 0.1));
+  color: var(--wp--preset--color--warning);
+  border-color: var(--wp--preset--color--warning-border, rgba(217, 119, 6, 0.2));
+}
+
+.wp-account-badge--cancelled {
+  background: var(--wp--preset--color--error-muted, rgba(220, 38, 38, 0.1));
+  color: var(--wp--preset--color--error);
+  border-color: var(--wp--preset--color--error-border, rgba(220, 38, 38, 0.2));
+}
+
+.wp-account-badge--default {
+  background: var(--wp--preset--color--surface-alt, #f3f4f6);
+  color: var(--wp--preset--color--muted-foreground);
+  border-color: var(--wp--preset--color--border);
+}
+
+/* Mobile order cards */
+.wp-account-dashboard__mobile-order {
+  padding: var(--wp--preset--spacing--40);
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-dashboard__mobile-order + .wp-account-dashboard__mobile-order {
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-account-dashboard__mobile-order:hover {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+}
+
+.wp-account-dashboard__mobile-order-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__mobile-order-date {
+  color: var(--wp--preset--color--muted-foreground);
+  display: block;
+  margin-top: var(--wp--preset--spacing--10);
+}
+
+.wp-account-dashboard__mobile-order-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wp-account-dashboard__mobile-order-total {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Quick actions */
+.wp-account-dashboard__quick-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-account-dashboard__quick-actions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================
+   SWEEP BATCH - Account Sidebar Nav
+   ======================================== */
+
+.wp-account-nav {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  overflow: hidden;
+}
+
+.wp-account-nav__list {
+  padding: var(--wp--preset--spacing--20) 0;
+  list-style: none;
+  margin: 0;
+}
+
+.wp-account-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  text-decoration: none;
+  border-left: 4px solid transparent;
+  transition: all var(--wp--preset--transition--base) ease;
+  color: var(--wp--preset--color--secondary-foreground, #374151);
+}
+
+.wp-account-nav__link:hover {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+}
+
+.wp-account-nav__link--active {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.05));
+  color: var(--wp--preset--color--accent);
+  border-left-color: var(--wp--preset--color--accent);
+}
+
+.wp-account-nav__link--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-account-nav__link--logout:hover {
+  background: var(--wp--preset--color--error-muted, rgba(220, 38, 38, 0.05));
+}
+
+.wp-account-nav__link-content {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-account-nav__icon {
+  color: var(--wp--preset--color--muted-foreground);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-nav__link:hover .wp-account-nav__icon {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-account-nav__icon--active {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-account-nav__icon--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-account-nav__label {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: inherit;
+}
+
+.wp-account-nav__label--active {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-account-nav__label--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-account-nav__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 var(--wp--preset--spacing--20);
+  border-radius: 9999px;
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  background: var(--wp--preset--color--surface-alt, #e5e7eb);
+  color: var(--wp--preset--color--secondary-foreground, #374151);
+}
+
+.wp-account-nav__badge--active {
+  background: var(--wp--preset--color--accent);
+  color: #fff;
+}
+
+.wp-account-nav__separator {
+  margin: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  border-top: 1px solid var(--wp--preset--color--border);
+  list-style: none;
+}
+
+/* ========================================
+   SWEEP BATCH - Shop Hero
+   ======================================== */
+
+.wp-shop-hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.wp-shop-hero__inner {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40);
+  padding-bottom: 8rem;
+}
+
+.wp-shop-hero__content {
+  max-width: 56rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wp-shop-hero__title {
+  color: #fff;
+  font-family: var(--wp--preset--font-family--serif, serif);
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.wp-shop-hero__subtitle {
+  color: #fff;
+  font-size: var(--wp--preset--font-size--large);
+  margin-bottom: var(--wp--preset--spacing--60);
+  max-width: 42rem;
+  margin-inline: auto;
+  line-height: var(--wp--preset--line-height--relaxed);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+@media (min-width: 768px) {
+  .wp-shop-hero__subtitle {
+    font-size: var(--wp--preset--font-size--x-large);
+  }
+}
+
+.wp-shop-hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wp-shop-hero__actions {
+    flex-direction: row;
+    width: auto;
+  }
+}
+
+.wp-shop-hero__btn {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wp-shop-hero__btn {
+    width: auto;
+  }
+}
+
+.wp-shop-hero__btn--outline {
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--wp--preset--font-weight--bold);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.wp-shop-hero .wp-shop-hero__btn--outline,
+.wp-shop-hero__btn--outline.wp-shop-hero__btn--outline {
+  color: #fff;
+  border-color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 640px) {
+  .wp-shop-hero__btn--outline {
+    width: auto;
+  }
+}
+
+.wp-shop-hero .wp-shop-hero__btn--outline:hover,
+.wp-shop-hero__btn--outline.wp-shop-hero__btn--outline:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.wp-shop-hero__scroll-arrow {
+  z-index: 30;
+}
+
+/* ========================================
+   SWEEP BATCH - Shop Newsletter
+   ======================================== */
+
+.wp-shop-newsletter {
+  position: relative;
+  padding-block: var(--wp--preset--spacing--100);
+  background-color: var(--wp--preset--color--surface-alt, #e5e7eb);
+}
+
+.wp-shop-newsletter__bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wp-shop-newsletter__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wp-shop-newsletter__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+.wp-shop-newsletter__inner {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.wp-shop-newsletter__heading {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--wp--preset--font-family--serif, serif);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--wp--preset--spacing--20);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.wp-shop-newsletter__description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--wp--preset--font-size--large);
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.wp-shop-newsletter__form {
+  max-width: 64rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .wp-shop-newsletter__form {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   SWEEP BATCH - Shop Category Slider
+   ======================================== */
+
+.wc-block-category-slider__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--70);
+}
+
+.wc-block-category-slider__heading {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wc-block-category-slider__divider {
+  height: 0.25rem;
+  width: 5rem;
+  margin-inline: auto;
+  margin-top: var(--wp--preset--spacing--40);
+}
+
+.wc-block-category-slider__slider-wrapper {
+  padding-inline: var(--wp--preset--spacing--60);
+}
+
+/* ========================================
+   SWEEP BATCH - Shop Social Section
+   ======================================== */
+
+.wp-shop-social {
+  padding-block: var(--wp--preset--spacing--80);
+  background-color: var(--wp--preset--color--background, #fff);
+  text-align: center;
+}
+
+.wp-shop-social__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.wp-shop-social__icon-circle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--wp--preset--color--brand-gold-light, var(--wp--preset--color--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--brand-gold-light, var(--wp--preset--color--accent));
+}
+
+.wp-shop-social__heading {
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  text-transform: uppercase;
+  font-weight: var(--wp--preset--font-weight--bold);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-shop-social__hashtags {
+  color: var(--wp--preset--color--brand-gold-light, var(--wp--preset--color--accent));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--wp--preset--font-size--small, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+/* ========================================
+   SWEEP BATCH - Shop Support Strip
+   ======================================== */
+
+.wp-shop-support-strip {
+  padding-block: var(--wp--preset--spacing--80);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-shop-support-strip__card {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.05));
+  border-radius: var(--wp--preset--border-radius--2xl, 1rem);
+  padding: var(--wp--preset--spacing--60);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 768px) {
+  .wp-shop-support-strip__card {
+    flex-direction: row;
+    padding: var(--wp--preset--spacing--70);
+  }
+}
+
+.wp-shop-support-strip__heading {
+  color: var(--wp--preset--color--accent-dark, #581c87);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-shop-support-strip__description {
+  color: var(--wp--preset--color--accent-text, #6d28d9);
+  max-width: 28rem;
+}
+
+.wp-shop-support-strip__actions {
+  display: flex;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-shop-support-strip .wp-shop-support-strip__btn--primary,
+.wp-shop-support-strip__btn--primary.wp-shop-support-strip__btn--primary {
+  background-color: var(--wp--preset--color--accent);
+  color: #fff;
+  border: none;
+}
+
+.wp-shop-support-strip .wp-shop-support-strip__btn--primary:hover,
+.wp-shop-support-strip__btn--primary.wp-shop-support-strip__btn--primary:hover {
+  background-color: var(--wp--preset--color--accent-hover, #6d28d9);
+}
+
+.wp-shop-support-strip .wp-shop-support-strip__btn--outline,
+.wp-shop-support-strip__btn--outline.wp-shop-support-strip__btn--outline {
+  border-color: var(--wp--preset--color--accent-muted-border, rgba(124, 58, 237, 0.2));
+  color: var(--wp--preset--color--accent-dark, #581c87);
+}
+
+.wp-shop-support-strip .wp-shop-support-strip__btn--outline:hover,
+.wp-shop-support-strip__btn--outline.wp-shop-support-strip__btn--outline:hover {
+  background-color: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.1));
+}
+
+/* ========================================
+   SWEEP BATCH - Values Grid Card Inner
+   ======================================== */
+
+.wp-about-values-card__inner {
+  position: relative;
+  z-index: 10;
+  background: var(--wp--preset--color--surface);
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  height: 100%;
+  border: 1px solid var(--wp--preset--color--border-light, #f3f4f6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wp-about-values-icon--animated {
+  margin-bottom: var(--wp--preset--spacing--40);
+  transition: transform 500ms ease;
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.group:hover .wp-about-values-icon--animated {
+  transform: rotate(12deg);
+}
+
+.wp-about-values-card-title--spaced {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   SWEEP BATCH - Archive Aside Template
+   ======================================== */
+
+.wp-archive-aside__header {
+  background: var(--wp--preset--color--surface);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  padding-block: var(--wp--preset--spacing--70);
+}
+
+.wp-archive-aside__heading {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-archive-aside__description {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-archive-aside__body {
+  padding-block: var(--wp--preset--spacing--60);
+  max-width: 42rem;
+}
+
+.wp-archive-aside__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.wp-archive-aside__post {
+  display: flex;
+  gap: var(--wp--preset--spacing--40);
+  padding: var(--wp--preset--spacing--50);
+  background: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  border: 1px solid var(--wp--preset--color--border-light, #f3f4f6);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-archive-aside__post:hover {
+  border-color: var(--wp--preset--color--border-medium, #e5e7eb);
+}
+
+.wp-archive-aside__avatar-wrapper {
+  flex-shrink: 0;
+}
+
+.wp-archive-aside__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--skeleton, #e5e7eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-archive-aside__post-content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.wp-archive-aside__post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-archive-aside__post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-archive-aside__author-name {
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-archive-aside__username {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-archive-aside__dot {
+  color: var(--wp--preset--color--muted-foreground-light, #9ca3af);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-archive-aside__date {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+  cursor: pointer;
+  transition: text-decoration var(--wp--preset--transition--base) ease;
+}
+
+.wp-archive-aside__date:hover {
+  text-decoration: underline;
+}
+
+.wp-archive-aside__more-btn {
+  color: var(--wp--preset--color--muted-foreground-light, #9ca3af);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-archive-aside__more-btn:hover {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-archive-aside__post-body {
+  color: var(--wp--preset--color--foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+  font-size: var(--wp--preset--font-size--normal);
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+.wp-archive-aside__post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--wp--preset--color--muted-foreground);
+  max-width: 24rem;
+}
+
+.wp-archive-aside__action-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  transition: color var(--wp--preset--transition--base) ease;
+  padding: 0;
+}
+
+.wp-archive-aside__action-btn--reply:hover {
+  color: var(--wp--preset--color--info, #3b82f6);
+}
+
+.wp-archive-aside__action-btn--share:hover {
+  color: var(--wp--preset--color--success, #22c55e);
+}
+
+.wp-archive-aside__action-btn--like:hover {
+  color: var(--wp--preset--color--error, #ef4444);
+}
+
+.wp-archive-aside__action-count {
+  font-size: var(--wp--preset--font-size--small);
+}
+
+/* ========================================
+   SWEEP BATCH - Section Heading Spacing
+   ======================================== */
+
+.wp-section-bordered__heading {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-section-compact__heading {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-section-muted__heading {
+  margin-bottom: var(--wp--preset--spacing--40);
+}

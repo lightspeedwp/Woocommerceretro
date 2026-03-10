@@ -1,0 +1,16 @@
+/* ========================================
+   PAGE LIST BLOCK
+   ======================================== */
+
+.wp-block-page-list {
+  padding-left: var(--wp--preset--spacing--40);
+  /* Margin removed */
+}
+
+.wp-block-page-list li {
+  /* Margin removed */
+}
+
+.wp-block-page-list ul {
+  /* Margin removed */
+}

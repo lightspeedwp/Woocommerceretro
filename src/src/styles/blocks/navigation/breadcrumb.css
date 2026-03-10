@@ -1,0 +1,125 @@
+/* ========================================
+   BREADCRUMB
+   ======================================== */
+
+/* Block Component (if used directly) */
+.wp-block-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-block-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wp-block-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-block-breadcrumb__link {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-breadcrumb__link:hover {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-breadcrumb__separator {
+  display: flex;
+  align-items: center;
+  color: var(--wp--preset--color--muted-foreground);
+  opacity: 0.5;
+}
+
+.wp-block-breadcrumb__page {
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+/* ========================================
+   BREADCRUMBS BAR (Global Template Part)
+   ======================================== */
+
+.wp-breadcrumbs-bar {
+  width: 100%;
+  background-color: var(--wp--preset--color--background);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  
+  /* Fluid Padding (Vertical) */
+  /* Top/Bottom: Min 8px (0.5rem) -> Max 12px (0.75rem) */
+  padding-block: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.wp-breadcrumbs-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--wp--preset--layout--site-size, 1400px);
+  
+  /* Fluid Padding (Horizontal) */
+  /* Left/Right: Min 24px (1.5rem) -> Max 32px (2rem) */
+  padding-inline: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+/* Ensure list is horizontal */
+.wp-breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-breadcrumbs-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-breadcrumbs-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-breadcrumbs-link:hover {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-breadcrumbs-separator {
+  color: var(--wp--preset--color--muted-foreground);
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+}
+
+.wp-breadcrumbs-current {
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-breadcrumbs-inactive {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Dark Mode Overrides */
+.dark .wp-breadcrumbs-bar {
+  background-color: var(--wp--preset--color--surface);
+}

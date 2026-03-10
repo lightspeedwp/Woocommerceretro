@@ -1,0 +1,16 @@
+/* ========================================
+   POST EXCERPT BLOCK
+   ======================================== */
+
+.wp-block-post-excerpt {
+  font-size: var(--wp--preset--font-size--normal);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+  /* Margin removed */
+}
+
+.wp-block-post-excerpt__more-link {
+  display: inline-block;
+  margin-top: var(--wp--preset--spacing--20);
+  font-weight: var(--wp--preset--font-weight--medium);
+}

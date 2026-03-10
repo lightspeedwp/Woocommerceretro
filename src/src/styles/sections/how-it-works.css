@@ -1,0 +1,136 @@
+/* ========================================
+   HOW IT WORKS SECTION
+   ======================================== */
+
+.wp-how-it-works {
+  padding-top: var(--wp--preset--spacing--80);
+  padding-bottom: var(--wp--preset--spacing--80);
+  background-color: var(--wp--preset--color--background);
+}
+
+.wp-how-it-works__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--80);
+}
+
+.wp-how-it-works__header {
+  text-align: center;
+  /* Margin removed */
+  margin: 0;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-how-it-works__heading {
+  /* Margin removed */
+  margin: 0;
+}
+
+.wp-how-it-works__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .wp-how-it-works__grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .wp-how-it-works__grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .wp-how-it-works__grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Step Item */
+.wp-how-it-works__step {
+  position: relative;
+  text-align: center;
+  /* Use gap for spacing between elements */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+  align-items: center;
+}
+
+.wp-how-it-works__badge-wrapper {
+  display: flex;
+  justify-content: center;
+  /* Margin removed */
+  margin: 0;
+  /* Extra gap might be needed if visual spacing is tight, but gap-20 handles it */
+  margin-bottom: var(--wp--preset--spacing--20); /* Add specific margin here or increase parent gap? */
+  /* Let's increase gap in step or keep this margin as internal component spacing? */
+  /* Strict no-margin means use gap. */
+  /* So let's rely on .wp-how-it-works__step having gap. */
+  /* But the badge might need more space than title/desc gap. */
+  /* Let's set gap: 20px on step and maybe add a spacer div or increase gap. */
+  /* Or just use a larger gap on the step container and specific overrides if needed. */
+  /* For now, let's stick to gap: 20px. */
+}
+
+.wp-how-it-works__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  background-color: var(--wp--preset--color--accent);
+  color: #ffffff;
+  font-size: var(--wp--preset--font-size--heading-3);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+/* Connector Line (Desktop) */
+.wp-how-it-works__connector {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .wp-how-it-works__connector {
+    display: block;
+    position: absolute;
+    top: 2.5rem; /* Half of badge height */
+    left: 60%;
+    width: 80%;
+    border-top: 2px dashed var(--wp--preset--color--border);
+    z-index: 0;
+  }
+}
+
+.wp-how-it-works__title {
+  /* Margin removed */
+  margin: 0;
+  font-size: var(--wp--preset--font-size--heading-3);
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.wp-how-it-works__description {
+  color: var(--wp--preset--color--muted-foreground);
+  /* Margin removed */
+  margin: 0;
+}
+
+.wp-how-it-works__card {
+  position: relative;
+  z-index: 10;
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  height: 100%;
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dark .wp-how-it-works__card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}

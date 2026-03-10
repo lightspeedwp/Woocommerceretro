@@ -1,0 +1,180 @@
+/* ========================================
+   ORDER CONFIRMATION
+   ======================================== */
+
+.wp-block-order-confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+/* Account Creation Box */
+.wp-order-account-creation {
+  background-color: var(--wp--preset--color--background);
+  border: 2px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  padding: var(--wp--preset--spacing--60);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 1024px) {
+  .wp-order-account-creation {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.wp-order-account-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-order-account-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-order-account-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Order Summary Header (Dashed Box) */
+.wp-order-summary-header {
+  display: flex;
+  flex-direction: column;
+  border: 2px dashed var(--wp--preset--color--border-strong);
+  border-radius: var(--wp--preset--radii--sm);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .wp-order-summary-header {
+    flex-direction: row;
+  }
+}
+
+.wp-order-summary-item {
+  padding: var(--wp--preset--spacing--40);
+  border-bottom: 2px dashed var(--wp--preset--color--border-strong);
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .wp-order-summary-item {
+    border-bottom: none;
+    border-right: 2px dashed var(--wp--preset--color--border-strong);
+  }
+  
+  .wp-order-summary-item:last-child {
+    border-right: none;
+  }
+}
+
+.wp-order-summary-label {
+  display: block;
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-order-summary-value {
+  display: block;
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Order Details Table */
+.wp-order-details-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.wp-order-details-header {
+  border-bottom: 2px solid var(--wp--preset--color--border);
+}
+
+.wp-order-details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--wp--preset--spacing--30);
+  border-bottom: 1px solid var(--wp--preset--color--border-light);
+}
+
+.wp-order-details-row:last-child {
+  border-bottom: none;
+}
+
+.wp-order-details-footer {
+  border-top: 2px solid var(--wp--preset--color--border);
+  margin-top: var(--wp--preset--spacing--40);
+  padding-top: var(--wp--preset--spacing--40);
+}
+
+/* Order Status Header */
+.wp-order-status-header {
+  margin-bottom: var(--wp--preset--spacing--70); /* Replaces wp-mb-8 */
+}
+
+/* Downloads Section */
+.wp-order-downloads {
+  border: 2px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  overflow: hidden;
+}
+
+.wp-order-downloads-header {
+  background-color: var(--wp--preset--color--surface);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  border-bottom: 2px solid var(--wp--preset--color--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-downloads-row {
+  padding: var(--wp--preset--spacing--40);
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+}
+
+.wp-order-download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* gap-2 */
+  padding: 6px 12px;
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border: none;
+  border-radius: var(--wp--preset--radii--sm);
+  font-size: var(--wp--preset--font-size--small);
+  cursor: pointer;
+  transition: background-color var(--wp--preset--transition--base);
+}
+
+.wp-order-download-button:hover {
+  background-color: var(--wp--preset--color--primary-hover);
+}
+
+/* Address Box */
+.wp-order-address-box {
+  border: 2px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--radii--md);
+  padding: var(--wp--preset--spacing--50);
+}

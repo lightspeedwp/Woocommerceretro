@@ -1,0 +1,99 @@
+/* ========================================
+   TEAM GRID SECTION
+   ======================================== */
+
+.wp-team-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 1024px) {
+  .wp-team-grid {
+    gap: var(--wp--preset--spacing--80);
+  }
+}
+
+.wp-team-grid--cols-1 { grid-template-columns: 1fr; }
+.wp-team-grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.wp-team-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.wp-team-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (min-width: 768px) {
+  .wp-team-grid--md-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .wp-team-grid--md-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .wp-team-grid--lg-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .wp-team-grid--lg-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+.wp-team-member {
+  text-align: center;
+}
+
+.wp-team-member__image-wrapper {
+  margin-bottom: var(--wp--preset--spacing--40);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.wp-team-member__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.wp-team-member__image:hover {
+  transform: scale(1.05);
+}
+
+.wp-team-member__name {
+  margin-bottom: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-team-member__role {
+  color: var(--wp--preset--color--primary);
+  margin-bottom: var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-team-member__bio {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+.wp-team-member__social {
+  display: flex;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-team-member__social-link {
+  padding: var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--border-radius--md);
+  background-color: var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--muted-foreground);
+  transition: all var(--wp--preset--transition--base) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-team-member__social-link:hover {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.dark .wp-team-member__social-link {
+  background-color: var(--wp--preset--color--surface);
+}
+
+.dark .wp-team-member__social-link:hover {
+  background-color: var(--wp--preset--color--primary);
+}

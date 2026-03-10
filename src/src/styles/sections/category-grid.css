@@ -1,0 +1,85 @@
+/* ========================================
+   CATEGORY SHOWCASE GRID
+   ======================================== */
+
+.wp-category-card {
+  position: relative;
+  display: block;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  aspect-ratio: 0.75; /* 3:4 portrait - Or make configurable */
+  text-decoration: none;
+}
+
+.wp-category-card__image-container {
+  width: 100%;
+  height: 100%;
+}
+
+.wp-category-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.wp-category-card:hover .wp-category-card__image {
+  transform: scale(1.05);
+}
+
+.wp-category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--wp--preset--spacing--40);
+  color: #ffffff;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.wp-category-card:hover .wp-category-card__overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.wp-category-card__name {
+  color: #ffffff;
+  margin-bottom: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--heading-4);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-category-card__description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--wp--preset--font-size--small);
+  margin-bottom: var(--wp--preset--spacing--20);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wp-category-card__count {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--wp--preset--font-size--xs);
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-category-card__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--10);
+  color: #ffffff;
+  font-weight: var(--wp--preset--font-weight--medium);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.wp-category-card:hover .wp-category-card__action {
+  opacity: 1;
+  transform: translateY(0);
+}

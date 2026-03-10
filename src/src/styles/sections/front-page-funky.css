@@ -1,0 +1,740 @@
+/**
+ * Front Page - Funky Redesign CSS
+ *
+ * BEM block: .front-page
+ * Funky treatments per section (minimum 2 each):
+ *   Hero:        gradient overlay + orbs + glassmorphism badge + gradient text
+ *   Features:    glow cards + icon gradient circles + hover lift
+ *   Categories:  gradient heading + glow border cards + hover lift
+ *   Trending:    gradient heading + animated divider
+ *   Brand Story: gradient overlay + orbs + glassmorphism panel
+ *   Best Sellers: gradient heading + glow border section
+ *   Newsletter:  glassmorphism + neon focus + gradient background
+ *
+ * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITY
+   ======================================== */
+
+.front-page {
+  --page-hero-from: #ff00ff;
+  --page-hero-via: #030213;
+  --page-hero-to: #00ffff;
+}
+
+/* ========================================
+   1. HERO SECTION
+   ======================================== */
+
+.front-page__hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--wp--preset--color--primary);
+}
+
+.front-page__hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.front-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.25) 0%, rgba(3, 2, 19, 0.75) 50%, rgba(0, 255, 255, 0.15) 100%);
+}
+
+.dark .front-page__hero-overlay {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.35) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.25) 100%);
+}
+
+.front-page__hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 48rem;
+  padding: var(--wp--preset--spacing--50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+/* Hero badge - glassmorphism pill */
+.front-page__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .front-page__hero-badge {
+  background: rgba(0, 255, 255, 0.08);
+  border-color: rgba(0, 255, 255, 0.2);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.front-page__hero-badge svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Hero title */
+.front-page__hero-title {
+  font-size: var(--wp--preset--font-size--900);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #ffffff;
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  line-height: var(--wp--preset--line-height--tight);
+  margin: 0;
+}
+
+/* Hero subtitle */
+.front-page__hero-subtitle {
+  font-size: var(--wp--preset--font-size--400);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin: 0;
+}
+
+/* Hero CTA wrapper */
+.front-page__hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  width: 100%;
+}
+
+/* Outline button on dark hero - white borders, white text */
+.front-page__hero .wp-block-button--outline {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  background: transparent;
+}
+
+.front-page__hero .wp-block-button--outline:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.front-page__hero-actions > * {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .front-page__hero-actions {
+    flex-direction: row;
+    width: auto;
+  }
+  .front-page__hero-actions > * {
+    width: auto;
+  }
+}
+
+/* Hero orbs */
+.front-page__hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.front-page__hero-orb--1 {
+  width: 22rem;
+  height: 22rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.18;
+  top: 8%;
+  right: -6%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.front-page__hero-orb--2 {
+  width: 16rem;
+  height: 16rem;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.14;
+  bottom: 12%;
+  left: -4%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.front-page__hero-orb--3 {
+  width: 12rem;
+  height: 12rem;
+  background: var(--wp--preset--color--neon-lime);
+  opacity: 0.09;
+  top: 55%;
+  right: 18%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+/* Dark mode: orbs more visible */
+.dark .front-page__hero-orb--1 { opacity: 0.3; }
+.dark .front-page__hero-orb--2 { opacity: 0.22; }
+.dark .front-page__hero-orb--3 { opacity: 0.15; }
+
+/* Scroll arrow */
+.front-page__hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.6);
+  animation: funky-float 3s ease-in-out infinite;
+}
+
+.dark .front-page__hero-scroll {
+  color: var(--wp--preset--color--neon-cyan);
+  opacity: 0.7;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .front-page__hero {
+    min-height: auto;
+    padding-block: var(--wp--preset--spacing--80);
+  }
+  .front-page__hero-content {
+    padding: var(--wp--preset--spacing--40);
+  }
+  .front-page__hero-orb--1,
+  .front-page__hero-orb--2 {
+    opacity: 0.08;
+  }
+  .front-page__hero-orb--3 {
+    display: none;
+  }
+  .dark .front-page__hero-orb--1 { opacity: 0.12; }
+  .dark .front-page__hero-orb--2 { opacity: 0.1; }
+  .front-page__hero-scroll {
+    display: none;
+  }
+}
+
+/* ========================================
+   2. FEATURES BAND
+   ======================================== */
+
+.front-page__features {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--gradient--accent-soft);
+}
+
+.dark .front-page__features {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.03), rgba(0, 255, 255, 0.03));
+}
+
+.front-page__features-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+}
+
+/* Feature tiles get glow border treatment */
+.front-page__features .wp-quick-entry-tile {
+  position: relative;
+  overflow: visible;
+}
+
+.front-page__features .wp-quick-entry-tile::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: linear-gradient(45deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  opacity: 0;
+  transition: opacity var(--wp--preset--transition--slow) ease;
+  border-radius: inherit;
+}
+
+.front-page__features .wp-quick-entry-tile:hover::before {
+  opacity: 0.6;
+}
+
+.dark .front-page__features .wp-quick-entry-tile:hover::before {
+  opacity: 1;
+}
+
+/* Icon gradient circles */
+.front-page__features .wp-quick-entry-tile__icon {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan);
+  transition: all 0.3s ease;
+}
+
+.dark .front-page__features .wp-quick-entry-tile__icon {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
+  background: rgba(0, 255, 255, 0.18);
+  transform: scale(1.1);
+}
+
+.dark .front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
+}
+
+/* ========================================
+   3. CATEGORY SHOWCASE
+   ======================================== */
+
+.front-page__categories {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--background);
+}
+
+.front-page__categories-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+/* Category cards funky border glow */
+.front-page__categories .wp-category-card {
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.front-page__categories .wp-category-card:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+}
+
+.dark .front-page__categories .wp-category-card:hover {
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+}
+
+/* ========================================
+   4. TRENDING PRODUCTS
+   ======================================== */
+
+.front-page__trending {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--background);
+}
+
+.front-page__trending-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+}
+
+/* Product card hover glow */
+.front-page__trending .wc-block-product-grid__item,
+.front-page__best-sellers .wc-block-product-grid__item {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease;
+  border-radius: var(--wp--preset--border-radius--lg);
+}
+
+.front-page__trending .wc-block-product-grid__item:hover,
+.front-page__best-sellers .wc-block-product-grid__item:hover {
+  transform: translateY(-4px);
+}
+
+.dark .front-page__trending .wc-block-product-grid__item:hover,
+.dark .front-page__best-sellers .wc-block-product-grid__item:hover {
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.1);
+}
+
+/* ========================================
+   5. BRAND STORY BANNER
+   ======================================== */
+
+.front-page__brand-story {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.front-page__brand-story-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+@media (min-width: 1024px) {
+  .front-page__brand-story-bg {
+    /* Parallax-like fixed attachment on desktop */
+    position: fixed;
+    /* Clip to section bounds using the parent */
+  }
+  .front-page__brand-story {
+    /* Create a clipping context for the fixed bg */
+    clip-path: inset(0);
+  }
+}
+
+.front-page__brand-story-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.8) 0%, rgba(45, 0, 89, 0.55) 50%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.dark .front-page__brand-story-overlay {
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.92) 0%, rgba(45, 0, 89, 0.7) 50%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.front-page__brand-story-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--container);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  width: 100%;
+}
+
+.front-page__brand-story-title {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #ffffff;
+  line-height: var(--wp--preset--line-height--tight);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  max-width: 36rem;
+  margin: 0;
+}
+
+.front-page__brand-story-text {
+  font-size: var(--wp--preset--font-size--300);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin: 0;
+}
+
+/* Brand story orbs */
+.front-page__brand-story-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.front-page__brand-story-orb--1 {
+  width: 18rem;
+  height: 18rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.12;
+  bottom: -8%;
+  right: 5%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+.front-page__brand-story-orb--2 {
+  width: 14rem;
+  height: 14rem;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.1;
+  top: 10%;
+  left: -3%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+.dark .front-page__brand-story-orb--1 { opacity: 0.2; }
+.dark .front-page__brand-story-orb--2 { opacity: 0.18; }
+
+@media (max-width: 640px) {
+  .front-page__brand-story-orb--1,
+  .front-page__brand-story-orb--2 {
+    opacity: 0.06;
+  }
+  .dark .front-page__brand-story-orb--1 { opacity: 0.1; }
+  .dark .front-page__brand-story-orb--2 { opacity: 0.08; }
+}
+
+/* ========================================
+   6. BEST SELLERS
+   ======================================== */
+
+.front-page__best-sellers {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--neutral-100);
+}
+
+.dark .front-page__best-sellers {
+  background: var(--wp--preset--color--surface);
+}
+
+.front-page__best-sellers-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+}
+
+/* ========================================
+   7. NEWSLETTER SECTION
+   ======================================== */
+
+.front-page__newsletter {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--100);
+  background: var(--wp--preset--gradient--commerce);
+  color: #ffffff;
+}
+
+.front-page__newsletter-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.front-page__newsletter-title {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: var(--wp--preset--line-height--tight);
+  margin: 0;
+  color: #ffffff;
+}
+
+.front-page__newsletter-subtitle {
+  font-size: var(--wp--preset--font-size--300);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin: 0;
+}
+
+/* Newsletter input - neon focus */
+.front-page__newsletter .wp-newsletter-section__input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.front-page__newsletter .wp-newsletter-section__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.front-page__newsletter .wp-newsletter-section__input:focus {
+  outline: 2px solid var(--wp--preset--color--neon-cyan);
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+}
+
+.front-page__newsletter .wp-newsletter-section__icon {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Newsletter orbs */
+.front-page__newsletter-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.front-page__newsletter-orb--1 {
+  width: 20rem;
+  height: 20rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.15;
+  top: -10%;
+  left: -5%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.front-page__newsletter-orb--2 {
+  width: 16rem;
+  height: 16rem;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.12;
+  bottom: -8%;
+  right: -3%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.dark .front-page__newsletter-orb--1 { opacity: 0.25; }
+.dark .front-page__newsletter-orb--2 { opacity: 0.2; }
+
+@media (max-width: 640px) {
+  .front-page__newsletter-orb--1,
+  .front-page__newsletter-orb--2 {
+    opacity: 0.08;
+  }
+  .dark .front-page__newsletter-orb--1 { opacity: 0.12; }
+  .dark .front-page__newsletter-orb--2 { opacity: 0.1; }
+}
+
+/* ========================================
+   SECTION HEADINGS - GRADIENT TEXT
+   ======================================== */
+
+.front-page__section-heading {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: var(--wp--preset--line-height--tight);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  margin: 0;
+  color: var(--wp--preset--color--foreground);
+}
+
+.front-page__section-heading--gradient {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.dark .front-page__section-heading--gradient {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.front-page__section-description {
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+  max-width: 65ch;
+  margin: 0;
+}
+
+/* ========================================
+   GRADIENT DIVIDERS
+   ======================================== */
+
+.front-page__divider {
+  height: 2px;
+  border: none;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), transparent);
+  opacity: 0.3;
+  margin: 0 auto;
+  max-width: var(--wp--preset--layout--wide-size);
+}
+
+.dark .front-page__divider {
+  opacity: 0.5;
+}
+
+/* ========================================
+   COLLECTION ROW HEADER (inside funky sections)
+   ======================================== */
+
+.front-page__collection-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .front-page__collection-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.front-page__collection-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   REDUCED MOTION GUARD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .front-page__hero-orb--1,
+  .front-page__hero-orb--2,
+  .front-page__hero-orb--3,
+  .front-page__brand-story-orb--1,
+  .front-page__brand-story-orb--2,
+  .front-page__newsletter-orb--1,
+  .front-page__newsletter-orb--2,
+  .front-page__hero-scroll {
+    animation: none;
+  }
+  .front-page__features .wp-quick-entry-tile::before,
+  .front-page__features .wp-quick-entry-tile__icon,
+  .front-page__trending .wc-block-product-grid__item,
+  .front-page__best-sellers .wc-block-product-grid__item {
+    transition: none;
+  }
+  .front-page__trending .wc-block-product-grid__item:hover,
+  .front-page__best-sellers .wc-block-product-grid__item:hover {
+    transform: none;
+  }
+  .front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
+    transform: none;
+  }
+}

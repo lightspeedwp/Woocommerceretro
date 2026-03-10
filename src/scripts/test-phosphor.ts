@@ -1,0 +1,2 @@
+import * as p from '@phosphor-icons/react'
+console.log(Object.keys(p).filter(k => ['Package', 'Heart', 'MapPin', 'User', 'Eye', 'Check', 'Download', 'House', 'CaretRight', 'MagnifyingGlass', 'X'].includes(k)))

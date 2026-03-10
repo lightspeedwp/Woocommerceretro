@@ -1,0 +1,83 @@
+/* ========================================
+   TABS
+   ======================================== */
+
+.wp-block-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-block-tabs__list {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  width: 100%;
+  overflow-x: auto; /* Allow scrolling on mobile */
+}
+
+.wp-block-tabs__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--muted-foreground);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--wp--preset--transition--base) ease;
+  margin-bottom: -1px; /* Overlap border */
+}
+
+.wp-block-tabs__trigger:hover {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-tabs__trigger[data-state="active"] {
+  color: var(--wp--preset--color--primary);
+  border-bottom-color: var(--wp--preset--color--primary);
+}
+
+.wp-block-tabs__trigger:focus-visible {
+  outline: none;
+  color: var(--wp--preset--color--foreground);
+  border-bottom-color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-tabs__content {
+  outline: none;
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Variant: Pill Tabs */
+.wp-block-tabs--pills .wp-block-tabs__list {
+  background-color: var(--wp--preset--color--muted);
+  border-radius: var(--wp--preset--border-radius--lg);
+  padding: var(--wp--preset--spacing--10);
+  border: none;
+  width: fit-content;
+}
+
+.wp-block-tabs--pills .wp-block-tabs__trigger {
+  border-radius: var(--wp--preset--border-radius--md);
+  border: none;
+  margin: 0;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-block-tabs--pills .wp-block-tabs__trigger[data-state="active"] {
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  box-shadow: var(--wp--preset--shadow--100);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

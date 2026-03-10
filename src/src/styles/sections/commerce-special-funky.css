@@ -1,0 +1,701 @@
+/**
+ * Commerce Special Pages - Funky Redesign CSS
+ *
+ * Phase 9: PageLoyalty, PageRewards, PageAffiliate, PageReferral,
+ *          PageNewsletter, PageComingSoon, PageMaintenance,
+ *          PageLanding, PageSales, PageBundles, PageSubscriptions
+ *
+ * Colour identities:
+ *   Loyalty:      Gold #fbbf24  / Cyan #00ffff  (achievement)
+ *   Referral:     Cyan #00ffff  / Lime #ccff00  (growth)
+ *   Sales:        Pink #ff00ff  / Yellow #ffff00 (urgency)
+ *   Newsletter:   Purple #8b5cf6 / Pink #ff00ff  (community)
+ *
+ * Mode: CLEAN FUNKY - conversion-first, punchy accents
+ * Treatments: Grand gradient hero, neon glow stats, glassmorphism cards,
+ *             gradient dividers, spring-hover buttons
+ *
+ * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITIES
+   ======================================== */
+
+.page-rewards {
+  --page-hero-from: #fbbf24;
+  --page-hero-via: #030213;
+  --page-hero-to: #00ffff;
+}
+
+.page-referral {
+  --page-hero-from: #00ffff;
+  --page-hero-via: #030213;
+  --page-hero-to: #ccff00;
+}
+
+.page-newsletter {
+  --page-hero-from: #8b5cf6;
+  --page-hero-via: #030213;
+  --page-hero-to: #ff00ff;
+}
+
+.page-sales {
+  --page-hero-from: #ff00ff;
+  --page-hero-via: #030213;
+  --page-hero-to: #ffff00;
+}
+
+/* ========================================
+   1. GRAND HERO (Full Height / Large)
+   ======================================== */
+
+.commerce-hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--page-hero-from);
+}
+
+.commerce-hero--full {
+  min-height: 100vh;
+}
+
+.commerce-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.commerce-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(3, 2, 19, 0.88) 0%,
+    rgba(3, 2, 19, 0.7) 50%,
+    rgba(0, 255, 255, 0.1) 100%
+  );
+}
+
+.dark .commerce-hero__overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(3, 2, 19, 0.95) 0%,
+    rgba(3, 2, 19, 0.85) 50%,
+    rgba(0, 255, 255, 0.15) 100%
+  );
+}
+
+.commerce-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 48rem;
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.commerce-hero__content--center {
+  text-align: center;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commerce-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.commerce-hero__title {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #ffffff;
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  line-height: 1.1;
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.commerce-hero__subtitle {
+  font-size: var(--wp--preset--font-size--400);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.commerce-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Orbs */
+.commerce-hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.commerce-hero__orb--1 {
+  width: 24rem;
+  height: 24rem;
+  background: var(--page-hero-from);
+  opacity: 0.15;
+  top: -10%;
+  right: -5%;
+  animation: funky-float 8s ease-in-out infinite;
+}
+
+.commerce-hero__orb--2 {
+  width: 18rem;
+  height: 18rem;
+  background: var(--page-hero-to);
+  opacity: 0.12;
+  bottom: -10%;
+  left: -5%;
+  animation: funky-float 8s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+/* ========================================
+   2. STATS GRID (Rewards / Points)
+   ======================================== */
+
+.commerce-stats {
+  padding-block: var(--wp--preset--spacing--70);
+  background: var(--wp--preset--color--surface);
+}
+
+.dark .commerce-stats {
+  background: var(--wp--preset--color--background);
+}
+
+.commerce-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .commerce-stats__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .commerce-stats__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.commerce-stat-card {
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--border);
+  background: var(--wp--preset--color--background);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.commerce-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--wp--preset--color--neon-cyan);
+}
+
+.commerce-stat-card__value {
+  font-size: var(--wp--preset--font-size--700);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.commerce-stat-card__label {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   3. PRICING PLANS (Subscriptions / Bundles)
+   ======================================== */
+
+.commerce-pricing {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.commerce-pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 768px) {
+  .commerce-pricing__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.commerce-plan-card {
+  position: relative;
+  padding: var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--xl);
+  border: 1px solid var(--wp--preset--color--border);
+  background: var(--wp--preset--color--surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+  transition: all 0.3s ease;
+}
+
+/* Popular / highlighted plan - neon glow */
+.commerce-plan-card--popular {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.dark .commerce-plan-card--popular {
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.15);
+}
+
+.commerce-plan-card__badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wp--preset--color--neon-pink);
+  color: white;
+  padding: 4px var(--wp--preset--spacing--30);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.commerce-plan-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.commerce-plan-card__amount {
+  font-size: var(--wp--preset--font-size--700);
+  font-weight: 800;
+}
+
+.commerce-plan-card__period {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+.commerce-plan-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.commerce-plan-card__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.commerce-plan-card__feature svg {
+  color: var(--wp--preset--color--neon-lime);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   4. BENEFITS GRID (Referral / Rewards)
+   ======================================== */
+
+.commerce-benefits {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.commerce-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 768px) {
+  .commerce-benefits__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.commerce-benefit-card {
+  padding: var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--lg);
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  transition: all 0.3s ease;
+}
+
+/* Benefit card - glow on hover */
+.commerce-benefit-card {
+  padding: var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--lg);
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  transition: all 0.3s ease;
+}
+
+.commerce-benefit-card:hover {
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+.commerce-benefit-card__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+  color: var(--wp--preset--color--foreground);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.dark .commerce-benefit-card__icon {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* ========================================
+   5. REFERRAL LINK WIDGET
+   ======================================== */
+
+.commerce-referral-widget {
+  padding: var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--xl);
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--funky-glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.commerce-referral-widget__input-group {
+  display: flex;
+  gap: 0;
+  border-radius: var(--wp--preset--border-radius--md);
+  overflow: hidden;
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+.commerce-referral-widget__input {
+  flex: 1;
+  padding: var(--wp--preset--spacing--30);
+  border: none;
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  font-family: var(--font-mono);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+.commerce-referral-widget__copy-btn {
+  padding-inline: var(--wp--preset--spacing--40);
+  background: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--background);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.commerce-referral-widget__copy-btn:hover {
+  background: var(--wp--preset--color--neon-cyan);
+  color: #030213;
+}
+
+/* ========================================
+   6. SALES TICKER / BANNER
+   ======================================== */
+
+.commerce-sales-ticker {
+  background: #000;
+  color: white;
+  padding-block: var(--wp--preset--spacing--20);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.commerce-sales-ticker__inner {
+  display: inline-flex;
+  gap: var(--wp--preset--spacing--80);
+  animation: scroll-ticker 20s linear infinite;
+}
+
+.commerce-sales-ticker__item {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  font-weight: 800;
+  font-size: var(--wp--preset--font-size--200);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.commerce-sales-ticker__item span {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+@keyframes scroll-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ========================================
+   7. LANDING FEATURE SECTION
+   ======================================== */
+
+.commerce-features {
+  padding-block: var(--wp--preset--spacing--100);
+}
+
+.commerce-features__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--80);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .commerce-features__grid { grid-template-columns: 1fr 1fr; }
+}
+
+.commerce-features__image {
+  position: relative;
+  border-radius: var(--wp--preset--border-radius--xl);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.dark .commerce-features__image {
+  box-shadow: 0 20px 60px rgba(255, 0, 255, 0.1);
+}
+
+.commerce-features__image img {
+  width: 100%;
+  display: block;
+}
+
+/* ========================================
+   8. COMMERCE CTA SECTION
+   ======================================== */
+
+.commerce-cta {
+  padding-block: var(--wp--preset--spacing--100);
+  background: #000;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.commerce-cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.commerce-cta__orb {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.2;
+  filter: blur(100px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* ========================================
+   9. COMMERCE LANDING HERO 
+   ======================================== */
+
+.wp-commerce-landing-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #030213;
+}
+
+.wp-commerce-landing-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, rgba(3, 2, 19, 0.9) 100%);
+}
+
+.wp-commerce-landing-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 56rem;
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--50);
+}
+
+.wp-commerce-landing-hero__badge {
+  display: inline-flex;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--wp--preset--color--neon-pink);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.wp-commerce-landing-hero__title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.wp-commerce-landing-hero__title span {
+  display: block;
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================
+   10. COMMERCE SALES GRID
+   ======================================== */
+
+.wp-sales-grid {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wp-sales-grid__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--70);
+}
+
+.wp-sales-feature-card {
+  padding: var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--xl);
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  transition: all 0.3s ease;
+}
+
+/* Feature card - glow border on hover */
+.wp-sales-feature-card {
+  padding: var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--xl);
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  transition: all 0.3s ease;
+}
+
+.wp-sales-feature-card:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.12);
+}
+
+/* ========================================
+   11. BUNDLE LIST (PageBundles)
+   ======================================== */
+
+.wp-bundles-list {
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wp-bundle-card {
+  background: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--xl);
+  border: 1px solid var(--wp--preset--color--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .wp-bundle-card { flex-direction: row; }
+}
+
+.wp-bundle-card__gallery {
+  flex: 1;
+  background: var(--wp--preset--color--surface-secondary);
+}
+
+.wp-bundle-card__content {
+  flex: 1.2;
+  padding: var(--wp--preset--spacing--70);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-roi-card { padding: var(--wp--preset--spacing--50); border-radius: var(--wp--preset--border-radius--lg,12px); background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(0,255,255,0.08)); border: 1px solid rgba(0,255,255,0.15); }
+
+/* ========================================
+   12. REDUCED MOTION - REWARD/AFFILIATE/NEWSLETTER
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .commerce-hero__orb { animation: none; }
+  .commerce-stat-card:hover,
+  .commerce-benefit-card:hover,
+  .wp-sales-feature-card:hover { transform: none; }
+  .commerce-plan-card--popular { transform: none; }
+}

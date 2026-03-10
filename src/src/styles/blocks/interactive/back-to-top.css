@@ -1,0 +1,48 @@
+/* ========================================
+   BACK TO TOP BUTTON
+   ======================================== */
+
+.wp-back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border-radius: 9999px;
+  box-shadow: var(--wp--preset--shadow--lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Hover State */
+.wp-back-to-top:hover {
+  background-color: var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--secondary-foreground);
+  transform: translateY(-2px);
+}
+
+/* Hidden State */
+.wp-back-to-top--hidden {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  pointer-events: none;
+}
+
+/* Dark Mode Overrides */
+.dark .wp-back-to-top {
+  background-color: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--background);
+}
+
+.dark .wp-back-to-top:hover {
+  background-color: var(--wp--preset--color--muted);
+}

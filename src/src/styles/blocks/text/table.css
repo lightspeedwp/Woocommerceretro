@@ -1,0 +1,39 @@
+/* ========================================
+   TABLE BLOCK
+   ======================================== */
+
+.wp-block-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.wp-block-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--wp--preset--font-size--normal);
+}
+
+.wp-block-table th {
+  padding: var(--wp--preset--spacing--20);
+  border: 1px solid var(--wp--preset--color--border);
+  text-align: left;
+  background-color: var(--wp--preset--color--surface);
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-block-table td {
+  padding: var(--wp--preset--spacing--20);
+  border: 1px solid var(--wp--preset--color--border);
+  text-align: left;
+}
+
+.wp-block-table figcaption {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  text-align: center;
+}
+
+/* Striped Style */
+.is-style-stripes tbody tr:nth-child(odd) {
+  background-color: var(--wp--preset--color--surface);
+}

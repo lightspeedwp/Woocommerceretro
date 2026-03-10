@@ -1,0 +1,28 @@
+/* ========================================
+   DETAILS BLOCK
+   ======================================== */
+
+.wp-block-details {
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: var(--wp--preset--spacing--30);
+}
+
+.wp-block-details summary {
+  cursor: pointer;
+  font-weight: var(--wp--preset--font-weight--medium);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-block-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.wp-block-details[open] summary {
+  margin-bottom: var(--wp--preset--spacing--30);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  padding-bottom: var(--wp--preset--spacing--30);
+}

@@ -1,0 +1,26 @@
+/* ========================================
+   RELATED PRODUCTS SECTION
+   ======================================== */
+
+.wc-related-products {
+  width: 100%;
+}
+
+.wc-related-products__header {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wc-related-products__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--heading-2);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wc-related-products__description {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--normal);
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,23 @@
+/* ========================================
+   FORM
+   ======================================== */
+
+.wp-block-form-item {
+  display: grid;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-block-form-label[data-error="true"] {
+  color: var(--wp--preset--color--destructive);
+}
+
+.wp-block-form-description {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+.wp-block-form-message {
+  color: var(--wp--preset--color--destructive);
+  font-size: var(--wp--preset--font-size--sm);
+  font-weight: var(--wp--preset--font-weight--medium);
+}

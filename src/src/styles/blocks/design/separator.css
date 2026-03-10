@@ -1,0 +1,18 @@
+/* ========================================
+   SEPARATOR
+   ======================================== */
+
+.wp-block-separator {
+  background-color: var(--wp--preset--color--border);
+  flex-shrink: 0;
+}
+
+.wp-block-separator--horizontal {
+  height: 1px;
+  width: 100%;
+}
+
+.wp-block-separator--vertical {
+  height: 100%;
+  width: 1px;
+}

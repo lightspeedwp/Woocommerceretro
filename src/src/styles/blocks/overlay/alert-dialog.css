@@ -1,0 +1,105 @@
+/* ========================================
+   ALERT DIALOG
+   ======================================== */
+
+.wp-block-alert-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation-duration: 200ms;
+}
+
+.wp-block-alert-dialog-overlay[data-state="open"] {
+  animation-name: enter;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-alert-dialog-overlay[data-state="closed"] {
+  animation-name: exit;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-alert-dialog-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 50;
+  display: grid;
+  width: 100%;
+  max-width: 32rem; /* max-w-lg */
+  transform: translate(-50%, -50%);
+  gap: var(--wp--preset--spacing--20);
+  border: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--background);
+  padding: var(--wp--preset--spacing--40);
+  box-shadow: var(--wp--preset--shadow--500);
+  border-radius: var(--wp--preset--border-radius--500);
+  animation-duration: 200ms;
+}
+
+.wp-block-alert-dialog-content[data-state="open"] {
+  animation-name: contentEnter;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-alert-dialog-content[data-state="closed"] {
+  animation-name: contentExit;
+  animation-fill-mode: forwards;
+}
+
+.wp-block-alert-dialog-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .wp-block-alert-dialog-header {
+    text-align: left;
+  }
+}
+
+.wp-block-alert-dialog-footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--wp--preset--spacing--10);
+}
+
+@media (min-width: 640px) {
+  .wp-block-alert-dialog-footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+.wp-block-alert-dialog-title {
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.wp-block-alert-dialog-description {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+@keyframes enter {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes exit {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+@keyframes contentEnter {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes contentExit {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+}

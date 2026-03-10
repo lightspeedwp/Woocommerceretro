@@ -1,0 +1,191 @@
+/**
+ * EnquiryModal - Funky BEM Styles
+ * Overlay modal with enquiry/lead-capture form.
+ */
+
+.enquiry-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--40);
+}
+
+.enquiry-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.enquiry-modal__container {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--wp--preset--border-radius--lg, 12px);
+  border: 1px solid var(--wp--preset--color--border-light);
+  background: var(--wp--preset--color--background);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.dark .enquiry-modal__container {
+  background: var(--wp--preset--color--surface);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 255, 0.06);
+}
+
+.enquiry-modal__close {
+  position: absolute;
+  top: var(--wp--preset--spacing--30);
+  right: var(--wp--preset--spacing--30);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--wp--preset--color--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.dark .enquiry-modal__close { color: rgba(255, 255, 255, 0.4); }
+.enquiry-modal__close:hover { color: var(--wp--preset--color--foreground); }
+.dark .enquiry-modal__close:hover { color: rgba(255, 255, 255, 0.9); }
+
+.enquiry-modal__body { padding: var(--wp--preset--spacing--60); }
+
+.enquiry-modal__header { margin-bottom: var(--wp--preset--spacing--50); }
+.enquiry-modal__title { margin-bottom: var(--wp--preset--spacing--20); }
+.enquiry-modal__description { color: var(--wp--preset--color--text-secondary); }
+.dark .enquiry-modal__description { color: rgba(255, 255, 255, 0.6); }
+
+.enquiry-modal__form { display: flex; flex-direction: column; gap: var(--wp--preset--spacing--40); }
+
+.enquiry-modal__label {
+  display: block;
+  font-weight: var(--wp--preset--font-weight--medium);
+  margin-bottom: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--foreground);
+}
+
+.enquiry-modal__input {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border-light);
+  border-radius: var(--wp--preset--border-radius--md, 8px);
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.enquiry-modal__textarea {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  border: 1px solid var(--wp--preset--color--border-light);
+  border-radius: var(--wp--preset--border-radius--md, 8px);
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark .enquiry-modal__input {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+.dark .enquiry-modal__textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.enquiry-modal__input:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.15);
+}
+.enquiry-modal__textarea:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.15);
+}
+
+.enquiry-modal__input--error {
+  border-color: var(--wp--preset--color--error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+.enquiry-modal__input--error:focus {
+  border-color: var(--wp--preset--color--error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+.enquiry-modal__textarea--error {
+  border-color: var(--wp--preset--color--error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+.enquiry-modal__textarea--error:focus {
+  border-color: var(--wp--preset--color--error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.enquiry-modal__textarea { resize: none; }
+
+.enquiry-modal__error {
+  margin-top: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--error);
+}
+
+.enquiry-modal__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.enquiry-modal__spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: spin 1s linear infinite;
+}
+
+.enquiry-modal__spinner-track { opacity: 0.25; }
+.enquiry-modal__spinner-head { opacity: 0.75; }
+
+.enquiry-modal__note {
+  text-align: center;
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+}
+
+.dark .enquiry-modal__note { color: rgba(255, 255, 255, 0.4); }
+
+/* Success state */
+.enquiry-modal__success { text-align: center; padding: var(--wp--preset--spacing--60); }
+
+.enquiry-modal__success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  margin-bottom: var(--wp--preset--spacing--50);
+  background: rgba(0, 255, 0, 0.1);
+  color: var(--wp--preset--color--neon-lime, #00ff00);
+}
+
+.dark .enquiry-modal__success-icon { background: rgba(0, 255, 0, 0.15); }
+
+.enquiry-modal__success-title { margin-bottom: var(--wp--preset--spacing--20); }
+
+.enquiry-modal__success-text {
+  color: var(--wp--preset--color--text-secondary);
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.dark .enquiry-modal__success-text { color: rgba(255, 255, 255, 0.6); }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

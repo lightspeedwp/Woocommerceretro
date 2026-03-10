@@ -1,0 +1,60 @@
+/* ========================================
+   WORDPRESS COVER BLOCK
+   ======================================== */
+
+.wp-block-cover {
+  position: relative;
+  min-height: 430px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--wp--preset--spacing--40);
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.wp-block-cover__image-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.wp-block-cover__inner-container {
+  z-index: 1;
+  color: #fff; /* Default text color for cover */
+  width: 100%;
+  max-width: var(--wp--preset--layout--content-size);
+}
+
+.wp-block-cover.has-background-dim::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+/* Alignments */
+.wp-block-cover.alignfull {
+  width: 100vw;
+  max-width: 100vw;
+  /* Margin removed */
+}
+
+.wp-block-cover.alignwide {
+  max-width: var(--wp--preset--layout--wide-size);
+  /* Margin removed */
+}

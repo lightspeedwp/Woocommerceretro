@@ -1,0 +1,10 @@
+/* ========================================
+   RESULTS COUNT BLOCK
+   ======================================== */
+
+.wp-block-results-count {
+  /* Margin removed */
+  text-align: center;
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--normal);
+}

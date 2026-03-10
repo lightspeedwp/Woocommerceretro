@@ -1,0 +1,205 @@
+/* ========================================
+   PRICING TABLE
+   (Consolidated from pricing.css + pricing-table.css)
+   ======================================== */
+
+/* Table header */
+.wp-pricing-table__subheading {
+  color: var(--wp--preset--color--neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-pricing-table__heading { margin-bottom: var(--wp--preset--spacing--50); }
+
+.wp-pricing-table__billing-note {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+  margin-bottom: var(--wp--preset--spacing--50);
+  margin-top: calc(-1 * var(--wp--preset--spacing--30));
+}
+
+.dark .wp-pricing-table__billing-note { color: rgba(255, 255, 255, 0.4); }
+
+/* Toggle */
+.wp-pricing-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--10);
+  background-color: var(--wp--preset--color--secondary);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.wp-pricing-toggle__button {
+  position: relative;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--60);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  transition: all var(--wp--preset--transition--base) ease;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-pricing-toggle__button[aria-pressed="true"] {
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--primary);
+  box-shadow: var(--wp--preset--shadow--sm);
+}
+
+.dark .wp-pricing-toggle__button[aria-pressed="true"] {
+  background-color: var(--wp--preset--color--surface-elevated);
+}
+
+.wp-pricing-toggle__save-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: var(--wp--preset--font-size--x-small);
+  color: var(--wp--preset--color--success);
+  font-weight: var(--wp--preset--font-weight--bold);
+  background: var(--wp--preset--color--background);
+  padding: 2px 6px;
+  border-radius: 9999px;
+  border: 1px solid var(--wp--preset--color--success);
+}
+
+.dark .wp-pricing-toggle__save-badge {
+  background-color: var(--wp--preset--color--surface);
+}
+
+/* Grid */
+.wp-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .wp-pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card */
+.wp-pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--wp--preset--spacing--60);
+  background-color: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--xl);
+  border: 2px solid var(--wp--preset--color--border);
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-pricing-card--popular {
+  border-color: var(--wp--preset--color--primary);
+  box-shadow: var(--wp--preset--shadow--xl);
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.wp-pricing-card__badge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--40);
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--bold);
+  border-radius: 9999px;
+}
+
+.wp-pricing-card__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-pricing-card__description {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--60);
+  font-size: var(--wp--preset--font-size--small);
+  min-height: 3rem;
+}
+
+.wp-pricing-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.wp-pricing-card__amount {
+  font-size: var(--wp--preset--font-size--huge);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: 1;
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-pricing-card__period {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-left: var(--wp--preset--spacing--20);
+}
+
+/* Features List */
+.wp-pricing-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: auto;
+  margin-bottom: var(--wp--preset--spacing--60);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  flex: 1;
+}
+
+.wp-pricing-card__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-pricing-card__check {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wp-pricing-card__check--included {
+  color: var(--wp--preset--color--success);
+}
+
+.wp-pricing-card__check--excluded {
+  color: var(--wp--preset--color--muted-foreground);
+  opacity: 0.5;
+}
+
+.wp-pricing-card__feature-text {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-pricing-card__feature-text--excluded {
+  color: var(--wp--preset--color--muted-foreground);
+  text-decoration: line-through;
+}

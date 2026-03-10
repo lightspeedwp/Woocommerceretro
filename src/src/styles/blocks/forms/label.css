@@ -1,0 +1,15 @@
+/* ========================================
+   LABEL
+   ======================================== */
+
+.wp-block-label {
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  line-height: 1;
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-label--disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}

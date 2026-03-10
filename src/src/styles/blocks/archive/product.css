@@ -1,0 +1,167 @@
+/* ========================================
+   ARCHIVE PRODUCT TEMPLATE STYLES
+   ======================================== */
+
+/**
+ * Archive Product Template
+ * WordPress & WooCommerce Aligned
+ * 
+ * Features:
+ * - Shop page layout
+ * - Category/tag archives
+ * - Product grid
+ * - Filter sidebar
+ * - Pagination
+ * - Complete dark mode support
+ */
+
+/* ========================================
+   PAGE LAYOUT
+   ======================================== */
+
+.wp-archive-product {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ========================================
+   ARCHIVE HEADER SECTION
+   ======================================== */
+
+.wp-archive-product__header {
+  background: var(--wp--preset--color--background);
+  padding-top: var(--wp--preset--spacing--80);
+  padding-bottom: var(--wp--preset--spacing--80);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.dark .wp-archive-product__header {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border-medium);
+}
+
+/* ========================================
+   MAIN CONTENT AREA
+   ======================================== */
+
+.wp-archive-product__main {
+  padding-top: var(--wp--preset--spacing--60);
+  padding-bottom: var(--wp--preset--spacing--80);
+}
+
+@media (min-width: 1024px) {
+  .wp-archive-product__main {
+    padding-top: var(--wp--preset--spacing--80);
+    padding-bottom: var(--wp--preset--spacing--100);
+  }
+}
+
+/* ========================================
+   TWO-COLUMN LAYOUT
+   ======================================== */
+
+.wp-archive-product__layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 1024px) {
+  .wp-archive-product__layout {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   MOBILE FILTER TOGGLE
+   ======================================== */
+
+.wp-archive-product__mobile-filter {
+  /* Margin removed in favor of layout gap */
+}
+
+@media (min-width: 1024px) {
+  .wp-archive-product__mobile-filter {
+    display: none;
+  }
+}
+
+.wp-archive-product__mobile-filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* ========================================
+   CONTENT AREA (Right Column)
+   ======================================== */
+
+.wp-archive-product__content {
+  flex: 1;
+}
+
+/* ========================================
+   RESULTS BAR
+   ======================================== */
+
+.wp-archive-product__results-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  /* Margin removed for gap */
+}
+
+@media (min-width: 640px) {
+  .wp-archive-product__results-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* ========================================
+   PRODUCT GRID
+   ======================================== */
+
+.wp-archive-product__grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-archive-product__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-archive-product__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--60);
+  }
+}
+
+/* Skeleton loading grid */
+.wp-archive-product__grid--loading {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-archive-product__grid--loading {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-archive-product__grid--loading {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--wp--preset--spacing--60);
+  }
+}

@@ -1,0 +1,329 @@
+/**
+ * Funky Sections CSS Framework
+ * 
+ * Reusable BEM patterns for funky-styled sections.
+ * Any template can compose these classes for consistent funky treatments.
+ * 
+ * Naming: .funky-section__[element]--[modifier]
+ * 
+ * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
+ * @see /src/styles/theme-funky.css (tokens, animations, utilities)
+ */
+
+/* ========================================
+   SECTION BASE
+   ======================================== */
+
+.funky-section {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.funky-section--compact {
+  padding-block: var(--wp--preset--spacing--60);
+}
+
+.funky-section--spacious {
+  padding-block: var(--wp--preset--spacing--100);
+}
+
+/* ========================================
+   SECTION BACKGROUND VARIANTS
+   ======================================== */
+
+/* Dark commerce background (deep purple/black) */
+.funky-section--dark {
+  background: var(--wp--preset--gradient--commerce);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+/* Accent soft tint (subtle neon gradient in light mode) */
+.funky-section--accent {
+  background: var(--wp--preset--gradient--accent-soft);
+}
+
+.dark .funky-section--accent {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.03), rgba(0, 255, 255, 0.03));
+}
+
+/* Glass surface section */
+.funky-section--glass {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ========================================
+   GRADIENT DIVIDERS
+   ======================================== */
+
+.funky-section__divider {
+  height: 2px;
+  border: none;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), transparent);
+  opacity: 0.3;
+  margin: 0;
+}
+
+.dark .funky-section__divider {
+  opacity: 0.5;
+}
+
+/* Subtle variant (single neon colour, thinner) */
+.funky-section__divider--subtle {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-cyan), transparent);
+  opacity: 0.15;
+}
+
+.dark .funky-section__divider--subtle {
+  opacity: 0.3;
+}
+
+/* ========================================
+   ORB POSITIONING HELPERS
+   ======================================== */
+
+/**
+ * Orb Rules (from design system):
+ * - Maximum 3 orbs per section
+ * - Stagger animation delays: 0s, -3s, -5s
+ * - Light mode opacity: 0.1 - 0.2
+ * - Dark mode opacity: 0.15 - 0.35
+ * - Mobile: Reduce to opacity: 0.08 or display: none
+ */
+
+.funky-section__orb--1 {
+  top: -5rem;
+  left: -5rem;
+  width: 20rem;
+  height: 20rem;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.15;
+  animation-delay: 0s;
+}
+
+.funky-section__orb--2 {
+  bottom: -5rem;
+  right: -5rem;
+  width: 18rem;
+  height: 18rem;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.12;
+  animation-delay: -3s;
+}
+
+.funky-section__orb--3 {
+  top: 50%;
+  left: 60%;
+  width: 14rem;
+  height: 14rem;
+  background: var(--wp--preset--color--neon-lime);
+  opacity: 0.08;
+  animation-delay: -5s;
+}
+
+/* Dark mode: increased orb visibility */
+.dark .funky-section__orb--1 { opacity: 0.25; }
+.dark .funky-section__orb--2 { opacity: 0.2; }
+.dark .funky-section__orb--3 { opacity: 0.15; }
+
+/* Mobile: reduce orb visibility */
+@media (max-width: 640px) {
+  .funky-section__orb--1,
+  .funky-section__orb--2 {
+    opacity: 0.08;
+  }
+  .funky-section__orb--3 {
+    display: none;
+  }
+  .dark .funky-section__orb--1 { opacity: 0.12; }
+  .dark .funky-section__orb--2 { opacity: 0.1; }
+}
+
+/* ========================================
+   GRADIENT TEXT HEADINGS
+   ======================================== */
+
+.funky-section__heading--gradient {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+}
+
+/* Dark mode: brighter gradient with lime stop */
+.dark .funky-section__heading--gradient {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sale gradient text */
+.funky-section__heading--sale {
+  background: var(--wp--preset--gradient--sale);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ========================================
+   SECTION CARDS (Glass + Glow)
+   ======================================== */
+
+.funky-section__card {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--60);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.funky-section__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--wp--preset--shadow--lg);
+}
+
+.dark .funky-section__card {
+  background: var(--wp--preset--color--surface);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .funky-section__card:hover {
+  border-color: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.08);
+}
+
+/* Glass card variant */
+.funky-section__card--glass {
+  background: var(--funky-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--funky-glass-border);
+}
+
+/* ========================================
+   SECTION BADGES
+   ======================================== */
+
+.funky-section__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  text-transform: uppercase;
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--wp--preset--color--accent);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.dark .funky-section__badge {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--neon-cyan);
+  border-color: rgba(0, 255, 255, 0.2);
+}
+
+/* Sale badge */
+.funky-section__badge--sale {
+  background: rgba(255, 0, 255, 0.1);
+  color: var(--wp--preset--color--error);
+  border-color: rgba(255, 0, 255, 0.2);
+}
+
+.dark .funky-section__badge--sale {
+  background: rgba(255, 0, 255, 0.15);
+  color: var(--wp--preset--color--neon-pink);
+  border-color: rgba(255, 0, 255, 0.3);
+}
+
+/* ========================================
+   HERO SECTION FUNKY OVERLAY
+   ======================================== */
+
+.funky-section__hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.7), rgba(45, 0, 89, 0.5), rgba(0, 0, 0, 0.3));
+}
+
+.dark .funky-section__hero-overlay {
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.85), rgba(45, 0, 89, 0.65), rgba(0, 0, 0, 0.5));
+}
+
+/* ========================================
+   ICON CIRCLES (Funky treatment for feature icons)
+   ======================================== */
+
+.funky-section__icon-circle {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--wp--preset--color--accent);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.dark .funky-section__icon-circle {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.funky-section__card:hover .funky-section__icon-circle {
+  background: rgba(0, 255, 255, 0.15);
+  transform: scale(1.1);
+}
+
+.dark .funky-section__card:hover .funky-section__icon-circle {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+}
+
+/* ========================================
+   SECTION CONTENT CONTAINERS
+   ======================================== */
+
+/* Standard section content container */
+.wp-section-accent__content,
+.wp-section-content__content,
+.wp-section-muted__content {
+  max-width: var(--funky-container-wide);
+  margin-inline: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60); /* 32px */
+}
+
+/* Hero section container */
+.wp-hero-section__container {
+  max-width: var(--funky-container-wide);
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* ========================================
+   REDUCED MOTION GUARD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .funky-section__card:hover {
+    transform: none;
+  }
+  .funky-section__card:hover .funky-section__icon-circle {
+    transform: none;
+  }
+}

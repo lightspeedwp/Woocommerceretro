@@ -1,0 +1,33 @@
+/* ========================================
+   TAG CLOUD BLOCK
+   ======================================== */
+
+.wp-block-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  align-items: baseline;
+  /* Margin removed */
+}
+
+.wp-block-tag-cloud a {
+  text-decoration: none;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--sm);
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-block-tag-cloud a:hover {
+  border-color: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Dark Mode */
+.dark .wp-block-tag-cloud a {
+  background-color: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}

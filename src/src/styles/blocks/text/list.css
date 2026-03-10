@@ -1,0 +1,15 @@
+/* ========================================
+   LIST BLOCK
+   ======================================== */
+
+.wp-block-list {
+  padding-left: var(--wp--preset--spacing--40);
+  /* Margin removed */
+}
+
+.wp-block-list li {
+  /* Margin removed */
+}
+
+.wp-block-list ul { }
+.wp-block-list ol { }

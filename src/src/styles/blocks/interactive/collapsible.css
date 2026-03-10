@@ -1,0 +1,21 @@
+/* ========================================
+   COLLAPSIBLE
+   ======================================== */
+
+.wp-block-collapsible-trigger {
+  cursor: pointer;
+}
+
+.wp-block-collapsible-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease-out;
+}
+
+.wp-block-collapsible-content[data-state="open"] {
+  grid-template-rows: 1fr;
+}
+
+.wp-block-collapsible-content-inner {
+  overflow: hidden;
+}

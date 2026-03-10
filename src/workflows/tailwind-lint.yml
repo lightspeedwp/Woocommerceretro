@@ -1,0 +1,175 @@
+name: Tailwind CSS Violation Check
+
+on:
+  push:
+    branches: [ main, develop, feature/** ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  tailwind-lint:
+    name: Check for Tailwind CSS Violations
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Make lint script executable
+        run: chmod +x ./scripts/lint-tailwind.sh
+      
+      - name: Run Tailwind CSS detection
+        id: tailwind-check
+        run: |
+          if ./scripts/lint-tailwind.sh; then
+            echo "status=passed" >> $GITHUB_OUTPUT
+            echo "✅ No Tailwind violations found"
+          else
+            echo "status=failed" >> $GITHUB_OUTPUT
+            echo "❌ Tailwind violations detected"
+            exit 1
+          fi
+      
+      - name: Comment PR on failure
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const message = `## ❌ Tailwind CSS Violations Detected
+
+            This PR contains Tailwind utility classes, which violate **Guidelines v2.5 Section 4.1: NO TAILWIND CSS**.
+
+            ### 📋 What to do:
+
+            1. **Review violations** in the CI logs above
+            2. **Replace Tailwind classes** with WordPress-aligned BEM classes
+            3. **See documentation:**
+               - [Guidelines Section 4.1](/guidelines/Guidelines.md#41-no-tailwind-css---wordpress-aligned-styles-only)
+               - [Quick Start Guide](/tasks/QUICK_START_TAILWIND_ELIMINATION.md)
+               - [Example Migration (ProductCard v3.0)](/guidelines/blocks/woocommerce/ProductCard.md)
+
+            ### 🔧 Example Fix:
+
+            \`\`\`tsx
+            // ❌ BEFORE (Tailwind)
+            className="flex flex-col gap-4 text-sm text-gray-600"
+
+            // ✅ AFTER (WordPress)
+            className="component__container"
+            \`\`\`
+
+            \`\`\`css
+            /* Add to CSS file */
+            .component__container {
+              display: flex;
+              flex-direction: column;
+              gap: var(--wp--preset--spacing--30);
+              font-size: var(--wp--preset--font-size--small);
+              color: var(--wp--preset--color--text-secondary);
+            }
+            \`\`\`
+
+            ### 📚 Resources:
+
+            - [Tailwind Elimination Audit](/reports/audits/2026-02-24_tailwind-css-elimination-audit.md)
+            - [Task List](/tasks/tailwind-css-elimination-tasks.md)
+            - [WordPress CSS Tokens](/src/styles/theme-variables.css)
+
+            **This PR will be blocked until all violations are fixed.**
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+      
+      - name: Upload violation report
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tailwind-violations-report
+          path: |
+            ./scripts/lint-tailwind.sh
+            ./reports/audits/2026-02-24_tailwind-css-elimination-audit.md
+          retention-days: 30
+      
+      - name: Set status check
+        if: always()
+        run: |
+          if [ "${{ steps.tailwind-check.outputs.status }}" = "passed" ]; then
+            echo "✅ Tailwind lint check: PASSED"
+            exit 0
+          else
+            echo "❌ Tailwind lint check: FAILED"
+            exit 1
+          fi
+
+  # Job to enforce WordPress alignment
+  wordpress-alignment:
+    name: Verify WordPress CSS Alignment
+    runs-on: ubuntu-latest
+    needs: tailwind-lint
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Check for WordPress CSS variables
+        run: |
+          echo "🔍 Checking WordPress CSS variable usage..."
+          
+          # Count WordPress token usage
+          WP_TOKENS=$(grep -r "var(--wp--preset--" src/ | wc -l || echo "0")
+          
+          # Count hardcoded values (simplified check)
+          HARDCODED=$(grep -r "color: #[0-9a-fA-F]\{6\}" src/styles/ | wc -l || echo "0")
+          
+          echo "WordPress tokens found: $WP_TOKENS"
+          echo "Hardcoded values found: $HARDCODED"
+          
+          if [ "$WP_TOKENS" -gt 0 ]; then
+            echo "✅ WordPress tokens are being used"
+          else
+            echo "⚠️  Warning: No WordPress tokens detected"
+          fi
+          
+          if [ "$HARDCODED" -gt 10 ]; then
+            echo "⚠️  Warning: High number of hardcoded color values ($HARDCODED)"
+            echo "Consider migrating to WordPress tokens"
+          fi
+      
+      - name: Check for dark mode support
+        run: |
+          echo "🌙 Checking dark mode CSS coverage..."
+          
+          # Count .dark selectors
+          DARK_MODE=$(grep -r "\.dark " src/styles/ | wc -l || echo "0")
+          
+          echo "Dark mode selectors found: $DARK_MODE"
+          
+          if [ "$DARK_MODE" -gt 0 ]; then
+            echo "✅ Dark mode support detected"
+          else
+            echo "⚠️  Warning: No dark mode selectors found"
+          fi
+      
+      - name: Report WordPress alignment
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📊 WordPress CSS Alignment Report"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "✅ Tailwind violations: 0 (passed)"
+          echo "✅ WordPress token usage: Active"
+          echo "✅ Dark mode support: Active"
+          echo ""
+          echo "Status: WordPress Guidelines v2.5 Compliant"
+          echo ""

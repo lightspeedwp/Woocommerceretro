@@ -1,0 +1,260 @@
+/**
+ * Button Block Styles
+ * 
+ * WordPress-aligned button styles using BEM naming convention.
+ * Maps to core/button block.
+ */
+
+/* Base Button */
+.wp-block-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+  white-space: nowrap;
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: none;
+  line-height: 1;
+  position: relative;
+  
+  /* LightSpeed Animations */
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+.wp-block-button:focus-visible {
+  outline: var(--wp--preset--focus-ring--width) solid var(--wp--preset--focus-ring--color);
+  outline-offset: var(--wp--preset--focus-ring--offset);
+}
+
+.wp-block-button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+.wp-block-button[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Hover State: Lift and Shadow (LightSpeed) */
+.wp-block-button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+/* Active State: Press */
+.wp-block-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   BUTTONS CONTAINER (core/buttons)
+   ======================================== */
+
+.wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--40); /* Default gap */
+}
+
+.wp-block-buttons.is-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.wp-block-buttons.is-content-justification-center {
+  justify-content: center;
+}
+
+.wp-block-buttons.is-content-justification-right {
+  justify-content: flex-end;
+}
+
+.wp-block-buttons.is-content-justification-space-between {
+  justify-content: space-between;
+}
+
+/* ========================================
+   VARIANTS
+   ======================================== */
+
+/* Primary (Default) */
+.wp-block-button--primary {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: transparent;
+}
+
+.wp-block-button--primary:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--primary);
+  /* Primary Button Specific Glow */
+  box-shadow: 0 8px 20px -6px var(--wp--preset--color--primary), 0 4px 8px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* Secondary */
+.wp-block-button--secondary {
+  background-color: var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--secondary-foreground);
+  border-color: transparent;
+}
+
+.wp-block-button--secondary:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--secondary);
+  opacity: 0.9;
+}
+
+/* Outline */
+.wp-block-button--outline {
+  background-color: transparent;
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-button--outline:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--muted);
+  color: var(--wp--preset--color--foreground);
+  border-color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Ghost */
+.wp-block-button--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-button--ghost:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--muted);
+  color: var(--wp--preset--color--foreground);
+  box-shadow: none; /* No lift for ghost buttons usually, but we can keep standard lift or disable it */
+  transform: translateY(-1px);
+}
+
+/* Destructive (Error) */
+.wp-block-button--destructive {
+  background-color: var(--wp--preset--color--error);
+  color: var(--wp--preset--color--error-foreground);
+  border-color: transparent;
+}
+
+.wp-block-button--destructive:hover:not(:disabled) {
+  box-shadow: 0 8px 20px -6px var(--wp--preset--color--error), 0 4px 8px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* Link */
+.wp-block-button.wp-block-button--link {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--wp--preset--color--primary);
+  text-decoration: none;
+  padding: 0;
+  height: auto;
+  box-shadow: none;
+  transform: none;
+}
+
+.wp-block-button.wp-block-button--link:hover { text-decoration: underline; box-shadow: none; transform: none; }
+.wp-block-button.wp-block-button--link:hover:not(:disabled) { text-decoration: underline; box-shadow: none; transform: none; }
+
+/* CTA (Gradient) */
+.wp-block-button--cta {
+  background: linear-gradient(to right, var(--wp--preset--color--accent), var(--wp--preset--color--deep-purple));
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: transparent;
+  box-shadow: var(--wp--preset--shadow--md);
+}
+
+.wp-block-button--cta:hover:not(:disabled) {
+  background: linear-gradient(to right, var(--wp--preset--color--deep-purple), var(--wp--preset--color--accent));
+  box-shadow: var(--wp--preset--shadow--lg);
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Gradient (Funky Neon) */
+.wp-block-button--gradient {
+  background: var(--wp--preset--gradient--neon-glow);
+  color: var(--wp--preset--color--primary-foreground);
+  border-color: transparent;
+}
+
+.wp-block-button--gradient:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3), 0 0 40px rgba(0, 255, 255, 0.2);
+}
+
+.dark .wp-block-button--gradient:hover:not(:disabled) {
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.3);
+}
+
+/* ========================================
+   SIZES
+   ======================================== */
+
+/* Small */
+.wp-block-button--size-sm {
+  height: 2rem; /* 32px */
+  padding: 0 var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--100);
+}
+
+/* Default (Medium) */
+.wp-block-button--size-default {
+  height: 2.5rem; /* 40px */
+  padding: 0 var(--wp--preset--spacing--40);
+}
+
+/* Large */
+.wp-block-button--size-lg {
+  height: 3rem; /* 48px */
+  padding: 0 var(--wp--preset--spacing--60);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+/* Icon Only */
+.wp-block-button--size-icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0;
+}
+
+.wp-block-button--size-icon.wp-block-button--size-sm {
+  height: 2rem;
+  width: 2rem;
+}
+
+.wp-block-button--size-icon.wp-block-button--size-lg {
+  height: 3rem;
+  width: 3rem;
+}
+
+/* ========================================
+   MODIFIERS
+   ======================================== */
+
+.wp-block-button--full-width {
+  width: 100%;
+}
+
+.wp-block-button__spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

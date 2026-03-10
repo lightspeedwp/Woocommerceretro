@@ -1,0 +1,78 @@
+/* ========================================
+   QUICK ENTRY TILES GRID
+   ======================================== */
+
+.wp-quick-entry-tiles-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-quick-entry-tiles-grid--1-2-2 { 
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .wp-quick-entry-tiles-grid--1-2-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .wp-quick-entry-tiles-grid--1-2-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+.wp-quick-entry-tiles-grid--1-2-3 { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .wp-quick-entry-tiles-grid--1-2-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .wp-quick-entry-tiles-grid--1-2-3 { grid-template-columns: repeat(3, 1fr); } }
+
+.wp-quick-entry-tiles-grid--1-2-4 { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .wp-quick-entry-tiles-grid--1-2-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .wp-quick-entry-tiles-grid--1-2-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Tile */
+.wp-quick-entry-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--wp--preset--spacing--50);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  text-decoration: none;
+  transition: all var(--wp--preset--transition--base) ease;
+}
+
+.wp-quick-entry-tile:hover {
+  background-color: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--accent);
+  box-shadow: var(--wp--preset--shadow--md);
+  transform: translateY(-2px);
+}
+
+.wp-quick-entry-tile__icon {
+  margin-bottom: var(--wp--preset--spacing--30);
+  color: var(--wp--preset--color--accent);
+  padding: var(--wp--preset--spacing--30);
+  background-color: rgba(124, 58, 237, 0.1); /* fallback */
+  border-radius: var(--wp--preset--border-radius--full);
+}
+
+.dark .wp-quick-entry-tile__icon {
+  background-color: rgba(124, 58, 237, 0.2);
+}
+
+.wp-quick-entry-tile__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.wp-quick-entry-tile__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.wp-quick-entry-tile__description {
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--tight);
+}

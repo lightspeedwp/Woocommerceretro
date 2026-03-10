@@ -1,0 +1,8 @@
+/* ========================================
+   LOGIN/OUT BLOCK
+   ======================================== */
+
+.wp-block-loginout {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+}

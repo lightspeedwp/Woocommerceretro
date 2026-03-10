@@ -1,0 +1,175 @@
+/* ========================================
+   VIDEO TESTIMONIAL
+   Customer video testimonial with controls
+   ======================================== */
+
+.wc-block-video-testimonial {
+  display: flex;
+  flex-direction: column;
+}
+
+.wc-block-video-testimonial__player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: var(--wp--preset--color--foreground);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+}
+
+.wc-block-video-testimonial__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Play/Pause Overlay */
+.wc-block-video-testimonial__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--wp--preset--transition--base);
+}
+
+.wc-block-video-testimonial__overlay--hidden {
+  opacity: 0;
+}
+
+.wc-block-video-testimonial__player:hover .wc-block-video-testimonial__overlay--hidden {
+  opacity: 1;
+}
+
+.wc-block-video-testimonial__play-button {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--wp--preset--color--primary);
+  border-radius: 50%;
+  transition: all var(--wp--preset--transition--base);
+  border: none;
+  cursor: pointer;
+}
+
+.wc-block-video-testimonial__play-button:hover {
+  background-color: #fff;
+  transform: scale(1.1);
+}
+
+.wc-block-video-testimonial__play-icon {
+  margin-left: 0.25rem;
+}
+
+/* Controls Bar */
+.wc-block-video-testimonial__controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--wp--preset--spacing--40);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  transition: opacity var(--wp--preset--transition--base);
+}
+
+.wc-block-video-testimonial__controls--hidden {
+  opacity: 0;
+}
+
+.wc-block-video-testimonial__player:hover .wc-block-video-testimonial__controls--hidden {
+  opacity: 1;
+}
+
+.wc-block-video-testimonial__controls-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.wc-block-video-testimonial__controls-left {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wc-block-video-testimonial__control-button {
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--wp--preset--transition--base);
+}
+
+.wc-block-video-testimonial__control-button:hover {
+  color: var(--wp--preset--color--primary);
+}
+
+/* Customer Info (in controls) */
+.wc-block-video-testimonial__customer-info {
+  text-align: right;
+}
+
+.wc-block-video-testimonial__customer-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+.wc-block-video-testimonial__customer-role {
+  font-size: var(--wp--preset--font-size--xs);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Transcript */
+.wc-block-video-testimonial__transcript-toggle {
+  margin-top: var(--wp--preset--spacing--40);
+}
+
+.wc-block-video-testimonial__transcript-button {
+  color: var(--wp--preset--color--primary);
+  font-size: var(--wp--preset--font-size--sm);
+  font-weight: var(--wp--preset--font-weight--medium);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.wc-block-video-testimonial__transcript-button:hover {
+  text-decoration: underline;
+}
+
+.wc-block-video-testimonial__transcript-content {
+  margin-top: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--40);
+  background-color: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--md);
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+.wc-block-video-testimonial__transcript-text {
+  font-size: var(--wp--preset--font-size--sm);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+  font-style: italic;
+}
+
+.wc-block-video-testimonial__transcript-author {
+  margin-top: var(--wp--preset--spacing--30);
+  padding-top: var(--wp--preset--spacing--30);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wc-block-video-testimonial__transcript-author-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+.wc-block-video-testimonial__transcript-author-role {
+  font-size: var(--wp--preset--font-size--xs);
+  color: var(--wp--preset--color--muted-foreground);
+}

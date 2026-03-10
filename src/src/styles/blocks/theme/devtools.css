@@ -1,0 +1,110 @@
+/**
+ * DevTools Page Styles
+ * 
+ * Styles for the developer tools index page (/dev-tools).
+ * Provides a responsive grid of tool cards with hover effects.
+ * 
+ * WordPress Mapping: Custom admin/developer page
+ * Dark Mode: Complete support via CSS variables
+ */
+
+/* ========================================
+   DEV TOOLS GRID
+   ======================================== */
+
+.wp-devtools-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 640px) {
+  .wp-devtools-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-devtools-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ========================================
+   DEV TOOL CARD
+   ======================================== */
+
+.wp-devtool-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--60);
+  background-color: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  text-decoration: none;
+  color: var(--wp--preset--color--foreground);
+  transition: transform var(--wp--preset--transition--base) ease, box-shadow var(--wp--preset--transition--base) ease, border-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-devtool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--wp--preset--shadow--lg);
+  border-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-devtool-card:focus-visible {
+  outline: 2px solid var(--wp--preset--color--ring);
+  outline-offset: 2px;
+}
+
+/* Card Header */
+.wp-devtool-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--30);
+}
+
+/* Card Icon */
+.wp-devtool-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--wp--preset--border-radius--md);
+  background-color: var(--wp--preset--color--accent-surface);
+  color: var(--wp--preset--color--primary);
+  flex-shrink: 0;
+}
+
+/* Card Badge */
+.wp-devtool-card__badge {
+  padding: 4px 12px;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--background);
+  background: var(--wp--preset--color--primary);
+  border-radius: var(--wp--preset--border-radius--sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Card Arrow */
+.wp-devtool-card__arrow {
+  display: inline-flex;
+  align-items: center;
+  margin-top: auto;
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--primary);
+  transition: transform var(--wp--preset--transition--fast) ease;
+}
+
+.wp-devtool-card:hover .wp-devtool-card__arrow {
+  transform: translateX(4px);
+}

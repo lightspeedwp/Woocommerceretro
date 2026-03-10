@@ -1,0 +1,43 @@
+/* ========================================
+   LATEST COMMENTS BLOCK
+   ======================================== */
+
+.wp-block-latest-comments {
+  padding-left: 0;
+  list-style: none;
+  /* Margin removed */
+}
+
+.wp-block-latest-comments__comment {
+  /* Margin removed */
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  padding-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-block-latest-comments__comment:last-child {
+  border-bottom: none;
+  /* Margin removed */
+}
+
+.wp-block-latest-comments__comment-meta {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  /* Margin removed */
+}
+
+.wp-block-latest-comments__comment-excerpt {
+  font-size: var(--wp--preset--font-size--normal);
+  color: var(--wp--preset--color--foreground);
+}
+
+.has-avatars .wp-block-latest-comments__comment {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-block-latest-comments__comment-avatar {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}

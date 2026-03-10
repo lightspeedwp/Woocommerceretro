@@ -1,0 +1,89 @@
+/* ========================================
+   COMPARISON TABLE
+   ======================================== */
+
+.wp-comparison-table {
+  width: 100%;
+}
+
+.wp-comparison-table__heading {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-comparison-table__wrapper {
+  overflow-x: auto;
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-comparison-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.wp-comparison-table__head-cell {
+  padding: var(--wp--preset--spacing--40);
+  text-align: left;
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--surface);
+  vertical-align: top;
+}
+
+.wp-comparison-table__head-cell--center {
+  text-align: center;
+}
+
+.wp-comparison-table__plan-name {
+  font-size: var(--wp--preset--font-size--heading-4);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-comparison-table__plan-name--popular {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-comparison-table__popular-badge {
+  display: inline-block;
+  margin-top: var(--wp--preset--spacing--10);
+  padding: 2px 8px;
+  background-color: var(--wp--preset--color--accent);
+  color: #ffffff;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+.wp-comparison-table__row {
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-comparison-table__row:last-child {
+  border-bottom: none;
+}
+
+.wp-comparison-table__cell {
+  padding: var(--wp--preset--spacing--40);
+  vertical-align: top;
+}
+
+.wp-comparison-table__cell--center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wp-comparison-table__feature-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-comparison-table__feature-desc {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  margin-top: 4px;
+}
+
+.wp-comparison-table__check { color: var(--wp--preset--color--success); }
+.wp-comparison-table__cross { color: var(--wp--preset--color--muted-foreground); opacity: 0.5; }
+.wp-comparison-table__value { color: var(--wp--preset--color--foreground); }

@@ -1,0 +1,53 @@
+/* ========================================
+   BRAND LOGO GRID
+   ======================================== */
+
+.wp-brand-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--60);
+  align-items: center;
+  justify-items: center;
+}
+
+@media (min-width: 640px) {
+  .wp-brand-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-brand-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.wp-brand-grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.wp-brand-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.wp-brand-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+.wp-brand-grid--cols-5 { grid-template-columns: repeat(5, 1fr); }
+.wp-brand-grid--cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+.wp-brand-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--20);
+}
+
+.wp-brand-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 3rem; /* 48px */
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-image--grayscale {
+  filter: grayscale(100%);
+}
+
+.wp-brand-image:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}

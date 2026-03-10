@@ -1,0 +1,215 @@
+/**
+ * Legal & Policy Pages - Funky Redesign CSS (Clean Funky Mode)
+ *
+ * Phase 8: PagePrivacyPolicy, PageTermsConditions, PageAccessibilityStatement,
+ *          PageShippingReturns, PageSizeGuide, PageWarranty,
+ *          PageCareInstructions, PageReturnsPortal, PageBuyingGuide,
+ *          PageHelpCenter
+ *
+ * Mode: CLEAN FUNKY - readability-first, minimal animation
+ * Treatments: Compact gradient hero, gradient dividers, neon focus states,
+ *             gradient step numbers, subtle card hover glow, commerce CTA
+ * NO heavy animation, NO floating orbs in content sections.
+ *
+ * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
+ * @see /src/styles/theme-funky.css (shared tokens & utilities)
+ */
+
+/* ========================================
+   PAGE-LEVEL COLOUR IDENTITY
+   ======================================== */
+
+.legal-page {
+  --page-hero-from: #030213;
+  --page-hero-via: #1a0533;
+  --page-hero-to: #0d1b2a;
+}
+
+/* ========================================
+   1. COMPACT HERO (30vh)
+   ======================================== */
+
+.legal-hero {
+  position: relative;
+  min-height: 30vh;
+  min-height: 30dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--page-hero-from);
+}
+
+.legal-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.85) 0%, rgba(26, 5, 51, 0.7) 50%, rgba(0, 255, 255, 0.08) 100%);
+}
+
+.dark .legal-hero__overlay {
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.92) 0%, rgba(26, 5, 51, 0.8) 50%, rgba(0, 255, 255, 0.1) 100%);
+}
+
+.legal-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 42rem;
+  padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.legal-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--wp--preset--font-family--base);
+}
+
+.legal-hero__title {
+  font-size: var(--wp--preset--font-size--700);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #ffffff;
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  line-height: var(--wp--preset--line-height--tight);
+  font-family: var(--wp--preset--font-family--base);
+  margin: 0;
+}
+
+/* ========================================
+   2. CONTENT LAYOUT (Readability First)
+   ======================================== */
+
+.legal-content {
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--background);
+}
+
+.legal-content__inner {
+  max-width: var(--wp--preset--layout--content-size);
+  margin-inline: auto;
+}
+
+/* Typography Overrides for Clean Funky Legal */
+.legal-content h2 {
+  margin-top: var(--wp--preset--spacing--70);
+  margin-bottom: var(--wp--preset--spacing--40);
+  padding-bottom: var(--wp--preset--spacing--20);
+  border-bottom: 1px solid var(--wp--preset--color--border-subtle);
+  position: relative;
+}
+
+.legal-content h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 3rem;
+  height: 2px;
+  background: linear-gradient(90deg, #ff00ff, #00ffff);
+}
+
+.legal-content p {
+  margin-bottom: var(--wp--preset--spacing--40);
+  line-height: var(--wp--preset--line-height--relaxed);
+  color: var(--wp--preset--color--foreground);
+}
+
+.legal-content ul, 
+.legal-content ol {
+  margin-bottom: var(--wp--preset--spacing--50);
+  padding-left: var(--wp--preset--spacing--50);
+}
+
+.legal-content li {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   3. POLICY CARDS / GRIDS (Buying Guide, etc)
+   ======================================== */
+
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--wp--preset--spacing--50);
+  margin-block: var(--wp--preset--spacing--60);
+}
+
+.policy-card {
+  padding: var(--wp--preset--spacing--50);
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--border);
+  background: var(--wp--preset--color--surface);
+  transition: all 0.3s ease;
+}
+
+.policy-card:hover {
+  border-color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+.dark .policy-card:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.12);
+}
+
+.policy-card__icon {
+  margin-bottom: var(--wp--preset--spacing--40);
+  color: #ff00ff;
+}
+
+.policy-card__title {
+  font-weight: var(--wp--preset--font-weight--bold);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   4. HELP CENTER SEARCH
+   ======================================== */
+
+.help-search {
+  max-width: 36rem;
+  margin: var(--wp--preset--spacing--60) auto 0;
+  position: relative;
+}
+
+.help-search__input {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+  padding-left: 3.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--wp--preset--border-radius--full);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.help-search__input:focus {
+  outline: none;
+  border-color: #00ffff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.help-search__icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}

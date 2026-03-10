@@ -1,0 +1,89 @@
+/* ========================================
+   BADGE
+   ======================================== */
+
+.wp-block-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--wp--preset--border-radius--full, 9999px);
+  border: 1px solid transparent;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--bold, 700);
+  transition: all var(--wp--preset--transition--base) ease;
+  line-height: 1;
+  white-space: nowrap;
+  gap: var(--wp--preset--spacing--10);
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  
+  /* Funky Redesign: Glassmorphism base */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.wp-block-badge--default {
+  background-color: rgba(3, 2, 19, 0.8);
+  color: var(--wp--preset--color--white);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.wp-block-badge--default:hover {
+  background-color: var(--wp--preset--color--primary);
+  box-shadow: 0 0 15px var(--wp--preset--color--neon-pink, #ff00ff);
+  transform: translateY(-1px);
+}
+
+.wp-block-badge--secondary {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--wp--preset--color--foreground);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.wp-block-badge--secondary:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px var(--wp--preset--color--neon-cyan, #00ffff);
+  transform: translateY(-1px);
+}
+
+.wp-block-badge--destructive {
+  background-color: rgba(212, 24, 61, 0.2);
+  color: var(--wp--preset--color--error, #d4183d);
+  border-color: rgba(212, 24, 61, 0.3);
+}
+
+.wp-block-badge--destructive:hover {
+  background-color: rgba(212, 24, 61, 0.4);
+  box-shadow: 0 0 15px var(--wp--preset--color--error, #d4183d);
+  transform: translateY(-1px);
+}
+
+.wp-block-badge--outline {
+  background-color: transparent;
+  color: var(--wp--preset--color--foreground);
+  border-color: var(--wp--preset--color--border);
+}
+
+.wp-block-badge--outline:hover {
+  border-color: var(--wp--preset--color--neon-lime, #00ff00);
+  box-shadow: 0 0 10px var(--wp--preset--color--neon-lime, #00ff00);
+  transform: translateY(-1px);
+}
+
+/* Dark mode overrides */
+.dark .wp-block-badge--default {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .wp-block-badge--secondary {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Icon animations */
+.wp-block-badge svg { width: 1.1em; height: 1.1em; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+.wp-block-badge:hover svg { transform: scale(1.2) rotate(10deg); }

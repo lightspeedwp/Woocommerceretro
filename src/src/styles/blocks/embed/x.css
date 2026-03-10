@@ -1,0 +1,9 @@
+/* ========================================
+   X (TWITTER) EMBED BLOCK
+   ======================================== */
+
+.wp-block-embed-twitter {
+  /* Specific styling if needed */
+  display: flex;
+  justify-content: center;
+}

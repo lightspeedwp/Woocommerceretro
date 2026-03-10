@@ -1,0 +1,236 @@
+/**
+ * Critical CSS - Inline in <head>
+ * 
+ * This file contains the minimal CSS needed for above-the-fold rendering.
+ * It should be inlined in the HTML <head> to eliminate render-blocking CSS.
+ * 
+ * Contents:
+ * 1. Essential CSS variables (colors, fonts)
+ * 2. Layout foundations (html, body)
+ * 3. Header styles (MainHeader - always above fold)
+ * 4. Hero section styles (FrontPage above fold)
+ * 5. Critical typography
+ * 
+ * Target size: < 15KB uncompressed
+ * 
+ * Location: /src/styles/critical.css
+ */
+
+/* ========================================
+   1. ESSENTIAL CSS VARIABLES
+   ======================================== */
+
+:root {
+  /* Colors - Light Mode (Essential only) */
+  --wp--preset--color--primary: #111111;
+  --wp--preset--color--background: #ffffff;
+  --wp--preset--color--foreground: #1a1a1a;
+  --wp--preset--color--surface: #f9f9f9;
+  --wp--preset--color--text-primary: #1a1a1a;
+  --wp--preset--color--text-secondary: #4b5563;
+  --wp--preset--color--border: #e5e7eb;
+  --wp--preset--color--link: #2563eb;
+  
+  /* Typography */
+  --wp--preset--font-family--base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --wp--preset--font-weight--normal: 400;
+  --wp--preset--font-weight--medium: 500;
+  --wp--preset--font-weight--semibold: 600;
+  
+  /* Spacing (Essential) */
+  --wp--preset--spacing--30: 12px;
+  --wp--preset--spacing--40: 16px;
+  --wp--preset--spacing--50: 24px;
+  --wp--preset--spacing--60: 32px;
+  
+  /* Transitions */
+  --wp--preset--transition--base: 200ms;
+}
+
+/* Dark Mode */
+.dark {
+  --wp--preset--color--primary: #f9fafb;
+  --wp--preset--color--background: #0f0f0f;
+  --wp--preset--color--foreground: #f9fafb;
+  --wp--preset--color--surface: #1a1a1a;
+  --wp--preset--color--text-primary: #f9fafb;
+  --wp--preset--color--text-secondary: #d1d5db;
+  --wp--preset--color--border: #374151;
+}
+
+/* ========================================
+   2. LAYOUT FOUNDATIONS
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--wp--preset--font-family--base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   3. HEADER STYLES (Above Fold)
+   ======================================== */
+
+.wp-block-theme-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--wp--preset--color--surface);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-block-theme-header__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--wp--preset--spacing--40);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wp-block-theme-header__logo {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--text-primary);
+  text-decoration: none;
+}
+
+/* ========================================
+   4. HERO SECTION (Above Fold)
+   ======================================== */
+
+.front-page-hero {
+  min-height: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wp--preset--color--surface);
+}
+
+.front-page-hero__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+/* ========================================
+   5. CRITICAL TYPOGRAPHY
+   ======================================== */
+
+h1 { margin: 0; font-weight: var(--wp--preset--font-weight--semibold); color: var(--wp--preset--color--text-primary); line-height: 1.2; }
+h2 { margin: 0; font-weight: var(--wp--preset--font-weight--semibold); color: var(--wp--preset--color--text-primary); line-height: 1.2; }
+h3 { margin: 0; font-weight: var(--wp--preset--font-weight--semibold); color: var(--wp--preset--color--text-primary); line-height: 1.2; }
+
+h1 {
+  font-size: clamp(2rem, 3vw + 1rem, 3.5rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 2vw + 1rem, 2.75rem);
+}
+
+p {
+  margin: 0;
+  color: var(--wp--preset--color--text-secondary);
+}
+
+a {
+  color: var(--wp--preset--color--link);
+  text-decoration: none;
+  transition: opacity var(--wp--preset--transition--base) ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   6. BUTTON (Critical for CTA)
+   ======================================== */
+
+.wp-element-button,
+.wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+  font-weight: var(--wp--preset--font-weight--medium);
+  background: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--background);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity var(--wp--preset--transition--base) ease;
+}
+
+.wp-element-button:hover,
+.wp-block-button__link:hover {
+  opacity: 0.9;
+}
+
+/* ========================================
+   7. CONTAINER UTILITY
+   ======================================== */
+
+.wp-container,
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-inline: var(--wp--preset--spacing--40);
+}
+
+/* ========================================
+   8. SCREEN READER ONLY
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ========================================
+   9. SKIP LINK
+   ======================================== */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--background);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}

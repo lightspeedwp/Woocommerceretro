@@ -1,0 +1,25 @@
+/* ========================================
+   MORE BLOCK
+   ======================================== */
+
+.wp-block-more {
+  text-align: center;
+  white-space: nowrap;
+  border-top: 1px dashed var(--wp--preset--color--border);
+  position: relative;
+  margin: 0;
+  padding-block: var(--wp--preset--spacing--40);
+}
+
+.wp-block-more::after {
+  content: 'Read More';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--wp--preset--color--background);
+  padding: 0 var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+}

@@ -1,0 +1,275 @@
+/**
+ * WordPress & WooCommerce Theme Variables
+ * CSS Custom Properties for Colors, Spacing, Typography
+ * 
+ * CSS ENTRY POINT ARCHITECTURE (Resolved)
+ * 
+ * This project has a multi-file CSS architecture:
+ * 1. /styles/globals.css - Figma Make auto-loads. Base resets + flat token fallbacks.
+ * 2. THIS FILE - Canonical WordPress tokens (--wp--preset--*).
+ * 3. /src/styles/globals.css - Utility classes and component styles only.
+ * 4. /src/styles/blocks/*.css - Component BEM classes, parsed individually.
+ * 
+ * CANONICAL SOURCE: THIS FILE (/src/styles/theme-variables.css)
+ * Components MUST use --wp--preset--* variables defined here.
+ * /styles/globals.css provides fallback values only.
+ * 
+ * When values conflict, THIS FILE takes precedence.
+ * 
+ * This file defines all design tokens following WordPress naming conventions.
+ * Variables use the --wp--preset-- namespace for consistency with WordPress Core.
+ * 
+ * WordPress theme.json Alignment:
+ * --------------------------------
+ * This CSS architecture mirrors WordPress Block Theme's theme.json structure:
+ * 
+ * 1. COLORS: --wp--preset--color--(name)
+ *    - Maps to theme.json: settings.color.palette
+ *    - Example: --wp--preset--color--primary
+ * 
+ * 2. SPACING: --wp--preset--spacing--(scale)
+ *    - Maps to theme.json: settings.spacing.spacingSizes
+ *    - Scale: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+ *    - Also includes: --wp--style--block-gap, --wp--custom--spacing--*
+ * 
+ * 3. TYPOGRAPHY: --wp--preset--font-size--(size)
+ *    - Maps to theme.json: settings.typography.fontSizes
+ *    - Includes: --wp--preset--font-family--*, --wp--preset--font-weight--*
+ *    - Also includes: --wp--preset--line-height--*, --wp--preset--letter-spacing--*
+ * 
+ * 4. LAYOUT: --wp--preset--layout--(type)
+ *    - Maps to theme.json: settings.layout.contentSize, wideSize
+ * 
+ * References:
+ * - WordPress theme.json Schema: https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/
+ * - WordPress CSS Variables: https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json/
+ * - WooCommerce Block Styles: https://github.com/woocommerce/woocommerce-blocks
+ */
+
+:root {
+  /* ========================================
+     COLOR SYSTEM - WordPress Preset Format
+     ======================================== */
+  
+  /* Primary Brand Colors */
+  --wp--preset--color--primary: #111111;
+  --wp--preset--color--primary-foreground: #ffffff;
+  --wp--preset--color--secondary: #f5f5f7;
+  --wp--preset--color--secondary-foreground: #030213;
+  
+  /* Surface Colors */
+  --wp--preset--color--background: #ffffff;
+  --wp--preset--color--foreground: #1a1a1a;
+  --wp--preset--color--surface: #f9f9f9;
+  --wp--preset--color--surface-foreground: #1a1a1a;
+  
+  /* Semantic Colors */
+  --wp--preset--color--accent: #e9ebef;
+  --wp--preset--color--accent-foreground: #030213;
+  --wp--preset--color--muted: #ececf0;
+  --wp--preset--color--muted-foreground: #4b5563; /* Enhanced for AAA: 7.5:1 contrast (was #717182) */
+  
+  /* Brand & CTA Colors (from presets) */
+  --wp--preset--color--brand: #0055AA;
+  --wp--preset--color--cta: #0055AA;
+  --wp--preset--color--cta-hover: #004499;
+  --wp--preset--color--ring: #3b82f6;
+  --wp--preset--color--link: #2563eb;
+  --wp--preset--color--link-hover: #1d4ed8;
+  
+  /* Neutral Ramp (from presets) */
+  --wp--preset--color--neutral-100: #F9FAFB;
+  --wp--preset--color--neutral-200: #F3F4F6;
+  --wp--preset--color--neutral-300: #E5E7EB;
+  --wp--preset--color--neutral-400: #D1D5DB;
+  --wp--preset--color--neutral-500: #9CA3AF;
+  --wp--preset--color--neutral-600: #6B7280;
+  --wp--preset--color--neutral-700: #4B5563;
+  --wp--preset--color--neutral-800: #374151;
+  --wp--preset--color--neutral-900: #111827;
+
+  /* Accent Ramp (from presets) */
+  --wp--preset--color--accent-100: #E0F2FE;
+  --wp--preset--color--accent-500: #0A84FF;
+  --wp--preset--color--accent-900: #0C4A6E;
+
+  /* Component Specific (Overlays) */
+  --wp--preset--color--popover: #ffffff;
+  --wp--preset--color--popover-foreground: #111111;
+  
+  /* State Colors */
+  --wp--preset--color--success: #065f46; /* Enhanced for AAA: 7.1:1 contrast (was #047857) */
+  --wp--preset--color--success-foreground: #ffffff;
+  --wp--preset--color--warning: #92400e; /* Enhanced for AAA: 7.3:1 contrast (was #d97706) */
+  --wp--preset--color--warning-foreground: #ffffff;
+  --wp--preset--color--error: #991b1b;   /* Enhanced for AAA: 7.1:1 contrast (was #dc2626) */
+  --wp--preset--color--error-foreground: #ffffff;
+  
+  /* WordPress Core Color Presets (Fallbacks) */
+  --wp--preset--color--black: #000000;
+  --wp--preset--color--white: #ffffff;
+  --wp--preset--color--luminous-vivid-orange: #ff6900;
+  --wp--preset--color--luminous-vivid-amber: #fcb900;
+  --wp--preset--color--vivid-purple: #9b51e0;
+
+  /* Funky Redesign Specific Colors (Phase 2) */
+  --wp--preset--color--neon-cyan: #00ffff;
+  --wp--preset--color--neon-pink: #ff00ff;
+  --wp--preset--color--neon-lime: #ccff00;
+  --wp--preset--color--neon-yellow: #fbbf24;
+  --wp--preset--color--navy: #030213;
+  --wp--preset--color--deep-purple: #2d0059;
+
+  /* ========================================
+     SPACING SYSTEM - WordPress Preset Format
+     ======================================== */
+  
+  /* Numeric Scale (Maps to theme.json settings.spacing.spacingSizes) */
+  --wp--preset--spacing--10: 0.25rem;  /* 4px */
+  --wp--preset--spacing--20: 0.5rem;   /* 8px */
+  --wp--preset--spacing--30: 0.75rem;  /* 12px */
+  --wp--preset--spacing--40: 1rem;     /* 16px */
+  --wp--preset--spacing--50: 1.5rem;   /* 24px */
+  --wp--preset--spacing--60: 2rem;     /* 32px */
+  --wp--preset--spacing--70: 3rem;     /* 48px */
+  --wp--preset--spacing--80: 4rem;     /* 64px */
+  --wp--preset--spacing--90: 6rem;     /* 96px */
+  --wp--preset--spacing--100: 8rem;    /* 128px */
+  
+  /* Core Block Tokens */
+  --wp--style--block-gap: 1.5rem;
+  --wp--custom--spacing--outer: 1.5rem;
+  --wp--custom--spacing--inner: 1rem;
+  
+  /* Fluid Spacing (responsive) - WordPress Block Editor patterns */
+  --wp--preset--spacing--section: clamp(3rem, 8vw, 6rem);     /* 48px -> 96px */
+  --wp--preset--spacing--container: clamp(1rem, 3vw, 3rem);   /* 16px -> 48px */
+  --wp--preset--spacing--inner: clamp(1rem, 2vw, 2rem);       /* 16px -> 32px */
+  
+  /* Named Sizes (Aliases) */
+  --wp--preset--spacing--x-small: var(--wp--preset--spacing--20);
+  --wp--preset--spacing--small: var(--wp--preset--spacing--30);
+  --wp--preset--spacing--medium: var(--wp--preset--spacing--40);
+  --wp--preset--spacing--large: var(--wp--preset--spacing--60);
+  --wp--preset--spacing--x-large: var(--wp--preset--spacing--80);
+
+  /* ========================================
+     TYPOGRAPHY SYSTEM - WordPress Preset Format
+     ======================================== */
+  
+  /* Font Families (Maps to theme.json settings.typography.fontFamilies) */
+  --wp--preset--font-family--base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --wp--preset--font-family--heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --wp--preset--font-family--mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* Numeric Font Sizes (Maps to theme.json settings.typography.fontSizes) */
+  /* Aligned with WordPress theme.json numeric scale */
+  --wp--preset--font-size--100: clamp(0.65rem, 0.5vw + 0.55rem, 0.75rem);      /* 10.4px -> 12px - Tiny (labels, badges, meta) */
+  --wp--preset--font-size--200: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);        /* 14px -> 16px - Base (body text) */
+  --wp--preset--font-size--300: clamp(1rem, 1vw + 0.75rem, 1.25rem);           /* 16px -> 20px - Small (emphasized body) */
+  --wp--preset--font-size--400: clamp(1.25rem, 1.5vw + 0.875rem, 1.5rem);      /* 20px -> 24px - Medium (H6, minor headings) */
+  --wp--preset--font-size--500: clamp(1.5rem, 2vw + 1rem, 2rem);               /* 24px -> 32px - Large (H5, sub-sections) */
+  --wp--preset--font-size--600: clamp(2rem, 2.5vw + 1.25rem, 2.5rem);          /* 32px -> 40px - X-Large (H4, widget titles) */
+  --wp--preset--font-size--700: clamp(2.5rem, 3vw + 1.5rem, 3rem);             /* 40px -> 48px - XX-Large (H3, card titles) */
+  --wp--preset--font-size--800: clamp(3rem, 4vw + 2rem, 4rem);                 /* 48px -> 64px - Huge (H2, section headings) */
+  --wp--preset--font-size--900: clamp(3.5rem, 5vw + 2.5rem, 5rem);             /* 56px -> 80px - Gigantic (H1, hero titles) */
+  
+  /* Named aliases for backward compatibility (map to numeric scale) */
+  --wp--preset--font-size--small: var(--wp--preset--font-size--100);      /* 12px -> 14px */
+  --wp--preset--font-size--medium: var(--wp--preset--font-size--200);     /* 14px -> 16px */
+  --wp--preset--font-size--normal: var(--wp--preset--font-size--200);     /* 16px -> 21px */
+  --wp--preset--font-size--large: var(--wp--preset--font-size--300);      /* 18px -> 22px */
+  --wp--preset--font-size--x-large: var(--wp--preset--font-size--400);    /* 19px -> 26px */
+  --wp--preset--font-size--xx-large: var(--wp--preset--font-size--500);   /* 21px -> 29px */
+  --wp--preset--font-size--xxx-large: var(--wp--preset--font-size--600);  /* 26px -> 35px */
+  --wp--preset--font-size--huge: var(--wp--preset--font-size--800);       /* 32px -> 48px */
+  --wp--preset--font-size--gigantic: var(--wp--preset--font-size--900);   /* 38px -> 64px */
+  
+  /* Font Weights (Maps to theme.json settings.typography.fontWeights) */
+  --wp--preset--font-weight--light: 300;
+  --wp--preset--font-weight--normal: 400;
+  --wp--preset--font-weight--medium: 500;
+  --wp--preset--font-weight--semibold: 600;
+  --wp--preset--font-weight--bold: 700;
+  --wp--preset--font-weight--black: 900;
+  
+  /* Line Heights (Maps to theme.json settings.typography.lineHeights) */
+  --wp--preset--line-height--tight: 1.15;
+  --wp--preset--line-height--snug: 1.3;
+  --wp--preset--line-height--normal: 1.5;
+  --wp--preset--line-height--relaxed: 1.625;
+  --wp--preset--line-height--loose: 1.8;
+  
+  /* Letter Spacing (Maps to theme.json settings.typography.letterSpacing) */
+  --wp--preset--letter-spacing--tight: -0.02em;
+  --wp--preset--letter-spacing--normal: 0;
+  --wp--preset--letter-spacing--wide: 0.05em;
+
+  /* ========================================
+     LAYOUT SYSTEM - WordPress Preset Format
+     ======================================== */
+  
+  /* Layout sizes (Maps to theme.json settings.layout) */
+  --wp--preset--layout--content-size: 800px;
+  --wp--preset--layout--wide-size: 1200px;
+  --wp--preset--layout--site-size: 1400px;
+
+  /* ========================================
+     TRANSITIONS & SHADOWS
+     ======================================== */
+  
+  /* Shadows */
+  --wp--preset--shadow--sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --wp--preset--shadow--md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --wp--preset--shadow--lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --wp--preset--shadow--xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Custom shadows for Funky Redesign */
+  --wp--preset--shadow--glow: 0 0 15px rgba(0, 255, 255, 0.3);
+  --wp--preset--shadow--lift: 0 10px 30px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --wp--preset--transition--fast: 150ms;
+  --wp--preset--transition--base: 200ms;
+  --wp--preset--transition--slow: 350ms;
+
+  /* ========================================
+     WP CORE PRESET BORDERS
+     ======================================== */
+  --wp--preset--border-radius--none: 0;
+  --wp--preset--border-radius--sm: 0.125rem;
+  --wp--preset--border-radius--md: 0.375rem;
+  --wp--preset--border-radius--lg: 0.5rem;
+  --wp--preset--border-radius--xl: 0.75rem;
+  --wp--preset--border-radius--xxl: 1rem;
+  --wp--preset--border-radius--full: 9999px;
+
+  /* Custom Funky Border Widths (Phase 2 - Neon thick borders) */
+  --wp--custom--border-width--100: 1px;
+  --wp--custom--border-width--200: 2px;
+  --wp--custom--border-width--300: 3px;
+  --wp--custom--border-width--400: 4px;
+
+  /* Gradient Presets */
+  --wp--preset--gradient--neon-glow: linear-gradient(135deg, #ff00ff, #00ffff);
+  --wp--preset--gradient--commerce: linear-gradient(135deg, #030213 0%, #2d0059 50%, #030213 100%);
+  --wp--preset--gradient--accent-soft: linear-gradient(135deg, rgba(255, 0, 255, 0.04), rgba(0, 255, 255, 0.04));
+  --wp--preset--gradient--sale: linear-gradient(135deg, #ff00ff, #ff6b6b, #fbbf24);
+
+  /* ========================================
+     WCAG AA-SAFE TOKEN LAYER
+     ======================================== */
+  
+  /* WCAG AA-Safe Interactive Colors (4.5:1+ contrast on respective backgrounds) */
+  --funky-interactive-color: #0e7490;           /* Teal-700: 5.4:1 on white - AA - OK */
+  --funky-interactive-color-hover: #0c6075;     /* Teal-800: 7.1:1 on white - AAA - OK */
+  --funky-interactive-bg: rgba(14, 116, 144, 0.08);
+  --funky-interactive-bg-hover: rgba(14, 116, 144, 0.12);
+  --funky-interactive-focus: #0369a1;           /* Sky-700: 6.0:1 on white - AA - OK */
+  
+  /* Gradient endpoints for decorative use only (Gradients / Borders)
+   * These DON'T need to pass text contrast as they are non-textual or decorative elements */
+  --funky-pink-glow: #ff00ff;
+  --funky-cyan-glow: #00ffff;
+  --funky-lime-glow: #ccff00;
+}
