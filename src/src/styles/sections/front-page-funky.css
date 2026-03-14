@@ -1,740 +1,1388 @@
-/**
- * Front Page - Funky Redesign CSS
- *
- * BEM block: .front-page
- * Funky treatments per section (minimum 2 each):
- *   Hero:        gradient overlay + orbs + glassmorphism badge + gradient text
- *   Features:    glow cards + icon gradient circles + hover lift
- *   Categories:  gradient heading + glow border cards + hover lift
- *   Trending:    gradient heading + animated divider
- *   Brand Story: gradient overlay + orbs + glassmorphism panel
- *   Best Sellers: gradient heading + glow border section
- *   Newsletter:  glassmorphism + neon focus + gradient background
- *
- * @see /guidelines/design-tokens/funky-woocommerce-design-system.md
- * @see /src/styles/theme-funky.css (shared tokens & utilities)
+/* 
+ * Retro Theme Home Styles 
+ * Replacing Funky Redesign
+ * 
+ * Color tokens are now in /src/styles/retro-theme.css
+ * This file contains structural/layout styles only.
  */
 
-/* ========================================
-   PAGE-LEVEL COLOUR IDENTITY
-   ======================================== */
+/* NOTE: .retro-home color variables are defined in retro-theme.css */
+/* The retro-home class is still needed for scoping, but vars come from retro-theme */
 
-.front-page {
-  --page-hero-from: #ff00ff;
-  --page-hero-via: #030213;
-  --page-hero-to: #00ffff;
+.retro-home {
+  min-height: 100vh;
+  padding: 0;
 }
 
-/* ========================================
-   1. HERO SECTION
-   ======================================== */
+.retro-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
 
-.front-page__hero {
+/* Header, Nav, Actions, Badge — ALL moved to:
+   - /src/styles/sections/retro-mega-menu.css (structural)
+   - /src/styles/retro-theme.css (tokens, badge, buttons)
+   Do NOT define .retro-header, .retro-nav, .retro-actions,
+   .retro-action-btn, or .retro-badge here.
+*/
+
+/* Logo text variant (used when no image logo) */
+.retro-logo-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-signal);
+  border: 3px solid var(--color-ink);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+.retro-logo-inner {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+}
+.retro-logo-text {
+  font-size: 1.5rem;
+  letter-spacing: -0.05em;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+/* Hero */
+.retro-hero {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-ink);
+  border-radius: 1rem;
+  background-color: transparent;
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .retro-hero { flex-direction: row; align-items: center; }
+}
+.retro-hero-dots {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  opacity: 0.5;
+  z-index: 10;
+}
+.retro-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-ink);
+}
+.retro-dot:nth-child(2), .retro-dot:nth-child(3) {
+  background-color: transparent;
+  border: 1px solid var(--color-ink);
+}
+.retro-hero-left {
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+@media (min-width: 768px) {
+  .retro-hero-left { width: 50%; padding: 3rem; }
+}
+.retro-hero-title {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin: 0 0 1.5rem 0;
+  color: var(--color-ink);
+}
+@media (min-width: 1024px) {
+  .retro-hero-title { font-size: 4rem; }
+}
+.retro-hero-highlight {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+  padding: 0 0.5rem;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.retro-hero-desc {
+  font-size: 1.125rem;
+  color: var(--color-ink);
+  margin: 0 0 2rem 0;
+  max-width: 24rem;
+}
+
+.retro-button {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-retro);
+  transition: all 0.2s ease;
+}
+.retro-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-retro-hover);
+}
+.retro-button--secondary {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+.retro-button--secondary:hover {
+  background-color: var(--wp--preset--color--cta-hover);
+}
+
+.retro-button--primary {
+  /* Same as base .retro-button — ink bg, paper text */
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-hero-right {
+  width: 100%;
+  background-color: var(--color-screen);
+  background-image: 
+    linear-gradient(rgba(30, 38, 48, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 38, 48, 0.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-top: 2px solid var(--color-ink);
+  min-height: 400px;
+}
+.dark .retro-hero-right {
+  background-image: 
+    linear-gradient(rgba(242, 238, 230, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 238, 230, 0.05) 1px, transparent 1px);
+}
+@media (min-width: 768px) {
+  .retro-hero-right { width: 50%; border-top: none; border-left: 2px solid var(--color-ink); }
+}
+
+.retro-hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+}
+
+.retro-hero-stage-main {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 65%;
+  height: 65%;
+  object-fit: cover;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-retro);
+  z-index: 2;
+  background-color: var(--color-paper);
+}
+
+.retro-hero-stage-sub1 {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-retro);
+  z-index: 3;
+  background-color: var(--color-paper);
+}
+
+.retro-hero-stage-sub2 {
+  position: absolute;
+  top: 15%;
+  right: 0%;
+  width: 40%;
+  height: 40%;
+  object-fit: cover;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-retro);
+  z-index: 1;
+  background-color: var(--color-paper);
+}
+
+.retro-hero-stage-main,
+.retro-hero-stage-sub1,
+.retro-hero-stage-sub2 {
+  mix-blend-mode: multiply;
+}
+
+.dark .retro-hero-stage-main,
+.dark .retro-hero-stage-sub1,
+.dark .retro-hero-stage-sub2 {
+  mix-blend-mode: normal;
+}
+
+/* Category Row */
+.retro-cat-header {
+  border: 2px solid var(--color-ink);
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: var(--color-panel);
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+.retro-cat-row {
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid var(--color-ink);
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
+  background-color: var(--color-paper);
+  box-shadow: var(--shadow-retro);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.retro-cat-item {
+  flex: 1 1 20%;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-right: 2px solid var(--color-ink);
+  border-bottom: 2px solid var(--color-ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .retro-cat-item { border-bottom: none; }
+  .retro-cat-item:last-child { border-right: none; }
+}
+.retro-cat-item:hover {
+  background-color: var(--color-paper-deep);
+}
+.retro-cat-icon {
+  color: var(--color-ink);
+}
+
+/* Featured Header */
+.retro-section-header {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Product Grid */
+.retro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+@media (min-width: 640px) { .retro-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .retro-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.retro-card {
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  background-color: var(--color-paper-deep);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-retro);
+  transition: transform 0.2s ease;
+  position: relative;
+}
+.retro-card:hover {
+  transform: translateY(-4px);
+}
+.retro-heart-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.retro-heart-btn:hover {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+.retro-card-img-wrap {
+  aspect-ratio: 1;
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--wp--preset--color--primary);
+}
+.retro-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+.dark .retro-card-img {
+  mix-blend-mode: normal;
+}
+.retro-card-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+  border: 2px solid var(--color-ink);
+  padding: 2px 6px;
+  font-size: 0.625rem;
+  z-index: 10;
+}
+.retro-card-title {
+  font-size: 0.875rem;
+  margin: 0 0 0.25rem 0;
+  color: var(--color-ink);
+}
+.retro-card-price {
+  font-size: 1.25rem;
+  margin: 0 0 1rem 0;
+  color: var(--color-ink);
+}
+.retro-card-btn {
+  margin-top: auto;
+  width: 100%;
+  background-color: var(--color-screen);
+  color: var(--wp--preset--color--accent-foreground, #101417);
+  border: 2px solid var(--color-ink);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.retro-card-btn:hover {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+.retro-card-btn--yellow { 
+  background-color: var(--color-signal); 
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+.retro-card-btn--yellow:hover { 
+  background-color: var(--wp--preset--color--cta-hover); 
+}
+.retro-card-btn--white { 
+  background-color: var(--color-paper); 
+  color: var(--color-ink);
+}
+.retro-card-btn--white:hover { 
+  background-color: var(--wp--preset--color--cta); 
+  color: var(--wp--preset--color--primary-foreground, #101417);
 }
 
-.front-page__hero-bg {
+/* Card: Hover Image Swap */
+.retro-card-img--primary {
+  transition: opacity 0.3s ease;
+}
+
+.retro-card-img--hover {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-.front-page__hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(135deg, rgba(255, 0, 255, 0.25) 0%, rgba(3, 2, 19, 0.75) 50%, rgba(0, 255, 255, 0.15) 100%);
-}
-
-.dark .front-page__hero-overlay {
-  background: linear-gradient(135deg, rgba(255, 0, 255, 0.35) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.25) 100%);
-}
-
-.front-page__hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 48rem;
-  padding: var(--wp--preset--spacing--50);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--wp--preset--spacing--40);
-}
-
-/* Hero badge - glassmorphism pill */
-.front-page__hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--wp--preset--spacing--10);
-  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
-  border-radius: var(--wp--preset--border-radius--full);
-  font-size: var(--wp--preset--font-size--100);
-  font-weight: var(--wp--preset--font-weight--semibold);
-  letter-spacing: var(--wp--preset--letter-spacing--wide);
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.dark .front-page__hero-badge {
-  background: rgba(0, 255, 255, 0.08);
-  border-color: rgba(0, 255, 255, 0.2);
-  color: var(--wp--preset--color--neon-cyan);
-}
-
-.front-page__hero-badge svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-/* Hero title */
-.front-page__hero-title {
-  font-size: var(--wp--preset--font-size--900);
-  font-weight: var(--wp--preset--font-weight--bold);
-  color: #ffffff;
-  letter-spacing: var(--wp--preset--letter-spacing--tight);
-  line-height: var(--wp--preset--line-height--tight);
-  margin: 0;
-}
-
-/* Hero subtitle */
-.front-page__hero-subtitle {
-  font-size: var(--wp--preset--font-size--400);
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 36rem;
-  line-height: var(--wp--preset--line-height--relaxed);
-  margin: 0;
-}
-
-/* Hero CTA wrapper */
-.front-page__hero-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wp--preset--spacing--30);
-  width: 100%;
-}
-
-/* Outline button on dark hero - white borders, white text */
-.front-page__hero .wp-block-button--outline {
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #ffffff;
-  background: transparent;
-}
-
-.front-page__hero .wp-block-button--outline:hover {
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-}
-
-.front-page__hero-actions > * {
-  width: 100%;
-  justify-content: center;
-}
-
-@media (min-width: 640px) {
-  .front-page__hero-actions {
-    flex-direction: row;
-    width: auto;
-  }
-  .front-page__hero-actions > * {
-    width: auto;
-  }
-}
-
-/* Hero orbs */
-.front-page__hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.front-page__hero-orb--1 {
-  width: 22rem;
-  height: 22rem;
-  background: var(--wp--preset--color--neon-pink);
-  opacity: 0.18;
-  top: 8%;
-  right: -6%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: 0s;
-}
-
-.front-page__hero-orb--2 {
-  width: 16rem;
-  height: 16rem;
-  background: var(--wp--preset--color--neon-cyan);
-  opacity: 0.14;
-  bottom: 12%;
-  left: -4%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: -3s;
-}
-
-.front-page__hero-orb--3 {
-  width: 12rem;
-  height: 12rem;
-  background: var(--wp--preset--color--neon-lime);
-  opacity: 0.09;
-  top: 55%;
-  right: 18%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: -5s;
-}
-
-/* Dark mode: orbs more visible */
-.dark .front-page__hero-orb--1 { opacity: 0.3; }
-.dark .front-page__hero-orb--2 { opacity: 0.22; }
-.dark .front-page__hero-orb--3 { opacity: 0.15; }
-
-/* Scroll arrow */
-.front-page__hero-scroll {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.6);
-  animation: funky-float 3s ease-in-out infinite;
-}
-
-.dark .front-page__hero-scroll {
-  color: var(--wp--preset--color--neon-cyan);
-  opacity: 0.7;
-}
-
-/* Mobile adjustments */
-@media (max-width: 640px) {
-  .front-page__hero {
-    min-height: auto;
-    padding-block: var(--wp--preset--spacing--80);
-  }
-  .front-page__hero-content {
-    padding: var(--wp--preset--spacing--40);
-  }
-  .front-page__hero-orb--1,
-  .front-page__hero-orb--2 {
-    opacity: 0.08;
-  }
-  .front-page__hero-orb--3 {
-    display: none;
-  }
-  .dark .front-page__hero-orb--1 { opacity: 0.12; }
-  .dark .front-page__hero-orb--2 { opacity: 0.1; }
-  .front-page__hero-scroll {
-    display: none;
-  }
-}
-
-/* ========================================
-   2. FEATURES BAND
-   ======================================== */
-
-.front-page__features {
-  position: relative;
-  overflow: hidden;
-  padding-block: var(--wp--preset--spacing--80);
-  background: var(--wp--preset--gradient--accent-soft);
-}
-
-.dark .front-page__features {
-  background: linear-gradient(135deg, rgba(255, 0, 255, 0.03), rgba(0, 255, 255, 0.03));
-}
-
-.front-page__features-inner {
-  position: relative;
-  z-index: 1;
-  max-width: var(--wp--preset--layout--wide-size);
-  margin-inline: auto;
-  padding-inline: var(--wp--preset--spacing--container);
-}
-
-/* Feature tiles get glow border treatment */
-.front-page__features .wp-quick-entry-tile {
-  position: relative;
-  overflow: visible;
-}
-
-.front-page__features .wp-quick-entry-tile::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  z-index: -1;
-  background: linear-gradient(45deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
   opacity: 0;
-  transition: opacity var(--wp--preset--transition--slow) ease;
-  border-radius: inherit;
+  transition: opacity 0.3s ease;
 }
 
-.front-page__features .wp-quick-entry-tile:hover::before {
-  opacity: 0.6;
+.retro-card:hover .retro-card-img--primary {
+  opacity: 0;
 }
 
-.dark .front-page__features .wp-quick-entry-tile:hover::before {
+.retro-card:hover .retro-card-img--hover {
   opacity: 1;
 }
 
-/* Icon gradient circles */
-.front-page__features .wp-quick-entry-tile__icon {
-  background: rgba(0, 255, 255, 0.08);
-  color: var(--wp--preset--color--neon-cyan);
-  transition: all 0.3s ease;
+/* Card: Sale Price */
+.retro-card-sale-price {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: var(--color-alert);
+  color: #fff;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  z-index: 10;
 }
 
-.dark .front-page__features .wp-quick-entry-tile__icon {
-  background: rgba(0, 255, 255, 0.1);
-  color: var(--wp--preset--color--neon-cyan);
+.retro-card-price--original {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
 }
 
-.front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
-  background: rgba(0, 255, 255, 0.18);
-  transform: scale(1.1);
+.retro-card-price--sale {
+  color: var(--color-alert);
 }
 
-.dark .front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
-  box-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
+/* Card: Compare Button */
+.retro-compare-btn {
+  position: absolute;
+  top: 3.75rem;
+  right: 1.5rem;
+  z-index: 10;
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
 }
 
-/* ========================================
-   3. CATEGORY SHOWCASE
-   ======================================== */
-
-.front-page__categories {
-  position: relative;
-  overflow: hidden;
-  padding-block: var(--wp--preset--spacing--80);
-  background: var(--wp--preset--color--background);
+.retro-card:hover .retro-compare-btn {
+  opacity: 1;
 }
 
-.front-page__categories-inner {
-  position: relative;
-  z-index: 1;
-  max-width: var(--wp--preset--layout--wide-size);
-  margin-inline: auto;
-  padding-inline: var(--wp--preset--spacing--container);
+.retro-compare-btn:hover {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+
+.retro-compare-btn--active {
+  opacity: 1;
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+
+/* Card: Archive styles */
+.retro-sidebar-item--active {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-archive-header {
+  margin-bottom: 1.5rem;
+}
+
+.retro-archive-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+}
+
+.retro-archive-header p {
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.retro-archive-count {
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Bottom Modules */
+.retro-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+@media (min-width: 1024px) {
+  .retro-bottom-grid { grid-template-columns: 2fr 1fr; }
+}
+
+.retro-sidebar {
   display: flex;
   flex-direction: column;
-  gap: var(--wp--preset--spacing--50);
+  gap: 1.5rem;
 }
 
-/* Category cards funky border glow */
-.front-page__categories .wp-category-card {
-  border: 2px solid transparent;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+.retro-mini-drops {
+  display: flex;
+  flex-direction: column;
 }
 
-.front-page__categories .wp-category-card:hover {
-  border-color: rgba(0, 255, 255, 0.3);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+.retro-mini-drops-header {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.dark .front-page__categories .wp-category-card:hover {
-  border-color: rgba(0, 255, 255, 0.5);
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+.retro-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .retro-mini-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ========================================
-   4. TRENDING PRODUCTS
-   ======================================== */
-
-.front-page__trending {
-  position: relative;
-  overflow: hidden;
-  padding-block: var(--wp--preset--spacing--80);
-  background: var(--wp--preset--color--background);
+.retro-mini-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
-
-.front-page__trending-inner {
-  position: relative;
-  z-index: 1;
-  max-width: var(--wp--preset--layout--wide-size);
-  margin-inline: auto;
-  padding-inline: var(--wp--preset--spacing--container);
-}
-
-/* Product card hover glow */
-.front-page__trending .wc-block-product-grid__item,
-.front-page__best-sellers .wc-block-product-grid__item {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s ease;
-  border-radius: var(--wp--preset--border-radius--lg);
-}
-
-.front-page__trending .wc-block-product-grid__item:hover,
-.front-page__best-sellers .wc-block-product-grid__item:hover {
+.retro-mini-card:hover .retro-mini-img-wrap {
   transform: translateY(-4px);
 }
 
-.dark .front-page__trending .wc-block-product-grid__item:hover,
-.dark .front-page__best-sellers .wc-block-product-grid__item:hover {
-  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.1);
-}
-
-/* ========================================
-   5. BRAND STORY BANNER
-   ======================================== */
-
-.front-page__brand-story {
-  position: relative;
-  min-height: 50vh;
+.retro-mini-img-wrap {
+  background-color: var(--color-screen);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  aspect-ratio: 4/3;
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
   overflow: hidden;
+  box-shadow: 2px 2px 0px var(--color-ink);
+  transition: transform 0.2s ease;
+  margin-bottom: 0.75rem;
 }
-
-.front-page__brand-story-bg {
-  position: absolute;
-  inset: 0;
+.retro-mini-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-@media (min-width: 1024px) {
-  .front-page__brand-story-bg {
-    /* Parallax-like fixed attachment on desktop */
-    position: fixed;
-    /* Clip to section bounds using the parent */
-  }
-  .front-page__brand-story {
-    /* Create a clipping context for the fixed bg */
-    clip-path: inset(0);
-  }
-}
-
-.front-page__brand-story-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(135deg, rgba(3, 2, 19, 0.8) 0%, rgba(45, 0, 89, 0.55) 50%, rgba(0, 0, 0, 0.5) 100%);
-}
-
-.dark .front-page__brand-story-overlay {
-  background: linear-gradient(135deg, rgba(3, 2, 19, 0.92) 0%, rgba(45, 0, 89, 0.7) 50%, rgba(0, 0, 0, 0.65) 100%);
-}
-
-.front-page__brand-story-content {
+  object-fit: contain;
+  mix-blend-mode: multiply;
   position: relative;
   z-index: 2;
-  max-width: var(--wp--preset--layout--wide-size);
-  margin-inline: auto;
-  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--container);
+}
+.dark .retro-mini-img {
+  mix-blend-mode: normal;
+}
+
+.retro-rewards {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #fff);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 4px 4px 0px var(--color-ink);
+}
+
+.retro-rewards-header {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.retro-rewards-box {
+  background-color: var(--color-screen);
+  color: var(--color-ink);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border: 2px solid var(--color-ink);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.retro-rewards-progress {
+  width: 100%;
+  height: 0.75rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.125rem;
+  background-color: var(--wp--preset--color--primary-foreground, #fff);
+  padding: 2px;
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.retro-rewards-bar {
+  height: 100%;
+  background-color: var(--color-signal);
+  width: 70%;
+}
+
+.retro-rewards-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+  font-size: 0.875rem;
   display: flex;
   flex-direction: column;
-  gap: var(--wp--preset--spacing--40);
+  gap: 0.5rem;
+}
+
+.retro-signup {
+  background-color: var(--color-paper-deep);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 4px 4px 0px var(--color-ink);
+}
+
+.retro-signup-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-ink);
+}
+
+.retro-signup-desc {
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  color: var(--color-ink);
+}
+
+/* Shop / Archive Product Retro */
+.retro-archive-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+@media (min-width: 768px) {
+  .retro-archive-layout {
+    flex-direction: row;
+  }
+}
+
+.retro-sidebar-filters {
+  width: 100%;
+  color: var(--color-ink);
+}
+@media (min-width: 768px) {
+  .retro-sidebar-filters {
+    width: 16rem;
+    flex-shrink: 0;
+  }
+}
+
+.retro-sidebar-title {
+  font-size: 1.125rem;
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.retro-sidebar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.retro-sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--color-panel);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+.retro-sidebar-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 0px var(--color-ink);
+}
+
+.retro-archive-content {
+  flex: 1;
+}
+
+/* Single Product Retro */
+.retro-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: var(--color-ink);
+}
+.retro-breadcrumb-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-ink);
+}
+.retro-breadcrumb-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+.retro-breadcrumb-link:hover {
+  text-decoration: underline;
+}
+.retro-breadcrumb-sep {
+  margin: 0 0.25rem;
+}
+.retro-breadcrumb-current {
+  color: var(--color-muted);
+}
+
+.retro-sp-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+@media (min-width: 1024px) {
+  .retro-sp-layout {
+    flex-direction: row;
+  }
+}
+
+.retro-sp-gallery {
   width: 100%;
 }
-
-.front-page__brand-story-title {
-  font-size: var(--wp--preset--font-size--800);
-  font-weight: var(--wp--preset--font-weight--bold);
-  color: #ffffff;
-  line-height: var(--wp--preset--line-height--tight);
-  letter-spacing: var(--wp--preset--letter-spacing--tight);
-  max-width: 36rem;
-  margin: 0;
+@media (min-width: 1024px) {
+  .retro-sp-gallery { width: 60%; }
 }
-
-.front-page__brand-story-text {
-  font-size: var(--wp--preset--font-size--300);
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 36rem;
-  line-height: var(--wp--preset--line-height--relaxed);
-  margin: 0;
-}
-
-/* Brand story orbs */
-.front-page__brand-story-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.front-page__brand-story-orb--1 {
-  width: 18rem;
-  height: 18rem;
-  background: var(--wp--preset--color--neon-pink);
-  opacity: 0.12;
-  bottom: -8%;
-  right: 5%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: -2s;
-}
-
-.front-page__brand-story-orb--2 {
-  width: 14rem;
-  height: 14rem;
-  background: var(--wp--preset--color--neon-cyan);
-  opacity: 0.1;
-  top: 10%;
-  left: -3%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: -4s;
-}
-
-.dark .front-page__brand-story-orb--1 { opacity: 0.2; }
-.dark .front-page__brand-story-orb--2 { opacity: 0.18; }
-
-@media (max-width: 640px) {
-  .front-page__brand-story-orb--1,
-  .front-page__brand-story-orb--2 {
-    opacity: 0.06;
-  }
-  .dark .front-page__brand-story-orb--1 { opacity: 0.1; }
-  .dark .front-page__brand-story-orb--2 { opacity: 0.08; }
-}
-
-/* ========================================
-   6. BEST SELLERS
-   ======================================== */
-
-.front-page__best-sellers {
+.retro-sp-gallery-inner {
+  background-color: var(--color-screen);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.75rem;
+  padding: 2rem;
   position: relative;
   overflow: hidden;
-  padding-block: var(--wp--preset--spacing--80);
-  background: var(--wp--preset--color--neutral-100);
-}
-
-.dark .front-page__best-sellers {
-  background: var(--wp--preset--color--surface);
-}
-
-.front-page__best-sellers-inner {
-  position: relative;
-  z-index: 1;
-  max-width: var(--wp--preset--layout--wide-size);
-  margin-inline: auto;
-  padding-inline: var(--wp--preset--spacing--container);
-}
-
-/* ========================================
-   7. NEWSLETTER SECTION
-   ======================================== */
-
-.front-page__newsletter {
-  position: relative;
-  overflow: hidden;
-  padding-block: var(--wp--preset--spacing--100);
-  background: var(--wp--preset--gradient--commerce);
-  color: #ffffff;
-}
-
-.front-page__newsletter-inner {
-  position: relative;
-  z-index: 2;
-  max-width: var(--wp--preset--layout--wide-size);
-  margin-inline: auto;
-  padding-inline: var(--wp--preset--spacing--container);
+  aspect-ratio: 1;
+  box-shadow: 0 4px 0px var(--color-ink);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: var(--wp--preset--spacing--40);
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  .retro-sp-gallery-inner { aspect-ratio: 4/3; }
 }
 
-.front-page__newsletter-title {
-  font-size: var(--wp--preset--font-size--800);
-  font-weight: var(--wp--preset--font-weight--bold);
-  line-height: var(--wp--preset--line-height--tight);
-  margin: 0;
-  color: #ffffff;
-}
-
-.front-page__newsletter-subtitle {
-  font-size: var(--wp--preset--font-size--300);
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 36rem;
-  line-height: var(--wp--preset--line-height--relaxed);
-  margin: 0;
-}
-
-/* Newsletter input - neon focus */
-.front-page__newsletter .wp-newsletter-section__input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-.front-page__newsletter .wp-newsletter-section__input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.front-page__newsletter .wp-newsletter-section__input:focus {
-  outline: 2px solid var(--wp--preset--color--neon-cyan);
-  border-color: transparent;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
-}
-
-.front-page__newsletter .wp-newsletter-section__icon {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* Newsletter orbs */
-.front-page__newsletter-orb {
+.retro-sp-decal {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: 0;
-  pointer-events: none;
+  color: var(--color-ink);
+  z-index: 5;
 }
-
-.front-page__newsletter-orb--1 {
-  width: 20rem;
-  height: 20rem;
-  background: var(--wp--preset--color--neon-pink);
-  opacity: 0.15;
-  top: -10%;
-  left: -5%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: 0s;
+.retro-sp-decal-1 {
+  top: 1.5rem;
+  left: 1.5rem;
 }
-
-.front-page__newsletter-orb--2 {
-  width: 16rem;
-  height: 16rem;
-  background: var(--wp--preset--color--neon-cyan);
-  opacity: 0.12;
-  bottom: -8%;
-  right: -3%;
-  animation: funky-float 6s ease-in-out infinite;
-  animation-delay: -3s;
+.retro-sp-decal-2 {
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 3px solid var(--color-ink);
 }
-
-.dark .front-page__newsletter-orb--1 { opacity: 0.25; }
-.dark .front-page__newsletter-orb--2 { opacity: 0.2; }
-
-@media (max-width: 640px) {
-  .front-page__newsletter-orb--1,
-  .front-page__newsletter-orb--2 {
-    opacity: 0.08;
-  }
-  .dark .front-page__newsletter-orb--1 { opacity: 0.12; }
-  .dark .front-page__newsletter-orb--2 { opacity: 0.1; }
+.retro-sp-decal-3 {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--color-ink);
 }
-
-/* ========================================
-   SECTION HEADINGS - GRADIENT TEXT
-   ======================================== */
-
-.front-page__section-heading {
-  font-size: var(--wp--preset--font-size--800);
-  font-weight: var(--wp--preset--font-weight--bold);
-  line-height: var(--wp--preset--line-height--tight);
-  letter-spacing: var(--wp--preset--letter-spacing--tight);
-  margin: 0;
-  color: var(--wp--preset--color--foreground);
-}
-
-.front-page__section-heading--gradient {
-  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-.dark .front-page__section-heading--gradient {
-  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-lime));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.front-page__section-description {
-  font-size: var(--wp--preset--font-size--300);
-  color: var(--wp--preset--color--muted-foreground);
-  line-height: var(--wp--preset--line-height--relaxed);
-  max-width: 65ch;
-  margin: 0;
-}
-
-/* ========================================
-   GRADIENT DIVIDERS
-   ======================================== */
-
-.front-page__divider {
-  height: 2px;
-  border: none;
-  background: linear-gradient(90deg, transparent, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-cyan), transparent);
-  opacity: 0.3;
-  margin: 0 auto;
-  max-width: var(--wp--preset--layout--wide-size);
-}
-
-.dark .front-page__divider {
+.retro-sp-decal-4 {
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-left: 2px solid var(--color-ink);
+  border-bottom: 2px solid var(--color-ink);
   opacity: 0.5;
 }
 
-/* ========================================
-   COLLECTION ROW HEADER (inside funky sections)
-   ======================================== */
-
-.front-page__collection-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wp--preset--spacing--30);
+.retro-sp-img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.5s ease;
+}
+.retro-sp-img:hover {
+  transform: scale(1.05);
+}
+.dark .retro-sp-img {
+  mix-blend-mode: normal;
 }
 
-@media (min-width: 640px) {
-  .front-page__collection-header {
-    flex-direction: row;
-    align-items: flex-end;
+.retro-sp-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1024px) {
+  .retro-sp-details { width: 40%; }
+}
+
+.retro-sp-title {
+  font-size: 2.25rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--color-ink);
+}
+.retro-sp-reviews {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.retro-sp-stars {
+  display: flex;
+  color: var(--color-ink);
+}
+.retro-sp-review-count {
+  font-size: 0.875rem;
+  color: var(--color-ink);
+}
+.retro-sp-price {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-ink);
+  letter-spacing: -0.025em;
+}
+
+.retro-sp-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.retro-qty {
+  display: flex;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.25rem;
+  background-color: var(--color-panel);
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+.retro-qty-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-ink);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.retro-qty-btn:first-child {
+  border-right: 2px solid var(--color-ink);
+}
+.retro-qty-btn:last-child {
+  border-left: 2px solid var(--color-ink);
+}
+.retro-qty-btn:hover {
+  background-color: var(--wp--preset--color--primary-foreground, #fff);
+}
+.retro-qty-val {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--wp--preset--color--primary-foreground, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--color-ink);
+}
+.retro-sp-add {
+  flex: 1;
+  padding: 0.75rem;
+}
+.retro-sp-buy {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.retro-sp-tabs {
+  display: flex;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.25rem;
+  background-color: var(--color-panel);
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  box-shadow: 2px 2px 0px var(--color-ink);
+  overflow: hidden;
+}
+.retro-sp-tab {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-right: 2px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.retro-sp-tab:last-child {
+  border-right: none;
+}
+.retro-sp-tab:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.retro-sp-tab.active {
+  background-color: var(--color-paper-deep);
+}
+
+.retro-sp-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--color-ink);
+}
+.retro-sp-tab-content h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.retro-sp-tab-content p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Single Product: Gallery Thumbnails */
+.retro-sp-thumbnails {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.retro-sp-thumb {
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--color-border);
+  background: var(--color-screen);
+  cursor: pointer;
+  padding: 2px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.retro-sp-thumb:hover {
+  border-color: var(--color-ink);
+}
+
+.retro-sp-thumb--active {
+  border-color: var(--color-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+
+.retro-sp-thumb:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.retro-sp-thumb__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Single Product: Sale Badge */
+.retro-sp-sale-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  background: var(--color-alert);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+/* Single Product: Brand */
+.retro-sp-brand {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Single Product: Price Row */
+.retro-sp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-sp-price--sale {
+  color: var(--color-alert);
+}
+
+.retro-sp-price--original {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+}
+
+/* Single Product: Badges */
+.retro-sp-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.retro-sp-badge {
+  display: inline-block;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Single Product: Short Description */
+.retro-sp-short-desc {
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+  color: var(--color-text-soft);
+}
+
+/* Single Product: Secondary Actions */
+.retro-sp-secondary-actions {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-sp-action-link {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.retro-sp-action-link:hover {
+  color: var(--color-ink);
+}
+
+.retro-sp-action-link--active {
+  color: var(--color-signal);
+}
+
+/* Single Product: Trust Signals */
+.retro-sp-trust {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px dashed var(--color-border);
+  margin-bottom: 1.5rem;
+  background: var(--color-paper-deep);
+}
+
+.retro-sp-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-soft);
+}
+
+/* Single Product: Info Table (Details Tab) */
+.retro-sp-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.retro-sp-info-table tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.retro-sp-info-table tr:last-child {
+  border-bottom: none;
+}
+
+.retro-sp-info-table td {
+  padding: 0.625rem 0;
+  font-size: 0.9375rem;
+  vertical-align: top;
+}
+
+.retro-sp-info-table__label {
+  width: 120px;
+  color: var(--color-text-muted);
+}
+
+/* Single Product: Tags */
+.retro-sp-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.retro-sp-tag {
+  display: inline-block;
+  border: 1px solid var(--color-border);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.6875rem;
+  text-decoration: none;
+  color: var(--color-ink);
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.retro-sp-tag:hover {
+  background: var(--color-panel);
+  border-color: var(--color-ink);
+}
+
+/* Single Product: Related Products */
+.retro-sp-related {
+  border-top: 3px solid var(--color-ink);
+  padding-top: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.retro-sp-related__heading {
+  font-size: 1.5rem;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.retro-grid--4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .retro-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Footer Banner */
+.retro-footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.retro-trust-banner {
+  border-top: 2px dashed var(--color-ink);
+  border-bottom: 2px dashed var(--color-ink);
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+@media (min-width: 768px) {
+  .retro-trust-banner {
     justify-content: space-between;
   }
 }
 
-.front-page__collection-header-text {
+.retro-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retro-footer {
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  background-color: var(--color-panel);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--wp--preset--spacing--20);
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-retro);
+}
+@media (min-width: 768px) {
+  .retro-footer { flex-direction: row; }
+}
+.retro-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .retro-footer-left { 
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+.retro-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+.retro-footer-link {
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.retro-footer-link:hover {
+  text-decoration: underline;
+}
+
+.retro-footer-icons {
+  display: flex;
+  gap: 0.5rem;
+}
+.retro-footer-icons svg {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--color-ink);
+}
+.retro-footer-icons svg:hover {
+  transform: translateY(-2px);
+  color: var(--color-signal);
+}
+.retro-footer-right {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+@media (min-width: 768px) {
+  .retro-footer-right { width: auto; }
+}
+
+.retro-copyright {
+  text-align: center;
+  font-size: 0.625rem;
+  color: var(--color-muted);
+  margin-top: 1rem;
+}
+.retro-input {
+  flex: 1;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  background-color: var(--color-paper-deep);
+  color: var(--color-ink);
+  outline: none;
+}
+.retro-input::placeholder {
+  color: var(--color-muted);
+}
+.retro-input:focus {
+  background-color: var(--color-paper);
 }
 
 /* ========================================
-   REDUCED MOTION GUARD
+   SITEMAP CTA BANNER (Homepage)
    ======================================== */
 
-@media (prefers-reduced-motion: reduce) {
-  .front-page__hero-orb--1,
-  .front-page__hero-orb--2,
-  .front-page__hero-orb--3,
-  .front-page__brand-story-orb--1,
-  .front-page__brand-story-orb--2,
-  .front-page__newsletter-orb--1,
-  .front-page__newsletter-orb--2,
-  .front-page__hero-scroll {
-    animation: none;
+.retro-sitemap-cta {
+  margin: 4rem 0 3rem;
+  padding: 0 1rem;
+}
+
+.retro-sitemap-cta__card {
+  background-color: var(--color-panel);
+  border: 4px solid var(--color-ink);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-retro-lg);
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .retro-sitemap-cta__card {
+    flex-direction: row;
+    text-align: left;
+    padding: 2.5rem;
   }
-  .front-page__features .wp-quick-entry-tile::before,
-  .front-page__features .wp-quick-entry-tile__icon,
-  .front-page__trending .wc-block-product-grid__item,
-  .front-page__best-sellers .wc-block-product-grid__item {
-    transition: none;
+}
+
+.retro-sitemap-cta__icon {
+  flex-shrink: 0;
+  color: var(--color-signal);
+  width: 40px;
+  height: 40px;
+}
+
+.retro-sitemap-cta__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.retro-sitemap-cta__title {
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .retro-sitemap-cta__title {
+    font-size: 1.75rem;
   }
-  .front-page__trending .wc-block-product-grid__item:hover,
-  .front-page__best-sellers .wc-block-product-grid__item:hover {
-    transform: none;
-  }
-  .front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
-    transform: none;
-  }
+}
+
+.retro-sitemap-cta__desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-soft);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.retro-sitemap-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
 }

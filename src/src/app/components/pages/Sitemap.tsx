@@ -1,44 +1,62 @@
 /**
- * Sitemap Page - Visual Route Testing
+ * Sitemap Page - Visual Route Directory
+ *
+ * Full-page sitemap with HeaderRetro, FooterRetro, Breadcrumbs,
+ * and clear accordion sections with strong visual affordance.
+ *
+ * **Styling:** BEM (.retro-sitemap__*) in /src/styles/sections/sitemap-retro.css
+ * **Dark Mode:** Inherits retro theme tokens from front-page-funky.css
+ * **WCAG AA 2.2:** Focus-visible rings, aria-expanded, keyboard nav
  */
 
-import React from 'react';
-import * as ReactRouterModule from 'react-router';
-import { House, Storefront, ShoppingBag, User, BookOpenText, Info, Tag, Question } from '@phosphor-icons/react';
+import { useState, useMemo, useCallback, memo, type ReactNode } from 'react';
+import { Link } from 'react-router';
+import {
+  House, Storefront, Bag as ShoppingBag, User, BookOpenText, Info,
+  Tag, Question, Headphones, CreditCard, ShieldCheck, Warning, Wrench,
+  MagnifyingGlass, CaretDown, ArrowSquareOut, MapTrifold,
+  GameController, Users, CheckCircle, Code, Palette, FileText
+} from '@phosphor-icons/react';
+import { HeaderRetro } from '../parts/HeaderRetro';
+import { FooterRetro } from '../parts/FooterRetro';
+import { Breadcrumbs } from '../parts/Breadcrumbs';
+import { DevToolsStatsBar } from '../blocks/dev-tools/DevToolsStatsBar';
 
-var useState = React.useState;
-var Link = ReactRouterModule.Link;
+interface RouteItem {
+  path: string;
+  label: string;
+  description: string;
+  dynamic?: boolean;
+  external?: boolean;
+}
 
-export function Sitemap() {
-  var _st = useState('');
-  var searchTerm = _st[0];
-  var setSearchTerm = _st[1];
-  var _se = useState(null);
-  var expandedSection = _se[0];
-  var setExpandedSection = _se[1];
+interface RouteSection {
+  title: string;
+  icon: ReactNode;
+  routes: RouteItem[];
+}
 
-  var routeSections = [
+// Module-level constant -- never changes, never triggers re-renders
+const ROUTE_SECTIONS: RouteSection[] = [
     {
       title: 'Core Pages',
-      icon: React.createElement(House, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-primary',
+      icon: <House size={20} weight="bold" />,
       routes: [
-        { path: '/', label: 'Homepage', description: 'Main landing page' },
-        { path: '/search', label: 'Search', description: 'Global search' },
+        { path: '/', label: 'Homepage (PlayPocket)', description: 'Main retro FSE landing page' },
+        { path: '/search', label: 'Search', description: 'Global product search' },
         { path: '/contact', label: 'Contact', description: 'Contact form' },
         { path: '/faq', label: 'FAQ', description: 'Frequently asked questions' },
         { path: '/newsletter', label: 'Newsletter', description: 'Newsletter subscription' },
         { path: '/sitemap', label: 'Sitemap', description: 'This page - all routes' },
-      ]
+      ],
     },
     {
       title: 'Shop & Products',
-      icon: React.createElement(Storefront, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-accent',
+      icon: <Storefront size={20} weight="bold" />,
       routes: [
-        { path: '/shop', label: 'Shop - All Products', description: 'Main shop archive' },
-        { path: '/shop/all', label: 'Shop - All (Alt)', description: 'Alternative shop URL' },
-        { path: '/shop/all-products', label: 'All Products List', description: 'Complete product listing' },
+        { path: '/shop', label: 'Shop', description: 'Main product archive' },
+        { path: '/shop/all', label: 'Shop - All', description: 'All products listing' },
+        { path: '/shop/all-products', label: 'All Products', description: 'Complete product listing' },
         { path: '/shop/collections', label: 'Collections', description: 'Product collections' },
         { path: '/shop/filtered', label: 'Shop with Sidebar', description: 'Shop with filter sidebar' },
         { path: '/shop/search', label: 'Product Search', description: 'Search products' },
@@ -51,46 +69,45 @@ export function Sitemap() {
         { path: '/shop/category/clothing', label: 'Category: Clothing', description: 'Example category', dynamic: true },
         { path: '/shop/category/accessories', label: 'Category: Accessories', description: 'Example category', dynamic: true },
         { path: '/shop/category/home', label: 'Category: Home & Living', description: 'Example category', dynamic: true },
+        { path: '/shop/category/electronics', label: 'Category: Electronics', description: 'Example category', dynamic: true },
+        { path: '/shop/category/sports-fitness', label: 'Category: Sports & Fitness', description: 'Example category', dynamic: true },
         { path: '/shop/tag/eco-friendly', label: 'Tag: Eco-Friendly', description: 'Example product tag', dynamic: true },
         { path: '/product/prod-001', label: 'Single Product', description: 'Example product page', dynamic: true },
         { path: '/product/prod-001/sticky', label: 'Product (Sticky)', description: 'Product with sticky buy panel', dynamic: true },
         { path: '/variable-product/prod-002', label: 'Variable Product', description: 'Product with variations', dynamic: true },
-      ]
+        { path: '/lookbook', label: 'Lookbook', description: 'Curated editorial collection gallery' },
+      ],
     },
     {
       title: 'Cart & Checkout',
-      icon: React.createElement(ShoppingBag, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-success',
+      icon: <ShoppingBag size={20} weight="bold" />,
       routes: [
         { path: '/cart', label: 'Shopping Cart', description: 'View cart' },
         { path: '/checkout', label: 'Checkout', description: 'Checkout page' },
         { path: '/order-confirmation', label: 'Order Confirmation', description: 'Order success page' },
         { path: '/track-order', label: 'Track Order', description: 'Order tracking' },
-      ]
+      ],
     },
     {
       title: 'Account & Profile',
-      icon: React.createElement(User, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-info',
+      icon: <User size={20} weight="bold" />,
       routes: [
         { path: '/account/login', label: 'Login / Register', description: 'Authentication page' },
-        { path: '/account', label: 'Account Dashboard', description: 'Redirects to /dashboard' },
+        { path: '/register', label: 'Register (New Game)', description: 'New account registration' },
+        { path: '/reset-password', label: 'Password Reset', description: 'Forgot password recovery' },
+        { path: '/account/reset-password', label: 'Password Reset (Account)', description: 'Account-scoped reset alias' },
+        { path: '/account', label: 'Account', description: 'Redirects to dashboard' },
         { path: '/account/dashboard', label: 'Dashboard', description: 'Account overview' },
         { path: '/account/orders', label: 'Orders', description: 'Order history' },
-        { path: '/account/orders/ORD-12345', label: 'Order Details', description: 'Single order view', dynamic: true },
-        { path: '/account/wishlist', label: 'Account Wishlist', description: 'Saved items' },
-        { path: '/account/addresses', label: 'Addresses', description: 'Saved addresses' },
-        { path: '/account/details', label: 'Account Details', description: 'Profile settings' },
-        { path: '/account/loyalty', label: 'Loyalty Dashboard', description: 'Points & rewards overview' },
-        { path: '/account/reset-password', label: 'Reset Password', description: 'Password reset' },
+        { path: '/account/addresses', label: 'Addresses', description: 'Saved addresses (Save Files)' },
+        { path: '/account/loyalty', label: 'Loyalty & XP', description: 'Points, tier progress, and activity' },
         { path: '/account/dashboard-widgets', label: 'Enhanced Dashboard', description: 'Widgets dashboard' },
-        { path: '/wishlist', label: 'Wishlist (Standalone)', description: 'Standalone wishlist page' },
-      ]
+        { path: '/wishlist', label: 'Wishlist', description: 'Standalone wishlist page' },
+      ],
     },
     {
       title: 'Blog & Content',
-      icon: React.createElement(BookOpenText, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-purple',
+      icon: <BookOpenText size={20} weight="bold" />,
       routes: [
         { path: '/blog', label: 'Blog Index', description: 'All blog posts' },
         { path: '/blog/category/fashion', label: 'Category: Fashion', description: 'Example category', dynamic: true },
@@ -105,23 +122,21 @@ export function Sitemap() {
         { path: '/blog/latest-trends-2026/video', label: 'Single Post (Video Format)', description: 'Video format view', dynamic: true },
         { path: '/blog/latest-trends-2026/gallery', label: 'Single Post (Gallery Format)', description: 'Gallery format view', dynamic: true },
         { path: '/blog/latest-trends-2026/aside', label: 'Single Post (Aside Format)', description: 'Aside/status format', dynamic: true },
-      ]
+      ],
     },
     {
       title: 'Blog Format Archives',
-      icon: React.createElement(Headphones, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-purple',
+      icon: <Headphones size={20} weight="bold" />,
       routes: [
         { path: '/blog/format/audio', label: 'Podcasts (Audio)', description: 'Audio post archive' },
         { path: '/blog/format/video', label: 'Videos', description: 'Video post archive' },
         { path: '/blog/format/gallery', label: 'Galleries', description: 'Gallery post archive' },
         { path: '/blog/format/aside', label: 'Asides', description: 'Aside/status post archive' },
-      ]
+      ],
     },
     {
       title: 'About & Company',
-      icon: React.createElement(Info, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-teal',
+      icon: <Info size={20} weight="bold" />,
       routes: [
         { path: '/about', label: 'About Us', description: 'Company information' },
         { path: '/about/our-story', label: 'Our Story', description: 'Brand story' },
@@ -130,23 +145,21 @@ export function Sitemap() {
         { path: '/about/careers', label: 'Careers', description: 'Job openings' },
         { path: '/stores', label: 'Store Locations', description: 'Physical stores' },
         { path: '/press', label: 'Press & Media', description: 'Press kit and media resources' },
-      ]
+      ],
     },
     {
       title: 'Subscriptions & Memberships',
-      icon: React.createElement(CreditCard, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-accent',
+      icon: <CreditCard size={20} weight="bold" />,
       routes: [
         { path: '/subscriptions', label: 'Subscription Plans', description: 'Browse subscription products' },
         { path: '/subscription/sub-001', label: 'Single Subscription', description: 'Example subscription page', dynamic: true },
         { path: '/memberships', label: 'Membership Plans', description: 'Browse membership tiers' },
         { path: '/membership/mem-001', label: 'Single Membership', description: 'Example membership page', dynamic: true },
-      ]
+      ],
     },
     {
       title: 'Promotions & Sales',
-      icon: React.createElement(Tag, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-warning',
+      icon: <Tag size={20} weight="bold" />,
       routes: [
         { path: '/promotions', label: 'Promotions Hub', description: 'All promotions' },
         { path: '/promotions/flash-sale', label: 'Flash Sale', description: 'Limited time sale' },
@@ -156,17 +169,37 @@ export function Sitemap() {
         { path: '/promotions/winter-clearance', label: 'Winter Clearance', description: 'Winter sale (alias)' },
         { path: '/promotions/buy-2-get-1', label: 'Buy 2 Get 1', description: 'Promotion (alias)' },
         { path: '/loyalty', label: 'Loyalty Program', description: 'Rewards program' },
-      ]
+      ],
+    },
+    {
+      title: 'Gaming & Rewards',
+      icon: <GameController size={20} weight="bold" />,
+      routes: [
+        { path: '/achievements', label: 'Achievements', description: 'Trophy room with unlockable badges' },
+        { path: '/leaderboard', label: 'Leaderboard', description: 'Top players by XP and loyalty points' },
+        { path: '/new-releases', label: 'New Releases', description: 'Upcoming product drops with countdown timers' },
+        { path: '/pre-orders', label: 'Pre-Orders', description: 'Reserve upcoming products (alias)' },
+        { path: '/bundle-builder', label: 'Bundle Builder', description: 'Build your own product pack with tiered discounts' },
+      ],
+    },
+    {
+      title: 'Community & Engagement',
+      icon: <Users size={20} weight="bold" />,
+      routes: [
+        { path: '/community', label: 'Community Hub', description: 'Player lounge with social feed and contributors' },
+        { path: '/referral', label: 'Referral Program', description: 'Invite friends and earn reward tiers' },
+        { path: '/events', label: 'Events', description: 'Upcoming events with RSVP and capacity tracking' },
+      ],
     },
     {
       title: 'Help & Support',
-      icon: React.createElement(Question, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-secondary',
+      icon: <Question size={20} weight="bold" />,
       routes: [
         { path: '/help', label: 'Help Center', description: 'Support hub' },
-        { path: '/faq', label: 'FAQ', description: 'Frequently asked questions' },
         { path: '/shipping-returns', label: 'Shipping & Returns', description: 'Shipping info' },
+        { path: '/shipping', label: 'Shipping (Alias)', description: 'Redirects to shipping & returns' },
         { path: '/returns', label: 'Returns Portal', description: 'Process returns' },
+        { path: '/refunds', label: 'Refunds', description: 'Refund policy and requests' },
         { path: '/size-guide', label: 'Size Guide', description: 'Sizing information' },
         { path: '/chat', label: 'Live Chat', description: 'Customer support chat' },
         { path: '/buying-guide', label: 'Buying Guide', description: 'Product buying guide' },
@@ -176,217 +209,378 @@ export function Sitemap() {
         { path: '/rewards', label: 'Rewards Program', description: 'Loyalty rewards' },
         { path: '/affiliate', label: 'Affiliate Program', description: 'Partner with us' },
         { path: '/reviews', label: 'Customer Reviews', description: 'Product reviews' },
-      ]
+      ],
     },
     {
       title: 'Legal & Policies',
-      icon: React.createElement(ShieldCheck, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-gray',
+      icon: <ShieldCheck size={20} weight="bold" />,
       routes: [
         { path: '/privacy-policy', label: 'Privacy Policy', description: 'Privacy information' },
         { path: '/terms-and-conditions', label: 'Terms & Conditions', description: 'Terms of service' },
-      ]
+        { path: '/privacy', label: 'Privacy (Redirect)', description: 'Redirects to /privacy-policy' },
+        { path: '/terms', label: 'Terms (Redirect)', description: 'Redirects to /terms-and-conditions' },
+      ],
     },
     {
       title: 'Error Pages',
-      icon: React.createElement(Warning, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-error',
+      icon: <Warning size={20} weight="bold" />,
       routes: [
         { path: '/error/404', label: '404 Not Found (Demo)', description: 'Test 404 page' },
         { path: '/error/500', label: '500 Server Error (Demo)', description: 'Test 500 page' },
         { path: '/error/503', label: '503 Maintenance (Demo)', description: 'Test maintenance page' },
         { path: '/error/network', label: 'Network Error (Demo)', description: 'Test network error' },
         { path: '/nonexistent-route', label: '404 Fallback', description: 'Test actual 404' },
-      ]
+      ],
     },
     {
       title: 'Development Tools',
-      icon: React.createElement(Wrench, { size: 20, weight: 'duotone' }),
-      color: 'wp-color-dev',
+      icon: <Wrench size={20} weight="bold" />,
       routes: [
-        { path: '/dev-tools', label: 'Dev Tools Index', description: 'Developer tools hub' },
+        { path: '/dev-tools', label: 'Dev Tools Hub', description: 'Developer tools index' },
         { path: '/dev-tools/style-guide', label: 'Style Guide', description: 'Design system reference' },
         { path: '/dev-tools/showcase', label: 'Component Showcase', description: 'Component gallery' },
-        { path: '/dev-tools/forms', label: 'Form Showcase', description: 'Form elements' },
-        { path: '/dev-tools/icons', label: 'Icon Library', description: 'Available icons' },
+        { path: '/dev-tools/forms', label: 'Form Showcase', description: 'Form elements reference' },
+        { path: '/dev-tools/icons', label: 'Icon Library', description: 'Phosphor icons browser' },
         { path: '/dev-tools/api', label: 'Component API', description: 'Component API docs' },
         { path: '/dev-tools/live-preview', label: 'Live Preview', description: 'Live component preview' },
-        { path: '/dev-tools/performance', label: 'Performance', description: 'Performance tools' },
-        { path: '/template-tester', label: 'Template Tester', description: 'Test all templates' },
+        { path: '/dev-tools/performance', label: 'Performance', description: 'Web Vitals monitoring (temporarily disabled)' },
+        { path: '/template-tester', label: 'Template Tester', description: 'PlayPocket homepage preview' },
         { path: '/campaign/product-launch', label: 'Long-Form Sales Page', description: 'Sales page demo' },
-      ]
-    }
+        { path: '/social/instagram', label: 'Social Redirect', description: 'Social platform redirect', dynamic: true },
+      ],
+    },
   ];
 
-  var filteredSections = routeSections.map(function(section) {
-    var filteredRoutes = section.routes.filter(function(route) {
-      var lowerSearch = searchTerm.toLowerCase();
-      return route.label.toLowerCase().indexOf(lowerSearch) !== -1 ||
-             route.path.toLowerCase().indexOf(lowerSearch) !== -1 ||
-             (route.description && route.description.toLowerCase().indexOf(lowerSearch) !== -1);
+// Pre-computed stats -- static data, computed once at module level
+const SITEMAP_STATS = (() => {
+  const totalRoutes = ROUTE_SECTIONS.reduce((sum, s) => sum + s.routes.length, 0);
+  const dynamicRoutes = ROUTE_SECTIONS.reduce(
+    (sum, s) => sum + s.routes.filter((r) => r.dynamic).length,
+    0
+  );
+  const staticRoutes = totalRoutes - dynamicRoutes;
+
+  return [
+    { value: totalRoutes, label: 'TOTAL' },
+    { value: staticRoutes, label: 'STATIC' },
+    { value: dynamicRoutes, label: 'DYNAMIC' },
+    { value: ROUTE_SECTIONS.length, label: 'SECTIONS' },
+  ];
+})();
+
+// Pre-computed section titles for expandAll
+const ALL_SECTION_TITLES = new Set(ROUTE_SECTIONS.map((s) => s.title));
+
+export const Sitemap = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+
+  // Memoize filtered sections to prevent unnecessary re-computation
+  const filteredSections = useMemo(
+    () =>
+      ROUTE_SECTIONS
+        .map((section) => ({
+          ...section,
+          routes: section.routes.filter((route) => {
+            const lower = searchTerm.toLowerCase();
+            return (
+              route.label.toLowerCase().includes(lower) ||
+              route.path.toLowerCase().includes(lower) ||
+              route.description.toLowerCase().includes(lower)
+            );
+          }),
+        }))
+        .filter((section) => section.routes.length > 0),
+    [searchTerm]
+  );
+
+  // Stable callbacks with useCallback
+  const toggleSection = useCallback((title: string) => {
+    setExpandedSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(title)) {
+        next.delete(title);
+      } else {
+        next.add(title);
+      }
+      return next;
     });
-    return {
-      title: section.title,
-      icon: section.icon,
-      color: section.color,
-      routes: filteredRoutes
-    };
-  }).filter(function(section) {
-    return section.routes.length > 0;
-  });
+  }, []);
 
-  var totalRoutes = routeSections.reduce(function(sum, section) {
-    return sum + section.routes.length;
-  }, 0);
-  
-  var dynamicRoutes = routeSections.reduce(function(sum, section) {
-    return sum + section.routes.filter(function(r) { return r.dynamic; }).length;
-  }, 0);
-  
-  var staticRoutes = totalRoutes - dynamicRoutes;
+  const expandAll = useCallback(() => {
+    setExpandedSections(new Set(ALL_SECTION_TITLES));
+  }, []);
 
-  var toggleSection = function(title) {
-    setExpandedSection(expandedSection === title ? null : title);
-  };
+  const collapseAll = useCallback(() => {
+    setExpandedSections(new Set());
+  }, []);
 
-  return React.createElement('div', { className: "wp-page-sitemap" },
-    /* Header */
-    React.createElement('div', { className: "wp-page-sitemap__header" },
-      React.createElement('div', { className: "wp-container" },
-        React.createElement('div', { className: "wp-page-sitemap__header-content" },
-          React.createElement('h1', { className: "wp-page-sitemap__title" },
-            React.createElement(Home, { size: 32, className: "wp-page-sitemap__title-icon" }),
-            "Complete Sitemap"
-          ),
-          React.createElement('p', { className: "wp-page-sitemap__description" },
-            "Interactive sitemap displaying all " + totalRoutes + " routes in the application. Click any link to navigate to that page."
-          ),
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  }, []);
 
-          /* Statistics */
-          React.createElement('div', { className: "wp-page-sitemap__stats" },
-            React.createElement('div', { className: "wp-page-sitemap__stat" },
-              React.createElement('span', { className: "wp-page-sitemap__stat-value" }, totalRoutes),
-              React.createElement('span', { className: "wp-page-sitemap__stat-label" }, "Total Routes")
-            ),
-            React.createElement('div', { className: "wp-page-sitemap__stat" },
-              React.createElement('span', { className: "wp-page-sitemap__stat-value" }, staticRoutes),
-              React.createElement('span', { className: "wp-page-sitemap__stat-label" }, "Static")
-            ),
-            React.createElement('div', { className: "wp-page-sitemap__stat" },
-              React.createElement('span', { className: "wp-page-sitemap__stat-value" }, dynamicRoutes),
-              React.createElement('span', { className: "wp-page-sitemap__stat-label" }, "Dynamic")
-            ),
-            React.createElement('div', { className: "wp-page-sitemap__stat" },
-              React.createElement('span', { className: "wp-page-sitemap__stat-value" }, filteredSections.length),
-              React.createElement('span', { className: "wp-page-sitemap__stat-label" }, "Categories")
-            )
-          ),
+  const handleClearSearch = useCallback(() => {
+    setSearchTerm('');
+  }, []);
 
-          /* Search */
-          React.createElement('div', { className: "wp-page-sitemap__search" },
-            React.createElement(MagnifyingGlass, { size: 20, weight: 'duotone', className: "wp-page-sitemap__search-icon" }),
-            React.createElement('input', {
-              type: "text",
-              placeholder: "Search routes...",
-              value: searchTerm,
-              onChange: function(e) { setSearchTerm(e.target.value); },
-              className: "wp-page-sitemap__search-input funky-input-glow"
-            }),
-            searchTerm ? React.createElement('button', {
-              onClick: function() { setSearchTerm(''); },
-              className: "wp-page-sitemap__search-clear",
-              'aria-label': "Clear search"
-            }, String.fromCharCode(215)) : null
-          )
-        )
-      )
-    ),
+  const isSearching = searchTerm.length > 0;
 
-    /* Route Sections */
-    React.createElement('div', { className: "wp-page-sitemap__content" },
-      React.createElement('div', { className: "wp-container" },
-        filteredSections.length === 0 ?
-          React.createElement('div', { className: "wp-page-sitemap__no-results" },
-            React.createElement(Warning, { size: 48, weight: 'duotone' }),
-            React.createElement('h3', null, "No routes found"),
-            React.createElement('p', null, "Try a different search term"),
-            React.createElement('button', {
-              onClick: function() { setSearchTerm(''); },
-              className: "wp-button"
-            }, "Clear Search")
-          ) :
-          React.createElement('div', { className: "wp-page-sitemap__sections" },
-            filteredSections.map(function(section) {
-              var isExpanded = expandedSection === section.title || searchTerm.length > 0;
-              
-              return React.createElement('div', { key: section.title, className: "wp-page-sitemap__section" },
-                React.createElement('button', {
-                  onClick: function() { toggleSection(section.title); },
-                  className: "wp-page-sitemap__section-header",
-                  'aria-expanded': isExpanded
-                },
-                  React.createElement('div', { className: "wp-page-sitemap__section-title" },
-                    React.createElement('span', { className: "wp-page-sitemap__section-icon " + section.color },
-                      section.icon
-                    ),
-                    React.createElement('span', { className: "wp-page-sitemap__section-name" }, section.title),
-                    React.createElement('span', { className: "wp-page-sitemap__section-count" },
-                      section.routes.length + ' ' + (section.routes.length === 1 ? 'route' : 'routes')
-                    )
-                  ),
-                  React.createElement(CaretRight, {
-                    size: 20,
-                    weight: 'bold',
-                    className: "wp-page-sitemap__section-chevron " + (isExpanded ? 'wp-page-sitemap__section-chevron--expanded' : '')
-                  })
-                ),
+  const breadcrumbItems = useMemo(
+    () => [{ label: 'Sitemap', path: '/sitemap' }],
+    []
+  );
 
-                isExpanded ? React.createElement('div', { className: "wp-page-sitemap__routes" },
-                  section.routes.map(function(route) {
-                    return React.createElement(Link, {
-                      key: route.path,
-                      to: route.path,
-                      className: "wp-page-sitemap__route funky-spring-hover"
-                    },
-                      React.createElement('div', { className: "wp-page-sitemap__route-content" },
-                        React.createElement('span', { className: "wp-page-sitemap__route-label" },
-                          route.label,
-                          route.dynamic ? React.createElement('span', {
-                            className: "wp-page-sitemap__route-badge wp-page-sitemap__route-badge--dynamic"
-                          }, "Dynamic") : null,
-                          route.external ? React.createElement('span', {
-                            className: "wp-page-sitemap__route-badge wp-page-sitemap__route-badge--external"
-                          }, "External ", React.createElement(ArrowSquareOut, { size: 12 })) : null
-                        ),
-                        React.createElement('span', { className: "wp-page-sitemap__route-path" }, route.path),
-                        route.description ? React.createElement('span', {
-                          className: "wp-page-sitemap__route-description"
-                        }, route.description) : null
-                      ),
-                      React.createElement(CaretRight, { size: 16, weight: 'bold', className: "wp-page-sitemap__route-arrow" })
-                    );
-                  })
-                ) : null
-              );
-            })
-          )
-      )
-    ),
+  return (
+    <div className="retro-home theme-retro">
+      <div className="retro-container">
+        <HeaderRetro />
+      </div>
 
-    /* Footer Note */
-    React.createElement('div', { className: "wp-page-sitemap__footer" },
-      React.createElement('div', { className: "wp-container" },
-        React.createElement('p', { className: "wp-page-sitemap__footer-text" },
-          React.createElement('strong', null, "Note:"),
-          " Dynamic routes show example URLs. Replace parameters like ",
-          React.createElement('code', null, ":id"),
-          ", ",
-          React.createElement('code', null, ":slug"),
-          ", or ",
-          React.createElement('code', null, ":categorySlug"),
-          " with actual values when testing."
-        )
-      )
-    )
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <main className="retro-sitemap" id="main-content">
+        {/* Hero Banner */}
+        <div className="retro-sitemap__hero">
+          <div className="wp-container">
+            <div className="retro-sitemap__hero-card">
+              <MapTrifold size={48} weight="bold" className="retro-sitemap__hero-icon" />
+              <div className="retro-sitemap__hero-text">
+                <h1 className="retro-font-display retro-bold retro-sitemap__hero-title">
+                  SITE NAVIGATION
+                </h1>
+                <p className="retro-font-body retro-sitemap__hero-desc">
+                  Welcome to PlayPocket! Find any page quickly using the search below or browse by category.
+                </p>
+                <p className="retro-font-body retro-sitemap__hero-stats">
+                  {`${SITEMAP_STATS[0].value} total pages • ${SITEMAP_STATS[1].value} main sections`}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="wp-container">
+          {/* Search + Quick Actions */}
+          <div className="retro-sitemap__toolbar">
+            <div className="retro-sitemap__search">
+              <MagnifyingGlass size={24} weight="bold" className="retro-sitemap__search-icon" />
+              <input
+                type="text"
+                placeholder="Search for a page... (e.g., 'cart', 'wishlist', 'blog')"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="retro-font-body retro-sitemap__search-input"
+                aria-label="Search routes"
+              />
+              {searchTerm && (
+                <button
+                  onClick={handleClearSearch}
+                  className="retro-font-display retro-bold retro-sitemap__search-clear"
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            <div className="retro-sitemap__toolbar-actions">
+              <button
+                onClick={expandAll}
+                className="retro-font-display retro-bold retro-sitemap__toolbar-btn"
+                aria-label="Expand all sections"
+              >
+                EXPAND ALL
+              </button>
+              <button
+                onClick={collapseAll}
+                className="retro-font-display retro-bold retro-sitemap__toolbar-btn"
+                aria-label="Collapse all sections"
+              >
+                COLLAPSE ALL
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Tips Banner */}
+          {!isSearching && (
+            <div className="retro-sitemap__tips">
+              <div className="retro-sitemap__tip retro-font-body">
+                <strong className="retro-font-display retro-bold">💡 TIP:</strong> Use the search above to find any page instantly, or click a category below to explore.
+              </div>
+            </div>
+          )}
+
+          {/* Project Architecture Status */}
+          {!isSearching && (
+            <div className="retro-sitemap__architecture">
+              <h2 className="retro-font-display retro-bold retro-sitemap__architecture-title">
+                <Code size={24} weight="bold" />
+                PROJECT ARCHITECTURE
+              </h2>
+              <div className="retro-sitemap__architecture-grid">
+                <div className="retro-sitemap__arch-card">
+                  <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
+                  <div className="retro-sitemap__arch-content">
+                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">Templates</h3>
+                    <p className="retro-font-body retro-sitemap__arch-stat">23/23 Complete</p>
+                    <p className="retro-font-body retro-sitemap__arch-desc">All templates converted to retro theme</p>
+                  </div>
+                </div>
+
+                <div className="retro-sitemap__arch-card">
+                  <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
+                  <div className="retro-sitemap__arch-content">
+                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">P0 Blocks</h3>
+                    <p className="retro-font-body retro-sitemap__arch-stat">13/13 Complete</p>
+                    <p className="retro-font-body retro-sitemap__arch-desc">Critical block guidelines documented</p>
+                  </div>
+                </div>
+
+                <div className="retro-sitemap__arch-card">
+                  <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
+                  <div className="retro-sitemap__arch-content">
+                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">P1 Blocks</h3>
+                    <p className="retro-font-body retro-sitemap__arch-stat">35/35 Complete 🎊</p>
+                    <p className="retro-font-body retro-sitemap__arch-desc">High priority block guidelines complete</p>
+                  </div>
+                </div>
+
+                <div className="retro-sitemap__arch-card">
+                  <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
+                  <div className="retro-sitemap__arch-content">
+                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">CSS System</h3>
+                    <p className="retro-font-body retro-sitemap__arch-stat">280 imports active</p>
+                    <p className="retro-font-body retro-sitemap__arch-desc">Full retro design system restored</p>
+                  </div>
+                </div>
+
+                <div className="retro-sitemap__arch-card">
+                  <Palette size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--design" />
+                  <div className="retro-sitemap__arch-content">
+                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">Retro Theme</h3>
+                    <p className="retro-font-body retro-sitemap__arch-stat">100% Applied</p>
+                    <p className="retro-font-body retro-sitemap__arch-desc">Neon glows, CRT effects, pixel borders</p>
+                  </div>
+                </div>
+
+                <div className="retro-sitemap__arch-card">
+                  <FileText size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--docs" />
+                  <div className="retro-sitemap__arch-content">
+                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">Guidelines</h3>
+                    <p className="retro-font-body retro-sitemap__arch-stat">48 total docs</p>
+                    <p className="retro-font-body retro-sitemap__arch-desc">Complete component documentation</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Sections */}
+        <div className="wp-container">
+          {filteredSections.length === 0 ? (
+            <div className="retro-sitemap__empty">
+              <Warning size={48} weight="duotone" className="retro-sitemap__empty-icon" />
+              <h3 className="retro-font-display retro-bold retro-sitemap__empty-title">NO ROUTES FOUND</h3>
+              <p className="retro-font-body retro-sitemap__empty-desc">
+                No routes match &quot;{searchTerm}&quot;
+              </p>
+              <button
+                onClick={handleClearSearch}
+                className="retro-font-display retro-bold retro-sitemap__empty-btn"
+              >
+                CLEAR SEARCH
+              </button>
+            </div>
+          ) : (
+            <div className="retro-sitemap__sections" role="list">
+              {filteredSections.map((section) => {
+                const isExpanded = expandedSections.has(section.title) || isSearching;
+                const dynamicCount = section.routes.filter((r) => r.dynamic).length;
+
+                return (
+                  <div key={section.title} className="retro-sitemap__section" role="listitem">
+                    <button
+                      onClick={() => toggleSection(section.title)}
+                      className={`retro-sitemap__trigger${isExpanded ? ' retro-sitemap__trigger--open' : ''}`}
+                      aria-expanded={isExpanded}
+                    >
+                      <span className="retro-sitemap__trigger-icon-wrap">
+                        {section.icon}
+                      </span>
+                      <span className="retro-sitemap__trigger-content">
+                        <span className="retro-font-display retro-bold retro-sitemap__trigger-title">
+                          {section.title}
+                        </span>
+                        <span className="retro-font-body retro-sitemap__trigger-meta">
+                          {section.routes.length} {section.routes.length === 1 ? 'route' : 'routes'}
+                          {dynamicCount > 0 && ` · ${dynamicCount} dynamic`}
+                        </span>
+                      </span>
+                      <CaretDown
+                        size={20}
+                        weight="bold"
+                        className="retro-sitemap__trigger-caret"
+                        aria-hidden="true"
+                      />
+                    </button>
+
+                    {isExpanded && (
+                      <ul className="retro-sitemap__routes">
+                        {section.routes.map((route) => (
+                          <li key={route.path} className="retro-sitemap__route-item">
+                            <Link
+                              to={route.path}
+                              className="retro-sitemap__route"
+                            >
+                              <span className="retro-sitemap__route-info">
+                                <span className="retro-font-display retro-bold retro-sitemap__route-label">
+                                  {route.label}
+                                  {route.dynamic && (
+                                    <span className="retro-sitemap__badge retro-sitemap__badge--dynamic">
+                                      DYN
+                                    </span>
+                                  )}
+                                  {route.external && (
+                                    <span className="retro-sitemap__badge retro-sitemap__badge--external">
+                                      EXT <ArrowSquareOut size={10} weight="bold" />
+                                    </span>
+                                  )}
+                                </span>
+                                <span className="retro-font-body retro-sitemap__route-path">{route.path}</span>
+                              </span>
+                              <span className="retro-sitemap__route-desc retro-font-body">
+                                {route.description}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Legend */}
+          <div className="retro-sitemap__legend">
+            <span className="retro-font-body retro-sitemap__legend-item">
+              <span className="retro-sitemap__badge retro-sitemap__badge--dynamic">DYN</span>
+              = Dynamic route (parameterized URL)
+            </span>
+            <span className="retro-font-body retro-sitemap__legend-item">
+              <span className="retro-sitemap__badge retro-sitemap__badge--external">EXT</span>
+              = External link
+            </span>
+          </div>
+        </div>
+      </main>
+
+      <div className="retro-container">
+        <FooterRetro />
+      </div>
+    </div>
   );
 }
+
+Sitemap.displayName = 'Sitemap';

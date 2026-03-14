@@ -1,80 +1,47 @@
-import React from "react";
-import * as cnModule from "../../../utils/cn";
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var cn = cnModule.cn;
+import React, { createContext, useContext, useState } from "react";
+import { cn } from "../../../utils/cn";
 
-var TabsContext = createContext(undefined);
+interface TabsContextValue {
+  value: string;
+  onValueChange: (value: string) => void;
+}
 
-export function Tabs(props) {
-  var defaultValue = props.defaultValue;
-  var controlledValue = props.value;
-  var onValueChange = props.onValueChange;
-  var className = props.className;
-  var children = props.children;
+const TabsContext = createContext<TabsContextValue | undefined>(undefined);
 
-  var state = useState(defaultValue === undefined ? "" : defaultValue);
-  var uncontrolledValue = state[0];
-  var setUncontrolledValue = state[1];
-  var value = controlledValue !== undefined ? controlledValue : uncontrolledValue;
+export const Tabs = ({ defaultValue = '', value: controlledValue, onValueChange, className, children }: any) => {
+  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+  const value = controlledValue !== undefined ? controlledValue : uncontrolledValue;
 
-  var handleValueChange = function(newValue) {
-    if (controlledValue === undefined) {
-      setUncontrolledValue(newValue);
-    }
-    if (onValueChange) {
-      onValueChange(newValue);
-    }
+  const handleValueChange = (newValue: string) => {
+    if (controlledValue === undefined) setUncontrolledValue(newValue);
+    onValueChange?.(newValue);
   };
 
-  return React.createElement(TabsContext.Provider, { value: { value: value, onValueChange: handleValueChange } },
-    React.createElement('div', { className: cn("wp-block-tabs", className) }, children)
+  return (
+    <TabsContext.Provider value={{ value, onValueChange: handleValueChange }}>
+      <div className={cn("wp-block-tabs", className)}>{children}</div>
+    </TabsContext.Provider>
   );
-}
+};
 
-export function TabsList(props) {
-  var className = props.className;
-  var children = props.children;
-  return React.createElement('div', { className: cn("wp-block-tabs__list", className) }, children);
-}
+export const TabsList = ({ className, children }: any) => {
+  return <div className={cn("wp-block-tabs__list", className)}>{children}</div>;
+};
 
-export function TabsTrigger(props) {
-  var value = props.value;
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-  var disabled = props.disabled;
-
-  var context = useContext(TabsContext);
+export const TabsTrigger = ({ value, className, children, id, style, disabled }: any) => {
+  const context = useContext(TabsContext);
   if (!context) return null;
+  const isActive = context.value === value;
 
-  var isActive = context.value === value;
+  return (
+    <button id={id} style={style} disabled={disabled} type="button" className={cn("wp-block-tabs__trigger", className)} data-state={isActive ? "active" : "inactive"} onClick={() => context.onValueChange(value)}>
+      {children}
+    </button>
+  );
+};
 
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    disabled: disabled,
-    type: "button",
-    className: cn("wp-block-tabs__trigger", className),
-    'data-state': isActive ? "active" : "inactive",
-    onClick: function() { context.onValueChange(value); }
-  }, children);
-}
-
-export function TabsContent(props) {
-  var value = props.value;
-  var className = props.className;
-  var children = props.children;
-
-  var context = useContext(TabsContext);
-  if (!context) return null;
-
-  if (context.value !== value) return null;
-
-  return React.createElement('div', {
-    className: cn("wp-block-tabs__content", className),
-    'data-state': "active"
-  }, children);
-}
+export const TabsContent = ({ value, className, children }: any) => {
+  const context = useContext(TabsContext);
+  if (!context || context.value !== value) return null;
+  return <div className={cn("wp-block-tabs__content", className)} data-state="active">{children}</div>;
+};

@@ -1,64 +1,62 @@
 import React from 'react';
-import * as TypographyModule from '../../common/Typography';
+import { Typography } from '../../common/Typography';
 import { Star } from '@phosphor-icons/react';
-
-var Typography = TypographyModule.Typography;
-
-/* ProductInfoProps: { title, price, salePrice, rating, reviewCount, shortDescription } */
 
 /**
  * ProductInfo Block
- * 
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. No arrow functions
- * 4. No template literals
- * 5. No non-ASCII characters
+ *
+ * Displays product title, star rating, price, and short description.
  */
-export function ProductInfo(props) {
-  var title = props.title;
-  var price = props.price;
-  var salePrice = props.salePrice;
-  var rating = props.rating;
-  var reviewCount = props.reviewCount;
-  var shortDescription = props.shortDescription;
+export const ProductInfo = ({
+  title,
+  price,
+  salePrice,
+  rating,
+  reviewCount,
+  shortDescription,
+}: {
+  title: string;
+  price: number;
+  salePrice?: number;
+  rating: number;
+  reviewCount: number;
+  shortDescription: string;
+}) => {
+  return (
+    <div className="wc-product-info">
+      <Typography variant="h1" className="wc-product-info__title">{title}</Typography>
 
-  var stars = [0, 1, 2, 3, 4].map(function(i) {
-    var isFilled = i < Math.floor(rating);
-    return React.createElement(Star, {
-      key: i,
-      size: 18,
-      fill: isFilled ? 'currentColor' : 'none',
-      className: isFilled ? '' : 'wc-product-info__star--empty'
-    });
-  });
+      <div className="wc-product-info__rating">
+        <div className="wc-product-info__stars">
+          {[0, 1, 2, 3, 4].map((i) => {
+            const isFilled = i < Math.floor(rating);
+            return (
+              <Star
+                key={i}
+                size={18}
+                fill={isFilled ? 'currentColor' : 'none'}
+                className={isFilled ? '' : 'wc-product-info__star--empty'}
+              />
+            );
+          })}
+        </div>
+        <span className="wc-product-info__review-count">({reviewCount} reviews)</span>
+      </div>
 
-  var ratingElement = React.createElement('div', { className: 'wc-product-info__rating' },
-    React.createElement('div', { className: 'wc-product-info__stars' }, stars),
-    React.createElement('span', { className: 'wc-product-info__review-count' },
-      '(' + reviewCount + ' reviews)'
-    )
+      <div className="wc-product-info__price">
+        {salePrice ? (
+          <>
+            <span className="wc-product-info__price-sale">&pound;{salePrice.toFixed(2)}</span>
+            <span className="wc-product-info__price-regular">&pound;{price.toFixed(2)}</span>
+          </>
+        ) : (
+          <span className="wc-product-info__price-current">&pound;{price.toFixed(2)}</span>
+        )}
+      </div>
+
+      <div className="wc-product-info__description">
+        <p>{shortDescription}</p>
+      </div>
+    </div>
   );
-
-  var priceElement = (function() {
-    if (salePrice) {
-      return React.createElement('div', { className: 'wc-product-info__price' },
-        React.createElement('span', { className: 'wc-product-info__price-sale' }, '\u00A3' + salePrice.toFixed(2)),
-        React.createElement('span', { className: 'wc-product-info__price-regular' }, '\u00A3' + price.toFixed(2))
-      );
-    }
-    return React.createElement('div', { className: 'wc-product-info__price' },
-      React.createElement('span', { className: 'wc-product-info__price-current' }, '\u00A3' + price.toFixed(2))
-    );
-  })();
-
-  return React.createElement('div', { className: 'wc-product-info' },
-    React.createElement(Typography, { variant: 'h1', className: 'wc-product-info__title' }, title),
-    ratingElement,
-    priceElement,
-    React.createElement('div', { className: 'wc-product-info__description' },
-      React.createElement('p', null, shortDescription)
-    )
-  );
-}
+};

@@ -1,248 +1,105 @@
 "use client";
 
-import * as React from "react";
-import * as ReactDOMModule from "react-dom";
+import React, { createContext, useContext, useState, useRef, useCallback, useId } from "react";
+import { createPortal } from "react-dom";
 import { CaretDown as ChevronDown } from '@phosphor-icons/react';
-import * as cnModule from "@/utils/cn";
+import { cn } from "@/utils/cn";
 
-var createPortal = ReactDOMModule.createPortal;
-var cn = cnModule.cn;
+const NavigationMenuContext = createContext<any>(null);
+const NavigationMenuItemContext = createContext<any>(null);
 
-// --- Contexts ---
+export const navigationMenuTriggerStyle = "wp-block-navigation-menu-trigger";
 
-var NavigationMenuContext = React.createContext(null);
-var NavigationMenuItemContext = React.createContext(null);
+export const NavigationMenu = ({ className, children, viewport = true, defaultValue, value, onValueChange, id, style }: any) => {
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const [isViewportMounted, setIsViewportMounted] = useState(false);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
 
-// --- Components ---
+  const isControlled = value !== undefined;
+  const actualValue = isControlled ? value : internalValue;
 
-function NavigationMenu(props) {
-  var className = props.className;
-  var children = props.children;
-  var viewport = props.viewport === undefined ? true : props.viewport;
-  var defaultValue = props.defaultValue;
-  var value = props.value;
-  var onValueChange = props.onValueChange;
-  var id = props.id;
-  var style = props.style;
-
-  var stateArr = React.useState(defaultValue);
-  var internalValue = stateArr[0];
-  var setInternalValue = stateArr[1];
-  var viewportMountedArr = React.useState(false);
-  var isViewportMounted = viewportMountedArr[0];
-  var setIsViewportMounted = viewportMountedArr[1];
-  var viewportRef = React.useRef(null);
-
-  var isControlled = value !== undefined;
-  var actualValue = isControlled ? value : internalValue;
-
-  var handleSetValue = React.useCallback(function(newValue) {
-    if (!isControlled) {
-      setInternalValue(newValue);
-    }
-    if (onValueChange && newValue !== undefined) {
-      onValueChange(newValue);
-    }
+  const handleSetValue = useCallback((newValue: any) => {
+    if (!isControlled) setInternalValue(newValue);
+    if (onValueChange && newValue !== undefined) onValueChange(newValue);
   }, [isControlled, onValueChange]);
 
-  var handleSetViewportRef = React.useCallback(function(node) {
+  const handleSetViewportRef = useCallback((node: HTMLDivElement | null) => {
     viewportRef.current = node;
     setIsViewportMounted(!!node);
   }, []);
 
-  var handleMouseLeave = function() {
-    handleSetValue(undefined);
-  };
-
-  var contextValue = {
-    value: actualValue,
-    setValue: handleSetValue,
-    viewportRef: viewportRef,
-    setViewportRef: handleSetViewportRef,
-    isViewportMounted: isViewportMounted
-  };
-
-  var navChildren = [children];
-  if (viewport) {
-    navChildren.push(React.createElement(NavigationMenuViewport, { key: "__viewport" }));
-  }
-
-  return React.createElement(NavigationMenuContext.Provider, { value: contextValue },
-    React.createElement('nav', {
-      id: id,
-      style: style,
-      'data-slot': "navigation-menu",
-      'data-viewport': viewport,
-      className: cn("wp-block-navigation-menu", className),
-      onMouseLeave: handleMouseLeave
-    }, navChildren)
+  return (
+    <NavigationMenuContext.Provider value={{ value: actualValue, setValue: handleSetValue, viewportRef, setViewportRef: handleSetViewportRef, isViewportMounted }}>
+      <nav id={id} style={style} data-slot="navigation-menu" data-viewport={viewport} className={cn("wp-block-navigation-menu", className)} onMouseLeave={() => handleSetValue(undefined)}>
+        {children}
+        {viewport && <NavigationMenuViewport key="__viewport" />}
+      </nav>
+    </NavigationMenuContext.Provider>
   );
-}
+};
 
-function NavigationMenuList(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
+export const NavigationMenuList = ({ className, children, id, style }: any) => {
+  return <ul id={id} style={style} data-slot="navigation-menu-list" className={cn("wp-block-navigation-menu-list", className)}>{children}</ul>;
+};
 
-  return React.createElement('ul', {
-    id: id,
-    style: style,
-    'data-slot': "navigation-menu-list",
-    className: cn("wp-block-navigation-menu-list", className)
-  }, children);
-}
-
-function NavigationMenuItem(props) {
-  var className = props.className;
-  var value = props.value;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  var uniqueId = React.useId();
-  var itemValue = value || uniqueId;
-
-  return React.createElement(NavigationMenuItemContext.Provider, { value: { value: itemValue } },
-    React.createElement('li', {
-      id: id,
-      style: style,
-      'data-slot': "navigation-menu-item",
-      className: cn("wp-block-navigation-menu-item", className)
-    }, children)
+export const NavigationMenuItem = ({ className, value, children, id, style }: any) => {
+  const uniqueId = useId();
+  const itemValue = value || uniqueId;
+  return (
+    <NavigationMenuItemContext.Provider value={{ value: itemValue }}>
+      <li id={id} style={style} data-slot="navigation-menu-item" className={cn("wp-block-navigation-menu-item", className)}>{children}</li>
+    </NavigationMenuItemContext.Provider>
   );
-}
+};
 
-function NavigationMenuTrigger(props) {
-  var className = props.className;
-  var children = props.children;
-  var onClick = props.onClick;
-  var onMouseEnter = props.onMouseEnter;
-  var id = props.id;
-  var style = props.style;
-
-  var navContext = React.useContext(NavigationMenuContext);
-  var itemContext = React.useContext(NavigationMenuItemContext);
-
+export const NavigationMenuTrigger = ({ className, children, onClick, onMouseEnter, id, style }: any) => {
+  const navContext = useContext(NavigationMenuContext);
+  const itemContext = useContext(NavigationMenuItemContext);
   if (!navContext || !itemContext) return null;
 
-  var isOpen = navContext.value === itemContext.value;
+  const isOpen = navContext.value === itemContext.value;
 
-  var handleClick = function(e) {
-    navContext.setValue(isOpen ? undefined : itemContext.value);
-    if (onClick) {
-      onClick(e);
-    }
-  };
-
-  var handleMouseEnter = function(e) {
-    navContext.setValue(itemContext.value);
-    if (onMouseEnter) {
-      onMouseEnter(e);
-    }
-  };
-
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    'data-slot': "navigation-menu-trigger",
-    'data-state': isOpen ? "open" : "closed",
-    className: cn("wp-block-navigation-menu-trigger", "group", className),
-    onClick: handleClick,
-    onMouseEnter: handleMouseEnter,
-    'aria-expanded': isOpen
-  },
-    children,
-    " ",
-    React.createElement(ChevronDown, {
-      className: "wp-block-navigation-menu-icon",
-      'aria-hidden': "true"
-    })
+  return (
+    <button
+      id={id} style={style} data-slot="navigation-menu-trigger" data-state={isOpen ? "open" : "closed"}
+      className={cn("wp-block-navigation-menu-trigger", "group", className)}
+      onClick={(e) => { navContext.setValue(isOpen ? undefined : itemContext.value); onClick?.(e); }}
+      onMouseEnter={(e) => { navContext.setValue(itemContext.value); onMouseEnter?.(e); }}
+      aria-expanded={isOpen}
+    >
+      {children}{" "}
+      <ChevronDown className="wp-block-navigation-menu-icon" aria-hidden="true" />
+    </button>
   );
-}
+};
 
-function NavigationMenuContent(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  var navContext = React.useContext(NavigationMenuContext);
-  var itemContext = React.useContext(NavigationMenuItemContext);
-
+export const NavigationMenuContent = ({ className, children, id, style }: any) => {
+  const navContext = useContext(NavigationMenuContext);
+  const itemContext = useContext(NavigationMenuItemContext);
   if (!navContext || !itemContext) return null;
 
-  var isOpen = navContext.value === itemContext.value;
-
+  const isOpen = navContext.value === itemContext.value;
   if (!isOpen) return null;
 
-  var content = React.createElement('div', {
-    id: id,
-    style: style,
-    'data-slot': "navigation-menu-content",
-    'data-state': isOpen ? "open" : "closed",
-    className: cn("wp-block-navigation-menu-content", className)
-  }, children);
+  const content = <div id={id} style={style} data-slot="navigation-menu-content" data-state="open" className={cn("wp-block-navigation-menu-content", className)}>{children}</div>;
 
-  // If viewport is mounted, render into it via Portal
   if (navContext.isViewportMounted && navContext.viewportRef.current) {
     return createPortal(content, navContext.viewportRef.current);
   }
-
-  // Fallback if no viewport
   return content;
-}
-
-function NavigationMenuViewport(props) {
-  var className = props ? props.className : undefined;
-  var id = props ? props.id : undefined;
-  var style = props ? props.style : undefined;
-
-  var navContext = React.useContext(NavigationMenuContext);
-
-  return React.createElement('div', { className: cn("wp-block-navigation-menu-viewport-container") },
-    React.createElement('div', {
-      id: id,
-      style: style,
-      'data-slot': "navigation-menu-viewport",
-      ref: navContext === null ? null : navContext.setViewportRef,
-      className: cn("wp-block-navigation-menu-viewport", className)
-    })
-  );
-}
-
-function NavigationMenuLink(props) {
-  var className = props.className;
-  var active = props.active;
-  var href = props.href;
-  var id = props.id;
-  var style = props.style;
-  var onClick = props.onClick;
-  var children = props.children;
-
-  return React.createElement('a', {
-    id: id,
-    style: style,
-    onClick: onClick,
-    'data-slot': "navigation-menu-link",
-    'data-active': active,
-    href: href,
-    className: cn("wp-block-navigation-menu-link", className)
-  }, children);
-}
-
-function NavigationMenuIndicator(props) {
-  // Stub implementation - complex indicator animations removed
-  return null;
-}
-
-export {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuContent,
-  NavigationMenuTrigger,
-  NavigationMenuLink,
-  NavigationMenuIndicator,
-  NavigationMenuViewport
 };
+
+export const NavigationMenuViewport = ({ className, id, style }: any) => {
+  const navContext = useContext(NavigationMenuContext);
+  return (
+    <div className={cn("wp-block-navigation-menu-viewport-container")}>
+      <div id={id} style={style} data-slot="navigation-menu-viewport" ref={navContext?.setViewportRef} className={cn("wp-block-navigation-menu-viewport", className)} />
+    </div>
+  );
+};
+
+export const NavigationMenuLink = ({ className, active, href, id, style, onClick, children }: any) => {
+  return <a id={id} style={style} onClick={onClick} data-slot="navigation-menu-link" data-active={active} href={href} className={cn("wp-block-navigation-menu-link", className)}>{children}</a>;
+};
+
+export const NavigationMenuIndicator = () => { return null; };

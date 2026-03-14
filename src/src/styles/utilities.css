@@ -417,6 +417,10 @@
 
 .wp-text-secondary { color: var(--wp--preset--color--muted-foreground); }
 
+/* CRITICAL FIX: Add .text-muted for accessibility (used in ProductTabsSection) */
+.text-muted { color: var(--wp--preset--color--muted-foreground); }
+.dark .text-muted { color: var(--wp--preset--color--muted-foreground); }
+
 /* Gray scale text */
 .wp-text-gray-300 { color: #d1d5db; }
 .dark .wp-text-gray-300 { color: var(--wp--preset--color--neutral-600); } /* was #6b7280 */

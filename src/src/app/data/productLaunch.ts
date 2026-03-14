@@ -9,7 +9,7 @@
 
 import { Lightning as Zap, Shield, Users, TrendUp as TrendingUp } from '@phosphor-icons/react';
 
-export var productLaunchContent = {
+export const productLaunchContent = {
   hero: {
     badge: 'Limited Time Offer - 50% Off',
     heading: 'Transform Your Productivity in 30 Days',

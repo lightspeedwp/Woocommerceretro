@@ -11,7 +11,7 @@ import imgImageWithFallback7 from "figma:asset/edfc144193a7ca77fcaff925c3487eef2
 import imgImageWithFallback8 from "figma:asset/cb1c2316ea963ac435991723bd90223cbbbfdafd.png";
 import imgImageWithFallback9 from "figma:asset/6fdbb17bf2a07622279591ffb50fad6cbfb4e643.png";
 
-function LinkBackgroundImage({ children }: React.PropsWithChildren<{}>) {
+const LinkBackgroundImage = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="h-[35.5px] relative shrink-0 w-full">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[#60a5fa] text-[16px] top-[-3px] tracking-[-0.3125px] whitespace-nowrap">{children}</p>
@@ -27,7 +27,7 @@ type ProductCardBackgroundImageProps = {
   additionalClassNames?: string;
 };
 
-function ProductCardBackgroundImage({ children, additionalClassNames = "" }: React.PropsWithChildren<ProductCardBackgroundImageProps>) {
+const ProductCardBackgroundImage = ({ children, additionalClassNames = "" }: React.PropsWithChildren<ProductCardBackgroundImageProps>) => {
   return (
     <div className={clsx("relative rounded-[8px] shrink-0 w-full", additionalClassNames)}>
       <div className="content-stretch flex flex-col items-start overflow-clip p-px relative rounded-[inherit] size-full">{children}</div>
@@ -39,7 +39,7 @@ type BackgroundImage7Props = {
   additionalClassNames?: string;
 };
 
-function BackgroundImage7({ children, additionalClassNames = "" }: React.PropsWithChildren<BackgroundImage7Props>) {
+const BackgroundImage7 = ({ children, additionalClassNames = "" }: React.PropsWithChildren<BackgroundImage7Props>) => {
   return (
     <div className={clsx("relative w-[410px]", additionalClassNames)}>
       <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">{children}</div>
@@ -47,7 +47,7 @@ function BackgroundImage7({ children, additionalClassNames = "" }: React.PropsWi
   );
 }
 
-function BackgroundImage6({ children }: React.PropsWithChildren<{}>) {
+const BackgroundImage6 = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="h-[24px] relative shrink-0 w-full">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[#60a5fa] text-[16px] top-[-0.5px] tracking-[-0.3125px] whitespace-nowrap">{children}</p>
@@ -58,7 +58,7 @@ type BackgroundImage5Props = {
   additionalClassNames?: string;
 };
 
-function BackgroundImage5({ children, additionalClassNames = "" }: React.PropsWithChildren<BackgroundImage5Props>) {
+const BackgroundImage5 = ({ children, additionalClassNames = "" }: React.PropsWithChildren<BackgroundImage5Props>) => {
   return (
     <div className={clsx("absolute left-0 size-[14px]", additionalClassNames)}>
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14 14">
@@ -68,7 +68,7 @@ function BackgroundImage5({ children, additionalClassNames = "" }: React.PropsWi
   );
 }
 
-function BackgroundImage4({ children }: React.PropsWithChildren<{}>) {
+const BackgroundImage4 = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="absolute left-0 size-[24px] top-0">
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@ function BackgroundImage4({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function IconBackgroundImage5({ children }: React.PropsWithChildren<{}>) {
+const IconBackgroundImage5 = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="absolute left-0 size-[20px] top-0">
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 20">
@@ -88,7 +88,7 @@ function IconBackgroundImage5({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function VectorBackgroundImage1({ children }: React.PropsWithChildren<{}>) {
+const VectorBackgroundImage1 = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="absolute inset-[8.33%]">
       <div className="absolute inset-[-5%]">
@@ -100,7 +100,7 @@ function VectorBackgroundImage1({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function VectorBackgroundImage({ children }: React.PropsWithChildren<{}>) {
+const VectorBackgroundImage = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="absolute inset-[12.5%]">
       <div className="absolute inset-[-5.56%]">
@@ -115,7 +115,7 @@ type BackgroundImage3Props = {
   additionalClassNames?: string;
 };
 
-function BackgroundImage3({ children, additionalClassNames = "" }: React.PropsWithChildren<BackgroundImage3Props>) {
+const BackgroundImage3 = ({ children, additionalClassNames = "" }: React.PropsWithChildren<BackgroundImage3Props>) => {
   return (
     <div className={clsx("absolute left-0 size-[16px]", additionalClassNames)}>
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
@@ -125,7 +125,7 @@ function BackgroundImage3({ children, additionalClassNames = "" }: React.PropsWi
   );
 }
 
-function BackgroundImage2({ children }: React.PropsWithChildren<{}>) {
+const BackgroundImage2 = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="absolute left-0 size-[18px] top-0">
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18 18">
@@ -135,7 +135,7 @@ function BackgroundImage2({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function BackgroundImage1({ children }: React.PropsWithChildren<{}>) {
+const BackgroundImage1 = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <BackgroundImage4>
       <g id="Icon">{children}</g>
@@ -143,7 +143,7 @@ function BackgroundImage1({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function BackgroundImage({ children }: React.PropsWithChildren<{}>) {
+const BackgroundImage = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div className="h-[14px] overflow-clip relative shrink-0 w-full">
       <div className="absolute inset-[8.33%_8.33%_12.2%_8.33%]" data-name="Vector">
@@ -157,7 +157,7 @@ function BackgroundImage({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function IconBackgroundImage4() {
+const IconBackgroundImage4 = () => {
   return (
     <BackgroundImage1>
       <path d={svgPaths.p311be280} id="Vector" stroke="var(--stroke-0, white)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
@@ -167,7 +167,7 @@ function IconBackgroundImage4() {
   );
 }
 
-function Icon77BackgroundImage() {
+const Icon77BackgroundImage = () => {
   return (
     <div className="absolute inset-[-9999.77%_-1px]">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 2 2.01">
@@ -181,7 +181,7 @@ type ParagraphBackgroundImageAndTextProps = {
   additionalClassNames?: string;
 };
 
-function ParagraphBackgroundImageAndText({ text, additionalClassNames = "" }: ParagraphBackgroundImageAndTextProps) {
+const ParagraphBackgroundImageAndText = ({ text, additionalClassNames = "" }: ParagraphBackgroundImageAndTextProps) => {
   return (
     <div className={clsx("relative shrink-0 w-full", additionalClassNames)}>
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[16px] text-white top-[-0.5px] tracking-[-0.3125px] w-[412px]">{text}</p>
@@ -189,7 +189,7 @@ function ParagraphBackgroundImageAndText({ text, additionalClassNames = "" }: Pa
   );
 }
 
-function ImageWithFallbackBackgroundImage2() {
+const ImageWithFallbackBackgroundImage2 = () => {
   return (
     <div className="absolute h-[615px] left-0 top-0 w-[410px]">
       <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImageWithFallback7} />
@@ -197,7 +197,7 @@ function ImageWithFallbackBackgroundImage2() {
   );
 }
 
-function ImageWithFallbackBackgroundImage1() {
+const ImageWithFallbackBackgroundImage1 = () => {
   return (
     <div className="absolute h-[272.438px] left-0 top-0 w-[409.984px]">
       <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImageWithFallback6} />
@@ -209,7 +209,7 @@ type ContainerBackgroundImageProps = {
   text1: string;
 };
 
-function ContainerBackgroundImage({ text, text1 }: ContainerBackgroundImageProps) {
+const ContainerBackgroundImage = ({ text, text1 }: ContainerBackgroundImageProps) => {
   return (
     <div className="absolute h-[24px] left-0 top-[118px] w-[410px]">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[0] left-0 not-italic text-[0px] text-white top-[-0.5px] tracking-[-0.3125px] whitespace-nowrap">
@@ -224,7 +224,7 @@ type ProductCardBackgroundImageAndText1Props = {
   additionalClassNames?: string;
 };
 
-function ProductCardBackgroundImageAndText1({ text, additionalClassNames = "" }: ProductCardBackgroundImageAndText1Props) {
+const ProductCardBackgroundImageAndText1 = ({ text, additionalClassNames = "" }: ProductCardBackgroundImageAndText1Props) => {
   return (
     <div className={clsx("absolute h-[24px] left-0 w-[410px]", additionalClassNames)}>
       <p className="absolute font-['Inter:Bold',sans-serif] font-bold leading-[24px] left-0 not-italic text-[#60a5fa] text-[16px] top-[-0.5px] tracking-[-0.3125px] whitespace-nowrap">{text}</p>
@@ -232,7 +232,7 @@ function ProductCardBackgroundImageAndText1({ text, additionalClassNames = "" }:
   );
 }
 
-function ImageWithFallbackBackgroundImage() {
+const ImageWithFallbackBackgroundImage = () => {
   return (
     <div className="absolute h-[273.328px] left-0 top-0 w-[409.992px]">
       <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImageWithFallback5} />
@@ -243,7 +243,7 @@ type ProductCardBackgroundImageAndTextProps = {
   text: string;
 };
 
-function ProductCardBackgroundImageAndText({ text }: ProductCardBackgroundImageAndTextProps) {
+const ProductCardBackgroundImageAndText = ({ text }: ProductCardBackgroundImageAndTextProps) => {
   return (
     <div className="absolute h-[39.5px] left-0 top-0 w-[83.023px]">
       <BackgroundImage2>
@@ -261,7 +261,7 @@ type ContainerBackgroundImageAndText1Props = {
   text: string;
 };
 
-function ContainerBackgroundImageAndText1({ text }: ContainerBackgroundImageAndText1Props) {
+const ContainerBackgroundImageAndText1 = ({ text }: ContainerBackgroundImageAndText1Props) => {
   return (
     <div className="absolute h-[94px] left-0 top-0 w-[410px]">
       <div className="absolute content-stretch flex flex-col h-[70px] items-start left-0 pr-[396px] top-0 w-[410px]">
@@ -278,7 +278,7 @@ function ContainerBackgroundImageAndText1({ text }: ContainerBackgroundImageAndT
   );
 }
 
-function IconBackgroundImage3() {
+const IconBackgroundImage3 = () => {
   return (
     <BackgroundImage>
       <path d={svgPaths.p25c68640} fill="var(--fill-0, white)" id="Vector" stroke="var(--stroke-0, white)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.16667" />
@@ -286,7 +286,7 @@ function IconBackgroundImage3() {
   );
 }
 
-function IconBackgroundImage2() {
+const IconBackgroundImage2 = () => {
   return (
     <BackgroundImage2>
       <path d={svgPaths.pac54200} id="Vector" stroke="var(--stroke-0, #60A5FA)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
@@ -295,7 +295,7 @@ function IconBackgroundImage2() {
   );
 }
 
-function IconBackgroundImage1() {
+const IconBackgroundImage1 = () => {
   return (
     <BackgroundImage2>
       <path d={svgPaths.p288ca880} id="Vector" stroke="var(--stroke-0, #60A5FA)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
@@ -303,7 +303,7 @@ function IconBackgroundImage1() {
   );
 }
 
-function IconBackgroundImage() {
+const IconBackgroundImage = () => {
   return (
     <BackgroundImage3 additionalClassNames="top-0">
       <path d="M6 12L10 8L6 4" id="Vector" stroke="var(--stroke-0, #60A5FA)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33333" />
@@ -314,7 +314,7 @@ type ContainerBackgroundImageAndTextProps = {
   text: string;
 };
 
-function ContainerBackgroundImageAndText({ text }: ContainerBackgroundImageAndTextProps) {
+const ContainerBackgroundImageAndText = ({ text }: ContainerBackgroundImageAndTextProps) => {
   return (
     <div className="h-[40px] relative shrink-0 w-full">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[19.2px] left-0 not-italic text-[#60a5fa] text-[12.8px] top-[2.5px] tracking-[-0.06px] whitespace-nowrap">{text}</p>
@@ -326,7 +326,7 @@ function ContainerBackgroundImageAndText({ text }: ContainerBackgroundImageAndTe
   );
 }
 
-function HorizontalRuleBackgroundImage() {
+const HorizontalRuleBackgroundImage = () => {
   return (
     <div className="h-px relative shrink-0 w-full">
       <div aria-hidden="true" className="absolute border-solid border-t border-white inset-0 pointer-events-none" />
@@ -337,7 +337,7 @@ type BackgroundImageAndText5Props = {
   text: string;
 };
 
-function BackgroundImageAndText5({ text }: BackgroundImageAndText5Props) {
+const BackgroundImageAndText5 = ({ text }: BackgroundImageAndText5Props) => {
   return (
     <div className="absolute h-[24px] left-0 top-[48px] w-[412px]">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[19.2px] left-0 not-italic text-[#60a5fa] text-[12.8px] top-[2.5px] tracking-[-0.06px] whitespace-nowrap">{text}</p>
@@ -348,7 +348,7 @@ type BackgroundImageAndText4Props = {
   text: string;
 };
 
-function BackgroundImageAndText4({ text }: BackgroundImageAndText4Props) {
+const BackgroundImageAndText4 = ({ text }: BackgroundImageAndText4Props) => {
   return (
     <div className="h-[24px] relative shrink-0 w-full">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[19.2px] left-0 not-italic text-[#60a5fa] text-[12.8px] top-[2.5px] tracking-[-0.06px] whitespace-nowrap">{text}</p>
@@ -359,7 +359,7 @@ type Icon2VectorBackgroundImageProps = {
   additionalClassNames?: string;
 };
 
-function Icon2VectorBackgroundImage({ additionalClassNames = "" }: Icon2VectorBackgroundImageProps) {
+const Icon2VectorBackgroundImage = ({ additionalClassNames = "" }: Icon2VectorBackgroundImageProps) => {
   return (
     <div className={clsx("absolute", additionalClassNames)}>
       <div className="absolute inset-[-25%]">
@@ -374,7 +374,7 @@ type BackgroundImageAndText3Props = {
   text: string;
 };
 
-function BackgroundImageAndText3({ text }: BackgroundImageAndText3Props) {
+const BackgroundImageAndText3 = ({ text }: BackgroundImageAndText3Props) => {
   return <BackgroundImage6>{text}</BackgroundImage6>;
 }
 type BackgroundImageAndText2Props = {
@@ -382,7 +382,7 @@ type BackgroundImageAndText2Props = {
   additionalClassNames?: string;
 };
 
-function BackgroundImageAndText2({ text, additionalClassNames = "" }: BackgroundImageAndText2Props) {
+const BackgroundImageAndText2 = ({ text, additionalClassNames = "" }: BackgroundImageAndText2Props) => {
   return (
     <div className={clsx("absolute h-[24px] left-0", additionalClassNames)}>
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[#60a5fa] text-[16px] top-[-0.5px] tracking-[-0.3125px] whitespace-nowrap">{text}</p>
@@ -394,7 +394,7 @@ type BackgroundImageAndText1Props = {
   additionalClassNames?: string;
 };
 
-function BackgroundImageAndText1({ text, additionalClassNames = "" }: BackgroundImageAndText1Props) {
+const BackgroundImageAndText1 = ({ text, additionalClassNames = "" }: BackgroundImageAndText1Props) => {
   return (
     <div className={clsx("absolute h-[24px] left-0", additionalClassNames)}>
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[16px] text-white top-[-0.5px] tracking-[-0.3125px] whitespace-nowrap">{text}</p>
@@ -405,7 +405,7 @@ type BackgroundImageAndTextProps = {
   text: string;
 };
 
-function BackgroundImageAndText({ text }: BackgroundImageAndTextProps) {
+const BackgroundImageAndText = ({ text }: BackgroundImageAndTextProps) => {
   return (
     <div className="h-[24px] relative shrink-0 w-full">
       <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[16px] text-white top-[-0.5px] tracking-[-0.3125px] whitespace-nowrap">{text}</p>
@@ -413,7 +413,7 @@ function BackgroundImageAndText({ text }: BackgroundImageAndTextProps) {
   );
 }
 
-export default function WooCommercePrototype() {
+const WooCommercePrototype = () => {
   return (
     <div className="bg-white relative size-full" data-name="WooCommerce Prototype">
       <div className="absolute h-[9169.188px] left-0 top-0 w-[412px]" data-name="Layout">
@@ -1070,4 +1070,6 @@ export default function WooCommercePrototype() {
       </div>
     </div>
   );
-}
+};
+
+export default WooCommercePrototype;

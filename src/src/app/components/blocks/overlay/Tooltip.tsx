@@ -1,227 +1,97 @@
 "use client";
 
-import * as React from "react";
-import * as ReactDOMModule from "react-dom";
-import * as cnModule from "@/utils/cn";
+import React, { createContext, useContext, useState, useRef, useEffect, useImperativeHandle } from "react";
+import { createPortal } from "react-dom";
+import { cn } from "@/utils/cn";
 
-var createPortal = ReactDOMModule.createPortal;
-var cn = cnModule.cn;
+interface TooltipContextValue {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  triggerRef: React.MutableRefObject<HTMLElement | null>;
+  contentRef: React.MutableRefObject<HTMLDivElement | null>;
+}
 
-// Context
-var TooltipContext = React.createContext(undefined);
+const TooltipContext = createContext<TooltipContextValue | undefined>(undefined);
 
-function useTooltip() {
-  var context = React.useContext(TooltipContext);
-  if (!context) {
-    throw new Error("useTooltip must be used within a TooltipProvider");
-  }
+const useTooltipCtx = () => {
+  const context = useContext(TooltipContext);
+  if (!context) throw new Error("useTooltip must be used within a TooltipProvider");
   return context;
+};
+
+export const TooltipProvider = ({ children }: any) => { return <>{children}</>; };
+
+export const Tooltip = ({ children, defaultOpen = false, open: controlledOpen, onOpenChange }: any) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const isOpen = controlledOpen === undefined ? uncontrolledOpen : controlledOpen;
+  const setIsOpen = (value: boolean) => { onOpenChange ? onOpenChange(value) : setUncontrolledOpen(value); };
+
+  return <TooltipContext.Provider value={{ isOpen, setIsOpen, triggerRef, contentRef }}>{children}</TooltipContext.Provider>;
 }
 
-// Provider
-export function TooltipProvider(props) {
-  var children = props.children;
-  return React.createElement(React.Fragment, null, children);
-}
+export const TooltipTrigger = React.forwardRef<HTMLElement, any>(({ className, children, asChild = false, id, style }, ref) => {
+  const { setIsOpen, triggerRef } = useTooltipCtx();
+  useImperativeHandle(ref, () => triggerRef.current!);
 
-// Root
-export function Tooltip(props) {
-  var children = props.children;
-  var defaultOpen = props.defaultOpen === undefined ? false : props.defaultOpen;
-  var controlledOpen = props.open;
-  var onOpenChange = props.onOpenChange;
-  
-  var _so = React.useState(defaultOpen);
-  var uncontrolledOpen = _so[0];
-  var setUncontrolledOpen = _so[1];
-  var triggerRef = React.useRef(null);
-  var contentRef = React.useRef(null);
-
-  var isOpen = controlledOpen === undefined ? uncontrolledOpen : controlledOpen;
-
-  var setIsOpen = function(value) {
-    if (onOpenChange) {
-      onOpenChange(value);
-    } else {
-      setUncontrolledOpen(value);
-    }
+  const handlers = {
+    onMouseEnter: () => setIsOpen(true),
+    onMouseLeave: () => setIsOpen(false),
+    onFocus: () => setIsOpen(true),
+    onBlur: () => setIsOpen(false),
   };
 
-  return React.createElement(TooltipContext.Provider, {
-    value: { isOpen: isOpen, setIsOpen: setIsOpen, triggerRef: triggerRef, contentRef: contentRef }
-  }, children);
-}
-
-// Trigger
-export var TooltipTrigger = React.forwardRef(
-  function(props, ref) {
-    var className = props.className;
-    var children = props.children;
-    var asChild = props.asChild === undefined ? false : props.asChild;
-    var id = props.id;
-    var style = props.style;
-
-    var context = useTooltip();
-    var setIsOpen = context.setIsOpen;
-    var triggerRef = context.triggerRef;
-
-    React.useImperativeHandle(ref, function() { return triggerRef.current; });
-
-    var handleMouseEnter = function() {
-      setIsOpen(true);
-    };
-
-    var handleMouseLeave = function() {
-      setIsOpen(false);
-    };
-
-    var handleFocus = function() {
-      setIsOpen(true);
-    };
-
-    var handleBlur = function() {
-      setIsOpen(false);
-    };
-
-    if (asChild && React.isValidElement(children)) {
-      var child = children;
-      return React.cloneElement(child, {
-        ref: function(node) {
-          triggerRef.current = node;
-          var originalRef = child.ref;
-          if (typeof originalRef === 'function') {
-            originalRef(node);
-          } else if (originalRef) {
-            originalRef.current = node;
-          }
-        },
-        onMouseEnter: function(e) {
-           handleMouseEnter();
-           if (child.props.onMouseEnter) {
-             child.props.onMouseEnter(e);
-           }
-        },
-        onMouseLeave: function(e) {
-           handleMouseLeave();
-           if (child.props.onMouseLeave) {
-             child.props.onMouseLeave(e);
-           }
-        },
-        onFocus: function(e) {
-           handleFocus();
-           if (child.props.onFocus) {
-             child.props.onFocus(e);
-           }
-        },
-        onBlur: function(e) {
-           handleBlur();
-           if (child.props.onBlur) {
-             child.props.onBlur(e);
-           }
-        },
-        id: id,
-        style: style,
-        className: cn(className, child.props.className)
-      });
-    }
-
-    return React.createElement('button', {
-      id: id,
-      style: style,
-      ref: triggerRef,
-      className: className,
-      onMouseEnter: handleMouseEnter,
-      onMouseLeave: handleMouseLeave,
-      onFocus: handleFocus,
-      onBlur: handleBlur
-    }, children);
+  if (asChild && React.isValidElement(children)) {
+    const child = children as React.ReactElement<any>;
+    return React.cloneElement(child, {
+      ref: (node: any) => { triggerRef.current = node; const origRef = (child as any).ref; if (typeof origRef === 'function') origRef(node); else if (origRef) origRef.current = node; },
+      onMouseEnter: (e: any) => { handlers.onMouseEnter(); child.props.onMouseEnter?.(e); },
+      onMouseLeave: (e: any) => { handlers.onMouseLeave(); child.props.onMouseLeave?.(e); },
+      onFocus: (e: any) => { handlers.onFocus(); child.props.onFocus?.(e); },
+      onBlur: (e: any) => { handlers.onBlur(); child.props.onBlur?.(e); },
+      id, style, className: cn(className, child.props.className),
+    });
   }
-);
+
+  return <button id={id} style={style} ref={triggerRef as any} className={className} {...handlers}>{children}</button>;
+});
 TooltipTrigger.displayName = "TooltipTrigger";
 
-// Content
-export var TooltipContent = React.forwardRef(
-  function(props, ref) {
-    var className = props.className;
-    var sideOffset = props.sideOffset === undefined ? 4 : props.sideOffset;
-    var side = props.side === undefined ? "top" : props.side;
-    var style = props.style;
-    var children = props.children;
-    var id = props.id;
+export const TooltipContent = React.forwardRef<HTMLDivElement, any>(({ className, sideOffset = 4, side = 'top', style, children, id, hidden }: any, ref) => {
+  const { isOpen, triggerRef, contentRef } = useTooltipCtx();
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
-    var context = useTooltip();
-    var isOpen = context.isOpen;
-    var triggerRef = context.triggerRef;
-    var contentRef = context.contentRef;
+  useEffect(() => {
+    if (isOpen && triggerRef.current && contentRef.current) {
+      const updatePosition = () => {
+        if (!triggerRef.current || !contentRef.current) return;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const contentRect = contentRef.current.getBoundingClientRect();
+        let top = triggerRect.top + window.scrollY - contentRect.height - sideOffset;
+        let left = triggerRect.left + window.scrollX + (triggerRect.width / 2) - (contentRect.width / 2);
+        if (left < 5) left = 5;
+        if (left + contentRect.width > window.innerWidth - 5) left = window.innerWidth - contentRect.width - 5;
+        if (top < window.scrollY + 5) top = triggerRect.bottom + window.scrollY + sideOffset;
+        setPosition({ top, left });
+      };
+      updatePosition();
+      window.addEventListener("resize", updatePosition);
+      window.addEventListener("scroll", updatePosition, true);
+      return () => { window.removeEventListener("resize", updatePosition); window.removeEventListener("scroll", updatePosition, true); };
+    }
+  }, [isOpen, sideOffset, triggerRef, contentRef]);
 
-    var _sp = React.useState({ top: 0, left: 0 });
-    var position = _sp[0];
-    var setPosition = _sp[1];
+  if (!isOpen || hidden) return null;
 
-    React.useEffect(function() {
-      if (isOpen && triggerRef.current && contentRef.current) {
-        var updatePosition = function() {
-            if (!triggerRef.current || !contentRef.current) return;
-            var triggerRect = triggerRef.current.getBoundingClientRect();
-            var contentRect = contentRef.current.getBoundingClientRect();
-            
-            var top = triggerRect.top + window.scrollY - contentRect.height - sideOffset;
-            var left = triggerRect.left + window.scrollX + (triggerRect.width / 2) - (contentRect.width / 2);
-
-            if (left < 5) {
-              left = 5;
-            }
-            if (left + contentRect.width > window.innerWidth - 5) {
-                left = window.innerWidth - contentRect.width - 5;
-            }
-
-            if (top < window.scrollY + 5) {
-                 top = triggerRect.bottom + window.scrollY + sideOffset;
-            }
-
-            setPosition({ top: top, left: left });
-        };
-
-        updatePosition();
-        window.addEventListener("resize", updatePosition);
-        window.addEventListener("scroll", updatePosition, true);
-
-        return function() {
-          window.removeEventListener("resize", updatePosition);
-          window.removeEventListener("scroll", updatePosition, true);
-        };
-      }
-    }, [isOpen, sideOffset, triggerRef, contentRef]);
-
-    if (!isOpen) return null;
-
-    return createPortal(
-      React.createElement('div', {
-        id: id,
-        ref: function(node) {
-             contentRef.current = node;
-             if (typeof ref === 'function') {
-               ref(node);
-             } else if (ref) {
-               ref.current = node;
-             }
-        },
-        className: cn("wp-block-tooltip-content", className),
-        style: {
-          top: position.top,
-          left: position.left,
-          position: "absolute",
-          marginTop: style && style.marginTop,
-          marginBottom: style && style.marginBottom,
-          marginLeft: style && style.marginLeft,
-          marginRight: style && style.marginRight
-        },
-        'data-state': isOpen ? "delayed-open" : "closed"
-      }, children),
-      document.body
-    );
-  }
-);
+  return createPortal(
+    <div id={id}
+      ref={(node) => { contentRef.current = node; if (typeof ref === 'function') ref(node); else if (ref) (ref as any).current = node; }}
+      className={cn("wp-block-tooltip-content", className)}
+      style={{ top: position.top, left: position.left, position: "absolute", ...style }} data-state="delayed-open">
+      {children}
+    </div>,
+    document.body,
+  );
+});
 TooltipContent.displayName = "TooltipContent";
-
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };

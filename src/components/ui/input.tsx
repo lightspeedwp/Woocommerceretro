@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "@/components/blocks/forms/Input";
 
-var NewInput = Input;
+const NewInput = Input;
 
 /**
  * @typedef {Object} InputProps
@@ -22,6 +22,6 @@ var NewInput = Input;
  * Redirects to new WordPress-aligned component.
  * @deprecated Import from @/components/blocks/forms/Input instead.
  */
-var Input = NewInput;
+const Input = NewInput;
 
 export { Input };

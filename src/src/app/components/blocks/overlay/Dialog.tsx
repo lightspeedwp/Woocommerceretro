@@ -1,260 +1,110 @@
-import React from "react";
-import * as ReactDOMModule from "react-dom";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { X } from '@phosphor-icons/react';
 
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useEffect = React.useEffect;
-var useState = React.useState;
-var forwardRef = React.forwardRef;
-var createPortal = ReactDOMModule.createPortal;
+interface DialogContextValue {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
 
-var DialogContext = createContext(undefined);
+const DialogContext = createContext<DialogContextValue | undefined>(undefined);
 
-/**
- * Dialog Component (Modal)
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript-specific syntax
- */
-export function Dialog(props) {
-  var children = props.children;
-  var controlledOpen = props.open;
-  var defaultOpen = props.defaultOpen === undefined ? false : props.defaultOpen;
-  var onOpenChange = props.onOpenChange;
+export const Dialog = ({ children, open: controlledOpen, defaultOpen = false, onOpenChange }: any) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
 
-  var state = useState(defaultOpen);
-  var uncontrolledOpen = state[0];
-  var setUncontrolledOpen = state[1];
-  var open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
-
-  var handleOpenChange = function(newOpen) {
-    if (controlledOpen === undefined) {
-      setUncontrolledOpen(newOpen);
-    }
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
+  const handleOpenChange = (newOpen: boolean) => {
+    if (controlledOpen === undefined) setUncontrolledOpen(newOpen);
+    onOpenChange?.(newOpen);
   };
 
-  var contextValue = { open: open, onOpenChange: handleOpenChange };
-
-  return React.createElement(DialogContext.Provider, { value: contextValue }, children);
+  return <DialogContext.Provider value={{ open, onOpenChange: handleOpenChange }}>{children}</DialogContext.Provider>;
 }
 
-export function DialogTrigger(props) {
-  var asChild = props.asChild;
-  var children = props.children;
-  var className = props.className || '';
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(DialogContext);
+export const DialogTrigger = ({ asChild, children, className = '', id, style }: any) => {
+  const context = useContext(DialogContext);
   if (!context) return null;
-  var onOpenChange = context.onOpenChange;
 
   if (asChild && React.isValidElement(children)) {
-    var child = children;
-    var childProps = {
-      onClick: function(e) {
-        if (child.props.onClick) {
-          child.props.onClick(e);
-        }
-        onOpenChange(true);
-      },
-      id: id,
-      style: style,
-      className: (className ? className + ' ' : '') + (child.props.className || '')
-    };
-    return React.cloneElement(child, childProps);
+    return React.cloneElement(children as React.ReactElement<any>, {
+      onClick: (e: any) => { (children as any).props.onClick?.(e); context.onOpenChange(true); },
+      id, style, className: `${className} ${(children as any).props.className || ''}`.trim(),
+    });
   }
 
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    type: "button",
-    className: 'wp-dialog-trigger ' + className,
-    onClick: function() { onOpenChange(true); }
-  }, children);
+  return <button id={id} style={style} type="button" className={`wp-dialog-trigger ${className}`} onClick={() => context.onOpenChange(true)}>{children}</button>;
 }
 
-export function DialogPortal(props) {
-  var mountState = useState(false);
-  var mounted = mountState[0];
-  var setMounted = mountState[1];
-  useEffect(function() { setMounted(true); }, []);
+export const DialogPortal = ({ children }: any) => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   if (!mounted) return null;
-  return createPortal(props.children, document.body);
+  return createPortal(children, document.body);
 }
 
-export var DialogOverlay = forwardRef(function DialogOverlay(props, ref) {
-  var className = props.className || '';
-  var id = props.id;
-  var style = props.style;
+export const DialogOverlay = React.forwardRef<HTMLDivElement, any>(({ className = '', id, style }, ref) => {
+  const context = useContext(DialogContext);
+  if (!context?.open) return null;
 
-  var context = useContext(DialogContext);
-  if (!context) return null;
-  var open = context.open;
-  var onOpenChange = context.onOpenChange;
-
-  if (!open) return null;
-
-  var handleOverlayClick = function() { onOpenChange(false); };
-
-  var combinedClassName = [
-    'wp-block-dialog__overlay',
-    'funky-overlay',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
-
-  return React.createElement('div', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: combinedClassName,
-    onClick: handleOverlayClick,
-    "data-state": open ? "open" : "closed"
-  });
+  return (
+    <div ref={ref} id={id} style={style} className={`wp-block-dialog__overlay funky-overlay ${className}`}
+      onClick={() => context.onOpenChange(false)} data-state={context.open ? "open" : "closed"} />
+  );
 });
-
 DialogOverlay.displayName = "DialogOverlay";
 
-export var DialogClose = forwardRef(function DialogClose(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(DialogContext);
+export const DialogClose = React.forwardRef<HTMLButtonElement, any>(({ className = '', children, id, style }, ref) => {
+  const context = useContext(DialogContext);
   if (!context) return null;
-  var onOpenChange = context.onOpenChange;
 
-  var handleClick = function() { onOpenChange(false); };
-
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    type: "button",
-    ref: ref,
-    className: 'wp-block-dialog__close ' + className,
-    onClick: handleClick
-  }, children);
+  return <button id={id} style={style} type="button" ref={ref} className={`wp-block-dialog__close ${className}`} onClick={() => context.onOpenChange(false)}>{children}</button>;
 });
-
 DialogClose.displayName = "DialogClose";
 
-export var DialogContent = forwardRef(function DialogContent(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(DialogContext);
+export const DialogContent = React.forwardRef<HTMLDivElement, any>(({ className = '', children, id, style }, ref) => {
+  const context = useContext(DialogContext);
   if (!context) return null;
-  var open = context.open;
-  var onOpenChange = context.onOpenChange;
+  const { open, onOpenChange } = context;
 
-  useEffect(function() {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return function() {
-      document.body.style.overflow = "";
-    };
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  useEffect(function() {
-    var handleKeyDown = function(e) {
-      if (e.key === "Escape" && open) {
-        onOpenChange(false);
-      }
-    };
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => { if (e.key === "Escape" && open) onOpenChange(false); };
     document.addEventListener("keydown", handleKeyDown);
-    return function() { document.removeEventListener("keydown", handleKeyDown); };
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, onOpenChange]);
 
   if (!open) return null;
 
-  var combinedClassName = [
-    'wp-block-dialog__content',
-    'funky-dialog',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
-
-  var handleClose = function() { onOpenChange(false); };
-
-  return React.createElement('div', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: combinedClassName,
-    "data-state": open ? "open" : "closed"
-  },
-    children,
-    React.createElement(DialogClose, { className: "wp-radix-close-button funky-dialog-close" },
-      React.createElement(X, { className: "wp-radix-close-button__icon", size: 18 }),
-      React.createElement('span', { className: "sr-only" }, "Close")
-    )
+  return (
+    <div ref={ref} id={id} style={style} className={`wp-block-dialog__content funky-dialog ${className}`} data-state={open ? "open" : "closed"}>
+      {children}
+      <DialogClose className="wp-radix-close-button funky-dialog-close">
+        <X className="wp-radix-close-button__icon" size={18} />
+        <span className="sr-only">Close</span>
+      </DialogClose>
+    </div>
   );
 });
-
 DialogContent.displayName = "DialogContent";
 
-export function DialogHeader(props) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    className: 'wp-block-dialog__header funky-dialog-header ' + className
-  }, children);
+export const DialogHeader = ({ className = '', children, id, style }: any) => {
+  return <div id={id} style={style} className={`wp-block-dialog__header funky-dialog-header ${className}`}>{children}</div>;
 }
 
-export function DialogFooter(props) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    className: 'wp-block-dialog__footer funky-dialog-footer ' + className
-  }, children);
+export const DialogFooter = ({ className = '', children, id, style }: any) => {
+  return <div id={id} style={style} className={`wp-block-dialog__footer funky-dialog-footer ${className}`}>{children}</div>;
 }
 
-export var DialogTitle = forwardRef(function DialogTitle(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
+export const DialogTitle = React.forwardRef<HTMLHeadingElement, any>(({ className = '', children, id, style }, ref) => (
+  <h2 ref={ref} id={id} style={style} className={`wp-block-dialog__title funky-dialog-title ${className}`}>{children}</h2>
+));
+DialogTitle.displayName = "DialogTitle";
 
-  return React.createElement('h2', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: 'wp-block-dialog__title funky-dialog-title ' + className
-  }, children);
-});
-
-export var DialogDescription = forwardRef(function DialogDescription(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('p', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: 'wp-block-dialog__description funky-dialog-desc ' + className
-  }, children);
-});
+export const DialogDescription = React.forwardRef<HTMLParagraphElement, any>(({ className = '', children, id, style }, ref) => (
+  <p ref={ref} id={id} style={style} className={`wp-block-dialog__description funky-dialog-desc ${className}`}>{children}</p>
+));
+DialogDescription.displayName = "DialogDescription";

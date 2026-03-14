@@ -17,7 +17,7 @@
  * @property {string} shopLink - URL to the filtered shop page.
  */
 
-export var SHOP_BRANDS_DATA = {
+export const SHOP_BRANDS_DATA = {
   'kwv-brandy': {
     id: 'kwv-brandy',
     name: 'KWV Brandy',

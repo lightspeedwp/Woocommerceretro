@@ -5,7 +5,7 @@
  * timelines, methods, eligibility, and status tracking.
  *
  * Optimized for Figma Make parser:
- * 1. No const, let, arrow functions, destructuring
+ * 1. No optional chaining, nullish coalescing, or spread at module level
  * 2. ASCII characters only
  *
  * @module data/refunds
@@ -31,7 +31,7 @@
  * @property {string} answer
  */
 
-var refundTimelines = [
+const refundTimelines = [
   {
     method: 'Original Payment Method',
     timeframe: '5-7 business days',
@@ -54,7 +54,7 @@ var refundTimelines = [
   }
 ];
 
-var refundEligibility = [
+const refundEligibility = [
   { icon: 'check', text: 'Unused items in original packaging within 30 days', eligible: true },
   { icon: 'check', text: 'Defective or damaged items (no time limit)', eligible: true },
   { icon: 'check', text: 'Wrong item received', eligible: true },
@@ -66,14 +66,14 @@ var refundEligibility = [
   { icon: 'x', text: 'Items returned after 30 days without prior approval', eligible: false }
 ];
 
-var refundStatusSteps = [
+const refundStatusSteps = [
   { step: '1', title: 'Return Received', description: 'We have received your returned item at our warehouse.' },
   { step: '2', title: 'Inspection', description: 'Our team inspects the item to confirm it meets return conditions.' },
   { step: '3', title: 'Refund Approved', description: 'Your refund has been approved and is being processed.' },
   { step: '4', title: 'Money Back', description: 'The refund has been issued to your original payment method.' }
 ];
 
-var refundFAQs = [
+const refundFAQs = [
   {
     question: 'How do I check the status of my refund?',
     answer: 'Log in to your account and visit the Orders section. Each returned order shows its current refund status. You can also use the Track Order page with your order number and email.'
@@ -100,7 +100,7 @@ var refundFAQs = [
   }
 ];
 
-var refundsPageContent = {
+const refundsPageContent = {
   title: 'Refunds',
   description: 'Everything you need to know about our refund process, timelines, and eligibility.',
   timelinesHeading: 'Refund Timelines',

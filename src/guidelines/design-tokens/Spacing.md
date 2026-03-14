@@ -3,7 +3,7 @@
 **Component Type:** Design System  
 **Scope:** WordPress theme.json Aligned Spacing Scale  
 **Related:** [/guidelines/design-tokens/Typography.md], [/guidelines/mobile/spacing.md]  
-**Last Updated:** 2026-02-22
+**Last Updated:** 2026-03-11
 
 ---
 
@@ -68,6 +68,8 @@ This document defines the spacing system for the WooCommerce prototype, aligned 
 
 **Prefer `gap` over `margin` for grids and flex containers.**
 
+**WARNING:** When migrating from margins to gap, the parent container MUST have `display: flex` or `display: grid`. Removing margins without adding a layout context will collapse all spacing. See [Margin Removal Guidelines](/guidelines/development/margin-removal-guidelines.md) for complete edge cases and decision tree.
+
 | Use Case | Spacing | WordPress Variable |
 |----------|---------|-------------------|
 | **Tight elements** | 20px | `--wp--preset--spacing--20` |
@@ -120,6 +122,10 @@ Minimum touch target size: **44px x 44px** (WCAG 2.2 Level AAA)
 ---
 
 ## Changelog
+
+### v2.2 - 2026-03-11
+- Added cross-reference to Margin Removal Guidelines
+- Added warning about layout context requirement when migrating margin to gap
 
 ### v2.1 - 2026-02-22
 - Renamed from `spacing.md` to `Spacing.md` (naming convention enforcement)

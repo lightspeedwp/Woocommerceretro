@@ -4,7 +4,7 @@
 **Source Report:** `/reports/audits/2026-03-03_light-dark-mode-stylesheet-audit.md`
 **Priority:** P0 (Critical)
 **Total Estimated Effort:** ~15 hours
-**Last Updated:** March 8, 2026
+**Last Updated:** March 13, 2026
 
 ---
 
@@ -40,7 +40,7 @@ Deferred: Cannot delete protected CSS files, making file rename/refactor tasks i
 - [ ] **3.5** Refactor `/src/styles/globals.css` to orchestrator-only (move funky styles to `theme-funky.css`)
 - [ ] **3.6** Update `globals.css` import order
 
-## Phase 4: Hardcoded Color Remediation (P1 - ~4 hours) -- IN PROGRESS
+## Phase 4: Hardcoded Color Remediation (P1 - ~4 hours) -- PARTIALLY COMPLETE
 
 - [ ] **4.1** Convert funky checkout/cart hardcoded colors to CSS variables (~30 instances)
 - [x] **4.2** Convert `theme-light-mode.css` link colors to CSS variables -- Done: uses `var(--wp--preset--color--link)` and `var(--wp--preset--color--link-hover)`
@@ -50,12 +50,15 @@ Deferred: Cannot delete protected CSS files, making file rename/refactor tasks i
 - [ ] **4.6** Audit and convert block CSS hardcoded colors
 - [ ] **4.7** Audit and convert section CSS hardcoded colors
 
-## Phase 5: Scattered Rule Consolidation (P2 - ~3 hours)
+## Phase 5: Scattered Rule Consolidation (P2 - ~3 hours) -- LOW PRIORITY
 
 - [ ] **5.1** Eliminate dark mode rules replaceable by CSS variables (~120 rules)
 - [ ] **5.2** Move structural dark overrides to `theme-dark.css` (~30 rules)
 - [ ] **5.3** Document co-located overrides that stay (mega-menu, funky-sections)
-- [ ] **5.4** Reduce `/styles/globals.css` to minimal Figma Make entrypoint
+- [x] **5.4** Reduce `/styles/globals.css` to minimal Figma Make entrypoint ✅ **DONE (2026-03-13)**
+  - Created `/styles/globals-minimal.css` with 5 critical CSS imports
+  - Updated `/src/main.tsx` to use minimal entry point
+  - Full globals.css preserved as production backup
 
 ## Phase 6: Verification (P1 - ~2 hours)
 
@@ -69,4 +72,4 @@ Deferred: Cannot delete protected CSS files, making file rename/refactor tasks i
 ---
 
 **Execution Order:** Phase 2 > Phase 1 > Phase 3 > Phase 4 > Phase 5 > Phase 6
-**Progress:** Phase 1 COMPLETE, Phase 2 COMPLETE, Phase 4 4/7 done, Phase 6.4 done (March 8, 2026)
+**Progress:** Phase 1 COMPLETE, Phase 2 COMPLETE, Phase 3 DEFERRED, Phase 4 4/7 done, Phase 5.4 done, Phase 6.4 done (March 13, 2026)

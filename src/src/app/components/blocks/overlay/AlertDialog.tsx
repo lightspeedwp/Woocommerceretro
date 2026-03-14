@@ -1,274 +1,114 @@
 "use client";
 
-import React from "react";
-import * as ReactDOMModule from "react-dom";
-import * as cnModule from "../../../utils/cn";
-import * as ButtonsModule from "../design/Buttons";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { cn } from "../../../utils/cn";
+import { Button } from "../design/Buttons";
 
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useEffect = React.useEffect;
-var useState = React.useState;
-
-var createPortal = ReactDOMModule.createPortal;
-var cn = cnModule.cn;
-var Button = ButtonsModule.Button;
-
-/**
- * AlertDialog Component
- */
-
-var AlertDialogContext = createContext(undefined);
-
-export function AlertDialog(props) {
-  var children = props.children;
-  var controlledOpen = props.open;
-  var defaultOpen = props.defaultOpen === undefined ? false : props.defaultOpen;
-  var onOpenChange = props.onOpenChange;
-
-  var _s = useState(defaultOpen);
-  var uncontrolledOpen = _s[0];
-  var setUncontrolledOpen = _s[1];
-  var open = controlledOpen === undefined ? uncontrolledOpen : controlledOpen;
-
-  var handleOpenChange = function(newOpen) {
-    if (controlledOpen === undefined) {
-      setUncontrolledOpen(newOpen);
-    }
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
-  };
-
-  var contextValue = { open: open, onOpenChange: handleOpenChange };
-
-  return React.createElement(AlertDialogContext.Provider, { value: contextValue },
-    children
-  );
+interface AlertDialogContextValue {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export function AlertDialogTrigger(props) {
-  var asChild = props.asChild;
-  var children = props.children;
-  var className = props.className;
-  var id = props.id;
-  var style = props.style;
+const AlertDialogContext = createContext<AlertDialogContextValue | undefined>(undefined);
 
-  var context = useContext(AlertDialogContext);
+export const AlertDialog = ({ children, open: controlledOpen, defaultOpen = false, onOpenChange }: any) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const open = controlledOpen === undefined ? uncontrolledOpen : controlledOpen;
+
+  const handleOpenChange = (newOpen: boolean) => {
+    if (controlledOpen === undefined) setUncontrolledOpen(newOpen);
+    onOpenChange?.(newOpen);
+  };
+
+  return <AlertDialogContext.Provider value={{ open, onOpenChange: handleOpenChange }}>{children}</AlertDialogContext.Provider>;
+}
+
+export const AlertDialogTrigger = ({ asChild, children, className, id, style }: any) => {
+  const context = useContext(AlertDialogContext);
   if (!context) return null;
-  var onOpenChange = context.onOpenChange;
 
   if (asChild && React.isValidElement(children)) {
-    var child = children;
-    return React.cloneElement(child, {
-      onClick: function(e) {
-        if (child.props.onClick) {
-          child.props.onClick(e);
-        }
-        onOpenChange(true);
-      },
-      id: id,
-      style: style,
-      className: cn(className, child.props.className)
+    return React.cloneElement(children as React.ReactElement<any>, {
+      onClick: (e: any) => { (children as any).props.onClick?.(e); context.onOpenChange(true); },
+      id, style, className: cn(className, (children as any).props.className),
     });
   }
 
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    type: "button",
-    onClick: function() { onOpenChange(true); },
-    className: className
-  }, children);
+  return <button id={id} style={style} type="button" onClick={() => context.onOpenChange(true)} className={className}>{children}</button>;
 }
 
-export function AlertDialogPortal(props) {
-  var children = props.children;
-  var _ms = useState(false);
-  var mounted = _ms[0];
-  var setMounted = _ms[1];
-  useEffect(function() { setMounted(true); }, []);
+export const AlertDialogPortal = ({ children }: any) => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   if (!mounted) return null;
   return createPortal(children, document.body);
 }
 
-export var AlertDialogOverlay = React.forwardRef(function(props, ref) {
-  var className = props.className;
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(AlertDialogContext);
-  if (!context) return null;
-  var open = context.open;
-
-  if (!open) return null;
-
-  return React.createElement('div', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: cn("wp-alert-dialog-overlay", className),
-    "data-state": open ? "open" : "closed"
-  });
+export const AlertDialogOverlay = React.forwardRef<HTMLDivElement, any>(({ className, id, style }, ref) => {
+  const context = useContext(AlertDialogContext);
+  if (!context?.open) return null;
+  return <div ref={ref} id={id} style={style} className={cn("wp-alert-dialog-overlay", className)} data-state={context.open ? "open" : "closed"} />;
 });
 AlertDialogOverlay.displayName = "AlertDialogOverlay";
 
-export var AlertDialogContent = React.forwardRef(function(props, ref) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(AlertDialogContext);
+export const AlertDialogContent = React.forwardRef<HTMLDivElement, any>(({ className, children, id, style }, ref) => {
+  const context = useContext(AlertDialogContext);
   if (!context) return null;
-  var open = context.open;
-  var onOpenChange = context.onOpenChange;
+  const { open, onOpenChange } = context;
 
-  useEffect(function() {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return function() {
-      document.body.style.overflow = "";
-    };
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  useEffect(function() {
-    var handleKeyDown = function(e) {
-      if (e.key === "Escape" && open) {
-        onOpenChange(false);
-      }
-    };
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => { if (e.key === "Escape" && open) onOpenChange(false); };
     document.addEventListener("keydown", handleKeyDown);
-    return function() { document.removeEventListener("keydown", handleKeyDown); };
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, onOpenChange]);
 
   if (!open) return null;
-
-  return React.createElement('div', {
-    ref: ref,
-    id: id,
-    style: style,
-    role: "alertdialog",
-    className: cn("wp-alert-dialog-content", className),
-    "data-state": open ? "open" : "closed"
-  }, children);
+  return <div ref={ref} id={id} style={style} role="alertdialog" className={cn("wp-alert-dialog-content", className)} data-state={open ? "open" : "closed"}>{children}</div>;
 });
 AlertDialogContent.displayName = "AlertDialogContent";
 
-export function AlertDialogHeader(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    className: cn("wp-block-alert-dialog__header flex flex-col space-y-2 text-center sm:text-left", className)
-  }, children);
+export const AlertDialogHeader = ({ className, children, id, style }: any) => {
+  return <div id={id} style={style} className={cn("wp-block-alert-dialog__header", className)}>{children}</div>;
 }
-AlertDialogHeader.displayName = "AlertDialogHeader";
 
-export function AlertDialogFooter(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    className: cn("wp-block-alert-dialog__footer flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)
-  }, children);
+export const AlertDialogFooter = ({ className, children, id, style }: any) => {
+  return <div id={id} style={style} className={cn("wp-block-alert-dialog__footer", className)}>{children}</div>;
 }
-AlertDialogFooter.displayName = "AlertDialogFooter";
 
-export var AlertDialogTitle = React.forwardRef(function(props, ref) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('h2', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: cn("wp-block-alert-dialog__title text-lg font-semibold", className)
-  }, children);
-});
+export const AlertDialogTitle = React.forwardRef<HTMLHeadingElement, any>(({ className, children, id, style }, ref) => (
+  <h2 ref={ref} id={id} style={style} className={cn("wp-block-alert-dialog__title", className)}>{children}</h2>
+));
 AlertDialogTitle.displayName = "AlertDialogTitle";
 
-export var AlertDialogDescription = React.forwardRef(function(props, ref) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('p', {
-    ref: ref,
-    id: id,
-    style: style,
-    className: cn("wp-block-alert-dialog__description text-sm text-muted-foreground", className)
-  }, children);
-});
+export const AlertDialogDescription = React.forwardRef<HTMLParagraphElement, any>(({ className, children, id, style }, ref) => (
+  <p ref={ref} id={id} style={style} className={cn("wp-block-alert-dialog__description", className)}>{children}</p>
+));
 AlertDialogDescription.displayName = "AlertDialogDescription";
 
-export var AlertDialogAction = React.forwardRef(function(props, ref) {
-  var className = props.className;
-  var onClick = props.onClick;
-  var id = props.id;
-  var style = props.style;
-  var children = props.children;
-
-  var context = useContext(AlertDialogContext);
+export const AlertDialogAction = React.forwardRef<HTMLButtonElement, any>(({ className, onClick, id, style, children }, ref) => {
+  const context = useContext(AlertDialogContext);
   if (!context) return null;
-  var onOpenChange = context.onOpenChange;
-
-  return React.createElement(Button, {
-    id: id,
-    style: style,
-    ref: ref,
-    className: cn(className),
-    onClick: function(e) {
-      if (onClick) {
-        onClick(e);
-      }
-      if (!e.defaultPrevented) {
-        onOpenChange(false);
-      }
-    }
-  }, children);
+  return (
+    <Button id={id} style={style} ref={ref} className={cn(className)} onClick={(e: any) => { onClick?.(e); if (!e.defaultPrevented) context.onOpenChange(false); }}>
+      {children}
+    </Button>
+  );
 });
 AlertDialogAction.displayName = "AlertDialogAction";
 
-export var AlertDialogCancel = React.forwardRef(function(props, ref) {
-  var className = props.className;
-  var onClick = props.onClick;
-  var id = props.id;
-  var style = props.style;
-  var children = props.children;
-
-  var context = useContext(AlertDialogContext);
+export const AlertDialogCancel = React.forwardRef<HTMLButtonElement, any>(({ className, onClick, id, style, children }, ref) => {
+  const context = useContext(AlertDialogContext);
   if (!context) return null;
-  var onOpenChange = context.onOpenChange;
-
-  return React.createElement(Button, {
-    id: id,
-    style: style,
-    ref: ref,
-    variant: "outline",
-    className: cn("wp-block-alert-dialog__cancel", className),
-    onClick: function(e) {
-      if (onClick) {
-        onClick(e);
-      }
-      if (!e.defaultPrevented) {
-        onOpenChange(false);
-      }
-    }
-  }, children);
+  return (
+    <Button id={id} style={style} ref={ref} variant="outline" className={cn("wp-block-alert-dialog__cancel", className)} onClick={(e: any) => { onClick?.(e); if (!e.defaultPrevented) context.onOpenChange(false); }}>
+      {children}
+    </Button>
+  );
 });
 AlertDialogCancel.displayName = "AlertDialogCancel";

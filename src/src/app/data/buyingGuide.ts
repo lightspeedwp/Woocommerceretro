@@ -20,7 +20,7 @@
 // @property {string} link
 // @property {string} icon
 
-var buyingGuides = [
+const buyingGuides = [
   {
     id: 'measurements',
     title: 'Know Your Measurements',
@@ -63,14 +63,14 @@ var buyingGuides = [
   },
 ];
 
-var categoryGuides = [
+const categoryGuides = [
   { id: 'apparel', name: 'Apparel', description: 'Find the perfect fit, fabric, and style.', link: '/shop/category/apparel', icon: 'ShoppingBag' },
   { id: 'accessories', name: 'Accessories', description: 'Complete your look with the right pieces.', link: '/shop/category/accessories', icon: 'ShoppingBag' },
   { id: 'home', name: 'Home & Living', description: 'Quality essentials for every room.', link: '/shop/category/home', icon: 'ShoppingBag' },
   { id: 'electronics', name: 'Electronics', description: 'Choose the right tech for your needs.', link: '/shop/category/electronics', icon: 'ShoppingBag' },
 ];
 
-var buyingGuidePageContent = {
+const buyingGuidePageContent = {
   title: 'Buying Guide',
   description: 'Expert tips and recommendations to help you find exactly what you need.',
   tipsHeading: 'Shopping Tips',

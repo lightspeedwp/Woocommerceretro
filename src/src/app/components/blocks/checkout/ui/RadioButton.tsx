@@ -2,36 +2,50 @@ import React from 'react';
 
 /**
  * RadioButton Component
- * No TypeScript syntax for parser compatibility.
+ * 
+ * A styled radio button with optional label wrapper.
  */
-export function RadioButton(props) {
-  var label = props.label;
-  var className = props.className || '';
-  var checked = props.checked;
-  var onChange = props.onChange;
-  var name = props.name;
-  var value = props.value;
-  var disabled = props.disabled;
-  var id = props.id;
+export const RadioButton = ({
+  label,
+  className = '',
+  checked,
+  onChange,
+  name,
+  value,
+  disabled,
+  id,
+}: {
+  label?: string;
+  className?: string;
+  checked?: boolean;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  name?: string;
+  value?: string;
+  disabled?: boolean;
+  id?: string;
+}) => {
+  const Wrapper = label ? 'label' : 'div';
+  const wrapperClass = `wp-block-radio-wrapper ${className}`;
 
-  var Wrapper = label ? 'label' : 'div';
-  var wrapperClass = 'wp-block-radio-wrapper ' + className;
-
-  return React.createElement(Wrapper, { className: wrapperClass },
-    React.createElement('div', { className: 'wp-block-radio-input-wrapper' },
-      React.createElement('input', {
-        type: 'radio',
-        className: 'wp-block-radio',
-        checked: checked,
-        onChange: onChange,
-        name: name,
-        value: value,
-        disabled: disabled,
-        id: id
-      })
-    ),
-    label ? React.createElement('span', { className: 'wp-block-radio-label' }, 
-      React.createElement('small', null, label)
-    ) : null
+  return (
+    <Wrapper className={wrapperClass}>
+      <div className="wp-block-radio-input-wrapper">
+        <input
+          type="radio"
+          className="wp-block-radio"
+          checked={checked}
+          onChange={onChange}
+          name={name}
+          value={value}
+          disabled={disabled}
+          id={id}
+        />
+      </div>
+      {label ? (
+        <span className="wp-block-radio-label">
+          <small>{label}</small>
+        </span>
+      ) : null}
+    </Wrapper>
   );
-}
+};

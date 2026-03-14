@@ -6,9 +6,9 @@ import {
 } from "../../src/app/components/blocks/feedback/Alert";
 
 // Re-export component
-var Alert = NewAlert;
-var AlertTitle = NewAlertTitle;
-var AlertDescription = NewAlertDescription;
+const Alert = NewAlert;
+const AlertTitle = NewAlertTitle;
+const AlertDescription = NewAlertDescription;
 
 /**
  * Legacy Alert compatibility shim.

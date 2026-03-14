@@ -10,7 +10,7 @@
  * @property {string[][]} rows
  */
 
-export var sizeData = {
+export const sizeData = {
   tops: {
     headers: ['Size', 'US', 'Chest (in)', 'Waist (in)', 'Length (in)'],
     rows: [
@@ -46,13 +46,13 @@ export var sizeData = {
   },
 };
 
-export var categoryLabels = {
+export const categoryLabels = {
   tops: 'Tops & Outerwear',
   bottoms: 'Bottoms',
   shoes: 'Shoes',
 };
 
-export var measurementInstructions = [
+export const measurementInstructions = [
   { 
     title: 'Chest', 
     description: 'Measure around the fullest part of your chest, keeping the tape horizontal.',
@@ -75,7 +75,7 @@ export var measurementInstructions = [
   },
 ];
 
-export var sizeGuidePageContent = {
+export const sizeGuidePageContent = {
   title: 'Size guide',
   description: 'Find your perfect fit with our comprehensive sizing charts and measurement tips.',
   measureHeading: 'How to Measure',

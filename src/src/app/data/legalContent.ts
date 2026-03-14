@@ -16,7 +16,7 @@
 // Privacy policy
 // ---------------------------------------------------------------------------
 
-export var privacyPolicyContent = {
+export const privacyPolicyContent = {
   title: 'Privacy policy',
   lastUpdated: 'January 1, 2026',
   intro:
@@ -71,7 +71,7 @@ export var privacyPolicyContent = {
 // Terms and conditions
 // ---------------------------------------------------------------------------
 
-export var termsContent = {
+export const termsContent = {
   title: 'Terms and conditions',
   lastUpdated: 'January 1, 2026',
   intro:

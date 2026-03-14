@@ -16,7 +16,7 @@
 // @property {boolean} inStock
 // @property {string} category
 
-var mockWishlistItems = [
+const mockWishlistItems = [
   {
     id: '1',
     name: 'Premium Wireless Headphones',

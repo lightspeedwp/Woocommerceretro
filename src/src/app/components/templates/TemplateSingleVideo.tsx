@@ -1,18 +1,11 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { useParams } from 'react-router';
 import { ShareNetwork as Share2, Calendar, User } from '@phosphor-icons/react';
 
-var useParams = ReactRouterModule.useParams;
-
-import * as LayoutModule from '../parts/Layout';
-import * as ContainerModule from '../common/Container';
-import * as PostsDataModule from '../../data/posts';
-import * as UsersDataModule from '../../data/users';
-
-var Layout = LayoutModule.Layout;
-var Container = ContainerModule.Container;
-var getPostBySlug = PostsDataModule.getPostBySlug;
-var getUserById = UsersDataModule.getUserById;
+import { Layout } from '../parts/Layout';
+import { Container } from '../common/Container';
+import { getPostBySlug } from '../../data/posts';
+import { getUserById } from '../../data/users';
 
 /**
  * TemplateSingleVideo — Video Post Format
@@ -22,77 +15,77 @@ var getUserById = UsersDataModule.getUserById;
  *
  * **CSS:** `/src/styles/sections/blog-funky.css`
  */
-export function TemplateSingleVideo() {
-  var params = useParams();
-  var slug = params.slug;
-  var post = getPostBySlug(slug || '');
+export const TemplateSingleVideo = () => {
+  const { slug } = useParams();
+  const post = getPostBySlug(slug || '');
 
-  if (!post) return React.createElement('div', { className: "single-post__not-found" }, "Post not found");
+  if (!post) return <div className="single-post__not-found">Post not found</div>;
 
-  var author = getUserById(post.author);
-  var authorName = (author && author.name) || 'Unknown Author';
-  var videoUrl = post.format_data && post.format_data.video_url;
+  const author = getUserById(post.author);
+  const authorName = author?.name || 'Unknown Author';
+  const videoUrl = post.format_data?.video_url;
 
   return (
-    React.createElement(Layout, null,
-      React.createElement('article', { className: "single-video" },
-        /* Video Player Header */
-        React.createElement('section', { className: "single-video__hero" },
-          React.createElement(Container, null,
-            React.createElement('div', { className: "single-video__wrapper" },
-              /* Video Container */
-              React.createElement('div', { className: "single-video__player" },
-                videoUrl
-                  ? React.createElement('iframe', {
-                      src: videoUrl,
-                      className: "single-video__iframe",
-                      title: post.title.rendered,
-                      allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-                      allowFullScreen: true
-                    })
-                  : React.createElement('div', { className: "single-video__placeholder" },
-                      React.createElement('span', null, "Video Placeholder")
-                    )
-              ),
+    <Layout>
+      <article className="single-video">
+        {/* Video Player Header */}
+        <section className="single-video__hero">
+          <Container>
+            <div className="single-video__wrapper">
+              {/* Video Container */}
+              <div className="single-video__player">
+                {videoUrl ? (
+                  <iframe
+                    src={videoUrl}
+                    className="single-video__iframe"
+                    title={post.title.rendered}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div className="single-video__placeholder">
+                    <span>Video Placeholder</span>
+                  </div>
+                )}
+              </div>
 
-              /* Info Row */
-              React.createElement('div', { className: "single-video__info" },
-                React.createElement('div', { className: "single-video__info-left" },
-                  React.createElement('h1', { className: "single-video__title" }, post.title.rendered),
-                  React.createElement('div', { className: "single-video__meta" },
-                    React.createElement('span', { className: "single-video__meta-item" },
-                      React.createElement(Calendar, { size: 16, "aria-hidden": "true" }),
-                      " ", new Date(post.date).toLocaleDateString()
-                    ),
-                    React.createElement('span', { className: "single-video__meta-item" },
-                      React.createElement(User, { size: 16, "aria-hidden": "true" }),
-                      " ", authorName
-                    )
-                  )
-                ),
+              {/* Info Row */}
+              <div className="single-video__info">
+                <div className="single-video__info-left">
+                  <h1 className="single-video__title">{post.title.rendered}</h1>
+                  <div className="single-video__meta">
+                    <span className="single-video__meta-item">
+                      <Calendar size={16} aria-hidden="true" />{' '}
+                      {new Date(post.date).toLocaleDateString()}
+                    </span>
+                    <span className="single-video__meta-item">
+                      <User size={16} aria-hidden="true" />{' '}
+                      {authorName}
+                    </span>
+                  </div>
+                </div>
 
-                React.createElement('div', { className: "single-video__actions" },
-                  React.createElement('button', { className: "single-video__subscribe-btn" }, "Subscribe"),
-                  React.createElement('button', { className: "single-video__share-btn" },
-                    React.createElement(Share2, { size: 18, "aria-hidden": "true" }),
-                    " Share"
-                  )
-                )
-              )
-            )
-          )
-        ),
+                <div className="single-video__actions">
+                  <button className="single-video__subscribe-btn">Subscribe</button>
+                  <button className="single-video__share-btn">
+                    <Share2 size={18} aria-hidden="true" /> Share
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
 
-        /* Content */
-        React.createElement('section', { className: "single-video__content" },
-          React.createElement(Container, null,
-            React.createElement('div', {
-              className: "single-video__body",
-              dangerouslySetInnerHTML: { __html: post.content.rendered }
-            })
-          )
-        )
-      )
-    )
+        {/* Content */}
+        <section className="single-video__content">
+          <Container>
+            <div
+              className="single-video__body"
+              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+            />
+          </Container>
+        </section>
+      </article>
+    </Layout>
   );
 }

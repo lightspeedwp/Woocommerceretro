@@ -1,363 +1,363 @@
 import React from 'react';
-import * as ContainerModule from '../common/Container';
-
-var Container = ContainerModule.Container;
+import { Container } from '../common/Container';
 
 /**
- * PageFormShowcase Template 
- * 
+ * PageFormShowcase Template
+ *
  * Dev Tools showcase for all WordPress-aligned form components.
- * 
+ *
  * @template
+ * @route /dev-tools/forms
  */
-export function PageFormShowcase() {
-  var handleSubmit = function(e) { e.preventDefault(); };
+export const PageFormShowcase = () => {
+  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); };
 
-  return React.createElement(React.Fragment, null,
-    React.createElement(Container, { className: "wp-form-showcase", style: { padding: 'var(--wp--preset--spacing--60) 0' } },
-      React.createElement('div', { className: "wp-form-showcase__header", style: { marginBottom: 'var(--wp--preset--spacing--60)' } },
-        React.createElement('h1', { style: { marginBottom: 'var(--wp--preset--spacing--40)' } }, "Form Components Showcase"),
-        React.createElement('p', null,
-          "A comprehensive preview of all standardized form types using the global `.wp-block-*` design system."
-        )
-      ),
+  return (
+    <>
+      <Container className="wp-form-showcase">
+        <div className="wp-form-showcase__header">
+          <h1>Form Components Showcase</h1>
+          <p>
+            A comprehensive preview of all standardized form types using the global `.wp-block-*` design system.
+          </p>
+        </div>
 
-      React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--wp--preset--spacing--80)' } },
-        
-        /* 1. Product Review Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "1. Product Review Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Rating *"),
-              React.createElement('select', { className: "wp-block-select funky-input-glow" },
-                React.createElement('option', { value: "" }, "Rate..."),
-                React.createElement('option', { value: "5" }, "Perfect"),
-                React.createElement('option', { value: "4" }, "Good"),
-                React.createElement('option', { value: "3" }, "Average")
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Your review *"),
-              React.createElement('textarea', { className: "wp-block-textarea funky-input-glow", rows: 4, required: true })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Name *"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Submit Review")
-          )
-        ),
+        <div className="wp-form-showcase__sections">
 
-        /* 2. Blog Post Comments Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "2. Blog Post Comments Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Comment"),
-              React.createElement('textarea', { className: "wp-block-textarea funky-input-glow", rows: 4 })
-            ),
-            React.createElement('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--wp--preset--spacing--40)', marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Name *"),
-                React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-              ),
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Email *"),
-                React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", required: true })
-              )
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Post Comment")
-          )
-        ),
+          {/* 1. Product Review Form */}
+          <section className="wp-form-showcase__section">
+            <h2>1. Product Review Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Rating *</label>
+                <select className="wp-block-select funky-input-glow">
+                  <option value="">Rate...</option>
+                  <option value="5">Perfect</option>
+                  <option value="4">Good</option>
+                  <option value="3">Average</option>
+                </select>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Your review *</label>
+                <textarea className="wp-block-textarea funky-input-glow" rows={4} required />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Name *</label>
+                <input type="text" className="wp-block-input funky-input-glow" required />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Submit Review</button>
+            </form>
+          </section>
 
-        /* 3. Contact Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "3. Contact Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-contact-form wp-block-form" },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Subject"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", placeholder: "How can we help?" })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Message *"),
-              React.createElement('textarea', { className: "wp-block-textarea funky-input-glow", rows: 5, placeholder: "Your message...", required: true })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Send Message")
-          )
-        ),
+          {/* 2. Blog Post Comments Form */}
+          <section className="wp-form-showcase__section">
+            <h2>2. Blog Post Comments Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Comment</label>
+                <textarea className="wp-block-textarea funky-input-glow" rows={4} />
+              </div>
+              <div className="wp-form-showcase__grid-2col">
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Name *</label>
+                  <input type="text" className="wp-block-input funky-input-glow" required />
+                </div>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Email *</label>
+                  <input type="email" className="wp-block-input funky-input-glow" required />
+                </div>
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Post Comment</button>
+            </form>
+          </section>
 
-        /* 4. Login Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "4. Login Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form wp-max-w-md", style: { maxWidth: '400px' } },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Username or email address *"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Password *"),
-              React.createElement('input', { type: "password", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-checkbox" },
-                React.createElement('input', { type: "checkbox", className: "wp-block-checkbox__input" }),
-                React.createElement('span', { className: "wp-block-checkbox__label" }, "Remember me")
-              )
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Log in")
-          )
-        ),
+          {/* 3. Contact Form */}
+          <section className="wp-form-showcase__section">
+            <h2>3. Contact Form</h2>
+            <form onSubmit={handleSubmit} className="wp-contact-form wp-block-form">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Subject</label>
+                <input type="text" className="wp-block-input funky-input-glow" placeholder="How can we help?" />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Message *</label>
+                <textarea className="wp-block-textarea funky-input-glow" rows={5} placeholder="Your message..." required />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Send Message</button>
+            </form>
+          </section>
 
-        /* 5. Registration Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "5. Registration Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form wp-max-w-md", style: { maxWidth: '400px' } },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Email address *"),
-              React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('p', { style: { marginBottom: 'var(--wp--preset--spacing--30)', fontSize: '0.875rem' } }, 
-              "A link to set a new password will be sent to your email address."
-            ),
-            React.createElement('p', { style: { marginBottom: 'var(--wp--preset--spacing--30)', fontSize: '0.875rem' } }, 
-              "Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy."
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Register")
-          )
-        ),
+          {/* 4. Login Form */}
+          <section className="wp-form-showcase__section">
+            <h2>4. Login Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Username or email address *</label>
+                <input type="text" className="wp-block-input funky-input-glow" required />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Password *</label>
+                <input type="password" className="wp-block-input funky-input-glow" required />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-checkbox">
+                  <input type="checkbox" className="wp-block-checkbox__input" />
+                  <span className="wp-block-checkbox__label">Remember me</span>
+                </label>
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Log in</button>
+            </form>
+          </section>
 
-        /* 6. WooCommerce Checkout Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "6. WooCommerce Checkout Form (Billing)"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--wp--preset--spacing--40)', marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "First name *"),
-                React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-              ),
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Last name *"),
-                React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Company name (optional)"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow" })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Country / Region *"),
-              React.createElement('select', { className: "wp-block-select funky-input-glow" },
-                React.createElement('option', { value: "US" }, "United States (US)"),
-                React.createElement('option', { value: "UK" }, "United Kingdom (UK)")
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Street address *"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", placeholder: "House number and street name", style: { marginBottom: 'var(--wp--preset--spacing--20)' }, required: true }),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", placeholder: "Apartment, suite, unit, etc. (optional)" })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Town / City *"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Order notes (optional)"),
-              React.createElement('textarea', { className: "wp-block-textarea funky-input-glow", placeholder: "Notes about your order, e.g. special notes for delivery.", rows: 4 })
-            )
-          )
-        ),
+          {/* 5. Registration Form */}
+          <section className="wp-form-showcase__section">
+            <h2>5. Registration Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Email address *</label>
+                <input type="email" className="wp-block-input funky-input-glow" required />
+              </div>
+              <p className="wp-form-showcase__hint">
+                A link to set a new password will be sent to your email address.
+              </p>
+              <p className="wp-form-showcase__hint">
+                Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.
+              </p>
+              <button type="submit" className="wp-block-button__link wp-element-button">Register</button>
+            </form>
+          </section>
 
-        /* 7. My Account - Password Reset */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "7. My Account - Password Reset"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form wp-max-w-md", style: { maxWidth: '400px' } },
-            React.createElement('p', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, 
-              "Lost your password? Please enter your username or email address. You will receive a link to create a new password via email."
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Username or email"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Reset password")
-          )
-        ),
+          {/* 6. WooCommerce Checkout Form */}
+          <section className="wp-form-showcase__section">
+            <h2>6. WooCommerce Checkout Form (Billing)</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-form-showcase__grid-2col">
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">First name *</label>
+                  <input type="text" className="wp-block-input funky-input-glow" required />
+                </div>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Last name *</label>
+                  <input type="text" className="wp-block-input funky-input-glow" required />
+                </div>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Company name (optional)</label>
+                <input type="text" className="wp-block-input funky-input-glow" />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Country / Region *</label>
+                <select className="wp-block-select funky-input-glow">
+                  <option value="US">United States (US)</option>
+                  <option value="UK">United Kingdom (UK)</option>
+                </select>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Street address *</label>
+                <input type="text" className="wp-block-input funky-input-glow" placeholder="House number and street name" required />
+                <input type="text" className="wp-block-input funky-input-glow" placeholder="Apartment, suite, unit, etc. (optional)" />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Town / City *</label>
+                <input type="text" className="wp-block-input funky-input-glow" required />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Order notes (optional)</label>
+                <textarea className="wp-block-textarea funky-input-glow" placeholder="Notes about your order, e.g. special notes for delivery." rows={4} />
+              </div>
+            </form>
+          </section>
 
-        /* 8. My Account - Update Profile */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "8. My Account - Update Profile"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--wp--preset--spacing--40)', marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "First name *"),
-                React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-              ),
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Last name *"),
-                React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Display name *"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true }),
-              React.createElement('p', { style: { fontSize: '0.875rem', marginTop: 'var(--wp--preset--spacing--10)', fontStyle: 'italic' } }, "This will be how your name will be displayed in the account section and in reviews")
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Email address *"),
-              React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('fieldset', { style: { border: '1px solid var(--wp--preset--color--black)', padding: 'var(--wp--preset--spacing--40)', marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('legend', { style: { fontWeight: 'bold' } }, "Password change"),
-              React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--20)' } },
-                React.createElement('label', { className: "wp-block-form-label" }, "Current password (leave blank to leave unchanged)"),
-                React.createElement('input', { type: "password", className: "wp-block-input funky-input-glow" })
-              ),
-              React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--20)' } },
-                React.createElement('label', { className: "wp-block-form-label" }, "New password (leave blank to leave unchanged)"),
-                React.createElement('input', { type: "password", className: "wp-block-input funky-input-glow" })
-              ),
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Confirm new password"),
-                React.createElement('input', { type: "password", className: "wp-block-input funky-input-glow" })
-              )
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Save changes")
-          )
-        ),
+          {/* 7. My Account - Password Reset */}
+          <section className="wp-form-showcase__section">
+            <h2>7. My Account - Password Reset</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
+              <p>Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.</p>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Username or email</label>
+                <input type="text" className="wp-block-input funky-input-glow" required />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Reset password</button>
+            </form>
+          </section>
 
-        /* 9. My Account - Change Address */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "9. My Account - Change Address"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Country / Region *"),
-              React.createElement('select', { className: "wp-block-select funky-input-glow" },
-                React.createElement('option', { value: "US" }, "United States (US)"),
-                React.createElement('option', { value: "CA" }, "Canada"),
-                React.createElement('option', { value: "MX" }, "Mexico")
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Street address *"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", placeholder: "House number and street name" })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Save address")
-          )
-        ),
+          {/* 8. My Account - Update Profile */}
+          <section className="wp-form-showcase__section">
+            <h2>8. My Account - Update Profile</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-form-showcase__grid-2col">
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">First name *</label>
+                  <input type="text" className="wp-block-input funky-input-glow" required />
+                </div>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Last name *</label>
+                  <input type="text" className="wp-block-input funky-input-glow" required />
+                </div>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Display name *</label>
+                <input type="text" className="wp-block-input funky-input-glow" required />
+                <p className="wp-form-showcase__hint wp-form-showcase__hint--italic">
+                  This will be how your name will be displayed in the account section and in reviews
+                </p>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Email address *</label>
+                <input type="email" className="wp-block-input funky-input-glow" required />
+              </div>
+              <fieldset className="wp-form-showcase__fieldset">
+                <legend>Password change</legend>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Current password (leave blank to leave unchanged)</label>
+                  <input type="password" className="wp-block-input funky-input-glow" />
+                </div>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">New password (leave blank to leave unchanged)</label>
+                  <input type="password" className="wp-block-input funky-input-glow" />
+                </div>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Confirm new password</label>
+                  <input type="password" className="wp-block-input funky-input-glow" />
+                </div>
+              </fieldset>
+              <button type="submit" className="wp-block-button__link wp-element-button">Save changes</button>
+            </form>
+          </section>
 
-        /* 10. Search Form with Autocomplete */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "10. Search Form with Autocomplete"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-search__button-inside wp-block-search__icon-button wp-block-search" },
-            React.createElement('div', { className: "wp-block-search__inside-wrapper", style: { position: 'relative' } },
-              React.createElement('input', { 
-                type: "search", 
-                className: "wp-block-search__input wp-block-input funky-input-glow", 
-                placeholder: "Search products...",
-                required: true 
-              }),
-              React.createElement('button', { type: "submit", className: "wp-block-search__button wp-element-button", 'aria-label': "Search" },
-                React.createElement('span', null, "🔍")
-              )
-            )
-          )
-        ),
+          {/* 9. My Account - Change Address */}
+          <section className="wp-form-showcase__section">
+            <h2>9. My Account - Change Address</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Country / Region *</label>
+                <select className="wp-block-select funky-input-glow">
+                  <option value="US">United States (US)</option>
+                  <option value="CA">Canada</option>
+                  <option value="MX">Mexico</option>
+                </select>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Street address *</label>
+                <input type="text" className="wp-block-input funky-input-glow" placeholder="House number and street name" />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Save address</button>
+            </form>
+          </section>
 
-        /* 11. Newsletter Subscription Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "11. Newsletter Subscription Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { style: { display: 'flex', gap: 'var(--wp--preset--spacing--20)' } },
-              React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", placeholder: "Email address", required: true, style: { flex: 1 } }),
-              React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Subscribe")
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginTop: 'var(--wp--preset--spacing--20)' } },
-              React.createElement('label', { className: "wp-block-checkbox" },
-                React.createElement('input', { type: "checkbox", className: "wp-block-checkbox__input", required: true }),
-                React.createElement('span', { className: "wp-block-checkbox__label", style: { fontSize: '0.875rem' } }, "I agree to the privacy policy")
-              )
-            )
-          )
-        ),
+          {/* 10. Search Form with Autocomplete */}
+          <section className="wp-form-showcase__section">
+            <h2>10. Search Form with Autocomplete</h2>
+            <form onSubmit={handleSubmit} className="wp-block-search__button-inside wp-block-search__icon-button wp-block-search">
+              <div className="wp-block-search__inside-wrapper">
+                <input
+                  type="search"
+                  className="wp-block-search__input wp-block-input funky-input-glow"
+                  placeholder="Search products..."
+                  required
+                />
+                <button type="submit" className="wp-block-search__button wp-element-button" aria-label="Search">
+                  <span>&#128269;</span>
+                </button>
+              </div>
+            </form>
+          </section>
 
-        /* 12. Order Tracking Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "12. Order Tracking Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form wp-max-w-md", style: { maxWidth: '400px' } },
-            React.createElement('p', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, 
-              "To track your order please enter your Order ID in the box below and press the \"Track\" button."
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Order ID"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", placeholder: "Found in your order confirmation email.", required: true })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Billing email"),
-              React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", placeholder: "Email you used during checkout.", required: true })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Track")
-          )
-        ),
+          {/* 11. Newsletter Subscription Form */}
+          <section className="wp-form-showcase__section">
+            <h2>11. Newsletter Subscription Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-form-showcase__inline-group">
+                <input type="email" className="wp-block-input funky-input-glow" placeholder="Email address" required />
+                <button type="submit" className="wp-block-button__link wp-element-button">Subscribe</button>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-checkbox">
+                  <input type="checkbox" className="wp-block-checkbox__input" required />
+                  <span className="wp-block-checkbox__label">I agree to the privacy policy</span>
+                </label>
+              </div>
+            </form>
+          </section>
 
-        /* 13. Gift Card Purchase Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "13. Gift Card Purchase Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form wp-max-w-md", style: { maxWidth: '400px' } },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Amount"),
-              React.createElement('select', { className: "wp-block-select funky-input-glow" },
-                React.createElement('option', { value: "25" }, "$25.00"),
-                React.createElement('option', { value: "50" }, "$50.00"),
-                React.createElement('option', { value: "100" }, "$100.00")
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "To (Recipient Email)"),
-              React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", required: true })
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Message (optional)"),
-              React.createElement('textarea', { className: "wp-block-textarea funky-input-glow", rows: 3 })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Add to cart")
-          )
-        ),
+          {/* 12. Order Tracking Form */}
+          <section className="wp-form-showcase__section">
+            <h2>12. Order Tracking Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
+              <p>To track your order please enter your Order ID in the box below and press the "Track" button.</p>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Order ID</label>
+                <input type="text" className="wp-block-input funky-input-glow" placeholder="Found in your order confirmation email." required />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Billing email</label>
+                <input type="email" className="wp-block-input funky-input-glow" placeholder="Email you used during checkout." required />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Track</button>
+            </form>
+          </section>
 
-        /* 14. Coupon / Promo Code Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "14. Coupon / Promo Code Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form", style: { display: 'flex', gap: 'var(--wp--preset--spacing--20)' } },
-            React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", placeholder: "Coupon code", style: { flex: 1, maxWidth: '250px' } }),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Apply coupon")
-          )
-        ),
+          {/* 13. Gift Card Purchase Form */}
+          <section className="wp-form-showcase__section">
+            <h2>13. Gift Card Purchase Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Amount</label>
+                <select className="wp-block-select funky-input-glow">
+                  <option value="25">$25.00</option>
+                  <option value="50">$50.00</option>
+                  <option value="100">$100.00</option>
+                </select>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">To (Recipient Email)</label>
+                <input type="email" className="wp-block-input funky-input-glow" required />
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Message (optional)</label>
+                <textarea className="wp-block-textarea funky-input-glow" rows={3} />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Add to cart</button>
+            </form>
+          </section>
 
-        /* 15. Product Enquiry Form */
-        React.createElement('section', { className: "wp-form-showcase__section" },
-          React.createElement('h2', { style: { marginBottom: 'var(--wp--preset--spacing--30)' } }, "15. Product Enquiry Form"),
-          React.createElement('form', { onSubmit: handleSubmit, className: "wp-block-form" },
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Product"),
-              React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", value: "Awesome Funky Sneaker", disabled: true })
-            ),
-            React.createElement('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--wp--preset--spacing--40)', marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Name *"),
-                React.createElement('input', { type: "text", className: "wp-block-input funky-input-glow", required: true })
-              ),
-              React.createElement('div', { className: "wp-block-form-item" },
-                React.createElement('label', { className: "wp-block-form-label" }, "Email *"),
-                React.createElement('input', { type: "email", className: "wp-block-input funky-input-glow", required: true })
-              )
-            ),
-            React.createElement('div', { className: "wp-block-form-item", style: { marginBottom: 'var(--wp--preset--spacing--30)' } },
-              React.createElement('label', { className: "wp-block-form-label" }, "Enquiry *"),
-              React.createElement('textarea', { className: "wp-block-textarea funky-input-glow", rows: 4, required: true })
-            ),
-            React.createElement('button', { type: "submit", className: "wp-block-button__link wp-element-button" }, "Send Enquiry")
-          )
-        )
-      )
-    )
+          {/* 14. Coupon / Promo Code Form */}
+          <section className="wp-form-showcase__section">
+            <h2>14. Coupon / Promo Code Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__inline-group">
+              <input type="text" className="wp-block-input funky-input-glow" placeholder="Coupon code" />
+              <button type="submit" className="wp-block-button__link wp-element-button">Apply coupon</button>
+            </form>
+          </section>
+
+          {/* 15. Product Enquiry Form */}
+          <section className="wp-form-showcase__section">
+            <h2>15. Product Enquiry Form</h2>
+            <form onSubmit={handleSubmit} className="wp-block-form">
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Product</label>
+                <input type="text" className="wp-block-input funky-input-glow" value="Awesome Funky Sneaker" disabled />
+              </div>
+              <div className="wp-form-showcase__grid-2col">
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Name *</label>
+                  <input type="text" className="wp-block-input funky-input-glow" required />
+                </div>
+                <div className="wp-block-form-item">
+                  <label className="wp-block-form-label">Email *</label>
+                  <input type="email" className="wp-block-input funky-input-glow" required />
+                </div>
+              </div>
+              <div className="wp-block-form-item">
+                <label className="wp-block-form-label">Enquiry *</label>
+                <textarea className="wp-block-textarea funky-input-glow" rows={4} required />
+              </div>
+              <button type="submit" className="wp-block-button__link wp-element-button">Send Enquiry</button>
+            </form>
+          </section>
+
+        </div>
+      </Container>
+    </>
   );
 }

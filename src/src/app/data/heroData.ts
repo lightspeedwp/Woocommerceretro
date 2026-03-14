@@ -1,11 +1,11 @@
 /**
  * Hero Data - Centralised hero configurations for all pages
  *
- * Each entry drives the shared FunkyHero component.
+ * Each entry drives the shared RetroHero component.
  * Omit any field to hide that element in the hero.
  *
  * Optimized for Figma Make parser:
- * 1. No modern JS (no const, let, arrow functions, destructuring)
+ * 1. No optional chaining, nullish coalescing, or spread at module level
  * 2. ASCII characters only
  */
 
@@ -54,7 +54,7 @@
    ======================================== */
 
 /** @type {HeroConfig} */
-export var homepageHero = {
+export const homepageHero = {
   id: 'homepage',
   backgroundImage: 'https://images.unsplash.com/photo-1518117823675-9a4bb23df61c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdGF0aW9uZXJ5JTIwZGVzayUyMGFlc3RoZXRpYyUyMGZsYXQlMjBsYXl8ZW58MXx8fHwxNzczMDU5NjIzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#030213',
@@ -95,7 +95,7 @@ export var homepageHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var shopHero = {
+export const shopHero = {
   id: 'shop',
   backgroundImage: 'https://images.unsplash.com/photo-1755514838747-adfd34197d39?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBsaWZlc3R5bGUlMjBwcm9kdWN0cyUyMGN1cmF0ZWQlMjBjb2xsZWN0aW9ufGVufDF8fHx8MTc3MzA1OTYyM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#030213',
@@ -125,7 +125,7 @@ export var shopHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var aboutHero = {
+export const aboutHero = {
   id: 'about',
   backgroundImage: 'https://images.unsplash.com/photo-1760611656007-f767a8082758?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjB0ZWFtJTIwY29sbGFib3JhdGlvbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NzE3NDg3NjB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#0d1b2a',
@@ -160,7 +160,7 @@ export var aboutHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var contactHero = {
+export const contactHero = {
   id: 'contact',
   backgroundImage: 'https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdXN0b21lciUyMHNlcnZpY2UlMjBoZWFkc2V0JTIwY29tbXVuaWNhdGlvbnxlbnwxfHx8fDE3NzE3NDg3NjJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#2d0059',
@@ -185,7 +185,7 @@ export var contactHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var faqHero = {
+export const faqHero = {
   id: 'faq',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 255, 255, 0.08) 100%)',
@@ -209,7 +209,7 @@ export var faqHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var blogHero = {
+export const blogHero = {
   id: 'blog',
   backgroundColor: '#0d1b2a',
   backgroundGradient: 'linear-gradient(135deg, rgba(13, 27, 42, 0.7) 0%, rgba(3, 2, 19, 0.85) 50%, rgba(0, 255, 255, 0.1) 100%)',
@@ -238,7 +238,7 @@ export var blogHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var ourStoryHero = {
+export const ourStoryHero = {
   id: 'our-story',
   backgroundImage: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=1600&auto=format&fit=crop',
   backgroundColor: '#030213',
@@ -263,7 +263,7 @@ export var ourStoryHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var sustainabilityHero = {
+export const sustainabilityHero = {
   id: 'sustainability',
   backgroundColor: '#0d1b2a',
   backgroundGradient: 'linear-gradient(135deg, rgba(0, 60, 30, 0.4) 0%, rgba(3, 2, 19, 0.85) 50%, rgba(0, 255, 0, 0.08) 100%)',
@@ -287,7 +287,7 @@ export var sustainabilityHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var careersHero = {
+export const careersHero = {
   id: 'careers',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.15) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.1) 100%)',
@@ -316,7 +316,7 @@ export var careersHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var teamHero = {
+export const teamHero = {
   id: 'team',
   backgroundImage: 'https://images.unsplash.com/photo-1758518731468-98e90ffd7430?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwcHJvZmVzc2lvbmFsJTIwdGVhbSUyMHBvcnRyYWl0JTIwY29ycG9yYXRlfGVufDF8fHx8MTc3MTc0ODc2MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#030213',
@@ -341,7 +341,7 @@ export var teamHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var storesHero = {
+export const storesHero = {
   id: 'stores',
   backgroundImage: 'https://images.unsplash.com/photo-1635930376155-4ee50db13cca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjByZXRhaWwlMjBzdG9yZSUyMGludGVyaW9yJTIwZmxhZ3NoaXB8ZW58MXx8fHwxNzcxNzQ4NzYzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#030213',
@@ -366,7 +366,7 @@ export var storesHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var pressHero = {
+export const pressHero = {
   id: 'press',
   backgroundImage: 'https://images.unsplash.com/photo-1554941829-1a16e65a02b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzcyUyMGNvbmZlcmVuY2UlMjBtZWRpYSUyMGpvdXJuYWxpc20lMjBtaWNyb3Bob25lfGVufDF8fHx8MTc3MTc0ODc2NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   backgroundColor: '#0d1b2a',
@@ -391,7 +391,7 @@ export var pressHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var privacyPolicyHero = {
+export const privacyPolicyHero = {
   id: 'privacy-policy',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 255, 255, 0.06) 100%)',
@@ -407,7 +407,7 @@ export var privacyPolicyHero = {
 };
 
 /** @type {HeroConfig} */
-export var termsConditionsHero = {
+export const termsConditionsHero = {
   id: 'terms-conditions',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 255, 255, 0.06) 100%)',
@@ -423,7 +423,7 @@ export var termsConditionsHero = {
 };
 
 /** @type {HeroConfig} */
-export var shippingReturnsHero = {
+export const shippingReturnsHero = {
   id: 'shipping-returns',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.25) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 200, 200, 0.06) 100%)',
@@ -439,7 +439,7 @@ export var shippingReturnsHero = {
 };
 
 /** @type {HeroConfig} */
-export var sizeGuideHero = {
+export const sizeGuideHero = {
   id: 'size-guide',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.25) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 255, 255, 0.06) 100%)',
@@ -455,7 +455,7 @@ export var sizeGuideHero = {
 };
 
 /** @type {HeroConfig} */
-export var helpCenterHero = {
+export const helpCenterHero = {
   id: 'help-center',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -471,7 +471,7 @@ export var helpCenterHero = {
 };
 
 /** @type {HeroConfig} */
-export var returnsPortalHero = {
+export const returnsPortalHero = {
   id: 'returns-portal',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.25) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 200, 200, 0.06) 100%)',
@@ -487,7 +487,7 @@ export var returnsPortalHero = {
 };
 
 /** @type {HeroConfig} */
-export var refundsHero = {
+export const refundsHero = {
   id: 'refunds',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(0, 180, 0, 0.15) 0%, rgba(3, 2, 19, 0.9) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -503,7 +503,7 @@ export var refundsHero = {
 };
 
 /** @type {HeroConfig} */
-export var buyingGuideHero = {
+export const buyingGuideHero = {
   id: 'buying-guide',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.25) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 255, 255, 0.06) 100%)',
@@ -519,7 +519,7 @@ export var buyingGuideHero = {
 };
 
 /** @type {HeroConfig} */
-export var careInstructionsHero = {
+export const careInstructionsHero = {
   id: 'care-instructions',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.25) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 200, 200, 0.06) 100%)',
@@ -535,7 +535,7 @@ export var careInstructionsHero = {
 };
 
 /** @type {HeroConfig} */
-export var accessibilityHero = {
+export const accessibilityHero = {
   id: 'accessibility',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 255, 255, 0.06) 100%)',
@@ -551,7 +551,7 @@ export var accessibilityHero = {
 };
 
 /** @type {HeroConfig} */
-export var warrantyHero = {
+export const warrantyHero = {
   id: 'warranty',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.25) 0%, rgba(3, 2, 19, 0.9) 60%, rgba(0, 200, 200, 0.06) 100%)',
@@ -571,7 +571,7 @@ export var warrantyHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var dealsHero = {
+export const dealsHero = {
   id: 'deals',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.15) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(204, 255, 0, 0.08) 100%)',
@@ -589,7 +589,7 @@ export var dealsHero = {
 };
 
 /** @type {HeroConfig} */
-export var rewardProgramHero = {
+export const rewardProgramHero = {
   id: 'reward-program',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.12) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -605,7 +605,7 @@ export var rewardProgramHero = {
 };
 
 /** @type {HeroConfig} */
-export var giftCardsHero = {
+export const giftCardsHero = {
   id: 'gift-cards',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.12) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.1) 100%)',
@@ -623,7 +623,7 @@ export var giftCardsHero = {
 };
 
 /** @type {HeroConfig} */
-export var trackOrderHero = {
+export const trackOrderHero = {
   id: 'track-order',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 200, 200, 0.08) 100%)',
@@ -639,7 +639,7 @@ export var trackOrderHero = {
 };
 
 /** @type {HeroConfig} */
-export var reviewsHero = {
+export const reviewsHero = {
   id: 'reviews',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.1) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -655,7 +655,7 @@ export var reviewsHero = {
 };
 
 /** @type {HeroConfig} */
-export var affiliateProgramHero = {
+export const affiliateProgramHero = {
   id: 'affiliate-program',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -671,7 +671,7 @@ export var affiliateProgramHero = {
 };
 
 /** @type {HeroConfig} */
-export var membershipHero = {
+export const membershipHero = {
   id: 'membership',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.15) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.1) 100%)',
@@ -689,7 +689,7 @@ export var membershipHero = {
 };
 
 /** @type {HeroConfig} */
-export var subscriptionHero = {
+export const subscriptionHero = {
   id: 'subscription',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(255, 0, 255, 0.12) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.1) 100%)',
@@ -711,7 +711,7 @@ export var subscriptionHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var blogCategoryBaseHero = {
+export const blogCategoryBaseHero = {
   id: 'blog-category',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -726,7 +726,7 @@ export var blogCategoryBaseHero = {
 };
 
 /** @type {HeroConfig} */
-export var blogAuthorBaseHero = {
+export const blogAuthorBaseHero = {
   id: 'blog-author',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.88) 55%, rgba(0, 255, 255, 0.08) 100%)',
@@ -745,7 +745,7 @@ export var blogAuthorBaseHero = {
    ======================================== */
 
 /** @type {HeroConfig} */
-export var genericHero = {
+export const genericHero = {
   id: 'generic',
   backgroundColor: '#030213',
   backgroundGradient: 'linear-gradient(135deg, rgba(45, 0, 89, 0.3) 0%, rgba(3, 2, 19, 0.85) 60%, rgba(0, 255, 255, 0.08) 100%)',
@@ -761,7 +761,7 @@ export var genericHero = {
    ALL HEROES INDEX
    ======================================== */
 
-export var allHeroes = {
+export const allHeroes = {
   homepage: homepageHero,
   shop: shopHero,
   about: aboutHero,

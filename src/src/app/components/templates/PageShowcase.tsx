@@ -1,44 +1,28 @@
-import React from 'react';
-import * as ContainerModule from '../common/Container';
-import * as DarkModeToggleModule from '../common/DarkModeToggle';
+import React, { useState } from 'react';
+import { Container } from '../common/Container';
+import { DarkModeToggle } from '../common/DarkModeToggle';
 import { AppWindow, Package, Cube, Code, ShoppingBag, BookOpen, Info, Question, FileText, User, CreditCard, Megaphone, Wrench, MagnifyingGlass, Faders, Sparkle, TextT, GridFour, Check, ArrowSquareOut, ShoppingCart, CursorClick, Image as ImageIcon, Palette } from '@phosphor-icons/react';
 
-var Container = ContainerModule.Container;
-var DarkModeToggle = DarkModeToggleModule.DarkModeToggle;
-
 /**
- * PageShowcase Template — Funky Redesign
+ * PageShowcase Template — Retro Redesign
  *
  * Visual component showcase and design system documentation page.
  *
  * @template
  * @route /showcase
  */
-export default function PageShowcase() {
-  var searchState = React.useState('');
-  var searchTerm = searchState[0];
-  var setSearchTerm = searchState[1];
-  
-  var catState = React.useState('All');
-  var selectedCategory = catState[0];
-  var setSelectedCategory = catState[1];
+const PageShowcase = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  var stats = [
-    { icon: AppWindow, count: 63, label: 'Templates' },
-    { icon: Package, count: 21, label: 'Parts' },
-    { icon: Cube, count: 43, label: 'Patterns' },
-    { icon: Code, count: 200, label: 'Blocks' },
+  const stats = [
+    { icon: AppWindow, count: 63, label: 'TEMPLATES' },
+    { icon: Package, count: 21, label: 'PARTS' },
+    { icon: Cube, count: 43, label: 'PATTERNS' },
+    { icon: Code, count: 200, label: 'BLOCKS' },
   ];
 
-  var coverage = [
-    { value: '100%', label: 'Template Guidelines', desc: 'All 63 templates documented' },
-    { value: '100%', label: 'JSDoc Coverage', desc: 'All 200+ blocks documented' },
-    { value: '100%', label: 'WCAG 2.1 AA', desc: 'All components accessible' },
-    { value: '100%', label: 'Dark Mode Support', desc: 'Complete coverage' },
-    { value: '100%', label: 'Funky Redesign', desc: 'Phase 10 complete' },
-  ];
-
-  var templateCategories = [
+  const templateCategories = [
     { icon: ShoppingBag, name: 'Shop', count: 8, desc: 'Product archives & single pages' },
     { icon: BookOpen, name: 'Blog', count: 11, desc: 'Blog archives & post formats' },
     { icon: Info, name: 'Info Pages', count: 11, desc: 'About, team, careers, stores' },
@@ -50,14 +34,33 @@ export default function PageShowcase() {
     { icon: Wrench, name: 'Dev Tools', count: 6, desc: 'Style guide, showcase, icons' },
   ];
 
-  var components = [
-    { name: 'FrontPage', category: 'Templates', type: 'Page', path: '/templates/FrontPage.tsx', desc: 'Homepage with hero, features, and products' },
-    { name: 'ArchiveProduct', category: 'Templates', type: 'Archive', path: '/templates/ArchiveProduct.tsx', desc: 'Product listing with filters and pagination' },
-    { name: 'SingleProduct', category: 'Templates', type: 'Single', path: '/templates/SingleProduct.tsx', desc: 'Product detail page with gallery and tabs' },
-    { name: 'PageCart', category: 'Templates', type: 'Commerce', path: '/templates/PageCart.tsx', desc: 'Shopping cart with line items and totals' },
-    { name: 'PageCheckout', category: 'Templates', type: 'Commerce', path: '/templates/PageCheckout.tsx', desc: 'Checkout flow with shipping and payment' },
-    { name: 'ArchiveBlog', category: 'Templates', type: 'Archive', path: '/templates/ArchiveBlog.tsx', desc: 'Blog posts grid with filters' },
-    { name: 'SinglePost', category: 'Templates', type: 'Single', path: '/templates/SinglePost.tsx', desc: 'Blog post with sidebar and related posts' },
+  const components = [
+    { name: 'FrontPageRetro', category: 'Templates', type: 'Page', path: '/templates/FrontPageRetro.tsx', desc: 'Retro Homepage' },
+    { name: 'ArchiveProductRetro', category: 'Templates', type: 'Archive', path: '/templates/ArchiveProductRetro.tsx', desc: 'Retro product listing' },
+    { name: 'ProductSearchResultsRetro', category: 'Templates', type: 'Archive', path: '/templates/ProductSearchResultsRetro.tsx', desc: 'Retro search results' },
+    { name: 'SingleProductRetro', category: 'Templates', type: 'Single', path: '/templates/SingleProductRetro.tsx', desc: 'Retro product detail page' },
+    { name: 'PageCartRetro', category: 'Templates', type: 'Commerce', path: '/templates/PageCartRetro.tsx', desc: 'Retro shopping cart' },
+    { name: 'PageCheckoutRetro', category: 'Templates', type: 'Commerce', path: '/templates/PageCheckoutRetro.tsx', desc: 'Retro checkout flow' },
+    { name: 'PageOrderConfirmationRetro', category: 'Templates', type: 'Commerce', path: '/templates/PageOrderConfirmationRetro.tsx', desc: 'Retro order success' },
+    { name: 'PageAboutRetro', category: 'Templates', type: 'Page', path: '/templates/PageAboutRetro.tsx', desc: 'Retro About page' },
+    { name: 'PageContactRetro', category: 'Templates', type: 'Page', path: '/templates/PageContactRetro.tsx', desc: 'Retro Contact page' },
+    { name: 'PageFAQRetro', category: 'Templates', type: 'Page', path: '/templates/PageFAQRetro.tsx', desc: 'Retro FAQ page' },
+    { name: 'PageStoresRetro', category: 'Templates', type: 'Page', path: '/templates/PageStoresRetro.tsx', desc: 'Retro Stores page' },
+    { name: 'PageCompareRetro', category: 'Templates', type: 'Page', path: '/templates/PageCompareRetro.tsx', desc: 'Retro Product Compare page' },
+    { name: 'PageGiftCardsRetro', category: 'Templates', type: 'Page', path: '/templates/PageGiftCardsRetro.tsx', desc: 'Retro Gift Cards page' },
+    { name: 'PageLoginRetro', category: 'Templates', type: 'Account', path: '/templates/PageLoginRetro.tsx', desc: 'Retro Login / Register' },
+    { name: 'AccountLayoutRetro', category: 'Templates', type: 'Account', path: '/templates/AccountLayoutRetro.tsx', desc: 'Retro My Account Wrapper' },
+    { name: 'DashboardRetro', category: 'Patterns', type: 'Account', path: '/patterns/account/DashboardRetro.tsx', desc: 'Retro Account Dashboard' },
+    { name: 'OrdersRetro', category: 'Patterns', type: 'Account', path: '/patterns/account/OrdersRetro.tsx', desc: 'Retro Account Orders' },
+    { name: 'PageTrackOrderRetro', category: 'Templates', type: 'Commerce', path: '/templates/PageTrackOrderRetro.tsx', desc: 'Retro Track Order' },
+    { name: 'PageWishlistRetro', category: 'Templates', type: 'Account', path: '/templates/PageWishlistRetro.tsx', desc: 'Retro Wishlist' },
+    { name: 'PagePrivacyPolicyRetro', category: 'Templates', type: 'Legal', path: '/templates/PagePrivacyPolicyRetro.tsx', desc: 'Retro Privacy Policy' },
+    { name: 'PageTermsConditionsRetro', category: 'Templates', type: 'Legal', path: '/templates/PageTermsConditionsRetro.tsx', desc: 'Retro Terms & Conditions' },
+    { name: 'PageNotFoundRetro', category: 'Templates', type: 'Page', path: '/templates/PageNotFoundRetro.tsx', desc: 'Retro 404 Error' },
+    { name: 'PageReturnsPortalRetro', category: 'Templates', type: 'Support', path: '/templates/PageReturnsPortalRetro.tsx', desc: 'Retro Returns Portal' },
+    { name: 'PageShippingReturnsRetro', category: 'Templates', type: 'Support', path: '/templates/PageShippingReturnsRetro.tsx', desc: 'Retro Shipping & Returns' },
+    { name: 'ArchiveBlogRetro', category: 'Templates', type: 'Archive', path: '/templates/ArchiveBlogRetro.tsx', desc: 'Retro blog archive' },
+    { name: 'SinglePostRetro', category: 'Templates', type: 'Single', path: '/templates/SinglePostRetro.tsx', desc: 'Retro single blog post' },
     { name: 'Header', category: 'Parts', type: 'Navigation', path: '/parts/Header.tsx', desc: 'Main navigation with mega menu and cart' },
     { name: 'Footer', category: 'Parts', type: 'Navigation', path: '/parts/Footer.tsx', desc: 'Site footer with links and newsletter' },
     { name: 'MiniCart', category: 'Parts', type: 'Commerce', path: '/parts/MiniCart.tsx', desc: 'Slide-over cart drawer with items' },
@@ -71,200 +74,236 @@ export default function PageShowcase() {
     { name: 'Input', category: 'Blocks', type: 'UI', path: '/blocks/forms/Input.tsx', desc: 'Form text input field' },
   ];
 
-  var blockCategories = [
-    { name: 'UI Primitives', count: 18, desc: 'Buttons, badges, avatars, tooltips', icon: Faders },
-    { name: 'Forms', count: 14, desc: 'Inputs, selects, checkboxes, radios', icon: TextT },
-    { name: 'Layout', count: 12, desc: 'Containers, grids, stacks, wrappers', icon: GridFour },
-    { name: 'Product', count: 24, desc: 'Cards, galleries, prices, variants', icon: ShoppingBag },
-    { name: 'Cart', count: 15, desc: 'Line items, totals, shipping calculators', icon: ShoppingCart },
-    { name: 'Checkout', count: 19, desc: 'Steps, payment methods, order summary', icon: CreditCard },
-    { name: 'Archive', count: 11, desc: 'Filters, pagination, active constraints', icon: Faders },
-    { name: 'Blog', count: 16, desc: 'Post cards, meta info, author bios', icon: FileText },
-    { name: 'Account', count: 22, desc: 'Orders, addresses, profile edits', icon: User },
-    { name: 'Theme', count: 9, desc: 'Logo, search, navigation, toggles', icon: Palette },
-    { name: 'Interactive', count: 13, desc: 'Accordions, tabs, modals, drawers', icon: CursorClick },
-    { name: 'Media', count: 8, desc: 'Images, video players, carousels', icon: ImageIcon },
-  ];
+  const categories = ['All', 'Templates', 'Parts', 'Patterns', 'Blocks'];
 
-  var categories = ['All', 'Templates', 'Parts', 'Patterns', 'Blocks'];
-
-  var filteredComponents = components.filter(function(comp) {
-    var matchesSearch = comp.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                        comp.desc.toLowerCase().includes(searchTerm.toLowerCase());
-    var matchesCategory = selectedCategory === 'All' || comp.category === selectedCategory;
+  const filteredComponents = components.filter((comp) => {
+    const matchesSearch = comp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          comp.desc.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || comp.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  return React.createElement(React.Fragment, null,
-    React.createElement(DarkModeToggle, null),
-    React.createElement('div', { className: 'page-rewards' },
-      
-      /* Header */
-      React.createElement('section', { className: 'wp-page-intro-section' },
-        React.createElement(Container, null,
-          React.createElement('div', { className: 'wp-page-intro-content' },
-            React.createElement('div', { className: 'wp-badge-pill' },
-              React.createElement(Sparkle, { size: 16, weight: 'duotone' }),
-              React.createElement('span', { className: 'wp-badge-pill__text' }, 'Component Library')
-            ),
-            React.createElement('h1', null, 'Component Showcase'),
-            React.createElement('p', { className: 'wp-page-intro-text' },
-              'Explore the complete collection of templates, parts, patterns, and blocks.'
-            )
-          )
-        )
-      ),
+  return (
+    <>
+      <DarkModeToggle />
+      <div className="retro-devtools-page" style={{ backgroundColor: 'var(--color-paper)', color: 'var(--color-ink)', minHeight: '100vh', paddingBottom: '4rem' }}>
 
-      /* Stats */
-      React.createElement('section', { className: 'reward-section' },
-        React.createElement(Container, null,
-          React.createElement('div', { className: 'showcase-stats-grid' },
-            stats.map(function(stat, index) {
-              return React.createElement('div', { key: index, className: 'showcase-stat-card' },
-                React.createElement(stat.icon, { size: 32, weight: 'duotone', className: 'showcase-stat-card__icon' }),
-                React.createElement('span', { className: 'showcase-stat-card__count' }, stat.count),
-                React.createElement('span', { className: 'showcase-stat-card__label' }, stat.label)
-              );
-            })
-          )
-        )
-      ),
+        {/* Header Section */}
+        <section style={{
+          padding: '3rem 0',
+          borderBottom: '4px solid var(--color-ink)',
+          backgroundColor: 'var(--color-signal)',
+          backgroundImage: 'radial-gradient(var(--color-ink) 2px, transparent 2px)',
+          backgroundSize: '16px 16px',
+        }}>
+          <Container>
+            <div style={{
+              backgroundColor: 'var(--color-ink)',
+              padding: '2rem',
+              border: '4px solid var(--color-ink)',
+              boxShadow: '8px 8px 0 rgba(0,0,0,0.2)',
+              display: 'inline-block',
+              color: 'var(--color-paper)'
+            }}>
+              <h1 className="retro-font-display retro-bold" style={{ fontSize: '3rem', margin: '0 0 1rem 0' }}>COMPONENT SHOWCASE</h1>
+              <p className="retro-font-body" style={{ fontSize: '1.125rem', margin: 0, opacity: 0.9 }}>
+                Explore the complete collection of templates, parts, patterns, and blocks.
+              </p>
+            </div>
+          </Container>
+        </section>
 
-      /* Coverage */
-      React.createElement('section', { className: 'reward-section reward-section--alt' },
-        React.createElement(Container, null,
-          React.createElement('h2', { className: 'reward-section__heading' }, 'Audit Coverage'),
-          React.createElement('div', { className: 'showcase-coverage-grid' },
-            coverage.map(function(item, index) {
-              return React.createElement('div', { key: index, className: 'showcase-coverage-item' },
-                React.createElement('div', { className: 'showcase-coverage-item__header' },
-                  React.createElement(Check, { size: 16, weight: 'bold', className: 'showcase-coverage-item__icon' }),
-                  React.createElement('span', { className: 'showcase-coverage-item__value' }, item.value)
-                ),
-                React.createElement('h3', { className: 'showcase-coverage-item__label' }, item.label),
-                React.createElement('p', { className: 'showcase-coverage-item__desc' }, item.desc)
-              );
-            })
-          )
-        )
-      ),
+        {/* Stats */}
+        <section style={{ padding: '4rem 0' }}>
+          <Container>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+              {stats.map((stat, index) => (
+                <div key={index} style={{
+                  backgroundColor: 'var(--color-paper-deep)',
+                  border: '4px solid var(--color-ink)',
+                  padding: '2rem',
+                  textAlign: 'center',
+                  boxShadow: '4px 4px 0 var(--color-ink)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', color: 'var(--color-signal)' }}>
+                    <stat.icon size={48} weight="bold" />
+                  </div>
+                  <div className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', marginBottom: '0.25rem' }}>{stat.count}</div>
+                  <div className="retro-font-body" style={{ fontSize: '0.875rem', opacity: 0.8, fontWeight: 'bold' }}>{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
 
-      /* Templates by Category */
-      React.createElement('section', { className: 'reward-section' },
-        React.createElement(Container, null,
-          React.createElement('h2', { className: 'reward-section__heading' }, 'Template Categories'),
-          React.createElement('p', { className: 'reward-section__subheading' }, '63 templates organized into 9 semantic groups'),
-          React.createElement('div', { className: 'template-categories-grid' },
-            templateCategories.map(function(category, index) {
-              return React.createElement('div', { key: index, className: 'template-category-card' },
-                React.createElement('div', { className: 'template-category-card__header' },
-                  React.createElement('div', { className: 'template-category-card__icon' },
-                    React.createElement(category.icon, { size: 24, weight: 'duotone' })
-                  ),
-                  React.createElement('span', { className: 'template-category-card__count' }, category.count)
-                ),
-                React.createElement('h3', { className: 'template-category-card__name' }, category.name),
-                React.createElement('p', { className: 'template-category-card__desc' }, category.desc)
-              );
-            })
-          )
-        )
-      ),
+        {/* Templates by Category */}
+        <section style={{ padding: '4rem 0', backgroundColor: 'var(--color-paper-deep)', borderTop: '4px solid var(--color-ink)' }}>
+          <Container>
+            <div style={{ marginBottom: '3rem' }}>
+              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>TEMPLATE CATEGORIES</h2>
+              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>63 templates organized into 9 semantic groups</p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+              {templateCategories.map((category, index) => (
+                <div key={index} style={{
+                  backgroundColor: 'var(--color-paper)',
+                  border: '4px solid var(--color-ink)',
+                  padding: '1.5rem',
+                  boxShadow: '4px 4px 0 var(--color-ink)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <div style={{ color: 'var(--color-signal)' }}>
+                      <category.icon size={32} weight="bold" />
+                    </div>
+                    <span className="retro-font-display retro-bold" style={{ backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', padding: '0.25rem 0.5rem', fontSize: '0.875rem' }}>
+                      {category.count}
+                    </span>
+                  </div>
+                  <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.25rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{category.name}</h3>
+                  <p className="retro-font-body" style={{ margin: 0, fontSize: '0.875rem', opacity: 0.8 }}>{category.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
 
-      /* Component Browser */
-      React.createElement('section', { className: 'reward-section reward-section--alt' },
-        React.createElement(Container, null,
-          React.createElement('h2', { className: 'reward-section__heading' }, 'Component Directory'),
-          React.createElement('p', { className: 'reward-section__subheading' }, 'Search and filter all available React components'),
-          
-          React.createElement('div', { className: 'component-browser-controls' },
-            React.createElement('div', { className: 'component-search' },
-              React.createElement(MagnifyingGlass, { size: 20, weight: 'duotone', className: 'component-search__icon' }),
-              React.createElement('input', {
-                type: 'text',
-                placeholder: 'Search components...',
-                value: searchTerm,
-                onChange: function(e) { setSearchTerm(e.target.value); },
-                className: 'component-search__input funky-input-glow',
-                'aria-label': 'Search components'
-              })
-            ),
-            
-            React.createElement('div', { className: 'component-filter' },
-              React.createElement(Faders, { size: 18, weight: 'duotone', className: 'component-filter__icon' }),
-              React.createElement('div', { className: 'component-filter__buttons' },
-                categories.map(function(cat) {
-                  return React.createElement('button', {
-                    key: cat,
-                    onClick: function() { setSelectedCategory(cat); },
-                    className: 'component-filter__button' + (selectedCategory === cat ? ' component-filter__button--active' : ''),
-                    'aria-pressed': selectedCategory === cat
-                  }, 
-                    cat + (cat === 'All' ? ' (' + components.length + ')' : ' (' + components.filter(function(c) { return c.category === cat; }).length + ')')
-                  );
-                })
-              )
-            )
-          ),
+        {/* Component Browser */}
+        <section style={{ padding: '4rem 0', borderTop: '4px solid var(--color-ink)' }}>
+          <Container>
+            <div style={{ marginBottom: '3rem' }}>
+              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>COMPONENT DIRECTORY</h2>
+              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>Search and filter all available React components</p>
+            </div>
 
-          /* Results Count */
-          React.createElement('div', { className: 'component-browser-results' },
-            React.createElement('p', null, 
-              'Showing ', React.createElement('strong', null, filteredComponents.length), 
-              ' of ', React.createElement('strong', null, components.length), ' components'
-            )
-          ),
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+              marginBottom: '3rem',
+              backgroundColor: 'var(--color-paper-deep)',
+              border: '4px solid var(--color-ink)',
+              padding: '2rem',
+              boxShadow: '4px 4px 0 var(--color-ink)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <MagnifyingGlass size={24} weight="bold" color="var(--color-ink)" />
+                <input
+                  type="text"
+                  placeholder="SEARCH COMPONENTS..."
+                  value={searchTerm}
+                  onChange={(evt) => setSearchTerm(evt.target.value)}
+                  className="retro-font-display retro-bold"
+                  style={{
+                    flex: 1,
+                    backgroundColor: 'var(--color-paper)',
+                    border: '2px solid var(--color-ink)',
+                    padding: '0.75rem 1rem',
+                    fontSize: '1rem',
+                    color: 'var(--color-ink)',
+                    outline: 'none'
+                  }}
+                  aria-label="Search components"
+                />
+              </div>
 
-          /* Component Grid */
-          filteredComponents.length > 0 ? React.createElement('div', { className: 'component-grid' },
-            filteredComponents.map(function(comp) {
-              return React.createElement('div', { key: comp.name, className: 'component-card funky-glass-panel' },
-                React.createElement('div', { className: 'component-card__header' },
-                  React.createElement('h3', { className: 'component-card__name' }, comp.name),
-                  React.createElement('span', { className: 'component-card__type' }, comp.type)
-                ),
-                React.createElement('p', { className: 'component-card__desc' }, comp.desc),
-                React.createElement('div', { className: 'component-card__footer' },
-                  React.createElement('code', { className: 'component-card__path' }, comp.path),
-                  React.createElement('a', {
-                    href: '#' + comp.path,
-                    className: 'component-card__link',
-                    'aria-label': 'View ' + comp.name + ' source'
-                  },
-                    React.createElement(ArrowSquareOut, { size: 14, weight: 'duotone' })
-                  )
-                )
-              );
-            })
-          ) : React.createElement('div', { className: 'component-browser-empty' },
-            React.createElement(Cube, { size: 48, weight: 'duotone' }),
-            React.createElement('h3', null, 'No components found'),
-            React.createElement('p', null, 'Try adjusting your search or filter criteria')
-          )
-        )
-      ),
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <Faders size={24} weight="bold" color="var(--color-ink)" />
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  {categories.map((cat) => {
+                    const isActive = selectedCategory === cat;
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className="retro-font-display retro-bold"
+                        style={{
+                          backgroundColor: isActive ? 'var(--color-ink)' : 'var(--color-paper)',
+                          color: isActive ? 'var(--color-paper)' : 'var(--color-ink)',
+                          border: '2px solid var(--color-ink)',
+                          padding: '0.5rem 1rem',
+                          fontSize: '0.875rem',
+                          cursor: 'pointer',
+                          textTransform: 'uppercase'
+                        }}
+                        aria-pressed={isActive}
+                      >
+                        {`${cat} (${cat === 'All' ? components.length : components.filter((c) => c.category === cat).length})`}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
 
-      /* Block Categories */
-      React.createElement('section', { className: 'reward-section' },
-        React.createElement(Container, null,
-          React.createElement('h2', { className: 'reward-section__heading' }, 'Block Categories'),
-          React.createElement('p', { className: 'reward-section__subheading' }, '200+ blocks organized into 21 functional categories'),
-          React.createElement('div', { className: 'block-categories-grid' },
-            blockCategories.map(function(category) {
-              return React.createElement('div', { key: category.name, className: 'block-category-card funky-glass-panel' },
-                React.createElement('div', { className: 'block-category-card__header' },
-                  React.createElement('div', { className: 'block-category-card__icon' },
-                    React.createElement(category.icon, { size: 24, weight: 'duotone' })
-                  ),
-                  React.createElement('span', { className: 'block-category-card__count' }, category.count)
-                ),
-                React.createElement('h3', { className: 'block-category-card__name' }, category.name),
-                React.createElement('p', { className: 'block-category-card__desc' }, category.desc)
-              );
-            })
-          )
-        )
-      )
-    )
+            {/* Results Count */}
+            <div style={{ marginBottom: '2rem' }}>
+              <p className="retro-font-body" style={{ fontSize: '1rem' }}>
+                SHOWING <strong>{filteredComponents.length}</strong> OF <strong>{components.length}</strong> COMPONENTS
+              </p>
+            </div>
+
+            {/* Component Grid */}
+            {filteredComponents.length > 0 ? (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+                {filteredComponents.map((comp) => (
+                  <div key={comp.name} style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    backgroundColor: 'var(--color-paper)',
+                    border: '4px solid var(--color-ink)',
+                    padding: '1.5rem',
+                    boxShadow: '4px 4px 0 var(--color-ink)',
+                    transition: 'transform 0.1s, box-shadow 0.1s'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                      <h3 className="retro-font-display retro-bold" style={{ margin: 0, fontSize: '1.25rem', wordBreak: 'break-all' }}>{comp.name}</h3>
+                      <span
+                        className="retro-font-display"
+                        style={{
+                          backgroundColor: 'var(--color-signal)',
+                          color: 'var(--color-paper)',
+                          padding: '0.25rem 0.5rem',
+                          fontSize: '0.75rem',
+                          fontWeight: 'bold',
+                          borderRadius: '2px',
+                          whiteSpace: 'nowrap',
+                          marginLeft: '0.5rem'
+                        }}
+                      >
+                        {comp.type}
+                      </span>
+                    </div>
+                    <p className="retro-font-body" style={{ margin: '0 0 1.5rem 0', fontSize: '0.875rem', flex: 1, opacity: 0.8 }}>{comp.desc}</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '2px dashed var(--color-ink)', paddingTop: '1rem', marginTop: 'auto' }}>
+                      <code style={{ fontSize: '0.75rem', backgroundColor: 'var(--color-paper-deep)', padding: '0.25rem 0.5rem', border: '1px solid var(--color-ink)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{comp.path}</code>
+                      <a
+                        href={`#${comp.path}`}
+                        style={{ color: 'var(--color-ink)' }}
+                        aria-label={`View ${comp.name} source`}
+                      >
+                        <ArrowSquareOut size={20} weight="bold" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{
+                textAlign: 'center',
+                padding: '4rem 2rem',
+                backgroundColor: 'var(--color-paper-deep)',
+                border: '4px dashed var(--color-ink)'
+              }}>
+                <Cube size={48} weight="duotone" color="var(--color-ink)" style={{ marginBottom: '1rem' }} />
+                <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>NO COMPONENTS FOUND</h3>
+                <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>Try adjusting your search or filter criteria</p>
+              </div>
+            )}
+          </Container>
+        </section>
+      </div>
+    </>
   );
 }
+
+export default PageShowcase;

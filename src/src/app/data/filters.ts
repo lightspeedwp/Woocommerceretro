@@ -4,7 +4,7 @@
  * Centralized filter options for the Shop Sidebar.
  */
 
-export var SHOP_FILTERS = {
+export const SHOP_FILTERS = {
   brands: [
     'Roodeberg', 
     'The Mentors', 

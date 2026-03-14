@@ -1,55 +1,59 @@
 import React from 'react';
-import * as ButtonsModule from '../design/Buttons';
-import * as FloatingLabelInputModule from './ui/FloatingLabelInput';
-import * as AccountData from '../../../data/account';
-
-var Button = ButtonsModule.Button;
-var FloatingLabelInput = FloatingLabelInputModule.FloatingLabelInput;
-var mockUserProfile = AccountData.mockUserProfile;
+import { Button } from '../design/Buttons';
+import { FloatingLabelInput } from './ui/FloatingLabelInput';
+import { mockUserProfile } from '../../../data/account';
 
 /**
  * ContactInfo Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
+ *
+ * Shows logged-in user preview or guest email input for checkout.
  */
-export function ContactInfo(props) {
-  var isLoggedIn = props.isLoggedIn;
-
-  var renderContent = function() {
+export const ContactInfo = ({
+  isLoggedIn,
+}: {
+  isLoggedIn?: boolean;
+}) => {
+  const renderContent = () => {
     if (isLoggedIn) {
-      return React.createElement('div', { className: "wp-checkout-contact__preview funky-contact-preview" },
-        React.createElement('span', { className: "wp-checkout-contact__label" }, "Logged in as "),
-        React.createElement('strong', { className: "wp-checkout-contact__name" }, mockUserProfile.firstName + " " + mockUserProfile.lastName),
-        React.createElement('span', { className: "wp-checkout-contact__email" }, " (" + mockUserProfile.email + ")")
+      return (
+        <div className="wp-checkout-contact__preview funky-contact-preview">
+          <span className="wp-checkout-contact__label">Logged in as </span>
+          <strong className="wp-checkout-contact__name">
+            {mockUserProfile.firstName} {mockUserProfile.lastName}
+          </strong>
+          <span className="wp-checkout-contact__email"> ({mockUserProfile.email})</span>
+        </div>
       );
     }
 
-    return React.createElement('div', { className: "wp-checkout-contact__form" },
-      React.createElement(FloatingLabelInput, { 
-        label: "Email or mobile phone number",
-        type: "email",
-        id: "email",
-        className: "wp-checkout-contact__input funky-input"
-      }),
-      
-      React.createElement('div', { className: "wp-checkout-contact__newsletter" },
-        React.createElement('input', { 
-          type: "checkbox", 
-          id: "newsletter", 
-          className: "wp-checkout-contact__checkbox" 
-        }),
-        React.createElement('label', { htmlFor: "newsletter", className: "wp-checkout-contact__checkbox-label" },
-          "Email me with news and offers"
-        )
-      )
+    return (
+      <div className="wp-checkout-contact__form">
+        <FloatingLabelInput
+          label="Email or mobile phone number"
+          type="email"
+          id="email"
+          className="wp-checkout-contact__input funky-input"
+        />
+
+        <div className="wp-checkout-contact__newsletter">
+          <input
+            type="checkbox"
+            id="newsletter"
+            className="wp-checkout-contact__checkbox"
+          />
+          <label htmlFor="newsletter" className="wp-checkout-contact__checkbox-label">
+            Email me with news and offers
+          </label>
+        </div>
+      </div>
     );
   };
 
-  return React.createElement('div', { className: "wp-checkout-contact funky-checkout-contact" },
-    renderContent()
+  return (
+    <div className="wp-checkout-contact funky-checkout-contact">
+      {renderContent()}
+    </div>
   );
-}
+};
 
 ContactInfo.displayName = 'ContactInfo';

@@ -1,0 +1,62 @@
+/**
+ * Loyalty Dashboard Page - Retro Redesign CSS
+ *
+ * Retro handheld gaming aesthetic overrides for the loyalty dashboard.
+ * Inherits base loyalty-* styles from loyalty-funky.css.
+ * Adds retro section spacing, heading alignment, and section backgrounds.
+ *
+ * @see /src/app/components/templates/PageLoyaltyRetro.tsx
+ * @see /src/styles/sections/loyalty-funky.css (base loyalty styles)
+ */
+
+/* ========================================
+   RETRO SECTION OVERRIDES FOR LOYALTY
+   ======================================== */
+
+.retro-section--dashboard {
+  background: var(--retro-surface, var(--wp--preset--color--surface));
+}
+
+.dark .retro-section--dashboard {
+  background: var(--retro-bg, var(--wp--preset--color--background));
+}
+
+.retro-section--actions {
+  background: var(--retro-bg, var(--wp--preset--color--background));
+}
+
+.dark .retro-section--actions {
+  background: rgba(3, 2, 19, 0.4);
+}
+
+.retro-section--activity {
+  background: var(--retro-surface, var(--wp--preset--color--surface));
+}
+
+.dark .retro-section--activity {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ========================================
+   RETRO TYPOGRAPHY OVERRIDES
+   ======================================== */
+
+.retro-section--dashboard .loyalty-stat-card__value,
+.retro-section--actions .loyalty-action-card__label,
+.retro-section--activity .loyalty-activity-row__points {
+  font-family: var(--retro-font-display, var(--wp--preset--font-family--heading));
+}
+
+/* ========================================
+   RETRO UPGRADE BANNER
+   ======================================== */
+
+.retro-section .loyalty-upgrade-banner {
+  border-color: var(--retro-accent, var(--wp--preset--color--neon-cyan, #00ffff));
+}
+
+.dark .retro-section .loyalty-upgrade-banner {
+  border-color: rgba(0, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.06), rgba(204, 255, 0, 0.04));
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.06);
+}

@@ -1,0 +1,131 @@
+/**
+ * Sustainability Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for sustainability page.
+ *
+ * **Components:**
+ * - Impact stats grid with neon values
+ * - Goals checklist
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   STATS SECTION
+   ========================================================================== */
+
+.retro-section--stats {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--retro-space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.retro-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--retro-space-6);
+  background: var(--retro-bg-elevated);
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  transition: all 0.3s ease;
+}
+
+.retro-stat-card:hover {
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 249, 0.15);
+}
+
+.retro-stat-value {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--retro-neon-cyan);
+  filter: drop-shadow(0 0 6px rgba(0, 255, 249, 0.4));
+  line-height: 1.1;
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-stat-label {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   GOALS SECTION
+   ========================================================================== */
+
+.retro-section--goals {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.retro-goal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--retro-space-3);
+  padding: var(--retro-space-4);
+  background: var(--retro-bg-elevated);
+  border: 1px solid rgba(0, 255, 249, 0.15);
+  transition: all 0.3s ease;
+}
+
+.retro-goal-item:hover {
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 249, 0.1);
+}
+
+.retro-goal-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: var(--retro-neon-green, #00ff88);
+}
+
+.retro-goal-text {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-secondary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .retro-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--retro-space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .retro-stat-card {
+    padding: var(--retro-space-4);
+  }
+}

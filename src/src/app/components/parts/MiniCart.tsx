@@ -1,157 +1,149 @@
-import React from "react";
-import * as DrawerModule from "../blocks/layout/Drawer";
-import * as ButtonsModule from "../blocks/design/Buttons";
-import * as TypographyModule from "../common/Typography";
+import React, { useState } from 'react';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerClose, DrawerTrigger } from '../blocks/layout/Drawer';
+import { Button } from '../blocks/design/Buttons';
+import { Typography } from '../common/Typography';
 import { Bag as ShoppingBag, X, Minus, Plus } from '@phosphor-icons/react';
-import * as ReactRouterModule from "react-router";
-import * as ImageFallbackModule from "../figma/ImageWithFallback";
-import * as CartContextModule from "../../contexts/CartContext";
-
-var useState = React.useState;
-var Drawer = DrawerModule.Drawer;
-var DrawerContent = DrawerModule.DrawerContent;
-var DrawerHeader = DrawerModule.DrawerHeader;
-var DrawerTitle = DrawerModule.DrawerTitle;
-var DrawerDescription = DrawerModule.DrawerDescription;
-var DrawerClose = DrawerModule.DrawerClose;
-var DrawerTrigger = DrawerModule.DrawerTrigger;
-var Button = ButtonsModule.Button;
-var Typography = TypographyModule.Typography;
-var Link = ReactRouterModule.Link;
-var ImageWithFallback = ImageFallbackModule.ImageWithFallback;
-var useCart = CartContextModule.useCart;
-
-// Safe icon fallbacks
-var IconShoppingBag = ShoppingBag || (function() { return React.createElement('span', { 'aria-hidden': 'true' }, '🛍️'); });
-var IconX = X || (function() { return React.createElement('span', { 'aria-hidden': 'true' }, '✕'); });
-var IconMinus = Minus || (function() { return React.createElement('span', { 'aria-hidden': 'true' }, '-'); });
-var IconPlus = Plus || (function() { return React.createElement('span', { 'aria-hidden': 'true' }, '+'); });
+import { Link } from 'react-router';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { useCart } from '../../contexts/CartContext';
 
 /**
  * MiniCart Component (Global Template Part) — Funky Redesign (Phase 2)
  */
-export function MiniCart() {
-  var cartContext = useCart();
-  var _so = useState(false);
-  var isOpen = _so[0];
-  var setIsOpen = _so[1];
+export const MiniCart = () => {
+  const cartContext = useCart();
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!cartContext) return null;
 
-  var items = cartContext.items;
-  var updateQuantity = cartContext.updateQuantity;
-  var removeFromCart = cartContext.removeFromCart;
-  var getCartTotal = cartContext.getCartTotal;
-  var getCartCount = cartContext.getCartCount;
-  
-  var total = getCartTotal();
-  var itemCount = getCartCount();
+  const { items, updateQuantity, removeFromCart, getCartTotal, getCartCount } = cartContext;
+  const total = getCartTotal();
+  const itemCount = getCartCount();
 
-  var handleSetIsOpenFalse = function() {
-    setIsOpen(false);
-  };
+  const handleClose = () => setIsOpen(false);
 
-  var renderProductLink = function(item) {
-    return React.createElement(Link, { 
-      to: '/product/' + item.product.id, 
-      onClick: handleSetIsOpenFalse 
-    }, item.product.name);
-  };
+  return (
+    <Drawer open={isOpen} onOpenChange={setIsOpen}>
+      <DrawerTrigger asChild>
+        <button className="woocommerce-mini-cart__trigger funky-spring-hover" aria-label="Cart">
+          <ShoppingBag size={24} />
+          {itemCount > 0 && (
+            <strong className="woocommerce-mini-cart__badge woocommerce-mini-cart__badge--funky">
+              <small>{itemCount}</small>
+            </strong>
+          )}
+        </button>
+      </DrawerTrigger>
+      <DrawerContent side="right" className="woocommerce-mini-cart woocommerce-mini-cart--funky">
+        <DrawerHeader
+          className={`woocommerce-mini-cart__header woocommerce-mini-cart__header--funky ${
+            items.length > 0 ? 'woocommerce-mini-cart__header--has-items' : 'woocommerce-mini-cart__header--empty'
+          }`}
+        >
+          <DrawerTitle className={`woocommerce-mini-cart__title${items.length === 0 ? ' sr-only' : ''}`}>
+            {items.length > 0 ? `Cart (${itemCount})` : 'Cart'}
+          </DrawerTitle>
+          <DrawerClose asChild>
+            <button className="woocommerce-mini-cart__close" aria-label="Close cart">
+              <X size={24} aria-hidden="true" />
+            </button>
+          </DrawerClose>
+          <DrawerDescription className="sr-only">Review your items.</DrawerDescription>
+        </DrawerHeader>
 
-  return React.createElement(Drawer, { open: isOpen, onOpenChange: setIsOpen },
-    React.createElement(DrawerTrigger, { asChild: true },
-      React.createElement('button', {
-        className: 'woocommerce-mini-cart__trigger funky-spring-hover',
-        'aria-label': 'Cart'
-      },
-        React.createElement(IconShoppingBag, { size: 24 }),
-        itemCount > 0 ? React.createElement('strong', { className: 'woocommerce-mini-cart__badge woocommerce-mini-cart__badge--funky' },
-          React.createElement('small', null, itemCount)
-        ) : null
-      )
-    ),
-    React.createElement(DrawerContent, {
-      side: 'right',
-      className: 'woocommerce-mini-cart woocommerce-mini-cart--funky'
-    },
-      React.createElement(DrawerHeader, { className: 'woocommerce-mini-cart__header woocommerce-mini-cart__header--funky ' + (items.length > 0 ? 'woocommerce-mini-cart__header--has-items' : 'woocommerce-mini-cart__header--empty') },
-        React.createElement(DrawerTitle, { className: 'woocommerce-mini-cart__title ' + (items.length === 0 ? 'sr-only' : '') },
-          items.length > 0 ? 'Cart (' + itemCount + ')' : 'Cart'
-        ),
-        React.createElement(DrawerClose, { asChild: true },
-          React.createElement('button', { className: 'woocommerce-mini-cart__close', 'aria-label': 'Close cart' },
-            React.createElement(IconX, { size: 24, 'aria-hidden': 'true' })
-          )
-        ),
-        React.createElement(DrawerDescription, { className: 'sr-only' }, 'Review your items.')
-      ),
+        <div className="woocommerce-mini-cart__content">
+          {items.length === 0 ? (
+            <div className="woocommerce-mini-cart__empty">
+              <Typography variant="body" className="woocommerce-mini-cart__empty-message">
+                Your cart is currently empty
+              </Typography>
+              <Button onClick={handleClose} className="woocommerce-mini-cart__empty-cta funky-spring-hover">
+                Start shopping
+              </Button>
+            </div>
+          ) : (
+            items.map((item) => {
+              const price = item.product.salePrice || item.product.price;
+              return (
+                <div key={item.product.id} className="woocommerce-mini-cart-item">
+                  <div className="woocommerce-mini-cart-item__image woocommerce-mini-cart-item__image--funky">
+                    <ImageWithFallback
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="woocommerce-mini-cart-item__img"
+                    />
+                  </div>
+                  <div className="woocommerce-mini-cart-item__details">
+                    <div>
+                      <div className="woocommerce-mini-cart-item__header">
+                        <h4 className="woocommerce-mini-cart-item__name">
+                          <Link to={`/product/${item.product.id}`} onClick={handleClose}>
+                            {item.product.name}
+                          </Link>
+                        </h4>
+                        <span className="woocommerce-mini-cart-item__price">
+                          &pound;{price.toFixed(2)}
+                        </span>
+                      </div>
+                      {item.product.brand && (
+                        <small className="woocommerce-mini-cart-item__brand">{item.product.brand}</small>
+                      )}
+                    </div>
+                    <div className="woocommerce-mini-cart-item__footer">
+                      <div className="woocommerce-quantity-selector">
+                        <button
+                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          aria-label={`Decrease quantity of ${item.product.name}`}
+                          className="woocommerce-quantity-selector__button"
+                        >
+                          <Minus size={12} />
+                        </button>
+                        <span className="woocommerce-quantity-selector__value">
+                          <small>{item.quantity}</small>
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          aria-label={`Increase quantity of ${item.product.name}`}
+                          className="woocommerce-quantity-selector__button"
+                        >
+                          <Plus size={12} />
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(item.product.id)}
+                        aria-label={`Remove ${item.product.name} from cart`}
+                        className="woocommerce-mini-cart-item__remove funky-spring-hover"
+                      >
+                        <small>Remove</small>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
 
-      React.createElement('div', { className: 'woocommerce-mini-cart__content' },
-        items.length === 0 ? React.createElement('div', { className: 'woocommerce-mini-cart__empty' },
-          React.createElement(Typography, { variant: 'body', className: 'woocommerce-mini-cart__empty-message' }, 'Your cart is currently empty'),
-          React.createElement(Button, {
-            onClick: handleSetIsOpenFalse,
-            className: 'woocommerce-mini-cart__empty-cta funky-spring-hover'
-          }, 'Start shopping')
-        ) : items.map(function(item) {
-          var price = item.product.salePrice || item.product.price;
-          
-          return React.createElement('div', { key: item.product.id, className: 'woocommerce-mini-cart-item' },
-            React.createElement('div', { className: 'woocommerce-mini-cart-item__image woocommerce-mini-cart-item__image--funky' },
-              React.createElement(ImageWithFallback, {
-                src: item.product.image,
-                alt: item.product.name,
-                className: 'woocommerce-mini-cart-item__img'
-              })
-            ),
-            React.createElement('div', { className: 'woocommerce-mini-cart-item__details' },
-              React.createElement('div', null,
-                React.createElement('div', { className: 'woocommerce-mini-cart-item__header' },
-                  React.createElement('h4', { className: 'woocommerce-mini-cart-item__name' },
-                    renderProductLink(item)
-                  ),
-                  React.createElement('span', { className: 'woocommerce-mini-cart-item__price' }, '£' + price.toFixed(2))
-                ),
-                item.product.brand ? React.createElement('small', { className: 'woocommerce-mini-cart-item__brand' }, item.product.brand) : null
-              ),
-              React.createElement('div', { className: 'woocommerce-mini-cart-item__footer' },
-                React.createElement('div', { className: 'woocommerce-quantity-selector' },
-                  React.createElement('button', {
-                    onClick: function() { updateQuantity(item.product.id, item.quantity - 1); },
-                    'aria-label': 'Decrease quantity of ' + item.product.name,
-                    className: 'woocommerce-quantity-selector__button'
-                  }, React.createElement(IconMinus, { size: 12 })),
-                  React.createElement('span', { className: 'woocommerce-quantity-selector__value' },
-                    React.createElement('small', null, item.quantity)
-                  ),
-                  React.createElement('button', {
-                    onClick: function() { updateQuantity(item.product.id, item.quantity + 1); },
-                    'aria-label': 'Increase quantity of ' + item.product.name,
-                    className: 'woocommerce-quantity-selector__button'
-                  }, React.createElement(IconPlus, { size: 12 }))
-                ),
-                React.createElement('button', {
-                  onClick: function() { removeFromCart(item.product.id); },
-                  'aria-label': 'Remove ' + item.product.name + ' from cart',
-                  className: 'woocommerce-mini-cart-item__remove funky-spring-hover'
-                }, React.createElement('small', null, 'Remove'))
-              )
-            )
-          );
-        })
-      ),
-
-      items.length > 0 ? React.createElement('div', { className: 'woocommerce-mini-cart__footer woocommerce-mini-cart__footer--funky' },
-        React.createElement('div', { className: 'woocommerce-mini-cart__totals' },
-          React.createElement('span', { className: 'woocommerce-mini-cart__subtotal-label' }, 'Subtotal'),
-          React.createElement('span', { className: 'woocommerce-mini-cart__subtotal-amount woocommerce-mini-cart__subtotal-amount--funky' }, '£' + total.toFixed(2))
-        ),
-        React.createElement('p', { className: 'woocommerce-mini-cart__notice' }, 'Shipping and taxes calculated at checkout.'),
-        React.createElement('div', { className: 'woocommerce-mini-cart__actions' },
-          React.createElement(Button, { fullWidth: true, variant: 'outline', size: 'lg', to: '/cart', onClick: handleSetIsOpenFalse, className: 'funky-spring-hover' }, 'View cart'),
-          React.createElement(Button, { fullWidth: true, variant: 'primary', size: 'lg', to: '/checkout', onClick: handleSetIsOpenFalse, className: 'funky-spring-hover' }, 'Checkout')
-        )
-      ) : null
-    )
+        {items.length > 0 && (
+          <div className="woocommerce-mini-cart__footer woocommerce-mini-cart__footer--funky">
+            <div className="woocommerce-mini-cart__totals">
+              <span className="woocommerce-mini-cart__subtotal-label">Subtotal</span>
+              <span className="woocommerce-mini-cart__subtotal-amount woocommerce-mini-cart__subtotal-amount--funky">
+                &pound;{total.toFixed(2)}
+              </span>
+            </div>
+            <p className="woocommerce-mini-cart__notice">Shipping and taxes calculated at checkout.</p>
+            <div className="woocommerce-mini-cart__actions">
+              <Button fullWidth variant="outline" size="lg" to="/cart" onClick={handleClose} className="funky-spring-hover">
+                View cart
+              </Button>
+              <Button fullWidth variant="primary" size="lg" to="/checkout" onClick={handleClose} className="funky-spring-hover">
+                Checkout
+              </Button>
+            </div>
+          </div>
+        )}
+      </DrawerContent>
+    </Drawer>
   );
 }

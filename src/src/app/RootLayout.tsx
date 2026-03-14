@@ -1,67 +1,70 @@
 /**
  * RootLayout Component
- * 
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. No destructured imports (Legacy syntax)
- * 4. Named functions
- * 5. ASCII only
+ *
+ * Top-level layout wrapper providing error boundary, suspense fallback,
+ * scroll restoration, quick view overlay, comparison bar, and global
+ * font loading (single Google Fonts link for entire app lifecycle).
+ * WCAG AA 2.2 compliant.
  */
 
-import React from 'react';
-var Suspense = React.Suspense;
-import * as ReactRouterModule from 'react-router';
-var Outlet = ReactRouterModule.Outlet;
-import * as ScrollToTopModule from './components/common/ScrollToTop';
-var ScrollToTop = ScrollToTopModule.ScrollToTop;
-import * as QuickViewModule from './components/patterns/QuickView';
-var QuickView = QuickViewModule.QuickView;
-import * as ComparisonBarModule from './components/blocks/product/ComparisonBar';
-var ComparisonBar = ComparisonBarModule.ComparisonBar;
-import * as ErrorBoundaryModule from './components/common/ErrorBoundary';
-var ErrorBoundary = ErrorBoundaryModule.ErrorBoundary;
-import * as PerformanceMonitorModule from './components/developer/PerformanceMonitor';
-var PerformanceMonitor = PerformanceMonitorModule.PerformanceMonitor;
-import * as AccessibilityCheckerModule from './components/developer/AccessibilityChecker';
-var AccessibilityChecker = AccessibilityCheckerModule.AccessibilityChecker;
+import { Suspense, useEffect, lazy } from 'react';
+import { Outlet } from 'react-router';
+import { ScrollToTop } from './components/common/ScrollToTop';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 
-function PageLoadingFallback() {
-  var spinner = React.createElement('div', { key: 'spinner', className: "wp-page-loading__spinner" });
-  var text = React.createElement('small', { key: 'text', className: "wp-page-loading__text" }, "Loading...");
-  
-  var inner = React.createElement('div', { 
-    key: 'inner',
-    className: "wp-block-group wp-block-group--vertical wp-block-group--spacing-md has-text-align-center" 
-  }, [spinner, text]);
+// Lazy load heavy overlay components to reduce initial bundle parse time
+const QuickView = lazy(() => import('./components/patterns/QuickView').then(m => ({ default: m.QuickView })));
+const ComparisonBar = lazy(() => import('./components/blocks/product/ComparisonBar').then(m => ({ default: m.ComparisonBar })));
 
-  return React.createElement('div', { className: "wp-page-loading" }, [inner]);
+// Dev tools remain disabled — only needed during development, not in production preview.
+// import { PerformanceMonitor } from './components/developer/PerformanceMonitor';
+// import { AccessibilityChecker } from './components/developer/AccessibilityChecker';
+
+const GOOGLE_FONTS_URL =
+  'https://fonts.googleapis.com/css2?family=Silkscreen&family=Inter:wght@400;500;700&display=swap';
+
+const PageLoadingFallback = () => {
+  return (
+    <div className="wp-page-loading">
+      <div className="wp-block-group wp-block-group--vertical wp-block-group--spacing-md has-text-align-center">
+        <div className="wp-page-loading__spinner" />
+        <small className="wp-page-loading__text">Loading...</small>
+      </div>
+    </div>
+  );
 }
 
-export function RootLayout() {
-  var scroll = React.createElement(ScrollToTop, { key: 'scroll' });
-  var perf = React.createElement(PerformanceMonitor, { key: 'perf' });
-  var a11y = React.createElement(AccessibilityChecker, { key: 'a11y' });
-  
-  var outlet = React.createElement(Outlet, { key: 'outlet' });
-  var suspense = React.createElement(Suspense, { 
-    key: 'suspense',
-    fallback: React.createElement(PageLoadingFallback, null) 
-  }, [outlet]);
+export const RootLayout = () => {
+  // Load Google Fonts once for the entire app lifecycle.
+  // Previously each of the 16 retro templates injected and removed
+  // this link independently, causing DOM churn on every navigation.
+  useEffect(() => {
+    const existing = document.querySelector(
+      `link[href="${GOOGLE_FONTS_URL}"]`
+    );
+    if (existing) return;
 
-  var errorBoundary = React.createElement(ErrorBoundary, { key: 'error' }, [suspense]);
-  
-  var quickView = React.createElement(QuickView, { key: 'quick' });
-  var comparison = React.createElement(ComparisonBar, { key: 'comp' });
+    const link = document.createElement('link');
+    link.href = GOOGLE_FONTS_URL;
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    // Intentionally no cleanup — fonts should persist for the app's lifetime.
+  }, []);
 
-  return React.createElement(React.Fragment, null, [
-    scroll,
-    perf,
-    a11y,
-    errorBoundary,
-    quickView,
-    comparison
-  ]);
+  return (
+    <>
+      <ScrollToTop />
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoadingFallback />}>
+          <Outlet />
+        </Suspense>
+      </ErrorBoundary>
+      <Suspense fallback={null}>
+        <QuickView />
+        <ComparisonBar />
+      </Suspense>
+    </>
+  );
 }
 
 RootLayout.displayName = 'RootLayout';

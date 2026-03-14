@@ -1,149 +1,172 @@
-import React from 'react';
-var useState = React.useState;
-var useContext = React.useContext;
-var createContext = React.createContext;
-var forwardRef = React.forwardRef;
-
-var ToggleGroupContext = createContext(undefined);
+import React, { useState, useContext, createContext, forwardRef } from 'react';
 
 /**
  * ToggleGroup Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript syntax
+ *
+ * WordPress-aligned toggle group supporting single and multiple selection.
+ *
+ * @example
+ * <ToggleGroup type="single" value={val} onValueChange={setVal}>
+ *   <ToggleGroupItem value="a">A</ToggleGroupItem>
+ *   <ToggleGroupItem value="b">B</ToggleGroupItem>
+ * </ToggleGroup>
  */
-export var ToggleGroup = forwardRef(function ToggleGroup(props, ref) {
-  var className = props.className || '';
-  var variant = props.variant || 'default';
-  var size = props.size || 'default';
-  var children = props.children;
-  var type = props.type;
-  var value = props.value;
-  var defaultValue = props.defaultValue;
-  var onValueChange = props.onValueChange;
-  var disabled = props.disabled;
-  var id = props.id;
-  var style = props.style;
 
-  var _lv = useState(
-    defaultValue || (type === "multiple" ? [] : "")
-  );
-  var localValue = _lv[0];
-  var setLocalValue = _lv[1];
-  var actualValue = value !== undefined ? value : localValue;
+interface ToggleGroupContextValue {
+  type?: string;
+  value: string | string[];
+  onValueChange: (itemValue: string) => void;
+  variant: string;
+  size: string;
+  disabled?: boolean;
+}
 
-  var handleValueChange = function(itemValue) {
-    var newValue;
-    
-    if (type === "single") {
-      newValue = actualValue === itemValue ? "" : itemValue;
-    } else {
-      var list = Array.isArray(actualValue) ? actualValue.slice() : [];
-      var index = list.indexOf(itemValue);
-      if (index !== -1) {
-        list.splice(index, 1);
-        newValue = list;
+const ToggleGroupContext = createContext<ToggleGroupContextValue | undefined>(undefined);
+
+interface ToggleGroupProps {
+  className?: string;
+  variant?: string;
+  size?: string;
+  children?: React.ReactNode;
+  type?: string;
+  value?: string | string[];
+  defaultValue?: string | string[];
+  onValueChange?: (value: string | string[]) => void;
+  disabled?: boolean;
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
+  (
+    { className = '', variant = 'default', size = 'default', children, type, value, defaultValue, onValueChange, disabled, id, style },
+    ref
+  ) => {
+    const [localValue, setLocalValue] = useState<string | string[]>(
+      defaultValue || (type === "multiple" ? [] : "")
+    );
+    const actualValue = value !== undefined ? value : localValue;
+
+    const handleValueChange = (itemValue: string) => {
+      let newValue: string | string[];
+
+      if (type === "single") {
+        newValue = actualValue === itemValue ? "" : itemValue;
       } else {
-        list.push(itemValue);
+        const list = Array.isArray(actualValue) ? [...actualValue] : [];
+        const index = list.indexOf(itemValue);
+        if (index !== -1) {
+          list.splice(index, 1);
+        } else {
+          list.push(itemValue);
+        }
         newValue = list;
       }
-    }
 
-    if (value === undefined) {
-      setLocalValue(newValue);
-    }
-    if (onValueChange) {
-      onValueChange(newValue);
-    }
-  };
+      if (value === undefined) {
+        setLocalValue(newValue);
+      }
+      onValueChange?.(newValue);
+    };
 
-  var contextValue = { 
-    type: type, 
-    value: actualValue, 
-    onValueChange: handleValueChange, 
-    variant: variant, 
-    size: size, 
-    disabled: disabled 
-  };
+    const contextValue: ToggleGroupContextValue = {
+      type,
+      value: actualValue,
+      onValueChange: handleValueChange,
+      variant,
+      size,
+      disabled,
+    };
 
-  var combinedClassName = [
-    'wp-block-toggle-group',
-    'funky-toggle-group',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+    const combinedClassName = [
+      'wp-block-toggle-group',
+      'funky-toggle-group',
+      className
+    ].filter(Boolean).join(' ');
 
-  return React.createElement(ToggleGroupContext.Provider, { value: contextValue },
-    React.createElement('div', {
-      id: id,
-      style: style,
-      ref: ref,
-      role: type === "single" ? "radiogroup" : "group",
-      className: combinedClassName
-    }, children)
-  );
-});
+    return (
+      <ToggleGroupContext.Provider value={contextValue}>
+        <div
+          id={id}
+          style={style}
+          ref={ref}
+          role={type === "single" ? "radiogroup" : "group"}
+          className={combinedClassName}
+        >
+          {children}
+        </div>
+      </ToggleGroupContext.Provider>
+    );
+  }
+);
 
 ToggleGroup.displayName = "ToggleGroup";
 
-export var ToggleGroupItem = forwardRef(function ToggleGroupItem(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var variant = props.variant || 'default';
-  var size = props.size || 'default';
-  var value = props.value;
-  var disabled = props.disabled;
-  var id = props.id;
-  var style = props.style;
-  var onClick = props.onClick;
+interface ToggleGroupItemProps {
+  className?: string;
+  children?: React.ReactNode;
+  variant?: string;
+  size?: string;
+  value: string;
+  disabled?: boolean;
+  id?: string;
+  style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent) => void;
+}
 
-  var context = useContext(ToggleGroupContext);
+export const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
+  (
+    { className = '', children, variant = 'default', size = 'default', value, disabled, id, style, onClick },
+    ref
+  ) => {
+    const context = useContext(ToggleGroupContext);
 
-  if (!context) {
-    throw new Error("ToggleGroupItem must be used within a ToggleGroup");
+    if (!context) {
+      throw new Error("ToggleGroupItem must be used within a ToggleGroup");
+    }
+
+    const isSelected = Array.isArray(context.value)
+      ? context.value.includes(value)
+      : context.value === value;
+
+    const isDisabled = disabled || context.disabled;
+
+    const handleClick = (e: React.MouseEvent) => {
+      if (!isDisabled) {
+        context.onValueChange(value);
+      }
+      onClick?.(e);
+    };
+
+    const itemVariant = context.variant || variant;
+    const itemSize = context.size || size;
+
+    const combinedClassName = [
+      'wp-block-toggle',
+      `wp-block-toggle--${itemVariant}`,
+      `wp-block-toggle--size-${itemSize}`,
+      'wp-block-toggle-group-item',
+      isSelected ? 'is-pressed funky-toggle--active' : '',
+      className,
+      'funky-toggle-item'
+    ].filter(Boolean).join(' ');
+
+    return (
+      <button
+        id={id}
+        style={style}
+        ref={ref}
+        type="button"
+        disabled={isDisabled}
+        aria-pressed={isSelected}
+        data-state={isSelected ? "on" : "off"}
+        className={combinedClassName}
+        onClick={handleClick}
+      >
+        {children}
+      </button>
+    );
   }
-
-  var isSelected = Array.isArray(context.value) 
-    ? context.value.indexOf(value) !== -1
-    : context.value === value;
-
-  var isDisabled = disabled || context.disabled;
-
-  var handleClick = function(e) {
-    if (!isDisabled) {
-      context.onValueChange(value);
-    }
-    if (onClick) {
-      onClick(e);
-    }
-  };
-
-  var itemVariant = context.variant || variant;
-  var itemSize = context.size || size;
-
-  var combinedClassName = [
-    'wp-block-toggle',
-    'wp-block-toggle--' + itemVariant,
-    'wp-block-toggle--size-' + itemSize,
-    'wp-block-toggle-group-item',
-    isSelected ? 'is-pressed funky-toggle--active' : '',
-    className,
-    'funky-toggle-item'
-  ].filter(function(c) { return !!c; }).join(' ');
-
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    ref: ref,
-    type: "button",
-    disabled: isDisabled,
-    'aria-pressed': isSelected,
-    'data-state': isSelected ? "on" : "off",
-    className: combinedClassName,
-    onClick: handleClick
-  }, children);
-});
+);
 
 ToggleGroupItem.displayName = "ToggleGroupItem";

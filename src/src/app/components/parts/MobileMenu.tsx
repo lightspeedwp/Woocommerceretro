@@ -1,177 +1,190 @@
-import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router';
 import { MagnifyingGlass, CaretDown, User, Tote, EnvelopeSimple, Phone, Heart, Lightning, Tag, Gift, Percent } from '@phosphor-icons/react';
-
-var useState = React.useState;
-var useEffect = React.useEffect;
-var useNavigate = ReactRouterModule.useNavigate;
-var Link = ReactRouterModule.Link;
 
 /**
  * MobileMenu Component (Template Part) — Funky Redesign (Phase 2)
- * 
+ *
  * Full-screen mobile navigation with funky gradient overlay background,
  * neon-accented collapsible sections, and glow-on-hover quick links.
- * 
+ *
  * @part
- * @param {boolean} isOpen - Controls menu open/close state
- * @param {function} onOpenChange - Callback when open state changes
  */
 
-export function MobileMenu(props) {
-  var isOpen = props.isOpen;
-  var onOpenChange = props.onOpenChange;
+interface MobileMenuProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+}
 
-  var _sq = useState('');
-  var searchQuery = _sq[0];
-  var setSearchQuery = _sq[1];
-  var _se = useState({});
-  var expandedSections = _se[0];
-  var setExpandedSections = _se[1];
-  var navigate = useNavigate();
-  
-  var toggleSection = function(sectionId) {
-    var nextState = Object.assign({}, expandedSections);
-    nextState[sectionId] = !nextState[sectionId];
-    setExpandedSections(nextState);
+export const MobileMenu = ({ isOpen, onOpenChange }: MobileMenuProps) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const navigate = useNavigate();
+
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections((prev) => ({ ...prev, [sectionId]: !prev[sectionId] }));
   };
 
-  var handleSearch = function(e) {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate("/shop/search?q=" + encodeURIComponent(searchQuery));
+      navigate(`/shop/search?q=${encodeURIComponent(searchQuery)}`);
       onOpenChange(false);
     }
   };
 
-  var handleNavigate = function(path) {
+  const handleNavigate = (path: string) => {
     onOpenChange(false);
     navigate(path);
   };
 
-  useEffect(function() {
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-    return function() {
+    return () => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  var renderLink = function(to, children, className) {
-    return React.createElement(Link, {
-      to: to,
-      onClick: function() { handleNavigate(to); },
-      className: className
-    }, children);
-  };
+  const renderLink = (to: string, children: React.ReactNode, className: string) => (
+    <Link to={to} onClick={() => handleNavigate(to)} className={className}>
+      {children}
+    </Link>
+  );
 
   if (!isOpen) return null;
 
-  return React.createElement('div', { className: "woocommerce-mobile-menu woocommerce-mobile-menu--funky" },
-    React.createElement('div', { className: "woocommerce-mobile-menu__inner" },
-      React.createElement('div', { className: "woocommerce-mobile-menu__search" },
-        React.createElement('form', { onSubmit: handleSearch, className: "woocommerce-mobile-menu__search-form wp-block-search" },
-          React.createElement('input', {
-            type: "search",
-            placeholder: "Search products...",
-            value: searchQuery,
-            onChange: function(e) { setSearchQuery(e.target.value); },
-            className: "wp-block-input wp-block-search__input woocommerce-mobile-menu__search-input funky-input-glow"
-          }),
-          React.createElement(MagnifyingGlass, { size: 20, className: "woocommerce-mobile-menu__search-icon" }),
-          React.createElement('button', { type: "submit", className: "sr-only" }, "Search")
-        )
-      ),
-      React.createElement('nav', { className: "woocommerce-mobile-menu__nav" },
-        React.createElement('div', { className: "woocommerce-mobile-menu__nav-item" },
-          React.createElement('button', {
-            onClick: function() { toggleSection('shop'); },
-            className: "woocommerce-mobile-menu__nav-button funky-spring-hover",
-            'aria-expanded': expandedSections['shop']
-          },
-            React.createElement('span', { className: "woocommerce-mobile-menu__nav-label--funky" }, "Shop"),
-            React.createElement(CaretDown, { size: 20, className: "woocommerce-mobile-menu__chevron " + (expandedSections['shop'] ? 'woocommerce-mobile-menu__chevron--open' : '') })
-          ),
-          expandedSections['shop'] ? React.createElement('div', { className: "woocommerce-mobile-menu__submenu" },
-            renderLink("/shop", "All Products", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/new-arrivals", "New Arrivals", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/best-sellers", "Best Sellers", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/sale", "Sale", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/shop/collections", "Collections", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/subscriptions", "Subscriptions", "woocommerce-mobile-menu__submenu-link")
-          ) : null
-        ),
-        React.createElement('div', { className: "woocommerce-mobile-menu__nav-item" },
-          React.createElement('button', {
-            onClick: function() { toggleSection('promotions'); },
-            className: "woocommerce-mobile-menu__nav-button funky-spring-hover",
-            'aria-expanded': expandedSections['promotions']
-          },
-            React.createElement('span', { className: "woocommerce-mobile-menu__nav-label--funky" }, "Promotions"),
-            React.createElement(CaretDown, { size: 20, className: "woocommerce-mobile-menu__chevron " + (expandedSections['promotions'] ? 'woocommerce-mobile-menu__chevron--open' : '') })
-          ),
-          expandedSections['promotions'] ? React.createElement('div', { className: "woocommerce-mobile-menu__submenu" },
-            renderLink("/promotions", React.createElement('span', { className: "woocommerce-mobile-menu__submenu-icon-row" }, React.createElement(Percent, { size: 16, className: "woocommerce-mobile-menu__submenu-icon" }), " All Deals"), "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/promotions/flash-sale", React.createElement('span', { className: "woocommerce-mobile-menu__submenu-icon-row" }, React.createElement(Lightning, { size: 16, className: "woocommerce-mobile-menu__submenu-icon" }), " Flash Sale"), "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/promotions/seasonal", React.createElement('span', { className: "woocommerce-mobile-menu__submenu-icon-row" }, React.createElement(Tag, { size: 16, className: "woocommerce-mobile-menu__submenu-icon" }), " Seasonal Sale"), "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/promotions/bundles", React.createElement('span', { className: "woocommerce-mobile-menu__submenu-icon-row" }, React.createElement(Gift, { size: 16, className: "woocommerce-mobile-menu__submenu-icon" }), " Bundle Deals"), "woocommerce-mobile-menu__submenu-link")
-          ) : null
-        ),
-        React.createElement('div', { className: "woocommerce-mobile-menu__nav-item" },
-          React.createElement('button', {
-            onClick: function() { toggleSection('blog'); },
-            className: "woocommerce-mobile-menu__nav-button funky-spring-hover",
-            'aria-expanded': expandedSections['blog']
-          },
-            React.createElement('span', { className: "woocommerce-mobile-menu__nav-label--funky" }, "Blog"),
-            React.createElement(CaretDown, { size: 20, className: "woocommerce-mobile-menu__chevron " + (expandedSections['blog'] ? 'woocommerce-mobile-menu__chevron--open' : '') })
-          ),
-          expandedSections['blog'] ? React.createElement('div', { className: "woocommerce-mobile-menu__submenu" },
-            renderLink("/blog", "All Posts", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/blog/format/audio", "Podcasts", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/blog/format/video", "Videos", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/blog/format/gallery", "Galleries", "woocommerce-mobile-menu__submenu-link")
-          ) : null
-        ),
-        React.createElement('div', { className: "woocommerce-mobile-menu__nav-item" },
-          React.createElement('button', {
-            onClick: function() { toggleSection('about'); },
-            className: "woocommerce-mobile-menu__nav-button funky-spring-hover",
-            'aria-expanded': expandedSections['about']
-          },
-            React.createElement('span', { className: "woocommerce-mobile-menu__nav-label--funky" }, "About"),
-            React.createElement(CaretDown, { size: 20, className: "woocommerce-mobile-menu__chevron " + (expandedSections['about'] ? 'woocommerce-mobile-menu__chevron--open' : '') })
-          ),
-          expandedSections['about'] ? React.createElement('div', { className: "woocommerce-mobile-menu__submenu" },
-            renderLink("/about", "About Us", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/about/our-story", "Our Story", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/about/team", "Team", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/about/careers", "Careers", "woocommerce-mobile-menu__submenu-link"),
-            renderLink("/stores", "Store Locations", "woocommerce-mobile-menu__submenu-link")
-          ) : null
-        ),
-        React.createElement('div', { className: "woocommerce-mobile-menu__nav-item" },
-          renderLink("/contact", "Contact", "woocommerce-mobile-menu__nav-link")
-        )
-      ),
-      React.createElement('div', { className: "woocommerce-mobile-menu__quick-links woocommerce-mobile-menu__quick-links--funky" },
-        renderLink("/account", React.createElement('span', { className: "woocommerce-mobile-menu__quick-link-content" }, React.createElement(User, { size: 24, className: "woocommerce-mobile-menu__quick-link-icon" }), React.createElement('span', { className: "woocommerce-mobile-menu__quick-link-label" }, "Account")), "woocommerce-mobile-menu__quick-link"),
-        renderLink("/cart", React.createElement('span', { className: "woocommerce-mobile-menu__quick-link-content" }, React.createElement(Tote, { size: 24, className: "woocommerce-mobile-menu__quick-link-icon" }), React.createElement('span', { className: "woocommerce-mobile-menu__quick-link-label" }, "Cart")), "woocommerce-mobile-menu__quick-link"),
-        renderLink("/wishlist", React.createElement('span', { className: "woocommerce-mobile-menu__quick-link-content" }, React.createElement(Heart, { size: 24, className: "woocommerce-mobile-menu__quick-link-icon" }), React.createElement('span', { className: "woocommerce-mobile-menu__quick-link-label" }, "Wishlist")), "woocommerce-mobile-menu__quick-link")
-      ),
-      React.createElement('div', { className: "woocommerce-mobile-menu__contact" },
-        React.createElement('a', { href: "mailto:support@example.com", className: "woocommerce-mobile-menu__contact-link" },
-          React.createElement(EnvelopeSimple, { size: 18 }),
-          React.createElement('span', null, "support@example.com")
-        ),
-        React.createElement('a', { href: "tel:+1234567890", className: "woocommerce-mobile-menu__contact-link" },
-          React.createElement(Phone, { size: 18 }),
-          React.createElement('span', null, "(123) 456-7890")
-        )
-      )
-    )
+  return (
+    <div className="woocommerce-mobile-menu woocommerce-mobile-menu--funky">
+      <div className="woocommerce-mobile-menu__inner">
+        {/* Search */}
+        <div className="woocommerce-mobile-menu__search">
+          <form onSubmit={handleSearch} className="woocommerce-mobile-menu__search-form wp-block-search">
+            <input
+              type="search"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="wp-block-input wp-block-search__input woocommerce-mobile-menu__search-input funky-input-glow"
+            />
+            <MagnifyingGlass size={20} className="woocommerce-mobile-menu__search-icon" />
+            <button type="submit" className="sr-only">Search</button>
+          </form>
+        </div>
+
+        {/* Navigation */}
+        <nav className="woocommerce-mobile-menu__nav">
+          {/* Shop */}
+          <div className="woocommerce-mobile-menu__nav-item">
+            <button
+              onClick={() => toggleSection('shop')}
+              className="woocommerce-mobile-menu__nav-button funky-spring-hover"
+              aria-expanded={expandedSections['shop']}
+            >
+              <span className="woocommerce-mobile-menu__nav-label--funky">Shop</span>
+              <CaretDown size={20} className={`woocommerce-mobile-menu__chevron ${expandedSections['shop'] ? 'woocommerce-mobile-menu__chevron--open' : ''}`} />
+            </button>
+            {expandedSections['shop'] && (
+              <div className="woocommerce-mobile-menu__submenu">
+                {renderLink('/shop', 'All Products', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/new-arrivals', 'New Arrivals', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/best-sellers', 'Best Sellers', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/sale', 'Sale', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/shop/collections', 'Collections', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/subscriptions', 'Subscriptions', 'woocommerce-mobile-menu__submenu-link')}
+              </div>
+            )}
+          </div>
+
+          {/* Promotions */}
+          <div className="woocommerce-mobile-menu__nav-item">
+            <button
+              onClick={() => toggleSection('promotions')}
+              className="woocommerce-mobile-menu__nav-button funky-spring-hover"
+              aria-expanded={expandedSections['promotions']}
+            >
+              <span className="woocommerce-mobile-menu__nav-label--funky">Promotions</span>
+              <CaretDown size={20} className={`woocommerce-mobile-menu__chevron ${expandedSections['promotions'] ? 'woocommerce-mobile-menu__chevron--open' : ''}`} />
+            </button>
+            {expandedSections['promotions'] && (
+              <div className="woocommerce-mobile-menu__submenu">
+                {renderLink('/promotions', <span className="woocommerce-mobile-menu__submenu-icon-row"><Percent size={16} className="woocommerce-mobile-menu__submenu-icon" /> All Deals</span>, 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/promotions/flash-sale', <span className="woocommerce-mobile-menu__submenu-icon-row"><Lightning size={16} className="woocommerce-mobile-menu__submenu-icon" /> Flash Sale</span>, 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/promotions/seasonal', <span className="woocommerce-mobile-menu__submenu-icon-row"><Tag size={16} className="woocommerce-mobile-menu__submenu-icon" /> Seasonal Sale</span>, 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/promotions/bundles', <span className="woocommerce-mobile-menu__submenu-icon-row"><Gift size={16} className="woocommerce-mobile-menu__submenu-icon" /> Bundle Deals</span>, 'woocommerce-mobile-menu__submenu-link')}
+              </div>
+            )}
+          </div>
+
+          {/* Blog */}
+          <div className="woocommerce-mobile-menu__nav-item">
+            <button
+              onClick={() => toggleSection('blog')}
+              className="woocommerce-mobile-menu__nav-button funky-spring-hover"
+              aria-expanded={expandedSections['blog']}
+            >
+              <span className="woocommerce-mobile-menu__nav-label--funky">Blog</span>
+              <CaretDown size={20} className={`woocommerce-mobile-menu__chevron ${expandedSections['blog'] ? 'woocommerce-mobile-menu__chevron--open' : ''}`} />
+            </button>
+            {expandedSections['blog'] && (
+              <div className="woocommerce-mobile-menu__submenu">
+                {renderLink('/blog', 'All Posts', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/blog/format/audio', 'Podcasts', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/blog/format/video', 'Videos', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/blog/format/gallery', 'Galleries', 'woocommerce-mobile-menu__submenu-link')}
+              </div>
+            )}
+          </div>
+
+          {/* About */}
+          <div className="woocommerce-mobile-menu__nav-item">
+            <button
+              onClick={() => toggleSection('about')}
+              className="woocommerce-mobile-menu__nav-button funky-spring-hover"
+              aria-expanded={expandedSections['about']}
+            >
+              <span className="woocommerce-mobile-menu__nav-label--funky">About</span>
+              <CaretDown size={20} className={`woocommerce-mobile-menu__chevron ${expandedSections['about'] ? 'woocommerce-mobile-menu__chevron--open' : ''}`} />
+            </button>
+            {expandedSections['about'] && (
+              <div className="woocommerce-mobile-menu__submenu">
+                {renderLink('/about', 'About Us', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/about/our-story', 'Our Story', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/about/team', 'Team', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/about/careers', 'Careers', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/stores', 'Store Locations', 'woocommerce-mobile-menu__submenu-link')}
+              </div>
+            )}
+          </div>
+
+          {/* Contact */}
+          <div className="woocommerce-mobile-menu__nav-item">
+            {renderLink('/contact', 'Contact', 'woocommerce-mobile-menu__nav-link')}
+          </div>
+        </nav>
+
+        {/* Quick Links */}
+        <div className="woocommerce-mobile-menu__quick-links woocommerce-mobile-menu__quick-links--funky">
+          {renderLink('/account', <span className="woocommerce-mobile-menu__quick-link-content"><User size={24} className="woocommerce-mobile-menu__quick-link-icon" /><span className="woocommerce-mobile-menu__quick-link-label">Account</span></span>, 'woocommerce-mobile-menu__quick-link')}
+          {renderLink('/cart', <span className="woocommerce-mobile-menu__quick-link-content"><Tote size={24} className="woocommerce-mobile-menu__quick-link-icon" /><span className="woocommerce-mobile-menu__quick-link-label">Cart</span></span>, 'woocommerce-mobile-menu__quick-link')}
+          {renderLink('/wishlist', <span className="woocommerce-mobile-menu__quick-link-content"><Heart size={24} className="woocommerce-mobile-menu__quick-link-icon" /><span className="woocommerce-mobile-menu__quick-link-label">Wishlist</span></span>, 'woocommerce-mobile-menu__quick-link')}
+        </div>
+
+        {/* Contact Info */}
+        <div className="woocommerce-mobile-menu__contact">
+          <a href="mailto:support@example.com" className="woocommerce-mobile-menu__contact-link">
+            <EnvelopeSimple size={18} />
+            <span>support@example.com</span>
+          </a>
+          <a href="tel:+1234567890" className="woocommerce-mobile-menu__contact-link">
+            <Phone size={18} />
+            <span>(123) 456-7890</span>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -11,7 +11,7 @@
  * Font Families
  * Defined in CSS/Tailwind but referenced here for JS usage (e.g., Canvas drawing).
  */
-export var FONTS = {
+export const FONTS = {
   heading: '"Inter", sans-serif',
   body: '"Inter", sans-serif',
 };
@@ -21,7 +21,7 @@ export var FONTS = {
  * Fluid spacing values using clamp() for responsive layouts.
  * Aligned with CSS custom properties in globals.css
  */
-export var SPACING = {
+export const SPACING = {
   section: 'clamp(3rem, 8vw, 6rem)',      /* 48px → 96px - Section vertical spacing */
   container: 'clamp(1rem, 3vw, 3rem)',    /* 16px → 48px - Container horizontal padding */
   inner: 'clamp(1rem, 4vw, 3rem)',        /* 16px → 48px - Inner content spacing */
@@ -42,7 +42,7 @@ export var SPACING = {
  * Inner content class for full-width sections:
  * Use 'inner' constant for content within .alignfull containers
  */
-export var CONTAINER = {
+export const CONTAINER = {
   site: 'wp-container-site',
   content: 'wp-container-content',
   wide: 'wp-container-wide',
@@ -54,7 +54,7 @@ export var CONTAINER = {
  * WordPress-aligned typography classes with automatic dark mode support.
  * Actual styles defined in /src/styles/globals.css
  */
-export var TYPOGRAPHY = {
+export const TYPOGRAPHY = {
   h1: 'typography-h1',
   h2: 'typography-h2',
   h3: 'typography-h3',

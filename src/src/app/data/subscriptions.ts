@@ -76,7 +76,7 @@ import { Cube as Box, Truck, ArrowClockwise as RotateCw, Gift, Star, Percent, Ca
  * 
  * @type {SubscriptionPlan[]}
  */
-export var subscriptionPlans = [
+export const subscriptionPlans = [
   {
     id: 'monthly',
     name: 'Monthly',
@@ -151,7 +151,7 @@ export var subscriptionPlans = [
  * 
  * @type {SubscriptionFeature[]}
  */
-export var subscriptionFeatures = [
+export const subscriptionFeatures = [
   {
     id: 'products',
     name: 'Premium products',
@@ -249,7 +249,7 @@ export var subscriptionFeatures = [
  * 
  * @type {SubscriptionBenefit[]}
  */
-export var subscriptionBenefits = [
+export const subscriptionBenefits = [
   {
     icon: Box,
     title: 'Curated selection',
@@ -287,7 +287,7 @@ export var subscriptionBenefits = [
  * 
  * @type {SubscriptionFAQ[]}
  */
-export var subscriptionFAQs = [
+export const subscriptionFAQs = [
   {
     id: '1',
     question: 'How does the subscription work?',
@@ -370,16 +370,16 @@ export var subscriptionFAQs = [
  * @param {Object} plan - Subscription plan
  * @returns {Object} Savings breakdown
  */
-export function calculateSubscriptionSavings(plan) {
-  var monthlyPlan = subscriptionPlans.find(function(p) { return p.id === 'monthly'; });
+export const calculateSubscriptionSavings = (plan) => {
+  const monthlyPlan = subscriptionPlans.find((p) => p.id === 'monthly');
   if (!monthlyPlan) {
     return { totalCost: 0, monthlyEquivalent: 0, savings: 0, savingsPercent: 0 };
   }
 
-  var months = plan.interval === 'quarter' ? 3 : plan.interval === 'year' ? 12 : 1;
-  var monthlyEquivalent = monthlyPlan.price * months;
-  var savings = monthlyEquivalent - plan.price;
-  var savingsPercent = (savings / monthlyEquivalent) * 100;
+  const months = plan.interval === 'quarter' ? 3 : plan.interval === 'year' ? 12 : 1;
+  const monthlyEquivalent = monthlyPlan.price * months;
+  const savings = monthlyEquivalent - plan.price;
+  const savingsPercent = (savings / monthlyEquivalent) * 100;
 
   return {
     totalCost: plan.price,
@@ -395,8 +395,8 @@ export function calculateSubscriptionSavings(plan) {
  * @param {string} planId - Plan identifier
  * @returns {Object|undefined} Subscription plan or undefined
  */
-export function getSubscriptionPlanById(planId) {
-  return subscriptionPlans.find(function(plan) { return plan.id === planId; });
+export const getSubscriptionPlanById = (planId) => {
+  return subscriptionPlans.find((plan) => plan.id === planId);
 }
 
 /**
@@ -404,8 +404,8 @@ export function getSubscriptionPlanById(planId) {
  * 
  * @returns {Object} Most popular subscription plan
  */
-export function getPopularSubscriptionPlan() {
-  return subscriptionPlans.find(function(plan) { return plan.popular; }) || subscriptionPlans[1];
+export const getPopularSubscriptionPlan = () => {
+  return subscriptionPlans.find((plan) => plan.popular) || subscriptionPlans[1];
 }
 
 /**
@@ -413,8 +413,8 @@ export function getPopularSubscriptionPlan() {
  * 
  * @returns {Object} Best value subscription plan
  */
-export function getBestValueSubscriptionPlan() {
-  return subscriptionPlans.find(function(plan) { return plan.badge === 'Best Value'; }) || subscriptionPlans[2];
+export const getBestValueSubscriptionPlan = () => {
+  return subscriptionPlans.find((plan) => plan.badge === 'Best Value') || subscriptionPlans[2];
 }
 
 /**
@@ -423,8 +423,8 @@ export function getBestValueSubscriptionPlan() {
  * @param {string} category - FAQ category
  * @returns {Array} Filtered FAQs
  */
-export function getSubscriptionFAQsByCategory(category) {
-  return subscriptionFAQs.filter(function(faq) { return faq.category === category; });
+export const getSubscriptionFAQsByCategory = (category) => {
+  return subscriptionFAQs.filter((faq) => faq.category === category);
 }
 
 /**
@@ -432,17 +432,17 @@ export function getSubscriptionFAQsByCategory(category) {
  * 
  * @returns {string[]} Array of unique category names
  */
-export function getSubscriptionFAQCategories() {
-  var categories = subscriptionFAQs
-    .map(function(faq) { return faq.category; })
-    .filter(function(category) { return category !== undefined; });
+export const getSubscriptionFAQCategories = () => {
+  const categories = subscriptionFAQs
+    .map((faq) => faq.category)
+    .filter((category) => category !== undefined);
   return Array.from(new Set(categories)).sort();
 }
 
 /**
  * How It Works Steps
  */
-export var howItWorksSteps = [
+export const howItWorksSteps = [
   {
     id: '1',
     step: '1',
@@ -466,7 +466,7 @@ export var howItWorksSteps = [
 /**
  * Subscription Testimonials
  */
-export var subscriptionTestimonials = [
+export const subscriptionTestimonials = [
   {
     id: '1',
     quote: 'The quarterly box is perfect! I love discovering new products without the commitment of monthly deliveries. The quality is always top-notch.',
@@ -496,7 +496,7 @@ export var subscriptionTestimonials = [
 /**
  * Subscription Product Images
  */
-export var subscriptionProductImages = {
+export const subscriptionProductImages = {
   main: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&q=80&w=800',
   gallery: [
     'https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&q=80&w=200',
@@ -506,7 +506,7 @@ export var subscriptionProductImages = {
   ]
 };
 
-export var subscriptionPageContent = {
+export const subscriptionPageContent = {
   landing: {
     heroTitle: "Discover Something New Every Month",
     heroSubtitle: "Join thousands of happy subscribers who receive hand-curated products delivered to their door. Flexible plans, exclusive perks, and the freedom to pause or cancel anytime.",

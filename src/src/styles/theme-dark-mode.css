@@ -6,241 +6,106 @@
  */
 
 .dark {
-  /* ========================================
-     DARK MODE COLOR OVERRIDES
-     ======================================== */
-  
+  /* Core dark surfaces */
+  --retro-dark-bg: #151A1E;
+  --retro-dark-panel: #202830;
+  --retro-dark-panel-alt: #2A343D;
+  --retro-dark-inset: #11161A;
+
+  /* Text */
+  --retro-dark-text: #F2EEE6;
+  --retro-dark-text-soft: #C4CBC3;
+  --retro-dark-text-muted: #9BA69F;
+
+  /* Lines */
+  --retro-dark-line: #56645F;
+  --retro-dark-line-soft: #3E4A46;
+  --retro-dark-line-strong: #7B8C86;
+
+  /* Retro accents */
+  --retro-dark-screen: #8DA89D;
+  --retro-dark-screen-strong: #A7C0B6;
+  --retro-dark-signal: #D8B548;
+  --retro-dark-signal-strong: #E4C96E;
+  --retro-dark-alert: #D48068;
+  --retro-dark-success: #7EA17A;
+  --retro-dark-coral: #D08A72;
+  --retro-dark-sky: #8AAFC0;
+  --retro-dark-berry: #A083A6;
+  --retro-dark-olive: #A0AE73;
+
+  /* Interaction */
+  --retro-dark-focus: #E4C96E;
+  --retro-dark-shadow-sm: 0 1px 0 rgba(0,0,0,0.35);
+  --retro-dark-shadow-md: 0 4px 12px rgba(0,0,0,0.28);
+  --retro-dark-shadow-lg: 0 10px 24px rgba(0,0,0,0.32);
+
   /* Primary Brand Colors */
   --wp--preset--color--primary: #f9fafb;
   --wp--preset--color--primary-foreground: #111111;
-  --wp--preset--color--secondary: #262626;
-  --wp--preset--color--secondary-foreground: #f9fafb;
+  --wp--preset--color--secondary: var(--retro-dark-panel-alt);
+  --wp--preset--color--secondary-foreground: var(--retro-dark-text);
   
   /* Surface Colors */
-  --wp--preset--color--background: #0f0f0f;          /* Very dark background */
-  --wp--preset--color--foreground: #f9fafb;          /* Very light text - 15.8:1 contrast */
-  --wp--preset--color--surface: #1a1a1a;             /* Slightly lighter surface */
-  --wp--preset--color--surface-foreground: #f9fafb;  /* Light text on surfaces */
+  --wp--preset--color--background: #0f0f0f;
+  --wp--preset--color--foreground: #f9fafb;
+  --wp--preset--color--surface: #1a1a1a;
+  --wp--preset--color--surface-foreground: #f9fafb;
   
   /* Semantic Colors */
-  --wp--preset--color--accent: #262626;
+  --wp--preset--color--accent: #374151;
   --wp--preset--color--accent-foreground: #f9fafb;
-  --wp--preset--color--muted: #262626;
-  --wp--preset--color--muted-foreground: #a3a3a3;    /* Light gray - 4.92:1 contrast */
+  --wp--preset--color--muted: #374151;
+  --wp--preset--color--muted-foreground: #d1d5db;
   
-  /* State Colors - Adjusted for dark backgrounds */
-  --wp--preset--color--success: #10b981;             /* Green - visible on dark */
+  /* State Colors */
+  --wp--preset--color--success: #4ade80;
   --wp--preset--color--success-foreground: #0f0f0f;
-  --wp--preset--color--warning: #f59e0b;             /* Amber - visible on dark */
+  --wp--preset--color--warning: #fbbf24;
   --wp--preset--color--warning-foreground: #0f0f0f;
-  --wp--preset--color--error: #f87171;               /* Enhanced for AAA: 7.2:1 contrast (was #ef4444) */
+  --wp--preset--color--error: #f87171;
   --wp--preset--color--error-foreground: #fafafa;
-  --wp--preset--color--info: #3b82f6;                /* Blue - visible on dark */
+  --wp--preset--color--info: var(--retro-dark-sky);
   --wp--preset--color--info-foreground: #fafafa;
   
   /* Border & Divider Colors */
-  --wp--preset--color--border: #525252;              /* Medium gray - 4.6:1 contrast (was #404040 / 3.5:1) */
-  --wp--preset--color--border-subtle: #374151;       /* Subtle border (was #2a2a2a) */
-  --wp--preset--color--border-strong: #6b7280;       /* Strong border (was #525252) */
+  --wp--preset--color--border: #525252;
+  --wp--preset--color--border-light: #374151;
+  --wp--preset--color--border-strong: var(--retro-dark-line-strong);
+  --wp--preset--color--text-secondary: #d1d5db;
 
   /* Popover & Overlays */
   --wp--preset--color--popover: #1a1a1a;
-  --wp--preset--color--popover-foreground: #fafafa;
+  --wp--preset--color--popover-foreground: #f9fafb;
   
   /* Brand & CTA (Dark Mode) */
-  --wp--preset--color--cta: #60a5fa;                 /* Light Blue */
-  --wp--preset--color--cta-hover: #93c5fd;           /* Lighter Blue */
-  --wp--preset--color--ring: #60a5fa;
-  --wp--preset--color--link: #60a5fa;                /* Blue-400: 5.3:1 on #0f0f0f - AA */
-  --wp--preset--color--link-hover: #93c5fd;          /* Blue-300: 8.6:1 on #0f0f0f - AAA */
+  --wp--preset--color--cta: var(--retro-dark-signal);
+  --wp--preset--color--cta-hover: var(--retro-dark-signal-strong);
+  --wp--preset--color--ring: var(--retro-dark-focus);
+  --wp--preset--color--link: #60a5fa;
+  --wp--preset--color--link-hover: #93c5fd;
+
+  /* PlayPocket custom accents mapped to dark counterparts */
+  --retro-accent-coral: var(--retro-dark-coral);
+  --retro-accent-sky: var(--retro-dark-sky);
+  --retro-accent-berry: var(--retro-dark-berry);
+  --retro-accent-olive: var(--retro-dark-olive);
   
   /* Neutral Ramp Overrides */
   --wp--preset--color--neutral-100: #1a1a1a;
-  --wp--preset--color--neutral-200: #262626;
-  --wp--preset--color--neutral-300: #404040;
-  --wp--preset--color--neutral-400: #525252;
-  --wp--preset--color--neutral-500: #a3a3a3;
-  --wp--preset--color--neutral-600: #d4d4d4;
-  --wp--preset--color--neutral-700: #e5e5e5;
-  --wp--preset--color--neutral-800: #f5f5f5;
-  --wp--preset--color--neutral-900: #fafafa;
-  
-  /* ========================================
-     DARK MODE SHADOW OVERRIDES
-     ======================================== */
-  
-  /* Shadows need to be lighter/more subtle in dark mode */
-  --wp--preset--shadow--sm: 0 1px 2px 0 rgba(255, 255, 255, 0.05);
-  --wp--preset--shadow--md: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
-  --wp--preset--shadow--lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
-  --wp--preset--shadow--xl: 0 20px 25px -5px rgba(255, 255, 255, 0.1), 0 10px 10px -5px rgba(255, 255, 255, 0.04);
-  
-  /* ========================================
-     FOCUS RING (more visible in dark mode)
-     ======================================== */
-  
-  --wp--preset--focus-ring--color: #60a5fa; /* Brighter blue for visibility */
 
-  /* WCAG AA-Safe Interactive Colors (dark mode) */
-  --funky-interactive-color: #22d3ee;           /* Cyan-400: 10.1:1 on #0f0f0f - AAA - OK */
-  --funky-interactive-color-hover: #67e8f9;     /* Cyan-300: 12.8:1 on #0f0f0f - AAA - OK */
-  --funky-interactive-bg: rgba(34, 211, 238, 0.1);
-  --funky-interactive-bg-hover: rgba(34, 211, 238, 0.15);
-  --funky-interactive-focus: #38bdf8;           /* Sky-400: 9.4:1 on #0f0f0f - AAA - OK */
-  --funky-interactive-underline-start: #e879f9; /* Fuchsia-400: decorative */
-  --funky-interactive-underline-end: #22d3ee;   /* Cyan-400: decorative */
+  /* Funky Theme Additions */
+  --funky-glass-bg: rgba(3, 2, 19, 0.95);
+  --funky-glass-border: rgba(255, 255, 255, 0.1);
+  --funky-glass-header-border: rgba(0, 255, 255, 0.3);
+  --funky-glass-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  --funky-text-muted: rgba(255, 255, 255, 0.6);
+  --funky-input-bg: rgba(255, 255, 255, 0.1);
+  --funky-input-border: rgba(255, 255, 255, 0.2);
+  --funky-interactive-underline-start: #f472b6;
+  --funky-interactive-underline-end: #22d3ee;
 }
 
-/* ========================================
-   DARK MODE-SPECIFIC ADJUSTMENTS
-   ======================================== */
-
-/* Ensure links are visible in dark mode */
-.dark a {
-  color: var(--wp--preset--color--link);
-}
-
-.dark a:hover {
-  color: var(--wp--preset--color--link-hover);
-}
-
-/* Input fields in dark mode */
-.dark input {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-}
-.dark textarea {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-}
-.dark select {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-}
-
-.dark input::placeholder {
-  color: var(--wp--preset--color--muted-foreground);
-}
-.dark textarea::placeholder {
-  color: var(--wp--preset--color--muted-foreground);
-}
-
-.dark input:focus {
-  border-color: var(--wp--preset--focus-ring--color);
-}
-.dark textarea:focus {
-  border-color: var(--wp--preset--focus-ring--color);
-}
-.dark select:focus {
-  border-color: var(--wp--preset--focus-ring--color);
-}
-
-/* Buttons in dark mode */
-.dark .wp-block-button.is-style-outline .wp-block-button__link {
-  border-color: var(--wp--preset--color--primary);
-  color: var(--wp--preset--color--primary);
-}
-
-.dark .wp-block-button.is-style-outline .wp-block-button__link:hover {
-  background-color: var(--wp--preset--color--primary);
-  color: var(--wp--preset--color--primary-foreground);
-}
-
-/* Product cards in dark mode - ensure proper contrast */
-.dark .wc-block-grid__product {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-}
-
-.dark .wc-block-grid__product:hover {
-  border-color: var(--wp--preset--color--border-strong);
-}
-
-/* Cart items in dark mode */
-.dark .wc-block-cart-item {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-}
-
-/* Checkout steps in dark mode */
-.dark .wc-block-checkout__step {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-}
-
-/* Ensure proper contrast for muted backgrounds */
-.dark .has-muted-background-color {
-  background-color: var(--wp--preset--color--muted);
-  color: var(--wp--preset--color--muted-foreground);
-}
-
-/* Cart totals sidebar */
-.dark .wc-block-cart__totals {
-  background-color: var(--wp--preset--color--surface);
-}
-
-/* Navigation items in dark mode */
-.dark .wp-block-navigation-item__content {
-  color: var(--wp--preset--color--foreground);
-}
-
-.dark .wp-block-navigation-item__content:hover {
-  color: var(--wp--preset--color--primary);
-}
-
-/* Search input in dark mode */
-.dark .wp-block-search__input {
-  background-color: var(--wp--preset--color--surface);
-  border-color: var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-}
-
-/* Separator in dark mode */
-.dark .wp-block-separator {
-  border-color: var(--wp--preset--color--border);
-}
-
-/* Out of stock overlay in dark mode */
-.dark .wc-block-grid__product.is-out-of-stock .wc-block-grid__product-image::after {
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #0f0f0f;
-}
-
-/* Dot pattern in dark mode */
-.dark .bg-dot-pattern {
-  opacity: 0.3; /* Reduce opacity for better dark mode appearance */
-}
-
-/* ========================================
-   DARK MODE ACCESSIBILITY ENHANCEMENTS
-   ======================================== */
-
-/* Ensure all interactive elements have proper focus states */
-.dark button:focus-visible { outline-color: var(--wp--preset--focus-ring--color); }
-.dark a:focus-visible { outline-color: var(--wp--preset--focus-ring--color); }
-.dark input:focus-visible { outline-color: var(--wp--preset--focus-ring--color); }
-.dark textarea:focus-visible { outline-color: var(--wp--preset--focus-ring--color); }
-.dark select:focus-visible { outline-color: var(--wp--preset--focus-ring--color); }
-
-/* Ensure disabled states are clearly visible */
-.dark .is-disabled { opacity: 0.4; cursor: not-allowed; }
-.dark [disabled] { opacity: 0.4; cursor: not-allowed; }
-
-/* Loading states */
-.dark .is-loading {
-  opacity: 0.5;
-}
-
-/* Active states */
-.dark .is-active {
-  color: var(--wp--preset--color--primary);
-}
-
-/* Error states */
-.dark .has-error {
-  border-color: var(--wp--preset--color--error);
-  color: var(--wp--preset--color--error);
+.dark .surface-elevated {
+  background-color: #1f1f1f;
 }

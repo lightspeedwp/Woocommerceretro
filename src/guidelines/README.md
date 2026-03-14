@@ -2,9 +2,9 @@
 
 **Purpose:** Central repository for all project guidelines, standards, and documentation templates  
 **Location:** `/guidelines/`  
-**Last Updated:** January 9, 2026
+**Last Updated:** March 12, 2026
 
-**📖 Main Guidelines:** See [/guidelines/Guidelines.md](/guidelines/Guidelines.md) for the complete project guidelines (v2.4+)
+**📖 Main Guidelines:** See [/guidelines/Guidelines.md](/guidelines/Guidelines.md) for the complete project guidelines (v2.10)
 
 ---
 
@@ -15,6 +15,28 @@ This directory contains comprehensive documentation for the WooCommerce Prototyp
 **🚨 CRITICAL: Always read relevant guidelines BEFORE creating or modifying components.**
 
 **⭐ Main Guidelines File:** The complete project guidelines are located at `/guidelines/Guidelines.md` - this is the authoritative source for all project standards, architecture, and best practices.
+
+---
+
+## 🆕 What's New in v2.10 (March 12, 2026)
+
+### **Navigation Architecture & Performance**
+- **NEW Section 10.4:** Navigation Architecture & Sitemap-Centric Design
+  - Navigation philosophy ("Simplify navigation, elevate discovery")
+  - Header standards (5-link maximum rule)
+  - Sitemap component requirements (7 features)
+  - Discovery CTA patterns with code examples
+  - Performance best practices for Figma Make
+  - Hook dependency rules with correct/incorrect examples
+
+### **Key Updates:**
+- ✅ Header simplified to 5 essential links
+- ✅ Enhanced sitemap with 150+ routes
+- ✅ Fixed all iframe communication errors
+- ✅ Corrected React hook dependencies
+- ✅ Added 2 discovery CTAs (homepage + 404)
+
+**See:** [Guidelines v2.10 - Section 10.4](/guidelines/Guidelines.md#104-navigation-architecture--sitemap-centric-design) for complete navigation standards.
 
 ---
 
@@ -64,7 +86,10 @@ This directory contains comprehensive documentation for the WooCommerce Prototyp
 │   │   ├── css-optimization-quick-reference.md    # Quick lookup guide
 │   │   ├── css-optimization-implementation-guide.md  # Step-by-step process (1,100+ lines)
 │   │   ├── implementation-example.md              # Real-world example (P0.1 task)
-│   │   └── CSS-OPTIMIZATION-SYSTEM-MAP.md         # System overview & file relationships
+│   │   ├── CSS-OPTIMIZATION-SYSTEM-MAP.md         # System overview & file relationships
+│   │   ├── modern-react-coding-standards.md       # Modern React/TS coding standards + Tailwind CSS replacement (900+ lines, v2.0)
+│   │   ├── modern-react-quick-reference.md        # Quick reference card (v2.0)
+│   │   └── margin-removal-guidelines.md           # Margin-to-gap migration patterns
 │
 ├── 🎭 COMPONENT GUIDELINES
 │   ├── blocks/                        # Block component guidelines
@@ -444,6 +469,15 @@ Apply the guidelines to your work:
 
 ### **Recent Updates**
 
+#### **v2.10.0 - March 12, 2026**
+
+**Added:**
+- ✅ Updated modern-react-coding-standards.md to v2.0 (900+ lines)
+- ✅ Added Tailwind CSS replacement standards (Section 9)
+- ✅ Added combined migration timeline (Section 10)
+- ✅ Updated quick reference card to v2.0 with styling patterns
+- ✅ All migrations 100% complete (ES5, TypeScript, Tailwind)
+
 #### **v2.4.0 - January 9, 2026**
 
 **Added:**
@@ -639,6 +673,13 @@ grep -r "WordPress CSS" /guidelines/
 
 ## 📊 Version History
 
+### **v2.10.0 - March 12, 2026**
+- Updated modern-react-coding-standards.md to v2.0 (900+ lines)
+- Added Tailwind CSS replacement standards (Section 9)
+- Added combined migration timeline (Section 10)
+- Updated quick reference card to v2.0 with styling patterns
+- All migrations 100% complete (ES5, TypeScript, Tailwind)
+
 ### **v2.4.0 - January 9, 2026**
 - Added IMPORTS_GUIDELINES.md
 - Added REDUCED_MOTION_GUIDELINES.md
@@ -700,6 +741,6 @@ grep -r "WordPress CSS" /guidelines/
 
 ---
 
-**Last Updated:** January 9, 2026  
+**Last Updated:** March 12, 2026  
 **Maintained By:** Project Team  
-**Version:** 2.4.0
+**Version:** 2.10.0

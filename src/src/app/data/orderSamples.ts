@@ -3,13 +3,11 @@
  * 
  * Sample/demo order data used for documentation and testing.
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. No TypeScript types
- * 4. Named functions
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  */
 
-export var sampleOrderItems = [
+export const sampleOrderItems = [
   {
     id: 1,
     name: 'Album',
@@ -36,24 +34,24 @@ export var sampleOrderItems = [
   }
 ];
 
-export var sampleShipping = {
+export const sampleShipping = {
   method: 'Local Pickup',
   cost: 'Free'
 };
 
-export var samplePayment = {
+export const samplePayment = {
   method: 'Credit Card',
   lastFour: '4242'
 };
 
-export var sampleTotals = {
+export const sampleTotals = {
   subtotal: '$56.00',
   shipping: '$0.00',
   tax: '$4.48',
   total: '$60.48'
 };
 
-export var sampleOrder = {
+export const sampleOrder = {
   items: sampleOrderItems,
   shipping: sampleShipping,
   payment: samplePayment,
@@ -62,7 +60,7 @@ export var sampleOrder = {
   orderDate: 'January 1, 2026'
 };
 
-export var largeSampleOrderItems = [
+export const largeSampleOrderItems = [
   {
     id: 1,
     name: 'Album',
@@ -105,12 +103,12 @@ export var largeSampleOrderItems = [
   }
 ];
 
-export var sampleShippingWithCost = {
+export const sampleShippingWithCost = {
   method: 'Express Shipping',
   cost: '$15.00'
 };
 
-export function createOrderItem(params) {
+export const createOrderItem = (params) => {
   return {
     id: params.id,
     name: params.name,
@@ -121,17 +119,17 @@ export function createOrderItem(params) {
   };
 }
 
-export function calculateOrderTotals(items, shippingCost, taxRate) {
-  var sCost = shippingCost || 0;
-  var tRate = taxRate || 0.08;
+export const calculateOrderTotals = (items, shippingCost, taxRate) => {
+  const sCost = shippingCost || 0;
+  const tRate = taxRate || 0.08;
   
-  var subtotalCents = items.reduce(function(sum, item) {
-    var priceValue = parseFloat(item.price.replace('$', ''));
-    return sum + (priceValue * item.quantity * 100);
+  const subtotalCents = items.reduce((sum, item) => {
+    const priceValue = parseFloat(item.price.replace('$', ''));
+    return sum + Math.round(priceValue * 100) * item.quantity;
   }, 0);
 
-  var taxCents = Math.round(subtotalCents * tRate);
-  var totalCents = subtotalCents + sCost + taxCents;
+  const taxCents = Math.round(subtotalCents * tRate);
+  const totalCents = subtotalCents + sCost + taxCents;
 
   return {
     subtotal: '$' + (subtotalCents / 100).toFixed(2),

@@ -1,0 +1,51 @@
+/**
+ * Accessibility Statement Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for accessibility statement page.
+ *
+ * **Components:**
+ * - Prose text sections
+ * - Features section background
+ * - Feedback section background
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   PROSE SECTIONS
+   ========================================================================== */
+
+.retro-prose {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.retro-prose-text {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--retro-space-4);
+}
+
+.retro-prose-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   FEATURES SECTION
+   ========================================================================== */
+
+.retro-section--a11y-features {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+/* ==========================================================================
+   FEEDBACK SECTION
+   ========================================================================== */
+
+.retro-section--feedback {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}

@@ -1,0 +1,45 @@
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.wp-site-footer { background-color: var(--wp--preset--color--background); border-top: 1px solid var(--wp--preset--color--border); padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40); }
+.wp-site-footer__inner { max-width: var(--wp--preset--layout--site-size); margin: 0 auto; }
+.wp-site-footer__grid { display: grid; grid-template-columns: 1fr; gap: var(--wp--preset--spacing--60); }
+@media (min-width: 768px) { .wp-site-footer__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .wp-site-footer__grid { grid-template-columns: repeat(4, 1fr); } }
+.wp-site-footer__heading { font-size: var(--wp--preset--font-size--normal); font-weight: var(--wp--preset--font-weight--semibold); color: var(--wp--preset--color--foreground); margin-bottom: var(--wp--preset--spacing--30); }
+.wp-site-footer__link { display: block; color: var(--wp--preset--color--muted-foreground); font-size: var(--wp--preset--font-size--small); padding: var(--wp--preset--spacing--10) 0; transition: color 0.2s ease; text-decoration: none; }
+.wp-site-footer__link:hover { color: var(--wp--preset--color--foreground); }
+.wp-site-footer__bottom { border-top: 1px solid var(--wp--preset--color--border); margin-top: var(--wp--preset--spacing--60); padding-top: var(--wp--preset--spacing--50); display: flex; flex-direction: column; align-items: center; gap: var(--wp--preset--spacing--30); }
+@media (min-width: 640px) { .wp-site-footer__bottom { flex-direction: row; justify-content: space-between; } }
+.wp-site-footer__copyright { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--muted-foreground); }
+.wp-site-footer__legal { display: flex; gap: var(--wp--preset--spacing--30); }
+.wp-site-footer__legal-link { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--muted-foreground); text-decoration: none; }
+.wp-site-footer__legal-link:hover { color: var(--wp--preset--color--foreground); }
+.wp-site-footer__social { display: flex; gap: var(--wp--preset--spacing--30); }
+.wp-footer-social-icon { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; color: var(--wp--preset--color--muted-foreground); transition: color 0.2s ease; }
+.wp-footer-social-icon:hover { color: var(--wp--preset--color--foreground); }
+.wp-site-footer__description { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--muted-foreground); line-height: var(--wp--preset--line-height--relaxed); margin-bottom: var(--wp--preset--spacing--30); }
+.wp-site-footer__newsletter { display: flex; gap: var(--wp--preset--spacing--20); }
+.wp-site-footer__newsletter-input { flex: 1; padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30); border: 1px solid var(--wp--preset--color--border); border-radius: var(--wp--preset--border-radius--md); font-size: var(--wp--preset--font-size--small); background: var(--wp--preset--color--background); color: var(--wp--preset--color--foreground); }
+.wp-site-footer__newsletter-button { padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40); border-radius: var(--wp--preset--border-radius--md); font-size: var(--wp--preset--font-size--small); font-weight: var(--wp--preset--font-weight--medium); background: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary-foreground); transition: opacity 0.2s ease; }
+.wp-site-footer__newsletter-button:hover { opacity: 0.9; }
+
+/* Funky footer -> Retro */
+.wp-site-footer--funky { background: var(--retro-panel); border-top: 2px solid var(--retro-line); position: relative; overflow: hidden; box-shadow: 0 -3px 0px var(--retro-line); }
+.wp-site-footer--funky::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--retro-signal); opacity: 0.8; }
+.dark .wp-site-footer--funky::before { opacity: 1; }
+.wp-site-footer--funky .wp-site-footer__heading { position: relative; display: inline-block; padding-bottom: var(--wp--preset--spacing--20); color: var(--retro-ink); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-family: "Silkscreen", monospace; }
+.wp-site-footer--funky .wp-site-footer__heading::after { content: ''; position: absolute; bottom: 0; left: 0; width: 3rem; height: 3px; background: var(--retro-signal); opacity: 0.8; border-radius: 2px; }
+.dark .wp-site-footer--funky .wp-site-footer__heading::after { opacity: 1; box-shadow: none; }
+.wp-site-footer--funky .wp-site-footer__link:hover, .wp-site-footer--funky .wp-site-footer__legal-link:hover { color: var(--retro-signal); text-shadow: none; transform: translateX(5px); display: inline-block; transition: all 0.3s ease; }
+.wp-site-footer--funky .wp-site-footer__newsletter-input { background: var(--retro-paper); border: 2px solid var(--retro-line); border-radius: 0; transition: all 0.3s ease; }
+.wp-site-footer--funky .wp-site-footer__newsletter-input:focus { border-color: var(--retro-signal); box-shadow: none; outline: none; }
+.dark .wp-site-footer--funky .wp-site-footer__newsletter-input { background: var(--retro-dark-bg); }
+.wp-site-footer--funky .wp-site-footer__newsletter-button { background: var(--retro-signal); color: var(--retro-ink); border: 2px solid var(--retro-ink); border-radius: 0; font-weight: var(--wp--preset--font-weight--bold); transition: all 0.3s ease; text-shadow: none; box-shadow: 2px 2px 0px var(--retro-ink); }
+.wp-site-footer--funky .wp-site-footer__newsletter-button:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0px var(--retro-ink); opacity: 1; }
+.wp-site-footer--funky .wp-site-footer__social a:hover { transform: scale(1.1) rotate(5deg); color: var(--retro-signal); filter: none; }
+.wp-site-footer--funky .wp-site-footer__bottom { border-top: 2px solid var(--retro-line); background: transparent; }
+.wp-site-footer--funky .wp-site-footer__logo-text { color: var(--retro-ink); font-family: "Silkscreen", monospace; font-weight: 800; letter-spacing: -0.02em; }
+.wp-site-footer--funky .wp-site-footer__logo { color: var(--retro-signal); filter: none; transition: all 0.3s ease; }
+.wp-site-footer--funky .wp-site-footer__logo:hover { filter: none; color: var(--retro-ink); transform: scale(1.05); }

@@ -16,7 +16,7 @@
  * Classic t-shirt with size and color variations.
  * 3 sizes × 4 colors = 12 total variations
  */
-export var VARIABLE_TSHIRT = {
+export const VARIABLE_TSHIRT = {
   id: 'var-tshirt-001',
   name: 'Classic cotton t-shirt',
   slug: 'classic-cotton-tshirt',
@@ -98,7 +98,7 @@ export var VARIABLE_TSHIRT = {
  * Warm hoodie with size and color variations.
  * 4 sizes × 3 colors = 12 total variations
  */
-export var VARIABLE_HOODIE = {
+export const VARIABLE_HOODIE = {
   id: 'var-hoodie-001',
   name: 'Premium pullover hoodie',
   slug: 'premium-pullover-hoodie',
@@ -172,7 +172,7 @@ export var VARIABLE_HOODIE = {
  * Sneakers with size variations only.
  * 7 sizes = 7 total variations
  */
-export var VARIABLE_SNEAKERS = {
+export const VARIABLE_SNEAKERS = {
   id: 'var-sneakers-001',
   name: 'Athletic running sneakers',
   slug: 'athletic-running-sneakers',
@@ -226,7 +226,7 @@ export var VARIABLE_SNEAKERS = {
  * 
  * Export array of all variable products for easy access
  */
-export var VARIABLE_PRODUCTS = [
+export const VARIABLE_PRODUCTS = [
   VARIABLE_TSHIRT,
   VARIABLE_HOODIE,
   VARIABLE_SNEAKERS,

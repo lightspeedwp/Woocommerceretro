@@ -1,120 +1,130 @@
-import React from 'react';
-var useState = React.useState;
-var useContext = React.useContext;
-var createContext = React.createContext;
-var forwardRef = React.forwardRef;
-
-var RadioGroupContext = createContext(undefined);
+import React, { useState, useContext, createContext, forwardRef } from 'react';
 
 /**
  * RadioGroup Component
  *
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript generics or interfaces
+ * WordPress-aligned radio group with controlled/uncontrolled support.
+ *
+ * @example
+ * <RadioGroup value={val} onValueChange={setVal}>
+ *   <RadioGroupItem value="a" />
+ *   <RadioGroupItem value="b" />
+ * </RadioGroup>
  */
-export var RadioGroup = forwardRef(function RadioGroup(props, ref) {
-  var className = props.className || '';
-  var value = props.value;
-  var defaultValue = props.defaultValue;
-  var onValueChange = props.onValueChange;
-  var disabled = props.disabled;
-  var name = props.name;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
 
-  var _uv = useState(defaultValue);
-  var uncontrolledValue = _uv[0];
-  var setUncontrolledValue = _uv[1];
-  var actualValue = value !== undefined ? value : uncontrolledValue;
+interface RadioGroupContextValue {
+  value?: string;
+  onValueChange: (value: string) => void;
+  name?: string;
+  disabled?: boolean;
+}
 
-  var handleValueChange = function(newValue) {
-    if (value === undefined) {
-      setUncontrolledValue(newValue);
-    }
-    if (onValueChange) {
-      onValueChange(newValue);
-    }
-  };
+const RadioGroupContext = createContext<RadioGroupContextValue | undefined>(undefined);
 
-  var contextValue = {
-    value: actualValue,
-    onValueChange: handleValueChange,
-    name: name,
-    disabled: disabled
-  };
+interface RadioGroupProps {
+  className?: string;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  disabled?: boolean;
+  name?: string;
+  children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
+}
 
-  var combinedClassName = [
-    'wp-block-radio-group',
-    'funky-radio-group',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
+  ({ className = '', value, defaultValue, onValueChange, disabled, name, children, id, style }, ref) => {
+    const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+    const actualValue = value !== undefined ? value : uncontrolledValue;
 
-  return React.createElement(RadioGroupContext.Provider, { value: contextValue },
-    React.createElement('div', {
-      id: id,
-      style: style,
-      ref: ref,
-      className: combinedClassName,
-      role: "radiogroup"
-    }, children)
-  );
-});
+    const handleValueChange = (newValue: string) => {
+      if (value === undefined) {
+        setUncontrolledValue(newValue);
+      }
+      onValueChange?.(newValue);
+    };
+
+    const contextValue: RadioGroupContextValue = {
+      value: actualValue,
+      onValueChange: handleValueChange,
+      name,
+      disabled,
+    };
+
+    const combinedClassName = [
+      'wp-block-radio-group',
+      'funky-radio-group',
+      className
+    ].filter(Boolean).join(' ');
+
+    return (
+      <RadioGroupContext.Provider value={contextValue}>
+        <div id={id} style={style} ref={ref} className={combinedClassName} role="radiogroup">
+          {children}
+        </div>
+      </RadioGroupContext.Provider>
+    );
+  }
+);
 
 RadioGroup.displayName = "RadioGroup";
 
-export var RadioGroupItem = forwardRef(function RadioGroupItem(props, ref) {
-  var className = props.className || '';
-  var value = props.value;
-  var disabled = props.disabled;
-  var id = props.id;
-  var style = props.style;
+interface RadioGroupItemProps {
+  className?: string;
+  value: string;
+  disabled?: boolean;
+  id?: string;
+  style?: React.CSSProperties;
+}
 
-  var context = useContext(RadioGroupContext);
+export const RadioGroupItem = forwardRef<HTMLButtonElement, RadioGroupItemProps>(
+  ({ className = '', value, disabled, id, style }, ref) => {
+    const context = useContext(RadioGroupContext);
 
-  if (!context) {
-    throw new Error("RadioGroupItem must be used within a RadioGroup");
-  }
-
-  var isChecked = context.value === value;
-  var isDisabled = disabled || context.disabled;
-
-  var handleClick = function() {
-    if (!isDisabled && context.onValueChange) {
-      context.onValueChange(value);
+    if (!context) {
+      throw new Error("RadioGroupItem must be used within a RadioGroup");
     }
-  };
 
-  var combinedClassName = [
-    'wp-block-radio-item',
-    'funky-radio-item',
-    isChecked ? 'is-checked funky-radio--active' : '',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+    const isChecked = context.value === value;
+    const isDisabled = disabled || context.disabled;
 
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    ref: ref,
-    type: "button",
-    role: "radio",
-    'aria-checked': isChecked,
-    disabled: isDisabled,
-    'data-state': isChecked ? "checked" : "unchecked",
-    className: combinedClassName,
-    onClick: handleClick
-  },
-    React.createElement('span', {
-      className: [
-        'wp-block-radio-indicator',
-        'funky-radio-indicator',
-        isChecked ? 'is-visible' : 'is-hidden'
-      ].filter(function(c) { return !!c; }).join(' ')
-    })
-  );
-});
+    const handleClick = () => {
+      if (!isDisabled) {
+        context.onValueChange(value);
+      }
+    };
+
+    const combinedClassName = [
+      'wp-block-radio-item',
+      'funky-radio-item',
+      isChecked ? 'is-checked funky-radio--active' : '',
+      className
+    ].filter(Boolean).join(' ');
+
+    return (
+      <button
+        id={id}
+        style={style}
+        ref={ref}
+        type="button"
+        role="radio"
+        aria-checked={isChecked}
+        disabled={isDisabled}
+        data-state={isChecked ? "checked" : "unchecked"}
+        className={combinedClassName}
+        onClick={handleClick}
+      >
+        <span
+          className={[
+            'wp-block-radio-indicator',
+            'funky-radio-indicator',
+            isChecked ? 'is-visible' : 'is-hidden'
+          ].filter(Boolean).join(' ')}
+        />
+      </button>
+    );
+  }
+);
 
 RadioGroupItem.displayName = "RadioGroupItem";

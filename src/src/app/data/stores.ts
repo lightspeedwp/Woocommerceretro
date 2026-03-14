@@ -1,7 +1,7 @@
 /**
  * Store Locations
  */
-var storeLocations = [
+const storeLocations = [
   {
     id: 'soho',
     name: 'SoHo Flagship',
@@ -55,7 +55,7 @@ var storeLocations = [
 /**
  * Page-level content strings
  */
-var storesPageContent = {
+const storesPageContent = {
   title: 'Our stores',
   description:
     'Visit us in person. Experience our products, get personalized recommendations, and enjoy in-store services.',
@@ -67,15 +67,15 @@ var storesPageContent = {
 /**
  * Helper function to get store by ID
  */
-function getStoreById(id) {
-  return storeLocations.find(function(store) { return store.id === id; });
+const getStoreById = (id) => {
+  return storeLocations.find((store) => store.id === id);
 }
 
 /**
  * Helper function to get stores with a specific feature
  */
-function getStoresByFeature(feature) {
-  return storeLocations.filter(function(store) { return store.features.includes(feature); });
+const getStoresByFeature = (feature) => {
+  return storeLocations.filter((store) => store.features.includes(feature));
 }
 
 export { storeLocations, storesPageContent, getStoreById, getStoresByFeature };

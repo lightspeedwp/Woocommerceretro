@@ -16,7 +16,7 @@
  */
 
 /** @type {NavItem[]} */
-export var MAIN_MENU = [
+export const MAIN_MENU = [
   {
     id: 'home',
     label: 'Home',
@@ -29,12 +29,12 @@ export var MAIN_MENU = [
     megaMenu: true,
     children: [
       { id: 'all', label: 'All products', url: '/shop' },
-      { id: 'new', label: 'New arrivals', url: '/new-arrivals' },
-      { id: 'sale', label: 'Sale', url: '/sale', badge: 'Hot' },
-      { id: 'collections', label: 'Collections', url: '/shop/collections' },
-      { id: 'subs', label: 'Subscriptions', url: '/shop/category/subscriptions' },
-      { id: 'bundles', label: 'Bundles', url: '/shop/category/bundles' },
-      { id: 'composite', label: 'Build your PC', url: '/shop/category/computers' }
+      { id: 'electronics', label: 'Electronics', url: '/shop/category/electronics' },
+      { id: 'clothing', label: 'Clothing', url: '/shop/category/clothing' },
+      { id: 'home-living', label: 'Home & Living', url: '/shop/category/home-living' },
+      { id: 'accessories', label: 'Accessories', url: '/shop/category/accessories' },
+      { id: 'sports-fitness', label: 'Sports & Fitness', url: '/shop/category/sports-fitness' },
+      { id: 'sale', label: 'Sale', url: '/sale', badge: 'Hot' }
     ]
   },
   {
@@ -107,7 +107,7 @@ export var MAIN_MENU = [
 ];
 
 /** @type {NavItem[]} */
-export var FOOTER_MENU_SHOP = [
+export const FOOTER_MENU_SHOP = [
   { id: 'f_new', label: 'New arrivals', url: '/new-arrivals' },
   { id: 'f_best', label: 'Best sellers', url: '/best-sellers' },
   { id: 'f_sale', label: 'Sale', url: '/sale' },
@@ -115,7 +115,7 @@ export var FOOTER_MENU_SHOP = [
 ];
 
 /** @type {NavItem[]} */
-export var FOOTER_MENU_SUPPORT = [
+export const FOOTER_MENU_SUPPORT = [
   { id: 'f_help', label: 'Help center', url: '/help' },
   { id: 'f_shipping', label: 'Shipping & returns', url: '/shipping-returns' },
   { id: 'f_size', label: 'Size guide', url: '/size-guide' },
@@ -123,7 +123,7 @@ export var FOOTER_MENU_SUPPORT = [
 ];
 
 /** @type {NavItem[]} */
-export var FOOTER_MENU_COMPANY = [
+export const FOOTER_MENU_COMPANY = [
   { id: 'f_about', label: 'About us', url: '/about' },
   { id: 'f_careers', label: 'Careers', url: '/about/careers' },
   { id: 'f_stores', label: 'Store locations', url: '/stores' },

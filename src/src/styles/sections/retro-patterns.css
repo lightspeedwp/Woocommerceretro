@@ -1,0 +1,161 @@
+/**
+ * Retro Pattern Components CSS
+ *
+ * BEM classes for HeaderRetroPattern, FooterRetroPattern, and BottomGridRetro.
+ * Replaces all inline style={{}} attributes from these components.
+ *
+ * These components share retro theme tokens from front-page-funky.css:
+ *   --color-ink, --color-paper, --color-signal, etc.
+ *
+ * @see /src/app/components/patterns/HeaderRetroPattern.tsx
+ * @see /src/app/components/patterns/FooterRetroPattern.tsx
+ * @see /src/app/components/patterns/BottomGridRetro.tsx
+ */
+
+/* ========================================
+   HEADER RETRO - OVERRIDES
+   ======================================== */
+
+.retro-header__logo-img {
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Nav links - reset anchor defaults for retro nav */
+.retro-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Actions bar */
+.retro-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Search pill */
+.retro-search-pill {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--color-ink);
+  border-radius: 9999px;
+  background-color: transparent;
+  padding: 0 12px;
+  height: 36px;
+  position: relative;
+}
+
+.retro-search-pill__icon {
+  color: var(--color-ink);
+  margin-right: 8px;
+}
+
+.retro-search-pill__input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--color-ink);
+  width: 120px;
+  font-size: 12px;
+}
+
+.retro-search-pill__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  color: var(--color-ink);
+}
+
+/* Action links (account, wishlist, cart) - reset anchor defaults */
+a.retro-action-btn {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Cart link with badge positioning */
+.retro-action-btn--cart {
+  position: relative;
+}
+
+/* ========================================
+   FOOTER RETRO - OVERRIDES
+   ======================================== */
+
+/* Footer sign-up button */
+.retro-footer__signup-btn {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+/* Copyright bar */
+.retro-copyright {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Footer links in copyright - reset anchor defaults */
+.retro-copyright .retro-footer-link {
+  color: inherit;
+}
+
+/* ========================================
+   BOTTOM GRID RETRO - OVERRIDES
+   ======================================== */
+
+/* Mini card links - reset anchor defaults */
+.retro-mini-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Mini card product name */
+.retro-mini-card__name {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+/* Mini card product price */
+.retro-mini-card__price {
+  font-size: 0.875rem;
+}
+
+/* Rewards row items */
+.retro-rewards-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Rewards box layout */
+.retro-rewards-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* CTA button full width */
+.retro-button--fullwidth {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Inverted CTA variant */
+.retro-button--inverted {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border: 2px solid var(--color-paper);
+}
+
+/* Sign-up email input */
+.retro-signup .retro-input {
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}

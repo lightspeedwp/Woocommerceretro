@@ -50,7 +50,7 @@
  * 
  * @type {TeamMember[]}
  */
-export var teamMembers = [
+export const teamMembers = [
   // Leadership
   {
     id: '1',
@@ -222,14 +222,14 @@ export var teamMembers = [
 /**
  * Department list with counts
  */
-export var departments = [
+export const departments = [
   { id: 'all', name: 'All team members', count: teamMembers.length },
-  { id: 'leadership', name: 'Leadership', count: teamMembers.filter(function(m) { return m.department === 'Leadership'; }).length },
-  { id: 'design', name: 'Design', count: teamMembers.filter(function(m) { return m.department === 'Design'; }).length },
-  { id: 'engineering', name: 'Engineering', count: teamMembers.filter(function(m) { return m.department === 'Engineering'; }).length },
-  { id: 'customer-success', name: 'Customer success', count: teamMembers.filter(function(m) { return m.department === 'Customer Success'; }).length },
-  { id: 'operations', name: 'Operations', count: teamMembers.filter(function(m) { return m.department === 'Operations'; }).length },
-  { id: 'marketing', name: 'Marketing', count: teamMembers.filter(function(m) { return m.department === 'Marketing'; }).length },
+  { id: 'leadership', name: 'Leadership', count: teamMembers.filter((m) => m.department === 'Leadership').length },
+  { id: 'design', name: 'Design', count: teamMembers.filter((m) => m.department === 'Design').length },
+  { id: 'engineering', name: 'Engineering', count: teamMembers.filter((m) => m.department === 'Engineering').length },
+  { id: 'customer-success', name: 'Customer success', count: teamMembers.filter((m) => m.department === 'Customer Success').length },
+  { id: 'operations', name: 'Operations', count: teamMembers.filter((m) => m.department === 'Operations').length },
+  { id: 'marketing', name: 'Marketing', count: teamMembers.filter((m) => m.department === 'Marketing').length },
 ];
 
 /**
@@ -238,11 +238,11 @@ export var departments = [
  * @param {string} department - Department name
  * @returns {TeamMember[]}
  */
-export function getTeamMembersByDepartment(department) {
+export const getTeamMembersByDepartment = (department) => {
   if (department.toLowerCase() === 'all' || !department) {
     return teamMembers;
   }
-  return teamMembers.filter(function(member) { return member.department.toLowerCase() === department.toLowerCase(); });
+  return teamMembers.filter((member) => member.department.toLowerCase() === department.toLowerCase());
 }
 
 /**
@@ -251,8 +251,8 @@ export function getTeamMembersByDepartment(department) {
  * @param {string} id - Member ID
  * @returns {TeamMember | undefined}
  */
-export function getTeamMemberById(id) {
-  return teamMembers.find(function(member) { return member.id === id; });
+export const getTeamMemberById = (id) => {
+  return teamMembers.find((member) => member.id === id);
 }
 
 /**
@@ -260,7 +260,7 @@ export function getTeamMemberById(id) {
  * 
  * @returns {TeamMember[]}
  */
-export function getLeadershipTeam() {
+export const getLeadershipTeam = () => {
   return getTeamMembersByDepartment('Leadership');
 }
 
@@ -269,11 +269,11 @@ export function getLeadershipTeam() {
  * 
  * @returns {number}
  */
-export function getTotalTeamCount() {
+export const getTotalTeamCount = () => {
   return teamMembers.length;
 }
 
-export var teamPageContent = {
+export const teamPageContent = {
   title: 'Meet our team',
   description: 'The passionate people behind our products. A diverse team united by a shared commitment to quality.',
   leadershipHeading: 'Leadership',

@@ -1,286 +1,331 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useContext, createContext, forwardRef, useCallback } from 'react';
 import { Check, CaretDown as ChevronDown, CaretUp as ChevronUp } from '@phosphor-icons/react';
-
-var useState = React.useState;
-var useRef = React.useRef;
-var useEffect = React.useEffect;
-var useContext = React.useContext;
-var createContext = React.createContext;
-var forwardRef = React.forwardRef;
-var useCallback = React.useCallback;
-
-var SelectContext = createContext(undefined);
 
 /**
  * Select Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript syntax
+ *
+ * WordPress-aligned custom select dropdown with controlled/uncontrolled support.
+ *
+ * @example
+ * <Select value={val} onValueChange={setVal}>
+ *   <SelectTrigger><SelectValue placeholder="Pick one" /></SelectTrigger>
+ *   <SelectContent>
+ *     <SelectItem value="a">Option A</SelectItem>
+ *   </SelectContent>
+ * </Select>
  */
-export function Select(props) {
-  var controlledValue = props.value;
-  var defaultValue = props.defaultValue;
-  var onValueChange = props.onValueChange;
-  var controlledOpen = props.open;
-  var defaultOpen = props.defaultOpen || false;
-  var onOpenChange = props.onOpenChange;
-  var disabled = props.disabled;
-  var children = props.children;
 
-  var _sv = useState(defaultValue || "");
-  var uncontrolledValue = _sv[0];
-  var setUncontrolledValue = _sv[1];
-  var _so = useState(defaultOpen);
-  var uncontrolledOpen = _so[0];
-  var setUncontrolledOpen = _so[1];
-  var _sl = useState(function() { return new Map(); });
-  var labelMap = _sl[0];
-  var setLabelMap = _sl[1];
+interface SelectContextValue {
+  value: string;
+  onValueChange: (value: string) => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
+  labelMap: Map<string, React.ReactNode>;
+  registerLabel: (value: string, label: React.ReactNode) => void;
+}
 
-  var value = controlledValue !== undefined ? controlledValue : uncontrolledValue;
-  var open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
-  
-  var triggerRef = useRef(null);
+const SelectContext = createContext<SelectContextValue | undefined>(undefined);
 
-  var setOpen = function(newOpen) {
+interface SelectProps {
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  disabled?: boolean;
+  children?: React.ReactNode;
+}
+
+export const Select = ({
+  value: controlledValue,
+  defaultValue,
+  onValueChange,
+  open: controlledOpen,
+  defaultOpen = false,
+  onOpenChange,
+  disabled,
+  children,
+}: SelectProps) => {
+  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue || "");
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const [labelMap, setLabelMap] = useState<Map<string, React.ReactNode>>(() => new Map());
+
+  const value = controlledValue !== undefined ? controlledValue : uncontrolledValue;
+  const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
+
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+
+  const setOpen = (newOpen: boolean) => {
     if (controlledOpen === undefined) {
       setUncontrolledOpen(newOpen);
     }
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
+    onOpenChange?.(newOpen);
   };
 
-  var handleValueChange = function(newValue) {
+  const handleValueChange = (newValue: string) => {
     if (controlledValue === undefined) {
       setUncontrolledValue(newValue);
     }
-    if (onValueChange) {
-      onValueChange(newValue);
-    }
+    onValueChange?.(newValue);
     setOpen(false);
   };
 
-  var registerLabel = useCallback(function(val, label) {
-    setLabelMap(function(prev) {
-      var newMap = new Map(prev);
+  const registerLabel = useCallback((val: string, label: React.ReactNode) => {
+    setLabelMap((prev) => {
+      const newMap = new Map(prev);
       newMap.set(val, label);
       return newMap;
     });
   }, []);
 
-  var contextValue = {
-    value: value,
+  const contextValue: SelectContextValue = {
+    value,
     onValueChange: handleValueChange,
-    open: open,
-    setOpen: setOpen,
-    triggerRef: triggerRef,
-    labelMap: labelMap,
-    registerLabel: registerLabel,
+    open,
+    setOpen,
+    triggerRef,
+    labelMap,
+    registerLabel,
   };
 
-  return React.createElement(SelectContext.Provider, { value: contextValue }, children);
+  return (
+    <SelectContext.Provider value={contextValue}>
+      {children}
+    </SelectContext.Provider>
+  );
 }
 
-export var SelectTrigger = forwardRef(function SelectTrigger(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
+interface SelectTriggerProps {
+  className?: string;
+  children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
+}
 
-  var context = useContext(SelectContext);
-  if (!context) throw new Error("SelectTrigger must be used within Select");
+export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
+  ({ className = '', children, id, style }, ref) => {
+    const context = useContext(SelectContext);
+    if (!context) throw new Error("SelectTrigger must be used within Select");
 
-  var combinedRef = function(node) {
-    context.triggerRef.current = node;
-    if (typeof ref === 'function') ref(node);
-    else if (ref) ref.current = node;
-  };
-
-  var handleClick = function() { context.setOpen(!context.open); };
-
-  var combinedClassName = [
-    'wp-block-select-trigger',
-    'funky-input-glow',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
-
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    ref: combinedRef,
-    type: "button",
-    className: combinedClassName,
-    onClick: handleClick,
-    'aria-expanded': context.open
-  },
-    children,
-    React.createElement(ChevronDown, { className: "wp-block-select-icon" })
-  );
-});
-
-export var SelectValue = forwardRef(function SelectValue(props, ref) {
-  var className = props.className || '';
-  var placeholder = props.placeholder;
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(SelectContext);
-  if (!context) throw new Error("SelectValue must be used within Select");
-
-  var displayValue = context.value ? context.labelMap.get(context.value) : placeholder;
-
-  return React.createElement('span', {
-    id: id,
-    style: style,
-    ref: ref,
-    className: 'wp-block-select-value ' + className
-  }, displayValue || placeholder || "");
-});
-
-export var SelectContent = forwardRef(function SelectContent(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var position = props.position || "popper";
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(SelectContext);
-  if (!context) throw new Error("SelectContent must be used within Select");
-
-  var contentRef = useRef(null);
-
-  useEffect(function() {
-    var handleClickOutside = function(event) {
-      if (
-        context.open &&
-        contentRef.current &&
-        !contentRef.current.contains(event.target) &&
-        context.triggerRef.current &&
-        !context.triggerRef.current.contains(event.target)
-      ) {
-        context.setOpen(false);
-      }
+    const combinedRef = (node: HTMLButtonElement | null) => {
+      context.triggerRef.current = node;
+      if (typeof ref === 'function') ref(node);
+      else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return function() { document.removeEventListener("mousedown", handleClickOutside); };
-  }, [context.open, context]);
+    const combinedClassName = [
+      'wp-block-select-trigger',
+      'funky-input-glow',
+      className
+    ].filter(Boolean).join(' ');
 
-  if (!context.open) return null;
-
-  var combinedStyle = {
-    width: context.triggerRef.current ? context.triggerRef.current.offsetWidth : undefined,
-    position: 'absolute',
-    top: '100%',
-  };
-  if (style) {
-    Object.assign(combinedStyle, style);
+    return (
+      <button
+        id={id}
+        style={style}
+        ref={combinedRef}
+        type="button"
+        className={combinedClassName}
+        onClick={() => context.setOpen(!context.open)}
+        aria-expanded={context.open}
+      >
+        {children}
+        <ChevronDown className="wp-block-select-icon" />
+      </button>
+    );
   }
+);
 
-  var combinedClassName = [
-    'wp-block-select-content',
-    'funky-card-glow',
-    position === "popper" ? 'wp-block-select-content--popper' : '',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+interface SelectValueProps {
+  className?: string;
+  placeholder?: string;
+  id?: string;
+  style?: React.CSSProperties;
+}
 
-  return React.createElement('div', {
-    id: id,
-    ref: contentRef,
-    className: combinedClassName,
-    style: combinedStyle
-  },
-    React.createElement('div', { className: "wp-block-select-viewport" }, children)
-  );
-});
+export const SelectValue = forwardRef<HTMLSpanElement, SelectValueProps>(
+  ({ className = '', placeholder, id, style }, ref) => {
+    const context = useContext(SelectContext);
+    if (!context) throw new Error("SelectValue must be used within Select");
 
-export var SelectItem = forwardRef(function SelectItem(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var value = props.value;
-  var id = props.id;
-  var style = props.style;
-  var onClick = props.onClick;
+    const displayValue = context.value ? context.labelMap.get(context.value) : placeholder;
 
-  var context = useContext(SelectContext);
-  if (!context) throw new Error("SelectItem must be used within Select");
+    return (
+      <span id={id} style={style} ref={ref} className={`wp-block-select-value ${className}`}>
+        {displayValue || placeholder || ""}
+      </span>
+    );
+  }
+);
 
-  var isSelected = context.value === value;
+interface SelectContentProps {
+  className?: string;
+  children?: React.ReactNode;
+  position?: string;
+  id?: string;
+  style?: React.CSSProperties;
+}
 
-  useEffect(function() {
-    context.registerLabel(value, children);
-  }, [value, children, context]);
+export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
+  ({ className = '', children, position = "popper", id, style }, ref) => {
+    const context = useContext(SelectContext);
+    if (!context) throw new Error("SelectContent must be used within Select");
 
-  var handleClick = function(e) {
-    context.onValueChange(value);
-    if (onClick) {
-      onClick(e);
-    }
-  };
+    const contentRef = useRef<HTMLDivElement>(null);
 
-  var combinedClassName = [
-    'wp-block-select-item',
-    'funky-select-item',
-    isSelected ? 'wp-block-select-item--selected funky-select-item--active' : '',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          context.open &&
+          contentRef.current &&
+          !contentRef.current.contains(event.target as Node) &&
+          context.triggerRef.current &&
+          !context.triggerRef.current.contains(event.target as Node)
+        ) {
+          context.setOpen(false);
+        }
+      };
 
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    ref: ref,
-    className: combinedClassName,
-    onClick: handleClick,
-    'data-state': isSelected ? "checked" : "unchecked"
-  },
-    React.createElement('span', { className: "wp-block-select-item-indicator" },
-      isSelected ? React.createElement(Check, { className: "wp-block-context-menu-item-indicator__icon" }) : null
-    ),
-    React.createElement('span', { className: "wp-block-select-item-text" }, children)
-  );
-});
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [context.open, context]);
 
-export var SelectGroup = forwardRef(function SelectGroup(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-  return React.createElement('div', { id: id, style: style, ref: ref, className: 'wp-block-select-group ' + className }, children);
-});
+    if (!context.open) return null;
 
-export var SelectLabel = forwardRef(function SelectLabel(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-  return React.createElement('div', { id: id, style: style, ref: ref, className: 'wp-block-select-label ' + className }, children);
-});
+    const combinedStyle: React.CSSProperties = {
+      width: context.triggerRef.current ? context.triggerRef.current.offsetWidth : undefined,
+      position: 'absolute',
+      top: '100%',
+      ...style,
+    };
 
-export var SelectSeparator = forwardRef(function SelectSeparator(props, ref) {
-  var className = props.className || '';
-  var id = props.id;
-  var style = props.style;
-  return React.createElement('div', { id: id, style: style, ref: ref, className: 'wp-block-select-separator ' + className });
-});
+    const combinedClassName = [
+      'wp-block-select-content',
+      'funky-card-glow',
+      position === "popper" ? 'wp-block-select-content--popper' : '',
+      className
+    ].filter(Boolean).join(' ');
 
-export var SelectScrollUpButton = forwardRef(function SelectScrollUpButton(props, ref) {
-  var className = props.className || '';
-  var id = props.id;
-  var style = props.style;
-  return React.createElement('div', { id: id, style: style, ref: ref, className: 'wp-block-select-scroll-button ' + className },
-    React.createElement(ChevronUp, { className: "wp-block-select-icon" })
-  );
-});
+    return (
+      <div id={id} ref={contentRef} className={combinedClassName} style={combinedStyle}>
+        <div className="wp-block-select-viewport">{children}</div>
+      </div>
+    );
+  }
+);
 
-export var SelectScrollDownButton = forwardRef(function SelectScrollDownButton(props, ref) {
-  var className = props.className || '';
-  var id = props.id;
-  var style = props.style;
-  return React.createElement('div', { id: id, style: style, ref: ref, className: 'wp-block-select-scroll-button ' + className },
-    React.createElement(ChevronDown, { className: "wp-block-select-icon" })
-  );
-});
+interface SelectItemProps {
+  className?: string;
+  children?: React.ReactNode;
+  value: string;
+  id?: string;
+  style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent) => void;
+}
+
+export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
+  ({ className = '', children, value, id, style, onClick }, ref) => {
+    const context = useContext(SelectContext);
+    if (!context) throw new Error("SelectItem must be used within Select");
+
+    const isSelected = context.value === value;
+
+    useEffect(() => {
+      context.registerLabel(value, children);
+    }, [value, children, context]);
+
+    const handleClick = (e: React.MouseEvent) => {
+      context.onValueChange(value);
+      onClick?.(e);
+    };
+
+    const combinedClassName = [
+      'wp-block-select-item',
+      'funky-select-item',
+      isSelected ? 'wp-block-select-item--selected funky-select-item--active' : '',
+      className
+    ].filter(Boolean).join(' ');
+
+    return (
+      <div
+        id={id}
+        style={style}
+        ref={ref}
+        className={combinedClassName}
+        onClick={handleClick}
+        data-state={isSelected ? "checked" : "unchecked"}
+      >
+        <span className="wp-block-select-item-indicator">
+          {isSelected && <Check className="wp-block-context-menu-item-indicator__icon" />}
+        </span>
+        <span className="wp-block-select-item-text">{children}</span>
+      </div>
+    );
+  }
+);
+
+interface SelectGroupProps {
+  className?: string;
+  children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+export const SelectGroup = forwardRef<HTMLDivElement, SelectGroupProps>(
+  ({ className = '', children, id, style }, ref) => {
+    return <div id={id} style={style} ref={ref} className={`wp-block-select-group ${className}`}>{children}</div>;
+  }
+);
+
+interface SelectLabelProps {
+  className?: string;
+  children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+export const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(
+  ({ className = '', children, id, style }, ref) => {
+    return <div id={id} style={style} ref={ref} className={`wp-block-select-label ${className}`}>{children}</div>;
+  }
+);
+
+interface SelectSeparatorProps {
+  className?: string;
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+export const SelectSeparator = forwardRef<HTMLDivElement, SelectSeparatorProps>(
+  ({ className = '', id, style }, ref) => {
+    return <div id={id} style={style} ref={ref} className={`wp-block-select-separator ${className}`} />;
+  }
+);
+
+interface SelectScrollButtonProps {
+  className?: string;
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+export const SelectScrollUpButton = forwardRef<HTMLDivElement, SelectScrollButtonProps>(
+  ({ className = '', id, style }, ref) => {
+    return (
+      <div id={id} style={style} ref={ref} className={`wp-block-select-scroll-button ${className}`}>
+        <ChevronUp className="wp-block-select-icon" />
+      </div>
+    );
+  }
+);
+
+export const SelectScrollDownButton = forwardRef<HTMLDivElement, SelectScrollButtonProps>(
+  ({ className = '', id, style }, ref) => {
+    return (
+      <div id={id} style={style} ref={ref} className={`wp-block-select-scroll-button ${className}`}>
+        <ChevronDown className="wp-block-select-icon" />
+      </div>
+    );
+  }
+);

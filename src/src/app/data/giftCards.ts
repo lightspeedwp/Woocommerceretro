@@ -8,30 +8,12 @@
  * @module data/giftCards
  */
 
-import * as ReactModule from 'react';
+import React from 'react';
 import { Envelope as Mail, Heart, CreditCard, Bag as ShoppingBag } from '@phosphor-icons/react';
-
-var React = ReactModule.default || ReactModule;
-
-/* ── Types ───────────────────────────────────────────────────────────────── */
-
-// @typedef {Object} GiftCardDenomination
-// @property {string} id
-// @property {number} amount
-// @property {boolean} [popular]
-
-// @typedef {Object} GiftCardOccasion
-// @property {string} label
-// @property {string} image
-
-// @typedef {Object} GiftCardFeature
-// @property {React.ReactNode} icon
-// @property {string} title
-// @property {string} description
 
 /* ── Hero Copy ───────────────────────────────────────────────────────────── */
 
-var giftCardHero = {
+const giftCardHero = {
   badge: 'The perfect gift',
   title: 'Gift cards',
   subtitle:
@@ -42,7 +24,7 @@ var giftCardHero = {
 
 /* ── Denominations ───────────────────────────────────────────────────────── */
 
-var giftCardDenominations = [
+const giftCardDenominations = [
   { id: 'gc-25', amount: 25 },
   { id: 'gc-50', amount: 50, popular: true },
   { id: 'gc-75', amount: 75 },
@@ -53,7 +35,7 @@ var giftCardDenominations = [
 
 /* ── Occasions ───────────────────────────────────────────────────────────── */
 
-var giftCardOccasions = [
+const giftCardOccasions = [
   {
     label: 'Birthday',
     image:
@@ -88,29 +70,29 @@ var giftCardOccasions = [
 
 /* ── Fallback card preview image ─────────────────────────────────────────── */
 
-var GIFT_CARD_IMAGE =
+const GIFT_CARD_IMAGE =
   'https://images.unsplash.com/photo-1614850715776-a749a85b4144?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZ2lmdCUyMGNhcmQlMjBjb2xvcmZ1bCUyMGdyYWRpZW50fGVufDF8fHx8MTc3MTc5MzgxMHww&ixlib=rb-4.1.0&q=80&w=1080';
 
 /* ── Features ────────────────────────────────────────────────────────────── */
 
-var giftCardFeatures = [
+const giftCardFeatures = [
   {
-    icon: React.createElement(Mail, { size: 24 }),
+    icon: <Mail size={24} />,
     title: 'Instant delivery',
     description: 'Send by email or print at home — arrives in seconds.',
   },
   {
-    icon: React.createElement(Heart, { size: 24 }),
+    icon: <Heart size={24} />,
     title: 'Add a personal note',
     description: 'Include a heartfelt message with every gift card.',
   },
   {
-    icon: React.createElement(CreditCard, { size: 24 }),
+    icon: <CreditCard size={24} />,
     title: 'Never expires',
     description: 'No expiry dates, no hidden fees. Use at any time.',
   },
   {
-    icon: React.createElement(ShoppingBag, { size: 24 }),
+    icon: <ShoppingBag size={24} />,
     title: 'Redeemable on anything',
     description: 'Valid across our entire product catalogue.',
   },
@@ -118,7 +100,7 @@ var giftCardFeatures = [
 
 /* ── CTA Copy ────────────────────────────────────────────────────────────── */
 
-var giftCardCta = {
+const giftCardCta = {
   title: 'Not sure what to give?',
   text: 'A gift card lets them pick exactly what they love from our entire collection.',
   btnLabel: 'Get a gift card',

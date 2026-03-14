@@ -1,420 +1,345 @@
-# Prompts Directory
+# AI Prompts Directory
 
-**Last Updated:** January 10, 2026  
-**Version:** 1.0  
-**Purpose:** Central repository for all AI prompts used in the WooCommerce prototype project
+**Purpose:** Centralized storage for all AI prompts used in project maintenance, development, and auditing.
 
----
-
-## 📋 Overview
-
-This directory contains standardized prompts for generating code, documentation, tests, audits, and workflows. All prompts follow the conventions defined in [PROMPT_GENERATION_GUIDELINES.md](/guidelines/PROMPT_GENERATION_GUIDELINES.md).
+**Organization:** Prompts are organized by category in subfolders.
 
 ---
 
-## 📁 Directory Structure
+## 📂 Folder Structure
 
 ```
 /prompts/
-├── components/              # Component generation prompts
-│   ├── blocks/             # Block component prompts
-│   ├── patterns/           # Pattern component prompts
-│   ├── parts/              # Global parts prompts
-│   └── common/             # Common component prompts
-│
-├── templates/              # Template generation prompts
-│   ├── pages/              # Page template prompts
-│   ├── archives/           # Archive template prompts
-│   └── single/             # Single item template prompts
-│
-├── testing/                # Testing-related prompts
-│   ├── unit-tests/         # Unit test generation
-│   ├── integration-tests/  # Integration test prompts
-│   └── accessibility/      # A11y testing prompts
-│
-├── audits/                 # Audit procedure prompts
-│   ├── accessibility/      # WCAG audit prompts
-│   ├── performance/        # Performance audit prompts
-│   ├── code-quality/       # Code quality audit prompts
-│   └── compliance/         # Standards compliance prompts
-│
-├── refactoring/            # Refactoring task prompts
-│   ├── css-migration/      # CSS refactoring prompts
-│   ├── component-updates/  # Component refactoring
-│   └── architecture/       # Architecture refactoring
-│
-├── documentation/          # Documentation generation prompts
-│   ├── components/         # Component doc prompts
-│   ├── guidelines/         # Guideline creation prompts
-│   └── reports/            # Report generation prompts
-│
-├── workflows/              # Complete workflow prompts
-│   ├── feature-complete/   # End-to-end feature prompts
-│   ├── bugfix/             # Bug fixing workflows
-│   └── optimization/       # Optimization workflows
-│
-└── archive/                # Archived/deprecated prompts
-    ├── 2026-01/            # January 2026 archives
-    └── README.md           # Archive index
+├── README.md                          # This file
+├── maintenance/                       # Regular maintenance prompts
+│   └── orchestrator_comprehensive-cleanup-audit.md
+├── audits/                            # Audit prompts
+├── components/                        # Component creation prompts
+├── refactoring/                       # Refactoring prompts
+├── testing/                           # Testing prompts
+└── workflows/                         # Multi-step workflow prompts
 ```
 
 ---
 
-## 🎯 Quick Start
+## 🚀 Quick Start
 
-### Using a Prompt
+### Running a Prompt
 
-1. **Find the appropriate prompt:**
-   - Browse directories by category
-   - Check README files in each directory
-   - Use naming convention to identify version
+**Method 1: Copy-paste into AI chat**
+1. Open the prompt file (e.g., `/prompts/maintenance/orchestrator_comprehensive-cleanup-audit.md`)
+2. Copy the entire content
+3. Paste into your AI assistant chat
+4. Wait for completion
 
-2. **Read the prompt:**
-   - Review metadata and objective
-   - Check prerequisites
-   - Review requirements
-
-3. **Execute the prompt:**
-   - Follow step-by-step instructions
-   - Complete verification checklist
-   - Run tests
-
-4. **Verify output:**
-   - Check success criteria
-   - Review generated files
-   - Test functionality
+**Method 2: Reference in conversation**
+```
+Please run the comprehensive cleanup audit prompt located at:
+/prompts/maintenance/orchestrator_comprehensive-cleanup-audit.md
+```
 
 ---
 
-## 📝 Naming Convention
+## 📋 Available Prompts
 
-All prompts follow this pattern:
+### Maintenance Prompts
 
+#### `orchestrator_comprehensive-cleanup-audit.md`
+**Purpose:** Regular maintenance audit and cleanup  
+**Type:** Single-session orchestrator  
+**Duration:** ~100 minutes  
+**Frequency:** Weekly or before releases
+
+**What it does:**
+- ✅ Cleans up root directory (moves/deletes orphaned files)
+- ✅ Archives stale reports (> 30 days)
+- ✅ Archives completed task files
+- ✅ Validates all routes in routes.tsx
+- ✅ Checks for broken CSS imports
+- ✅ Checks for broken JS/TS imports
+- ✅ Updates CHANGELOG.md
+- ✅ Updates Guidelines.md
+- ✅ Updates task-list.md
+- ✅ Updates Sitemap.tsx component
+- ✅ Updates DevTools.tsx component
+- ✅ Runs TypeScript/ESLint/build checks
+- ✅ Generates comprehensive report
+
+**When to run:**
+- Before deploying to production
+- After major feature completion
+- Weekly maintenance (recommended)
+- When file system feels cluttered
+
+**Example usage:**
 ```
-<category>_<action>_<target>_<version>.md
+Run the comprehensive cleanup audit. Today is March 20, 2026.
 ```
+
+---
+
+## 🎯 Prompt Categories
+
+### 1. Maintenance
+Regular upkeep and validation tasks.
 
 **Examples:**
-- `component_create_product-card_v1.md`
-- `test_write_unit-tests_header_v1.md`
-- `audit_wcag_color-contrast_v2.md`
-- `refactor_css_tailwind-to-wordpress_v1.md`
+- Comprehensive cleanup and audit
+- Documentation sync
+- File organization
+- Dependency updates
 
-**See:** [PROMPT_GENERATION_GUIDELINES.md](/guidelines/PROMPT_GENERATION_GUIDELINES.md#3-naming-conventions) for complete naming standards.
+### 2. Audits
+Code quality, compliance, and standards audits.
 
----
+**Examples:**
+- CSS architecture audit
+- Component coverage audit
+- Accessibility audit
+- Performance audit
 
-## 📊 Available Prompts
+### 3. Components
+Templates for creating new components with proper structure.
 
-### Components (3 prompts) ✅
+**Examples:**
+- Create new block component
+- Create new pattern component
+- Create new template
 
-**Location:** `/prompts/components/`
+### 4. Refactoring
+Large-scale code refactoring workflows.
 
-| Prompt | Version | Target | Complexity | Time | Status |
-|--------|---------|--------|------------|------|--------|
-| ProductCard Block | v1.0 | ProductCard.tsx | Medium | 45 min | ✅ Active |
-| Hero Pattern | v1.0 | Hero.tsx | Medium | 60 min | ✅ Active |
-| MainHeader Part | v1.0 | MainHeader.tsx | High | 90 min | ✅ Active |
+**Examples:**
+- Convert Tailwind to WordPress CSS
+- Modernize ES5 to modern JS
+- Migrate to new architecture
 
-**Files:**
-- `/prompts/components/blocks/component_create_product-card_v1.md`
-- `/prompts/components/patterns/component_create_hero_v1.md`
-- `/prompts/components/parts/component_create_header_v1.md`
+### 5. Testing
+Test creation and validation prompts.
 
----
+**Examples:**
+- Create unit tests for component
+- Create E2E test flow
+- Validate test coverage
 
-### Templates (2 prompts) ✅
+### 6. Workflows
+Multi-step processes for complex tasks.
 
-**Location:** `/prompts/templates/`
-
-| Prompt | Version | Target | Complexity | Time | Status |
-|--------|---------|--------|------------|------|--------|
-| Archive Product | v1.0 | ArchiveProduct.tsx | High | 90 min | ✅ Active |
-| Single Product | v1.0 | SingleProduct.tsx | High | 120 min | ✅ Active |
-
-**Files:**
-- `/prompts/templates/archives/template_create_archive-product_v1.md`
-- `/prompts/templates/single/template_create_single-product_v1.md`
-
----
-
-### Testing (2 prompts) ✅
-
-**Location:** `/prompts/testing/`
-
-| Prompt | Version | Target | Complexity | Time | Status |
-|--------|---------|--------|------------|------|--------|
-| Unit Test Generation | v1.0 | Component.test.tsx | Simple | 30 min | ✅ Active |
-| Integration Tests | v1.0 | Feature.integration.test.tsx | Medium | 60 min | ✅ Active |
-
-**Files:**
-- `/prompts/testing/unit-tests/test_write_unit-tests_component_v1.md`
-- `/prompts/testing/integration-tests/test_write_integration-tests_v1.md`
+**Examples:**
+- Complete feature development
+- Release preparation
+- Migration workflows
 
 ---
 
-### Audits (1 prompt) ✅
+## 📝 Prompt Writing Standards
 
-**Location:** `/prompts/audits/`
+When creating new prompts, follow these standards:
 
-| Prompt | Version | Target | Complexity | Time | Status |
-|--------|---------|--------|------------|------|--------|
-| WCAG Color Contrast | v1.0 | Contrast audit report | Medium | 2-3 hrs | ✅ Active |
+### File Naming
+```
+{type}_{descriptive-name}.md
 
-**Files:**
-- `/prompts/audits/accessibility/audit_wcag_color-contrast_v1.md`
+Examples:
+orchestrator_comprehensive-cleanup-audit.md
+audit_css-architecture.md
+component_create-block.md
+workflow_feature-complete.md
+```
+
+### Naming Conventions
+- **orchestrator_** - Single-session, multi-phase workflow
+- **audit_** - Code/system audit
+- **component_** - Component creation
+- **refactoring_** - Refactoring workflow
+- **testing_** - Test creation/validation
+- **workflow_** - Multi-step process
+
+### Required Sections
+1. **Title & Metadata**
+   - Purpose
+   - Type (single-session, multi-session)
+   - Duration estimate
+   - Frequency (if recurring)
+
+2. **Overview**
+   - What the prompt does
+   - Expected outputs
+   - Prerequisites
+
+3. **Phases/Steps**
+   - Clear numbered phases
+   - Time estimates per phase
+   - Actions to take
+   - Expected outputs
+
+4. **Configuration** (if applicable)
+   - Customizable settings
+   - Rules that can be adjusted
+
+5. **Success Criteria**
+   - How to know it completed successfully
+   - Quality checks
+
+6. **Expected Outputs**
+   - Files created
+   - Files updated
+   - Reports generated
 
 ---
 
-### Refactoring (1 prompt) ✅
+## 🔄 Prompt Lifecycle
 
-**Location:** `/prompts/refactoring/`
+### 1. Creation
+- Create prompt file in appropriate category folder
+- Follow naming convention
+- Include all required sections
+- Test with AI assistant
 
-| Prompt | Version | Target | Complexity | Time | Status |
-|--------|---------|--------|------------|------|--------|
-| CSS Migration | v1.0 | Tailwind → WordPress | Medium | 60-90 min | ✅ Active |
+### 2. Versioning
+- Append `_v1.md`, `_v2.md` for major changes
+- Document changes in prompt header
+- Keep old versions for reference
 
-**Files:**
-- `/prompts/refactoring/css-migration/refactor_css_tailwind-to-wordpress_v1.md`
+### 3. Testing
+- Run prompt in isolated environment
+- Verify all phases complete
+- Check output quality
+- Time the execution
 
----
+### 4. Documentation
+- Add to this README
+- Update `/docs/` if needed
+- Create quick-start guide if complex
 
-### Documentation (1 prompt) ✅
-
-**Location:** `/prompts/documentation/`
-
-| Prompt | Version | Target | Complexity | Time | Status |
-|--------|---------|--------|------------|------|--------|
-| Component Guideline | v1.0 | Component.md | Medium | 45-60 min | ✅ Active |
-
-**Files:**
-- `/prompts/documentation/components/docs_write_component-guideline_v1.md`
-
----
-
-### Workflows (0 prompts)
-
-**Location:** `/prompts/workflows/`
-
-| Prompt | Version | Target | Status |
-|--------|---------|--------|--------|
-| *(Coming soon)* | - | - | Planned |
-
-**Planned:**
-- Feature Development Workflow
-- Code Optimization Workflow
-- Performance Audit
+### 5. Maintenance
+- Review monthly for accuracy
+- Update as codebase evolves
+- Archive obsolete prompts
 
 ---
 
-## 📚 Creating New Prompts
+## 📊 Prompt Performance Tracking
 
-### Step 1: Choose Category
+### Recommended Format
 
-Determine which category your prompt belongs to:
-- **Components:** Generating React components
-- **Templates:** Generating page templates
-- **Testing:** Generating tests
-- **Audits:** Performing code audits
-- **Refactoring:** Restructuring code
-- **Documentation:** Writing docs
-- **Workflows:** Complete multi-step processes
-
-### Step 2: Follow Template
-
-Use the standard template from [PROMPT_GENERATION_GUIDELINES.md](/guidelines/PROMPT_GENERATION_GUIDELINES.md#5-prompt-template-structure):
+After each prompt run, track:
 
 ```markdown
-# [Prompt Title]
+**Date:** YYYY-MM-DD
+**Prompt:** orchestrator_comprehensive-cleanup-audit.md
+**Duration:** XX minutes
+**Status:** Success / Partial / Failed
+**Issues:** [any problems encountered]
+**Outputs:** [key files created/updated]
+```
 
-**Version:** v1.0
-**Date Created:** YYYY-MM-DD
-**Category:** [category]
+**Storage:** `/reports/prompt-runs/YYYY-MM-DD_prompt-name.md`
+
+---
+
+## 🎯 Best Practices
+
+### For Single-Session Prompts
+- ✅ Clear phase breakdown
+- ✅ Time estimates per phase
+- ✅ No user input required between phases
+- ✅ Generate final report
+- ✅ Clear success criteria
+
+### For Multi-Session Prompts
+- ✅ Clear stopping points
+- ✅ State preservation instructions
+- ✅ Progress tracking
+- ✅ Resume instructions
+
+### General
+- ✅ Use code blocks for examples
+- ✅ Include validation steps
+- ✅ Specify exact file paths
+- ✅ List expected outputs
+- ✅ Include rollback instructions (if destructive)
+
+---
+
+## ⚠️ Safety Guidelines
+
+### Before Running Destructive Prompts
+
+**Prompts that delete/move files should warn:**
+
+```markdown
+⚠️ **WARNING: This prompt will delete/move files.**
+
+Before running:
+- [ ] Commit pending changes
+- [ ] Review files marked for deletion
+- [ ] Back up important data
+- [ ] Verify cleanup rules are correct
+```
+
+### Required Safeguards
+1. **Always list files before deletion**
+2. **Provide dry-run option**
+3. **Archive before delete**
+4. **Generate undo instructions**
+
+---
+
+## 📚 Related Documentation
+
+- `/guidelines/PROMPT_GENERATION_GUIDELINES.md` - Standards for prompt creation
+- `/guidelines/REPORTING_GUIDELINES.md` - Report structure standards
+- `/tasks/task-list.md` - Current project tasks
+- `/CHANGELOG.md` - Version history
+
+---
+
+## 🔗 Quick Links
+
+**Most Used Prompts:**
+- [Comprehensive Cleanup & Audit](./maintenance/orchestrator_comprehensive-cleanup-audit.md)
+
+**Documentation:**
+- [Prompt Generation Guidelines](/guidelines/PROMPT_GENERATION_GUIDELINES.md)
+- [Project Guidelines](/guidelines/Guidelines.md)
+
+**Reports:**
+- [Maintenance Reports](/reports/maintenance/)
+- [Audit Reports](/reports/audits/)
+
+---
+
+## 📝 Prompt Request Template
+
+**To request a new prompt:**
+
+```markdown
+**Prompt Name:** [descriptive name]
+**Category:** [maintenance/audits/components/etc.]
+**Purpose:** [what it should do]
+**Type:** [single-session/multi-session]
+**Expected Duration:** [time estimate]
+**Frequency:** [one-time/weekly/monthly]
+
+**Phases:**
+1. Phase 1: [description]
+2. Phase 2: [description]
+3. ...
+
+**Expected Outputs:**
+- [file 1]
+- [file 2]
+- ...
+
+**Success Criteria:**
+- [criterion 1]
+- [criterion 2]
+- ...
+```
+
+---
+
+**Last Updated:** March 13, 2026  
+**Prompts Count:** 1  
 **Status:** Active
-
----
-
-## 📋 Prompt Metadata
-[metadata table]
-
-## 🎯 Objective
-[clear objective]
-
-## 📋 Requirements
-[requirements]
-
-## 🔧 Implementation Instructions
-[step-by-step]
-
-## ✅ Verification Checklist
-[checklist]
-
-[... other sections ...]
-```
-
-### Step 3: Name Correctly
-
-Follow naming convention:
-```
-category_action_target_v1.md
-```
-
-### Step 4: Store in Correct Directory
-
-Place in appropriate subdirectory:
-```
-/prompts/[category]/[subcategory]/[filename].md
-```
-
-### Step 5: Update Index
-
-Add to this README's appropriate section.
-
----
-
-## 🔍 Search & Discovery
-
-### By Category
-
-Browse directories:
-- `/prompts/components/` - Component generation
-- `/prompts/testing/` - Test generation
-- `/prompts/audits/` - Audit procedures
-
-### By Action
-
-Common actions:
-- `create` - Generate new code
-- `update` - Modify existing code
-- `test` - Write tests
-- `audit` - Review/analyze
-- `refactor` - Restructure
-- `document` - Write docs
-
-### By Target
-
-Target specific components or features:
-- `product-card`
-- `checkout-form`
-- `mobile-navigation`
-- `wcag-contrast`
-
----
-
-## 📖 Guidelines
-
-**Complete Guidelines:** [PROMPT_GENERATION_GUIDELINES.md](/guidelines/PROMPT_GENERATION_GUIDELINES.md)
-
-**Key Standards:**
-1. ✅ All prompts must follow standard template
-2. ✅ Use semantic naming convention
-3. ✅ Include verification checklist
-4. ✅ Provide complete code examples
-5. ✅ Consider dark mode and accessibility
-6. ✅ Include version number
-7. ✅ Link to related documentation
-
----
-
-## 🗂️ Archive
-
-**Location:** `/prompts/archive/`
-
-Deprecated or superseded prompts are moved to archive with:
-- Deprecation date
-- Reason for deprecation
-- Link to replacement prompt
-
-**Archive Structure:**
-```
-/prompts/archive/
-├── 2026-01/
-│   ├── component_create_old-card_v1.md
-│   └── README.md
-└── 2025-12/
-    └── ...
-```
-
----
-
-## 🔍 Maintenance
-
-### Regular Tasks
-
-**Weekly:**
-- Review new prompts for quality
-- Test new prompts for effectiveness
-
-**Monthly:**
-- Update index with new prompts
-- Archive deprecated prompts
-- Review and update active prompts
-
-**Quarterly:**
-- Comprehensive prompt audit
-- Update templates if needed
-- Clean up archive
-
-### Quality Standards
-
-All prompts must:
-- [ ] Follow standard template
-- [ ] Use correct naming convention
-- [ ] Include complete examples
-- [ ] Have verification checklist
-- [ ] Be tested before publishing
-- [ ] Link to related documentation
-
----
-
-## 📞 Support
-
-**Questions about prompts?**
-- Read [PROMPT_GENERATION_GUIDELINES.md](/guidelines/PROMPT_GENERATION_GUIDELINES.md)
-- Check examples in this directory
-- Review related guidelines
-
-**Creating your first prompt?**
-1. Read the guidelines thoroughly
-2. Use the standard template
-3. Follow naming conventions
-4. Test with AI before publishing
-
----
-
-## 📈 Statistics
-
-**Total Prompts:** 13  
-**Active Prompts:** 13  
-**Archived Prompts:** 0  
-**Categories:** 7  
-**Last Updated:** January 10, 2026
-
----
-
-## 🎯 Roadmap
-
-### Planned Prompts
-
-**Priority 1 (Immediate):**
-- [x] Component creation prompts (ProductCard ✅, Hero ✅, Header ✅)
-- [x] Test generation prompts (unit tests ✅, integration tests ✅)
-- [x] WCAG audit prompt (color contrast ✅)
-
-**Progress:** 6/6 complete (100%) ✅
-
-**Priority 2 (Short-term):**
-- [x] Template generation prompts (Archive ✅, Single Product ✅)
-- [x] Refactoring prompts (CSS migration ✅)
-- [x] Documentation prompts (component guidelines ✅)
-
-**Progress:** 4/4 complete (100%) ✅
-
-**Priority 3 (Long-term):**
-- [ ] Complete workflow prompts (feature development)
-- [ ] Performance audit prompts
-- [ ] Optimization prompts
-
-**Progress:** 0/3 complete (0%)
-
-**Overall Progress:** 10/13 prompts (77%)

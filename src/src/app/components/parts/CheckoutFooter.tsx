@@ -1,69 +1,48 @@
 /**
  * CheckoutFooter Component (Checkout Template Part)
- * 
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. Named functions
- * 4. ASCII only
+ *
+ * Minimal footer for the checkout flow with legal links,
+ * payment badges, and copyright.
  */
 
 import React from 'react';
-import * as ContainerModule from '../common/Container';
-import * as ReactRouterModule from 'react-router';
+import { Container } from '../common/Container';
+import { Link } from 'react-router';
 
-var Container = ContainerModule.Container;
-var Link = ReactRouterModule.Link;
+interface CheckoutFooterProps {
+  className?: string;
+}
 
-export function CheckoutFooter() {
-  var currentYear = new Date().getFullYear();
+export const CheckoutFooter = ({ className = '' }: CheckoutFooterProps) => {
+  const currentYear = new Date().getFullYear();
 
-  var renderLink = function(to, text, key) {
-    return React.createElement(Link, { 
-      key: key,
-      to: to, 
-      className: 'wp-checkout-footer__link' 
-    }, text);
-  };
-
-  var copyright = React.createElement('p', { 
-    key: 'copy',
-    className: 'wp-checkout-footer__copyright' 
-  }, '© ' + currentYear + ' Store. All rights reserved.');
-
-  var links = React.createElement('div', { 
-    key: 'links',
-    className: 'wp-checkout-footer__links' 
-  }, [
-    renderLink('/legal/privacy', 'Privacy Policy', 'l1'),
-    renderLink('/legal/terms', 'Terms & Conditions', 'l2'),
-    renderLink('/shipping-returns', 'Returns Policy', 'l3')
-  ]);
-
-  var badges = React.createElement('div', { 
-    key: 'badges',
-    className: 'wp-checkout-footer__badges' 
-  }, [
-     React.createElement('span', { key: 'b1', className: 'wp-checkout-footer__badge funky-card-glow' }, 'Visa'),
-     React.createElement('span', { key: 'b2', className: 'wp-checkout-footer__badge funky-card-glow' }, 'Mastercard'),
-     React.createElement('span', { key: 'b3', className: 'wp-checkout-footer__badge funky-card-glow' }, 'Secure SSL')
-  ]);
-
-  var inner = React.createElement('div', { 
-    key: 'inner',
-    className: 'wp-checkout-footer__inner' 
-  }, [
-    copyright,
-    links,
-    badges
-  ]);
-
-  return React.createElement('footer', { className: 'wp-checkout-footer' }, [
-    React.createElement(Container, { 
-      key: 'container',
-      variant: 'site' 
-    }, [inner])
-  ]);
+  return (
+    <footer className={`wp-checkout-footer ${className}`.trim()}>
+      <Container variant="site">
+        <div className="wp-checkout-footer__inner">
+          <p className="wp-checkout-footer__copyright">
+            &copy; {currentYear} Store. All rights reserved.
+          </p>
+          <div className="wp-checkout-footer__links">
+            <Link to="/legal/privacy" className="wp-checkout-footer__link">
+              Privacy Policy
+            </Link>
+            <Link to="/legal/terms" className="wp-checkout-footer__link">
+              Terms &amp; Conditions
+            </Link>
+            <Link to="/shipping-returns" className="wp-checkout-footer__link">
+              Returns Policy
+            </Link>
+          </div>
+          <div className="wp-checkout-footer__badges">
+            <span className="wp-checkout-footer__badge funky-card-glow">Visa</span>
+            <span className="wp-checkout-footer__badge funky-card-glow">Mastercard</span>
+            <span className="wp-checkout-footer__badge funky-card-glow">Secure SSL</span>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  );
 }
 
 CheckoutFooter.displayName = 'CheckoutFooter';

@@ -30,7 +30,7 @@ import { CheckCircle, Cube as Box, Truck, MapPin, Package, Question as HelpCircl
 
 /* ── Hero Copy ───────────────────────────────────────────────────────────── */
 
-var trackOrderHero = {
+const trackOrderHero = {
   badge: 'Order tracking',
   title: 'Track your order',
   subtitle:
@@ -39,7 +39,7 @@ var trackOrderHero = {
 
 /* ── Mock Tracking Steps ─────────────────────────────────────────────────── */
 
-var mockTrackingSteps = [
+const mockTrackingSteps = [
   {
     id: 'confirmed',
     label: 'Order confirmed',
@@ -83,7 +83,7 @@ var mockTrackingSteps = [
 
 /* ── Help Cards ──────────────────────────────────────────────────────────── */
 
-var trackOrderHelpCards = [
+const trackOrderHelpCards = [
   {
     to: '/help',
     icon: React.createElement(HelpCircle, { size: 24 }),
@@ -106,7 +106,7 @@ var trackOrderHelpCards = [
 
 /* ── Mock Result Data ────────────────────────────────────────────────────── */
 
-var mockTrackingResult = {
+const mockTrackingResult = {
   statusBadge: 'In transit',
   estimatedDelivery: 'Feb 22, 2026',
 };

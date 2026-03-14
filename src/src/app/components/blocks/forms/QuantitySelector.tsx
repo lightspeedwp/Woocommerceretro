@@ -3,75 +3,83 @@ import { Minus, Plus } from '@phosphor-icons/react';
 
 /**
  * QuantitySelector Block Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript-specific syntax
+ *
+ * WooCommerce-aligned quantity input with increment/decrement buttons.
+ *
+ * @example
+ * <QuantitySelector quantity={1} onChange={(q) => setQty(q)} />
  */
-export function QuantitySelector(props) {
-  var quantity = props.quantity;
-  var min = props.min !== undefined ? props.min : 1;
-  var max = props.max !== undefined ? props.max : 99;
-  var onChange = props.onChange;
-  var className = props.className || '';
-  var disabled = props.disabled || false;
 
-  var handleQuantityChange = function(newQuantity) {
+interface QuantitySelectorProps {
+  quantity: number;
+  min?: number;
+  max?: number;
+  onChange: (quantity: number) => void;
+  className?: string;
+  disabled?: boolean;
+}
+
+export const QuantitySelector = ({
+  quantity,
+  min = 1,
+  max = 99,
+  onChange,
+  className = '',
+  disabled = false,
+}: QuantitySelectorProps) => {
+  const handleQuantityChange = (newQuantity: number) => {
     if (!disabled && newQuantity >= min && newQuantity <= max) {
       onChange(newQuantity);
     }
   };
 
-  var handleInputChange = function(e) {
-    var val = parseInt(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseInt(e.target.value);
     if (!isNaN(val)) {
       handleQuantityChange(val);
     }
   };
 
-  var containerClass = [
+  const containerClass = [
     'wc-quantity-selector',
     'funky-input-glow',
     className,
     disabled ? 'wc-quantity-selector--disabled' : ''
-  ].filter(function(c) { return !!c; }).join(' ');
+  ].filter(Boolean).join(' ');
 
-  var handleDecrement = function() { handleQuantityChange(quantity - 1); };
-  var handleIncrement = function() { handleQuantityChange(quantity + 1); };
+  return (
+    <div className={containerClass}>
+      <button
+        onClick={() => handleQuantityChange(quantity - 1)}
+        className="wc-quantity-selector__button wc-quantity-selector__button--decrement funky-qty-btn"
+        aria-label="Decrease quantity"
+        disabled={disabled || quantity <= min}
+        type="button"
+      >
+        <Minus size={16} />
+      </button>
 
-  return React.createElement('div', { className: containerClass },
-    React.createElement('button', {
-      onClick: handleDecrement,
-      className: "wc-quantity-selector__button wc-quantity-selector__button--decrement funky-qty-btn",
-      'aria-label': "Decrease quantity",
-      disabled: disabled || quantity <= min,
-      type: "button"
-    },
-      React.createElement(Minus, { size: 16 })
-    ),
-    
-    React.createElement('input', {
-      type: "number",
-      min: min,
-      max: max,
-      value: quantity,
-      onChange: handleInputChange,
-      className: "wc-quantity-selector__input funky-qty-input",
-      'aria-label': "Product quantity",
-      disabled: disabled
-    }),
-    
-    React.createElement('button', {
-      onClick: handleIncrement,
-      className: "wc-quantity-selector__button wc-quantity-selector__button--increment funky-qty-btn",
-      'aria-label': "Increase quantity",
-      disabled: disabled || quantity >= max,
-      type: "button"
-    },
-      React.createElement(Plus, { size: 16 })
-    )
+      <input
+        type="number"
+        min={min}
+        max={max}
+        value={quantity}
+        onChange={handleInputChange}
+        className="wc-quantity-selector__input funky-qty-input"
+        aria-label="Product quantity"
+        disabled={disabled}
+      />
+
+      <button
+        onClick={() => handleQuantityChange(quantity + 1)}
+        className="wc-quantity-selector__button wc-quantity-selector__button--increment funky-qty-btn"
+        aria-label="Increase quantity"
+        disabled={disabled || quantity >= max}
+        type="button"
+      >
+        <Plus size={16} />
+      </button>
+    </div>
   );
 }
 

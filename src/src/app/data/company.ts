@@ -57,7 +57,7 @@
 // ---------------------------------------------------------------------------
 
 /** @type {CompanyStat[]} */
-export var companyStats = [
+export const companyStats = [
   {
     id: 'customers',
     value: '50,000',
@@ -93,7 +93,7 @@ export var companyStats = [
 // ---------------------------------------------------------------------------
 
 /** @type {CompanyValue[]} */
-export var companyValues = [
+export const companyValues = [
   {
     id: 'craftsmanship',
     title: 'Craftsmanship first',
@@ -143,7 +143,7 @@ export var companyValues = [
 // ---------------------------------------------------------------------------
 
 /** @type {CompanyMilestone[]} */
-export var companyTimeline = [
+export const companyTimeline = [
   {
     id: '1',
     year: '2020',
@@ -193,7 +193,7 @@ export var companyTimeline = [
 // ---------------------------------------------------------------------------
 
 /** @type {OfficeLocation[]} */
-export var officeLocations = [
+export const officeLocations = [
   {
     id: '1',
     name: 'Headquarters & showroom',
@@ -236,7 +236,7 @@ export var officeLocations = [
 // Company information
 // ---------------------------------------------------------------------------
 
-export var companyInfo = {
+export const companyInfo = {
   name: 'Woo Shop',
   tagline: 'Curated living, delivered to your door',
   founded: '2020',
@@ -258,7 +258,7 @@ export var companyInfo = {
 // Awards and recognition
 // ---------------------------------------------------------------------------
 
-export var awards = [
+export const awards = [
   {
     id: '1',
     year: '2025',
@@ -293,7 +293,7 @@ export var awards = [
 // About page section headings (sentence case)
 // ---------------------------------------------------------------------------
 
-export var aboutPageContent = {
+export const aboutPageContent = {
   pageTitle: 'Our story',
   pageIntro: companyInfo.mission,
   storyHeading: 'Built on craft and curiosity',
@@ -318,23 +318,23 @@ export var aboutPageContent = {
  * @param {string} id
  * @returns {CompanyStat|undefined}
  */
-export function getStatById(id) {
-  return companyStats.find(function(stat) { return stat.id === id; });
+export const getStatById = (id) => {
+  return companyStats.find((stat) => stat.id === id);
 }
 
 /**
  * @param {string} id
  * @returns {CompanyValue|undefined}
  */
-export function getValueById(id) {
-  return companyValues.find(function(value) { return value.id === id; });
+export const getValueById = (id) => {
+  return companyValues.find((value) => value.id === id);
 }
 
 /**
  * @returns {OfficeLocation|undefined}
  */
-export function getHeadquarters() {
-  return officeLocations.find(function(location) { return location.headquarters; });
+export const getHeadquarters = () => {
+  return officeLocations.find((location) => location.headquarters);
 }
 
 /**
@@ -342,9 +342,9 @@ export function getHeadquarters() {
  * @param {string} endYear
  * @returns {CompanyMilestone[]}
  */
-export function getMilestonesByYearRange(startYear, endYear) {
+export const getMilestonesByYearRange = (startYear, endYear) => {
   return companyTimeline.filter(
-    function(milestone) { return milestone.year >= startYear && milestone.year <= endYear; },
+    (milestone) => milestone.year >= startYear && milestone.year <= endYear,
   );
 }
 

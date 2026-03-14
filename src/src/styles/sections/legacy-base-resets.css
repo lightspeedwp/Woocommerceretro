@@ -1,0 +1,20 @@
+/* ========================================
+   BASE RESETS
+   ======================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--wp--preset--font-family--base);
+  line-height: var(--wp--preset--line-height--normal);
+  color: var(--wp--preset--color--foreground);
+  background-color: var(--wp--preset--color--background);
+}
+
+body { margin: 0; padding: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; padding: 0; }

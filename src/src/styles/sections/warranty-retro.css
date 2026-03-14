@@ -1,0 +1,53 @@
+/**
+ * Warranty Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for warranty information page.
+ *
+ * **Components:**
+ * - Warranty overview centered block
+ * - Coverage section background
+ * - Large feature icon variant
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   WARRANTY OVERVIEW
+   ========================================================================== */
+
+.retro-warranty-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--retro-space-4);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   COVERAGE SECTION
+   ========================================================================== */
+
+.retro-section--coverage {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+/* ==========================================================================
+   LARGE FEATURE ICON
+   ========================================================================== */
+
+.retro-feature-icon--lg {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 255, 249, 0.1);
+  border: 2px solid rgba(0, 255, 249, 0.3);
+  color: var(--retro-neon-cyan);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 249, 0.3));
+}

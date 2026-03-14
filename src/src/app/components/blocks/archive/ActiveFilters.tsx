@@ -1,109 +1,141 @@
-import React from 'react';
 import { X } from '@phosphor-icons/react';
+
+interface Filters {
+  categories: string[];
+  colors: string[];
+  sizes: string[];
+  rating: number | null;
+  inStock: boolean;
+  priceRange: [number, number];
+}
+
+interface ActiveFiltersProps {
+  filters: Filters;
+  onClear: (key: string, value: any) => void;
+  onClearAll: () => void;
+}
 
 /**
  * ActiveFilters Block Component
- * 
- * Optimized for Figma Make parser:
- * - Uses var instead of const/let
- * - Uses function declarations
- * - No TypeScript-specific syntax
+ *
+ * Displays active filter chips with remove and clear-all actions.
  */
-export function ActiveFilters(props) {
-  var filters = props.filters;
-  var onClear = props.onClear;
-  var onClearAll = props.onClearAll;
-
-  var hasActiveFilters = 
-    filters.categories.length > 0 || 
-    filters.colors.length > 0 || 
-    filters.sizes.length > 0 || 
+export const ActiveFilters = ({ filters, onClear, onClearAll }: ActiveFiltersProps) => {
+  const hasActiveFilters =
+    filters.categories.length > 0 ||
+    filters.colors.length > 0 ||
+    filters.sizes.length > 0 ||
     filters.rating !== null ||
     filters.inStock ||
     filters.priceRange[0] > 0 || filters.priceRange[1] < 500;
 
   if (!hasActiveFilters) return null;
 
-  var chips = [];
+  const chips: JSX.Element[] = [];
 
-  filters.categories.forEach(function(cat) {
-    chips.push(React.createElement('span', { key: cat, className: "wp-filter-chip funky-filter-chip" },
-      React.createElement('span', { className: "wp-filter-chip__text" }, cat),
-      React.createElement('button', { 
-        onClick: function() { onClear('categories', cat); },
-        className: "wp-filter-chip__remove funky-chip-remove",
-        'aria-label': "Remove " + cat + " filter"
-      }, React.createElement(X, { className: "wp-filter-chip__icon" }))
-    ));
+  filters.categories.forEach((cat) => {
+    chips.push(
+      <span key={cat} className="wp-filter-chip funky-filter-chip">
+        <span className="wp-filter-chip__text">{cat}</span>
+        <button
+          onClick={() => onClear('categories', cat)}
+          className="wp-filter-chip__remove funky-chip-remove"
+          aria-label={`Remove ${cat} filter`}
+        >
+          <X className="wp-filter-chip__icon" />
+        </button>
+      </span>
+    );
   });
 
-  filters.colors.forEach(function(color) {
-    chips.push(React.createElement('span', { key: color, className: "wp-filter-chip funky-filter-chip" },
-      React.createElement('span', { className: "wp-filter-chip__text" }, color),
-      React.createElement('button', { 
-        onClick: function() { onClear('colors', color); },
-        className: "wp-filter-chip__remove funky-chip-remove",
-        'aria-label': "Remove " + color + " filter"
-      }, React.createElement(X, { className: "wp-filter-chip__icon" }))
-    ));
+  filters.colors.forEach((color) => {
+    chips.push(
+      <span key={color} className="wp-filter-chip funky-filter-chip">
+        <span className="wp-filter-chip__text">{color}</span>
+        <button
+          onClick={() => onClear('colors', color)}
+          className="wp-filter-chip__remove funky-chip-remove"
+          aria-label={`Remove ${color} filter`}
+        >
+          <X className="wp-filter-chip__icon" />
+        </button>
+      </span>
+    );
   });
 
-  filters.sizes.forEach(function(size) {
-    chips.push(React.createElement('span', { key: size, className: "wp-filter-chip funky-filter-chip" },
-      React.createElement('span', { className: "wp-filter-chip__text" }, size),
-      React.createElement('button', { 
-        onClick: function() { onClear('sizes', size); },
-        className: "wp-filter-chip__remove funky-chip-remove",
-        'aria-label': "Remove " + size + " filter"
-      }, React.createElement(X, { className: "wp-filter-chip__icon" }))
-    ));
+  filters.sizes.forEach((size) => {
+    chips.push(
+      <span key={size} className="wp-filter-chip funky-filter-chip">
+        <span className="wp-filter-chip__text">{size}</span>
+        <button
+          onClick={() => onClear('sizes', size)}
+          className="wp-filter-chip__remove funky-chip-remove"
+          aria-label={`Remove ${size} filter`}
+        >
+          <X className="wp-filter-chip__icon" />
+        </button>
+      </span>
+    );
   });
 
   if (filters.rating !== null) {
-    chips.push(React.createElement('span', { key: "rating", className: "wp-filter-chip funky-filter-chip" },
-      React.createElement('span', { className: "wp-filter-chip__text" }, filters.rating + "+ stars"),
-      React.createElement('button', { 
-        onClick: function() { onClear('rating', null); },
-        className: "wp-filter-chip__remove funky-chip-remove",
-        'aria-label': "Remove rating filter"
-      }, React.createElement(X, { className: "wp-filter-chip__icon" }))
-    ));
+    chips.push(
+      <span key="rating" className="wp-filter-chip funky-filter-chip">
+        <span className="wp-filter-chip__text">{`${filters.rating}+ stars`}</span>
+        <button
+          onClick={() => onClear('rating', null)}
+          className="wp-filter-chip__remove funky-chip-remove"
+          aria-label="Remove rating filter"
+        >
+          <X className="wp-filter-chip__icon" />
+        </button>
+      </span>
+    );
   }
 
   if (filters.inStock) {
-    chips.push(React.createElement('span', { key: "inStock", className: "wp-filter-chip funky-filter-chip" },
-      React.createElement('span', { className: "wp-filter-chip__text" }, "In Stock"),
-      React.createElement('button', { 
-        onClick: function() { onClear('inStock', false); },
-        className: "wp-filter-chip__remove funky-chip-remove",
-        'aria-label': "Remove in stock filter"
-      }, React.createElement(X, { className: "wp-filter-chip__icon" }))
-    ));
+    chips.push(
+      <span key="inStock" className="wp-filter-chip funky-filter-chip">
+        <span className="wp-filter-chip__text">In Stock</span>
+        <button
+          onClick={() => onClear('inStock', false)}
+          className="wp-filter-chip__remove funky-chip-remove"
+          aria-label="Remove in stock filter"
+        >
+          <X className="wp-filter-chip__icon" />
+        </button>
+      </span>
+    );
   }
 
   if (filters.priceRange[0] > 0 || filters.priceRange[1] < 500) {
-    chips.push(React.createElement('span', { key: "price", className: "wp-filter-chip funky-filter-chip" },
-      React.createElement('span', { className: "wp-filter-chip__text" }, 
-        "$" + filters.priceRange[0] + " - $" + filters.priceRange[1]
-      ),
-      React.createElement('button', { 
-        onClick: function() { onClear('priceRange', [0, 500]); },
-        className: "wp-filter-chip__remove funky-chip-remove",
-        'aria-label': "Remove price filter"
-      }, React.createElement(X, { className: "wp-filter-chip__icon" }))
-    ));
+    chips.push(
+      <span key="price" className="wp-filter-chip funky-filter-chip">
+        <span className="wp-filter-chip__text">
+          {`$${filters.priceRange[0]} - $${filters.priceRange[1]}`}
+        </span>
+        <button
+          onClick={() => onClear('priceRange', [0, 500])}
+          className="wp-filter-chip__remove funky-chip-remove"
+          aria-label="Remove price filter"
+        >
+          <X className="wp-filter-chip__icon" />
+        </button>
+      </span>
+    );
   }
 
-  return React.createElement('div', { className: "wp-active-filters funky-active-filters" },
-    React.createElement('div', { className: "wp-active-filters__header" },
-      React.createElement('span', { className: "wp-active-filters__label" }, "Active Filters:"),
-      React.createElement('button', { 
-        onClick: onClearAll,
-        className: "wp-active-filters__clear funky-clear-btn"
-      }, "Clear All")
-    ),
-    React.createElement('div', { className: "wp-active-filters__chips" }, chips)
+  return (
+    <div className="wp-active-filters funky-active-filters">
+      <div className="wp-active-filters__header">
+        <span className="wp-active-filters__label">Active Filters:</span>
+        <button onClick={onClearAll} className="wp-active-filters__clear funky-clear-btn">
+          Clear All
+        </button>
+      </div>
+      <div className="wp-active-filters__chips">{chips}</div>
+    </div>
   );
-}
+};
 
 ActiveFilters.displayName = 'ActiveFilters';

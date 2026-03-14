@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowUp } from '@phosphor-icons/react';
-
-var ArrowUpIcon = ArrowUp;
 
 /**
  * BackToTopButton Component
@@ -9,33 +7,23 @@ var ArrowUpIcon = ArrowUp;
  * A floating button that appears when the user scrolls down the page.
  * Clicking it smoothly scrolls the window back to the top.
  */
-export function BackToTopButton() {
-  var visState = React.useState(false);
-  var isVisible = visState[0];
-  var setIsVisible = visState[1];
+export const BackToTopButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
-  React.useEffect(function() {
-    function toggleVisibility() {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    }
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
 
     window.addEventListener('scroll', toggleVisibility);
-
-    return function() { window.removeEventListener('scroll', toggleVisibility); };
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-  var buttonClass = 'wp-back-to-top' + (!isVisible ? ' wp-back-to-top--hidden' : '');
+  const buttonClass = `wp-back-to-top${!isVisible ? ' wp-back-to-top--hidden' : ''}`;
 
   return (
     <button
@@ -45,7 +33,7 @@ export function BackToTopButton() {
       aria-hidden={!isVisible}
       tabIndex={isVisible ? 0 : -1}
     >
-      <ArrowUpIcon size={24} />
+      <ArrowUp size={24} />
     </button>
   );
 }

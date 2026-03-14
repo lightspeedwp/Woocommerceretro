@@ -2,105 +2,75 @@
  * CartFilled.tsx - Pattern
  * 
  * Full shopping cart display with item list, quantity controls, and order summary.
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. No template literals
- * 4. No optional chaining
- * 5. Named functions
- * 6. ASCII only
  */
 
 import React from 'react';
 import { Bag as ShoppingBag } from '@phosphor-icons/react';
-import * as ReactRouterModule from 'react-router';
-import * as MutedSectionModule from './sections/MutedSection';
-import * as ContentSectionModule from './sections/ContentSection';
-import * as LayoutModule from '../parts/Layout';
-import * as CartItemModule from '../blocks/cart/CartItem';
-import * as CartTotalsModule from '../blocks/cart/CartTotals';
+import { Link } from 'react-router';
+import { MutedSection } from './sections/MutedSection';
+import { ContentSection } from './sections/ContentSection';
+import { Layout } from '../parts/Layout';
+import { CartItem } from '../blocks/cart/CartItem';
+import { CartTotals } from '../blocks/cart/CartTotals';
 
-var Link = ReactRouterModule.Link;
-var MutedSection = MutedSectionModule.MutedSection;
-var ContentSection = ContentSectionModule.ContentSection;
-var Layout = LayoutModule.Layout;
-var CartItem = CartItemModule.CartItem;
-var CartTotals = CartTotalsModule.CartTotals;
+interface CartItemType {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image?: string;
+}
 
-/*
- * CartFilledProps:
- *   items: CartItemType[]
- *   updateQuantity: (id: string, delta: number) => void
- *   removeItem: (id: string) => void
- */
+interface CartFilledProps {
+  items: CartItemType[];
+  updateQuantity: (id: string, delta: number) => void;
+  removeItem: (id: string) => void;
+}
 
-export function CartFilled(props) {
-  var items = props.items;
-  var updateQuantity = props.updateQuantity;
-  var removeItem = props.removeItem;
+export const CartFilled = ({ items, updateQuantity, removeItem }: CartFilledProps) => {
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const tax = subtotal * 0.1;
+  const total = subtotal + tax;
 
-  var subtotal = 0;
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i];
-    subtotal += item.price * item.quantity;
-  }
-  var tax = subtotal * 0.1;
-  var total = subtotal + tax;
-
-  var tableHeader = React.createElement('div', { key: 'table-header', className: "wp-cart-table-header" }, [
-    React.createElement('span', { key: 'h-prod', className: "wp-cart-table-header__label" }, "Product"),
-    React.createElement('span', { key: 'h-price', className: "wp-cart-table-header__label" }, "Price")
-  ]);
-
-  var itemsList = React.createElement('div', { key: 'items-list', className: "wp-cart-items-list" }, 
-    items.map(function(item) {
-      return React.createElement(CartItem, {
-        key: item.id,
-        item: item,
-        updateQuantity: updateQuantity,
-        removeItem: removeItem
-      });
-    })
+  return (
+    <Layout>
+      <MutedSection
+        className="wp-cart-header"
+        heading="Shopping Cart"
+        headingLevel={1}
+      />
+      <ContentSection
+        content={
+          <div className="wp-cart-layout">
+            <div className="wp-cart-layout__items">
+              <div className="wp-cart-table-header">
+                <span className="wp-cart-table-header__label">Product</span>
+                <span className="wp-cart-table-header__label">Price</span>
+              </div>
+              <div className="wp-cart-items-list">
+                {items.map((item) => (
+                  <CartItem
+                    key={item.id}
+                    item={item}
+                    updateQuantity={updateQuantity}
+                    removeItem={removeItem}
+                  />
+                ))}
+              </div>
+              <div className="wp-cart-layout__continue">
+                <Link to="/shop" className="wp-cart-layout__continue-link">
+                  <ShoppingBag size={16} /> Continue Shopping
+                </Link>
+              </div>
+            </div>
+            <div className="wp-cart-layout__sidebar">
+              <CartTotals subtotal={subtotal} tax={tax} total={total} />
+            </div>
+          </div>
+        }
+      />
+    </Layout>
   );
-
-  var continueLink = React.createElement('div', { key: 'continue', className: "wp-cart-layout__continue" }, 
-    React.createElement(Link, { to: "/shop", className: "wp-cart-layout__continue-link" }, [
-      React.createElement(ShoppingBag, { key: 'icon', size: 16 }),
-      " Continue Shopping"
-    ])
-  );
-
-  var cartLayoutItems = React.createElement('div', { key: 'layout-items', className: "wp-cart-layout__items" }, [
-    tableHeader,
-    itemsList,
-    continueLink
-  ]);
-
-  var cartLayoutSidebar = React.createElement('div', { key: 'layout-sidebar', className: "wp-cart-layout__sidebar" }, 
-    React.createElement(CartTotals, { 
-      subtotal: subtotal, 
-      tax: tax, 
-      total: total 
-    })
-  );
-
-  var cartLayout = React.createElement('div', { className: "wp-cart-layout" }, [
-    cartLayoutItems,
-    cartLayoutSidebar
-  ]);
-
-  return React.createElement(Layout, null, [
-    React.createElement(MutedSection, {
-      key: 'header',
-      className: "wp-cart-header",
-      heading: "Shopping Cart",
-      headingLevel: 1
-    }),
-    React.createElement(ContentSection, {
-      key: 'content',
-      content: cartLayout
-    })
-  ]);
 }
 
 CartFilled.displayName = 'CartFilled';

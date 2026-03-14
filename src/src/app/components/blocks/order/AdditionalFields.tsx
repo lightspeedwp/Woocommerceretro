@@ -1,55 +1,30 @@
 import React from 'react';
 
-export function AdditionalFields() {
-  var heading = React.createElement('h2', { 
-    key: 'h1', 
-    className: "wp-block-heading funky-gradient-text" 
-  }, ["Additional fields"]);
-
-  var giftMessageColumn = React.createElement('div', { 
-    key: 'c1', 
-    className: "wp-block-column funky-glass-panel funky-glow-border--pink" 
-  }, [
-    React.createElement('div', { key: 'inner', className: "wp-p-4" }, [
-      React.createElement('p', { 
-        key: 'p1', 
-        className: "wp-text-bold text-neon-pink" 
-      }, ["Gift Message"]),
-      React.createElement('p', { 
-        key: 'p2' 
-      }, ["Happy Birthday! Hope you enjoy the wine."])
-    ])
-  ]);
-
-  var deliveryInstructionsColumn = React.createElement('div', { 
-    key: 'c2', 
-    className: "wp-block-column funky-glass-panel funky-glow-border" 
-  }, [
-    React.createElement('div', { key: 'inner', className: "wp-p-4" }, [
-      React.createElement('p', { 
-        key: 'p1', 
-        className: "wp-text-bold text-neon-cyan" 
-      }, ["Delivery Instructions"]),
-      React.createElement('p', { 
-        key: 'p2' 
-      }, ["Please leave at the front gate if no one is home."])
-    ])
-  ]);
-
-  var columns = React.createElement('div', { 
-    key: 'd1', 
-    className: "wp-block-columns" 
-  }, [
-    giftMessageColumn,
-    deliveryInstructionsColumn
-  ]);
-
-  return React.createElement('div', { 
-    className: "wp-block-group wp-block-group--vertical" 
-  }, [
-    heading,
-    columns
-  ]);
-}
+/**
+ * AdditionalFields Component
+ *
+ * Displays gift message and delivery instructions in glass panels.
+ */
+export const AdditionalFields = () => {
+  return (
+    <div className="wp-block-group wp-block-group--vertical">
+      <h2 className="wp-block-heading funky-gradient-text">Additional fields</h2>
+      <div className="wp-block-columns">
+        <div className="wp-block-column funky-glass-panel funky-glow-border--pink">
+          <div className="wp-order-additional-field">
+            <p className="wp-text-bold text-neon-pink">Gift Message</p>
+            <p>Happy Birthday! Hope you enjoy the wine.</p>
+          </div>
+        </div>
+        <div className="wp-block-column funky-glass-panel funky-glow-border">
+          <div className="wp-order-additional-field">
+            <p className="wp-text-bold text-neon-cyan">Delivery Instructions</p>
+            <p>Please leave at the front gate if no one is home.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 AdditionalFields.displayName = 'AdditionalFields';

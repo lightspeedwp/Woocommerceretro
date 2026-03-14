@@ -11,11 +11,8 @@
  * @example
  * ```tsx
  * // Import individual patterns
- * import * as SectionsModule from './src/app/components/patterns/sections';
- * var ContentSection = SectionsModule.ContentSection;
- * var DarkSection = SectionsModule.DarkSection;
- * var HeroSection = SectionsModule.HeroSection;
- * 
+ * import { ContentSection, DarkSection, HeroSection } from './src/app/components/patterns/sections';
+ *
  * // Use in templates
  * <HeroSection heading="Welcome" minHeight="80vh" />
  * <ContentSection heading="Featured Products" content={<ProductGrid />} />

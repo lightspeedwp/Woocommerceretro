@@ -92,7 +92,7 @@ import { Percent, Bag as ShoppingBag, Lightning as Zap, Users, Crown, Gift, Star
  * 
  * @type {MembershipPlan[]}
  */
-export var membershipPlans = [
+export const membershipPlans = [
   {
     id: 'basic',
     name: 'Basic',
@@ -175,7 +175,7 @@ export var membershipPlans = [
  * 
  * @type {MemberBenefit[]}
  */
-export var memberBenefits = [
+export const memberBenefits = [
   {
     icon: Percent,
     title: 'Instant savings',
@@ -214,7 +214,7 @@ export var memberBenefits = [
  * 
  * @type {MemberTestimonial[]}
  */
-export var memberTestimonials = [
+export const memberTestimonials = [
   {
     id: '1',
     name: 'Jessica Martinez',
@@ -265,7 +265,7 @@ export var memberTestimonials = [
  * 
  * @type {MembershipFAQ[]}
  */
-export var membershipFAQs = [
+export const membershipFAQs = [
   {
     id: '1',
     question: 'How does my membership discount work?',
@@ -336,7 +336,7 @@ export var membershipFAQs = [
  * 
  * @type {MembershipStat[]}
  */
-export var membershipStats = [
+export const membershipStats = [
   {
     value: '25,000+',
     label: 'Active members',
@@ -369,11 +369,11 @@ export var membershipStats = [
  * @param {number} membershipCost - Monthly membership cost
  * @returns {Object} ROI breakdown with monthly and annual savings
  */
-export function calculateMembershipROI(monthlySpend, discountPercent, membershipCost) {
-  var discountRate = parseFloat(discountPercent) / 100;
-  var monthlySavings = monthlySpend * discountRate;
-  var netSavings = monthlySavings - membershipCost;
-  var annualSavings = netSavings * 12;
+export const calculateMembershipROI = (monthlySpend, discountPercent, membershipCost) => {
+  const discountRate = parseFloat(discountPercent) / 100;
+  const monthlySavings = monthlySpend * discountRate;
+  const netSavings = monthlySavings - membershipCost;
+  const annualSavings = netSavings * 12;
 
   return {
     monthlySavings: Math.round(monthlySavings * 100) / 100,
@@ -389,8 +389,8 @@ export function calculateMembershipROI(monthlySpend, discountPercent, membership
  * @param {string} planId - Plan identifier
  * @returns {Object|undefined} Membership plan or undefined if not found
  */
-export function getMembershipPlanById(planId) {
-  return membershipPlans.find(function(plan) { return plan.id === planId; });
+export const getMembershipPlanById = (planId) => {
+  return membershipPlans.find((plan) => plan.id === planId);
 }
 
 /**
@@ -398,8 +398,8 @@ export function getMembershipPlanById(planId) {
  * 
  * @returns {Object} Most popular membership plan
  */
-export function getPopularMembershipPlan() {
-  return membershipPlans.find(function(plan) { return plan.popular; }) || membershipPlans[1];
+export const getPopularMembershipPlan = () => {
+  return membershipPlans.find((plan) => plan.popular) || membershipPlans[1];
 }
 
 /**
@@ -408,8 +408,8 @@ export function getPopularMembershipPlan() {
  * @param {string} category - FAQ category
  * @returns {Array} Filtered FAQs
  */
-export function getMembershipFAQsByCategory(category) {
-  return membershipFAQs.filter(function(faq) { return faq.category === category; });
+export const getMembershipFAQsByCategory = (category) => {
+  return membershipFAQs.filter((faq) => faq.category === category);
 }
 
 export default {

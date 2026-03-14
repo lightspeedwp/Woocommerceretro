@@ -20,14 +20,14 @@
  */
 
 /** @type {FAQItem[]} */
-export var cartFAQs = [
+export const cartFAQs = [
   { question: "How do I use a promo code?", answer: "Click on 'Add coupons' in the Cart Totals section, enter your code, and click Apply." },
   { question: "What if I want to change my order?", answer: "You can update quantities or remove items directly in the cart before proceeding to checkout." },
   { question: "Is shipping included?", answer: "Shipping costs are calculated at checkout based on your delivery address." }
 ];
 
 /** @type {FAQCategory[]} */
-export var faqCategories = [
+export const faqCategories = [
   {
     title: 'Orders & Shipping',
     icon: 'Truck',
@@ -78,7 +78,7 @@ export var faqCategories = [
   },
 ];
 
-export var faqPageContent = {
+export const faqPageContent = {
   title: 'Frequently asked questions',
   description: 'Find answers to the most common questions about shopping, shipping, returns, and more.',
   ctaHeading: 'Still have questions?',

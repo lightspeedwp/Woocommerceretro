@@ -19,7 +19,7 @@
 // @property {string} sales
 // @property {string} rate
 
-var affiliateBenefits = [
+const affiliateBenefits = [
   { 
     id: 'commission',
     icon: 'DollarSign', 
@@ -58,14 +58,14 @@ var affiliateBenefits = [
   },
 ];
 
-var commissionTiers = [
+const commissionTiers = [
   { id: 'standard', tier: 'Standard', sales: '0 - 50 sales/month', rate: '8%' },
   { id: 'pro', tier: 'Pro', sales: '51 - 200 sales/month', rate: '10%' },
   { id: 'elite', tier: 'Elite', sales: '201 - 500 sales/month', rate: '12%' },
   { id: 'partner', tier: 'Partner', sales: '500+ sales/month', rate: '15%' },
 ];
 
-var affiliateProgramPageContent = {
+const affiliateProgramPageContent = {
   title: 'Affiliate Program',
   description: 'Partner with us and earn commissions by sharing products you love with your audience.',
   benefitsHeading: 'Why Partner With Us',

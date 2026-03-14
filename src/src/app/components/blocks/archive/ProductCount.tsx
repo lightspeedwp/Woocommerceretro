@@ -1,28 +1,26 @@
-import React from 'react';
-import * as TypographyModule from '../../common/Typography';
-var Typography = TypographyModule.Typography;
+import { Typography } from '../../common/Typography';
+
+interface ProductCountProps {
+  total: number;
+  showing: number;
+  className?: string;
+}
 
 /**
  * ProductCount Component
- * 
- * Optimized for Figma Make parser:
- * - Uses var instead of const/let
- * - Uses function declarations
- * - No TypeScript-specific syntax
+ *
+ * Displays the current product count relative to total.
  */
-export function ProductCount(props) {
-  var total = props.total;
-  var showing = props.showing;
-  var className = props.className || '';
+export const ProductCount = ({ total, showing, className = '' }: ProductCountProps) => {
+  const message = showing === total
+    ? `${total} products`
+    : `Showing ${showing} of ${total} products`;
 
-  var message = showing === total
-    ? total + " products"
-    : "Showing " + showing + " of " + total + " products";
-
-  return React.createElement(Typography, { 
-    variant: "body",
-    className: "wp-product-count funky-product-count " + className
-  }, message);
-}
+  return (
+    <Typography variant="body" className={`wp-product-count funky-product-count ${className}`}>
+      {message}
+    </Typography>
+  );
+};
 
 ProductCount.displayName = 'ProductCount';

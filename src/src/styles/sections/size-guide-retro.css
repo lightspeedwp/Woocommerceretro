@@ -1,0 +1,151 @@
+/**
+ * Size Guide Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for size guide page.
+ *
+ * **Components:**
+ * - Tabbed category selector
+ * - Size chart table
+ * - Fit tip info banner
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   SIZE CHARTS SECTION
+   ========================================================================== */
+
+.retro-section--size-charts {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+/* ==========================================================================
+   TABS
+   ========================================================================== */
+
+.retro-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--retro-space-2);
+  margin-bottom: var(--retro-space-8);
+  justify-content: center;
+}
+
+.retro-tab {
+  padding: var(--retro-space-2) var(--retro-space-4);
+  background: var(--retro-bg-elevated);
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  color: var(--retro-text-secondary);
+  font-size: var(--retro-text-xs);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.retro-tab:hover {
+  border-color: var(--retro-neon-cyan);
+  color: var(--retro-text-primary);
+}
+
+.retro-tab:focus-visible {
+  outline: 2px solid var(--retro-neon-cyan);
+  outline-offset: 2px;
+}
+
+.retro-tab--active {
+  background: var(--retro-neon-cyan);
+  color: var(--retro-bg-primary);
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 249, 0.3);
+}
+
+/* ==========================================================================
+   TABLE
+   ========================================================================== */
+
+.retro-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+
+.retro-table__header {
+  padding: var(--retro-space-3) var(--retro-space-4);
+  text-align: left;
+  font-size: var(--retro-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--retro-neon-cyan);
+  border-bottom: 2px solid var(--retro-neon-cyan);
+  white-space: nowrap;
+}
+
+.retro-table__row {
+  border-bottom: 1px solid rgba(0, 255, 249, 0.1);
+  transition: background 0.2s ease;
+}
+
+.retro-table__row:hover {
+  background: rgba(0, 255, 249, 0.05);
+}
+
+.retro-table__cell {
+  padding: var(--retro-space-3) var(--retro-space-4);
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-secondary);
+}
+
+.retro-table__row .retro-table__cell:first-child {
+  color: var(--retro-text-primary);
+}
+
+/* ==========================================================================
+   INFO BANNER
+   ========================================================================== */
+
+.retro-info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--retro-space-3);
+  padding: var(--retro-space-4);
+  background: rgba(0, 255, 249, 0.08);
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  color: var(--retro-text-secondary);
+  font-size: var(--retro-text-xs);
+}
+
+.retro-info-banner__icon {
+  color: var(--retro-neon-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .retro-tabs {
+    gap: var(--retro-space-1);
+  }
+
+  .retro-tab {
+    padding: var(--retro-space-2) var(--retro-space-3);
+    font-size: 0.65rem;
+  }
+
+  .retro-table__header,
+  .retro-table__cell {
+    padding: var(--retro-space-2) var(--retro-space-3);
+    font-size: 0.7rem;
+  }
+}

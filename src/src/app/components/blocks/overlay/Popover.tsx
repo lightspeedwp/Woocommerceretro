@@ -1,108 +1,62 @@
-import React from "react";
-import * as cnModule from "@/utils/cn";
+import React, { createContext, useContext, useState, useRef, useEffect } from "react";
+import { cn } from "@/utils/cn";
 
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var useRef = React.useRef;
-var useEffect = React.useEffect;
-var cn = cnModule.cn;
+interface PopoverContextValue {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  triggerRef: React.MutableRefObject<HTMLDivElement | null>;
+}
 
-var PopoverContext = createContext(undefined);
+const PopoverContext = createContext<PopoverContextValue | undefined>(undefined);
 
-export function Popover(props) {
-  var controlledOpen = props.open;
-  var onOpenChange = props.onOpenChange;
-  var children = props.children;
-  
-  var _so = useState(false);
-  var uncontrolledOpen = _so[0];
-  var setUncontrolledOpen = _so[1];
-  var open = controlledOpen === undefined ? uncontrolledOpen : controlledOpen;
-  var triggerRef = useRef(null);
+export const Popover = ({ open: controlledOpen, onOpenChange, children }: any) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen === undefined ? uncontrolledOpen : controlledOpen;
+  const triggerRef = useRef<HTMLDivElement | null>(null);
 
-  var handleOpenChange = function(newOpen) {
-    if (controlledOpen === undefined) {
-      setUncontrolledOpen(newOpen);
-    }
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
+  const handleOpenChange = (newOpen: boolean) => {
+    if (controlledOpen === undefined) setUncontrolledOpen(newOpen);
+    onOpenChange?.(newOpen);
   };
 
-  useEffect(function() {
-    var handleClickOutside = function(event) {
-      if (
-        open &&
-        triggerRef.current &&
-        !triggerRef.current.contains(event.target) &&
-        !(event.target).closest(".wp-block-popover-content")
-      ) {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (open && triggerRef.current && !triggerRef.current.contains(event.target as Node) && !(event.target as Element).closest(".wp-block-popover-content")) {
         handleOpenChange(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return function() { document.removeEventListener("mousedown", handleClickOutside); };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
-  return React.createElement(PopoverContext.Provider, {
-    value: { open: open, onOpenChange: handleOpenChange, triggerRef: triggerRef }
-  },
-    React.createElement('div', { className: "wp-block-popover-wrapper" }, children)
+  return (
+    <PopoverContext.Provider value={{ open, onOpenChange: handleOpenChange, triggerRef }}>
+      <div className="wp-block-popover-wrapper">{children}</div>
+    </PopoverContext.Provider>
   );
-}
+};
 
-export function PopoverTrigger(props) {
-  var children = props.children;
-  var className = props.className;
-  var id = props.id;
-  var style = props.style;
-
-  var context = useContext(PopoverContext);
+export const PopoverTrigger = ({ children, className, id, style }: any) => {
+  const context = useContext(PopoverContext);
   if (!context) return null;
-  var onOpenChange = context.onOpenChange;
-  var triggerRef = context.triggerRef;
 
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    ref: triggerRef,
-    onClick: function() { onOpenChange(true); },
-    className: cn("wp-block-popover-trigger", className)
-  }, children);
-}
+  return (
+    <div id={id} style={style} ref={context.triggerRef} onClick={() => context.onOpenChange(true)} className={cn("wp-block-popover-trigger", className)}>
+      {children}
+    </div>
+  );
+};
 
-export function PopoverContent(props) {
-  var children = props.children;
-  var className = props.className;
-  var align = props.align === undefined ? "center" : props.align;
-  var sideOffset = props.sideOffset === undefined ? 4 : props.sideOffset;
+export const PopoverContent = ({ children, className, align = 'center', sideOffset = 4 }: any) => {
+  const context = useContext(PopoverContext);
+  if (!context?.open) return null;
 
-  var context = useContext(PopoverContext);
-  if (!context) return null;
-  var open = context.open;
+  const alignStyle = align === 'start' ? { left: 0 } : align === 'end' ? { right: 0 } : { left: '50%', transform: 'translateX(-50%)' };
 
-  if (!open) return null;
-
-  var getAlignStyle = function() {
-    if (align === 'start') return { left: 0 };
-    if (align === 'end') return { right: 0 };
-    return { left: '50%', transform: 'translateX(-50%)' };
-  };
-
-  var alignStyle = getAlignStyle();
-
-  return React.createElement('div', {
-    className: cn("wp-block-popover-content", className),
-    'data-state': open ? "open" : "closed",
-    style: { 
-      marginTop: sideOffset,
-      position: 'absolute',
-      top: '100%',
-      left: alignStyle.left,
-      right: alignStyle.right,
-      transform: alignStyle.transform
-    }
-  }, children);
-}
+  return (
+    <div className={cn("wp-block-popover-content", className)} data-state={context.open ? "open" : "closed"}
+      style={{ marginTop: sideOffset, position: 'absolute', top: '100%', ...alignStyle } as React.CSSProperties}>
+      {children}
+    </div>
+  );
+};

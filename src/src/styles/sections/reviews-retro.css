@@ -1,0 +1,319 @@
+/**
+ * Reviews Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for customer reviews page.
+ *
+ * **Components:**
+ * - Star rating display
+ * - Stat suffix styling
+ * - Testimonial cards
+ * - Review filter buttons
+ * - Review cards with author info
+ * - Helpful button
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   STAR RATINGS
+   ========================================================================== */
+
+.retro-stars {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.retro-star {
+  color: var(--retro-text-muted);
+}
+
+.retro-star--filled {
+  color: var(--retro-neon-yellow);
+  filter: drop-shadow(0 0 3px var(--retro-neon-yellow));
+}
+
+.retro-stat-suffix {
+  font-size: 0.6em;
+  color: var(--retro-text-muted);
+}
+
+/* ==========================================================================
+   TESTIMONIAL CARDS
+   ========================================================================== */
+
+.retro-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4);
+  position: relative;
+}
+
+.retro-testimonial-quote-icon {
+  color: var(--retro-neon-magenta);
+  opacity: 0.6;
+}
+
+.retro-testimonial-text {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
+}
+
+.retro-testimonial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--retro-space-3);
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(0, 255, 249, 0.15);
+  padding-top: var(--retro-space-4);
+  margin-top: auto;
+}
+
+.retro-testimonial-author-info {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-3);
+}
+
+.retro-testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--retro-neon-magenta);
+  object-fit: cover;
+}
+
+.retro-testimonial-author {
+  display: block;
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-primary);
+  font-style: normal;
+}
+
+.retro-testimonial-role {
+  display: block;
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-muted);
+}
+
+/* ==========================================================================
+   REVIEW FILTERS
+   ========================================================================== */
+
+.retro-section--reviews {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-reviews-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--retro-space-4);
+  margin-bottom: var(--retro-space-8);
+}
+
+.retro-reviews-header .retro-section-title {
+  margin-bottom: 0;
+}
+
+.retro-review-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--retro-space-2);
+}
+
+.retro-review-filter-btn {
+  padding: var(--retro-space-2) var(--retro-space-3);
+  background: transparent;
+  border: 1px solid rgba(0, 255, 249, 0.3);
+  color: var(--retro-text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: var(--retro-text-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.retro-review-filter-btn:hover {
+  border-color: var(--retro-neon-cyan);
+  color: var(--retro-neon-cyan);
+}
+
+.retro-review-filter-btn:focus-visible {
+  outline: 2px solid var(--retro-neon-cyan);
+  outline-offset: 2px;
+}
+
+.retro-review-filter-btn--active {
+  background: var(--retro-neon-cyan);
+  border-color: var(--retro-neon-cyan);
+  color: var(--retro-bg-primary);
+  box-shadow: 0 0 10px rgba(0, 255, 249, 0.3);
+}
+
+/* ==========================================================================
+   REVIEW CARDS
+   ========================================================================== */
+
+.retro-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4);
+}
+
+.retro-review-card {
+  padding: var(--retro-space-6);
+}
+
+.retro-review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--retro-space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--retro-space-4);
+}
+
+.retro-review-author-info {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-3);
+}
+
+.retro-review-avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--retro-neon-cyan);
+  object-fit: cover;
+}
+
+.retro-review-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--retro-bg-secondary);
+  border: 2px solid var(--retro-neon-cyan);
+  color: var(--retro-neon-cyan);
+  font-size: var(--retro-text-sm);
+}
+
+.retro-review-author {
+  display: block;
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-primary);
+}
+
+.retro-review-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--retro-text-xs);
+  color: var(--retro-neon-cyan);
+}
+
+.retro-review-title {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-review-content {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--retro-space-4);
+}
+
+.retro-review-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--retro-space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--retro-space-3);
+  padding-bottom: var(--retro-space-3);
+  border-bottom: 1px solid rgba(0, 255, 249, 0.1);
+}
+
+.retro-review-date {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-muted);
+}
+
+.retro-review-actions {
+  display: flex;
+  gap: var(--retro-space-3);
+}
+
+.retro-review-helpful-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--retro-space-1);
+  padding: var(--retro-space-1) var(--retro-space-3);
+  background: transparent;
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  color: var(--retro-text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: var(--retro-text-xs);
+}
+
+.retro-review-helpful-btn:hover {
+  border-color: var(--retro-neon-cyan);
+  color: var(--retro-neon-cyan);
+}
+
+.retro-review-helpful-btn:focus-visible {
+  outline: 2px solid var(--retro-neon-cyan);
+  outline-offset: 2px;
+}
+
+/* Empty state */
+.retro-reviews-empty {
+  text-align: center;
+  padding: var(--retro-space-12);
+  color: var(--retro-text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .retro-reviews-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .retro-review-filters {
+    width: 100%;
+  }
+
+  .retro-review-filter-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .retro-review-card {
+    padding: var(--retro-space-4);
+  }
+
+  .retro-review-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .retro-testimonial-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

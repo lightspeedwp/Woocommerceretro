@@ -1,40 +1,39 @@
 /**
  * QuickViewContext.tsx
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No destructuring in parameters
- * 3. ASCII only
- * 4. No TypeScript interfaces or generics
+ *
+ * Quick view modal state management for product previews.
  */
 
-import React from 'react';
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var useCallback = React.useCallback;
+import React, { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react';
 
-var QuickViewContext = createContext(undefined);
+interface QuickViewProduct {
+  id: string;
+  name?: string;
+  [key: string]: any;
+}
 
-export function useQuickView() {
-  var context = useContext(QuickViewContext);
+interface QuickViewContextValue {
+  product: QuickViewProduct | null;
+  isOpen: boolean;
+  openQuickView: (product: QuickViewProduct) => void;
+  closeQuickView: () => void;
+}
+
+const QuickViewContext = createContext<QuickViewContextValue | undefined>(undefined);
+
+export const useQuickView = (): QuickViewContextValue => {
+  const context = useContext(QuickViewContext);
   if (!context) {
     throw new Error('useQuickView must be used within QuickViewProvider');
   }
   return context;
 }
 
-export function QuickViewProvider(props) {
-  var children = props.children;
+export const QuickViewProvider = ({ children }: { children: ReactNode }) => {
+  const [product, setProduct] = useState<QuickViewProduct | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  var _ps = useState(null);
-  var product = _ps[0];
-  var setProduct = _ps[1];
-  var _os = useState(false);
-  var isOpen = _os[0];
-  var setIsOpen = _os[1];
-
-  var openQuickView = useCallback(function(productArg) {
+  const openQuickView = useCallback((productArg: QuickViewProduct) => {
     setProduct(productArg);
     setIsOpen(true);
     if (typeof document !== 'undefined') {
@@ -42,22 +41,22 @@ export function QuickViewProvider(props) {
     }
   }, []);
 
-  var closeQuickView = useCallback(function() {
+  const closeQuickView = useCallback(() => {
     setIsOpen(false);
     if (typeof document !== 'undefined') {
       document.body.style.overflow = 'unset';
     }
-    setTimeout(function() {
+    setTimeout(() => {
       setProduct(null);
     }, 300);
   }, []);
 
-  var value = {
-    product: product,
-    isOpen: isOpen,
-    openQuickView: openQuickView,
-    closeQuickView: closeQuickView
-  };
+  const value = useMemo<QuickViewContextValue>(() => ({
+    product,
+    isOpen,
+    openQuickView,
+    closeQuickView
+  }), [product, isOpen, openQuickView, closeQuickView]);
 
-  return React.createElement(QuickViewContext.Provider, { value: value }, children);
+  return <QuickViewContext.Provider value={value}>{children}</QuickViewContext.Provider>;
 }

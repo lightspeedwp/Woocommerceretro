@@ -1,76 +1,87 @@
 /**
  * ThemeContext.tsx
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No destructuring in parameters
- * 3. ASCII only
+ *
+ * Theme state management with style variants and light/dark mode.
  */
 
-import React from 'react';
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var useEffect = React.useEffect;
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 
-var ThemeContext = createContext(undefined);
+type ThemeStyle = 'default' | 'blue' | 'purple' | 'green' | 'ocean' | 'forest' | 'sunset';
+type ThemeMode = 'light' | 'dark';
 
-export function useTheme() {
-  var context = useContext(ThemeContext);
+interface ThemeConfig {
+  style: ThemeStyle;
+  mode: ThemeMode;
+}
+
+interface ThemeContextValue {
+  theme: ThemeConfig;
+  mode: ThemeMode;
+  style: ThemeStyle;
+  toggleMode: () => void;
+  setMode: (mode: ThemeMode) => void;
+  setStyle: (style: ThemeStyle) => void;
+  setTheme: (config: ThemeConfig) => void;
+  isDark: boolean;
+}
+
+const VALID_STYLES: ThemeStyle[] = ['default', 'blue', 'purple', 'green', 'ocean', 'forest', 'sunset'];
+const VALID_MODES: ThemeMode[] = ['light', 'dark'];
+
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+
+export const useTheme = (): ThemeContextValue => {
+  const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 }
 
-export function ThemeProvider(props) {
-  var children = props.children;
-
-  var _ts = useState(function() {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setThemeState] = useState<ThemeConfig>(() => {
     try {
-      var storedStyle = localStorage.getItem('theme-style');
-      var storedMode = localStorage.getItem('theme-mode');
-      
-      var validStyles = ['default', 'blue', 'purple', 'green', 'ocean', 'forest', 'sunset'];
-      var validModes = ['light', 'dark'];
-      
-      var style = (storedStyle && validStyles.indexOf(storedStyle) !== -1) ? storedStyle : 'default';
-      var mode = (storedMode && validModes.indexOf(storedMode) !== -1) ? storedMode : 'light';
-      
+      const storedStyle = localStorage.getItem('theme-style');
+      const storedMode = localStorage.getItem('theme-mode');
+
+      const style: ThemeStyle = (storedStyle && VALID_STYLES.includes(storedStyle as ThemeStyle))
+        ? storedStyle as ThemeStyle
+        : 'default';
+      let mode: ThemeMode = (storedMode && VALID_MODES.includes(storedMode as ThemeMode))
+        ? storedMode as ThemeMode
+        : 'light';
+
       if (!storedMode && typeof window !== 'undefined' && window.matchMedia) {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           mode = 'dark';
         }
       }
-      
-      return { style: style, mode: mode };
+
+      return { style, mode };
     } catch (e) {
       return { style: 'default', mode: 'light' };
     }
   });
-  var theme = _ts[0];
-  var setThemeState = _ts[1];
 
-  useEffect(function() {
+  useEffect(() => {
     try {
       if (typeof document === 'undefined') return;
-      var root = document.documentElement;
-      var themes = ['theme-default', 'theme-blue', 'theme-purple', 'theme-green', 'theme-ocean', 'theme-forest', 'theme-sunset'];
-      
+      const root = document.documentElement;
+
       root.classList.remove('light', 'dark');
-      for (var i = 0; i < themes.length; i++) {
-        root.classList.remove(themes[i]);
-      }
-      
+      VALID_STYLES.forEach((s) => {
+        root.classList.remove(`theme-${s}`);
+      });
+
       root.classList.add(theme.mode);
-      root.classList.add('theme-' + theme.style);
-      
+      root.classList.add(`theme-${theme.style}`);
+
       if (theme.mode === 'dark') {
         root.classList.add('dark');
       } else {
         root.classList.remove('dark');
       }
-      
+
       localStorage.setItem('theme-style', theme.style);
       localStorage.setItem('theme-mode', theme.mode);
     } catch (e) {
@@ -78,39 +89,35 @@ export function ThemeProvider(props) {
     }
   }, [theme]);
 
-  function toggleMode() {
-    setThemeState(function(prev) {
-      var newMode = prev.mode === 'light' ? 'dark' : 'light';
-      return { style: prev.style, mode: newMode };
-    });
-  }
+  const toggleMode = useCallback(() => {
+    setThemeState((prev) => ({
+      ...prev,
+      mode: prev.mode === 'light' ? 'dark' : 'light'
+    }));
+  }, []);
 
-  function setMode(mode) {
-    setThemeState(function(prev) {
-      return { style: prev.style, mode: mode };
-    });
-  }
+  const setMode = useCallback((mode: ThemeMode) => {
+    setThemeState((prev) => ({ ...prev, mode }));
+  }, []);
 
-  function setStyle(style) {
-    setThemeState(function(prev) {
-      return { style: style, mode: prev.mode };
-    });
-  }
+  const setStyle = useCallback((style: ThemeStyle) => {
+    setThemeState((prev) => ({ ...prev, style }));
+  }, []);
 
-  function setTheme(config) {
+  const setTheme = useCallback((config: ThemeConfig) => {
     setThemeState(config);
-  }
+  }, []);
 
-  var value = {
-    theme: theme,
+  const value = useMemo<ThemeContextValue>(() => ({
+    theme,
     mode: theme.mode,
     style: theme.style,
-    toggleMode: toggleMode,
-    setMode: setMode,
-    setStyle: setStyle,
-    setTheme: setTheme,
+    toggleMode,
+    setMode,
+    setStyle,
+    setTheme,
     isDark: theme.mode === 'dark',
-  };
+  }), [theme, toggleMode, setMode, setStyle, setTheme]);
 
-  return React.createElement(ThemeContext.Provider, { value: value }, children);
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }

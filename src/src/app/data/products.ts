@@ -1,44 +1,43 @@
 /**
  * Products Data - Main Aggregator
- * 
+ *
  * Imports and aggregates products from all category-specific files.
- * Total Products: 15 (3 per category)
- * Categories: 5 (Electronics, Clothing, Home & Living, Accessories, Sports & Fitness)
- * 
+ * Total Products: 100 (20 per category)
+ * Categories: 5 (Apparel, Accessories, Games, Posters, Collectibles)
+ * Tags: 20 (each product has 3-5 tags)
+ *
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. ASCII characters only
- * 4. No optional chaining
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  */
 
-import { ELECTRONICS_PRODUCTS } from './products/electronics';
-import { CLOTHING_PRODUCTS } from './products/clothing';
-import { HOME_LIVING_PRODUCTS } from './products/home-living';
+import { APPAREL_PRODUCTS } from './products/apparel';
 import { ACCESSORIES_PRODUCTS } from './products/accessories';
-import { SPORTS_FITNESS_PRODUCTS } from './products/sports-fitness';
+import { GAMES_PRODUCTS } from './products/games';
+import { POSTERS_PRODUCTS } from './products/posters';
+import { COLLECTIBLES_PRODUCTS } from './products/collectibles';
 
 /**
  * All products aggregated from category files
- * Total: 15 products
+ * Total: 100 products
  */
-export var PRODUCTS = [].concat(
-  ELECTRONICS_PRODUCTS,
-  CLOTHING_PRODUCTS,
-  HOME_LIVING_PRODUCTS,
+export const PRODUCTS = [].concat(
+  APPAREL_PRODUCTS,
   ACCESSORIES_PRODUCTS,
-  SPORTS_FITNESS_PRODUCTS
+  GAMES_PRODUCTS,
+  POSTERS_PRODUCTS,
+  COLLECTIBLES_PRODUCTS
 );
 
-export var products = PRODUCTS;
+export const products = PRODUCTS;
 
 /**
  * Get product by ID
  * @param {string} id - Product ID
  * @returns {Object|undefined}
  */
-export function getProductById(id) {
-  for (var i = 0; i < PRODUCTS.length; i++) {
+export const getProductById = (id) => {
+  for (let i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].id === id) return PRODUCTS[i];
   }
   return undefined;
@@ -49,8 +48,8 @@ export function getProductById(id) {
  * @param {string} slug - Product slug
  * @returns {Object|undefined}
  */
-export function getProductBySlug(slug) {
-  for (var i = 0; i < PRODUCTS.length; i++) {
+export const getProductBySlug = (slug) => {
+  for (let i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].slug === slug) return PRODUCTS[i];
   }
   return undefined;
@@ -61,9 +60,9 @@ export function getProductBySlug(slug) {
  * @param {string} categorySlug - Category slug
  * @returns {Array}
  */
-export function getProductsByCategory(categorySlug) {
-  var result = [];
-  for (var i = 0; i < PRODUCTS.length; i++) {
+export const getProductsByCategory = (categorySlug) => {
+  const result = [];
+  for (let i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].categorySlug === categorySlug) result.push(PRODUCTS[i]);
   }
   return result;
@@ -73,9 +72,9 @@ export function getProductsByCategory(categorySlug) {
  * Get featured products
  * @returns {Array}
  */
-export function getFeaturedProducts() {
-  var result = [];
-  for (var i = 0; i < PRODUCTS.length; i++) {
+export const getFeaturedProducts = () => {
+  const result = [];
+  for (let i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].featured) result.push(PRODUCTS[i]);
   }
   return result;
@@ -85,95 +84,146 @@ export function getFeaturedProducts() {
  * Get products on sale
  * @returns {Array}
  */
-export function getOnSaleProducts() {
-  var result = [];
-  for (var i = 0; i < PRODUCTS.length; i++) {
+export const getOnSaleProducts = () => {
+  const result = [];
+  for (let i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].onSale) result.push(PRODUCTS[i]);
   }
   return result;
 }
 
 /**
- * Get best sellers (sorted by total sales)
+ * Get best sellers (sorted by totalSales descending)
  * @param {number} [limitArg] - Optional limit
  * @returns {Array}
  */
-export function getBestSellers(limitArg) {
-  var limitVal = limitArg || 4;
-  var sorted = PRODUCTS.slice().sort(function(a, b) {
-    var salesA = a.totalSales || 0;
-    var salesB = b.totalSales || 0;
-    return salesB - salesA;
+export const getBestSellers = (limitArg) => {
+  const limitVal = limitArg || 4;
+  const sorted = PRODUCTS.slice().sort((a, b) => {
+    return (b.totalSales || 0) - (a.totalSales || 0);
   });
   return sorted.slice(0, limitVal);
 }
 
 /**
- * Get new arrivals (sorted by date added, newest first)
+ * Get new arrivals (sorted by dateAdded descending)
  * @param {number} [limitArg] - Optional limit
  * @returns {Array}
  */
-export function getNewArrivals(limitArg) {
-  var limitVal = limitArg || 4;
-  var sorted = PRODUCTS.slice().sort(function(a, b) {
-    var dateA = a.dateAdded || '';
-    var dateB = b.dateAdded || '';
-    if (dateA < dateB) return 1;
-    if (dateA > dateB) return -1;
-    return 0;
+export const getNewArrivals = (limitArg) => {
+  const limitVal = limitArg || 4;
+  const sorted = PRODUCTS.slice().sort((a, b) => {
+    const dateA = new Date(a.dateAdded).getTime();
+    const dateB = new Date(b.dateAdded).getTime();
+    return dateB - dateA;
   });
   return sorted.slice(0, limitVal);
 }
 
 /**
- * Get related products (same category, excluding current product)
- * @param {string} productId - Product ID
- * @param {number} [limitArg] - Optional limit
+ * Get related products based on SHARED TAGS (tag-based matching).
+ * Scores each product by number of shared tags, returns top matches.
+ *
+ * @param {string} productId - Source product ID
+ * @param {number} [limitArg] - Optional limit (default 4)
  * @returns {Array}
  */
-export function getRelatedProducts(productId, limitArg) {
-  var limitVal = limitArg || 4;
-  var product = getProductById(productId);
-  if (!product) return PRODUCTS.slice(0, limitVal);
-  var result = [];
-  for (var i = 0; i < PRODUCTS.length; i++) {
-    if (PRODUCTS[i].id !== productId && PRODUCTS[i].categorySlug === product.categorySlug) {
-      result.push(PRODUCTS[i]);
+export const getRelatedProducts = (productId, limitArg) => {
+  const limitVal = limitArg || 4;
+  const sourceProduct = getProductById(productId);
+
+  if (!sourceProduct) return [];
+
+  const sourceTags = sourceProduct.tags || [];
+  if (sourceTags.length === 0) {
+    // Fallback: same category
+    const catResult = [];
+    for (let c = 0; c < PRODUCTS.length; c++) {
+      if (PRODUCTS[c].id !== productId && PRODUCTS[c].categorySlug === sourceProduct.categorySlug) {
+        catResult.push(PRODUCTS[c]);
+      }
     }
+    return catResult.slice(0, limitVal);
   }
-  return result.slice(0, limitVal);
-}
 
-/**
- * Search products by query
- * @param {string} query - Search query
- * @returns {Array}
- */
-export function searchProducts(query) {
-  var q = query.toLowerCase();
-  var result = [];
-  for (var i = 0; i < PRODUCTS.length; i++) {
-    var p = PRODUCTS[i];
-    var nameMatch = p.name.toLowerCase().indexOf(q) !== -1;
-    var catMatch = p.category.toLowerCase().indexOf(q) !== -1;
-    var brandMatch = p.brand.toLowerCase().indexOf(q) !== -1;
-    var tagMatch = false;
-    if (p.tags) {
-      for (var j = 0; j < p.tags.length; j++) {
-        if (p.tags[j].toLowerCase().indexOf(q) !== -1) {
-          tagMatch = true;
+  // Score every other product by shared tag count
+  const scored = [];
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    const p = PRODUCTS[i];
+    if (p.id === productId) continue;
+    const pTags = p.tags || [];
+    let sharedCount = 0;
+    for (let s = 0; s < sourceTags.length; s++) {
+      for (let t = 0; t < pTags.length; t++) {
+        if (sourceTags[s] === pTags[t]) {
+          sharedCount++;
           break;
         }
       }
     }
-    if (nameMatch || catMatch || brandMatch || tagMatch) {
-      result.push(p);
+    if (sharedCount > 0) {
+      scored.push({ product: p, score: sharedCount });
     }
+  }
+
+  // Sort by score desc, then totalSales desc as tiebreaker
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return (b.product.totalSales || 0) - (a.product.totalSales || 0);
+  });
+
+  const result = [];
+  for (let r = 0; r < scored.length && r < limitVal; r++) {
+    result.push(scored[r].product);
   }
   return result;
 }
 
-export var newInStoreProducts = getNewArrivals(4);
+/**
+ * Get products by tag slug
+ * @param {string} tagSlug - Tag slug
+ * @param {number} [limitArg] - Optional limit
+ * @returns {Array}
+ */
+export const getProductsByTag = (tagSlug, limitArg) => {
+  const result = [];
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    const tags = PRODUCTS[i].tags || [];
+    for (let t = 0; t < tags.length; t++) {
+      if (tags[t] === tagSlug) {
+        result.push(PRODUCTS[i]);
+        break;
+      }
+    }
+  }
+  if (limitArg) return result.slice(0, limitArg);
+  return result;
+}
+
+/**
+ * Search products by name or description
+ * @param {string} query - Search query
+ * @returns {Array}
+ */
+export const searchProducts = (query) => {
+  const q = query.toLowerCase();
+  const result = [];
+
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    const p = PRODUCTS[i];
+    const nameMatch = p.name && p.name.toLowerCase().indexOf(q) !== -1;
+    const descMatch = p.description && p.description.toLowerCase().indexOf(q) !== -1;
+    const shortDescMatch = p.shortDescription && p.shortDescription.toLowerCase().indexOf(q) !== -1;
+
+    if (nameMatch || descMatch || shortDescMatch) {
+      result.push(p);
+    }
+  }
+
+  return result;
+}
+
+export const newInStoreProducts = getNewArrivals(4);
 
 export default {
   PRODUCTS: PRODUCTS,
@@ -186,6 +236,7 @@ export default {
   getBestSellers: getBestSellers,
   getNewArrivals: getNewArrivals,
   getRelatedProducts: getRelatedProducts,
+  getProductsByTag: getProductsByTag,
   searchProducts: searchProducts,
-  newInStoreProducts: newInStoreProducts,
+  newInStoreProducts: newInStoreProducts
 };

@@ -8,6 +8,6 @@ import { Separator as NewSeparator } from "@/components/blocks/design/Separator"
  * Redirects to new WordPress-aligned component.
  * @deprecated Import from @/components/blocks/design/Separator instead.
  */
-var Separator = NewSeparator;
+const Separator = NewSeparator;
 
 export { Separator };

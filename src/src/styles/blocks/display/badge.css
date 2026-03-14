@@ -83,6 +83,10 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+.dark .wp-block-badge--outline {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Icon animations */
 .wp-block-badge svg { width: 1.1em; height: 1.1em; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
 

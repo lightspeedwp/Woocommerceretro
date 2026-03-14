@@ -2,28 +2,165 @@
  * Light Mode Theme (Default)
  * 
  * This stylesheet provides default light mode styling.
- * Most colors are already defined in theme-variables.css,
- * but this file provides light-mode-specific adjustments.
  */
+
+:root {
+  --wp--preset--color--primary: #111111;
+  --wp--preset--color--primary-foreground: #ffffff;
+  --wp--preset--color--secondary: #f5f5f7;
+  --wp--preset--color--secondary-foreground: #111111;
+  --wp--preset--color--background: #ffffff;
+  --wp--preset--color--foreground: #1a1a1a;
+  --wp--preset--color--surface: #f9f9f9;
+  --wp--preset--color--surface-foreground: #1a1a1a;
+  --wp--preset--color--accent: #e9ebef;
+  --wp--preset--color--accent-foreground: #030213;
+  --wp--preset--color--muted: #ececf0;
+  --wp--preset--color--muted-foreground: #4b5563;
+  --wp--preset--color--brand: #0055AA;
+  --wp--preset--color--cta: #0055AA;
+  --wp--preset--color--cta-hover: #004499;
+  --wp--preset--color--ring: #3b82f6;
+  --wp--preset--color--link: #2563eb;
+  --wp--preset--color--link-hover: #1d4ed8;
+  --wp--preset--color--neutral-100: #F9FAFB;
+  --wp--preset--color--neutral-200: #F3F4F6;
+  --wp--preset--color--neutral-300: #E5E7EB;
+  --wp--preset--color--neutral-400: #D1D5DB;
+  --wp--preset--color--neutral-500: #9CA3AF;
+  --wp--preset--color--neutral-600: #6B7280;
+  --wp--preset--color--neutral-700: #4B5563;
+  --wp--preset--color--neutral-800: #374151;
+  --wp--preset--color--neutral-900: #111827;
+  --wp--preset--color--accent-100: #E0F2FE;
+  --wp--preset--color--accent-500: #0A84FF;
+  --wp--preset--color--accent-900: #0C4A6E;
+  --wp--preset--color--popover: #ffffff;
+  --wp--preset--color--popover-foreground: #111111;
+  --wp--preset--color--success: #065f46;
+  --wp--preset--color--success-foreground: #ffffff;
+  --wp--preset--color--warning: #92400e;
+  --wp--preset--color--warning-foreground: #ffffff;
+  --wp--preset--color--error: #991b1b;
+  --wp--preset--color--error-foreground: #ffffff;
+  --wp--preset--color--black: #000000;
+  --wp--preset--color--white: #ffffff;
+  --wp--preset--color--neon-cyan: #00ffff;
+  --wp--preset--color--neon-pink: #ff00ff;
+  --wp--preset--color--neon-lime: #ccff00;
+  --wp--preset--color--neon-yellow: #fbbf24;
+  --wp--preset--color--navy: #030213;
+  --wp--preset--color--deep-purple: #2d0059;
+  --wp--preset--color--border: #e5e7eb;
+  --wp--preset--color--border-light: #f3f4f6;
+  --wp--preset--color--text-secondary: #4b5563;
+  --wp--preset--spacing--10: 0.25rem;
+  --wp--preset--spacing--20: 0.5rem;
+  --wp--preset--spacing--30: 0.75rem;
+  --wp--preset--spacing--40: 1rem;
+  --wp--preset--spacing--50: 1.5rem;
+  --wp--preset--spacing--60: 2rem;
+  --wp--preset--spacing--70: 3rem;
+  --wp--preset--spacing--80: 4rem;
+  --wp--preset--spacing--90: 6rem;
+  --wp--preset--spacing--100: 8rem;
+  --wp--style--block-gap: 1.5rem;
+  --wp--custom--spacing--outer: 1.5rem;
+  --wp--custom--spacing--inner: 1rem;
+  --wp--preset--spacing--section: clamp(3rem, 8vw, 6rem);
+  --wp--preset--spacing--container: clamp(1rem, 3vw, 3rem);
+  --wp--preset--spacing--inner: clamp(1rem, 2vw, 2rem);
+  --wp--preset--spacing--x-small: var(--wp--preset--spacing--20);
+  --wp--preset--spacing--small: var(--wp--preset--spacing--30);
+  --wp--preset--spacing--medium: var(--wp--preset--spacing--40);
+  --wp--preset--spacing--large: var(--wp--preset--spacing--60);
+  --wp--preset--spacing--x-large: var(--wp--preset--spacing--80);
+  --wp--preset--font-family--base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --wp--preset--font-family--heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --wp--preset--font-family--mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --wp--preset--font-size--100: clamp(0.65rem, 0.5vw + 0.55rem, 0.75rem);
+  --wp--preset--font-size--200: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  --wp--preset--font-size--300: clamp(1rem, 1vw + 0.75rem, 1.25rem);
+  --wp--preset--font-size--400: clamp(1.25rem, 1.5vw + 0.875rem, 1.5rem);
+  --wp--preset--font-size--500: clamp(1.5rem, 2vw + 1rem, 2rem);
+  --wp--preset--font-size--600: clamp(2rem, 2.5vw + 1.25rem, 2.5rem);
+  --wp--preset--font-size--700: clamp(2.5rem, 3vw + 1.5rem, 3rem);
+  --wp--preset--font-size--800: clamp(3rem, 4vw + 2rem, 4rem);
+  --wp--preset--font-size--900: clamp(3.5rem, 5vw + 2.5rem, 5rem);
+  --wp--preset--font-size--small: var(--wp--preset--font-size--100);
+  --wp--preset--font-size--medium: var(--wp--preset--font-size--200);
+  --wp--preset--font-size--normal: var(--wp--preset--font-size--200);
+  --wp--preset--font-size--large: var(--wp--preset--font-size--300);
+  --wp--preset--font-size--x-large: var(--wp--preset--font-size--400);
+  --wp--preset--font-size--xx-large: var(--wp--preset--font-size--500);
+  --wp--preset--font-size--xxx-large: var(--wp--preset--font-size--600);
+  --wp--preset--font-size--huge: var(--wp--preset--font-size--800);
+  --wp--preset--font-size--gigantic: var(--wp--preset--font-size--900);
+  --wp--preset--font-size--xs: clamp(0.6rem, 0.4vw + 0.5rem, 0.7rem);
+  --wp--preset--font-weight--light: 300;
+  --wp--preset--font-weight--normal: 400;
+  --wp--preset--font-weight--medium: 500;
+  --wp--preset--font-weight--semibold: 600;
+  --wp--preset--font-weight--bold: 700;
+  --wp--preset--font-weight--black: 900;
+  --wp--preset--line-height--tight: 1.15;
+  --wp--preset--line-height--snug: 1.3;
+  --wp--preset--line-height--normal: 1.5;
+  --wp--preset--line-height--relaxed: 1.625;
+  --wp--preset--line-height--loose: 1.8;
+  --wp--preset--letter-spacing--tight: -0.02em;
+  --wp--preset--letter-spacing--normal: 0;
+  --wp--preset--letter-spacing--wide: 0.05em;
+  --wp--preset--layout--content-size: 800px;
+  --wp--preset--layout--wide-size: 1200px;
+  --wp--preset--layout--site-size: 1400px;
+  --wp--preset--shadow--sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --wp--preset--shadow--md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --wp--preset--shadow--lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --wp--preset--shadow--xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --wp--preset--shadow--glow: 0 0 15px rgba(0, 255, 255, 0.3);
+  --wp--preset--shadow--lift: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --wp--preset--transition--fast: 150ms;
+  --wp--preset--transition--base: 200ms;
+  --wp--preset--transition--slow: 350ms;
+  --wp--preset--border-radius--none: 0;
+  --wp--preset--border-radius--sm: 0.125rem;
+  --wp--preset--border-radius--md: 0.375rem;
+  --wp--preset--border-radius--lg: 0.5rem;
+  --wp--preset--border-radius--xl: 0.75rem;
+  --wp--preset--border-radius--xxl: 1rem;
+  --wp--preset--border-radius--full: 9999px;
+  --wp--preset--gradient--neon-glow: linear-gradient(135deg, #ff00ff, #00ffff);
+  --wp--preset--gradient--commerce: linear-gradient(135deg, #030213 0%, #2d0059 50%, #030213 100%);
+  --wp--preset--gradient--accent-soft: linear-gradient(135deg, rgba(255, 0, 255, 0.04), rgba(0, 255, 255, 0.04));
+  --wp--preset--gradient--sale: linear-gradient(135deg, #ff00ff, #ff6b6b, #fbbf24);
+  --funky-interactive-color: #0e7490;
+  --funky-interactive-color-hover: #0c6075;
+  --funky-interactive-bg: rgba(14, 116, 144, 0.08);
+  --funky-interactive-bg-hover: rgba(14, 116, 144, 0.12);
+  --funky-interactive-focus: #0369a1;
+  --funky-interactive-underline-start: #be185d;
+  --funky-interactive-underline-end: #0e7490;
+  --funky-glass-bg: rgba(255, 255, 255, 0.85);
+  --funky-glass-border: rgba(0, 0, 0, 0.1);
+  --funky-glass-header-border: rgba(0, 0, 0, 0.05);
+  --funky-glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --funky-text-muted: var(--wp--preset--color--text-secondary);
+  --funky-input-bg: rgba(0, 0, 0, 0.05);
+  --funky-input-border: rgba(0, 0, 0, 0.1);
+  --header-height-mobile: 60px;
+  --header-height-desktop: 80px;
+}
 
 /* ========================================
    LIGHT MODE BASE STYLES
    ======================================== */
 
-/* Light mode is the default, so most variables are already set in theme-variables.css */
-/* This file provides any light-mode-specific overrides or adjustments */
-
-/* Ensure good contrast for text on light backgrounds */
 body {
   background-color: var(--wp--preset--color--background);
   color: var(--wp--preset--color--foreground);
 }
 
-/* ========================================
-   LIGHT MODE-SPECIFIC ADJUSTMENTS
-   ======================================== */
-
-/* Links in light mode */
 a {
   color: var(--wp--preset--color--link);
   text-decoration: none;
@@ -40,47 +177,22 @@ a:focus-visible {
   border-radius: var(--wp--preset--border-radius--sm);
 }
 
-/* Input fields in light mode */
-input {
-  background-color: var(--wp--preset--color--background);
-  border: 1px solid var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-  transition: border-color var(--wp--preset--transition--base) ease;
-}
-textarea {
-  background-color: var(--wp--preset--color--background);
-  border: 1px solid var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-  transition: border-color var(--wp--preset--transition--base) ease;
-}
-select {
+input, textarea, select {
   background-color: var(--wp--preset--color--background);
   border: 1px solid var(--wp--preset--color--border);
   color: var(--wp--preset--color--foreground);
   transition: border-color var(--wp--preset--transition--base) ease;
 }
 
-input::placeholder {
-  color: var(--wp--preset--color--muted-foreground);
-}
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: var(--wp--preset--color--muted-foreground);
 }
 
-input:focus {
-  outline: none;
-  border-color: var(--wp--preset--focus-ring--color);
-}
-textarea:focus {
-  outline: none;
-  border-color: var(--wp--preset--focus-ring--color);
-}
-select:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--wp--preset--focus-ring--color);
 }
 
-/* Buttons in light mode */
 button {
   cursor: pointer;
   transition: all var(--wp--preset--transition--base) ease;
@@ -91,106 +203,6 @@ button:disabled {
   opacity: 0.5;
 }
 
-/* ========================================
-   LIGHT MODE SURFACE VARIATIONS
-   ======================================== */
-
-/* Slightly different surface colors for depth */
 .surface-elevated {
   background-color: #ffffff;
-  box-shadow: var(--wp--preset--shadow--sm);
-}
-
-.surface-sunken {
-  background-color: #f9fafb;
-}
-
-/* ========================================
-   LIGHT MODE INTERACTIVE STATES
-   ======================================== */
-
-/* Hover states should be subtle in light mode */
-.wp-block-navigation-item__content:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* Product cards on hover */
-.wc-block-grid__product:hover {
-  box-shadow: var(--wp--preset--shadow--md);
-}
-
-/* Button hover states */
-.wc-block-components-button--primary:hover {
-  filter: brightness(0.95);
-}
-
-.wc-block-components-button--secondary:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* ========================================
-   LIGHT MODE BORDERS
-   ======================================== */
-
-/* Ensure borders are subtle but visible */
-.has-border {
-  border: 1px solid var(--wp--preset--color--border);
-}
-
-.has-border-top {
-  border-top: 1px solid var(--wp--preset--color--border);
-}
-
-.has-border-bottom {
-  border-bottom: 1px solid var(--wp--preset--color--border);
-}
-
-/* ========================================
-   LIGHT MODE ACCESSIBILITY
-   ======================================== */
-
-/* Ensure focus states are always visible */
-*:focus-visible {
-  outline: var(--wp--preset--focus-ring--width) solid var(--wp--preset--focus-ring--color);
-  outline-offset: var(--wp--preset--focus-ring--offset);
-}
-
-/* High contrast mode adjustments */
-@media (prefers-contrast: high) {
-  :root {
-    --wp--preset--color--border: rgba(0, 0, 0, 0.3);
-    --wp--preset--color--border-strong: rgba(0, 0, 0, 0.5);
-  }
-  
-  button { border: 2px solid currentColor; }
-  .wp-block-button__link { border: 2px solid currentColor; }
-  .wc-block-components-button { border: 2px solid currentColor; }
-}
-
-/* ========================================
-   LIGHT MODE PRINT STYLES
-   ======================================== */
-
-@media print {
-  body {
-    background-color: white;
-    color: black;
-  }
-  
-  .wc-block-grid__product-actions { display: none; }
-  .wp-block-navigation { display: none; }
-  button { display: none; }
-  
-  /* Remove shadows and borders for cleaner print */
-  * {
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-  
-  /* Ensure links are visible */
-  a[href]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.8em;
-    color: #666;
-  }
 }

@@ -1,138 +1,139 @@
 "use client";
 
-import * as React from "react";
+import React, { useContext } from "react";
 import { Minus as MinusIcon } from '@phosphor-icons/react';
-
-import * as InputOtpModule from "input-otp";
-import * as cnModule from "../../../utils/cn";
-
-var OTPInput = InputOtpModule.OTPInput;
-var OTPInputContext = InputOtpModule.OTPInputContext;
-var cn = cnModule.cn;
+import { OTPInput, OTPInputContext } from "input-otp";
+import { cn } from "@/utils/cn";
 
 /**
- * @typedef {Object} InputOTPProps
- * @property {string} [className]
- * @property {string} [containerClassName]
- * @property {React.ReactNode} [children]
- * @property {string} [id]
- * @property {React.CSSProperties} [style]
- * @property {string} [value]
- * @property {Function} [onChange]
- * @property {number} [maxLength]
- * @property {boolean} [disabled]
- * @property {boolean} [autoFocus]
- * @property {Function} [render]
+ * InputOTP Components
+ *
+ * One-time password input using input-otp library.
+ *
+ * @example
+ * <InputOTP maxLength={6}>
+ *   <InputOTPGroup>
+ *     <InputOTPSlot index={0} />
+ *     <InputOTPSlot index={1} />
+ *     <InputOTPSlot index={2} />
+ *   </InputOTPGroup>
+ * </InputOTP>
  */
 
-function InputOTP(props) {
-  var className = props.className;
-  var containerClassName = props.containerClassName;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-  var value = props.value;
-  var onChange = props.onChange;
-  var maxLength = props.maxLength;
-  var disabled = props.disabled;
-  var autoFocus = props.autoFocus;
-  var render = props.render;
-
-  return React.createElement(OTPInput, {
-    id: id,
-    style: style,
-    value: value,
-    onChange: onChange,
-    maxLength: maxLength,
-    disabled: disabled,
-    autoFocus: autoFocus,
-    render: render,
-    "data-slot": "input-otp",
-    containerClassName: cn(
-      "wp-block-input-otp",
-      containerClassName,
-    ),
-    className: cn(className)
-  }, children);
+interface InputOTPProps {
+  className?: string;
+  containerClassName?: string;
+  children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
+  value?: string;
+  onChange?: (value: string) => void;
+  maxLength?: number;
+  disabled?: boolean;
+  autoFocus?: boolean;
+  render?: any;
 }
 
-/**
- * @typedef {Object} InputOTPGroupProps
- * @property {string} [className]
- * @property {React.ReactNode} [children]
- * @property {string} [id]
- * @property {React.CSSProperties} [style]
- */
-
-function InputOTPGroup(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    "data-slot": "input-otp-group",
-    className: cn("wp-block-input-otp-group", className)
-  }, children);
-}
-
-/**
- * @typedef {Object} InputOTPSlotProps
- * @property {number} index
- * @property {string} [className]
- * @property {string} [id]
- * @property {React.CSSProperties} [style]
- */
-
-function InputOTPSlot(props) {
-  var index = props.index;
-  var className = props.className;
-  var id = props.id;
-  var style = props.style;
-
-  var inputOTPContext = React.useContext(OTPInputContext);
-  var slot = inputOTPContext && inputOTPContext.slots ? inputOTPContext.slots[index] : undefined;
-  var char = slot ? slot.char : undefined;
-  var hasFakeCaret = slot ? slot.hasFakeCaret : undefined;
-  var isActive = slot ? slot.isActive : undefined;
-
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    "data-slot": "input-otp-slot",
-    "data-active": isActive,
-    className: cn(
-      "wp-block-input-otp-slot",
-      className,
-    )
-  },
-    char,
-    hasFakeCaret ? React.createElement('div', { className: "wp-block-input-otp-caret" },
-      React.createElement('div', { className: "wp-block-input-otp-caret-blink" })
-    ) : null
+const InputOTP = ({
+  className,
+  containerClassName,
+  children,
+  id,
+  style,
+  value,
+  onChange,
+  maxLength,
+  disabled,
+  autoFocus,
+  render,
+}: InputOTPProps) => {
+  return (
+    <OTPInput
+      id={id}
+      style={style}
+      value={value}
+      onChange={onChange}
+      maxLength={maxLength}
+      disabled={disabled}
+      autoFocus={autoFocus}
+      render={render}
+      data-slot="input-otp"
+      containerClassName={cn("wp-block-input-otp", containerClassName)}
+      className={cn(className)}
+    >
+      {children}
+    </OTPInput>
   );
 }
 
-/**
- * @typedef {Object} InputOTPSeparatorProps
- * @property {string} [id]
- * @property {React.CSSProperties} [style]
- */
+interface InputOTPGroupProps {
+  className?: string;
+  children?: React.ReactNode;
+  id?: string;
+  style?: React.CSSProperties;
+}
 
-function InputOTPSeparator(props) {
-  var id = props.id;
-  var style = props.style;
+const InputOTPGroup = ({ className, children, id, style }: InputOTPGroupProps) => {
+  return (
+    <div
+      id={id}
+      style={style}
+      data-slot="input-otp-group"
+      className={cn("wp-block-input-otp-group", className)}
+    >
+      {children}
+    </div>
+  );
+}
 
-  return React.createElement('div', {
-    id: id,
-    style: style,
-    "data-slot": "input-otp-separator",
-    role: "separator",
-    className: "wp-block-input-otp-separator"
-  },
-    React.createElement(MinusIcon, null)
+interface InputOTPSlotProps {
+  index: number;
+  className?: string;
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+const InputOTPSlot = ({ index, className, id, style }: InputOTPSlotProps) => {
+  const inputOTPContext = useContext(OTPInputContext);
+  const slot = inputOTPContext?.slots?.[index];
+  const char = slot?.char;
+  const hasFakeCaret = slot?.hasFakeCaret;
+  const isActive = slot?.isActive;
+
+  return (
+    <div
+      id={id}
+      style={style}
+      data-slot="input-otp-slot"
+      data-active={isActive}
+      className={cn("wp-block-input-otp-slot", className)}
+    >
+      {char}
+      {hasFakeCaret && (
+        <div className="wp-block-input-otp-caret">
+          <div className="wp-block-input-otp-caret-blink" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface InputOTPSeparatorProps {
+  id?: string;
+  style?: React.CSSProperties;
+}
+
+const InputOTPSeparator = ({ id, style }: InputOTPSeparatorProps) => {
+  return (
+    <div
+      id={id}
+      style={style}
+      data-slot="input-otp-separator"
+      role="separator"
+      className="wp-block-input-otp-separator"
+    >
+      <MinusIcon />
+    </div>
   );
 }
 

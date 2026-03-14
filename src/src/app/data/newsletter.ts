@@ -6,7 +6,7 @@
  * @module data/newsletter
  */
 
-export var newsletterPageContent = {
+export const newsletterPageContent = {
   heading: 'Subscribe to Our Newsletter',
   subheading: 'Stay in the loop with the latest news, exclusive offers, and behind-the-scenes content delivered directly to your inbox.',
   successHeading: 'Thank You for Subscribing!',

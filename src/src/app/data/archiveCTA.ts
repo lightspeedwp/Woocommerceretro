@@ -36,7 +36,7 @@
  * Used on: /shop, /shop/category/:slug
  * @type {CTAContent}
  */
-export var productArchiveCTA = {
+export const productArchiveCTA = {
   title: "Can't find what you're looking for?",
   description: "Get personalized product recommendations from our team. Tell us what you need and we'll find it for you.",
   buttonText: "Get expert help",
@@ -50,7 +50,7 @@ export var productArchiveCTA = {
  * Used on: /shop/sale
  * @type {CTAContent}
  */
-export var saleArchiveCTA = {
+export const saleArchiveCTA = {
   title: "Want early access to sales?",
   description: "Join our VIP list and get notified 24 hours before sales go live, plus exclusive discount codes.",
   buttonText: "Join VIP list",
@@ -64,7 +64,7 @@ export var saleArchiveCTA = {
  * Used on: /new-arrivals
  * @type {CTAContent}
  */
-export var newArrivalsArchiveCTA = {
+export const newArrivalsArchiveCTA = {
   title: "Never miss new drops",
   description: "Get instant notifications when new products launch. Be the first to shop our latest collections.",
   buttonText: "Get launch alerts",
@@ -78,7 +78,7 @@ export var newArrivalsArchiveCTA = {
  * Used on: /shop/category/:slug with dynamic content
  * @type {CTAContent}
  */
-export var categoryArchiveCTA = {
+export const categoryArchiveCTA = {
   title: "Need help choosing?",
   description: "Not sure which product is right for you? Our specialists can guide you to the perfect choice.",
   buttonText: "Talk to a specialist",
@@ -92,7 +92,7 @@ export var categoryArchiveCTA = {
  * Used on: /blog, /blog/category/:slug
  * @type {CTAContent}
  */
-export var blogArchiveCTA = {
+export const blogArchiveCTA = {
   title: "Want more content like this?",
   description: "Get our latest guides, tips, and industry insights delivered straight to your inbox every week.",
   buttonText: "Subscribe now",
@@ -106,7 +106,7 @@ export var blogArchiveCTA = {
  * Used on: /shop/tag/:slug, /blog/tag/:slug
  * @type {CTAContent}
  */
-export var tagArchiveCTA = {
+export const tagArchiveCTA = {
   title: "Discover more like this",
   description: "Want personalized recommendations based on your interests? Let us curate a collection just for you.",
   buttonText: "Get personalized picks",
@@ -120,7 +120,7 @@ export var tagArchiveCTA = {
  * Used on: /blog/author/:slug
  * @type {CTAContent}
  */
-export var authorArchiveCTA = {
+export const authorArchiveCTA = {
   title: "Follow this author",
   description: "Get notified when this author publishes new articles and exclusive insights from their expertise.",
   buttonText: "Follow author",
@@ -134,7 +134,7 @@ export var authorArchiveCTA = {
  * Used on: /shop?s=query
  * @type {CTAContent}
  */
-export var searchArchiveCTA = {
+export const searchArchiveCTA = {
   title: "Didn't find what you need?",
   description: "We're constantly expanding our catalog. Let us know what you're searching for and we'll source it.",
   buttonText: "Request product",

@@ -1,0 +1,650 @@
+/* ========================================
+   FRONT PAGE SECTIONS
+   Extracted from /styles/globals.css (Batch B1)
+   PlayPocket retro/funky front page styling
+   ======================================== */
+
+.front-page {
+  --page-hero-from: #ff00ff;
+  --page-hero-via: #030213;
+  --page-hero-to: #00ffff;
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.front-page__hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--wp--preset--color--primary);
+}
+
+.front-page__hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.front-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.25) 0%, rgba(3, 2, 19, 0.75) 50%, rgba(0, 255, 255, 0.15) 100%);
+}
+
+.dark .front-page__hero-overlay {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.35) 0%, rgba(3, 2, 19, 0.88) 50%, rgba(0, 255, 255, 0.25) 100%);
+}
+
+.front-page__hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 48rem;
+  padding: var(--wp--preset--spacing--50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.front-page__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  letter-spacing: var(--wp--preset--letter-spacing--wide);
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .front-page__hero-badge {
+  background: rgba(0, 255, 255, 0.08);
+  border-color: rgba(0, 255, 255, 0.2);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.front-page__hero-badge svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.front-page__hero-title {
+  font-size: var(--wp--preset--font-size--900);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #ffffff;
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  line-height: var(--wp--preset--line-height--tight);
+  margin: 0;
+}
+
+.front-page__hero-subtitle {
+  font-size: var(--wp--preset--font-size--400);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin: 0;
+}
+
+.front-page__hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  width: 100%;
+}
+
+.front-page__hero-actions > * {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .front-page__hero-actions {
+    flex-direction: row;
+    width: auto;
+  }
+  .front-page__hero-actions > * {
+    width: auto;
+  }
+}
+
+.front-page__hero .wp-block-button--outline {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  background: transparent;
+}
+
+.front-page__hero .wp-block-button--outline:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.front-page__hero-cta--outline {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  background: transparent;
+}
+
+.front-page__hero-cta--outline:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ========================================
+   HERO ORBS -> Retro Blocks
+   ======================================== */
+
+.front-page__hero-orb {
+  position: absolute;
+  border: 2px solid var(--retro-ink);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.front-page__hero-orb--1 {
+  width: 12rem;
+  height: 12rem;
+  background: var(--retro-accent-coral);
+  top: 8%;
+  right: -6%;
+  animation: funky-float 6s ease-in-out infinite;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.front-page__hero-orb--2 {
+  width: 8rem;
+  height: 8rem;
+  background: var(--retro-accent-sky);
+  bottom: 12%;
+  left: -4%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -3s;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.front-page__hero-orb--3 {
+  width: 6rem;
+  height: 6rem;
+  background: var(--retro-success);
+  top: 55%;
+  right: 18%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -5s;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.dark .front-page__hero-orb--1 { opacity: 0.8; }
+.dark .front-page__hero-orb--2 { opacity: 0.8; }
+.dark .front-page__hero-orb--3 { opacity: 0.8; }
+
+/* Scroll arrow */
+.front-page__hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.6);
+  animation: funky-float 3s ease-in-out infinite;
+}
+
+.dark .front-page__hero-scroll {
+  color: var(--wp--preset--color--neon-cyan);
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .front-page__hero {
+    min-height: auto;
+    padding-block: var(--wp--preset--spacing--80);
+  }
+  .front-page__hero-content {
+    padding: var(--wp--preset--spacing--40);
+  }
+  .front-page__hero-orb--1,
+  .front-page__hero-orb--2 {
+    opacity: 0.08;
+  }
+  .front-page__hero-orb--3 {
+    display: none;
+  }
+  .front-page__hero-scroll {
+    display: none;
+  }
+}
+
+/* ========================================
+   FEATURES
+   ======================================== */
+
+.front-page__features {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--gradient--accent-soft);
+}
+
+.dark .front-page__features {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.03), rgba(0, 255, 255, 0.03));
+}
+
+.front-page__features-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+}
+
+.front-page__features .wp-quick-entry-tile {
+  position: relative;
+  overflow: visible;
+}
+
+.front-page__features .wp-quick-entry-tile::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: var(--retro-signal);
+  opacity: 0;
+  transition: opacity var(--wp--preset--transition--slow) ease;
+  border-radius: inherit;
+}
+
+.front-page__features .wp-quick-entry-tile:hover::before {
+  opacity: 0.6;
+}
+
+.dark .front-page__features .wp-quick-entry-tile:hover::before {
+  opacity: 1;
+}
+
+.front-page__features .wp-quick-entry-tile__icon {
+  background: var(--retro-paper);
+  border: 2px solid var(--retro-ink);
+  color: var(--retro-ink);
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 0px var(--retro-ink);
+}
+
+.dark .front-page__features .wp-quick-entry-tile__icon {
+  background: var(--retro-dark-bg);
+  color: var(--retro-dark-text);
+}
+
+.front-page__features .wp-quick-entry-tile:hover .wp-quick-entry-tile__icon {
+  background: var(--retro-signal);
+  transform: scale(1.1) translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+/* ========================================
+   CATEGORIES
+   ======================================== */
+
+.front-page__categories {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--background);
+}
+
+.front-page__categories-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.front-page__categories .wp-category-card {
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.front-page__categories .wp-category-card:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+}
+
+.dark .front-page__categories .wp-category-card:hover {
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+}
+
+/* ========================================
+   TRENDING & BEST SELLERS
+   ======================================== */
+
+.front-page__trending {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--background);
+}
+
+.front-page__trending-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+}
+
+.front-page__best-sellers {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--80);
+  background: var(--wp--preset--color--neutral-100);
+}
+
+.dark .front-page__best-sellers {
+  background: var(--wp--preset--color--surface);
+}
+
+.front-page__best-sellers-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+}
+
+/* ========================================
+   BRAND STORY
+   ======================================== */
+
+.front-page__brand-story {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.front-page__brand-story-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.front-page__brand-story-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.8) 0%, rgba(45, 0, 89, 0.55) 50%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.dark .front-page__brand-story-overlay {
+  background: linear-gradient(135deg, rgba(3, 2, 19, 0.92) 0%, rgba(45, 0, 89, 0.7) 50%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.front-page__brand-story-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--container);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  width: 100%;
+}
+
+.front-page__brand-story-title {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: #ffffff;
+  line-height: var(--wp--preset--line-height--tight);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  max-width: 36rem;
+  margin: 0;
+}
+
+.front-page__brand-story-text {
+  font-size: var(--wp--preset--font-size--300);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin: 0;
+}
+
+.front-page__brand-story-orb {
+  position: absolute;
+  border: 2px solid var(--retro-ink);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.front-page__brand-story-orb--1 {
+  width: 14rem;
+  height: 14rem;
+  background: var(--retro-accent-coral);
+  bottom: -8%;
+  right: 5%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -2s;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.front-page__brand-story-orb--2 {
+  width: 10rem;
+  height: 10rem;
+  background: var(--retro-accent-sky);
+  top: 10%;
+  left: -3%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -4s;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.dark .front-page__brand-story-orb--1 { opacity: 0.8; }
+.dark .front-page__brand-story-orb--2 { opacity: 0.8; }
+
+/* ========================================
+   NEWSLETTER (Front Page Variant)
+   ======================================== */
+
+.front-page__newsletter {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--100);
+  background: var(--wp--preset--gradient--commerce);
+  color: #ffffff;
+}
+
+.front-page__newsletter-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--preset--spacing--container);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.front-page__newsletter-title {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: var(--wp--preset--line-height--tight);
+  margin: 0;
+  color: #ffffff;
+}
+
+.front-page__newsletter-subtitle {
+  font-size: var(--wp--preset--font-size--300);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 36rem;
+  line-height: var(--wp--preset--line-height--relaxed);
+  margin: 0;
+}
+
+.front-page__newsletter .wp-newsletter-section__input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.front-page__newsletter .wp-newsletter-section__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.front-page__newsletter .wp-newsletter-section__input:focus {
+  outline: 2px solid var(--wp--preset--color--neon-cyan);
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+}
+
+.front-page__newsletter .wp-newsletter-section__icon {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.front-page__newsletter-orb {
+  position: absolute;
+  border: 2px solid var(--retro-ink);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.front-page__newsletter-orb--1 {
+  width: 12rem;
+  height: 12rem;
+  background: var(--retro-accent-berry);
+  top: -10%;
+  left: -5%;
+  animation: funky-float 6s ease-in-out infinite;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.front-page__newsletter-orb--2 {
+  width: 10rem;
+  height: 10rem;
+  background: var(--retro-accent-sky);
+  bottom: -8%;
+  right: -3%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -3s;
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.dark .front-page__newsletter-orb--1 { opacity: 0.8; }
+.dark .front-page__newsletter-orb--2 { opacity: 0.8; }
+
+/* ========================================
+   SECTION HEADINGS
+   ======================================== */
+
+.front-page__section-heading {
+  font-size: var(--wp--preset--font-size--800);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: var(--wp--preset--line-height--tight);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  margin: 0;
+  color: var(--wp--preset--color--foreground);
+}
+
+.front-page__section-heading--gradient {
+  color: var(--retro-ink);
+}
+
+.dark .front-page__section-heading--gradient {
+  color: var(--retro-dark-text);
+}
+
+.front-page__section-description {
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--wp--preset--color--muted-foreground);
+  line-height: var(--wp--preset--line-height--relaxed);
+  max-width: 65ch;
+  margin: 0;
+}
+
+/* ========================================
+   DIVIDERS
+   ======================================== */
+
+.front-page__divider {
+  height: 2px;
+  border: none;
+  background: var(--retro-line);
+  opacity: 0.3;
+  margin: 0 auto;
+  max-width: var(--wp--preset--layout--wide-size);
+}
+
+.dark .front-page__divider {
+  opacity: 0.5;
+}
+
+/* ========================================
+   COLLECTION HEADERS
+   ======================================== */
+
+.front-page__collection-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .front-page__collection-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.front-page__collection-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   REDUCED MOTION (Front Page)
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .front-page__hero-orb--1,
+  .front-page__hero-orb--2,
+  .front-page__hero-orb--3,
+  .front-page__brand-story-orb--1,
+  .front-page__brand-story-orb--2,
+  .front-page__newsletter-orb--1,
+  .front-page__newsletter-orb--2,
+  .front-page__hero-scroll {
+    animation: none;
+  }
+  .front-page__features .wp-quick-entry-tile::before,
+  .front-page__features .wp-quick-entry-tile__icon {
+    transition: none;
+  }
+}

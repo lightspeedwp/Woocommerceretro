@@ -1,35 +1,23 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { Link } from 'react-router';
+import { cn } from '../ui/utils';
 
-var Link = ReactRouterModule.Link;
-import * as UtilsModule from '../ui/utils';
+interface SiteTaglineProps {
+  tag?: keyof JSX.IntrinsicElements;
+  children?: React.ReactNode;
+  linkHref?: string | null;
+  linkLabel?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
 
-var cn = UtilsModule.cn;
+export const SiteTagline = ({ tag: Tag = 'p', children, linkHref = null, linkLabel = 'Home', className = '', style }: SiteTaglineProps) => {
+  const taglineElement = <Tag className={cn('wp-block-site-tagline', className)} style={style}>{children}</Tag>;
 
-/**
- * Site Tagline component
- */
-export function SiteTagline(props) {
-  var Tag = props.tag || 'p';
-  var children = props.children;
-  var linkHref = props.linkHref || null;
-  var linkLabel = props.linkLabel || 'Home';
-  var className = props.className || '';
-  var style = props.style;
-
-  var taglineElement = React.createElement(Tag, {
-    className: cn('wp-block-site-tagline', className),
-    style: style
-  }, children);
-  
   if (linkHref) {
-    return React.createElement(Link, {
-      to: linkHref,
-      'aria-label': linkLabel,
-      className: "wp-block-site-tagline__link"
-    }, taglineElement);
+    return <Link to={linkHref} aria-label={linkLabel} className="wp-block-site-tagline__link">{taglineElement}</Link>;
   }
-  
+
   return taglineElement;
 }
 

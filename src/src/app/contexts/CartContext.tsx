@@ -1,20 +1,59 @@
 /**
  * CartContext.tsx
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No destructuring in parameters
- * 3. ASCII only
- * 4. No modern export-from
+ *
+ * Shopping cart state management with coupon and shipping support.
  */
 
-import React from 'react';
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var useEffect = React.useEffect;
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 
-var MOCK_COUPONS = [
+interface Coupon {
+  code: string;
+  discount: number;
+  type: 'percentage' | 'fixed';
+  minPurchase?: number;
+  maxDiscount?: number;
+}
+
+interface ShippingZone {
+  country: string;
+  rate: number;
+  freeShippingThreshold: number;
+}
+
+interface CartProduct {
+  id: string;
+  name?: string;
+  price: number;
+  salePrice?: number;
+  image?: string;
+  [key: string]: any;
+}
+
+interface CartItem {
+  product: CartProduct;
+  quantity: number;
+}
+
+interface CartContextValue {
+  items: CartItem[];
+  addToCart: (product: CartProduct, quantity?: number) => void;
+  removeFromCart: (productId: string) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
+  clearCart: () => void;
+  getCartTotal: () => number;
+  getCartCount: () => number;
+  isInCart: (productId: string) => boolean;
+  applyCoupon: (code: string) => { success: boolean; message: string };
+  removeCoupon: () => void;
+  appliedCoupon: Coupon | null;
+  getDiscount: () => number;
+  setShippingCountry: (country: string) => void;
+  shippingCountry: string;
+  getShippingCost: () => number;
+  getFinalTotal: () => number;
+}
+
+const MOCK_COUPONS: Coupon[] = [
   { code: 'SAVE10', discount: 10, type: 'percentage' },
   { code: 'SAVE20', discount: 20, type: 'percentage', minPurchase: 100 },
   { code: 'WELCOME', discount: 15, type: 'fixed' },
@@ -22,165 +61,126 @@ var MOCK_COUPONS = [
   { code: 'SUMMER25', discount: 25, type: 'percentage', maxDiscount: 50 }
 ];
 
-var MOCK_SHIPPING_ZONES = [
+const MOCK_SHIPPING_ZONES: ShippingZone[] = [
   { country: 'GB', rate: 4.99, freeShippingThreshold: 50 },
   { country: 'US', rate: 9.99, freeShippingThreshold: 75 },
   { country: 'EU', rate: 7.99, freeShippingThreshold: 60 },
   { country: 'OTHER', rate: 14.99, freeShippingThreshold: 100 }
 ];
 
-var CartContext = createContext(undefined);
+const CartContext = createContext<CartContextValue | undefined>(undefined);
 
-export function useCart() {
-  var context = useContext(CartContext);
+export const useCart = (): CartContextValue => {
+  const context = useContext(CartContext);
   if (!context) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }
 
-export function CartProvider(props) {
-  var children = props.children;
-
-  var _itemsState = useState(function() {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [items, setItems] = useState<CartItem[]>(() => {
     try {
-      var savedCart = localStorage.getItem('cart');
+      const savedCart = localStorage.getItem('cart');
       return savedCart ? JSON.parse(savedCart) : [];
     } catch (e) {
       return [];
     }
   });
-  var items = _itemsState[0];
-  var setItems = _itemsState[1];
 
-  useEffect(function() {
+  const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+  const [shippingCountry, setShippingCountry] = useState('GB');
+
+  useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
-  function addToCart(product, quantityArg) {
-    var quantity = quantityArg !== undefined ? quantityArg : 1;
-    setItems(function(currentItems) {
-      var existingIndex = -1;
-      for (var i = 0; i < currentItems.length; i++) {
-        if (currentItems[i].product.id === product.id) {
-          existingIndex = i;
-          break;
-        }
-      }
+  const addToCart = useCallback((product: CartProduct, quantity: number = 1) => {
+    setItems((currentItems) => {
+      const existingIndex = currentItems.findIndex((item) => item.product.id === product.id);
 
       if (existingIndex !== -1) {
-        var result = [];
-        for (var i = 0; i < currentItems.length; i++) {
-          if (i === existingIndex) {
-            result.push({ 
-              product: currentItems[i].product, 
-              quantity: currentItems[i].quantity + quantity 
-            });
-          } else {
-            result.push(currentItems[i]);
-          }
-        }
-        return result;
+        return currentItems.map((item, i) =>
+          i === existingIndex
+            ? { product: item.product, quantity: item.quantity + quantity }
+            : item
+        );
       } else {
-        return currentItems.concat([{ product: product, quantity: quantity }]);
+        return [...currentItems, { product, quantity }];
       }
     });
-  }
+  }, []);
 
-  function removeFromCart(productId) {
-    setItems(function(currentItems) {
-      var result = [];
-      for (var i = 0; i < currentItems.length; i++) {
-        if (currentItems[i].product.id !== productId) {
-          result.push(currentItems[i]);
-        }
-      }
-      return result;
-    });
-  }
+  const removeFromCart = useCallback((productId: string) => {
+    setItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
+  }, []);
 
-  function updateQuantity(productId, quantity) {
+  const updateQuantity = useCallback((productId: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      setItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
       return;
     }
 
-    setItems(function(currentItems) {
-      var result = [];
-      for (var i = 0; i < currentItems.length; i++) {
-        if (currentItems[i].product.id === productId) {
-          result.push({ product: currentItems[i].product, quantity: quantity });
-        } else {
-          result.push(currentItems[i]);
-        }
-      }
-      return result;
-    });
-  }
+    setItems((currentItems) =>
+      currentItems.map((item) =>
+        item.product.id === productId ? { product: item.product, quantity } : item
+      )
+    );
+  }, []);
 
-  function clearCart() {
+  const clearCart = useCallback(() => {
     setItems([]);
-  }
+  }, []);
 
-  function getCartTotal() {
-    var total = 0;
-    for (var i = 0; i < items.length; i++) {
-      var price = items[i].product.salePrice || items[i].product.price;
-      total += price * items[i].quantity;
-    }
-    return total;
-  }
+  const getCartTotal = useCallback((): number => {
+    return items.reduce((total, item) => {
+      const price = item.product.salePrice || item.product.price;
+      return total + price * item.quantity;
+    }, 0);
+  }, [items]);
 
-  function getCartCount() {
-    var count = 0;
-    for (var i = 0; i < items.length; i++) {
-      count += items[i].quantity;
-    }
-    return count;
-  }
+  const getCartCount = useCallback((): number => {
+    return items.reduce((count, item) => count + item.quantity, 0);
+  }, [items]);
 
-  function isInCart(productId) {
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].product.id === productId) return true;
-    }
-    return false;
-  }
+  const isInCart = useCallback((productId: string): boolean => {
+    return items.some((item) => item.product.id === productId);
+  }, [items]);
 
-  var _couponState = useState(null);
-  var appliedCoupon = _couponState[0];
-  var setAppliedCoupon = _couponState[1];
-
-  function applyCoupon(code) {
-    var coupon = null;
-    for (var i = 0; i < MOCK_COUPONS.length; i++) {
-      if (MOCK_COUPONS[i].code.toUpperCase() === code.toUpperCase()) {
-        coupon = MOCK_COUPONS[i];
-        break;
-      }
-    }
+  const applyCoupon = useCallback((code: string): { success: boolean; message: string } => {
+    const coupon = MOCK_COUPONS.find((c) => c.code.toUpperCase() === code.toUpperCase());
 
     if (!coupon) {
       return { success: false, message: 'Invalid coupon code.' };
     }
 
-    if (coupon.minPurchase && getCartTotal() < coupon.minPurchase) {
-      return { success: false, message: 'Minimum purchase of GBP ' + coupon.minPurchase.toFixed(2) + ' required.' };
+    const subtotal = items.reduce((total, item) => {
+      const price = item.product.salePrice || item.product.price;
+      return total + price * item.quantity;
+    }, 0);
+
+    if (coupon.minPurchase && subtotal < coupon.minPurchase) {
+      return { success: false, message: `Minimum purchase of GBP ${coupon.minPurchase.toFixed(2)} required.` };
     }
 
     setAppliedCoupon(coupon);
     return { success: true, message: 'Coupon applied successfully!' };
-  }
+  }, [items]);
 
-  function removeCoupon() {
+  const removeCoupon = useCallback(() => {
     setAppliedCoupon(null);
-  }
+  }, []);
 
-  function getDiscount() {
+  const getDiscount = useCallback((): number => {
     if (!appliedCoupon) return 0;
 
-    var subtotal = getCartTotal();
+    const subtotal = items.reduce((total, item) => {
+      const price = item.product.salePrice || item.product.price;
+      return total + price * item.quantity;
+    }, 0);
+
     if (appliedCoupon.type === 'percentage') {
-      var discount = (subtotal * appliedCoupon.discount) / 100;
+      const discount = (subtotal * appliedCoupon.discount) / 100;
       if (appliedCoupon.maxDiscount && discount > appliedCoupon.maxDiscount) {
         return appliedCoupon.maxDiscount;
       }
@@ -188,56 +188,71 @@ export function CartProvider(props) {
     } else {
       return appliedCoupon.discount;
     }
-  }
+  }, [items, appliedCoupon]);
 
-  var _shippingState = useState('GB');
-  var shippingCountry = _shippingState[0];
-  var setShippingCountry = _shippingState[1];
-
-  function getShippingCost() {
-    var zone = null;
-    for (var i = 0; i < MOCK_SHIPPING_ZONES.length; i++) {
-      if (MOCK_SHIPPING_ZONES[i].country === shippingCountry) {
-        zone = MOCK_SHIPPING_ZONES[i];
-        break;
-      }
-    }
-
+  const getShippingCost = useCallback((): number => {
+    const zone = MOCK_SHIPPING_ZONES.find((z) => z.country === shippingCountry);
     if (!zone) return 0;
 
-    var subtotal = getCartTotal();
+    const subtotal = items.reduce((total, item) => {
+      const price = item.product.salePrice || item.product.price;
+      return total + price * item.quantity;
+    }, 0);
+
     if (zone.freeShippingThreshold && subtotal >= zone.freeShippingThreshold) {
       return 0;
     }
 
     return zone.rate;
-  }
+  }, [items, shippingCountry]);
 
-  function getFinalTotal() {
-    var subtotal = getCartTotal();
-    var discount = getDiscount();
-    var shipping = getShippingCost();
-    return subtotal - discount + shipping;
-  }
+  const getFinalTotal = useCallback((): number => {
+    const subtotal = items.reduce((total, item) => {
+      const price = item.product.salePrice || item.product.price;
+      return total + price * item.quantity;
+    }, 0);
 
-  var value = {
-    items: items,
-    addToCart: addToCart,
-    removeFromCart: removeFromCart,
-    updateQuantity: updateQuantity,
-    clearCart: clearCart,
-    getCartTotal: getCartTotal,
-    getCartCount: getCartCount,
-    isInCart: isInCart,
-    applyCoupon: applyCoupon,
-    removeCoupon: removeCoupon,
-    appliedCoupon: appliedCoupon,
-    getDiscount: getDiscount,
-    setShippingCountry: setShippingCountry,
-    shippingCountry: shippingCountry,
-    getShippingCost: getShippingCost,
-    getFinalTotal: getFinalTotal
-  };
+    let discountAmount = 0;
+    if (appliedCoupon) {
+      if (appliedCoupon.type === 'percentage') {
+        discountAmount = (subtotal * appliedCoupon.discount) / 100;
+        if (appliedCoupon.maxDiscount && discountAmount > appliedCoupon.maxDiscount) {
+          discountAmount = appliedCoupon.maxDiscount;
+        }
+      } else {
+        discountAmount = appliedCoupon.discount;
+      }
+    }
 
-  return React.createElement(CartContext.Provider, { value: value }, children);
+    const zone = MOCK_SHIPPING_ZONES.find((z) => z.country === shippingCountry);
+    let shippingCost = 0;
+    if (zone) {
+      shippingCost = (zone.freeShippingThreshold && subtotal >= zone.freeShippingThreshold)
+        ? 0
+        : zone.rate;
+    }
+
+    return subtotal - discountAmount + shippingCost;
+  }, [items, appliedCoupon, shippingCountry]);
+
+  const value = useMemo<CartContextValue>(() => ({
+    items,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+    getCartTotal,
+    getCartCount,
+    isInCart,
+    applyCoupon,
+    removeCoupon,
+    appliedCoupon,
+    getDiscount,
+    setShippingCountry,
+    shippingCountry,
+    getShippingCost,
+    getFinalTotal
+  }), [items, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, getCartCount, isInCart, applyCoupon, removeCoupon, appliedCoupon, getDiscount, shippingCountry, getShippingCost, getFinalTotal]);
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

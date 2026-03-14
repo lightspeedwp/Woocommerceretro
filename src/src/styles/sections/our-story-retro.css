@@ -1,0 +1,182 @@
+/**
+ * Our Story Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for company story page.
+ *
+ * **Components:**
+ * - Mission highlight card
+ * - Timeline with milestone markers
+ * - CTA actions row
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   MISSION SECTION
+   ========================================================================== */
+
+.retro-section--mission {
+  padding: var(--retro-space-16) 0;
+}
+
+.retro-mission-card {
+  background: var(--retro-bg-secondary);
+  border: 2px solid var(--retro-neon-cyan);
+  padding: var(--retro-space-12) var(--retro-space-8);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 249, 0.1);
+}
+
+.retro-mission-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--retro-neon-cyan), var(--retro-neon-magenta), var(--retro-neon-yellow));
+}
+
+.retro-mission-icon {
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-mission-title {
+  font-size: var(--retro-text-2xl);
+  color: var(--retro-neon-cyan);
+  text-shadow: 0 0 10px var(--retro-neon-cyan);
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-mission-text {
+  font-size: var(--retro-text-lg);
+  color: var(--retro-text-secondary);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   TIMELINE SECTION
+   ========================================================================== */
+
+.retro-section--timeline {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-timeline {
+  position: relative;
+  padding-left: var(--retro-space-8);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.retro-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--retro-neon-cyan) 0%,
+    var(--retro-neon-magenta) 50%,
+    var(--retro-neon-yellow) 100%
+  );
+  box-shadow: 0 0 8px var(--retro-neon-cyan);
+}
+
+.retro-timeline-item {
+  position: relative;
+  padding-bottom: var(--retro-space-8);
+  padding-left: var(--retro-space-6);
+}
+
+.retro-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.retro-timeline-marker {
+  position: absolute;
+  left: calc(-1 * var(--retro-space-8) - 1px);
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--retro-bg-primary);
+  border: 2px solid var(--retro-neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--retro-neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 249, 0.3);
+}
+
+.retro-timeline-content {
+  background: var(--retro-bg-elevated);
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  padding: var(--retro-space-6);
+}
+
+.retro-timeline-year {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-neon-magenta);
+  text-shadow: 0 0 5px var(--retro-neon-magenta);
+  display: block;
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-timeline-title {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-timeline-desc {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   CTA ACTIONS ROW
+   ========================================================================== */
+
+.retro-cta-actions {
+  display: flex;
+  gap: var(--retro-space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .retro-mission-card {
+    padding: var(--retro-space-8) var(--retro-space-4);
+  }
+
+  .retro-mission-title {
+    font-size: var(--retro-text-xl);
+  }
+
+  .retro-timeline {
+    padding-left: var(--retro-space-6);
+  }
+
+  .retro-timeline-marker {
+    width: 28px;
+    height: 28px;
+    left: calc(-1 * var(--retro-space-6) - 1px);
+  }
+
+  .retro-timeline-content {
+    padding: var(--retro-space-4);
+  }
+}

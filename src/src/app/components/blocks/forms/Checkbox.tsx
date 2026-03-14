@@ -1,100 +1,96 @@
-import React from 'react';
-var useState = React.useState;
+import React, { useState, forwardRef } from 'react';
 
 /**
  * Checkbox Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript syntax
+ *
+ * WordPress-aligned checkbox with controlled/uncontrolled support.
+ *
+ * @example
+ * <Checkbox checked={true} onCheckedChange={(v) => setChecked(v)} />
  */
-export var Checkbox = React.forwardRef(function(props, ref) {
-  var className = props.className || '';
-  var checked = props.checked;
-  var defaultChecked = props.defaultChecked;
-  var onCheckedChange = props.onCheckedChange;
-  var onChange = props.onChange;
-  var id = props.id;
-  var name = props.name;
-  var value = props.value;
-  var required = props.required;
-  var disabled = props.disabled;
 
-  var _s = useState(defaultChecked || false);
-  var isChecked = _s[0];
-  var setIsChecked = _s[1];
-  var isControlled = checked !== undefined;
-  var currentChecked = isControlled ? checked : isChecked;
+interface CheckboxProps {
+  className?: string;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id?: string;
+  name?: string;
+  value?: string;
+  required?: boolean;
+  disabled?: boolean;
+}
 
-  var handleChange = function(e) {
-    if (!isControlled) {
-      setIsChecked(e.target.checked);
-    }
-    if (onCheckedChange) {
-      onCheckedChange(e.target.checked);
-    }
-    if (onChange) {
-      onChange(e);
-    }
-  };
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ className = '', checked, defaultChecked, onCheckedChange, onChange, id, name, value, required, disabled }, ref) => {
+    const [isChecked, setIsChecked] = useState(defaultChecked || false);
+    const isControlled = checked !== undefined;
+    const currentChecked = isControlled ? checked : isChecked;
 
-  var handleClick = function() {
-    if (!disabled) {
-      var newChecked = !currentChecked;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!isControlled) {
-        setIsChecked(newChecked);
+        setIsChecked(e.target.checked);
       }
-      if (onCheckedChange) {
-        onCheckedChange(newChecked);
+      onCheckedChange?.(e.target.checked);
+      onChange?.(e);
+    };
+
+    const handleClick = () => {
+      if (!disabled) {
+        const newChecked = !currentChecked;
+        if (!isControlled) {
+          setIsChecked(newChecked);
+        }
+        onCheckedChange?.(newChecked);
       }
-    }
-  };
+    };
 
-  var wrapperClass = [
-    'wp-block-checkbox-wrapper',
-    'funky-checkbox-wrapper',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+    const wrapperClass = [
+      'wp-block-checkbox-wrapper',
+      'funky-checkbox-wrapper',
+      className
+    ].filter(Boolean).join(' ');
 
-  var checkboxClass = [
-    'wp-block-checkbox',
-    'funky-checkbox',
-    currentChecked ? 'is-checked funky-checkbox--active' : '',
-    disabled ? 'is-disabled' : ''
-  ].filter(function(c) { return !!c; }).join(' ');
+    const checkboxClass = [
+      'wp-block-checkbox',
+      'funky-checkbox',
+      currentChecked ? 'is-checked funky-checkbox--active' : '',
+      disabled ? 'is-disabled' : ''
+    ].filter(Boolean).join(' ');
 
-  return React.createElement('div', { className: wrapperClass },
-    React.createElement('input', {
-      id: id,
-      name: name,
-      value: value,
-      required: required,
-      disabled: disabled,
-      type: "checkbox",
-      checked: currentChecked,
-      onChange: handleChange,
-      className: "wp-block-checkbox-input sr-only",
-      ref: ref
-    }),
-    React.createElement('div', { 
-      className: checkboxClass,
-      onClick: handleClick
-    },
-      currentChecked ? React.createElement('svg', { 
-        className: "wp-block-checkbox-icon", 
-        viewBox: "0 0 24 24", 
-        fill: "none", 
-        stroke: "currentColor", 
-        strokeWidth: "3", 
-        strokeLinecap: "round", 
-        strokeLinejoin: "round"
-      },
-        React.createElement('polyline', { points: "20 6 9 17 4 12" })
-      ) : null
-    )
-  );
-});
+    return (
+      <div className={wrapperClass}>
+        <input
+          id={id}
+          name={name}
+          value={value}
+          required={required}
+          disabled={disabled}
+          type="checkbox"
+          checked={currentChecked}
+          onChange={handleChange}
+          className="wp-block-checkbox-input sr-only"
+          ref={ref}
+        />
+        <div className={checkboxClass} onClick={handleClick}>
+          {currentChecked && (
+            <svg
+              className="wp-block-checkbox-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          )}
+        </div>
+      </div>
+    );
+  }
+);
 
 Checkbox.displayName = "Checkbox";

@@ -1,172 +1,201 @@
-import React from 'react';
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useId = React.useId;
-var isValidElement = React.isValidElement;
-var Children = React.Children;
-var cloneElement = React.cloneElement;
-import * as ReactHookFormModule from "react-hook-form@7.55.0";
-import * as LabelModule from "../forms/Label";
+import React, { createContext, useContext, useId, isValidElement, Children, cloneElement } from 'react';
+import { Controller, FormProvider, useFormContext, useFormState } from "react-hook-form@7.55.0";
+import { Label } from "../forms/Label";
 
-var Controller = ReactHookFormModule.Controller;
-var FormProvider = ReactHookFormModule.FormProvider;
-var useFormContext = ReactHookFormModule.useFormContext;
-var useFormState = ReactHookFormModule.useFormState;
-var Label = LabelModule.Label;
+/**
+ * Form Components
+ *
+ * WordPress-aligned form field components with react-hook-form integration.
+ */
 
-export var Form = FormProvider;
+export const Form = FormProvider;
 
-var FormFieldContext = createContext({});
+interface FormFieldContextValue {
+  name: string;
+}
+
+const FormFieldContext = createContext<FormFieldContextValue>({} as FormFieldContextValue);
+
+interface FormFieldProps {
+  name: string;
+  control?: any;
+  rules?: any;
+  defaultValue?: any;
+  shouldUnregister?: boolean;
+  render: any;
+}
 
 /**
  * FormField Component
  */
-export function FormField(props) {
-  return React.createElement(FormFieldContext.Provider, { value: { name: props.name } },
-    React.createElement(Controller, { 
-      name: props.name,
-      control: props.control,
-      rules: props.rules,
-      defaultValue: props.defaultValue,
-      shouldUnregister: props.shouldUnregister,
-      render: props.render
-    })
+export const FormField = ({ name, control, rules, defaultValue, shouldUnregister, render }: FormFieldProps) => {
+  return (
+    <FormFieldContext.Provider value={{ name }}>
+      <Controller
+        name={name}
+        control={control}
+        rules={rules}
+        defaultValue={defaultValue}
+        shouldUnregister={shouldUnregister}
+        render={render}
+      />
+    </FormFieldContext.Provider>
   );
+};
+
+interface FormItemContextValue {
+  id: string;
 }
+
+const FormItemContext = createContext<FormItemContextValue>({} as FormItemContextValue);
 
 /**
  * useFormField Hook
  */
-export function useFormField() {
-  var fieldContext = useContext(FormFieldContext);
-  var itemContext = useContext(FormItemContext);
-  var formContext = useFormContext();
-  var getFieldState = formContext.getFieldState;
-  var formState = useFormState({ name: fieldContext.name });
-  var fieldState = getFieldState(fieldContext.name, formState);
+export const useFormField = () => {
+  const fieldContext = useContext(FormFieldContext);
+  const itemContext = useContext(FormItemContext);
+  const { getFieldState } = useFormContext();
+  const formState = useFormState({ name: fieldContext.name });
+  const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
     throw new Error("useFormField should be used within <FormField>");
   }
 
-  var id = itemContext.id;
+  const { id } = itemContext;
 
-  var result = {
-    id: id,
+  return {
+    id,
     name: fieldContext.name,
-    formItemId: id + "-form-item",
-    formDescriptionId: id + "-form-item-description",
-    formMessageId: id + "-form-item-message",
+    formItemId: `${id}-form-item`,
+    formDescriptionId: `${id}-form-item-description`,
+    formMessageId: `${id}-form-item-message`,
+    ...(fieldState && {
+      error: fieldState.error,
+      isDirty: fieldState.isDirty,
+      isTouched: fieldState.isTouched,
+      invalid: fieldState.invalid,
+    }),
   };
+};
 
-  if (fieldState) {
-    result.error = fieldState.error;
-    result.isDirty = fieldState.isDirty;
-    result.isTouched = fieldState.isTouched;
-    result.invalid = fieldState.invalid;
-  }
-
-  return result;
+interface FormItemProps {
+  className?: string;
+  children?: React.ReactNode;
 }
-
-var FormItemContext = createContext({});
 
 /**
  * FormItem Component
  */
-export function FormItem(props) {
-  var id = useId();
-  var className = props.className || '';
-  var children = props.children;
+export const FormItem = ({ className = '', children }: FormItemProps) => {
+  const id = useId();
 
-  return React.createElement(FormItemContext.Provider, { value: { id: id } },
-    React.createElement('div', {
-      'data-slot': "form-item",
-      className: 'wp-block-form-item ' + className
-    }, children)
+  return (
+    <FormItemContext.Provider value={{ id }}>
+      <div data-slot="form-item" className={`wp-block-form-item ${className}`}>
+        {children}
+      </div>
+    </FormItemContext.Provider>
   );
+};
+
+interface FormLabelProps {
+  className?: string;
+  children?: React.ReactNode;
 }
 
 /**
  * FormLabel Component
  */
-export function FormLabel(props) {
-  var className = props.className || '';
-  var children = props.children;
-  var field = useFormField();
-  var error = field.error;
-  var formItemId = field.formItemId;
+export const FormLabel = ({ className = '', children }: FormLabelProps) => {
+  const { error, formItemId } = useFormField();
 
-  return React.createElement(Label, {
-    'data-slot': "form-label",
-    'data-error': !!error,
-    className: 'wp-block-form-label ' + className,
-    htmlFor: formItemId
-  }, children);
+  return (
+    <Label
+      data-slot="form-label"
+      data-error={!!error}
+      className={`wp-block-form-label ${className}`}
+      htmlFor={formItemId}
+    >
+      {children}
+    </Label>
+  );
+};
+
+interface FormControlProps {
+  className?: string;
+  children?: React.ReactNode;
 }
 
 /**
  * FormControl Component
  */
-export function FormControl(props) {
-  var field = useFormField();
-  var error = field.error;
-  var formItemId = field.formItemId;
-  var formDescriptionId = field.formDescriptionId;
-  var formMessageId = field.formMessageId;
-  var children = props.children;
+export const FormControl = ({ className, children }: FormControlProps) => {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
   if (Children.count(children) === 1 && isValidElement(children)) {
-    var childProps = {
+    const childProps: Record<string, any> = {
       id: formItemId,
       "aria-describedby": !error
         ? formDescriptionId
-        : formDescriptionId + " " + formMessageId,
-      "aria-invalid": !!error
+        : `${formDescriptionId} ${formMessageId}`,
+      "aria-invalid": !!error,
     };
-    
-    if (props.className) childProps.className = props.className;
+
+    if (className) childProps.className = className;
 
     return cloneElement(children, childProps);
   }
 
-  return React.createElement('div', { className: props.className }, children);
+  return <div className={className}>{children}</div>;
+};
+
+interface FormDescriptionProps {
+  className?: string;
+  children?: React.ReactNode;
 }
 
 /**
  * FormDescription Component
  */
-export function FormDescription(props) {
-  var className = props.className || '';
-  var children = props.children;
-  var field = useFormField();
-  var formDescriptionId = field.formDescriptionId;
+export const FormDescription = ({ className = '', children }: FormDescriptionProps) => {
+  const { formDescriptionId } = useFormField();
 
-  return React.createElement('p', {
-    'data-slot': "form-description",
-    id: formDescriptionId,
-    className: 'wp-block-form-description ' + className
-  }, children);
+  return (
+    <p
+      data-slot="form-description"
+      id={formDescriptionId}
+      className={`wp-block-form-description ${className}`}
+    >
+      {children}
+    </p>
+  );
+};
+
+interface FormMessageProps {
+  className?: string;
+  children?: React.ReactNode;
 }
 
 /**
  * FormMessage Component
  */
-export function FormMessage(props) {
-  var className = props.className || '';
-  var children = props.children;
-  var field = useFormField();
-  var error = field.error;
-  var formMessageId = field.formMessageId;
-  var body = error ? String(error.message || "") : children;
+export const FormMessage = ({ className = '', children }: FormMessageProps) => {
+  const { error, formMessageId } = useFormField();
+  const body = error ? String(error.message || "") : children;
 
   if (!body) {
     return null;
   }
 
-  return React.createElement('p', {
-    'data-slot': "form-message",
-    id: formMessageId,
-    className: 'wp-block-form-message ' + className
-  }, body);
-}
+  return (
+    <p
+      data-slot="form-message"
+      id={formMessageId}
+      className={`wp-block-form-message ${className}`}
+    >
+      {body}
+    </p>
+  );
+};

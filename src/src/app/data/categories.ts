@@ -6,7 +6,7 @@
 // Type references (JSDoc only - no runtime import needed):
 // WPCategory
 
-export var postCategories = [
+export const postCategories = [
   {
     id: 1,
     name: 'Uncategorized',
@@ -50,40 +50,40 @@ export var postCategories = [
   }
 ];
 
-export var productCategories = [
+export const productCategories = [
   {
     id: 20,
-    name: 'Electronics',
-    slug: 'electronics',
-    description: 'Cutting-edge tech for everyday life',
-    count: 3
+    name: 'Apparel',
+    slug: 'apparel',
+    description: 'Retro-inspired streetwear and everyday essentials',
+    count: 20
   },
   {
     id: 21,
-    name: 'Clothing',
-    slug: 'clothing',
-    description: 'Sustainable fashion for modern living',
-    count: 3
+    name: 'Accessories',
+    slug: 'accessories',
+    description: 'Bags, watches, and everyday carry gear',
+    count: 20
   },
   {
     id: 22,
-    name: 'Home & Living',
-    slug: 'home-living',
-    description: 'Curated pieces for mindful living',
-    count: 3
+    name: 'Games',
+    slug: 'games',
+    description: 'Board games, card games, and retro gaming gear',
+    count: 20
   },
   {
     id: 23,
-    name: 'Accessories',
-    slug: 'accessories',
-    description: 'Everyday essentials with timeless style',
-    count: 3
+    name: 'Posters',
+    slug: 'posters',
+    description: 'Art prints, wall art, and framed illustrations',
+    count: 20
   },
   {
     id: 24,
-    name: 'Sports & Fitness',
-    slug: 'sports-fitness',
-    description: 'Gear up for your active lifestyle',
-    count: 3
+    name: 'Collectibles',
+    slug: 'collectibles',
+    description: 'Figurines, vinyl, and limited-run treasures',
+    count: 20
   }
 ];

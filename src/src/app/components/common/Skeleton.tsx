@@ -1,193 +1,161 @@
 import React from 'react';
 
-// SkeletonProps structure
-// - width?: string
-// - height?: string
-// - variant?: 'text' | 'circular' | 'rectangular' | 'rounded'
-// - lines?: number
-// - className?: string
-// - noShimmer?: boolean
+interface SkeletonProps {
+  width?: string;
+  height?: string;
+  variant?: 'text' | 'circular' | 'rectangular' | 'rounded';
+  lines?: number;
+  className?: string;
+  noShimmer?: boolean;
+}
 
 /**
  * Skeleton Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
  */
-export function Skeleton(props) {
-  var width = props.width;
-  var height = props.height;
-  var variant = props.variant || 'text';
-  var lines = props.lines || 1;
-  var className = props.className || '';
-  var noShimmer = props.noShimmer !== undefined ? props.noShimmer : false;
-
-  var baseClass = 'wp-skeleton';
-  var shimmerClass = noShimmer ? '' : 'wp-skeleton--shimmer';
-  
-  var variantMap = {
+export const Skeleton = ({
+  width,
+  height,
+  variant = 'text',
+  lines = 1,
+  className = '',
+  noShimmer = false,
+}: SkeletonProps) => {
+  const shimmerClass = noShimmer ? '' : 'wp-skeleton--shimmer';
+  const variantMap: Record<string, string> = {
     text: 'wp-skeleton--text',
     circular: 'wp-skeleton--circular',
     rectangular: 'wp-skeleton--rectangular',
     rounded: 'wp-skeleton--rounded',
   };
 
-  var skeletonClass = [
-    baseClass,
+  const skeletonClass = [
+    'wp-skeleton',
     shimmerClass,
     variantMap[variant] || 'wp-skeleton--text',
     className,
-    'funky-skeleton'
-  ].filter(function(c) { return !!c; }).join(' ');
+    'funky-skeleton',
+  ].filter(Boolean).join(' ');
 
   if (variant === 'text' && lines > 1) {
-    var renderLines = function() {
-      var result = [];
-      for (var i = 0; i < lines; i++) {
-        var lineWidth = width || (i === lines - 1 ? '60%' : '100%');
-        result.push(React.createElement('div', {
-          key: i,
-          className: skeletonClass,
-          style: { width: lineWidth, height: height }
-        }));
-      }
-      return result;
-    };
-
-    return React.createElement('div', { 
-      className: "wp-skeleton__lines", 
-      'aria-busy': "true", 
-      'aria-label': "Loading content" 
-    }, renderLines());
+    return (
+      <div className="wp-skeleton__lines" aria-busy="true" aria-label="Loading content">
+        {Array.from({ length: lines }, (_, i) => (
+          <div
+            key={i}
+            className={skeletonClass}
+            style={{ width: width || (i === lines - 1 ? '60%' : '100%'), height }}
+          />
+        ))}
+      </div>
+    );
   }
 
-  return React.createElement('div', {
-    className: skeletonClass,
-    style: { width: width, height: height },
-    'aria-busy': "true",
-    'aria-label': "Loading"
-  });
+  return (
+    <div
+      className={skeletonClass}
+      style={{ width, height }}
+      aria-busy="true"
+      aria-label="Loading"
+    />
+  );
 }
 
 Skeleton.displayName = 'Skeleton';
 
-/**
- * ProductCardSkeleton Component
- */
-export function ProductCardSkeleton(props) {
-  var className = props.className || '';
-  
-  return React.createElement('div', { className: 'wp-skeleton-card ' + className + ' funky-skeleton-card' },
-    React.createElement(Skeleton, { variant: "rectangular", height: "200px" }),
-    React.createElement('div', { className: "wp-skeleton-card__body" },
-      React.createElement(Skeleton, { variant: "text", width: "80%" }),
-      React.createElement(Skeleton, { variant: "text", width: "50%", className: "wp-skeleton--h-sm" }),
-      React.createElement(Skeleton, { variant: "text", width: "40%", className: "wp-skeleton--h-md" }),
-      React.createElement(Skeleton, { variant: "rounded", height: "40px", className: "wp-skeleton--mt funky-btn-skeleton" })
-    )
+export const ProductCardSkeleton = ({ className = '' }: { className?: string }) => {
+  return (
+    <div className={`wp-skeleton-card ${className} funky-skeleton-card`}>
+      <Skeleton variant="rectangular" height="200px" />
+      <div className="wp-skeleton-card__body">
+        <Skeleton variant="text" width="80%" />
+        <Skeleton variant="text" width="50%" className="wp-skeleton--h-sm" />
+        <Skeleton variant="text" width="40%" className="wp-skeleton--h-md" />
+        <Skeleton variant="rounded" height="40px" className="wp-skeleton--mt funky-btn-skeleton" />
+      </div>
+    </div>
   );
 }
 
 ProductCardSkeleton.displayName = 'ProductCardSkeleton';
 
-/**
- * BlogPostSkeleton Component
- */
-export function BlogPostSkeleton(props) {
-  var className = props.className || '';
-  
-  return React.createElement('div', { className: 'wp-skeleton-card ' + className + ' funky-skeleton-card' },
-    React.createElement(Skeleton, { variant: "rectangular", height: "200px" }),
-    React.createElement('div', { className: "wp-skeleton-card__body wp-skeleton-card__body--lg" },
-      React.createElement(Skeleton, { variant: "rounded", width: "80px", height: "24px" }),
-      React.createElement(Skeleton, { variant: "text", lines: 2 }),
-      React.createElement(Skeleton, { variant: "text", lines: 3, className: "wp-skeleton--h-sm" }),
-      React.createElement('div', { className: "wp-skeleton-card__meta" },
-        React.createElement(Skeleton, { variant: "text", width: "100px", className: "wp-skeleton--h-sm" }),
-        React.createElement(Skeleton, { variant: "text", width: "100px", className: "wp-skeleton--h-sm" })
-      )
-    )
+export const BlogPostSkeleton = ({ className = '' }: { className?: string }) => {
+  return (
+    <div className={`wp-skeleton-card ${className} funky-skeleton-card`}>
+      <Skeleton variant="rectangular" height="200px" />
+      <div className="wp-skeleton-card__body wp-skeleton-card__body--lg">
+        <Skeleton variant="rounded" width="80px" height="24px" />
+        <Skeleton variant="text" lines={2} />
+        <Skeleton variant="text" lines={3} className="wp-skeleton--h-sm" />
+        <div className="wp-skeleton-card__meta">
+          <Skeleton variant="text" width="100px" className="wp-skeleton--h-sm" />
+          <Skeleton variant="text" width="100px" className="wp-skeleton--h-sm" />
+        </div>
+      </div>
+    </div>
   );
 }
 
 BlogPostSkeleton.displayName = 'BlogPostSkeleton';
 
-/**
- * ListItemSkeleton Component
- */
-export function ListItemSkeleton(props) {
-  var className = props.className || '';
-  
-  return React.createElement('div', { className: 'wp-skeleton-list-item ' + className },
-    React.createElement('div', { className: "wp-skeleton-list-item__row" },
-      React.createElement(Skeleton, { variant: "circular", width: "48px", height: "48px" }),
-      React.createElement('div', { className: "wp-skeleton-list-item__content" },
-        React.createElement(Skeleton, { variant: "text", width: "200px" }),
-        React.createElement(Skeleton, { variant: "text", width: "150px", className: "wp-skeleton--h-sm" })
-      ),
-      React.createElement(Skeleton, { variant: "rounded", width: "80px", height: "32px" })
-    )
+export const ListItemSkeleton = ({ className = '' }: { className?: string }) => {
+  return (
+    <div className={`wp-skeleton-list-item ${className}`}>
+      <div className="wp-skeleton-list-item__row">
+        <Skeleton variant="circular" width="48px" height="48px" />
+        <div className="wp-skeleton-list-item__content">
+          <Skeleton variant="text" width="200px" />
+          <Skeleton variant="text" width="150px" className="wp-skeleton--h-sm" />
+        </div>
+        <Skeleton variant="rounded" width="80px" height="32px" />
+      </div>
+    </div>
   );
 }
 
 ListItemSkeleton.displayName = 'ListItemSkeleton';
 
-/**
- * TableSkeleton Component
- */
-export function TableSkeleton(props) {
-  var rows = props.rows || 5;
-  var columns = props.columns || 4;
-  var className = props.className || '';
+interface TableSkeletonProps {
+  rows?: number;
+  columns?: number;
+  className?: string;
+}
 
-  var renderHeader = function() {
-    var result = [];
-    for (var i = 0; i < columns; i++) {
-      result.push(React.createElement(Skeleton, { key: 'header-' + i, variant: "text", width: "80%" }));
-    }
-    return result;
-  };
-
-  var renderRows = function() {
-    var result = [];
-    for (var i = 0; i < rows; i++) {
-      var cells = [];
-      for (var j = 0; j < columns; j++) {
-        cells.push(React.createElement(Skeleton, { key: 'cell-' + i + '-' + j, variant: "text", width: "90%" }));
-      }
-      result.push(React.createElement('div', { key: 'row-' + i, className: "wp-skeleton-table__row" }, cells));
-    }
-    return result;
-  };
-
-  return React.createElement('div', { className: 'wp-skeleton-table ' + className },
-    React.createElement('div', { className: "wp-skeleton-table__header" }, renderHeader()),
-    renderRows()
+export const TableSkeleton = ({ rows = 5, columns = 4, className = '' }: TableSkeletonProps) => {
+  return (
+    <div className={`wp-skeleton-table ${className}`}>
+      <div className="wp-skeleton-table__header">
+        {Array.from({ length: columns }, (_, i) => (
+          <Skeleton key={`header-${i}`} variant="text" width="80%" />
+        ))}
+      </div>
+      {Array.from({ length: rows }, (_, i) => (
+        <div key={`row-${i}`} className="wp-skeleton-table__row">
+          {Array.from({ length: columns }, (_, j) => (
+            <Skeleton key={`cell-${i}-${j}`} variant="text" width="90%" />
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
 TableSkeleton.displayName = 'TableSkeleton';
 
-/**
- * PageSkeleton Component
- */
-export function PageSkeleton(props) {
-  var className = props.className || '';
-  
-  return React.createElement('div', { className: 'wp-skeleton-page ' + className },
-    React.createElement('div', { className: "wp-skeleton-page__section" },
-      React.createElement(Skeleton, { variant: "text", width: "60%", className: "wp-skeleton--h-lg" }),
-      React.createElement(Skeleton, { variant: "text", width: "40%", className: "wp-skeleton--h-base" })
-    ),
-    React.createElement('div', { className: "wp-skeleton-page__section" },
-      React.createElement(Skeleton, { variant: "text", lines: 8 })
-    ),
-    React.createElement(Skeleton, { variant: "rounded", height: "300px" }),
-    React.createElement('div', { className: "wp-skeleton-page__section" },
-      React.createElement(Skeleton, { variant: "text", lines: 6 })
-    )
+export const PageSkeleton = ({ className = '' }: { className?: string }) => {
+  return (
+    <div className={`wp-skeleton-page ${className}`}>
+      <div className="wp-skeleton-page__section">
+        <Skeleton variant="text" width="60%" className="wp-skeleton--h-lg" />
+        <Skeleton variant="text" width="40%" className="wp-skeleton--h-base" />
+      </div>
+      <div className="wp-skeleton-page__section">
+        <Skeleton variant="text" lines={8} />
+      </div>
+      <Skeleton variant="rounded" height="300px" />
+      <div className="wp-skeleton-page__section">
+        <Skeleton variant="text" lines={6} />
+      </div>
+    </div>
   );
 }
 

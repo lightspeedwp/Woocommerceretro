@@ -1,129 +1,148 @@
 import React from 'react';
-var forwardRef = React.forwardRef;
-
-import * as ReactRouterModule from 'react-router';
+import { Link } from 'react-router';
 import { SpinnerGap } from '@phosphor-icons/react';
 
-var Link = ReactRouterModule.Link;
+interface ButtonProps {
+  variant?: string;
+  size?: string;
+  href?: string;
+  to?: string;
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
+  loading?: boolean;
+  fullWidth?: boolean;
+  ariaLabel?: string;
+  target?: string;
+  rel?: string;
+  className?: string;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: (e: any) => void;
+}
 
 /**
  * Button Component (Design Block)
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript syntax (no generics, no interfaces, no type annotations)
  */
-export var Button = forwardRef(function Button(props, ref) {
-  var variant = props.variant || 'primary';
-  var size = props.size || 'default';
-  var href = props.href;
-  var to = props.to;
-  var icon = props.icon;
-  var iconPosition = props.iconPosition || 'left';
-  var loading = props.loading || false;
-  var fullWidth = props.fullWidth || false;
-  var ariaLabel = props.ariaLabel;
-  var target = props.target;
-  var rel = props.rel;
-  var className = props.className || '';
-  var children = props.children;
-  var disabled = props.disabled;
-  var type = props.type || 'button';
-  var onClick = props.onClick;
+export const Button = React.forwardRef<any, ButtonProps>(({
+  variant = 'primary',
+  size = 'default',
+  href,
+  to,
+  icon,
+  iconPosition = 'left',
+  loading = false,
+  fullWidth = false,
+  ariaLabel,
+  target,
+  rel,
+  className = '',
+  children,
+  disabled,
+  type = 'button',
+  onClick,
+}, ref) => {
+  const normalizedVariant = variant === 'default' ? 'primary' : variant;
 
-  var normalizedVariant = variant === 'default' ? 'primary' : variant;
-  var baseClass = 'wp-block-button';
-  var variantClass = 'wp-block-button--' + normalizedVariant;
-  var sizeClass = 'wp-block-button--size-' + size;
-  var fullWidthClass = fullWidth ? 'wp-block-button--full-width' : '';
-
-  var combinedClassName = [
-    baseClass,
-    variantClass,
-    sizeClass,
-    fullWidthClass,
+  const combinedClassName = [
+    'wp-block-button',
+    `wp-block-button--${normalizedVariant}`,
+    `wp-block-button--size-${size}`,
+    fullWidth ? 'wp-block-button--full-width' : '',
     className,
-    'funky-btn'
-  ].filter(function(c) { return !!c; }).join(' ');
+    'funky-btn',
+  ].filter(Boolean).join(' ');
 
-  var renderIcon = function() {
+  const renderIcon = () => {
     if (loading) {
-      return React.createElement(SpinnerGap, { className: 'wp-block-button__spinner funky-spinner', size: 16, weight: "bold", 'aria-hidden': 'true' });
+      return <SpinnerGap className="wp-block-button__spinner funky-spinner" size={16} weight="bold" aria-hidden="true" />;
     }
-    return icon ? React.createElement('span', { className: 'wp-block-button__icon' }, icon) : null;
+    return icon ? <span className="wp-block-button__icon">{icon}</span> : null;
   };
 
-  var content = React.createElement(React.Fragment, null,
-    iconPosition === 'left' ? renderIcon() : null,
-    children,
-    iconPosition === 'right' && !loading ? renderIcon() : null
+  const content = (
+    <>
+      {iconPosition === 'left' ? renderIcon() : null}
+      {children}
+      {iconPosition === 'right' && !loading ? renderIcon() : null}
+    </>
   );
 
   if (href) {
-    return React.createElement('a', {
-      href: href,
-      target: target,
-      rel: rel || (target === '_blank' ? 'noopener noreferrer' : undefined),
-      className: combinedClassName,
-      'aria-label': ariaLabel,
-      'aria-disabled': disabled,
-      ref: ref,
-      onClick: onClick
-    }, content);
+    return (
+      <a
+        href={href}
+        target={target}
+        rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
+        className={combinedClassName}
+        aria-label={ariaLabel}
+        aria-disabled={disabled}
+        ref={ref}
+        onClick={onClick}
+      >
+        {content}
+      </a>
+    );
   }
 
   if (to) {
-    return React.createElement(Link, {
-      to: to,
-      className: combinedClassName,
-      'aria-label': ariaLabel,
-      'aria-disabled': disabled,
-      ref: ref,
-      onClick: onClick
-    }, content);
+    return (
+      <Link to={to} className={combinedClassName} aria-label={ariaLabel} aria-disabled={disabled} ref={ref} onClick={onClick}>
+        {content}
+      </Link>
+    );
   }
 
-  return React.createElement('button', {
-    ref: ref,
-    type: type,
-    disabled: disabled || loading,
-    className: combinedClassName,
-    'aria-label': ariaLabel,
-    'aria-busy': loading,
-    onClick: onClick
-  }, content);
+  return (
+    <button
+      ref={ref}
+      type={type}
+      disabled={disabled || loading}
+      className={combinedClassName}
+      aria-label={ariaLabel}
+      aria-busy={loading}
+      onClick={onClick}
+    >
+      {content}
+    </button>
+  );
 });
 
 Button.displayName = 'Button';
 
-export function Buttons(props) {
-  var orientation = props.orientation || 'horizontal';
-  var gap = props.gap || 'md';
-  var align = props.align || 'start';
-  var className = props.className || '';
-  var children = props.children;
+interface ButtonsProps {
+  orientation?: 'horizontal' | 'vertical';
+  gap?: 'none' | 'sm' | 'md' | 'lg';
+  align?: 'start' | 'center' | 'end' | 'between';
+  className?: string;
+  children?: React.ReactNode;
+}
 
-  var classes = [
+export const Buttons = ({ orientation = 'horizontal', gap = 'md', align = 'start', className = '', children }: ButtonsProps) => {
+  const classes = [
     'wp-block-buttons',
     orientation === 'vertical' ? 'is-vertical' : '',
     align === 'center' ? 'is-content-justification-center' : '',
     align === 'end' ? 'is-content-justification-right' : '',
     align === 'between' ? 'is-content-justification-space-between' : '',
     className,
-    'funky-buttons-group'
-  ].filter(function(c) { return !!c; }).join(' ');
+    'funky-buttons-group',
+  ].filter(Boolean).join(' ');
 
-  var style = {};
-  if (gap === 'none') style.gap = '0';
-  if (gap === 'sm') style.gap = 'var(--wp--preset--spacing--20)';
-  if (gap === 'md') style.gap = 'var(--wp--preset--spacing--40)';
-  if (gap === 'lg') style.gap = 'var(--wp--preset--spacing--60)';
+  const gapMap: Record<string, string> = {
+    none: '0',
+    sm: 'var(--wp--preset--spacing--20)',
+    md: 'var(--wp--preset--spacing--40)',
+    lg: 'var(--wp--preset--spacing--60)',
+  };
 
-  return React.createElement('div', { className: classes, style: style }, children);
-}
+  return (
+    <div className={classes} style={{ gap: gapMap[gap] }}>
+      {children}
+    </div>
+  );
+};
 
 Buttons.displayName = 'Buttons';
 
-export var ResponsiveButtons = Buttons;
+export const ResponsiveButtons = Buttons;

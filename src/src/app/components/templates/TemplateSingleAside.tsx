@@ -1,15 +1,10 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { useParams } from 'react-router';
 import { Chat as MessageSquare, ThumbsUp, ShareNetwork as Share2 } from '@phosphor-icons/react';
 
-import * as LayoutModule from '../parts/Layout';
-import * as ContainerModule from '../common/Container';
-import * as PostsDataModule from '../../data/posts';
-
-var useParams = ReactRouterModule.useParams;
-var Layout = LayoutModule.Layout;
-var Container = ContainerModule.Container;
-var getPostBySlug = PostsDataModule.getPostBySlug;
+import { Layout } from '../parts/Layout';
+import { Container } from '../common/Container';
+import { getPostBySlug } from '../../data/posts';
 
 /**
  * TemplateSingleAside — Status Update / Aside Post Format
@@ -19,53 +14,52 @@ var getPostBySlug = PostsDataModule.getPostBySlug;
  *
  * **CSS:** `/src/styles/sections/blog-funky.css` (Section 15)
  */
-export function TemplateSingleAside() {
-  var params = useParams();
-  var slug = params.slug;
-  var post = getPostBySlug(slug || '');
+export const TemplateSingleAside = () => {
+  const { slug } = useParams();
+  const post = getPostBySlug(slug || '');
 
-  if (!post) return React.createElement('div', { className: "single-post__not-found" }, "Post not found");
+  if (!post) return <div className="single-post__not-found">Post not found</div>;
 
   return (
-    React.createElement(Layout, null,
-      React.createElement('article', { className: "single-aside" },
-        React.createElement(Container, null,
-          React.createElement('div', { className: "single-aside__card" },
-            /* Decorative background icon */
-            React.createElement('div', { className: "single-aside__bg-icon", "aria-hidden": "true" },
-              React.createElement(MessageSquare, { size: 200, strokeWidth: 0.5 })
-            ),
+    <Layout>
+      <article className="single-aside">
+        <Container>
+          <div className="single-aside__card">
+            {/* Decorative background icon */}
+            <div className="single-aside__bg-icon" aria-hidden="true">
+              <MessageSquare size={200} strokeWidth={0.5} />
+            </div>
 
-            React.createElement('div', { className: "single-aside__content" },
-              React.createElement('div', { className: "single-aside__icon-circle" },
-                React.createElement(MessageSquare, { size: 32 })
-              ),
+            <div className="single-aside__content">
+              <div className="single-aside__icon-circle">
+                <MessageSquare size={32} />
+              </div>
 
-              React.createElement('div', { className: "single-aside__quote" },
-                "\u201C", post.content.rendered.replace(/<[^>]*>/g, ''), "\u201D"
-              ),
+              <div className="single-aside__quote">
+                &ldquo;{post.content.rendered.replace(/<[^>]*>/g, '')}&rdquo;
+              </div>
 
-              React.createElement('div', { className: "single-aside__footer" },
-                React.createElement('span', { className: "single-aside__date" },
-                  new Date(post.date).toLocaleDateString() + ' at ',
-                  new Date(post.date).toLocaleTimeString([], {
+              <div className="single-aside__footer">
+                <span className="single-aside__date">
+                  {new Date(post.date).toLocaleDateString()} at{' '}
+                  {new Date(post.date).toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',
-                  })
-                ),
-                React.createElement('div', { className: "single-aside__actions" },
-                  React.createElement('button', { className: "single-aside__action-btn", "aria-label": "Like" },
-                    React.createElement(ThumbsUp, { size: 20 })
-                  ),
-                  React.createElement('button', { className: "single-aside__action-btn", "aria-label": "Share" },
-                    React.createElement(Share2, { size: 20 })
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
-    )
+                  })}
+                </span>
+                <div className="single-aside__actions">
+                  <button className="single-aside__action-btn" aria-label="Like">
+                    <ThumbsUp size={20} />
+                  </button>
+                  <button className="single-aside__action-btn" aria-label="Share">
+                    <Share2 size={20} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </article>
+    </Layout>
   );
 }

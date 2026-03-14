@@ -2,7 +2,7 @@ import React from "react";
 import { Progress as NewProgress } from "../../src/app/components/blocks/feedback/Progress";
 
 // Re-export component
-var Progress = NewProgress;
+const Progress = NewProgress;
 
 /**
  * Legacy Progress compatibility shim.

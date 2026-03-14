@@ -1,0 +1,229 @@
+/* ========================================
+   FORM SHOWCASE — Dev Tools Page
+   
+   Layout and dark mode styles for the
+   /dev-tools/forms page. Uses retro theme
+   tokens for automatic light/dark support.
+   ======================================== */
+
+/* ----------------------------------------
+   Page Header
+   ---------------------------------------- */
+.wp-form-showcase {
+  padding-block: var(--wp--preset--spacing--70);
+}
+
+.wp-form-showcase__header {
+  margin-block-end: var(--wp--preset--spacing--60);
+}
+
+.wp-form-showcase__header h1 {
+  color: var(--color-ink, var(--wp--preset--color--foreground));
+  margin-block-end: var(--wp--preset--spacing--20);
+}
+
+.wp-form-showcase__header p {
+  color: var(--color-text-soft, var(--wp--preset--color--muted-foreground));
+  max-width: 65ch;
+}
+
+/* ----------------------------------------
+   Sections Container
+   ---------------------------------------- */
+.wp-form-showcase__sections {
+  display: grid;
+  gap: var(--wp--preset--spacing--60);
+}
+
+/* ----------------------------------------
+   Individual Section Cards
+   ---------------------------------------- */
+.wp-form-showcase__section {
+  background-color: var(--color-panel, var(--wp--preset--color--surface));
+  border: var(--retro-border-width, 2px) solid var(--color-border, var(--wp--preset--color--border));
+  border-radius: var(--retro-radius, var(--wp--preset--border-radius--md));
+  padding: var(--wp--preset--spacing--50);
+  box-shadow: var(--shadow-retro-sm, var(--wp--preset--shadow--sm));
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.wp-form-showcase__section:hover {
+  box-shadow: var(--shadow-retro, var(--wp--preset--shadow--md));
+}
+
+.wp-form-showcase__section h2 {
+  color: var(--color-ink, var(--wp--preset--color--foreground));
+  border-block-end: 1px solid var(--color-border-soft, var(--wp--preset--color--border-light));
+  padding-block-end: var(--wp--preset--spacing--30);
+  margin-block-end: var(--wp--preset--spacing--40);
+}
+
+/* ----------------------------------------
+   Form Layout Helpers
+   ---------------------------------------- */
+.wp-form-showcase__grid-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-form-showcase__grid-2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wp-form-showcase__narrow {
+  max-width: 28rem;
+}
+
+.wp-form-showcase__inline-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30);
+  align-items: flex-start;
+}
+
+.wp-form-showcase__inline-group .wp-block-input {
+  flex: 1;
+  min-width: 12rem;
+}
+
+.wp-form-showcase__inline-group .wp-block-button__link,
+.wp-form-showcase__inline-group .wp-element-button {
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------
+   Hint / Helper Text
+   ---------------------------------------- */
+.wp-form-showcase__hint {
+  color: var(--color-text-muted, var(--wp--preset--color--muted-foreground));
+  font-size: var(--wp--preset--font-size--100);
+  line-height: var(--wp--preset--line-height--normal);
+}
+
+.wp-form-showcase__hint--italic {
+  font-style: italic;
+}
+
+/* ----------------------------------------
+   Fieldset
+   ---------------------------------------- */
+.wp-form-showcase__fieldset {
+  border: 1px solid var(--color-border, var(--wp--preset--color--border));
+  border-radius: var(--retro-radius, var(--wp--preset--border-radius--md));
+  padding: var(--wp--preset--spacing--40);
+  margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.wp-form-showcase__fieldset legend {
+  color: var(--color-ink, var(--wp--preset--color--foreground));
+  font-weight: var(--wp--preset--font-weight--semibold);
+  padding-inline: var(--wp--preset--spacing--20);
+}
+
+/* ----------------------------------------
+   Form Blocks — wp-block-form spacing
+   ---------------------------------------- */
+.wp-form-showcase .wp-block-form {
+  display: grid;
+  gap: var(--wp--preset--spacing--40);
+}
+
+/* ----------------------------------------
+   Dark Mode — Form Input Overrides
+   
+   The wp-block-input, wp-block-textarea,
+   wp-block-select, and wp-block-checkbox
+   use --wp--preset--color--* tokens which
+   are only defined for light mode. These
+   overrides map them to retro dark tokens.
+   ---------------------------------------- */
+.dark .wp-block-input,
+.dark .wp-block-textarea,
+.dark .wp-block-select {
+  background-color: var(--color-inset, #11161A);
+  color: var(--color-text, #E8E2D8);
+  border-color: var(--color-border, #3E4A52);
+}
+
+.dark .wp-block-input::placeholder,
+.dark .wp-block-textarea::placeholder {
+  color: var(--color-text-muted, #8A9499);
+}
+
+.dark .wp-block-input:focus-visible,
+.dark .wp-block-textarea:focus-visible,
+.dark .wp-block-select:focus-visible,
+.dark .wp-block-input:focus,
+.dark .wp-block-textarea:focus,
+.dark .wp-block-select:focus {
+  border-color: var(--color-focus, #5DA0E0);
+  box-shadow: 0 0 0 2px var(--color-focus, #5DA0E0);
+}
+
+.dark .wp-block-input:disabled,
+.dark .wp-block-textarea:disabled,
+.dark .wp-block-select:disabled {
+  background-color: var(--color-panel-alt, #2A333C);
+  color: var(--color-text-muted, #8A9499);
+}
+
+/* Select native dropdown */
+.dark .wp-block-select option {
+  background-color: var(--color-panel, #232A32);
+  color: var(--color-text, #E8E2D8);
+}
+
+/* Form labels */
+.dark .wp-block-form-label {
+  color: var(--color-text, #E8E2D8);
+}
+
+/* Checkbox overrides */
+.dark .wp-block-checkbox__input,
+.dark .wp-block-checkbox {
+  background-color: var(--color-inset, #11161A);
+  border-color: var(--color-border, #3E4A52);
+}
+
+.dark .wp-block-checkbox__label,
+.dark .wp-block-checkbox-label {
+  color: var(--color-text, #E8E2D8);
+}
+
+/* Button overrides for form context */
+.dark .wp-form-showcase .wp-block-button__link,
+.dark .wp-form-showcase .wp-element-button {
+  background-color: var(--color-signal, #5DA0E0);
+  color: var(--color-paper, #151A1E);
+  border-color: var(--color-signal, #5DA0E0);
+}
+
+.dark .wp-form-showcase .wp-block-button__link:hover,
+.dark .wp-form-showcase .wp-element-button:hover {
+  background-color: var(--color-signal-hover, #7DB8F0);
+  border-color: var(--color-signal-hover, #7DB8F0);
+}
+
+/* Search block dark overrides */
+.dark .wp-block-search__button {
+  background-color: var(--color-signal, #5DA0E0);
+  color: var(--color-paper, #151A1E);
+}
+
+.dark .wp-block-search__button:hover {
+  background-color: var(--color-signal-hover, #7DB8F0);
+}
+
+/* Form description text in dark mode */
+.dark .wp-form-showcase p {
+  color: var(--color-text-soft, #C4CBC3);
+}
+
+/* Funky input glow — dark mode enhancement */
+.dark .wp-form-showcase .funky-input-glow:focus {
+  border-color: var(--color-focus, #5DA0E0);
+  box-shadow: 0 0 0 3px rgba(93, 160, 224, 0.2), 0 0 12px rgba(93, 160, 224, 0.1);
+}

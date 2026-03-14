@@ -1,0 +1,484 @@
+/**
+ * Membership Landing Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for membership landing page.
+ *
+ * **Components:**
+ * - Stats grid
+ * - Billing toggle
+ * - Pricing cards
+ * - ROI calculator
+ * - FAQ accordion
+ * - CTA section
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   STATS SECTION
+   ========================================================================== */
+
+.retro-section--stats {
+  background: var(--retro-bg-secondary);
+  padding: var(--retro-space-12) 0;
+  border-top: 2px solid var(--retro-neon-cyan);
+  border-bottom: 2px solid var(--retro-neon-cyan);
+}
+
+.retro-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--retro-space-8);
+  text-align: center;
+}
+
+.retro-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-2);
+}
+
+.retro-stat-value {
+  font-size: var(--retro-text-3xl);
+  color: var(--retro-neon-cyan);
+  text-shadow: 0 0 10px var(--retro-neon-cyan);
+  line-height: 1;
+}
+
+.retro-stat-label {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   PRICING SECTION
+   ========================================================================== */
+
+.retro-section--pricing {
+  padding: var(--retro-space-16) 0;
+}
+
+/* Billing Toggle */
+.retro-billing-toggle {
+  display: flex;
+  gap: var(--retro-space-4);
+  justify-content: center;
+  margin: var(--retro-space-8) 0;
+  flex-wrap: wrap;
+}
+
+.retro-toggle-btn {
+  padding: var(--retro-space-3) var(--retro-space-6);
+  background: transparent;
+  border: 2px solid var(--retro-neon-cyan);
+  color: var(--retro-neon-cyan);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: var(--retro-text-sm);
+  letter-spacing: 0.05em;
+}
+
+.retro-toggle-btn:hover {
+  background: rgba(0, 255, 249, 0.1);
+  box-shadow: 0 0 10px var(--retro-neon-cyan);
+}
+
+.retro-toggle-btn--active {
+  background: var(--retro-neon-cyan);
+  color: var(--retro-bg-primary);
+  box-shadow: 0 0 15px var(--retro-neon-cyan);
+}
+
+.retro-toggle-btn:focus-visible {
+  outline: 2px solid var(--retro-neon-magenta);
+  outline-offset: 2px;
+}
+
+/* Pricing Cards */
+.retro-pricing-card {
+  position: relative;
+  padding: var(--retro-space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4);
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.retro-pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px var(--retro-neon-cyan);
+}
+
+.retro-pricing-card--popular {
+  border-color: var(--retro-neon-magenta);
+  box-shadow: 0 0 15px var(--retro-neon-magenta);
+}
+
+.retro-pricing-card--popular:hover {
+  box-shadow: 0 0 25px var(--retro-neon-magenta);
+}
+
+.retro-badge--popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--retro-neon-magenta);
+  color: var(--retro-bg-primary);
+  padding: var(--retro-space-2) var(--retro-space-4);
+  font-size: var(--retro-text-xs);
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 10px var(--retro-neon-magenta);
+}
+
+.retro-pricing-name {
+  font-size: var(--retro-text-xl);
+  color: var(--retro-text-primary);
+  text-align: center;
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-pricing-desc {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  text-align: center;
+  min-height: 3em;
+}
+
+.retro-pricing-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-1);
+  padding: var(--retro-space-6) 0;
+  border-top: 1px solid var(--retro-border-primary);
+  border-bottom: 1px solid var(--retro-border-primary);
+}
+
+.retro-pricing-price {
+  font-size: var(--retro-text-4xl);
+  color: var(--retro-neon-cyan);
+  text-shadow: 0 0 10px var(--retro-neon-cyan);
+  line-height: 1;
+}
+
+.retro-pricing-card--popular .retro-pricing-price {
+  color: var(--retro-neon-magenta);
+  text-shadow: 0 0 10px var(--retro-neon-magenta);
+}
+
+.retro-pricing-period {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-muted);
+}
+
+/* Features List */
+.retro-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-3);
+  flex-grow: 1;
+}
+
+.retro-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--retro-space-3);
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-primary);
+}
+
+.retro-feature-check {
+  color: var(--retro-neon-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.retro-pricing-card--popular .retro-feature-check {
+  color: var(--retro-neon-magenta);
+}
+
+/* ==========================================================================
+   ROI SECTION
+   ========================================================================== */
+
+.retro-section--roi {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-primary);
+}
+
+.retro-roi-card {
+  text-align: center;
+  padding: var(--retro-space-12);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.retro-roi-icon {
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-neon-icon {
+  color: var(--retro-neon-yellow);
+  filter: drop-shadow(0 0 10px var(--retro-neon-yellow));
+}
+
+.retro-roi-title {
+  font-size: var(--retro-text-2xl);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-4);
+}
+
+.retro-roi-desc {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+  margin-bottom: var(--retro-space-8);
+}
+
+.retro-roi-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--retro-space-8);
+  margin: var(--retro-space-8) 0;
+  padding: var(--retro-space-8) 0;
+  border-top: 2px solid var(--retro-neon-yellow);
+  border-bottom: 2px solid var(--retro-neon-yellow);
+}
+
+.retro-roi-stats .retro-stat-value {
+  color: var(--retro-neon-yellow);
+  text-shadow: 0 0 10px var(--retro-neon-yellow);
+}
+
+.retro-roi-summary {
+  font-size: var(--retro-text-lg);
+  color: var(--retro-text-primary);
+  margin: var(--retro-space-8) 0;
+}
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+
+.retro-section--faq {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.retro-faq-item {
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-primary);
+  transition: all 0.3s ease;
+}
+
+.retro-faq-item:hover {
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 10px var(--retro-neon-cyan);
+}
+
+.retro-faq-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--retro-space-4);
+  padding: var(--retro-space-6);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.retro-faq-trigger:hover {
+  background: rgba(0, 255, 249, 0.05);
+}
+
+.retro-faq-trigger:focus-visible {
+  outline: 2px solid var(--retro-neon-magenta);
+  outline-offset: -2px;
+}
+
+.retro-faq-question {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-primary);
+  flex-grow: 1;
+}
+
+.retro-faq-chevron {
+  color: var(--retro-neon-cyan);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.retro-faq-chevron--open {
+  transform: rotate(180deg);
+}
+
+.retro-faq-answer {
+  padding: 0 var(--retro-space-6) var(--retro-space-6);
+  border-top: 1px solid var(--retro-border-primary);
+  animation: retro-fade-in 0.3s ease;
+}
+
+.retro-faq-answer p {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  line-height: 1.6;
+  margin: var(--retro-space-4) 0 0;
+}
+
+@keyframes retro-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   CTA SECTION
+   ========================================================================== */
+
+.retro-section--cta {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-section--cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.retro-cta-card {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--retro-space-12);
+  max-width: 700px;
+  margin: 0 auto;
+  border: 2px solid var(--retro-neon-magenta);
+  background: var(--retro-bg-secondary);
+  box-shadow: 0 0 20px var(--retro-neon-magenta);
+}
+
+.retro-cta-icon {
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-cta-title {
+  font-size: var(--retro-text-2xl);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-4);
+  line-height: 1.3;
+}
+
+.retro-cta-desc {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+  margin-bottom: var(--retro-space-8);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   SECTION FOOTER
+   ========================================================================== */
+
+.retro-section-footer {
+  text-align: center;
+  margin-top: var(--retro-space-8);
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .retro-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--retro-space-6);
+  }
+
+  .retro-billing-toggle {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .retro-toggle-btn {
+    width: 100%;
+  }
+
+  .retro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-roi-stats {
+    grid-template-columns: 1fr;
+    gap: var(--retro-space-6);
+  }
+
+  .retro-pricing-card {
+    padding: var(--retro-space-6);
+  }
+
+  .retro-roi-card,
+  .retro-cta-card {
+    padding: var(--retro-space-8);
+  }
+
+  .retro-roi-title,
+  .retro-cta-title {
+    font-size: var(--retro-text-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-stat-value {
+    font-size: var(--retro-text-2xl);
+  }
+
+  .retro-pricing-price {
+    font-size: var(--retro-text-3xl);
+  }
+
+  .retro-badge--popular {
+    font-size: 0.65rem;
+    padding: var(--retro-space-1) var(--retro-space-3);
+  }
+}

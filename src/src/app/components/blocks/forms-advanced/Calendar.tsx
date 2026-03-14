@@ -1,56 +1,56 @@
 "use client";
 
-import * as React from "react";
+import React from "react";
 import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from '@phosphor-icons/react';
-
-import * as DayPickerModule from "react-day-picker";
-import * as cnModule from "@/utils/cn";
-
-var DayPicker = DayPickerModule.DayPicker;
-var cn = cnModule.cn;
+import { DayPicker } from "react-day-picker";
+import { cn } from "@/utils/cn";
 
 /**
  * Calendar Component
- * Uses react-day-picker.
- * 
- * Refactored to use BEM classes defined in /src/styles/blocks/widgets/calendar.css
- * 
- * @typedef {Object} CalendarProps
- * @property {string} [className]
- * @property {Object} [classNames]
- * @property {boolean} [showOutsideDays]
- * @property {string} [mode]
- * @property {any} [selected]
- * @property {Function} [onSelect]
- * @property {any} [disabled]
- * @property {boolean} [initialFocus]
- * @property {Date} [fromDate]
- * @property {Date} [toDate]
- * @property {Date} [fromMonth]
- * @property {Date} [toMonth]
- * @property {number} [fromYear]
- * @property {number} [toYear]
- * @property {Object} [components]
+ *
+ * Uses react-day-picker with WordPress BEM classes defined in
+ * /src/styles/blocks/widgets/calendar.css
+ *
+ * @example
+ * <Calendar mode="single" selected={date} onSelect={setDate} />
  */
 
-function Calendar(props) {
-  var className = props.className;
-  var classNames = props.classNames;
-  var showOutsideDays = props.showOutsideDays === undefined ? true : props.showOutsideDays;
-  var mode = props.mode;
-  var selected = props.selected;
-  var onSelect = props.onSelect;
-  var disabled = props.disabled;
-  var initialFocus = props.initialFocus;
-  var fromDate = props.fromDate;
-  var toDate = props.toDate;
-  var fromMonth = props.fromMonth;
-  var toMonth = props.toMonth;
-  var fromYear = props.fromYear;
-  var toYear = props.toYear;
-  var components = props.components;
+interface CalendarProps {
+  className?: string;
+  classNames?: Record<string, string>;
+  showOutsideDays?: boolean;
+  mode?: any;
+  selected?: any;
+  onSelect?: any;
+  disabled?: any;
+  initialFocus?: boolean;
+  fromDate?: Date;
+  toDate?: Date;
+  fromMonth?: Date;
+  toMonth?: Date;
+  fromYear?: number;
+  toYear?: number;
+  components?: Record<string, any>;
+}
 
-  var mergedClassNames = {
+const Calendar = ({
+  className,
+  classNames,
+  showOutsideDays = true,
+  mode,
+  selected,
+  onSelect,
+  disabled,
+  initialFocus,
+  fromDate,
+  toDate,
+  fromMonth,
+  toMonth,
+  fromYear,
+  toYear,
+  components,
+}: CalendarProps) => {
+  const mergedClassNames: Record<string, string> = {
     months: "wp-block-calendar__months",
     month: "wp-block-calendar__month",
     caption: "wp-block-calendar__caption",
@@ -73,52 +73,38 @@ function Calendar(props) {
     day_disabled: "day-disabled",
     day_range_middle: "day-range-middle",
     day_hidden: "day-hidden",
+    ...classNames,
   };
 
-  if (classNames) {
-    var keys = Object.keys(classNames);
-    for (var i = 0; i < keys.length; i++) {
-      mergedClassNames[keys[i]] = classNames[keys[i]];
-    }
-  }
-
-  var mergedComponents = {
-    IconLeft: function(iconProps) {
-      return React.createElement(ChevronLeft, {
-        className: cn("wp-block-calendar__nav-icon", iconProps.className)
-      });
-    },
-    IconRight: function(iconProps) {
-      return React.createElement(ChevronRight, {
-        className: cn("wp-block-calendar__nav-icon", iconProps.className)
-      });
-    },
+  const mergedComponents: Record<string, any> = {
+    IconLeft: ({ className: iconClassName }: { className?: string }) => (
+      <ChevronLeft className={cn("wp-block-calendar__nav-icon", iconClassName)} />
+    ),
+    IconRight: ({ className: iconClassName }: { className?: string }) => (
+      <ChevronRight className={cn("wp-block-calendar__nav-icon", iconClassName)} />
+    ),
+    ...components,
   };
 
-  if (components) {
-    var componentKeys = Object.keys(components);
-    for (var j = 0; j < componentKeys.length; j++) {
-      mergedComponents[componentKeys[j]] = components[componentKeys[j]];
-    }
-  }
-
-  return React.createElement(DayPicker, {
-    showOutsideDays: showOutsideDays,
-    className: cn("wp-block-calendar__picker", className),
-    classNames: mergedClassNames,
-    components: mergedComponents,
-    mode: mode,
-    selected: selected,
-    onSelect: onSelect,
-    disabled: disabled,
-    initialFocus: initialFocus,
-    fromDate: fromDate,
-    toDate: toDate,
-    fromMonth: fromMonth,
-    toMonth: toMonth,
-    fromYear: fromYear,
-    toYear: toYear
-  });
+  return (
+    <DayPicker
+      showOutsideDays={showOutsideDays}
+      className={cn("wp-block-calendar__picker", className)}
+      classNames={mergedClassNames}
+      components={mergedComponents}
+      mode={mode}
+      selected={selected}
+      onSelect={onSelect}
+      disabled={disabled}
+      initialFocus={initialFocus}
+      fromDate={fromDate}
+      toDate={toDate}
+      fromMonth={fromMonth}
+      toMonth={toMonth}
+      fromYear={fromYear}
+      toYear={toYear}
+    />
+  );
 }
 
 export { Calendar };

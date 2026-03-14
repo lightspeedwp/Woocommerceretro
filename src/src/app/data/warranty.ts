@@ -9,7 +9,7 @@
 /**
  * Items Covered Under Warranty
  */
-var warrantyCovered = [
+const warrantyCovered = [
   'Manufacturing defects in materials or workmanship',
   'Premature wear under normal use conditions',
   'Hardware failures (zippers, buttons, snaps)',
@@ -20,7 +20,7 @@ var warrantyCovered = [
 /**
  * Items Not Covered Under Warranty
  */
-var warrantyNotCovered = [
+const warrantyNotCovered = [
   'Normal wear and tear from regular use',
   'Damage caused by misuse, accidents, or modifications',
   'Damage from improper care or cleaning',
@@ -31,7 +31,7 @@ var warrantyNotCovered = [
 /**
  * Warranty Claim Steps
  */
-var warrantyClaimSteps = [
+const warrantyClaimSteps = [
   {
     step: '1',
     title: 'Contact Support',
@@ -55,7 +55,7 @@ var warrantyClaimSteps = [
 /**
  * Page-level content strings
  */
-var warrantyPageContent = {
+const warrantyPageContent = {
   title: 'Warranty Information',
   description:
     'We stand behind the quality of our products. Learn about our warranty coverage and how to make a claim.',

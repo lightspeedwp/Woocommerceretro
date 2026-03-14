@@ -1,42 +1,28 @@
-/**
- * badge.tsx - UI Block
- * 
- * Small status indicator or label.
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. No template literals
- * 4. Named functions
- * 5. ASCII only
- */
-
 "use client";
 
-import * as React from "react";
-import * as cnModule from "./utils";
-var cn = cnModule.cn;
+import React from "react";
+import { cn } from "./utils";
 
-export function Badge(props) {
-  var className = props.className || '';
-  var variant = props.variant || 'default';
-  var size = props.size || 'md';
-  var children = props.children;
-  var style = props.style;
-  var id = props.id;
+interface BadgeProps {
+  className?: string;
+  variant?: string;
+  size?: string;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  id?: string;
+}
 
-  var compClass = cn(
-    "wp-block-badge",
-    "wp-block-badge--variant-" + variant,
-    "wp-block-badge--size-" + size,
-    className
+export const Badge = ({ className = '', variant = 'default', size = 'md', children, style, id }: BadgeProps) => {
+  return (
+    <span
+      id={id}
+      style={style}
+      data-slot="badge"
+      className={cn("wp-block-badge", `wp-block-badge--variant-${variant}`, `wp-block-badge--size-${size}`, className)}
+    >
+      {children}
+    </span>
   );
-
-  return React.createElement('span', {
-    id: id,
-    style: style,
-    "data-slot": "badge",
-    className: compClass
-  }, children);
 }
 
 Badge.displayName = 'Badge';

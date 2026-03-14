@@ -1,0 +1,442 @@
+/**
+ * Rewards Program Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for loyalty rewards program.
+ *
+ * **Components:**
+ * - How-it-works steps
+ * - Reward tier cards (4 colors)
+ * - Earn methods list
+ * - Redemption table
+ * - CTA with dual actions
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   HOW IT WORKS - STEPS
+   ========================================================================== */
+
+.retro-section--steps {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-primary);
+}
+
+.retro-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--retro-space-8);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.retro-step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-4);
+  padding: var(--retro-space-8);
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-secondary);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.retro-step-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 20px var(--retro-neon-cyan);
+}
+
+.retro-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--retro-neon-cyan);
+  background: rgba(0, 255, 249, 0.1);
+  color: var(--retro-neon-cyan);
+  font-size: var(--retro-text-3xl);
+  text-shadow: 0 0 10px var(--retro-neon-cyan);
+}
+
+.retro-step-title {
+  font-size: var(--retro-text-lg);
+  color: var(--retro-text-primary);
+}
+
+.retro-step-desc {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   REWARD TIERS
+   ========================================================================== */
+
+.retro-section--tiers {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--retro-space-6);
+}
+
+.retro-tier-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-4);
+  padding: var(--retro-space-8);
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-primary);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Tier Color Variants */
+.retro-tier-card--bronze {
+  border-color: #cd7f32;
+}
+
+.retro-tier-card--bronze:hover {
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.5);
+}
+
+.retro-tier-card--bronze .retro-tier-icon {
+  color: #cd7f32;
+}
+
+.retro-tier-card--silver {
+  border-color: #c0c0c0;
+}
+
+.retro-tier-card--silver:hover {
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
+}
+
+.retro-tier-card--silver .retro-tier-icon {
+  color: #c0c0c0;
+}
+
+.retro-tier-card--gold {
+  border-color: var(--retro-neon-yellow);
+}
+
+.retro-tier-card--gold:hover {
+  box-shadow: 0 0 20px var(--retro-neon-yellow);
+}
+
+.retro-tier-card--gold .retro-tier-icon {
+  color: var(--retro-neon-yellow);
+  text-shadow: 0 0 10px var(--retro-neon-yellow);
+}
+
+.retro-tier-card--platinum {
+  border-color: var(--retro-neon-magenta);
+}
+
+.retro-tier-card--platinum:hover {
+  box-shadow: 0 0 20px var(--retro-neon-magenta);
+}
+
+.retro-tier-card--platinum .retro-tier-icon {
+  color: var(--retro-neon-magenta);
+  text-shadow: 0 0 10px var(--retro-neon-magenta);
+}
+
+.retro-tier-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-tier-name {
+  font-size: var(--retro-text-xl);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-tier-points {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--retro-space-4);
+}
+
+.retro-tier-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-2);
+  width: 100%;
+}
+
+.retro-tier-benefit {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-secondary);
+  padding: var(--retro-space-2);
+  background: var(--retro-bg-secondary);
+  border-left: 2px solid var(--retro-border-primary);
+  text-align: left;
+}
+
+/* ==========================================================================
+   WAYS TO EARN
+   ========================================================================== */
+
+.retro-section--earn {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-primary);
+}
+
+.retro-earn-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.retro-earn-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--retro-space-6);
+  padding: var(--retro-space-6);
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.retro-earn-item:hover {
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 15px var(--retro-neon-cyan);
+}
+
+.retro-earn-info {
+  flex-grow: 1;
+}
+
+.retro-earn-title {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-2);
+}
+
+.retro-earn-desc {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-secondary);
+  line-height: 1.5;
+}
+
+.retro-earn-points {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-2);
+  padding: var(--retro-space-3) var(--retro-space-4);
+  background: var(--retro-neon-cyan);
+  color: var(--retro-bg-primary);
+  font-size: var(--retro-text-lg);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--retro-neon-cyan);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   REDEMPTION TABLE
+   ========================================================================== */
+
+.retro-section--redeem {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-redeem-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-3);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.retro-redeem-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--retro-space-6);
+  padding: var(--retro-space-4) var(--retro-space-6);
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-primary);
+  transition: all 0.3s ease;
+}
+
+.retro-redeem-row:hover {
+  border-color: var(--retro-neon-yellow);
+  box-shadow: 0 0 10px var(--retro-neon-yellow);
+}
+
+.retro-redeem-points {
+  font-size: var(--retro-text-base);
+  color: var(--retro-neon-yellow);
+  text-shadow: 0 0 5px var(--retro-neon-yellow);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.retro-redeem-reward {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-primary);
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   CTA SECTION
+   ========================================================================== */
+
+.retro-section--cta {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-section--cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.retro-cta-card {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--retro-space-12);
+  max-width: 700px;
+  margin: 0 auto;
+  border: 2px solid var(--retro-neon-magenta);
+  background: var(--retro-bg-secondary);
+  box-shadow: 0 0 20px var(--retro-neon-magenta);
+}
+
+.retro-cta-icon {
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-neon-icon {
+  color: var(--retro-neon-magenta);
+  filter: drop-shadow(0 0 10px var(--retro-neon-magenta));
+}
+
+.retro-cta-title {
+  font-size: var(--retro-text-2xl);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-4);
+  line-height: 1.3;
+}
+
+.retro-cta-desc {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+  margin-bottom: var(--retro-space-8);
+  line-height: 1.6;
+}
+
+.retro-cta-actions {
+  display: flex;
+  gap: var(--retro-space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .retro-steps-grid {
+    grid-template-columns: 1fr;
+    gap: var(--retro-space-6);
+  }
+
+  .retro-grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--retro-space-4);
+  }
+
+  .retro-earn-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .retro-earn-points {
+    align-self: flex-end;
+  }
+
+  .retro-redeem-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--retro-space-3);
+  }
+
+  .retro-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .retro-cta-actions .retro-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-step-number {
+    width: 56px;
+    height: 56px;
+    font-size: var(--retro-text-2xl);
+  }
+
+  .retro-tier-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .retro-tier-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .retro-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-earn-points {
+    font-size: var(--retro-text-base);
+  }
+
+  .retro-cta-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .retro-cta-title {
+    font-size: var(--retro-text-xl);
+  }
+}

@@ -17,21 +17,21 @@
  * @property {string} description
  */
 
-export var shippingMethods = [
+export const shippingMethods = [
   { name: 'Standard Shipping', time: '5-7 Business Days', cost: 'Free over $50', icon: 'Package' },
   { name: 'Express Shipping', time: '2-3 Business Days', cost: '$12.99', icon: 'Truck' },
   { name: 'Next Day Delivery', time: '1 Business Day', cost: '$24.99', icon: 'Clock' },
   { name: 'Store Pickup', time: 'Same Day', cost: 'Free', icon: 'MapPin' },
 ];
 
-export var returnProcessSteps = [
+export const returnProcessSteps = [
   { step: '1', title: 'Start Your Return', description: 'Log into your account and navigate to your order history. Select the item you wish to return and choose a reason.' },
   { step: '2', title: 'Print Shipping Label', description: 'A prepaid return shipping label will be emailed to you. Print it and attach it to your package.' },
   { step: '3', title: 'Ship Your Return', description: 'Drop off your package at any authorized shipping location. You can track the return status in your account.' },
   { step: '4', title: 'Receive Your Refund', description: 'Once we receive and inspect your return, your refund will be processed within 5-7 business days to your original payment method.' },
 ];
 
-export var shippingPageContent = {
+export const shippingPageContent = {
   title: 'Shipping & Returns',
   description: 'Everything you need to know about getting your order delivered and our hassle-free return process.',
   shippingHeading: 'Shipping options',

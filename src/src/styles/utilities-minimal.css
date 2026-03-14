@@ -1,0 +1,76 @@
+/**
+ * Minimal Utilities - Figma Make Safe
+ * 
+ * Critical utility classes only to prevent IframeMessageAbortError.
+ * Full utilities available in utilities.css for production.
+ * 
+ * Created: March 13, 2026
+ */
+
+/* ========================================
+   CRITICAL TEXT UTILITIES
+   ======================================== */
+
+/* Text muted - ACCESSIBILITY FIX for ProductTabsSection */
+.text-muted { color: var(--wp--preset--color--muted-foreground); }
+.dark .text-muted { color: var(--wp--preset--color--muted-foreground); }
+
+/* Primary text colors */
+.wp-text-primary { color: var(--wp--preset--color--foreground); }
+.wp-text-secondary { color: var(--wp--preset--color--muted-foreground); }
+
+/* White text (for dark backgrounds) */
+.wp-text-white { color: #ffffff; }
+.dark .wp-text-white { color: #ffffff; }
+
+/* ========================================
+   CRITICAL SPACING UTILITIES
+   ======================================== */
+
+/* Flexbox */
+.wp-flex { display: flex; }
+.wp-flex-col { flex-direction: column; }
+.wp-flex-row { flex-direction: row; }
+.wp-items-center { align-items: center; }
+.wp-justify-center { justify-content: center; }
+.wp-justify-between { justify-content: space-between; }
+.wp-gap-2 { gap: 0.5rem; }
+.wp-gap-4 { gap: 1rem; }
+.wp-gap-6 { gap: 1.5rem; }
+
+/* Display */
+.wp-block { display: block; }
+.wp-hidden { display: none; }
+
+/* Width */
+.wp-w-full { width: 100%; }
+.wp-max-w-2xl { max-width: 42rem; }
+
+/* ========================================
+   CRITICAL POSITION UTILITIES
+   ======================================== */
+
+.wp-relative { position: relative; }
+.wp-absolute { position: absolute; }
+
+/* ========================================
+   CRITICAL OVERFLOW UTILITIES
+   ======================================== */
+
+.wp-overflow-hidden { overflow: hidden; }
+
+/* ========================================
+   SCREEN READER ONLY
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

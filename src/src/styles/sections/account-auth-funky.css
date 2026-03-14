@@ -562,12 +562,21 @@
   color: var(--wp--preset--color--neon-pink);
 }
 
+.account-dash__card-icon--lime {
+  background: rgba(204, 255, 0, 0.08);
+  color: var(--wp--preset--color--neon-lime);
+}
+
 .dark .account-dash__card-icon--cyan {
   background: rgba(0, 255, 255, 0.1);
 }
 
 .dark .account-dash__card-icon--pink {
   background: rgba(255, 0, 255, 0.1);
+}
+
+.dark .account-dash__card-icon--lime {
+  background: rgba(204, 255, 0, 0.1);
 }
 
 .account-dash__card-title {
@@ -599,6 +608,18 @@
   align-items: center;
   gap: var(--wp--preset--spacing--10);
   transition: transform 0.2s ease;
+}
+
+.account-dash__card-action--cyan {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.account-dash__card-action--pink {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.account-dash__card-action--lime {
+  color: var(--wp--preset--color--neon-lime);
 }
 
 .account-dash__card:hover .account-dash__card-action {
@@ -925,6 +946,139 @@
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
 }
 
+/* ---- Order Card (used in Orders pattern) ---- */
+
+.account-orders__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.account-order-card {
+  padding: var(--wp--preset--spacing--40);
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.account-order-card--delivered { border-left-color: var(--wp--preset--color--success); }
+.account-order-card--processing { border-left-color: var(--wp--preset--color--warning); }
+.account-order-card--shipped { border-left-color: var(--wp--preset--color--info); }
+.account-order-card--default { border-left-color: var(--wp--preset--color--muted-foreground); }
+
+.account-order-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  padding-bottom: var(--wp--preset--spacing--20);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.dark .account-order-card__header {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.account-order-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.account-order-card__id {
+  margin: 0;
+  font-size: var(--wp--preset--font-size--large);
+}
+
+.account-order-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--wp--preset--border-radius--full);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: 500;
+}
+
+.account-order-card__status--delivered {
+  color: var(--wp--preset--color--success);
+  background: rgba(22, 163, 74, 0.1);
+}
+
+.account-order-card__status--processing {
+  color: var(--wp--preset--color--warning);
+  background: rgba(217, 119, 6, 0.1);
+}
+
+.account-order-card__status--shipped {
+  color: var(--wp--preset--color--info);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.account-order-card__status--default {
+  color: var(--wp--preset--color--muted-foreground);
+  background: var(--wp--preset--color--surface);
+}
+
+.account-order-card__meta {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.account-order-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.account-order-card__view-btn {
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.account-order-card__items {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  margin-top: var(--wp--preset--spacing--30);
+}
+
+.account-order-card__thumbs {
+  display: flex;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.account-order-card__thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--wp--preset--border-radius--md);
+  background: var(--wp--preset--color--surface-elevated);
+  border: 1px solid var(--wp--preset--color--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dark .account-order-card__thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.account-order-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.account-order-card__more {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
+  font-weight: 500;
+}
+
 /* Empty state */
 .account-orders__empty {
   display: flex;
@@ -1128,7 +1282,7 @@
 }
 
 .account-order__tracking-icon {
-  color: var(--wp--preset--color--muted-foreground);
+  color: var(--wp--preset--color--neon-cyan);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -1357,6 +1511,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--wp--preset--spacing--50);
+  padding: var(--wp--preset--spacing--60);
 }
 
 .account-details__title {
@@ -1471,7 +1626,7 @@
   font-family: var(--wp--preset--font-family--base);
   font-size: var(--wp--preset--font-size--400);
   font-weight: var(--wp--preset--font-weight--semibold);
-  color: var(--wp--preset--color--foreground);
+  color: var(--wp--preset--color--neon-cyan);
 }
 
 .dark .account-details__subtitle {

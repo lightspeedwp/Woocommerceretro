@@ -2,23 +2,23 @@ import React from "react";
 import { Button } from "@/components/blocks/design/Buttons";
 import { cn } from "./utils";
 
-var NewButton = Button;
+const NewButton = Button;
 
-function mapVariant(v) {
+const mapVariant = (v) => {
   if (v === "default") return "primary";
   return v;
-}
+};
 
-function mapSize(s) {
+const mapSize = (s) => {
   if (s === "default") return "md";
   if (s === "icon") return "md";
   return s;
-}
+};
 
-var Button = React.forwardRef(function ButtonInner(props, ref) {
-  var className = props.className;
-  var variant = props.variant || "default";
-  var size = props.size || "default";
+const Button = React.forwardRef((props, ref) => {
+  const className = props.className;
+  const variant = props.variant || "default";
+  const size = props.size || "default";
 
   return React.createElement(NewButton, {
     ref: ref,
@@ -38,6 +38,6 @@ var Button = React.forwardRef(function ButtonInner(props, ref) {
 });
 Button.displayName = "Button";
 
-function buttonVariants() { return ""; }
+const buttonVariants = () => "";
 
 export { Button, buttonVariants };

@@ -4,20 +4,18 @@
  * Glassmorphism, neon accents, Phosphor icons.
  */
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { Link } from 'react-router';
 import { Heart, UsersThree, Leaf, Briefcase, Question, FileText, ShieldCheck, Truck } from '@phosphor-icons/react';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 
-var Link = ReactRouterModule.Link;
-
-var aboutLinks = [
+const aboutLinks = [
   { title: 'Our Story', href: '/about', Icon: Heart, desc: 'Learn about our journey' },
   { title: 'Our Team', href: '/about/team', Icon: UsersThree, desc: 'Meet the people behind the brand' },
   { title: 'Sustainability', href: '/about/sustainability', Icon: Leaf, desc: 'Our commitment to the planet' },
   { title: 'Careers', href: '/about/careers', Icon: Briefcase, desc: 'Join our growing team' }
 ];
 
-var resourceLinks = [
+const resourceLinks = [
   { title: 'Help Center', href: '/help', Icon: Question },
   { title: 'FAQ', href: '/faq', Icon: FileText },
   { title: 'Shipping & Returns', href: '/shipping-returns', Icon: Truck },
@@ -25,7 +23,7 @@ var resourceLinks = [
   { title: 'Terms & Conditions', href: '/terms-and-conditions', Icon: FileText }
 ];
 
-var featuredSections = [
+const featuredSections = [
   {
     title: 'Our Story',
     subtitle: 'A passion for quality since 2020',
@@ -49,100 +47,76 @@ var featuredSections = [
   }
 ];
 
-export function AboutMegaMenu() {
-  function renderContent(closeMenu) {
-    var leftColumn = React.createElement('div', {
-      className: 'funky-mega__column funky-mega__column--bordered'
-    }, [
-      React.createElement('h4', { key: 't1', className: 'funky-mega__title' }, 'About Us'),
-      React.createElement('div', { key: 'about' },
-        aboutLinks.map(function(link) {
-          return React.createElement(Link, {
-            key: link.title,
-            to: link.href,
-            className: 'funky-mega__link'
-          }, [
-            React.createElement('span', { key: 'ic', className: 'funky-mega__link-icon' },
-              React.createElement(link.Icon, { size: 16, weight: 'duotone' })
-            ),
-            React.createElement('span', { key: 'tx', className: 'funky-mega__link-text' }, [
-              React.createElement('span', { key: 'lb', className: 'funky-mega__link-label' }, link.title),
-              React.createElement('span', { key: 'ds', className: 'funky-mega__link-desc' }, link.desc)
-            ])
-          ]);
-        })
-      ),
-      React.createElement('div', { key: 'sep', style: { height: '1px', background: 'var(--funky-glass-border)', margin: '0.75rem 0' } }),
-      React.createElement('h4', { key: 't2', className: 'funky-mega__title' }, 'Resources'),
-      React.createElement('div', { key: 'resources' },
-        resourceLinks.map(function(link) {
-          return React.createElement(Link, {
-            key: link.title,
-            to: link.href,
-            className: 'funky-mega__link'
-          }, [
-            React.createElement('span', { key: 'ic', className: 'funky-mega__link-icon' },
-              React.createElement(link.Icon, { size: 16, weight: 'duotone' })
-            ),
-            React.createElement('span', { key: 'lb', className: 'funky-mega__link-label' }, link.title)
-          ]);
-        })
-      )
-    ]);
+export const AboutMegaMenu = () => {
+  const renderContent = (closeMenu: () => void) => (
+    <div className="wp-mega-menu__content">
+      <div className="funky-mega__orb funky-mega__orb--pink" style={{ top: '-90px', right: '20%' }} />
+      <div className="funky-mega__orb funky-mega__orb--cyan" style={{ bottom: '-50px', left: '10%' }} />
+      <div className="funky-mega__inner funky-mega__inner--about">
+        {/* Left column: About + Resources */}
+        <div className="funky-mega__column funky-mega__column--bordered">
+          <h4 className="funky-mega__title">About Us</h4>
+          <div>
+            {aboutLinks.map((link) => (
+              <Link key={link.title} to={link.href} className="funky-mega__link">
+                <span className="funky-mega__link-icon">
+                  <link.Icon size={16} weight="duotone" />
+                </span>
+                <span className="funky-mega__link-text">
+                  <span className="funky-mega__link-label">{link.title}</span>
+                  <span className="funky-mega__link-desc">{link.desc}</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div style={{ height: '1px', background: 'var(--funky-glass-border)', margin: '0.75rem 0' }} />
+          <h4 className="funky-mega__title">Resources</h4>
+          <div>
+            {resourceLinks.map((link) => (
+              <Link key={link.title} to={link.href} className="funky-mega__link">
+                <span className="funky-mega__link-icon">
+                  <link.Icon size={16} weight="duotone" />
+                </span>
+                <span className="funky-mega__link-label">{link.title}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
 
-    var rightColumn = React.createElement('div', {
-      className: 'funky-mega__column'
-    }, [
-      React.createElement('h4', { key: 't', className: 'funky-mega__title' }, 'Featured'),
-      React.createElement('div', { key: 'cards', className: 'funky-mega__cards-grid funky-mega__cards-grid--3col' },
-        featuredSections.map(function(section) {
-          return React.createElement(Link, {
-            key: section.title,
-            to: section.href,
-            className: 'funky-mega__card',
-            style: { minHeight: '160px' }
-          }, [
-            React.createElement('img', {
-              key: 'bg',
-              src: section.image,
-              alt: section.title,
-              className: 'funky-mega__card-bg',
-              loading: 'lazy'
-            }),
-            React.createElement('div', {
-              key: 'ov',
-              className: 'funky-mega__card-overlay funky-mega__card-overlay--' + section.overlay
-            }),
-            React.createElement('div', { key: 'bd', className: 'funky-mega__card-body' }, [
-              React.createElement('span', { key: 't', className: 'funky-mega__card-title' }, section.title),
-              React.createElement('span', { key: 's', className: 'funky-mega__card-subtitle' }, section.subtitle),
-              React.createElement('span', { key: 'c', className: 'funky-mega__card-cta' }, [
-                React.createElement('span', { key: 'l' }, 'Learn more'),
-                React.createElement(Truck, { key: 'a', size: 12, weight: 'bold' })
-              ])
-            ])
-          ]);
-        })
-      )
-    ]);
+        {/* Right column: Featured cards */}
+        <div className="funky-mega__column">
+          <h4 className="funky-mega__title">Featured</h4>
+          <div className="funky-mega__cards-grid funky-mega__cards-grid--3col">
+            {featuredSections.map((section) => (
+              <Link key={section.title} to={section.href} className="funky-mega__card" style={{ minHeight: '160px' }}>
+                <img
+                  src={section.image}
+                  alt={section.title}
+                  className="funky-mega__card-bg"
+                  loading="lazy"
+                />
+                <div className={`funky-mega__card-overlay funky-mega__card-overlay--${section.overlay}`} />
+                <div className="funky-mega__card-body">
+                  <span className="funky-mega__card-title">{section.title}</span>
+                  <span className="funky-mega__card-subtitle">{section.subtitle}</span>
+                  <span className="funky-mega__card-cta">
+                    <span>Learn more</span>
+                    <Truck size={12} weight="bold" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
-    var content = React.createElement('div', {
-      className: 'wp-mega-menu__content'
-    }, [
-      React.createElement('div', { key: 'orb1', className: 'funky-mega__orb funky-mega__orb--pink', style: { top: '-90px', right: '20%' } }),
-      React.createElement('div', { key: 'orb2', className: 'funky-mega__orb funky-mega__orb--cyan', style: { bottom: '-50px', left: '10%' } }),
-      React.createElement('div', { key: 'grid', className: 'funky-mega__inner funky-mega__inner--about' }, [
-        React.cloneElement(leftColumn, { key: 'left' }),
-        React.cloneElement(rightColumn, { key: 'right' })
-      ])
-    ]);
-
-    return content;
-  }
-
-  return React.createElement(MegaMenuWrapper, {
-    triggerLabel: 'About',
-    triggerHref: '/about',
-    renderContent: renderContent
-  });
+  return (
+    <MegaMenuWrapper
+      triggerLabel="About"
+      triggerHref="/about"
+      renderContent={renderContent}
+    />
+  );
 }

@@ -1,11 +1,7 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
-import * as MainFooterModule from './MainFooter';
-import * as CheckoutFooterModule from './CheckoutFooter';
-
-var useLocation = ReactRouterModule.useLocation;
-var MainFooter = MainFooterModule.MainFooter;
-var CheckoutFooter = CheckoutFooterModule.CheckoutFooter;
+import { useLocation } from 'react-router';
+import { MainFooter } from './MainFooter';
+import { CheckoutFooter } from './CheckoutFooter';
 
 /**
  * Footer — Smart footer switcher (Global Template Part)
@@ -16,20 +12,21 @@ var CheckoutFooter = CheckoutFooterModule.CheckoutFooter;
  *
  * CSS: /src/styles/blocks/layout/footer.css (base)
  *      /src/styles/blocks/theme/parts-funky.css (funky overrides)
- *
- * @param {Object} props
- * @param {string} [props.className] - Additional CSS classes
- * @param {string} [props.id] - Optional element ID
  */
-export function Footer(props) {
-  var location = useLocation();
-  var pathname = location.pathname;
-  var className = props.className || '';
-  var isCheckout = pathname.startsWith('/checkout') || pathname.startsWith('/order-confirmation');
+
+interface FooterProps {
+  className?: string;
+  id?: string;
+}
+
+export const Footer = ({ className = '', id }: FooterProps) => {
+  const location = useLocation();
+  const { pathname } = location;
+  const isCheckout = pathname.startsWith('/checkout') || pathname.startsWith('/order-confirmation');
 
   if (isCheckout) {
-    return React.createElement(CheckoutFooter, { className: className });
+    return <CheckoutFooter className={className} />;
   }
 
-  return React.createElement(MainFooter, { id: props.id, className: className });
+  return <MainFooter id={id} className={className} />;
 }

@@ -1,7 +1,5 @@
 import React from 'react';
-import * as PostCardModule from '../blog/PostCard';
-
-var PostCard = PostCardModule.PostCard;
+import { PostCard } from '../blog/PostCard';
 
 /*
  * PostGridProps:
@@ -18,13 +16,12 @@ var PostCard = PostCardModule.PostCard;
 /**
  * PostGrid Pattern
  */
-export function PostGrid(props) {
-  var posts = props.posts;
-  var className = props.className || '';
-
-  return React.createElement('div', { className: 'wp-block-post-grid ' + className },
-    posts.map(function(post) {
-      return React.createElement(PostCard, { key: post.id, post: post });
-    })
+export const PostGrid = ({ posts, className = '' }: { posts: any[]; className?: string }) => {
+  return (
+    <div className={`wp-block-post-grid ${className}`}>
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
   );
 }

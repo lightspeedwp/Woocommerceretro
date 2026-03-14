@@ -46,33 +46,54 @@
  * - WooCommerce Block Styles: https://github.com/woocommerce/woocommerce-blocks
  */
 
-:root {
+:root,
+.theme-retro {
+  /* PlayPocket retro base */
+  --retro-paper: #F2EEE6;
+  --retro-paper-deep: #E6E0D3;
+  --retro-panel: #F7F3EB;
+  --retro-panel-alt: #DDD6C8;
+  --retro-ink: #1E2630;
+  --retro-ink-soft: #495565;
+  --retro-line: #8F998F;
+  --retro-line-soft: #BCC3B5;
+
+  /* PlayPocket expanded accent palette */
+  --retro-screen: #B7C9BE;
+  --retro-screen-dark: #7E9A8C;
+  --retro-signal: #D8B548;
+  --retro-signal-strong: #C79A24;
+  --retro-alert: #B65E4A;
+  --retro-success: #647B61;
+  --retro-accent-coral: #D9795B;
+  --retro-accent-sky: #86AFC3;
+  --retro-accent-berry: #8F6A8F;
+  --retro-accent-olive: #8A9A5B;
+
   /* ========================================
      COLOR SYSTEM - WordPress Preset Format
      ======================================== */
   
-  /* Primary Brand Colors */
-  --wp--preset--color--primary: #111111;
-  --wp--preset--color--primary-foreground: #ffffff;
-  --wp--preset--color--secondary: #f5f5f7;
-  --wp--preset--color--secondary-foreground: #030213;
+  /* Map into WP preset system */
+  --wp--preset--color--background: var(--retro-paper);
+  --wp--preset--color--foreground: var(--retro-ink);
+  --wp--preset--color--surface: var(--retro-panel);
+  --wp--preset--color--surface-foreground: var(--retro-ink);
+  --wp--preset--color--secondary: var(--retro-paper-deep);
+  --wp--preset--color--secondary-foreground: var(--retro-ink);
+  --wp--preset--color--accent: var(--retro-screen);
+  --wp--preset--color--accent-foreground: var(--retro-ink);
+  --wp--preset--color--muted: var(--retro-panel-alt);
+  --wp--preset--color--muted-foreground: var(--retro-ink-soft);
+  --wp--preset--color--brand: var(--retro-screen-dark);
+  --wp--preset--color--cta: var(--retro-signal);
+  --wp--preset--color--cta-hover: var(--retro-signal-strong);
   
-  /* Surface Colors */
-  --wp--preset--color--background: #ffffff;
-  --wp--preset--color--foreground: #1a1a1a;
-  --wp--preset--color--surface: #f9f9f9;
-  --wp--preset--color--surface-foreground: #1a1a1a;
-  
-  /* Semantic Colors */
-  --wp--preset--color--accent: #e9ebef;
-  --wp--preset--color--accent-foreground: #030213;
-  --wp--preset--color--muted: #ececf0;
-  --wp--preset--color--muted-foreground: #4b5563; /* Enhanced for AAA: 7.5:1 contrast (was #717182) */
-  
-  /* Brand & CTA Colors (from presets) */
-  --wp--preset--color--brand: #0055AA;
-  --wp--preset--color--cta: #0055AA;
-  --wp--preset--color--cta-hover: #004499;
+  /* Missing shared aliases used around the codebase */
+  --wp--preset--color--border: var(--retro-line);
+  --wp--preset--color--border-light: var(--retro-line-soft);
+  --wp--preset--color--text-secondary: var(--retro-ink-soft);
+
   --wp--preset--color--ring: #3b82f6;
   --wp--preset--color--link: #2563eb;
   --wp--preset--color--link-hover: #1d4ed8;
@@ -212,7 +233,7 @@
   /* Layout sizes (Maps to theme.json settings.layout) */
   --wp--preset--layout--content-size: 800px;
   --wp--preset--layout--wide-size: 1200px;
-  --wp--preset--layout--site-size: 1400px;
+  --wp--preset--layout--site-size: 1440px;
 
   /* ========================================
      TRANSITIONS & SHADOWS
@@ -272,4 +293,40 @@
   --funky-pink-glow: #ff00ff;
   --funky-cyan-glow: #00ffff;
   --funky-lime-glow: #ccff00;
+}
+
+/* ========================================
+   DARK MODE — WP Preset Overrides
+   
+   Maps --wp--preset--color--* tokens to
+   retro dark mode values so all components
+   using WP preset variables automatically
+   adapt in dark mode.
+   ======================================== */
+
+.dark,
+:root.dark {
+  --wp--preset--color--background: var(--color-inset, #11161A);
+  --wp--preset--color--foreground: var(--color-text, #E8E2D8);
+  --wp--preset--color--surface: var(--color-panel, #232A32);
+  --wp--preset--color--surface-foreground: var(--color-text, #E8E2D8);
+  --wp--preset--color--secondary: var(--color-panel-alt, #2A333C);
+  --wp--preset--color--secondary-foreground: var(--color-text, #E8E2D8);
+  --wp--preset--color--accent: var(--color-screen, #8DA89D);
+  --wp--preset--color--accent-foreground: var(--color-paper, #151A1E);
+  --wp--preset--color--muted: var(--color-panel-alt, #2A333C);
+  --wp--preset--color--muted-foreground: var(--color-text-muted, #8A9499);
+  --wp--preset--color--border: var(--color-border, #3E4A52);
+  --wp--preset--color--border-light: var(--color-border-soft, #2E3840);
+  --wp--preset--color--text-secondary: var(--color-text-soft, #C4CBC3);
+  --wp--preset--color--ring: var(--color-focus, #5DA0E0);
+  --wp--preset--color--link: var(--color-link, #5DA0E0);
+  --wp--preset--color--link-hover: var(--color-link-hover, #7DB8F0);
+  --wp--preset--color--popover: var(--color-panel, #232A32);
+  --wp--preset--color--popover-foreground: var(--color-text, #E8E2D8);
+
+  /* Shadows — softer for dark backgrounds */
+  --wp--preset--shadow--sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --wp--preset--shadow--md: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  --wp--preset--shadow--lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
 }

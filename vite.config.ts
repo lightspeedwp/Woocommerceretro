@@ -10,6 +10,7 @@
       alias: {
         'sonner@2.0.3': 'sonner',
         'react-hook-form@7.55.0': 'react-hook-form',
+        'figma:asset/f367e8ff057e1239dc88f32619b6a1f694c7db8d.png': path.resolve(__dirname, './src/assets/f367e8ff057e1239dc88f32619b6a1f694c7db8d.png'),
         'figma:asset/f199cc33707917c80c8a487f018e4be0adaa2d5d.png': path.resolve(__dirname, './src/assets/f199cc33707917c80c8a487f018e4be0adaa2d5d.png'),
         'figma:asset/ee839a047d450a2ce771b7926d5e5889e7888df3.png': path.resolve(__dirname, './src/assets/ee839a047d450a2ce771b7926d5e5889e7888df3.png'),
         'figma:asset/edfc144193a7ca77fcaff925c3487eef2d654a16.png': path.resolve(__dirname, './src/assets/edfc144193a7ca77fcaff925c3487eef2d654a16.png'),

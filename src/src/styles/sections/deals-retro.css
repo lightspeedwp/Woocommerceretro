@@ -1,0 +1,312 @@
+/**
+ * Deals Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for deals and sales page.
+ *
+ * **Components:**
+ * - Flash sale banner
+ * - Deals grid
+ * - Deals badge
+ * - Empty state
+ * - CTA section
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   FLASH SALE BANNER
+   ========================================================================== */
+
+.retro-flash-banner {
+  background: linear-gradient(90deg, 
+    var(--retro-neon-magenta) 0%, 
+    var(--retro-neon-yellow) 50%, 
+    var(--retro-neon-magenta) 100%
+  );
+  background-size: 200% 100%;
+  animation: retro-flash-slide 3s linear infinite;
+  padding: var(--retro-space-3) var(--retro-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--retro-space-4);
+  border-bottom: 2px solid var(--retro-bg-primary);
+  box-shadow: 0 4px 10px rgba(255, 0, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-flash-banner {
+    animation: none;
+    background: var(--retro-neon-magenta);
+  }
+}
+
+.retro-flash-text {
+  font-size: var(--retro-text-xs);
+  color: var(--retro-bg-primary);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.retro-flash-icon {
+  color: var(--retro-bg-primary);
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+  animation: retro-flash-pulse 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-flash-icon {
+    animation: none;
+  }
+}
+
+@keyframes retro-flash-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes retro-flash-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* ==========================================================================
+   DEALS SECTION
+   ========================================================================== */
+
+.retro-section--deals {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-primary);
+}
+
+.retro-deals-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--retro-space-2);
+  padding: var(--retro-space-2) var(--retro-space-4);
+  background: var(--retro-neon-yellow);
+  color: var(--retro-bg-primary);
+  border: 2px solid var(--retro-bg-primary);
+  box-shadow: 0 0 15px var(--retro-neon-yellow);
+  margin-top: var(--retro-space-4);
+}
+
+.retro-deals-badge-icon {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+}
+
+/* 4-column grid for deals */
+.retro-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--retro-space-8);
+}
+
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+
+.retro-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-6);
+  padding: var(--retro-space-16) var(--retro-space-8);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 2px solid var(--retro-border-primary);
+  background: var(--retro-bg-secondary);
+}
+
+.retro-empty-icon {
+  color: var(--retro-text-muted);
+  opacity: 0.5;
+}
+
+.retro-empty-title {
+  font-size: var(--retro-text-2xl);
+  color: var(--retro-text-primary);
+  line-height: 1.3;
+}
+
+.retro-empty-desc {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+  max-width: 400px;
+}
+
+/* ==========================================================================
+   CTA SECTION (Deals Specific)
+   ========================================================================== */
+
+.retro-section--cta {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-section--cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.retro-cta-card {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--retro-space-12);
+  max-width: 700px;
+  margin: 0 auto;
+  border: 2px solid var(--retro-neon-yellow);
+  background: var(--retro-bg-primary);
+  box-shadow: 0 0 20px var(--retro-neon-yellow);
+}
+
+.retro-cta-icon {
+  margin-bottom: var(--retro-space-6);
+}
+
+.retro-cta-card .retro-neon-icon {
+  color: var(--retro-neon-yellow);
+  filter: drop-shadow(0 0 15px var(--retro-neon-yellow));
+  animation: retro-fire-flicker 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-cta-card .retro-neon-icon {
+    animation: none;
+  }
+}
+
+@keyframes retro-fire-flicker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(0.98);
+  }
+  75% {
+    opacity: 0.95;
+    transform: scale(1.02);
+  }
+}
+
+.retro-cta-title {
+  font-size: var(--retro-text-2xl);
+  color: var(--retro-text-primary);
+  margin-bottom: var(--retro-space-4);
+  line-height: 1.3;
+}
+
+.retro-cta-desc {
+  font-size: var(--retro-text-base);
+  color: var(--retro-text-secondary);
+  margin-bottom: var(--retro-space-8);
+  line-height: 1.6;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .retro-grid-4 {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--retro-space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  .retro-flash-banner {
+    padding: var(--retro-space-2) var(--retro-space-4);
+    gap: var(--retro-space-2);
+  }
+
+  .retro-flash-text {
+    font-size: 0.65rem;
+  }
+
+  .retro-flash-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .retro-grid-4 {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--retro-space-4);
+  }
+
+  .retro-deals-badge {
+    font-size: var(--retro-text-xs);
+    padding: var(--retro-space-1) var(--retro-space-3);
+  }
+
+  .retro-empty-state {
+    padding: var(--retro-space-12) var(--retro-space-6);
+  }
+
+  .retro-cta-card {
+    padding: var(--retro-space-8);
+  }
+
+  .retro-cta-title {
+    font-size: var(--retro-text-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-flash-text {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  .retro-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-empty-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .retro-empty-title {
+    font-size: var(--retro-text-lg);
+  }
+
+  .retro-cta-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+}

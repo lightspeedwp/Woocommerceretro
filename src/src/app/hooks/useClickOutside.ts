@@ -1,41 +1,42 @@
-import React from 'react';
-var useEffect = React.useEffect;
+import { useEffect, RefObject } from 'react';
 
 /**
  * useClickOutside Hook
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No generics or type annotations
- * 3. Standard function declarations
+ *
+ * Detects clicks outside the given ref element and calls the handler.
+ * Optionally ignores clicks on elements referenced by ignoreRefs.
  */
-export function useClickOutside(ref, handler, ignoreRefs) {
-  useEffect(function() {
-    function listener(event) {
-      var el = ref.current;
-      
-      if (!el || el.contains(event.target)) {
+export const useClickOutside = (
+  ref: RefObject<HTMLElement | null>,
+  handler: (event: MouseEvent | TouchEvent) => void,
+  ignoreRefs?: RefObject<HTMLElement | null>[]
+) => {
+  useEffect(() => {
+    const listener = (event: MouseEvent | TouchEvent) => {
+      const el = ref.current;
+
+      if (!el || el.contains(event.target as Node)) {
         return;
       }
 
       if (ignoreRefs) {
-        for (var i = 0; i < ignoreRefs.length; i++) {
-          var ignoreRef = ignoreRefs[i];
-          if (ignoreRef.current && ignoreRef.current.contains(event.target)) {
-            return;
-          }
+        const clickedIgnored = ignoreRefs.some((ignoreRef) =>
+          ignoreRef.current && ignoreRef.current.contains(event.target as Node)
+        );
+        if (clickedIgnored) {
+          return;
         }
       }
 
       handler(event);
-    }
+    };
 
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
 
-    return function() {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
     };
   }, [ref, handler, ignoreRefs]);
 }

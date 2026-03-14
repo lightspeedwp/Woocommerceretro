@@ -19,7 +19,7 @@
  * @property {string} type
  */
 
-export var careerBenefits = [
+export const careerBenefits = [
   { 
     id: 'health',
     icon: 'Heart', 
@@ -58,7 +58,7 @@ export var careerBenefits = [
   },
 ];
 
-export var openPositions = [
+export const openPositions = [
   { id: 'fe-eng', title: 'Senior Frontend Engineer', department: 'Engineering', location: 'Remote', type: 'Full-time' },
   { id: 'prod-des', title: 'Product Designer', department: 'Design', location: 'New York, NY', type: 'Full-time' },
   { id: 'content-mkt', title: 'Content Marketing Manager', department: 'Marketing', location: 'Remote', type: 'Full-time' },
@@ -69,7 +69,7 @@ export var openPositions = [
   { id: 'mkt-intern', title: 'Marketing Intern', department: 'Marketing', location: 'New York, NY', type: 'Internship' },
 ];
 
-export var careersPageContent = {
+export const careersPageContent = {
   title: 'Careers',
   description: 'Join a team that is passionate about creating exceptional shopping experiences. We are always looking for talented, curious people.',
   benefitsHeading: 'Why work with us',

@@ -7,28 +7,11 @@
  * (e.g. inside sandboxed iframes).
  */
 
-export function copyToClipboard(text) {
-  // Try modern Clipboard API first
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-    return navigator.clipboard.writeText(text).then(function() {
-      return true;
-    }).catch(function() {
-      // Clipboard API blocked — fall through to legacy approach
-      return fallbackCopy(text);
-    });
-  }
-
-  // Use legacy fallback directly
-  return Promise.resolve(fallbackCopy(text));
-}
-
-function fallbackCopy(text) {
-  // Legacy fallback using a temporary textarea + execCommand
+const fallbackCopy = (text: string): boolean => {
   try {
-    var textarea = document.createElement('textarea');
+    const textarea = document.createElement('textarea');
     textarea.value = text;
 
-    // Place off-screen to avoid visual flash
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'fixed';
     textarea.style.left = '-9999px';
@@ -38,10 +21,20 @@ function fallbackCopy(text) {
     document.body.appendChild(textarea);
     textarea.select();
 
-    var success = document.execCommand('copy');
+    const success = document.execCommand('copy');
     document.body.removeChild(textarea);
     return success;
   } catch (e) {
     return false;
   }
-}
+};
+
+export const copyToClipboard = (text: string): Promise<boolean> => {
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+    return navigator.clipboard.writeText(text)
+      .then(() => true)
+      .catch(() => fallbackCopy(text));
+  }
+
+  return Promise.resolve(fallbackCopy(text));
+};

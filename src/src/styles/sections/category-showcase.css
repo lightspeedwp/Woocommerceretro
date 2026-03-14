@@ -2,6 +2,24 @@
    CATEGORY SHOWCASE GRID
    ======================================== */
 
+.wp-category-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-category-showcase-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-category-showcase-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .wp-category-card {
   position: relative;
   display: block;

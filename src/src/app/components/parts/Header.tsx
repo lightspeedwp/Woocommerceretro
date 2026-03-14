@@ -1,11 +1,7 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
-import * as MainHeaderModule from './MainHeader';
-import * as CheckoutHeaderModule from './CheckoutHeader';
-
-var useLocation = ReactRouterModule.useLocation;
-var MainHeader = MainHeaderModule.MainHeader;
-var CheckoutHeader = CheckoutHeaderModule.CheckoutHeader;
+import { useLocation } from 'react-router';
+import { MainHeader } from './MainHeader';
+import { CheckoutHeader } from './CheckoutHeader';
 
 /**
  * Header — Smart header switcher (Global Template Part)
@@ -15,19 +11,20 @@ var CheckoutHeader = CheckoutHeaderModule.CheckoutHeader;
  * all other routes get the full MainHeader with navigation and mega menus.
  *
  * CSS: /src/styles/blocks/theme/parts-funky.css (header + mega menu overrides)
- *
- * @param {Object} props
- * @param {string} [props.className] - Additional CSS classes
  */
-export function Header(props) {
-  var location = useLocation();
-  var pathname = location.pathname;
-  var className = props.className || '';
-  var isCheckout = pathname.startsWith('/checkout') || pathname.startsWith('/order-confirmation');
+
+interface HeaderProps {
+  className?: string;
+}
+
+export const Header = ({ className = '' }: HeaderProps) => {
+  const location = useLocation();
+  const { pathname } = location;
+  const isCheckout = pathname.startsWith('/checkout') || pathname.startsWith('/order-confirmation');
 
   if (isCheckout) {
-    return React.createElement(CheckoutHeader, { className: className });
+    return <CheckoutHeader className={className} />;
   }
 
-  return React.createElement(MainHeader, { className: className });
+  return <MainHeader className={className} />;
 }

@@ -1,26 +1,20 @@
-import React from 'react';
-var useState = React.useState;
-var useEffect = React.useEffect;
+import { useState, useEffect } from 'react';
 
 /**
  * useDebounce Hook
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. Standard function declarations
- * 3. No generics or type annotations
+ *
+ * Returns a debounced version of the provided value,
+ * updated only after the specified delay (default 500ms).
  */
-export function useDebounce(value, delay) {
-  var ref = useState(value);
-  var debouncedValue = ref[0];
-  var setDebouncedValue = ref[1];
+export const useDebounce = <T>(value: T, delay: number = 500): T => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useEffect(function() {
-    var handler = setTimeout(function() {
+  useEffect(() => {
+    const handler = setTimeout(() => {
       setDebouncedValue(value);
-    }, delay || 500);
+    }, delay);
 
-    return function() {
+    return () => {
       clearTimeout(handler);
     };
   }, [value, delay]);

@@ -1,34 +1,37 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 /**
  * Label Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript syntax
+ *
+ * WordPress-aligned form label.
+ *
+ * @example
+ * <Label htmlFor="email">Email Address</Label>
  */
-export var Label = React.forwardRef(function(props, ref) {
-  var className = props.className || '';
-  var children = props.children;
-  var htmlFor = props.htmlFor;
-  var id = props.id;
-  var style = props.style;
 
-  var combinedClassName = [
-    'wp-block-label',
-    'funky-label',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
+interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
 
-  return React.createElement('label', {
-    id: id,
-    style: style,
-    ref: ref,
-    htmlFor: htmlFor,
-    className: combinedClassName
-  }, children);
-});
+export const Label = forwardRef<HTMLLabelElement, LabelProps>(
+  ({ className = '', children, ...rest }, ref) => {
+    const combinedClassName = [
+      'wp-block-label',
+      'funky-label',
+      className
+    ].filter(Boolean).join(' ');
+
+    return (
+      <label
+        {...rest}
+        ref={ref}
+        className={combinedClassName}
+      >
+        {children}
+      </label>
+    );
+  }
+);
 
 Label.displayName = "Label";

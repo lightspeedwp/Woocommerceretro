@@ -1,270 +1,249 @@
-import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import React, { useState } from 'react';
+import { Link } from 'react-router';
 import { Crown, Lock, Gift, Check, Star } from '@phosphor-icons/react';
-
-var useState = React.useState;
-var Link = ReactRouterModule.Link;
-
-import * as LayoutModule from '../parts/Layout';
-import * as ContainerModule from '../common/Container';
-import * as TypographyModule from '../common/Typography';
-import * as HeadingModule from '../common/Heading';
-import * as TestimonialCarouselModule from '../patterns/TestimonialCarousel';
-import * as FAQSectionModule from '../patterns/FAQSection';
-import * as TrustBandModule from '../patterns/TrustBand';
-
-import * as MembershipsDataModule from '../../data/memberships';
-
-var Layout = LayoutModule.Layout;
-var Container = ContainerModule.Container;
-var Typography = TypographyModule.Typography;
-var Heading = HeadingModule.Heading;
-var TestimonialCarousel = TestimonialCarouselModule.TestimonialCarousel;
-var FAQSection = FAQSectionModule.FAQSection;
-var TrustBand = TrustBandModule.TrustBand;
-var membershipPlans = MembershipsDataModule.membershipPlans;
-var memberBenefits = MembershipsDataModule.memberBenefits;
-var memberTestimonials = MembershipsDataModule.memberTestimonials;
-var membershipFAQs = MembershipsDataModule.membershipFAQs;
+import { Layout } from '../parts/Layout';
+import { Container } from '../common/Container';
+import { Typography } from '../common/Typography';
+import { Heading } from '../common/Heading';
+import { TestimonialCarousel } from '../patterns/TestimonialCarousel';
+import { FAQSection } from '../patterns/FAQSection';
+import { TrustBand } from '../patterns/TrustBand';
+import { membershipPlans, memberBenefits, memberTestimonials, membershipFAQs } from '../../data/memberships';
 
 /**
  * SingleMembership Template — Funky Redesign (Phase 9)
  */
-export function SingleMembership() {
-  var planState = React.useState('premium');
-  var selectedPlan = planState[0];
-  var setSelectedPlan = planState[1];
-  var billingState = React.useState('annual');
-  var billingPeriod = billingState[0];
-  var setBillingPeriod = billingState[1];
-  
-  var currentPlan = membershipPlans.find(function(p) { return p.id === selectedPlan; }) || membershipPlans[1];
-  var currentPrice = billingPeriod === 'annual' ? currentPlan.annualPrice : currentPlan.monthlyPrice;
+export const SingleMembership = () => {
+  const [selectedPlan, setSelectedPlan] = useState('premium');
+  const [billingPeriod, setBillingPeriod] = useState('annual');
 
-  var transformedTestimonials = memberTestimonials.map(function(t) { return {
+  const currentPlan = membershipPlans.find((p) => p.id === selectedPlan) || membershipPlans[1];
+  const currentPrice = billingPeriod === 'annual' ? currentPlan.annualPrice : currentPlan.monthlyPrice;
+
+  const transformedTestimonials = memberTestimonials.map((t) => ({
     id: t.id,
     quote: t.quote,
     author: t.name,
-    role: t.tier + ' - Since ' + t.memberSince,
+    role: `${t.tier} - Since ${t.memberSince}`,
     avatar: t.image,
     rating: t.rating,
-  }; });
+  }));
 
-  var transformedFAQs = membershipFAQs.map(function(f) { return {
+  const transformedFAQs = membershipFAQs.map((f) => ({
     question: f.question,
     answer: f.answer,
-  }; });
+  }));
 
   return (
-    React.createElement(Layout, null,
-      React.createElement(Container, { className: "wp-product-page" },
-        /* Breadcrumbs */
-        React.createElement('nav', { className: "wp-breadcrumbs", "aria-label": "Breadcrumb" },
-          React.createElement('ol', { className: "wp-breadcrumbs__list" },
-            React.createElement('li', null, React.createElement(Link, { to: "/" }, "Home")),
-            React.createElement('li', { className: "wp-breadcrumbs__separator" }, "/"),
-            React.createElement('li', null, React.createElement(Link, { to: "/membership" }, "Membership")),
-            React.createElement('li', { className: "wp-breadcrumbs__separator" }, "/"),
-            React.createElement('li', { className: "wp-breadcrumbs__current" }, currentPlan.name + " Membership")
-          )
-        ),
+    <Layout>
+      <Container className="wp-product-page">
+        {/* Breadcrumbs */}
+        <nav className="wp-breadcrumbs" aria-label="Breadcrumb">
+          <ol className="wp-breadcrumbs__list">
+            <li><Link to="/">Home</Link></li>
+            <li className="wp-breadcrumbs__separator">/</li>
+            <li><Link to="/membership">Membership</Link></li>
+            <li className="wp-breadcrumbs__separator">/</li>
+            <li className="wp-breadcrumbs__current">{`${currentPlan.name} Membership`}</li>
+          </ol>
+        </nav>
 
-        React.createElement('div', { className: "wp-product-layout" },
-          /* Left: Plan Selection */
-          React.createElement('div', { className: "wp-product-info" },
-            React.createElement('div', { className: "wp-badge-pill" },
-              React.createElement(Crown, { size: 14, "aria-hidden": "true" }),
-              React.createElement(Typography, { variant: "caption", className: "wp-badge-pill__text" }, "Exclusive Membership")
-            ),
+        <div className="wp-product-layout">
+          {/* Left: Plan Selection */}
+          <div className="wp-product-info">
+            <div className="wp-badge-pill">
+              <Crown size={14} aria-hidden="true" />
+              <Typography variant="caption" className="wp-badge-pill__text">Exclusive Membership</Typography>
+            </div>
 
-            React.createElement(Heading, { level: 1, className: "wp-product-title" }, currentPlan.name + " Membership"),
+            <Heading level={1} className="wp-product-title">{`${currentPlan.name} Membership`}</Heading>
 
-            React.createElement(Typography, { className: "wp-product-description" },
-              currentPlan.description + ". Get " + currentPlan.discount + " off every purchase, exclusive products, and VIP perks that pay for themselves."
-            ),
+            <Typography className="wp-product-description">
+              {`${currentPlan.description}. Get ${currentPlan.discount} off every purchase, exclusive products, and VIP perks that pay for themselves.`}
+            </Typography>
 
-            /* Billing Period Toggle */
-            React.createElement('div', { className: "wp-billing-toggle" },
-              React.createElement('div', { className: "wp-billing-toggle__wrapper" },
-                React.createElement('button', {
-                  onClick: function() { setBillingPeriod('monthly'); },
-                  className: 'wp-billing-toggle__btn' + (billingPeriod === 'monthly' ? ' wp-billing-toggle__btn--active' : '')
-                },
-                  React.createElement(Typography, { className: "wp-billing-toggle__label" }, "Monthly")
-                ),
-                React.createElement('button', {
-                  onClick: function() { setBillingPeriod('annual'); },
-                  className: 'wp-billing-toggle__btn' + (billingPeriod === 'annual' ? ' wp-billing-toggle__btn--active' : '')
-                },
-                  React.createElement(Typography, { className: "wp-billing-toggle__label" }, "Annual"),
-                  React.createElement('span', { className: "wp-billing-toggle__badge" }, "Save 20%")
-                )
-              )
-            ),
+            {/* Billing Period Toggle */}
+            <div className="wp-billing-toggle">
+              <div className="wp-billing-toggle__wrapper">
+                <button
+                  onClick={() => setBillingPeriod('monthly')}
+                  className={`wp-billing-toggle__btn${billingPeriod === 'monthly' ? ' wp-billing-toggle__btn--active' : ''}`}
+                >
+                  <Typography className="wp-billing-toggle__label">Monthly</Typography>
+                </button>
+                <button
+                  onClick={() => setBillingPeriod('annual')}
+                  className={`wp-billing-toggle__btn${billingPeriod === 'annual' ? ' wp-billing-toggle__btn--active' : ''}`}
+                >
+                  <Typography className="wp-billing-toggle__label">Annual</Typography>
+                  <span className="wp-billing-toggle__badge">Save 20%</span>
+                </button>
+              </div>
+            </div>
 
-            /* Plan Selection */
-            React.createElement('div', { className: "wp-plan-selector" },
-              membershipPlans.map(function(plan) {
-                var price = billingPeriod === 'annual' ? plan.annualPrice : plan.monthlyPrice;
+            {/* Plan Selection */}
+            <div className="wp-plan-selector">
+              {membershipPlans.map((plan) => {
+                const price = billingPeriod === 'annual' ? plan.annualPrice : plan.monthlyPrice;
                 return (
-                  React.createElement('button', {
-                    key: plan.id,
-                    onClick: function() { setSelectedPlan(plan.id); },
-                    className: 'wp-plan-option' + (selectedPlan === plan.id ? ' wp-plan-option--active' : '')
-                  },
-                    React.createElement('div', { className: "wp-plan-option__content" },
-                      React.createElement('div', { className: 'wp-radio-indicator' + (selectedPlan === plan.id ? ' wp-radio-indicator--checked' : '') },
-                        selectedPlan === plan.id && React.createElement('div', { className: "wp-radio-indicator__dot" })
-                      ),
-                      
-                      React.createElement('div', { className: "wp-plan-option__details" },
-                        React.createElement('div', { className: "wp-plan-option__header" },
-                          React.createElement(Typography, { className: "wp-plan-option__name" }, plan.name),
-                          plan.badge && (
-                            React.createElement('span', { className: "wp-plan-option__badge" }, plan.badge)
-                          )
-                        ),
-                        React.createElement(Typography, { variant: "caption", className: "wp-plan-option__desc" }, plan.discount + " off everything")
-                      )
-                    ),
-                    
-                    React.createElement('div', { className: "wp-plan-option__pricing" },
-                      React.createElement(Typography, { className: "wp-plan-option__price" }, "\u00A3" + price),
-                      React.createElement(Typography, { variant: "caption", className: "wp-plan-option__interval" },
-                        "/" + (billingPeriod === 'annual' ? 'year' : 'month')
-                      ),
-                      billingPeriod === 'annual' && (
-                        React.createElement(Typography, { variant: "caption", className: "wp-plan-option__savings" },
-                          "Save \u00A3" + plan.annualSavings
-                        )
-                      )
-                    )
-                  )
+                  <button
+                    key={plan.id}
+                    onClick={() => setSelectedPlan(plan.id)}
+                    className={`wp-plan-option${selectedPlan === plan.id ? ' wp-plan-option--active' : ''}`}
+                  >
+                    <div className="wp-plan-option__content">
+                      <div className={`wp-radio-indicator${selectedPlan === plan.id ? ' wp-radio-indicator--checked' : ''}`}>
+                        {selectedPlan === plan.id && <div className="wp-radio-indicator__dot" />}
+                      </div>
+
+                      <div className="wp-plan-option__details">
+                        <div className="wp-plan-option__header">
+                          <Typography className="wp-plan-option__name">{plan.name}</Typography>
+                          {plan.badge && (
+                            <span className="wp-plan-option__badge">{plan.badge}</span>
+                          )}
+                        </div>
+                        <Typography variant="caption" className="wp-plan-option__desc">{`${plan.discount} off everything`}</Typography>
+                      </div>
+                    </div>
+
+                    <div className="wp-plan-option__pricing">
+                      <Typography className="wp-plan-option__price">{`£${price}`}</Typography>
+                      <Typography variant="caption" className="wp-plan-option__interval">
+                        {`/${billingPeriod === 'annual' ? 'year' : 'month'}`}
+                      </Typography>
+                      {billingPeriod === 'annual' && (
+                        <Typography variant="caption" className="wp-plan-option__savings">
+                          {`Save £${plan.annualSavings}`}
+                        </Typography>
+                      )}
+                    </div>
+                  </button>
                 );
-              })
-            ),
+              })}
+            </div>
 
-            /* Add to Cart */
-            React.createElement('button', { className: "wp-button-primary wp-button-full", type: "button" },
-              "Become a " + currentPlan.name + " Member"
-            ),
+            {/* Add to Cart */}
+            <button className="wp-button-primary wp-button-full" type="button">
+              {`Become a ${currentPlan.name} Member`}
+            </button>
 
-            React.createElement(Typography, { variant: "caption", className: "wp-guarantee-text" },
-              React.createElement(Lock, { size: 14, className: "wp-icon-inline", "aria-hidden": "true" }),
-              "30-day money-back guarantee \u2022 Cancel anytime"
-            ),
+            <Typography variant="caption" className="wp-guarantee-text">
+              <Lock size={14} className="wp-icon-inline" aria-hidden="true" />
+              30-day money-back guarantee • Cancel anytime
+            </Typography>
 
-            /* Value Calculator */
-            React.createElement('div', { className: "wp-roi-card" },
-              React.createElement('div', { className: "wp-roi-card__header" },
-                React.createElement('div', { className: "wp-roi-card__icon-wrapper" },
-                  React.createElement(Gift, { size: 20, className: "wp-icon-white", "aria-hidden": "true" })
-                ),
-                React.createElement('div', null,
-                  React.createElement(Typography, { className: "wp-roi-card__title" }, "Your Membership Pays for Itself!"),
-                  React.createElement(Typography, { variant: "caption", className: "wp-roi-card__subtitle" }, "Based on average monthly spend of \u00A3200")
-                )
-              ),
-              
-              React.createElement('div', { className: "wp-roi-card__content" },
-                React.createElement('div', { className: "wp-roi-row" },
-                  React.createElement('span', null, "Monthly savings (" + currentPlan.discount + " off):"),
-                  React.createElement('span', { className: "wp-roi-value" }, "\u00A3" + (200 * parseFloat(currentPlan.discount) / 100).toFixed(2))
-                ),
-                React.createElement('div', { className: "wp-roi-row" },
-                  React.createElement('span', null, "Membership cost:"),
-                  React.createElement('span', { className: "wp-roi-value" }, "-\u00A3" + currentPlan.monthlyPrice)
-                ),
-                React.createElement('div', { className: "wp-roi-row wp-roi-row--total" },
-                  React.createElement('span', null, "Net monthly savings:"),
-                  React.createElement('span', { className: "wp-roi-value--total" },
-                    "\u00A3" + ((200 * parseFloat(currentPlan.discount) / 100) - currentPlan.monthlyPrice).toFixed(2)
-                  )
-                )
-              )
-            )
-          ),
+            {/* Value Calculator */}
+            <div className="wp-roi-card">
+              <div className="wp-roi-card__header">
+                <div className="wp-roi-card__icon-wrapper">
+                  <Gift size={20} className="wp-icon-white" aria-hidden="true" />
+                </div>
+                <div>
+                  <Typography className="wp-roi-card__title">Your Membership Pays for Itself!</Typography>
+                  <Typography variant="caption" className="wp-roi-card__subtitle">Based on average monthly spend of £200</Typography>
+                </div>
+              </div>
 
-          /* Right: Benefits & Features */
-          React.createElement('div', { className: "wp-product-features" },
-            React.createElement('div', { className: "wp-features-list-wrapper" },
-              React.createElement(Heading, { level: 2, className: "wp-section-heading" }, "What's Included"),
-              
-              React.createElement('div', { className: "wp-features-list" },
-                currentPlan.features.map(function(feature, index) { return (
-                  React.createElement('div', { key: index, className: "wp-feature-item" },
-                    React.createElement('div', { className: "wp-feature-item__icon" },
-                      React.createElement(Check, { size: 16, className: "wp-icon-primary", "aria-hidden": "true" })
-                    ),
-                    React.createElement('div', null,
-                      React.createElement(Typography, { className: "wp-feature-item__title" }, feature.text),
-                      feature.description && (
-                        React.createElement(Typography, { variant: "caption", className: "wp-feature-item__desc" }, feature.description)
-                      )
-                    )
-                  )
-                ); })
-              )
-            ),
+              <div className="wp-roi-card__content">
+                <div className="wp-roi-row">
+                  <span>{`Monthly savings (${currentPlan.discount} off):`}</span>
+                  <span className="wp-roi-value">{`£${(200 * parseFloat(currentPlan.discount) / 100).toFixed(2)}`}</span>
+                </div>
+                <div className="wp-roi-row">
+                  <span>Membership cost:</span>
+                  <span className="wp-roi-value">{`-£${currentPlan.monthlyPrice}`}</span>
+                </div>
+                <div className="wp-roi-row wp-roi-row--total">
+                  <span>Net monthly savings:</span>
+                  <span className="wp-roi-value--total">
+                    {`£${((200 * parseFloat(currentPlan.discount) / 100) - currentPlan.monthlyPrice).toFixed(2)}`}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            React.createElement('div', { className: "wp-perks-card" },
-              React.createElement('div', { className: "wp-perks-card__header" },
-                React.createElement(Crown, { size: 20, className: "wp-icon-primary", "aria-hidden": "true" }),
-                React.createElement(Heading, { level: 3 }, "Exclusive Perks")
-              ),
-              
-              React.createElement('ul', { className: "wp-perks-list" },
-                currentPlan.exclusivePerks.map(function(perk, index) { return (
-                  React.createElement('li', { key: index, className: "wp-perks-item" },
-                    React.createElement(Star, { size: 16, className: "wp-icon-primary", "aria-hidden": "true" }),
-                    React.createElement(Typography, { className: "wp-perks-text" }, perk)
-                  )
-                ); })
-              )
-            )
-          )
-        ),
+          {/* Right: Benefits & Features */}
+          <div className="wp-product-features">
+            <div className="wp-features-list-wrapper">
+              <Heading level={2} className="wp-section-heading">What's Included</Heading>
 
-        /* Member Benefits */
-        React.createElement('section', { className: "wp-section-benefits" },
-          React.createElement('div', { className: "wp-section-header" },
-            React.createElement(Heading, { level: 2, className: "wp-section-title" }, "Why Members Love Us"),
-            React.createElement(Typography, { className: "wp-section-subtitle" }, "More than just discounts - it's a complete VIP experience.")
-          ),
+              <div className="wp-features-list">
+                {currentPlan.features.map((feature: any, index: number) => (
+                  <div key={index} className="wp-feature-item">
+                    <div className="wp-feature-item__icon">
+                      <Check size={16} className="wp-icon-primary" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <Typography className="wp-feature-item__title">{feature.text}</Typography>
+                      {feature.description && (
+                        <Typography variant="caption" className="wp-feature-item__desc">{feature.description}</Typography>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          React.createElement('div', { className: "wp-grid-4" },
-            memberBenefits.map(function(benefit, index) {
-              var Icon = benefit.icon;
+            <div className="wp-perks-card">
+              <div className="wp-perks-card__header">
+                <Crown size={20} className="wp-icon-primary" aria-hidden="true" />
+                <Heading level={3}>Exclusive Perks</Heading>
+              </div>
+
+              <ul className="wp-perks-list">
+                {currentPlan.exclusivePerks.map((perk: string, index: number) => (
+                  <li key={index} className="wp-perks-item">
+                    <Star size={16} className="wp-icon-primary" aria-hidden="true" />
+                    <Typography className="wp-perks-text">{perk}</Typography>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Member Benefits */}
+        <section className="wp-section-benefits">
+          <div className="wp-section-header">
+            <Heading level={2} className="wp-section-title">Why Members Love Us</Heading>
+            <Typography className="wp-section-subtitle">More than just discounts - it's a complete VIP experience.</Typography>
+          </div>
+
+          <div className="wp-grid-4">
+            {memberBenefits.map((benefit: any, index: number) => {
+              const Icon = benefit.icon;
               return (
-                React.createElement('div', { key: index, className: "wp-benefit-item" },
-                  React.createElement('div', { className: 'wp-benefit-icon ' + benefit.bg },
-                    React.createElement(Icon, { size: 32, className: benefit.color, "aria-hidden": "true" })
-                  ),
-                  React.createElement(Heading, { level: 3, className: "wp-benefit-title" }, benefit.title),
-                  React.createElement(Typography, { className: "wp-benefit-desc" }, benefit.description)
-                )
+                <div key={index} className="wp-benefit-item">
+                  <div className={`wp-benefit-icon ${benefit.bg}`}>
+                    <Icon size={32} className={benefit.color} aria-hidden="true" />
+                  </div>
+                  <Heading level={3} className="wp-benefit-title">{benefit.title}</Heading>
+                  <Typography className="wp-benefit-desc">{benefit.description}</Typography>
+                </div>
               );
-            })
-          )
-        ),
+            })}
+          </div>
+        </section>
 
-        /* Testimonials */
-        React.createElement('section', { className: "wp-section-testimonials" },
-          React.createElement(Heading, { level: 2, className: "wp-section-heading" }, "Member Success Stories"),
-          React.createElement(TestimonialCarousel, { testimonials: transformedTestimonials })
-        ),
+        {/* Testimonials */}
+        <section className="wp-section-testimonials">
+          <Heading level={2} className="wp-section-heading">Member Success Stories</Heading>
+          <TestimonialCarousel testimonials={transformedTestimonials} />
+        </section>
 
-        /* FAQ */
-        React.createElement('section', { className: "wp-section-faq" },
-          React.createElement(Heading, { level: 2, className: "wp-section-heading" }, "Membership Questions"),
-          React.createElement(FAQSection, { items: transformedFAQs })
-        ),
+        {/* FAQ */}
+        <section className="wp-section-faq">
+          <Heading level={2} className="wp-section-heading">Membership Questions</Heading>
+          <FAQSection items={transformedFAQs} />
+        </section>
 
-        /* Trust Band */
-        React.createElement('section', { className: "wp-section-trust" },
-          React.createElement(TrustBand, null)
-        )
-      )
-    )
+        {/* Trust Band */}
+        <section className="wp-section-trust">
+          <TrustBand />
+        </section>
+      </Container>
+    </Layout>
   );
 }

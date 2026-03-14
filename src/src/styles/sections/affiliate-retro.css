@@ -1,0 +1,30 @@
+/**
+ * Affiliate Program Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for affiliate program page.
+ *
+ * **Components:**
+ * - Commission section background
+ * - Commission rate highlight in table
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   COMMISSION SECTION
+   ========================================================================== */
+
+.retro-section--commission {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+/* ==========================================================================
+   COMMISSION RATE HIGHLIGHT
+   ========================================================================== */
+
+.retro-commission-rate {
+  color: var(--retro-neon-green, #00ff88);
+  filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.4));
+}

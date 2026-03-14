@@ -1,21 +1,15 @@
-import React from 'react';
-var useEffect = React.useEffect;
-var useState = React.useState;
+import { useEffect, useState } from 'react';
 
 /**
- * usePrefersReducedMotion
- * 
- * Optimized for Figma Make parser:
- * 1. Simple function declaration
- * 2. No arrow functions
- * 3. Standard ASCII characters
+ * usePrefersReducedMotion Hook
+ *
+ * Returns true when the user prefers reduced motion.
+ * Defaults to true (safe default) until the media query is evaluated.
  */
-export function usePrefersReducedMotion() {
-  var ref = useState(true);
-  var prefersReducedMotion = ref[0];
-  var setPrefersReducedMotion = ref[1];
+export const usePrefersReducedMotion = (): boolean => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true);
 
-  useEffect(function() {
+  useEffect(() => {
     if (typeof window === 'undefined') return;
 
     if (!window.matchMedia) {
@@ -23,25 +17,25 @@ export function usePrefersReducedMotion() {
       return;
     }
 
-    var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
 
-    function handleChange(event) {
+    const handleChange = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(event.matches);
-    }
+    };
 
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', handleChange);
-      return function() {
+      return () => {
         mediaQuery.removeEventListener('change', handleChange);
       };
-    } else if (mediaQuery.addListener) {
-      mediaQuery.addListener(handleChange);
-      return function() {
-        mediaQuery.removeListener(handleChange);
+    } else if ((mediaQuery as any).addListener) {
+      (mediaQuery as any).addListener(handleChange);
+      return () => {
+        (mediaQuery as any).removeListener(handleChange);
       };
     }
-    
+
     return undefined;
   }, []);
 

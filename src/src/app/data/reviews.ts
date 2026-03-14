@@ -19,7 +19,7 @@
  */
 
 /** @type {Review[]} */
-export var REVIEWS = [
+export const REVIEWS = [
   // Product: prod-1 (Premium Wireless Headphones) - 4 reviews (3 verified, 1 not)
   {
     id: 'r1',
@@ -155,24 +155,24 @@ export var REVIEWS = [
  * @param {string} productId
  * @returns {Review[]}
  */
-export function getReviewsByProductId(productId) {
-  return REVIEWS.filter(function(review) { return review.productId === productId; });
+export const getReviewsByProductId = (productId) => {
+  return REVIEWS.filter((review) => review.productId === productId);
 }
 
 /**
  * @param {string} productId
  * @returns {number}
  */
-export function getAverageRating(productId) {
-  var productReviews = getReviewsByProductId(productId);
+export const getAverageRating = (productId) => {
+  const productReviews = getReviewsByProductId(productId);
   if (productReviews.length === 0) return 0;
   
-  var sum = productReviews.reduce(function(acc, review) { return acc + review.rating; }, 0);
+  const sum = productReviews.reduce((acc, review) => acc + review.rating, 0);
   return Number((sum / productReviews.length).toFixed(1));
 }
 
 /** @type {Review} */
-export var defaultReview = {
+export const defaultReview = {
   id: 'default',
   productId: 'all',
   author: 'Verified Customer',

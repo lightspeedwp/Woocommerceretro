@@ -37,6 +37,7 @@
   display: flex;
   align-items: center;
   gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--20); /* Absorbs wp-p-2 */
   color: var(--wp--preset--color--foreground);
 }
 
@@ -44,8 +45,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--60); /* Absorbs wp-p-6 */
   width: 100%;
   max-width: 600px;
+}
+
+.wp-order-account-actions__footer {
+  margin-top: var(--wp--preset--spacing--40); /* Absorbs wp-mt-4 */
+  text-align: center;
 }
 
 /* Order Summary Header (Dashed Box) */
@@ -64,7 +71,7 @@
 }
 
 .wp-order-summary-item {
-  padding: var(--wp--preset--spacing--40);
+  padding: var(--wp--preset--spacing--40); /* Already handles wp-p-2/wp-p-3 */
   border-bottom: 2px dashed var(--wp--preset--color--border-strong);
   flex: 1;
 }
@@ -98,6 +105,9 @@
 
 /* Order Details Table */
 .wp-order-details-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20); /* Absorbs wp-mb-2 and wp-mb-1 between rows */
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -111,7 +121,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-block: var(--wp--preset--spacing--30);
+  padding: var(--wp--preset--spacing--30); /* Absorbs wp-p padding */
   border-bottom: 1px solid var(--wp--preset--color--border-light);
 }
 
@@ -125,13 +135,24 @@
   padding-top: var(--wp--preset--spacing--40);
 }
 
-/* Order Status Header */
+/* Order Status */
+.wp-order-status {
+  padding: var(--wp--preset--spacing--60); /* Absorbs wp-p-6 */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20); /* Absorbs wp-mt-2 between children */
+}
+
 .wp-order-status-header {
-  margin-bottom: var(--wp--preset--spacing--70); /* Replaces wp-mb-8 */
+  margin-bottom: var(--wp--preset--spacing--70);
+  margin-top: var(--wp--preset--spacing--40); /* Absorbs wp-mt-4 */
 }
 
 /* Downloads Section */
 .wp-order-downloads {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20); /* Absorbs wp-mb-2 between rows */
   border: 2px solid var(--wp--preset--color--border);
   border-radius: var(--wp--preset--radii--md);
   overflow: hidden;
@@ -139,7 +160,7 @@
 
 .wp-order-downloads-header {
   background-color: var(--wp--preset--color--surface);
-  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40); /* Absorbs wp-p-2 */
   border-bottom: 2px solid var(--wp--preset--color--border);
   display: grid;
   grid-template-columns: 1fr 1fr auto;
@@ -147,7 +168,7 @@
 }
 
 .wp-order-downloads-row {
-  padding: var(--wp--preset--spacing--40);
+  padding: var(--wp--preset--spacing--40); /* Absorbs wp-p-4 */
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   align-items: center;
@@ -157,7 +178,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* gap-2 */
+  gap: var(--wp--preset--spacing--20); /* Absorbs wp-ml-2 via gap */
   padding: 6px 12px;
   background-color: var(--wp--preset--color--primary);
   color: var(--wp--preset--color--primary-foreground);
@@ -176,5 +197,18 @@
 .wp-order-address-box {
   border: 2px solid var(--wp--preset--color--border);
   border-radius: var(--wp--preset--radii--md);
-  padding: var(--wp--preset--spacing--50);
+  padding: var(--wp--preset--spacing--50); /* Absorbs wp-p-4 on inner div */
+}
+
+/* Additional Information */
+.wp-order-additional-info {
+  padding: var(--wp--preset--spacing--40); /* Absorbs wp-p-4 */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20); /* Absorbs wp-mt-2 */
+}
+
+/* Additional Fields */
+.wp-order-additional-field {
+  padding: var(--wp--preset--spacing--40); /* Absorbs wp-p-4 */
 }

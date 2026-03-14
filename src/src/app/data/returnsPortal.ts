@@ -14,21 +14,21 @@
 // @typedef {Object} ReturnPolicyHighlight
 // @property {string} text
 
-var returnSteps = [
+const returnSteps = [
   { step: '1', title: 'Find Your Order', description: 'Enter your order number and email above.' },
   { step: '2', title: 'Select Items', description: 'Choose which items to return and provide a reason.' },
   { step: '3', title: 'Print Label', description: 'Download your free prepaid shipping label.' },
   { step: '4', title: 'Ship & Track', description: 'Drop off at any carrier location and track your refund.' },
 ];
 
-var returnHighlights = [
+const returnHighlights = [
   { text: '30-day return window from date of delivery' },
   { text: 'Free return shipping on all orders' },
   { text: 'Refunds processed within 5-7 business days' },
   { text: 'Exchange option available for different size or color' },
 ];
 
-var returnsPortalPageContent = {
+const returnsPortalPageContent = {
   title: 'Returns Portal',
   description: 'Start a return or exchange in just a few steps. We make the process simple and hassle-free.',
   startReturnHeading: 'Start a Return',

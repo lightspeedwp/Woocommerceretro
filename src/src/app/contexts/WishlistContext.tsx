@@ -1,94 +1,82 @@
 /**
  * WishlistContext.tsx
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No destructuring in parameters
- * 3. ASCII only
- * 4. No TypeScript interfaces or generics
+ *
+ * Wishlist state management with localStorage persistence.
  */
 
-import React from 'react';
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var useEffect = React.useEffect;
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 
-var WishlistContext = createContext(undefined);
+interface WishlistProduct {
+  id: string;
+  name?: string;
+  [key: string]: any;
+}
 
-export function useWishlist() {
-  var context = useContext(WishlistContext);
+interface WishlistContextValue {
+  items: WishlistProduct[];
+  addToWishlist: (product: WishlistProduct) => void;
+  removeFromWishlist: (productId: string) => void;
+  clearWishlist: () => void;
+  isInWishlist: (productId: string) => boolean;
+  getWishlistCount: () => number;
+}
+
+const WishlistContext = createContext<WishlistContextValue | undefined>(undefined);
+
+export const useWishlist = (): WishlistContextValue => {
+  const context = useContext(WishlistContext);
   if (!context) {
     throw new Error('useWishlist must be used within a WishlistProvider');
   }
   return context;
 }
 
-export function WishlistProvider(props) {
-  var children = props.children;
-
-  var _state = useState(function() {
+export const WishlistProvider = ({ children }: { children: ReactNode }) => {
+  const [items, setItems] = useState<WishlistProduct[]>(() => {
     try {
-      var savedWishlist = localStorage.getItem('wishlist');
+      const savedWishlist = localStorage.getItem('wishlist');
       return savedWishlist ? JSON.parse(savedWishlist) : [];
     } catch (e) {
       return [];
     }
   });
-  var items = _state[0];
-  var setItems = _state[1];
 
-  useEffect(function() {
+  useEffect(() => {
     localStorage.setItem('wishlist', JSON.stringify(items));
   }, [items]);
 
-  function addToWishlist(product) {
-    setItems(function(currentItems) {
-      var exists = false;
-      for (var i = 0; i < currentItems.length; i++) {
-        if (currentItems[i].id === product.id) {
-          exists = true;
-          break;
-        }
-      }
+  const addToWishlist = useCallback((product: WishlistProduct) => {
+    setItems((currentItems) => {
+      const exists = currentItems.some((item) => item.id === product.id);
       if (exists) return currentItems;
-      return currentItems.concat([product]);
+      return [...currentItems, product];
     });
-  }
+  }, []);
 
-  function removeFromWishlist(productId) {
-    setItems(function(currentItems) {
-      var result = [];
-      for (var i = 0; i < currentItems.length; i++) {
-        if (currentItems[i].id !== productId) result.push(currentItems[i]);
-      }
-      return result;
-    });
-  }
+  const removeFromWishlist = useCallback((productId: string) => {
+    setItems((currentItems) => currentItems.filter((item) => item.id !== productId));
+  }, []);
 
-  function clearWishlist() {
+  const clearWishlist = useCallback(() => {
     setItems([]);
-  }
+  }, []);
 
-  function isInWishlist(productId) {
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].id === productId) return true;
-    }
-    return false;
-  }
+  const isInWishlist = useCallback((productId: string): boolean => {
+    return items.some((item) => item.id === productId);
+  }, [items]);
 
-  function getWishlistCount() {
+  const getWishlistCount = useCallback((): number => {
     return items.length;
-  }
+  }, [items]);
 
-  var value = {
-    items: items,
-    addToWishlist: addToWishlist,
-    removeFromWishlist: removeFromWishlist,
-    clearWishlist: clearWishlist,
-    isInWishlist: isInWishlist,
-    getWishlistCount: getWishlistCount
-  };
+  const value = useMemo<WishlistContextValue>(() => ({
+    items,
+    addToWishlist,
+    removeFromWishlist,
+    clearWishlist,
+    isInWishlist,
+    getWishlistCount
+  }), [items, addToWishlist, removeFromWishlist, clearWishlist, isInWishlist, getWishlistCount]);
 
-  return React.createElement(WishlistContext.Provider, { value: value }, children);
+  return <WishlistContext.Provider value={value}>{children}</WishlistContext.Provider>;
 }

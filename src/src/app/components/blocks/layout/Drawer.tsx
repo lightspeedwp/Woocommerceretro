@@ -1,49 +1,18 @@
 import React from "react";
-var forwardRef = React.forwardRef;
-import * as SheetModule from "./Sheet";
+import { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription } from "./Sheet";
 
-var Sheet = SheetModule.Sheet;
-var SheetTrigger = SheetModule.SheetTrigger;
-var SheetClose = SheetModule.SheetClose;
-var SheetContent = SheetModule.SheetContent;
-var SheetHeader = SheetModule.SheetHeader;
-var SheetFooter = SheetModule.SheetFooter;
-var SheetTitle = SheetModule.SheetTitle;
-var SheetDescription = SheetModule.SheetDescription;
+export const Drawer = Sheet;
+export const DrawerTrigger = SheetTrigger;
+export const DrawerClose = SheetClose;
 
-/**
- * Drawer Component
- * 
- * Uses the Sheet component with side="bottom" by default.
- */
-
-export var Drawer = Sheet;
-export var DrawerTrigger = SheetTrigger;
-export var DrawerClose = SheetClose;
-
-export var DrawerContent = forwardRef(function DrawerContent(props, ref) {
-  var side = props.side === undefined ? "bottom" : props.side;
-  var className = props.className || '';
-  var children = props.children;
-
-  var combinedClassName = [
-    'wp-drawer-content',
-    'funky-drawer',
-    className
-  ].filter(function(c) { return !!c; }).join(' ');
-
-  var sheetProps = {
-    side: side,
-    ref: ref,
-    className: combinedClassName
-  };
-
-  return React.createElement(SheetContent, sheetProps, children);
-});
-
+export const DrawerContent = React.forwardRef<HTMLDivElement, any>(({ side = 'bottom', className = '', children }, ref) => (
+  <SheetContent side={side} ref={ref} className={`wp-drawer-content funky-drawer ${className}`}>
+    {children}
+  </SheetContent>
+));
 DrawerContent.displayName = "DrawerContent";
 
-export var DrawerHeader = SheetHeader;
-export var DrawerFooter = SheetFooter;
-export var DrawerTitle = SheetTitle;
-export var DrawerDescription = SheetDescription;
+export const DrawerHeader = SheetHeader;
+export const DrawerFooter = SheetFooter;
+export const DrawerTitle = SheetTitle;
+export const DrawerDescription = SheetDescription;

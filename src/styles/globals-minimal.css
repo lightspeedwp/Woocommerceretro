@@ -1,0 +1,176 @@
+/**
+ * Global Stylesheet - ULTRA MINIMAL (Figma Make Safe)
+ *
+ * ZERO @imports to prevent IframeMessageAbortError.
+ * All CSS inlined directly in this file.
+ *
+ * Created: March 13, 2026
+ * Updated: March 13, 2026 - Removed ALL imports (emergency fix)
+ */
+
+/* ========================================
+   CSS RESET & BASE
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #F2EEE6;
+  color: #1E2630;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode */
+.dark body {
+  background-color: #11161A;
+  color: #E8E2D8;
+}
+
+/* ========================================
+   CRITICAL COLOR VARIABLES
+   ======================================== */
+
+:root {
+  --color-ink: #1E2630;
+  --color-paper: #F2EEE6;
+  --color-panel: #DDD6C8;
+  --color-text: #1E2630;
+  --color-text-muted: #6B7A89;
+  --color-border: #C4BAA8;
+  
+  /* WordPress preset aliases */
+  --wp--preset--color--foreground: #1E2630;
+  --wp--preset--color--background: #F2EEE6;
+  --wp--preset--color--muted-foreground: #6B7A89;
+  --wp--preset--color--border: #C4BAA8;
+}
+
+.dark {
+  --color-ink: #E8E2D8;
+  --color-paper: #151A1E;
+  --color-panel: #232A32;
+  --color-text: #E8E2D8;
+  --color-text-muted: #8A9499;
+  --color-border: #3E4A52;
+  
+  /* WordPress preset aliases */
+  --wp--preset--color--foreground: #E8E2D8;
+  --wp--preset--color--background: #11161A;
+  --wp--preset--color--muted-foreground: #8A9499;
+  --wp--preset--color--border: #3E4A52;
+}
+
+/* ========================================
+   CRITICAL UTILITY CLASSES
+   ======================================== */
+
+/* Text colors */
+.text-muted {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-text-primary {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-text-secondary {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-text-white {
+  color: #ffffff;
+}
+
+/* Flexbox */
+.wp-flex { display: flex; }
+.wp-flex-col { flex-direction: column; }
+.wp-items-center { align-items: center; }
+.wp-justify-center { justify-content: center; }
+.wp-justify-between { justify-content: space-between; }
+.wp-gap-2 { gap: 0.5rem; }
+.wp-gap-4 { gap: 1rem; }
+
+/* Display */
+.wp-block { display: block; }
+.wp-hidden { display: none; }
+
+/* Width */
+.wp-w-full { width: 100%; }
+
+/* Position */
+.wp-relative { position: relative; }
+.wp-absolute { position: absolute; }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+.typography-h1,
+.typography-h2,
+.typography-h3,
+.typography-h4,
+.typography-h5,
+.typography-h6 {
+  color: var(--wp--preset--color--foreground);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.typography-body {
+  color: var(--wp--preset--color--foreground);
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.typography-small,
+.typography-caption {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+a {
+  color: #0055AA;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dark a {
+  color: #5DA0E0;
+}
+
+a:hover {
+  text-decoration: underline;
+}

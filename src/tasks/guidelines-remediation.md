@@ -1,8 +1,9 @@
 # Guidelines Remediation Task List
 
 **Source:** A1 Guidelines Freshness Audit (2026-02-21)  
-**Status:** NOT STARTED  
-**Updated:** February 21, 2026 (Per-component alignment with funky redesign added)  
+**Status:** PARTIALLY ADDRESSED  
+**Updated:** March 12, 2026  
+**Note:** T1.1 partially addressed by Guidelines.md v2.9 updates (Section 4 now has BEM examples alongside legacy Tailwind "WRONG" examples). Remaining sections 5-8 still contain Tailwind class references as negative examples. Full rewrite deferred -- Tailwind elimination is 100% complete in codebase, guidelines examples serve as "what NOT to do" reference.  
 **Cross-Reference:** `/prompts/funky-redesign-orchestrator.md` Appendix C
 
 ---

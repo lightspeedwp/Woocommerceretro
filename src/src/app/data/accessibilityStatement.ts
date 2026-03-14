@@ -13,7 +13,7 @@
 // @property {string} title
 // @property {string} description
 
-var accessibilityFeatures = [
+const accessibilityFeatures = [
   { 
     id: 'keyboard',
     icon: 'Keyboard', 
@@ -40,7 +40,7 @@ var accessibilityFeatures = [
   },
 ];
 
-var accessibilityStandards = [
+const accessibilityStandards = [
   'WCAG 2.1 Level AA conformance across all pages',
   'Proper heading hierarchy (h1 through h6)',
   'Color contrast ratios meet or exceed 4.5:1 for normal text',
@@ -51,7 +51,7 @@ var accessibilityStandards = [
   'All functionality available without a mouse',
 ];
 
-var accessibilityPageContent = {
+const accessibilityPageContent = {
   title: 'Accessibility Statement',
   description: 'We are committed to making our website accessible to everyone, regardless of ability or technology.',
   commitmentHeading: 'Our Commitment',

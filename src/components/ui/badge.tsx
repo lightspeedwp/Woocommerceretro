@@ -6,8 +6,8 @@ import { Badge as NewBadge } from "@/components/blocks/ui/badge";
  * Redirects to new WordPress-aligned component.
  * @deprecated Import from @/components/blocks/ui/badge instead.
  */
-var Badge = NewBadge;
+const Badge = NewBadge;
 
-function badgeVariants() { return ""; }
+const badgeVariants = () => "";
 
 export { Badge, badgeVariants };

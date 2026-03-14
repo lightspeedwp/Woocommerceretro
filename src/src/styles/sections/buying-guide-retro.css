@@ -1,0 +1,142 @@
+/**
+ * Buying Guide Page Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for buying guide page.
+ *
+ * **Components:**
+ * - Tip cards with checklists
+ * - Category guide linked cards
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   CATEGORIES SECTION
+   ========================================================================== */
+
+.retro-section--categories {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+/* ==========================================================================
+   TIP CARDS
+   ========================================================================== */
+
+.retro-tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-6);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.retro-tip-card {
+  background: var(--retro-bg-elevated);
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  padding: var(--retro-space-6);
+  transition: all 0.3s ease;
+}
+
+.retro-tip-card:hover {
+  border-color: var(--retro-neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 249, 0.1);
+}
+
+.retro-tip-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-4);
+  margin-bottom: var(--retro-space-4);
+}
+
+.retro-tip-card__title {
+  font-size: var(--retro-text-sm);
+  color: var(--retro-text-primary);
+}
+
+.retro-feature-icon--sm {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+}
+
+/* ==========================================================================
+   CHECKLIST
+   ========================================================================== */
+
+.retro-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.retro-checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--retro-space-2);
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-secondary);
+}
+
+.retro-checklist__icon {
+  color: var(--retro-neon-green, #00ff88);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.retro-checklist-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-3);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   LINKED CARDS
+   ========================================================================== */
+
+.retro-card--link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.retro-card--link:hover .retro-card-link {
+  color: var(--retro-neon-cyan);
+}
+
+.retro-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--retro-text-xs);
+  color: var(--retro-text-muted);
+  margin-top: auto;
+  padding-top: var(--retro-space-3);
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .retro-tip-card {
+    padding: var(--retro-space-4);
+  }
+
+  .retro-tip-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--retro-space-2);
+  }
+}

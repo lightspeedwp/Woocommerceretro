@@ -1,343 +1,325 @@
 /**
  * routes.ts - Router Configuration
- * 
+ *
  * Defines the application route tree for React Router Data mode.
- * Optimized for Figma Make parser:
- * 1. No arrow functions (Uses function() {})
- * 2. No spread operators
- * 3. No JSX inside route objects
- * 4. Categorized route arrays combined via loops
- * 5. ASCII characters only
- * 6. Top-level static imports ONLY (dynamic imports fail in preview)
- * 7. No destructured imports (Legacy syntax)
+ * All route components are lazy-loaded to reduce initial bundle size
+ * and prevent Figma Make iframe communication timeouts.
  */
 
+import { createBrowserRouter, Navigate } from 'react-router';
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
-var createBrowserRouter = ReactRouterModule.createBrowserRouter;
-var Navigate = ReactRouterModule.Navigate;
+import { RootLayout } from './src/app/RootLayout';
 
-import * as RootLayoutModule from './src/app/RootLayout';
-var RootLayout = RootLayoutModule.RootLayout;
+// --- Lazy-loaded Route Components -----------------------------------------------
+// Each component is loaded on-demand to reduce initial parse/compile time.
+// Named exports are remapped to default exports for React.lazy compatibility.
 
-// --- Static Imports for all Route Components ----------------------------------
-import * as FrontPageMod from './src/app/components/templates/FrontPage';
-import * as ArchiveProductMod from './src/app/components/templates/ArchiveProduct';
-import * as ProductSearchResultsMod from './src/app/components/templates/ProductSearchResults';
-import * as ShopWithSidebarMod from './src/app/components/templates/ShopWithSidebar';
-import * as SingleProductMod from './src/app/components/templates/SingleProduct';
-import * as SingleProductStickyMod from './src/app/components/templates/SingleProductSticky';
-import * as VariableProductMod from './src/app/components/templates/VariableProduct';
-import * as PageDealsMod from './src/app/components/templates/PageDeals';
-import * as PageGiftCardsMod from './src/app/components/templates/PageGiftCards';
-import * as ProductComparisonMod from './src/app/components/patterns/ProductComparison';
+// Shop
+const FrontPageRetro = React.lazy(() => import('./src/app/components/templates/FrontPageRetro').then((m) => ({ default: m.FrontPageRetro })));
+const ArchiveProductRetro = React.lazy(() => import('./src/app/components/templates/ArchiveProductRetro').then((m) => ({ default: m.ArchiveProductRetro })));
+const ProductSearchResultsRetro = React.lazy(() => import('./src/app/components/templates/ProductSearchResultsRetro').then((m) => ({ default: m.ProductSearchResultsRetro })));
+const SingleProductSticky = React.lazy(() => import('./src/app/components/templates/SingleProductSticky').then((m) => ({ default: m.SingleProductSticky })));
+const SingleProductRetro = React.lazy(() => import('./src/app/components/templates/SingleProductRetro').then((m) => ({ default: m.SingleProductRetro })));
+const PageGiftCardsRetro = React.lazy(() => import('./src/app/components/templates/PageGiftCardsRetro').then((m) => ({ default: m.PageGiftCardsRetro })));
+const PageCompareRetro = React.lazy(() => import('./src/app/components/templates/PageCompareRetro').then((m) => ({ default: m.PageCompareRetro })));
 
-import * as DashboardMod from './src/app/components/patterns/account/Dashboard';
-import * as OrdersMod from './src/app/components/patterns/account/Orders';
-import * as OrderViewPatternMod from './src/app/components/patterns/account/OrderView';
-import * as WishlistPatternMod from './src/app/components/patterns/account/Wishlist';
-import * as AddressesMod from './src/app/components/patterns/account/Addresses';
-import * as AccountDetailsMod from './src/app/components/patterns/account/AccountDetails';
-import * as AccountLoyaltyMod from './src/app/components/patterns/account/AccountLoyalty';
-import * as PageContactMod from './src/app/components/templates/PageContact';
+// Account Patterns
+const DashboardRetro = React.lazy(() => import('./src/app/components/patterns/account/DashboardRetro').then((m) => ({ default: m.DashboardRetro })));
+const OrdersRetro = React.lazy(() => import('./src/app/components/patterns/account/OrdersRetro').then((m) => ({ default: m.OrdersRetro })));
+const AddressesRetro = React.lazy(() => import('./src/app/components/patterns/account/AddressesRetro').then((m) => ({ default: m.AddressesRetro })));
+const LoyaltyRetro = React.lazy(() => import('./src/app/components/patterns/account/LoyaltyRetro').then((m) => ({ default: m.LoyaltyRetro })));
 
-import * as LoginRegisterMod from './src/app/components/templates/PageLogin';
-import * as AccountLayoutMod from './src/app/components/templates/AccountLayout';
-import * as PageWishlistMod from './src/app/components/templates/PageWishlist';
-import * as AccountDashboardWidgetsMod from './src/app/components/templates/AccountDashboardWidgets';
+// Account Templates
+const PageContactRetro = React.lazy(() => import('./src/app/components/templates/PageContactRetro').then((m) => ({ default: m.PageContactRetro })));
+const PageLoginRetro = React.lazy(() => import('./src/app/components/templates/PageLoginRetro').then((m) => ({ default: m.PageLoginRetro })));
+const AccountLayoutRetro = React.lazy(() => import('./src/app/components/templates/AccountLayoutRetro').then((m) => ({ default: m.AccountLayoutRetro })));
+const PageWishlistRetro = React.lazy(() => import('./src/app/components/templates/PageWishlistRetro').then((m) => ({ default: m.PageWishlistRetro })));
+const AccountDashboardWidgets = React.lazy(() => import('./src/app/components/templates/AccountDashboardWidgets').then((m) => ({ default: m.AccountDashboardWidgets })));
+const PageRegisterRetro = React.lazy(() => import('./src/app/components/templates/PageRegisterRetro').then((m) => ({ default: m.PageRegisterRetro })));
+const PagePasswordResetRetro = React.lazy(() => import('./src/app/components/templates/PagePasswordResetRetro').then((m) => ({ default: m.PagePasswordResetRetro })));
 
-import * as PageCartMod from './src/app/components/templates/PageCart';
-import * as PageCheckoutMod from './src/app/components/templates/PageCheckout';
-import * as PageTrackOrderMod from './src/app/components/templates/PageTrackOrder';
+// Checkout
+const PageCartRetro = React.lazy(() => import('./src/app/components/templates/PageCartRetro').then((m) => ({ default: m.PageCartRetro })));
+const PageCheckoutRetro = React.lazy(() => import('./src/app/components/templates/PageCheckoutRetro').then((m) => ({ default: m.PageCheckoutRetro })));
+const PageOrderConfirmationRetro = React.lazy(() => import('./src/app/components/templates/PageOrderConfirmationRetro').then((m) => ({ default: m.PageOrderConfirmationRetro })));
+const PageTrackOrderRetro = React.lazy(() => import('./src/app/components/templates/PageTrackOrderRetro').then((m) => ({ default: m.PageTrackOrderRetro })));
 
-import * as BlogIndexMod from './src/app/components/templates/BlogIndex';
-import * as ArchiveCategoryMod from './src/app/components/templates/ArchiveCategory';
-import * as ArchiveAuthorMod from './src/app/components/templates/ArchiveAuthor';
-import * as TagArchiveMod from './src/app/components/blog/TagArchive';
-import * as SinglePostMod from './src/app/components/templates/SinglePost';
-import * as SinglePostWithSidebarMod from './src/app/components/templates/SinglePostWithSidebar';
-import * as SinglePostFullWidthMod from './src/app/components/templates/SinglePostFullWidth';
-import * as ArchiveAudioMod from './src/app/components/templates/blog/ArchiveAudio';
-import * as ArchiveVideoMod from './src/app/components/templates/blog/ArchiveVideo';
-import * as ArchiveGalleryMod from './src/app/components/templates/blog/ArchiveGallery';
-import * as ArchiveAsideMod from './src/app/components/templates/blog/ArchiveAside';
-import * as TemplateSingleStandardMod from './src/app/components/templates/TemplateSingleStandard';
-import * as TemplateSingleAudioMod from './src/app/components/templates/TemplateSingleAudio';
-import * as TemplateSingleVideoMod from './src/app/components/templates/TemplateSingleVideo';
-import * as TemplateSingleGalleryMod from './src/app/components/templates/TemplateSingleGallery';
-import * as TemplateSingleAsideMod from './src/app/components/templates/TemplateSingleAside';
+// Blog
+const ArchiveBlogRetro = React.lazy(() => import('./src/app/components/templates/ArchiveBlogRetro').then((m) => ({ default: m.ArchiveBlogRetro })));
+const SinglePostRetro = React.lazy(() => import('./src/app/components/templates/SinglePostRetro').then((m) => ({ default: m.SinglePostRetro })));
+const SinglePostWithSidebar = React.lazy(() => import('./src/app/components/templates/SinglePostWithSidebar').then((m) => ({ default: m.SinglePostWithSidebar })));
+const SinglePostFullWidth = React.lazy(() => import('./src/app/components/templates/SinglePostFullWidth').then((m) => ({ default: m.SinglePostFullWidth })));
+const ArchiveAudio = React.lazy(() => import('./src/app/components/templates/blog/ArchiveAudio').then((m) => ({ default: m.ArchiveAudio })));
+const ArchiveVideo = React.lazy(() => import('./src/app/components/templates/blog/ArchiveVideo').then((m) => ({ default: m.ArchiveVideo })));
+const ArchiveGallery = React.lazy(() => import('./src/app/components/templates/blog/ArchiveGallery').then((m) => ({ default: m.ArchiveGallery })));
+const ArchiveAside = React.lazy(() => import('./src/app/components/templates/blog/ArchiveAside').then((m) => ({ default: m.ArchiveAside })));
+const TemplateSingleStandard = React.lazy(() => import('./src/app/components/templates/TemplateSingleStandard').then((m) => ({ default: m.TemplateSingleStandard })));
+const TemplateSingleAudio = React.lazy(() => import('./src/app/components/templates/TemplateSingleAudio').then((m) => ({ default: m.TemplateSingleAudio })));
+const TemplateSingleVideo = React.lazy(() => import('./src/app/components/templates/TemplateSingleVideo').then((m) => ({ default: m.TemplateSingleVideo })));
+const TemplateSingleGallery = React.lazy(() => import('./src/app/components/templates/TemplateSingleGallery').then((m) => ({ default: m.TemplateSingleGallery })));
+const TemplateSingleAside = React.lazy(() => import('./src/app/components/templates/TemplateSingleAside').then((m) => ({ default: m.TemplateSingleAside })));
 
-import * as PageAboutMod from './src/app/components/templates/PageAbout';
-import * as PageOurStoryMod from './src/app/components/templates/PageOurStory';
-import * as PageTeamMod from './src/app/components/templates/PageTeam';
-import * as PageSustainabilityMod from './src/app/components/templates/PageSustainability';
-import * as PageCareersMod from './src/app/components/templates/PageCareers';
-import * as PageStoresMod from './src/app/components/templates/PageStores';
-import * as PagePressMediaMod from './src/app/components/templates/PagePressMedia';
+// About & Company
+const PageAboutRetro = React.lazy(() => import('./src/app/components/templates/PageAboutRetro').then((m) => ({ default: m.PageAboutRetro })));
+const PageOurStoryRetro = React.lazy(() => import('./src/app/components/templates/PageOurStoryRetro').then((m) => ({ default: m.PageOurStoryRetro })));
+const PageTeamRetro = React.lazy(() => import('./src/app/components/templates/PageTeamRetro').then((m) => ({ default: m.PageTeamRetro })));
+const PageSustainabilityRetro = React.lazy(() => import('./src/app/components/templates/PageSustainabilityRetro').then((m) => ({ default: m.PageSustainabilityRetro })));
+const PageCareersRetro = React.lazy(() => import('./src/app/components/templates/PageCareersRetro').then((m) => ({ default: m.PageCareersRetro })));
+const PageStoresRetro = React.lazy(() => import('./src/app/components/templates/PageStoresRetro').then((m) => ({ default: m.PageStoresRetro })));
+const PagePressMediaRetro = React.lazy(() => import('./src/app/components/templates/PagePressMediaRetro').then((m) => ({ default: m.PagePressMediaRetro })));
 
-import * as PageFAQMod from './src/app/components/templates/PageFAQ';
-import * as PageHelpCenterMod from './src/app/components/templates/PageHelpCenter';
-import * as PageChatMod from './src/app/components/templates/PageChat';
-import * as PageShippingReturnsMod from './src/app/components/templates/PageShippingReturns';
-import * as PageSizeGuideMod from './src/app/components/templates/PageSizeGuide';
-import * as PageReturnsPortalMod from './src/app/components/templates/PageReturnsPortal';
-import * as PageBuyingGuideMod from './src/app/components/templates/PageBuyingGuide';
-import * as PageCareInstructionsMod from './src/app/components/templates/PageCareInstructions';
-import * as PageWarrantyMod from './src/app/components/templates/PageWarranty';
-import * as PageAccessibilityStatementMod from './src/app/components/templates/PageAccessibilityStatement';
-import * as PageRewardProgramMod from './src/app/components/templates/PageRewardProgram';
-import * as PageAffiliateProgramMod from './src/app/components/templates/PageAffiliateProgram';
-import * as PageReviewsMod from './src/app/components/templates/PageReviews';
+// Support
+const PageFAQRetro = React.lazy(() => import('./src/app/components/templates/PageFAQRetro').then((m) => ({ default: m.PageFAQRetro })));
+const PageHelpCenterRetro = React.lazy(() => import('./src/app/components/templates/PageHelpCenterRetro').then((m) => ({ default: m.PageHelpCenterRetro })));
+const PageChat = React.lazy(() => import('./src/app/components/templates/PageChat').then((m) => ({ default: m.PageChat })));
+const PageShippingReturnsRetro = React.lazy(() => import('./src/app/components/templates/PageShippingReturnsRetro').then((m) => ({ default: m.PageShippingReturnsRetro })));
+const PageSizeGuideRetro = React.lazy(() => import('./src/app/components/templates/PageSizeGuideRetro').then((m) => ({ default: m.PageSizeGuideRetro })));
+const PageReturnsPortalRetro = React.lazy(() => import('./src/app/components/templates/PageReturnsPortalRetro').then((m) => ({ default: m.PageReturnsPortalRetro })));
+const PageBuyingGuideRetro = React.lazy(() => import('./src/app/components/templates/PageBuyingGuideRetro').then((m) => ({ default: m.PageBuyingGuideRetro })));
+const PageCareInstructionsRetro = React.lazy(() => import('./src/app/components/templates/PageCareInstructionsRetro').then((m) => ({ default: m.PageCareInstructionsRetro })));
+const PageWarrantyRetro = React.lazy(() => import('./src/app/components/templates/PageWarrantyRetro').then((m) => ({ default: m.PageWarrantyRetro })));
+const PageAccessibilityStatementRetro = React.lazy(() => import('./src/app/components/templates/PageAccessibilityStatementRetro').then((m) => ({ default: m.PageAccessibilityStatementRetro })));
+const PageRewardProgramRetro = React.lazy(() => import('./src/app/components/templates/PageRewardProgramRetro').then((m) => ({ default: m.PageRewardProgramRetro })));
+const PageAffiliateProgramRetro = React.lazy(() => import('./src/app/components/templates/PageAffiliateProgramRetro').then((m) => ({ default: m.PageAffiliateProgramRetro })));
+const PageReviewsRetro = React.lazy(() => import('./src/app/components/templates/PageReviewsRetro').then((m) => ({ default: m.PageReviewsRetro })));
+const PageRefundsRetro = React.lazy(() => import('./src/app/components/templates/PageRefundsRetro').then((m) => ({ default: m.PageRefundsRetro })));
 
-import * as PagePrivacyPolicyMod from './src/app/components/templates/PagePrivacyPolicy';
-import * as PageTermsConditionsMod from './src/app/components/templates/PageTermsConditions';
+// Legal
+const PagePrivacyPolicyRetro = React.lazy(() => import('./src/app/components/templates/PagePrivacyPolicyRetro').then((m) => ({ default: m.PagePrivacyPolicyRetro })));
+const PageTermsConditionsRetro = React.lazy(() => import('./src/app/components/templates/PageTermsConditionsRetro').then((m) => ({ default: m.PageTermsConditionsRetro })));
 
-import * as PageLoyaltyMod from './src/app/components/templates/PageLoyalty';
-import * as SubscriptionLandingMod from './src/app/components/templates/SubscriptionLanding';
-import * as SingleSubscriptionMod from './src/app/components/templates/SingleSubscription';
-import * as MembershipLandingMod from './src/app/components/templates/MembershipLanding';
-import * as SingleMembershipMod from './src/app/components/templates/SingleMembership';
-import * as PageNewsletterMod from './src/app/components/templates/PageNewsletter';
-import * as PageNotFoundMod from './src/app/components/templates/PageNotFound';
-import * as LongFormSalesPageMod from './src/app/components/templates/LongFormSalesPage';
-import * as SocialRedirectMod from './src/app/components/templates/SocialRedirect';
-import * as PageRefundsMod from './src/app/components/templates/PageRefunds';
-import * as SitemapMod from './src/app/components/pages/Sitemap';
+// Promo & Misc
+const PageLoyaltyRetro = React.lazy(() => import('./src/app/components/templates/PageLoyaltyRetro').then((m) => ({ default: m.PageLoyaltyRetro })));
+const SubscriptionLandingRetro = React.lazy(() => import('./src/app/components/templates/SubscriptionLandingRetro').then((m) => ({ default: m.SubscriptionLandingRetro })));
+const SingleSubscription = React.lazy(() => import('./src/app/components/templates/SingleSubscription').then((m) => ({ default: m.SingleSubscription })));
+const MembershipLandingRetro = React.lazy(() => import('./src/app/components/templates/MembershipLandingRetro').then((m) => ({ default: m.MembershipLandingRetro })));
+const SingleMembership = React.lazy(() => import('./src/app/components/templates/SingleMembership').then((m) => ({ default: m.SingleMembership })));
+const PageNewsletter = React.lazy(() => import('./src/app/components/templates/PageNewsletter').then((m) => ({ default: m.PageNewsletter })));
+const PageNotFoundRetro = React.lazy(() => import('./src/app/components/templates/PageNotFoundRetro').then((m) => ({ default: m.PageNotFoundRetro })));
+const LongFormSalesPage = React.lazy(() => import('./src/app/components/templates/LongFormSalesPage').then((m) => ({ default: m.LongFormSalesPage })));
+const SocialRedirect = React.lazy(() => import('./src/app/components/templates/SocialRedirect'));
+const Sitemap = React.lazy(() => import('./src/app/components/pages/Sitemap').then((m) => ({ default: m.Sitemap })));
 
-import * as DevToolsIndexMod from './src/app/components/pages/DevToolsIndex';
-import * as PageStyleGuideMod from './src/app/components/templates/PageStyleGuide';
-import * as PageShowcaseMod from './src/app/components/templates/PageShowcase';
-import * as PageIconLibraryMod from './src/app/components/templates/PageIconLibrary';
-import * as PageComponentAPIMod from './src/app/components/templates/PageComponentAPI';
-import * as PageLivePreviewMod from './src/app/components/templates/PageLivePreview';
-import * as PagePerformanceMod from './src/app/components/templates/PagePerformance';
-import * as PageFormShowcaseMod from './src/app/components/templates/PageFormShowcase';
-import * as DevToolsLayoutMod from './src/app/components/templates/DevToolsLayout';
+// Gaming & Community
+const PageAchievementsRetro = React.lazy(() => import('./src/app/components/templates/PageAchievementsRetro').then((m) => ({ default: m.PageAchievementsRetro })));
+const PageLeaderboardRetro = React.lazy(() => import('./src/app/components/templates/PageLeaderboardRetro').then((m) => ({ default: m.PageLeaderboardRetro })));
+const PageNewReleasesRetro = React.lazy(() => import('./src/app/components/templates/PageNewReleasesRetro').then((m) => ({ default: m.PageNewReleasesRetro })));
+const PageBundleBuilderRetro = React.lazy(() => import('./src/app/components/templates/PageBundleBuilderRetro').then((m) => ({ default: m.PageBundleBuilderRetro })));
+const PageLookbookRetro = React.lazy(() => import('./src/app/components/templates/PageLookbookRetro').then((m) => ({ default: m.PageLookbookRetro })));
+const PageCommunityRetro = React.lazy(() => import('./src/app/components/templates/PageCommunityRetro').then((m) => ({ default: m.PageCommunityRetro })));
+const PageReferralRetro = React.lazy(() => import('./src/app/components/templates/PageReferralRetro').then((m) => ({ default: m.PageReferralRetro })));
+const PageEventsRetro = React.lazy(() => import('./src/app/components/templates/PageEventsRetro').then((m) => ({ default: m.PageEventsRetro })));
 
-// Helper to resolve the correct component export safely
-function resolveComp(mod, exportName) {
-  if (exportName && mod[exportName]) return mod[exportName];
-  if (mod.default) return mod.default;
-  var keys = Object.keys(mod);
-  for (var i = 0; i < keys.length; i++) {
-    if (keys[i] !== 'default' && typeof mod[keys[i]] === 'function') {
-      return mod[keys[i]];
-    }
-  }
-  return mod; // Fallback
+// Dev Tools
+const DevToolsIndex = React.lazy(() => import('./src/app/components/pages/DevToolsIndex').then((m) => ({ default: m.DevToolsIndex })));
+const DevToolsLayout = React.lazy(() => import('./src/app/components/templates/DevToolsLayout').then((m) => ({ default: m.DevToolsLayout })));
+const PageStyleGuide = React.lazy(() => import('./src/app/components/templates/PageStyleGuide'));
+const PageShowcase = React.lazy(() => import('./src/app/components/templates/PageShowcase'));
+const PageIconLibrary = React.lazy(() => import('./src/app/components/templates/PageIconLibrary'));
+const PageComponentAPI = React.lazy(() => import('./src/app/components/templates/PageComponentAPI'));
+const PageLivePreview = React.lazy(() => import('./src/app/components/templates/PageLivePreview'));
+const PagePerformance = React.lazy(() => import('./src/app/components/templates/PagePerformance'));
+const PageFormShowcase = React.lazy(() => import('./src/app/components/templates/PageFormShowcase').then((m) => ({ default: m.PageFormShowcase })));
+
+// --- Redirect Components -------------------------------------------------------
+
+const RedirectAccount = () => {
+  return React.createElement(Navigate, { to: '/account', replace: true });
+};
+
+const RedirectPrivacy = () => {
+  return React.createElement(Navigate, { to: '/privacy-policy', replace: true });
+};
+
+const RedirectTerms = () => {
+  return React.createElement(Navigate, { to: '/terms-and-conditions', replace: true });
+};
+
+const RedirectRetroDashboard = () => {
+  return React.createElement(Navigate, { to: 'dashboard', replace: true });
+};
+
+// --- HydrateFallback -----------------------------------------------------------
+
+const HydrateFallback = () => {
+  return React.createElement(
+    'div',
+    { className: 'wp-page-loading' },
+    React.createElement(
+      'div',
+      { className: 'wp-block-group wp-block-group--vertical wp-block-group--spacing-md has-text-align-center' },
+      React.createElement('div', { className: 'wp-page-loading__spinner' }),
+      React.createElement('small', { className: 'wp-page-loading__text' }, 'Loading...')
+    )
+  );
 }
 
-// --- Redirect Components ----------------------------------------------------
-function RedirectDashboard() { return React.createElement(Navigate, { to: "/account/dashboard", replace: true }); }
-function RedirectAccount() { return React.createElement(Navigate, { to: "/account", replace: true }); }
-function RedirectPrivacy() { return React.createElement(Navigate, { to: "/privacy-policy", replace: true }); }
-function RedirectTerms() { return React.createElement(Navigate, { to: "/terms-and-conditions", replace: true }); }
+// --- Route Definitions ---------------------------------------------------------
 
-// --- Route Definitions ------------------------------------------------------
-
-// 1. Shop Routes
-var shopRoutes = [
-  { path: 'shop', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'shop/all', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'shop/all-products', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'shop/collections', Component: resolveComp(FrontPageMod, 'FrontPage') },
-  { path: 'shop/category/:categorySlug', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'shop/tag/:tagSlug', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'shop/search', Component: resolveComp(ProductSearchResultsMod, 'ProductSearchResults') },
-  { path: 'shop/filtered', Component: resolveComp(ShopWithSidebarMod, 'ShopWithSidebar') },
-  { path: 'search', Component: resolveComp(ProductSearchResultsMod, 'ProductSearchResults') },
-  { path: 'product/:id', Component: resolveComp(SingleProductMod, null) },
-  { path: 'product/:id/sticky', Component: resolveComp(SingleProductStickyMod, 'SingleProductSticky') },
-  { path: 'variable-product/:id', Component: resolveComp(VariableProductMod, null) },
-  { path: 'deals', Component: resolveComp(PageDealsMod, 'PageDeals') },
-  { path: 'new-arrivals', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'best-sellers', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'sale', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'gift-cards', Component: resolveComp(PageGiftCardsMod, 'PageGiftCards') },
-  { path: 'compare', Component: resolveComp(ProductComparisonMod, 'ProductComparison') }
-];
-
-// 2. Account Routes
-var accountChildren = [
-  { index: true, Component: RedirectDashboard },
-  { path: 'dashboard', Component: resolveComp(DashboardMod, 'Dashboard') },
-  { path: 'orders', Component: resolveComp(OrdersMod, 'Orders') },
-  { path: 'orders/:orderId', Component: resolveComp(OrderViewPatternMod, 'OrderViewPattern') },
-  { path: 'wishlist', Component: resolveComp(WishlistPatternMod, 'WishlistPattern') },
-  { path: 'addresses', Component: resolveComp(AddressesMod, 'Addresses') },
-  { path: 'details', Component: resolveComp(AccountDetailsMod, 'AccountDetails') },
-  { path: 'loyalty', Component: resolveComp(AccountLoyaltyMod, 'AccountLoyalty') },
-  { path: 'reset-password', Component: resolveComp(PageContactMod, 'PageContact') },
-  { path: '*', Component: RedirectDashboard }
-];
-
-var accountRoutes = [
-  { path: 'account/login', Component: resolveComp(LoginRegisterMod, 'LoginRegister') },
-  {
-    path: 'account',
-    Component: resolveComp(AccountLayoutMod, 'AccountLayout'),
-    children: accountChildren
-  },
-  { path: 'my-account', Component: RedirectAccount },
-  { path: 'wishlist', Component: resolveComp(PageWishlistMod, 'PageWishlist') },
-  { path: 'account/dashboard-widgets', Component: resolveComp(AccountDashboardWidgetsMod, 'AccountDashboardWidgets') }
-];
-
-// 3. Checkout Routes
-var checkoutRoutes = [
-  { path: 'cart', Component: resolveComp(PageCartMod, 'PageCart') },
-  { path: 'checkout', Component: resolveComp(PageCheckoutMod, 'PageCheckout') },
-  { path: 'order-confirmation', Component: resolveComp(PageCheckoutMod, 'PageCheckout') },
-  { path: 'track-order', Component: resolveComp(PageTrackOrderMod, 'PageTrackOrder') }
-];
-
-// 4. Blog Routes
-var blogRoutes = [
-  { path: 'blog', Component: resolveComp(BlogIndexMod, 'BlogIndex') },
-  { path: 'blog/category/:categorySlug', Component: resolveComp(ArchiveCategoryMod, 'ArchiveCategory') },
-  { path: 'blog/author/:authorSlug', Component: resolveComp(ArchiveAuthorMod, 'ArchiveAuthor') },
-  { path: 'blog/tag/:tagSlug', Component: resolveComp(TagArchiveMod, 'TagArchive') },
-  { path: 'blog/:slug', Component: resolveComp(SinglePostMod, 'SinglePost') },
-  { path: 'blog/:slug/sidebar', Component: resolveComp(SinglePostWithSidebarMod, 'SinglePostWithSidebar') },
-  { path: 'blog/:slug/fullwidth', Component: resolveComp(SinglePostFullWidthMod, 'SinglePostFullWidth') },
-  { path: 'blog/format/audio', Component: resolveComp(ArchiveAudioMod, 'ArchiveAudio') },
-  { path: 'blog/format/video', Component: resolveComp(ArchiveVideoMod, 'ArchiveVideo') },
-  { path: 'blog/format/gallery', Component: resolveComp(ArchiveGalleryMod, 'ArchiveGallery') },
-  { path: 'blog/format/aside', Component: resolveComp(ArchiveAsideMod, 'ArchiveAside') },
-  { path: 'blog/:slug/standard', Component: resolveComp(TemplateSingleStandardMod, 'TemplateSingleStandard') },
-  { path: 'blog/:slug/audio', Component: resolveComp(TemplateSingleAudioMod, 'TemplateSingleAudio') },
-  { path: 'blog/:slug/video', Component: resolveComp(TemplateSingleVideoMod, 'TemplateSingleVideo') },
-  { path: 'blog/:slug/gallery', Component: resolveComp(TemplateSingleGalleryMod, 'TemplateSingleGallery') },
-  { path: 'blog/:slug/aside', Component: resolveComp(TemplateSingleAsideMod, 'TemplateSingleAside') }
-];
-
-// 5. About & Support Routes
-var aboutRoutes = [
-  { path: 'about', Component: resolveComp(PageAboutMod, 'PageAbout') },
-  { path: 'about/our-story', Component: resolveComp(PageOurStoryMod, 'PageOurStory') },
-  { path: 'about/team', Component: resolveComp(PageTeamMod, 'PageTeam') },
-  { path: 'about/sustainability', Component: resolveComp(PageSustainabilityMod, 'PageSustainability') },
-  { path: 'about/careers', Component: resolveComp(PageCareersMod, 'PageCareers') },
-  { path: 'contact', Component: resolveComp(PageContactMod, 'PageContact') },
-  { path: 'stores', Component: resolveComp(PageStoresMod, 'PageStores') },
-  { path: 'press', Component: resolveComp(PagePressMediaMod, 'PagePressMedia') }
-];
-
-var supportRoutes = [
-  { path: 'faq', Component: resolveComp(PageFAQMod, 'PageFAQ') },
-  { path: 'help', Component: resolveComp(PageHelpCenterMod, 'PageHelpCenter') },
-  { path: 'chat', Component: resolveComp(PageChatMod, 'PageChat') },
-  { path: 'shipping-returns', Component: resolveComp(PageShippingReturnsMod, 'PageShippingReturns') },
-  { path: 'size-guide', Component: resolveComp(PageSizeGuideMod, 'PageSizeGuide') },
-  { path: 'returns', Component: resolveComp(PageReturnsPortalMod, 'PageReturnsPortal') },
-  { path: 'refunds', Component: resolveComp(PageRefundsMod, 'PageRefunds') },
-  { path: 'buying-guide', Component: resolveComp(PageBuyingGuideMod, 'PageBuyingGuide') },
-  { path: 'care-instructions', Component: resolveComp(PageCareInstructionsMod, 'PageCareInstructions') },
-  { path: 'warranty', Component: resolveComp(PageWarrantyMod, 'PageWarranty') },
-  { path: 'accessibility', Component: resolveComp(PageAccessibilityStatementMod, 'PageAccessibilityStatement') },
-  { path: 'rewards', Component: resolveComp(PageRewardProgramMod, 'PageRewardProgram') },
-  { path: 'affiliate', Component: resolveComp(PageAffiliateProgramMod, 'PageAffiliateProgram') },
-  { path: 'reviews', Component: resolveComp(PageReviewsMod, 'PageReviews') }
-];
-
-// 6. Legal Routes
-var legalRoutes = [
-  { path: 'privacy-policy', Component: resolveComp(PagePrivacyPolicyMod, 'PagePrivacyPolicy') },
-  { path: 'terms-and-conditions', Component: resolveComp(PageTermsConditionsMod, 'PageTermsConditions') },
-  { path: 'privacy', Component: RedirectPrivacy },
-  { path: 'policies', Component: RedirectPrivacy },
-  { path: 'terms', Component: RedirectTerms },
-  { path: 'legal/privacy', Component: RedirectPrivacy },
-  { path: 'legal/terms', Component: RedirectTerms },
-  { path: 'legal/privacy-policy', Component: RedirectPrivacy },
-  { path: 'legal/terms-conditions', Component: RedirectTerms }
-];
-
-// 7. Promo & Misc Routes
-var miscRoutes = [
-  { path: 'promotions', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'promotions/flash-sale', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'promotions/seasonal', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'promotions/bundles', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'promotions/clearance', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'promotions/winter-clearance', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'promotions/buy-2-get-1', Component: resolveComp(ArchiveProductMod, 'ArchiveProduct') },
-  { path: 'loyalty', Component: resolveComp(PageLoyaltyMod, 'PageLoyalty') },
-  { path: 'subscriptions', Component: resolveComp(SubscriptionLandingMod, 'SubscriptionLanding') },
-  { path: 'subscription/:id', Component: resolveComp(SingleSubscriptionMod, 'SingleSubscription') },
-  { path: 'memberships', Component: resolveComp(MembershipLandingMod, 'MembershipLanding') },
-  { path: 'membership/:id', Component: resolveComp(SingleMembershipMod, 'SingleMembership') },
-  { path: 'newsletter', Component: resolveComp(PageNewsletterMod, 'PageNewsletter') },
-  { path: 'campaign/product-launch', Component: resolveComp(LongFormSalesPageMod, 'LongFormSalesPage') },
-  { path: 'social/:platform', Component: resolveComp(SocialRedirectMod, null) },
-  { path: 'template-tester', Component: resolveComp(FrontPageMod, 'FrontPage') },
-  { path: 'sitemap', Component: resolveComp(SitemapMod, 'Sitemap') }
-];
-
-// 8. Dev Tools Routes
-var devRoutes = [
-  {
-    path: 'dev-tools',
-    Component: resolveComp(DevToolsLayoutMod, 'DevToolsLayout'),
-    children: [
-      { index: true, Component: resolveComp(DevToolsIndexMod, 'DevToolsIndex') },
-      { path: 'style-guide', Component: resolveComp(PageStyleGuideMod, null) },
-      { path: 'showcase', Component: resolveComp(PageShowcaseMod, null) },
-      { path: 'forms', Component: resolveComp(PageFormShowcaseMod, 'PageFormShowcase') },
-      { path: 'icons', Component: resolveComp(PageIconLibraryMod, null) },
-      { path: 'api', Component: resolveComp(PageComponentAPIMod, null) },
-      { path: 'live-preview', Component: resolveComp(PageLivePreviewMod, null) },
-      { path: 'performance', Component: resolveComp(PagePerformanceMod, null) }
-    ]
-  }
-];
-
-// 9. Error Routes
-var errorRoutes = [
-  { path: 'error/404', Component: resolveComp(PageNotFoundMod, 'PageNotFound') },
-  { path: 'error/500', Component: resolveComp(PageNotFoundMod, 'PageNotFound') },
-  { path: 'error/503', Component: resolveComp(PageNotFoundMod, 'PageNotFound') },
-  { path: 'error/network', Component: resolveComp(PageNotFoundMod, 'PageNotFound') },
-  { path: '*', Component: resolveComp(PageNotFoundMod, 'PageNotFound') }
-];
-
-function HydrateFallback() {
-  var spinner = React.createElement('div', { key: 'spinner', className: 'wp-page-loading__spinner' });
-  var text = React.createElement('small', { key: 'text', className: 'wp-page-loading__text' }, 'Loading...');
-  var inner = React.createElement('div', {
-    key: 'inner',
-    className: 'wp-block-group wp-block-group--vertical wp-block-group--spacing-md has-text-align-center'
-  }, [spinner, text]);
-  return React.createElement('div', { className: 'wp-page-loading' }, [inner]);
-}
-
-// Combine all route groups
-var allChildren = [];
-function addRoutes(routes) {
-  for (var i = 0; i < routes.length; i++) {
-    allChildren.push(routes[i]);
-  }
-}
-
-addRoutes([{ index: true, Component: resolveComp(FrontPageMod, 'FrontPage') }]);
-addRoutes(shopRoutes);
-addRoutes(accountRoutes);
-addRoutes(checkoutRoutes);
-addRoutes(blogRoutes);
-addRoutes(aboutRoutes);
-addRoutes(supportRoutes);
-addRoutes(legalRoutes);
-addRoutes(miscRoutes);
-addRoutes(devRoutes);
-addRoutes(errorRoutes);
-
-var routerConfig = [
+export const router = createBrowserRouter([
   {
     path: '/',
     Component: RootLayout,
-    HydrateFallback: HydrateFallback,
-    children: allChildren
-  }
-];
+    HydrateFallback,
+    children: [
+      // Home
+      { index: true, Component: FrontPageRetro },
 
-export var router = createBrowserRouter(routerConfig);
+      // 1. Shop Routes
+      { path: 'shop', Component: ArchiveProductRetro },
+      { path: 'shop/all', Component: ArchiveProductRetro },
+      { path: 'shop/all-products', Component: ArchiveProductRetro },
+      { path: 'shop/collections', Component: FrontPageRetro },
+      { path: 'shop/category/:categorySlug', Component: ArchiveProductRetro },
+      { path: 'shop/tag/:tagSlug', Component: ArchiveProductRetro },
+      { path: 'shop/search', Component: ProductSearchResultsRetro },
+      { path: 'shop/filtered', Component: ArchiveProductRetro },
+      { path: 'search', Component: ProductSearchResultsRetro },
+      { path: 'product/:id', Component: SingleProductRetro },
+      { path: 'product/:id/sticky', Component: SingleProductSticky },
+      { path: 'variable-product/:id', Component: SingleProductRetro },
+      { path: 'deals', Component: ArchiveProductRetro },
+      { path: 'new-arrivals', Component: ArchiveProductRetro },
+      { path: 'best-sellers', Component: ArchiveProductRetro },
+      { path: 'sale', Component: ArchiveProductRetro },
+      { path: 'gift-cards', Component: PageGiftCardsRetro },
+      { path: 'compare', Component: PageCompareRetro },
+
+      // 2. Account Routes
+      { path: 'account/login', Component: PageLoginRetro },
+      { path: 'register', Component: PageRegisterRetro },
+      { path: 'reset-password', Component: PagePasswordResetRetro },
+      { path: 'account/reset-password', Component: PagePasswordResetRetro },
+      {
+        path: 'account',
+        Component: AccountLayoutRetro,
+        children: [
+          { index: true, Component: RedirectRetroDashboard },
+          { path: 'dashboard', Component: DashboardRetro },
+          { path: 'orders', Component: OrdersRetro },
+          { path: 'addresses', Component: AddressesRetro },
+          { path: 'loyalty', Component: LoyaltyRetro },
+          { path: '*', Component: RedirectRetroDashboard },
+        ],
+      },
+      { path: 'my-account', Component: RedirectAccount },
+      { path: 'wishlist', Component: PageWishlistRetro },
+      { path: 'account/dashboard-widgets', Component: AccountDashboardWidgets },
+
+      // 3. Checkout Routes
+      { path: 'cart', Component: PageCartRetro },
+      { path: 'checkout', Component: PageCheckoutRetro },
+      { path: 'order-confirmation', Component: PageOrderConfirmationRetro },
+      { path: 'track-order', Component: PageTrackOrderRetro },
+
+      // 4. Blog Routes
+      { path: 'blog', Component: ArchiveBlogRetro },
+      { path: 'blog/category/:categorySlug', Component: ArchiveBlogRetro },
+      { path: 'blog/author/:authorSlug', Component: ArchiveBlogRetro },
+      { path: 'blog/tag/:tagSlug', Component: ArchiveBlogRetro },
+      { path: 'blog/:slug', Component: SinglePostRetro },
+      { path: 'blog/:slug/sidebar', Component: SinglePostWithSidebar },
+      { path: 'blog/:slug/fullwidth', Component: SinglePostFullWidth },
+      { path: 'blog/format/audio', Component: ArchiveAudio },
+      { path: 'blog/format/video', Component: ArchiveVideo },
+      { path: 'blog/format/gallery', Component: ArchiveGallery },
+      { path: 'blog/format/aside', Component: ArchiveAside },
+      { path: 'blog/:slug/standard', Component: TemplateSingleStandard },
+      { path: 'blog/:slug/audio', Component: TemplateSingleAudio },
+      { path: 'blog/:slug/video', Component: TemplateSingleVideo },
+      { path: 'blog/:slug/gallery', Component: TemplateSingleGallery },
+      { path: 'blog/:slug/aside', Component: TemplateSingleAside },
+
+      // 5. About & Company Routes
+      { path: 'about', Component: PageAboutRetro },
+      { path: 'about/our-story', Component: PageOurStoryRetro },
+      { path: 'about/team', Component: PageTeamRetro },
+      { path: 'about/sustainability', Component: PageSustainabilityRetro },
+      { path: 'about/careers', Component: PageCareersRetro },
+      { path: 'contact', Component: PageContactRetro },
+      { path: 'stores', Component: PageStoresRetro },
+      { path: 'press', Component: PagePressMediaRetro },
+
+      // 6. Support Routes
+      { path: 'faq', Component: PageFAQRetro },
+      { path: 'help', Component: PageHelpCenterRetro },
+      { path: 'chat', Component: PageChat },
+      { path: 'shipping-returns', Component: PageShippingReturnsRetro },
+      { path: 'shipping', Component: PageShippingReturnsRetro },
+      { path: 'size-guide', Component: PageSizeGuideRetro },
+      { path: 'returns', Component: PageReturnsPortalRetro },
+      { path: 'refunds', Component: PageRefundsRetro },
+      { path: 'buying-guide', Component: PageBuyingGuideRetro },
+      { path: 'care-instructions', Component: PageCareInstructionsRetro },
+      { path: 'warranty', Component: PageWarrantyRetro },
+      { path: 'accessibility', Component: PageAccessibilityStatementRetro },
+      { path: 'rewards', Component: PageRewardProgramRetro },
+      { path: 'affiliate', Component: PageAffiliateProgramRetro },
+      { path: 'reviews', Component: PageReviewsRetro },
+
+      // 7. Legal Routes
+      { path: 'privacy-policy', Component: PagePrivacyPolicyRetro },
+      { path: 'terms-and-conditions', Component: PageTermsConditionsRetro },
+      { path: 'privacy', Component: RedirectPrivacy },
+      { path: 'policies', Component: RedirectPrivacy },
+      { path: 'terms', Component: RedirectTerms },
+      { path: 'legal/privacy', Component: RedirectPrivacy },
+      { path: 'legal/terms', Component: RedirectTerms },
+      { path: 'legal/privacy-policy', Component: RedirectPrivacy },
+      { path: 'legal/terms-conditions', Component: RedirectTerms },
+
+      // 8. Promo & Misc Routes
+      { path: 'promotions', Component: ArchiveProductRetro },
+      { path: 'promotions/flash-sale', Component: ArchiveProductRetro },
+      { path: 'promotions/seasonal', Component: ArchiveProductRetro },
+      { path: 'promotions/bundles', Component: ArchiveProductRetro },
+      { path: 'promotions/clearance', Component: ArchiveProductRetro },
+      { path: 'promotions/winter-clearance', Component: ArchiveProductRetro },
+      { path: 'promotions/buy-2-get-1', Component: ArchiveProductRetro },
+      { path: 'loyalty', Component: PageLoyaltyRetro },
+      { path: 'subscriptions', Component: SubscriptionLandingRetro },
+      { path: 'subscription/:id', Component: SingleSubscription },
+      { path: 'memberships', Component: MembershipLandingRetro },
+      { path: 'membership/:id', Component: SingleMembership },
+      { path: 'newsletter', Component: PageNewsletter },
+      { path: 'campaign/product-launch', Component: LongFormSalesPage },
+      { path: 'social/:platform', Component: SocialRedirect },
+      { path: 'template-tester', Component: FrontPageRetro },
+      { path: 'sitemap', Component: Sitemap },
+
+      // 8b. Gaming & Community Pages
+      { path: 'achievements', Component: PageAchievementsRetro },
+      { path: 'leaderboard', Component: PageLeaderboardRetro },
+      { path: 'new-releases', Component: PageNewReleasesRetro },
+      { path: 'pre-orders', Component: PageNewReleasesRetro },
+      { path: 'bundle-builder', Component: PageBundleBuilderRetro },
+      { path: 'lookbook', Component: PageLookbookRetro },
+      { path: 'community', Component: PageCommunityRetro },
+      { path: 'referral', Component: PageReferralRetro },
+      { path: 'events', Component: PageEventsRetro },
+
+      // 9. Dev Tools Routes
+      {
+        path: 'dev-tools',
+        Component: DevToolsLayout,
+        children: [
+          { index: true, Component: DevToolsIndex },
+          { path: 'style-guide', Component: PageStyleGuide },
+          { path: 'showcase', Component: PageShowcase },
+          { path: 'forms', Component: PageFormShowcase },
+          { path: 'icons', Component: PageIconLibrary },
+          { path: 'api', Component: PageComponentAPI },
+          { path: 'live-preview', Component: PageLivePreview },
+          { path: 'performance', Component: PagePerformance },
+        ],
+      },
+
+      // 10. Error Routes
+      { path: 'error/404', Component: PageNotFoundRetro },
+      { path: 'error/500', Component: PageNotFoundRetro },
+      { path: 'error/503', Component: PageNotFoundRetro },
+      { path: 'error/network', Component: PageNotFoundRetro },
+      { path: '*', Component: PageNotFoundRetro },
+    ],
+  },
+]);

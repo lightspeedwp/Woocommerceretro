@@ -1,0 +1,596 @@
+/* 
+ * Retro Theme Cart & Checkout Styles
+ * Added at the end of front-page-funky.css via @import
+ */
+
+/* Cart Layout */
+.retro-cart-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+
+.retro-page-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-ink);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 4px solid var(--color-ink);
+  padding-bottom: 0.5rem;
+}
+
+.retro-cart-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .retro-cart-grid {
+    flex-direction: row;
+  }
+}
+
+.retro-cart-main {
+  flex: 1;
+}
+
+.retro-cart-sidebar {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .retro-cart-sidebar {
+    width: 350px;
+    flex-shrink: 0;
+  }
+}
+
+/* Empty Cart */
+.retro-cart-empty {
+  background-color: var(--color-paper-deep);
+  border: 4px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-retro);
+  color: var(--color-ink);
+}
+
+.retro-cart-empty h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+/* Cart Items */
+.retro-cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.retro-cart-item {
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+
+@media (min-width: 640px) {
+  .retro-cart-item {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.retro-cart-item-img-wrap {
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-screen);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  flex-shrink: 0;
+}
+
+.retro-cart-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.dark .retro-cart-item-img {
+  mix-blend-mode: normal;
+}
+
+.retro-cart-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-ink);
+}
+
+.retro-cart-item-title {
+  font-size: 1.125rem;
+}
+
+.retro-cart-item-price {
+  font-size: 1rem;
+}
+
+.retro-cart-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .retro-cart-item-actions {
+    flex-direction: row;
+  }
+}
+
+.retro-cart-item-remove {
+  background: none;
+  border: none;
+  color: var(--color-ink);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.retro-cart-item-remove:hover {
+  transform: scale(1.1);
+  color: var(--color-signal);
+}
+
+/* Order Summary */
+.retro-cart-summary {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+  border: 4px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0px var(--color-ink);
+}
+
+.retro-cart-summary-title {
+  font-size: 1.25rem;
+  border-bottom: 2px solid var(--wp--preset--color--primary-foreground, #101417);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.retro-cart-summary-divider {
+  height: 2px;
+  background-color: var(--wp--preset--color--primary-foreground, #101417);
+  margin: 1rem 0;
+  opacity: 0.5;
+}
+
+.retro-cart-summary-total {
+  font-size: 1.25rem;
+}
+
+/* Checkout Form */
+.retro-checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.retro-checkout-section {
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-retro);
+}
+
+.retro-checkout-section-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retro-checkout-section-title::before {
+  content: "►";
+  color: var(--color-signal);
+  font-size: 1rem;
+}
+
+.retro-checkout-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.retro-checkout-label {
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  text-transform: uppercase;
+}
+
+.retro-checkout-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .retro-checkout-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.retro-checkout-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .retro-checkout-grid-3 {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+/* Checkout Items Summary */
+.retro-checkout-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-checkout-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.retro-checkout-item-img-wrap {
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-screen);
+  border: 2px solid var(--wp--preset--color--primary-foreground, #101417);
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  position: relative;
+}
+
+.retro-checkout-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.retro-checkout-item-qty {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.retro-checkout-item-details {
+  flex: 1;
+}
+
+.retro-checkout-item-title {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.retro-checkout-item-price {
+  font-size: 0.875rem;
+}
+
+/* ========================================
+   CHECKOUT STEP INDICATOR
+   ======================================== */
+
+.retro-checkout-steps {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.retro-checkout-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-right: 2px solid var(--color-ink);
+}
+
+.retro-checkout-step:last-child {
+  border-right: none;
+}
+
+.retro-checkout-step:hover {
+  background: var(--color-paper-deep);
+}
+
+.retro-checkout-step--active {
+  background: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+
+.retro-checkout-step--complete {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-checkout-step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.retro-checkout-step--active .retro-checkout-step__num,
+.retro-checkout-step--complete .retro-checkout-step__num {
+  border-color: currentColor;
+}
+
+.retro-checkout-step__label {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .retro-checkout-step__label {
+    display: inline;
+  }
+  .retro-checkout-step {
+    font-size: 0.875rem;
+  }
+}
+
+/* Checkout nav row (back/next buttons) */
+.retro-checkout-nav-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+/* Checkout submit button */
+.retro-checkout-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+}
+
+/* Checkout trust signal */
+.retro-checkout-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+/* ========================================
+   CART ENHANCEMENTS
+   ======================================== */
+
+/* Cart item title link */
+.retro-cart-item-title {
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a.retro-cart-item-title:hover {
+  color: var(--color-signal);
+}
+
+/* Cart item meta (sale prices) */
+.retro-cart-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retro-cart-item-price--original {
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
+
+.retro-cart-item-price--sale {
+  color: var(--color-signal);
+}
+
+/* Cart item line total */
+.retro-cart-item-line-total {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+/* Cart continue shopping */
+.retro-cart-continue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding: 0.75rem 0;
+  margin-top: 1rem;
+  transition: color 0.2s ease;
+}
+
+.retro-cart-continue:hover {
+  color: var(--color-signal);
+}
+
+/* Cart summary discount row */
+.retro-cart-summary-row--discount {
+  color: var(--color-signal-light, #00ff66);
+}
+
+/* Cart summary checkout link */
+.retro-cart-summary__checkout-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+/* Cart summary clear button */
+.retro-cart-summary__clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.retro-cart-summary__clear-btn:hover {
+  opacity: 1;
+}
+
+/* Cart empty link */
+.retro-cart-empty__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+/* Cart page title with icon */
+.retro-page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ========================================
+   WISHLIST ENHANCEMENTS
+   ======================================== */
+
+.retro-wishlist-layout__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-ink);
+}
+
+.retro-wishlist-layout__empty-heading {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.retro-wishlist-layout__actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.retro-wishlist-layout__card {
+  position: relative;
+}
+
+.retro-wishlist-layout__card-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 2px solid var(--color-ink);
+  margin-top: auto;
+}
+
+.retro-wishlist-layout__remove-btn {
+  background: none;
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.retro-wishlist-layout__remove-btn:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-heart-btn--active {
+  color: var(--color-signal);
+}
+
+.retro-card-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-paper-deep);
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+}

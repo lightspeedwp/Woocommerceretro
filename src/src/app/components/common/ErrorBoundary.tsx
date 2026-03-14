@@ -1,62 +1,53 @@
 /**
  * ErrorBoundary Component
- * 
- * Optimized for Figma Make parser:
- * 1. No JSX
- * 2. No TypeScript interfaces or generics
- * 3. var only, no const/let
- * 4. No arrow functions
- * 5. ASCII only
+ *
+ * React class component for catching rendering errors.
+ * Provides error recovery UI with reload and home navigation.
  */
 
-import React from 'react';
-var Component = React.Component;
-import { Warning as AlertTriangle, ArrowsClockwise as RefreshCw, House as Home } from '@phosphor-icons/react';
-import * as ReactRouterModule from 'react-router';
-var Link = ReactRouterModule.Link;
+import React, { Component } from 'react';
+import { Warning, ArrowsClockwise, House } from '@phosphor-icons/react';
+import { Link } from 'react-router';
 
-function IconAlertTriangle(props) { 
-  return AlertTriangle ? React.createElement(AlertTriangle, props) : React.createElement('span', { 'aria-hidden': 'true' }, '!'); 
-}
-function IconRefreshCw(props) { 
-  return RefreshCw ? React.createElement(RefreshCw, props) : React.createElement('span', { 'aria-hidden': 'true' }, 'R'); 
-}
-function IconHome(props) { 
-  return Home ? React.createElement(Home, props) : React.createElement('span', { 'aria-hidden': 'true' }, 'H'); 
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  errorMessage?: string;
+  showDetails?: boolean;
 }
 
-export class ErrorBoundary extends Component {
-  constructor(props) {
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+  errorInfo: React.ErrorInfo | null;
+}
+
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     };
     this.handleReset = this.handleReset.bind(this);
     this.handleReload = this.handleReload.bind(this);
   }
 
-  static getDerivedStateFromError(error) {
-    return {
-      hasError: true,
-      error: error
-    };
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
     }
-    this.setState({ errorInfo: errorInfo });
+    this.setState({ errorInfo });
   }
 
   handleReset() {
-    this.setState({
-      hasError: false,
-      error: null,
-      errorInfo: null
-    });
+    this.setState({ hasError: false, error: null, errorInfo: null });
   }
 
   handleReload() {
@@ -71,64 +62,56 @@ export class ErrorBoundary extends Component {
         return this.props.fallback;
       }
 
-      var iconWrap = React.createElement('div', { key: 'icon-wrap', className: 'wp-error-boundary__icon-wrap' },
-        React.createElement(IconAlertTriangle, { className: 'wp-error-boundary__icon' })
-      );
-      
-      var title = React.createElement('h2', { key: 'title', className: 'wp-error-boundary__title' }, 'Oops! Something went wrong');
-      
-      var message = React.createElement('p', { key: 'message', className: 'wp-error-boundary__message' }, 
-        this.props.errorMessage || "We're sorry, but something unexpected happened. Please try refreshing the page or return to the homepage."
-      );
-
-      var details = null;
-      if (this.props.showDetails && this.state.error) {
-        var errorText = React.createElement('p', { key: 'err-text', className: 'wp-error-boundary__details-text' }, this.state.error.toString());
-        var stack = null;
-        if (this.state.errorInfo) {
-          stack = React.createElement('details', { key: 'stack', className: 'wp-error-boundary__details-summary' }, [
-            React.createElement('summary', { key: 'sum' }, 'Stack trace'),
-            React.createElement('pre', { key: 'pre', className: 'wp-error-boundary__details-pre' }, this.state.errorInfo.componentStack)
-          ]);
-        }
-        details = React.createElement('div', { key: 'details', className: 'wp-error-boundary__details' }, [errorText, stack]);
-      }
-
-      var reloadBtn = React.createElement('button', {
-        key: 'reload',
-        onClick: this.handleReload,
-        className: 'wp-error-boundary__btn wp-error-boundary__btn--primary'
-      }, [
-        React.createElement(IconRefreshCw, { key: 'icon', size: 18 }),
-        React.createElement('span', { key: 'text' }, 'Reload Page')
-      ]);
-
-      var homeLink = React.createElement(Link, {
-        key: 'home',
-        to: '/',
-        className: 'wp-error-boundary__btn wp-error-boundary__btn--secondary'
-      }, [
-        React.createElement(IconHome, { key: 'icon', size: 18 }),
-        React.createElement('span', { key: 'text' }, 'Go Home')
-      ]);
-
-      var actions = React.createElement('div', { key: 'actions', className: 'wp-error-boundary__actions' }, [reloadBtn, homeLink]);
-
-      var resetBtn = React.createElement('button', {
-        key: 'reset',
-        onClick: this.handleReset,
-        className: 'wp-error-boundary__btn--text'
-      }, 'Or try again without reloading');
-
-      return React.createElement('div', { className: 'wp-error-boundary' },
-        React.createElement('div', { className: 'wp-error-boundary__card' }, [
-          iconWrap,
-          title,
-          message,
-          details,
-          actions,
-          resetBtn
-        ])
+      return (
+        <div className="wp-error-boundary">
+          <div className="wp-error-boundary__card">
+            <div className="wp-error-boundary__icon-wrap">
+              <Warning className="wp-error-boundary__icon" />
+            </div>
+            <h2 className="wp-error-boundary__title">Oops! Something went wrong</h2>
+            <p className="wp-error-boundary__message">
+              {this.props.errorMessage ||
+                "We're sorry, but something unexpected happened. Please try refreshing the page or return to the homepage."}
+            </p>
+            {this.props.showDetails && this.state.error && (
+              <div className="wp-error-boundary__details">
+                <p className="wp-error-boundary__details-text">
+                  {this.state.error.toString()}
+                </p>
+                {this.state.errorInfo && (
+                  <details className="wp-error-boundary__details-summary">
+                    <summary>Stack trace</summary>
+                    <pre className="wp-error-boundary__details-pre">
+                      {this.state.errorInfo.componentStack}
+                    </pre>
+                  </details>
+                )}
+              </div>
+            )}
+            <div className="wp-error-boundary__actions">
+              <button
+                onClick={this.handleReload}
+                className="wp-error-boundary__btn wp-error-boundary__btn--primary"
+              >
+                <ArrowsClockwise size={18} />
+                <span>Reload Page</span>
+              </button>
+              <Link
+                to="/"
+                className="wp-error-boundary__btn wp-error-boundary__btn--secondary"
+              >
+                <House size={18} />
+                <span>Go Home</span>
+              </Link>
+            </div>
+            <button
+              onClick={this.handleReset}
+              className="wp-error-boundary__btn--text"
+            >
+              Or try again without reloading
+            </button>
+          </div>
+        </div>
       );
     }
 
@@ -136,49 +119,52 @@ export class ErrorBoundary extends Component {
   }
 }
 
-export function ErrorFallback(props) {
-  var iconWrap = React.createElement('div', { key: 'icon-wrap', className: 'wp-error-fallback__icon-wrap' },
-    React.createElement(IconAlertTriangle, { className: 'wp-error-fallback__icon' })
-  );
-  
-  var title = React.createElement('h3', { key: 'title', className: 'wp-error-fallback__title' }, 'Something went wrong');
-  
-  var message = React.createElement('p', { key: 'message', className: 'wp-error-fallback__message' }, 
-    props.message || 'We encountered an unexpected error. Please try again.'
-  );
-
-  var errorText = props.error ? React.createElement('p', { key: 'err', className: 'wp-error-fallback__error-text' }, props.error.message) : null;
-
-  var resetBtn = props.resetError ? React.createElement('button', {
-    key: 'reset',
-    onClick: props.resetError,
-    className: 'wp-error-boundary__btn wp-error-boundary__btn--primary'
-  }, [
-    React.createElement(IconRefreshCw, { key: 'icon', size: 16 }),
-    React.createElement('span', { key: 'text' }, 'Try Again')
-  ]) : null;
-
-  return React.createElement('div', { className: 'wp-error-fallback' }, [
-    iconWrap,
-    title,
-    message,
-    errorText,
-    resetBtn
-  ]);
+interface ErrorFallbackProps {
+  message?: string;
+  error?: Error;
+  resetError?: () => void;
 }
 
-export function InlineError(props) {
-  var icon = React.createElement(IconAlertTriangle, { key: 'icon', className: 'wp-error-inline__icon' });
-  var text = React.createElement('p', { key: 'text', className: 'wp-error-inline__message' }, props.message);
-  var btn = props.onRetry ? React.createElement('button', {
-    key: 'btn',
-    onClick: props.onRetry,
-    className: 'wp-error-inline__retry'
-  }, 'Retry') : null;
+export const ErrorFallback = ({ message, error, resetError }: ErrorFallbackProps) => {
+  return (
+    <div className="wp-error-fallback">
+      <div className="wp-error-fallback__icon-wrap">
+        <Warning className="wp-error-fallback__icon" />
+      </div>
+      <h3 className="wp-error-fallback__title">Something went wrong</h3>
+      <p className="wp-error-fallback__message">
+        {message || 'We encountered an unexpected error. Please try again.'}
+      </p>
+      {error && <p className="wp-error-fallback__error-text">{error.message}</p>}
+      {resetError && (
+        <button
+          onClick={resetError}
+          className="wp-error-boundary__btn wp-error-boundary__btn--primary"
+        >
+          <ArrowsClockwise size={16} />
+          <span>Try Again</span>
+        </button>
+      )}
+    </div>
+  );
+}
 
-  return React.createElement('div', { className: 'wp-error-inline ' + (props.className || '') }, [
-    icon,
-    text,
-    btn
-  ]);
+interface InlineErrorProps {
+  message: string;
+  onRetry?: () => void;
+  className?: string;
+}
+
+export const InlineError = ({ message, onRetry, className = '' }: InlineErrorProps) => {
+  return (
+    <div className={`wp-error-inline ${className}`}>
+      <Warning className="wp-error-inline__icon" />
+      <p className="wp-error-inline__message">{message}</p>
+      {onRetry && (
+        <button onClick={onRetry} className="wp-error-inline__retry">
+          Retry
+        </button>
+      )}
+    </div>
+  );
 }

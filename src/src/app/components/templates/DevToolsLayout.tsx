@@ -1,23 +1,44 @@
+/**
+ * DevToolsLayout
+ *
+ * Wrapper layout for all /dev-tools/* routes.
+ * Provides retro header/footer with dev tools sub-navigation.
+ *
+ * Width constraints:
+ * - Shell (header/footer): max 1440px
+ * - Content area: max 1440px (site-wide)
+ * - Responsive breakpoints: 320px → 1440px
+ *
+ * @route /dev-tools/*
+ */
+
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
-import * as LayoutModule from '../parts/Layout';
-import * as DevToolsSubHeaderModule from '../parts/DevToolsSubHeader';
-import * as DevToolsSubFooterModule from '../parts/DevToolsSubFooter';
+import { Outlet } from 'react-router';
+import { HeaderRetro } from '../parts/HeaderRetro';
+import { FooterRetro } from '../parts/FooterRetro';
+import { DevToolsSubHeader } from '../parts/DevToolsSubHeader';
+import { DevToolsSubFooter } from '../parts/DevToolsSubFooter';
 
-var Outlet = ReactRouterModule.Outlet;
-var Layout = LayoutModule.Layout;
-var DevToolsSubHeader = DevToolsSubHeaderModule.DevToolsSubHeader;
-var DevToolsSubFooter = DevToolsSubFooterModule.DevToolsSubFooter;
+export const DevToolsLayout = () => {
+  return (
+    <div className="retro-home theme-retro">
+      <div className="retro-devtools-shell">
+        <HeaderRetro />
+        <DevToolsSubHeader />
 
-export function DevToolsLayout() {
-  return React.createElement(Layout, null,
-    React.createElement('div', { className: 'dev-tools-wrapper' },
-      React.createElement(DevToolsSubHeader, null),
-      React.createElement('main', { className: 'dev-tools-main' },
-        React.createElement(Outlet, null)
-      ),
-      React.createElement(DevToolsSubFooter, null)
-    )
+        <main
+          id="main-content"
+          className="retro-devtools-content"
+          role="main"
+          aria-label="Developer tools content"
+        >
+          <Outlet />
+        </main>
+
+        <DevToolsSubFooter />
+        <FooterRetro />
+      </div>
+    </div>
   );
 }
 

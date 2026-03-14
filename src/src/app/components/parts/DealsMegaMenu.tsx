@@ -1,9 +1,7 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { Link } from 'react-router';
 import { Lightning, TagSimple, Gift, Percent, Trophy, Ticket, ArrowRight, Fire, Timer, CreditCard } from '@phosphor-icons/react';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
-
-var Link = ReactRouterModule.Link;
 
 /**
  * DealsMegaMenu - Funky Redesign
@@ -11,7 +9,15 @@ var Link = ReactRouterModule.Link;
  * Glassmorphism, neon gradients, pulsing badges.
  */
 
-var dealLinks = [
+interface DealLink {
+  title: string;
+  href: string;
+  Icon: React.ElementType;
+  desc: string;
+  badge?: string;
+}
+
+const dealLinks: DealLink[] = [
   { title: 'All Deals', href: '/promotions', Icon: TagSimple, desc: 'View all offers' },
   { title: 'Flash Sale', href: '/promotions/flash-sale', Icon: Lightning, desc: 'Limited time only', badge: 'hot' },
   { title: 'Seasonal Sale', href: '/promotions/seasonal', Icon: Percent, desc: 'Winter collection', badge: 'sale' },
@@ -21,7 +27,7 @@ var dealLinks = [
   { title: 'Gift Cards', href: '/gift-cards', Icon: CreditCard, desc: 'Give the gift of choice' }
 ];
 
-var featuredDeals = [
+const featuredDeals = [
   {
     title: 'Winter Clearance',
     subtitle: 'Up to 70% off selected items',
@@ -31,7 +37,7 @@ var featuredDeals = [
   },
   {
     title: 'Flash Sale',
-    subtitle: '24 hours only - don\'t miss out',
+    subtitle: "24 hours only - don't miss out",
     href: '/promotions/flash-sale',
     overlay: 'orange',
     image: 'https://images.unsplash.com/photo-1722718467706-a2be2503d791?q=80&w=600&auto=format&fit=crop'
@@ -45,132 +51,97 @@ var featuredDeals = [
   }
 ];
 
-export function DealsMegaMenu() {
-  function renderContent(closeMenu) {
-    /* Deals list column */
-    var dealsColumn = React.createElement('div', {
-      className: 'funky-mega__column funky-mega__column--bordered'
-    }, [
-      React.createElement('h4', { key: 't', className: 'funky-mega__title' }, 'Deals & Offers'),
-      React.createElement('div', { key: 'list' },
-        dealLinks.map(function(link) {
-          return React.createElement(Link, {
-            key: link.title,
-            to: link.href,
-            className: 'funky-mega__link'
-          }, [
-            React.createElement('span', { key: 'ic', className: 'funky-mega__link-icon' },
-              React.createElement(link.Icon, { size: 16, weight: 'duotone' })
-            ),
-            React.createElement('span', { key: 'tx', className: 'funky-mega__link-text' }, [
-              React.createElement('span', { key: 'lb', className: 'funky-mega__link-label' }, link.title),
-              React.createElement('span', { key: 'ds', className: 'funky-mega__link-desc' }, link.desc)
-            ]),
-            link.badge ? React.createElement('span', {
-              key: 'b',
-              className: 'funky-mega__badge funky-mega__badge--' + link.badge
-            }, link.badge === 'hot' ? 'Hot' : link.badge === 'new' ? 'New' : 'Sale') : null
-          ]);
-        })
-      )
-    ]);
+export const DealsMegaMenu = () => {
+  const renderContent = (closeMenu: () => void) => (
+    <div className="wp-mega-menu__content">
+      <div className="funky-mega__orb funky-mega__orb--pink" style={{ top: '-60px', left: '-80px' }} />
+      <div className="funky-mega__orb funky-mega__orb--cyan" style={{ bottom: '-50px', right: '-50px' }} />
+      <div className="funky-mega__inner funky-mega__inner--deals">
+        {/* Deals list column */}
+        <div className="funky-mega__column funky-mega__column--bordered">
+          <h4 className="funky-mega__title">Deals &amp; Offers</h4>
+          <div>
+            {dealLinks.map((link) => (
+              <Link key={link.title} to={link.href} className="funky-mega__link">
+                <span className="funky-mega__link-icon">
+                  <link.Icon size={16} weight="duotone" />
+                </span>
+                <span className="funky-mega__link-text">
+                  <span className="funky-mega__link-label">{link.title}</span>
+                  <span className="funky-mega__link-desc">{link.desc}</span>
+                </span>
+                {link.badge && (
+                  <span className={`funky-mega__badge funky-mega__badge--${link.badge}`}>
+                    {link.badge === 'hot' ? 'Hot' : link.badge === 'new' ? 'New' : 'Sale'}
+                  </span>
+                )}
+              </Link>
+            ))}
+          </div>
+        </div>
 
-    /* Featured deals column */
-    var featuredColumn = React.createElement('div', {
-      className: 'funky-mega__column funky-mega__column--bordered'
-    }, [
-      React.createElement('h4', { key: 't', className: 'funky-mega__title' }, 'Featured Deals'),
-      React.createElement('div', { key: 'cards', className: 'funky-mega__cards-grid funky-mega__cards-grid--vertical' },
-        featuredDeals.map(function(deal) {
-          return React.createElement(Link, {
-            key: deal.title,
-            to: deal.href,
-            className: 'funky-mega__card'
-          }, [
-            React.createElement('img', {
-              key: 'bg',
-              src: deal.image,
-              alt: deal.title,
-              className: 'funky-mega__card-bg',
-              loading: 'lazy'
-            }),
-            React.createElement('div', {
-              key: 'ov',
-              className: 'funky-mega__card-overlay funky-mega__card-overlay--' + deal.overlay
-            }),
-            React.createElement('div', { key: 'bd', className: 'funky-mega__card-body' }, [
-              React.createElement('span', { key: 't', className: 'funky-mega__card-title' }, deal.title),
-              React.createElement('span', { key: 's', className: 'funky-mega__card-subtitle' }, deal.subtitle),
-              React.createElement('span', { key: 'c', className: 'funky-mega__card-cta' }, [
-                React.createElement('span', { key: 'l' }, 'Shop now'),
-                React.createElement(ArrowRight, { key: 'a', size: 12, weight: 'bold' })
-              ])
-            ])
-          ]);
-        })
-      )
-    ]);
+        {/* Featured deals column */}
+        <div className="funky-mega__column funky-mega__column--bordered">
+          <h4 className="funky-mega__title">Featured Deals</h4>
+          <div className="funky-mega__cards-grid funky-mega__cards-grid--vertical">
+            {featuredDeals.map((deal) => (
+              <Link key={deal.title} to={deal.href} className="funky-mega__card">
+                <img
+                  src={deal.image}
+                  alt={deal.title}
+                  className="funky-mega__card-bg"
+                  loading="lazy"
+                />
+                <div className={`funky-mega__card-overlay funky-mega__card-overlay--${deal.overlay}`} />
+                <div className="funky-mega__card-body">
+                  <span className="funky-mega__card-title">{deal.title}</span>
+                  <span className="funky-mega__card-subtitle">{deal.subtitle}</span>
+                  <span className="funky-mega__card-cta">
+                    <span>Shop now</span>
+                    <ArrowRight size={12} weight="bold" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
 
-    /* Promo highlight panel */
-    var promoPanel = React.createElement('div', {
-      className: 'funky-mega__column funky-mega__promo-panel'
-    }, [
-      React.createElement('div', { key: 'icon', className: 'funky-mega__promo-icon' },
-        React.createElement(Fire, { size: 24, weight: 'fill' })
-      ),
-      React.createElement('span', { key: 'label', className: 'funky-mega__promo-label' }, 'Limited time'),
-      React.createElement('span', { key: 'value', className: 'funky-mega__promo-value' }, 'Up to 70% Off'),
-      React.createElement('span', { key: 'sub', className: 'funky-mega__link-desc', style: { textAlign: 'center' } },
-        'Seasonal clearance on hundreds of items. Don\'t miss out!'
-      ),
-      React.createElement(Link, {
-        key: 'cta',
-        to: '/sale',
-        className: 'funky-mega__promo-cta funky-spring-hover'
-      }, [
-        React.createElement('span', { key: 'l' }, 'Shop Sale'),
-        React.createElement(ArrowRight, { key: 'a', size: 14, weight: 'bold' })
-      ])
-    ]);
+        {/* Promo highlight panel */}
+        <div className="funky-mega__column funky-mega__promo-panel">
+          <div className="funky-mega__promo-icon">
+            <Fire size={24} weight="fill" />
+          </div>
+          <span className="funky-mega__promo-label">Limited time</span>
+          <span className="funky-mega__promo-value">Up to 70% Off</span>
+          <span className="funky-mega__link-desc" style={{ textAlign: 'center' }}>
+            Seasonal clearance on hundreds of items. Don&apos;t miss out!
+          </span>
+          <Link to="/sale" className="funky-mega__promo-cta funky-spring-hover">
+            <span>Shop Sale</span>
+            <ArrowRight size={14} weight="bold" />
+          </Link>
+        </div>
+      </div>
 
-    var footer = React.createElement('div', { className: 'funky-mega__footer' }, [
-      React.createElement(Link, {
-        key: 'all',
-        to: '/promotions',
-        className: 'funky-mega__footer-link',
-        onClick: closeMenu
-      }, [
-        React.createElement('span', { key: 'l' }, 'View all deals'),
-        React.createElement(ArrowRight, { key: 'a', size: 14, weight: 'bold' })
-      ]),
-      React.createElement(Link, {
-        key: 'rewards',
-        to: '/loyalty',
-        className: 'funky-mega__footer-link',
-        onClick: closeMenu
-      }, [
-        React.createElement(Trophy, { key: 'i', size: 14, weight: 'duotone' }),
-        React.createElement('span', { key: 'l' }, 'Loyalty Rewards')
-      ])
-    ]);
+      {/* Footer */}
+      <div className="funky-mega__footer">
+        <Link to="/promotions" className="funky-mega__footer-link" onClick={closeMenu}>
+          <span>View all deals</span>
+          <ArrowRight size={14} weight="bold" />
+        </Link>
+        <Link to="/loyalty" className="funky-mega__footer-link" onClick={closeMenu}>
+          <Trophy size={14} weight="duotone" />
+          <span>Loyalty Rewards</span>
+        </Link>
+      </div>
+    </div>
+  );
 
-    return React.createElement('div', {
-      className: 'wp-mega-menu__content'
-    }, [
-      React.createElement('div', { key: 'orb1', className: 'funky-mega__orb funky-mega__orb--pink', style: { top: '-60px', left: '-80px' } }),
-      React.createElement('div', { key: 'orb2', className: 'funky-mega__orb funky-mega__orb--cyan', style: { bottom: '-50px', right: '-50px' } }),
-      React.createElement('div', { key: 'grid', className: 'funky-mega__inner funky-mega__inner--deals' }, [
-        React.cloneElement(dealsColumn, { key: 'deals' }),
-        React.cloneElement(featuredColumn, { key: 'feat' }),
-        React.cloneElement(promoPanel, { key: 'promo' })
-      ]),
-      React.cloneElement(footer, { key: 'footer' })
-    ]);
-  }
-
-  return React.createElement(MegaMenuWrapper, {
-    triggerLabel: 'Deals',
-    triggerHref: '/deals',
-    renderContent: renderContent
-  });
+  return (
+    <MegaMenuWrapper
+      triggerLabel="Deals"
+      triggerHref="/deals"
+      renderContent={renderContent}
+    />
+  );
 }

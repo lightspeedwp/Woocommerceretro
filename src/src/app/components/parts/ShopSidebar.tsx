@@ -1,209 +1,175 @@
-import React from 'react';
-import * as TypographyModule from '../common/Typography';
+import React, { useState } from 'react';
+import { Typography } from '../common/Typography';
 import { X, Star } from '@phosphor-icons/react';
-import * as CheckboxModule from '../blocks/forms/Checkbox';
-import * as FiltersData from '../../data/filters';
-
-var useState = React.useState;
-var Typography = TypographyModule.Typography;
-var Checkbox = CheckboxModule.Checkbox;
-var SHOP_FILTERS = FiltersData.SHOP_FILTERS;
+import { Checkbox } from '../blocks/forms/Checkbox';
+import { SHOP_FILTERS } from '../../data/filters';
 
 /**
  * FilterGroup Component
  */
-function FilterGroup(props) {
-  var title = props.title;
-  var children = props.children;
+interface FilterGroupProps {
+  title: string;
+  children: React.ReactNode;
+}
 
-  return React.createElement('div', { className: "wp-filter-section funky-filter-section" },
-    React.createElement(Typography, { variant: "h4", className: "wp-filter-section__trigger funky-filter-trigger" }, title),
-    React.createElement('div', { className: "wp-filter-section__content funky-filter-content" },
-      children
-    )
+const FilterGroup = ({ title, children }: FilterGroupProps) => {
+  return (
+    <div className="wp-filter-section funky-filter-section">
+      <Typography variant="h4" className="wp-filter-section__trigger funky-filter-trigger">
+        {title}
+      </Typography>
+      <div className="wp-filter-section__content funky-filter-content">
+        {children}
+      </div>
+    </div>
   );
+}
+
+interface ActiveFilter {
+  type: string;
+  value: string;
 }
 
 /**
  * ShopSidebar Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
+ *
+ * Product filter sidebar with categories, brands, price, rating,
+ * color, and status filters.
  */
-export function ShopSidebar() {
-  var _af = useState([
-     { type: 'Category', value: 'Tshirts' }
+export const ShopSidebar = () => {
+  const [activeFilters, setActiveFilters] = useState<ActiveFilter[]>([
+    { type: 'Category', value: 'Tshirts' }
   ]);
-  var activeFilters = _af[0];
-  var setActiveFilters = _af[1];
 
-  var removeFilter = function(value) {
-     var updated = activeFilters.filter(function(f) { return f.value !== value; });
-     setActiveFilters(updated);
+  const removeFilter = (value: string) => {
+    setActiveFilters(activeFilters.filter((f) => f.value !== value));
   };
 
-  var handleCheckboxChange = function(type, value, checked) {
+  const handleCheckboxChange = (type: string, value: string, checked: boolean) => {
     if (checked) {
-      var updated = activeFilters.concat([{ type: type, value: value }]);
-      setActiveFilters(updated);
+      setActiveFilters([...activeFilters, { type, value }]);
     } else {
-      var updated = activeFilters.filter(function(f) { return f.value !== value; });
-      setActiveFilters(updated);
+      setActiveFilters(activeFilters.filter((f) => f.value !== value));
     }
   };
 
-  var handleClearAll = function() {
+  const handleClearAll = () => {
     setActiveFilters([]);
   };
 
-  var renderActiveFilters = function() {
+  const renderActiveFilters = () => {
     if (activeFilters.length === 0) return null;
 
-    return React.createElement('div', { className: "wp-active-filters funky-active-filters-panel" },
-      React.createElement('div', { className: "wp-active-filters__list" },
-        activeFilters.map(function(filter, idx) {
-          var handleRemove = function() { removeFilter(filter.value); };
-          return React.createElement('div', { key: idx, className: "wp-filter-chip funky-filter-chip" },
-            React.createElement('span', null, filter.type + ": " + filter.value),
-            React.createElement('button', { 
-              onClick: handleRemove, 
-              className: "wp-filter-chip__remove", 
-              'aria-label': 'Remove filter ' + filter.value 
-            },
-              React.createElement(X, { size: 14 })
-            )
-          );
-        })
-      ),
-      React.createElement('button', { 
-         className: "wp-active-filters__clear-all funky-clear-all-btn",
-         onClick: handleClearAll
-      },
-         "Clear filters"
-      )
+    return (
+      <div className="wp-active-filters funky-active-filters-panel">
+        <div className="wp-active-filters__list">
+          {activeFilters.map((filter, idx) => (
+            <div key={idx} className="wp-filter-chip funky-filter-chip">
+              <span>{`${filter.type}: ${filter.value}`}</span>
+              <button
+                onClick={() => removeFilter(filter.value)}
+                className="wp-filter-chip__remove"
+                aria-label={`Remove filter ${filter.value}`}
+              >
+                <X size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
+        <button className="wp-active-filters__clear-all funky-clear-all-btn" onClick={handleClearAll}>
+          Clear filters
+        </button>
+      </div>
     );
   };
 
-  var renderBrands = function() {
-    return SHOP_FILTERS.brands.map(function(brand) {
-      var isChecked = activeFilters.some(function(f) { return f.value === brand; });
-      var handleChange = function(checked) { handleCheckboxChange('Brand', brand, checked); };
-      
-      return React.createElement('label', { key: brand, className: "wp-filter-checkbox funky-filter-checkbox" },
-        React.createElement(Checkbox, { 
-            checked: isChecked,
-            onCheckedChange: handleChange
-        }),
-        React.createElement('span', { className: "wp-filter-checkbox__label" }, brand)
+  const renderBrands = () =>
+    SHOP_FILTERS.brands.map((brand) => {
+      const isChecked = activeFilters.some((f) => f.value === brand);
+      return (
+        <label key={brand} className="wp-filter-checkbox funky-filter-checkbox">
+          <Checkbox checked={isChecked} onCheckedChange={(checked) => handleCheckboxChange('Brand', brand, !!checked)} />
+          <span className="wp-filter-checkbox__label">{brand}</span>
+        </label>
       );
     });
-  };
 
-  var renderRatings = function() {
-    var isChecked = activeFilters.some(function(f) { return f.type === 'Rating' && f.value === '5 Stars'; });
-    var handleChange = function(checked) { handleCheckboxChange('Rating', '5 Stars', checked); };
-    
-    return React.createElement('label', { className: "wp-filter-checkbox funky-filter-checkbox" },
-      React.createElement(Checkbox, { 
-        checked: isChecked,
-        onCheckedChange: handleChange
-      }),
-      React.createElement('div', { className: "wp-filter-rating-stars" },
-        [0, 1, 2, 3, 4].map(function(_, i) {
-          return React.createElement(Star, { 
-            key: i, 
-            size: 16, 
-            className: "wp-filter-rating-star funky-star-icon" 
-          });
-        })
-      )
+  const renderRatings = () => {
+    const isChecked = activeFilters.some((f) => f.type === 'Rating' && f.value === '5 Stars');
+    return (
+      <label className="wp-filter-checkbox funky-filter-checkbox">
+        <Checkbox checked={isChecked} onCheckedChange={(checked) => handleCheckboxChange('Rating', '5 Stars', !!checked)} />
+        <div className="wp-filter-rating-stars">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <Star key={i} size={16} className="wp-filter-rating-star funky-star-icon" />
+          ))}
+        </div>
+      </label>
     );
   };
 
-  var renderColors = function() {
-    return SHOP_FILTERS.colors.map(function(color) {
-      var isChecked = activeFilters.some(function(f) { return f.value === color; });
-      var handleChange = function(checked) { handleCheckboxChange('Color', color, checked); };
-      
-      return React.createElement('label', { key: color, className: "wp-filter-checkbox funky-filter-checkbox" },
-        React.createElement(Checkbox, { 
-          checked: isChecked,
-          onCheckedChange: handleChange
-        }),
-        React.createElement('span', { className: "wp-filter-checkbox__label" }, color)
+  const renderColors = () =>
+    SHOP_FILTERS.colors.map((color) => {
+      const isChecked = activeFilters.some((f) => f.value === color);
+      return (
+        <label key={color} className="wp-filter-checkbox funky-filter-checkbox">
+          <Checkbox checked={isChecked} onCheckedChange={(checked) => handleCheckboxChange('Color', color, !!checked)} />
+          <span className="wp-filter-checkbox__label">{color}</span>
+        </label>
       );
     });
-  };
 
-  var renderCategories = function() {
-    return SHOP_FILTERS.categories.map(function(cat) {
-      var isChecked = activeFilters.some(function(f) { return f.value === cat; });
-      var handleChange = function(checked) { handleCheckboxChange('Category', cat, checked); };
-      
-      return React.createElement('label', { key: cat, className: "wp-filter-checkbox funky-filter-checkbox" },
-        React.createElement(Checkbox, { 
-            checked: isChecked,
-            onCheckedChange: handleChange
-        }),
-        React.createElement('span', { className: "wp-filter-checkbox__label" }, cat)
+  const renderCategories = () =>
+    SHOP_FILTERS.categories.map((cat) => {
+      const isChecked = activeFilters.some((f) => f.value === cat);
+      return (
+        <label key={cat} className="wp-filter-checkbox funky-filter-checkbox">
+          <Checkbox checked={isChecked} onCheckedChange={(checked) => handleCheckboxChange('Category', cat, !!checked)} />
+          <span className="wp-filter-checkbox__label">{cat}</span>
+        </label>
       );
     });
-  };
 
-  var renderStatuses = function() {
-    return SHOP_FILTERS.statuses.map(function(status) {
-      var isChecked = activeFilters.some(function(f) { return f.value === status.value; });
-      var handleChange = function(checked) { handleCheckboxChange('Status', status.value, checked); };
-      
-      return React.createElement('label', { key: status.value, className: "wp-filter-checkbox funky-filter-checkbox" },
-        React.createElement(Checkbox, { 
-          checked: isChecked,
-          onCheckedChange: handleChange
-        }),
-        React.createElement('span', { className: "wp-filter-checkbox__label" }, status.label)
+  const renderStatuses = () =>
+    SHOP_FILTERS.statuses.map((status) => {
+      const isChecked = activeFilters.some((f) => f.value === status.value);
+      return (
+        <label key={status.value} className="wp-filter-checkbox funky-filter-checkbox">
+          <Checkbox checked={isChecked} onCheckedChange={(checked) => handleCheckboxChange('Status', status.value, !!checked)} />
+          <span className="wp-filter-checkbox__label">{status.label}</span>
+        </label>
       );
     });
-  };
 
-  return React.createElement('div', { className: "wp-filter-sidebar funky-shop-sidebar" },
-    React.createElement('div', { className: "wp-active-filters__header" },
-      React.createElement(Typography, { variant: "h3", className: "wp-filter-sidebar__title funky-sidebar-title" }, "Filters"),
-      renderActiveFilters()
-    ),
+  return (
+    <div className="wp-filter-sidebar funky-shop-sidebar">
+      <div className="wp-active-filters__header">
+        <Typography variant="h3" className="wp-filter-sidebar__title funky-sidebar-title">
+          Filters
+        </Typography>
+        {renderActiveFilters()}
+      </div>
 
-    React.createElement(FilterGroup, { title: "Brands" },
-      renderBrands()
-    ),
+      <FilterGroup title="Brands">{renderBrands()}</FilterGroup>
 
-    React.createElement(FilterGroup, { title: "Price" },
-      React.createElement('div', { className: "wp-filter-price funky-price-filter" },
-        React.createElement('div', { className: "wp-filter-price__slider funky-visual-slider" }),
-        React.createElement('div', { className: "wp-filter-price__labels" },
-          React.createElement('div', null, "£0"),
-          React.createElement('div', null, "£5000")
-        )
-      )
-    ),
+      <FilterGroup title="Price">
+        <div className="wp-filter-price funky-price-filter">
+          <div className="wp-filter-price__slider funky-visual-slider" />
+          <div className="wp-filter-price__labels">
+            <div>&pound;0</div>
+            <div>&pound;5000</div>
+          </div>
+        </div>
+      </FilterGroup>
 
-    React.createElement(FilterGroup, { title: "Rating" },
-      renderRatings()
-    ),
+      <FilterGroup title="Rating">{renderRatings()}</FilterGroup>
+      <FilterGroup title="Color">{renderColors()}</FilterGroup>
+      <FilterGroup title="Category">{renderCategories()}</FilterGroup>
 
-    React.createElement(FilterGroup, { title: "Color" },
-      renderColors()
-    ),
-
-    React.createElement(FilterGroup, { title: "Category" },
-      renderCategories()
-    ),
-    
-    React.createElement(FilterGroup, { title: "Status" },
-      React.createElement('div', { className: "wp-filter-status-list" },
-        renderStatuses()
-      )
-    )
+      <FilterGroup title="Status">
+        <div className="wp-filter-status-list">{renderStatuses()}</div>
+      </FilterGroup>
+    </div>
   );
 }
 

@@ -18,7 +18,7 @@
 // @property {string} title
 // @property {string} description
 
-var storyMilestones = [
+const storyMilestones = [
   { year: '2015', title: 'The Beginning', description: 'Founded in a small garage with a vision to make quality products accessible to everyone.' },
   { year: '2017', title: 'First 10,000 Customers', description: 'Reached our first major milestone and expanded our product line beyond the original collection.' },
   { year: '2019', title: 'Sustainability Commitment', description: 'Pledged to use 100% sustainable packaging and began sourcing eco-friendly materials.' },
@@ -27,14 +27,14 @@ var storyMilestones = [
   { year: '2025', title: 'Innovation Forward', description: 'Introduced AI-powered personalization and virtual try-on technology for an enhanced shopping experience.' },
 ];
 
-var storyValues = [
+const storyValues = [
   { icon: 'Heart', title: 'Craftsmanship', description: 'Every product is designed with care and attention to detail, ensuring lasting quality.' },
   { icon: 'Globe', title: 'Sustainability', description: 'We are committed to reducing our environmental impact through responsible sourcing and packaging.' },
   { icon: 'Users', title: 'Community', description: 'We support artisan partnerships and give back to communities that inspire our work.' },
   { icon: 'Award', title: 'Integrity', description: 'Transparent pricing, honest communication, and ethical practices in everything we do.' },
 ];
 
-var ourStoryPageContent = {
+const ourStoryPageContent = {
   title: 'Our story',
   description: 'From humble beginnings to a global community - the journey of building something meaningful.',
   missionHeading: 'Our mission',

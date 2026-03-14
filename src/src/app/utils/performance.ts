@@ -1,37 +1,29 @@
 /**
  * Performance Monitoring Utilities
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. Standard function declarations
- * 4. ASCII only
+ *
+ * Measures Core Web Vitals (LCP, FID, CLS, FCP, TTFB, INP)
+ * and stores results in localStorage for dev-time analysis.
  */
 
-/**
- * @typedef PerformanceMetric
- * @property {string} name
- * @property {number} value
- * @property {'good'|'needs-improvement'|'poor'} rating
- * @property {number} timestamp
- */
+interface PerformanceMetric {
+  name: string;
+  value: number;
+  rating: 'good' | 'needs-improvement' | 'poor';
+  timestamp: number;
+}
 
-/**
- * @typedef PerformanceConfig
- * @property {boolean} enabled
- * @property {boolean} logToConsole
- * @property {function(PerformanceMetric):void} [sendToAnalytics]
- */
+interface PerformanceConfig {
+  enabled: boolean;
+  logToConsole: boolean;
+  sendToAnalytics?: (metric: PerformanceMetric) => void;
+}
 
-/**
- * @type {PerformanceConfig}
- */
-var defaultConfig = {
+const defaultConfig: PerformanceConfig = {
   enabled: true,
   logToConsole: true,
 };
 
-export var WEB_VITALS_THRESHOLDS = {
+export const WEB_VITALS_THRESHOLDS: Record<string, { good: number; poor: number }> = {
   LCP: { good: 2500, poor: 4000 },
   FID: { good: 100, poor: 300 },
   CLS: { good: 0.1, poor: 0.25 },
@@ -40,145 +32,132 @@ export var WEB_VITALS_THRESHOLDS = {
   INP: { good: 200, poor: 500 },
 };
 
-function getRating(metricName, value) {
-  var threshold = WEB_VITALS_THRESHOLDS[metricName];
+const getRating = (metricName: string, value: number): PerformanceMetric['rating'] => {
+  const threshold = WEB_VITALS_THRESHOLDS[metricName];
   if (!threshold) return 'good';
   if (value <= threshold.good) return 'good';
   if (value <= threshold.poor) return 'needs-improvement';
   return 'poor';
-}
+};
 
-function storeMetric(metric) {
+const storeMetric = (metric: PerformanceMetric) => {
   try {
     if (typeof window !== 'undefined') {
-      var rawMetrics = localStorage.getItem('webVitals');
-      var metrics = JSON.parse(rawMetrics || '[]');
+      const metrics: PerformanceMetric[] = JSON.parse(localStorage.getItem('webVitals') || '[]');
       metrics.push(metric);
       localStorage.setItem('webVitals', JSON.stringify(metrics.slice(-100)));
     }
   } catch (e) {
     // Silent
   }
-}
+};
 
-function logMetric(metric, config) {
-  if (config.logToConsole) {
-    var emoji = '✅';
-    if (metric.rating === 'needs-improvement') emoji = '⚠️';
-    if (metric.rating === 'poor') emoji = '❌';
-    
-    console.log(
-      emoji + ' [Performance] ' + metric.name + ': ' + metric.value.toFixed(2) + 'ms (' + metric.rating + ')'
-    );
-  }
-}
+const logMetric = (metric: PerformanceMetric, config: PerformanceConfig) => {
+  if (!config.logToConsole) return;
 
-function measureFCP(config) {
+  let emoji = '\u2705';
+  if (metric.rating === 'needs-improvement') emoji = '\u26a0\ufe0f';
+  if (metric.rating === 'poor') emoji = '\u274c';
+
+  console.log(
+    `${emoji} [Performance] ${metric.name}: ${metric.value.toFixed(2)}ms (${metric.rating})`
+  );
+};
+
+const measureFCP = (config: PerformanceConfig) => {
   try {
-    var observer = new (window).PerformanceObserver(function(list) {
-      var entries = list.getEntries();
-      for (var i = 0; i < entries.length; i++) {
-        var entry = entries[i];
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
         if (entry.name === 'first-contentful-paint') {
-          var metric = {
+          const metric: PerformanceMetric = {
             name: 'FCP',
             value: entry.startTime,
             rating: getRating('FCP', entry.startTime),
             timestamp: Date.now(),
           };
-          
           logMetric(metric, config);
           storeMetric(metric);
-          if (config.sendToAnalytics) config.sendToAnalytics(metric);
-          
+          config.sendToAnalytics?.(metric);
           observer.disconnect();
         }
-      }
+      });
     });
-    
     observer.observe({ entryTypes: ['paint'] });
   } catch (e) {
     // Silent
   }
-}
+};
 
-function measureLCP(config) {
+const measureLCP = (config: PerformanceConfig) => {
   try {
-    var observer = new (window).PerformanceObserver(function(list) {
-      var entries = list.getEntries();
-      var lastEntry = entries[entries.length - 1];
-      
-      var metric = {
+    const observer = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const lastEntry = entries[entries.length - 1];
+      const metric: PerformanceMetric = {
         name: 'LCP',
         value: lastEntry.startTime,
         rating: getRating('LCP', lastEntry.startTime),
         timestamp: Date.now(),
       };
-      
       logMetric(metric, config);
       storeMetric(metric);
-      if (config.sendToAnalytics) config.sendToAnalytics(metric);
+      config.sendToAnalytics?.(metric);
     });
-    
     observer.observe({ entryTypes: ['largest-contentful-paint'] });
-    
-    window.addEventListener('load', function() {
-      setTimeout(function() { observer.disconnect(); }, 0);
+
+    window.addEventListener('load', () => {
+      setTimeout(() => observer.disconnect(), 0);
     });
   } catch (e) {
     // Silent
   }
-}
+};
 
-function measureCLS(config) {
+const measureCLS = (config: PerformanceConfig) => {
   try {
-    var clsValue = 0;
-    var sessionValue = 0;
-    var sessionEntries = [];
-    
-    var observer = new (window).PerformanceObserver(function(list) {
-      var entries = list.getEntries();
-      for (var i = 0; i < entries.length; i++) {
-        var entry = entries[i];
-        if (!entry.hadRecentInput) {
-          var firstSessionEntry = sessionEntries[0];
-          var lastSessionEntry = sessionEntries[sessionEntries.length - 1];
-          
+    let clsValue = 0;
+    let sessionValue = 0;
+    let sessionEntries: PerformanceEntry[] = [];
+
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
+        if (!(entry as any).hadRecentInput) {
+          const firstSessionEntry = sessionEntries[0];
+          const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+
           if (
             sessionValue &&
             entry.startTime - lastSessionEntry.startTime < 1000 &&
             entry.startTime - firstSessionEntry.startTime < 5000
           ) {
-            sessionValue += entry.value;
+            sessionValue += (entry as any).value;
             sessionEntries.push(entry);
           } else {
-            sessionValue = entry.value;
+            sessionValue = (entry as any).value;
             sessionEntries = [entry];
           }
-          
+
           if (sessionValue > clsValue) {
             clsValue = sessionValue;
           }
         }
-      }
+      });
     });
-    
     observer.observe({ entryTypes: ['layout-shift'] });
-    
-    function reportCLS() {
-      var metric = {
+
+    const reportCLS = () => {
+      const metric: PerformanceMetric = {
         name: 'CLS',
         value: clsValue,
         rating: getRating('CLS', clsValue),
         timestamp: Date.now(),
       };
-      
       logMetric(metric, config);
       storeMetric(metric);
-      if (config.sendToAnalytics) config.sendToAnalytics(metric);
-    }
-    
-    window.addEventListener('visibilitychange', function() {
+      config.sendToAnalytics?.(metric);
+    };
+
+    window.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden') {
         reportCLS();
         observer.disconnect();
@@ -187,81 +166,70 @@ function measureCLS(config) {
   } catch (e) {
     // Silent
   }
-}
+};
 
-function measureFID(config) {
+const measureFID = (config: PerformanceConfig) => {
   try {
-    var observer = new (window).PerformanceObserver(function(list) {
-      var entries = list.getEntries();
-      for (var i = 0; i < entries.length; i++) {
-        var entry = entries[i];
-        var value = entry.processingStart - entry.startTime;
-        var metric = {
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
+        const value = (entry as any).processingStart - entry.startTime;
+        const metric: PerformanceMetric = {
           name: 'FID',
-          value: value,
+          value,
           rating: getRating('FID', value),
           timestamp: Date.now(),
         };
-        
         logMetric(metric, config);
         storeMetric(metric);
-        if (config.sendToAnalytics) config.sendToAnalytics(metric);
-        
+        config.sendToAnalytics?.(metric);
         observer.disconnect();
-      }
+      });
     });
-    
     observer.observe({ entryTypes: ['first-input'] });
   } catch (e) {
     // Silent
   }
-}
+};
 
-function measureTTFB(config) {
+const measureTTFB = (config: PerformanceConfig) => {
   try {
-    var navigationEntry = performance.getEntriesByType('navigation')[0];
-    
+    const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+
     if (navigationEntry) {
-      var ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
-      
-      var metric = {
+      const ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
+      const metric: PerformanceMetric = {
         name: 'TTFB',
         value: ttfb,
         rating: getRating('TTFB', ttfb),
         timestamp: Date.now(),
       };
-      
       logMetric(metric, config);
       storeMetric(metric);
-      if (config.sendToAnalytics) config.sendToAnalytics(metric);
+      config.sendToAnalytics?.(metric);
     }
   } catch (e) {
     // Silent
   }
-}
+};
 
-export function initPerformanceMonitoring(config) {
-  var cfg = config || {};
-  var finalConfig = {
-    enabled: cfg.enabled !== undefined ? cfg.enabled : defaultConfig.enabled,
-    logToConsole: cfg.logToConsole !== undefined ? cfg.logToConsole : defaultConfig.logToConsole,
-    sendToAnalytics: cfg.sendToAnalytics,
+export const initPerformanceMonitoring = (config?: Partial<PerformanceConfig>) => {
+  const finalConfig: PerformanceConfig = {
+    enabled: config?.enabled ?? defaultConfig.enabled,
+    logToConsole: config?.logToConsole ?? defaultConfig.logToConsole,
+    sendToAnalytics: config?.sendToAnalytics,
   };
-  
+
   if (!finalConfig.enabled) return;
-  
-  if (typeof window === 'undefined' || !window.performance) {
-    return;
-  }
-  
+  if (typeof window === 'undefined' || !window.performance) return;
+
   measureFCP(finalConfig);
   measureLCP(finalConfig);
   measureCLS(finalConfig);
   measureFID(finalConfig);
   measureTTFB(finalConfig);
-}
+};
 
-export function getPerformanceMetrics() {
+export const getPerformanceMetrics = (): PerformanceMetric[] => {
   try {
     if (typeof window !== 'undefined') {
       return JSON.parse(localStorage.getItem('webVitals') || '[]');
@@ -270,55 +238,41 @@ export function getPerformanceMetrics() {
     // Silent
   }
   return [];
-}
+};
 
-export function getPerformanceSummary() {
-  var metrics = getPerformanceMetrics();
-  
-  var summary = {
+export const getPerformanceSummary = (): Record<string, PerformanceMetric | null> => {
+  const metrics = getPerformanceMetrics();
+  const summary: Record<string, PerformanceMetric | null> = {
     LCP: null,
     FID: null,
     CLS: null,
     FCP: null,
     TTFB: null,
   };
-  
-  var names = ['LCP', 'FID', 'CLS', 'FCP', 'TTFB'];
-  for (var i = 0; i < names.length; i++) {
-    var name = names[i];
-    var found = null;
-    for (var j = 0; j < metrics.length; j++) {
-      if (metrics[j].name === name) {
-        found = metrics[j];
-      }
-    }
-    summary[name] = found;
-  }
-  
-  return summary;
-}
 
-export function clearPerformanceMetrics() {
+  ['LCP', 'FID', 'CLS', 'FCP', 'TTFB'].forEach((name) => {
+    const found = metrics.filter((m) => m.name === name).pop() ?? null;
+    summary[name] = found;
+  });
+
+  return summary;
+};
+
+export const clearPerformanceMetrics = () => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('webVitals');
   }
-}
+};
 
-export function getRatingColor(rating) {
+export const getRatingColor = (rating: string): string => {
   if (rating === 'good') return 'green';
   if (rating === 'needs-improvement') return 'orange';
   if (rating === 'poor') return 'red';
   return 'gray';
-}
+};
 
-export function formatMetricValue(name, value) {
-  if (name === 'CLS') {
-    return value.toFixed(3);
-  }
-  
-  if (value > 1000) {
-    return (value / 1000).toFixed(2) + 's';
-  }
-  
-  return value.toFixed(0) + 'ms';
-}
+export const formatMetricValue = (name: string, value: number): string => {
+  if (name === 'CLS') return value.toFixed(3);
+  if (value > 1000) return `${(value / 1000).toFixed(2)}s`;
+  return `${value.toFixed(0)}ms`;
+};

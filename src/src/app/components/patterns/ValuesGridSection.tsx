@@ -1,87 +1,64 @@
 import React from 'react';
 import { Heart, Users, Globe, ShieldCheck } from '@phosphor-icons/react';
-import * as ContainerModule from '../common/Container';
-import * as TypographyModule from '../common/Typography';
-import * as HeadingModule from '../common/Heading';
+import { Container } from '../common/Container';
+import { Typography } from '../common/Typography';
+import { Heading } from '../common/Heading';
 
-var Container = ContainerModule.Container;
-var Typography = TypographyModule.Typography;
-var Heading = HeadingModule.Heading;
+interface ValueItem {
+  icon: React.ComponentType<{ size?: number; 'aria-hidden'?: string }>;
+  title: string;
+  description: string;
+}
 
-// ValueItem structure
-// - icon: React.ComponentType (Phosphor icon)
-// - title: string
-// - description: string
+interface ValuesGridSectionProps {
+  heading?: string;
+  description?: string;
+  values?: ValueItem[];
+  className?: string;
+}
 
-// ValuesGridSectionProps structure
-// - heading?: string
-// - description?: string
-// - values?: ValueItem[]
-// - className?: string
-
-var defaultValues = [
-  {
-    icon: Heart,
-    title: "Curated with Love",
-    description: "Every item is hand-picked for quality and style."
-  },
-  {
-    icon: Users,
-    title: "Community First",
-    description: "We listen to our customers and grow together."
-  },
-  {
-    icon: Globe,
-    title: "Sustainable Choices",
-    description: "Committed to eco-friendly packaging and ethical sourcing."
-  },
-  {
-    icon: ShieldCheck,
-    title: "Trust & Security",
-    description: "Your data and payments are always safe with us."
-  }
+const defaultValues: ValueItem[] = [
+  { icon: Heart, title: "Curated with Love", description: "Every item is hand-picked for quality and style." },
+  { icon: Users, title: "Community First", description: "We listen to our customers and grow together." },
+  { icon: Globe, title: "Sustainable Choices", description: "Committed to eco-friendly packaging and ethical sourcing." },
+  { icon: ShieldCheck, title: "Trust & Security", description: "Your data and payments are always safe with us." },
 ];
 
 /**
  * ValuesGridSection Pattern
- * 
- * Grid of icon-based value proposition cards.
- * 
- * @pattern
  */
-export function ValuesGridSection(props) {
-  var heading = props.heading !== undefined ? props.heading : "Why Shop With Us?";
-  var description = props.description !== undefined ? props.description : "We take pride in offering more than just great products. Here is what sets us apart.";
-  var values = props.values || defaultValues;
-  var className = props.className || "";
-
-  var header = React.createElement('div', { className: "wp-about-values-header" }, [
-    React.createElement(Typography, { key: 'h', variant: "h2", className: "wp-about-values-title" }, heading),
-    React.createElement(Typography, { key: 'd', variant: "body", className: "wp-about-values-description" }, description)
-  ]);
-
-  var cards = values.map(function(item, index) {
-    var Icon = item.icon;
-    
-    var iconWrapper = React.createElement('div', { key: 'icon', className: "wp-about-values-icon wp-about-values-icon--animated" },
-      React.createElement(Icon, { size: 32, 'aria-hidden': "true" })
-    );
-
-    var cardInner = React.createElement('div', { className: "wp-about-values-card__inner funky-spring-hover" }, [
-      iconWrapper,
-      React.createElement(Heading, { key: 'title', level: 3, className: "wp-about-values-card-title wp-about-values-card-title--spaced funky-text-neon" }, item.title),
-      React.createElement(Typography, { key: 'desc', variant: "small", className: "wp-about-values-card-text" }, item.description)
-    ]);
-
-    return React.createElement('div', { key: index, className: "wp-about-values-card funky-card-glow group" }, cardInner);
-  });
-
-  var grid = React.createElement('div', { className: "wp-about-values-grid" }, cards);
-
-  var containerContent = React.createElement(Container, null, [
-    header,
-    grid
-  ]);
-
-  return React.createElement('section', { className: 'wp-about-values-section ' + className }, containerContent);
+export const ValuesGridSection = ({
+  heading = "Why Shop With Us?",
+  description = "We take pride in offering more than just great products. Here is what sets us apart.",
+  values = defaultValues,
+  className = '',
+}: ValuesGridSectionProps) => {
+  return (
+    <section className={`wp-about-values-section ${className}`}>
+      <Container>
+        <div className="wp-about-values-header">
+          <Typography variant="h2" className="wp-about-values-title">{heading}</Typography>
+          <Typography variant="body" className="wp-about-values-description">{description}</Typography>
+        </div>
+        <div className="wp-about-values-grid">
+          {values.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div key={index} className="wp-about-values-card funky-card-glow group">
+                <div className="wp-about-values-card__inner funky-spring-hover">
+                  <div className="wp-about-values-icon wp-about-values-icon--animated">
+                    <Icon size={32} aria-hidden="true" />
+                  </div>
+                  <Heading level={3} className="wp-about-values-card-title wp-about-values-card-title--spaced funky-text-neon">
+                    {item.title}
+                  </Heading>
+                  <Typography variant="small" className="wp-about-values-card-text">{item.description}</Typography>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Container>
+    </section>
+  );
 }

@@ -1,0 +1,557 @@
+/* ============================================
+   RETRO MEGA MENU — HeaderRetro navigation
+   Block: .retro-mega-menu
+   
+   Desktop: hover-triggered dropdown panels
+   Mobile: hamburger → full-screen overlay
+   
+   WCAG AA 2.2: keyboard navigation, focus traps,
+   aria-expanded, aria-haspopup support
+   ============================================ */
+
+/* ========================================
+   HEADER — updated for mega menu
+   ======================================== */
+
+.retro-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 3px solid var(--color-ink);
+  background-color: var(--color-paper);
+  position: relative;
+  z-index: 100;
+}
+
+.retro-header__logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.retro-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.retro-logo a {
+  display: flex;
+  align-items: center;
+}
+
+/* ========================================
+   DESKTOP NAV — mega menu triggers
+   ======================================== */
+
+.retro-nav {
+  display: none;
+  align-items: center;
+  gap: 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .retro-nav {
+    display: flex;
+  }
+}
+
+/* Navigation item wrapper */
+.retro-nav__item {
+  position: relative;
+}
+
+/* Nav link / trigger */
+.retro-nav__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.625rem 0.75rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.retro-nav__trigger:hover,
+.retro-nav__trigger:focus-visible,
+.retro-nav__item:hover > .retro-nav__trigger,
+.retro-nav__item--open > .retro-nav__trigger {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.retro-nav__trigger:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -1px;
+}
+
+/* Caret icon */
+.retro-nav__caret {
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.retro-nav__item:hover > .retro-nav__trigger .retro-nav__caret,
+.retro-nav__item--open > .retro-nav__trigger .retro-nav__caret {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   MEGA MENU DROPDOWN PANEL
+   ======================================== */
+
+.retro-mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 280px;
+  background-color: var(--color-paper);
+  border: 3px solid var(--color-ink);
+  border-top: none;
+  box-shadow: var(--shadow-retro-lg);
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+  z-index: 200;
+}
+
+/* Wide variant for Shop */
+.retro-mega-menu--wide {
+  min-width: 560px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.retro-mega-menu--wide[data-visible="true"] {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Show on hover or keyboard open */
+.retro-nav__item:hover > .retro-mega-menu,
+.retro-nav__item--open > .retro-mega-menu,
+.retro-mega-menu[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.retro-nav__item:hover > .retro-mega-menu--wide,
+.retro-nav__item--open > .retro-mega-menu--wide {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========================================
+   MEGA MENU GRID — multi-column layout
+   ======================================== */
+
+.retro-mega-menu__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem 1.5rem;
+}
+
+.retro-mega-menu__grid--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Column header */
+.retro-mega-menu__heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  padding: 0.375rem 0.5rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* ========================================
+   MEGA MENU LINK — individual item
+   ======================================== */
+
+.retro-mega-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  transition: background-color 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.retro-mega-menu__link:hover {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.retro-mega-menu__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -1px;
+}
+
+.retro-mega-menu__link-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-signal);
+}
+
+.retro-mega-menu__link:hover .retro-mega-menu__link-icon {
+  color: var(--color-paper);
+}
+
+.retro-mega-menu__link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.retro-mega-menu__link-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.retro-mega-menu__link-desc {
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+  line-height: 1.3;
+}
+
+.retro-mega-menu__link:hover .retro-mega-menu__link-desc {
+  color: var(--color-paper-deep);
+}
+
+/* Divider */
+.retro-mega-menu__divider {
+  border: none;
+  border-top: 2px solid var(--color-border);
+  margin: 0.5rem 0;
+}
+
+/* CTA row at bottom */
+.retro-mega-menu__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--color-border);
+  margin-top: 0.5rem;
+}
+
+.retro-mega-menu__cta-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-signal);
+  text-decoration: none;
+  padding: 0.375rem 0.75rem;
+  border: 2px solid var(--color-signal);
+  transition: background-color 0.1s, color 0.1s;
+}
+
+.retro-mega-menu__cta-link:hover {
+  background-color: var(--color-signal);
+  color: #fff;
+}
+
+/* ========================================
+   HEADER ACTIONS (search, cart, etc.)
+   ======================================== */
+
+.retro-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.retro-action-btn {
+  padding: 0.5rem;
+  background: transparent;
+  border: 2px solid transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.retro-action-btn:hover {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.retro-action-btn:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -1px;
+}
+
+/* Search pill (expanded search) */
+.retro-search-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--color-ink);
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-paper);
+}
+
+.retro-search-pill__icon {
+  color: var(--color-muted);
+}
+
+.retro-search-pill__input {
+  border: none;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 0.75rem;
+  width: 120px;
+  padding: 0.25rem;
+}
+
+.retro-search-pill__input:focus {
+  outline: none;
+}
+
+.retro-search-pill__close {
+  background: none;
+  border: none;
+  color: var(--color-ink);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+}
+
+/* ========================================
+   MOBILE HAMBURGER BUTTON
+   ======================================== */
+
+.retro-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0.5rem;
+  background: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  color: var(--color-ink);
+  transition: border-color 0.15s;
+}
+
+.retro-hamburger:hover {
+  border-color: var(--color-ink);
+}
+
+.retro-hamburger:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -1px;
+}
+
+.retro-hamburger__line {
+  width: 22px;
+  height: 3px;
+  background-color: var(--color-ink);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.retro-hamburger--open .retro-hamburger__line:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+.retro-hamburger--open .retro-hamburger__line:nth-child(2) {
+  opacity: 0;
+}
+.retro-hamburger--open .retro-hamburger__line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (min-width: 1024px) {
+  .retro-hamburger { display: none; }
+}
+
+/* ========================================
+   MOBILE MENU OVERLAY
+   ======================================== */
+
+.retro-mobile-menu {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-paper);
+  z-index: 90;
+  padding: 5rem 1.5rem 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.retro-mobile-menu--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 1024px) {
+  .retro-mobile-menu { display: none; }
+}
+
+/* Mobile accordion section */
+.retro-mobile-menu__section {
+  border-bottom: 2px solid var(--color-border);
+}
+
+.retro-mobile-menu__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.retro-mobile-menu__trigger:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.retro-mobile-menu__trigger-caret {
+  transition: transform 0.2s;
+}
+
+.retro-mobile-menu__trigger[aria-expanded="true"] .retro-mobile-menu__trigger-caret {
+  transform: rotate(180deg);
+}
+
+.retro-mobile-menu__panel {
+  padding: 0 0.5rem 1rem;
+  display: none;
+}
+
+.retro-mobile-menu__panel--open {
+  display: block;
+}
+
+.retro-mobile-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.5rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  border: 2px solid transparent;
+  transition: background-color 0.1s, border-color 0.1s;
+}
+
+.retro-mobile-menu__link:hover {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.retro-mobile-menu__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -1px;
+}
+
+/* Standalone links (no dropdown) */
+.retro-mobile-menu__standalone {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.retro-mobile-menu__standalone:hover {
+  color: var(--color-signal);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .retro-header {
+    padding: 0.625rem 1rem;
+  }
+
+  .retro-header__logo-img {
+    height: 28px;
+  }
+
+  .retro-actions {
+    gap: 0.125rem;
+  }
+
+  .retro-action-btn {
+    padding: 0.375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .retro-header__logo-img {
+    height: 24px;
+  }
+
+  .retro-search-pill__input {
+    width: 80px;
+  }
+}

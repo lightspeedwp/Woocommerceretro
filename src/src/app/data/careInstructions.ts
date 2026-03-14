@@ -13,7 +13,7 @@
 // @property {string} icon
 // @property {string[]} instructions
 
-var careGuides = [
+const careGuides = [
   {
     id: 'cotton',
     material: 'Cotton',
@@ -71,7 +71,7 @@ var careGuides = [
   },
 ];
 
-var generalCareTips = [
+const generalCareTips = [
   'Always check the care label before washing.',
   'Turn garments inside out to preserve prints and colors.',
   'Use a mesh laundry bag for delicate items.',
@@ -80,7 +80,7 @@ var generalCareTips = [
   'Treat stains immediately for best results.',
 ];
 
-var careInstructionsPageContent = {
+const careInstructionsPageContent = {
   title: 'Care Instructions',
   description: 'Keep your products looking their best with our material-specific care guides.',
   tipsHeading: 'General Care Tips',

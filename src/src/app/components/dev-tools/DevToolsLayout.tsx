@@ -1,111 +1,82 @@
-import React from 'react';
-import * as LayoutModule from '../parts/Layout';
-import * as ContainerModule from '../common/Container';
-
-var Layout = LayoutModule.Layout;
-var Container = ContainerModule.Container;
-
 /**
  * DevToolsLayout Component
+ *
+ * Shared layout wrapper for dev tools pages with header, stats, and content area.
  */
-export function DevToolsLayout(props) {
-  var title = props.title;
-  var description = props.description;
-  var category = props.category;
-  var badgeIcon = props.badgeIcon;
-  var badgeText = props.badgeText;
-  var stats = props.stats || [];
-  var children = props.children;
-  var footer = props.footer;
 
-  var categoryConfig = {
-    testing: {
-      gradient: 'from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900',
-      badgeColor: 'bg-blue-600',
-      defaultBadgeText: 'Testing & QA'
-    },
-    components: {
-      gradient: 'from-purple-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900',
-      badgeColor: 'bg-purple-600',
-      defaultBadgeText: 'Components & APIs'
-    },
-    design: {
-      gradient: 'from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-900',
-      badgeColor: 'bg-green-600',
-      defaultBadgeText: 'Design System'
-    },
-    showcases: {
-      gradient: 'from-orange-50 to-amber-50 dark:from-gray-800 dark:to-gray-900',
-      badgeColor: 'bg-orange-600',
-      defaultBadgeText: 'Component Showcases'
-    }
+import { type ReactNode } from 'react';
+import { Layout } from '../parts/Layout';
+import { Container } from '../common/Container';
+
+interface StatItem {
+  value: string | number;
+  label: string;
+  color?: 'blue' | 'purple' | 'green' | 'orange' | 'pink';
+}
+
+interface DevToolsLayoutProps {
+  title: string;
+  description: string;
+  category: 'testing' | 'components' | 'design' | 'showcases';
+  badgeIcon?: ReactNode;
+  badgeText?: string;
+  stats?: StatItem[];
+  children: ReactNode;
+  footer?: ReactNode;
+}
+
+export const DevToolsLayout = ({
+  title,
+  description,
+  category,
+  badgeIcon,
+  badgeText,
+  stats = [],
+  children,
+  footer,
+}: DevToolsLayoutProps) => {
+  const defaultBadgeTexts: Record<string, string> = {
+    testing: 'Testing & QA',
+    components: 'Components & APIs',
+    design: 'Design System',
+    showcases: 'Component Showcases',
   };
+  const finalBadgeText = badgeText || defaultBadgeTexts[category];
 
-  var config = categoryConfig[category];
-  var finalBadgeText = badgeText || config.defaultBadgeText;
+  return (
+    <Layout>
+      <div className={`wp-dev-layout__banner wp-dev-layout__banner--${category}`}>
+        <Container variant="site">
+          <div className="wp-dev-layout__banner-content">
+            <div className={`wp-dev-layout__badge wp-dev-layout__badge--${category}`}>
+              {badgeIcon}
+              <span>{finalBadgeText}</span>
+            </div>
+            <h1 className="wp-dev-layout__title">{title}</h1>
+            <p className="wp-dev-layout__description">{description}</p>
 
-  var statColorMap = {
-    blue: 'text-blue-600 dark:text-blue-400',
-    purple: 'text-purple-600 dark:text-purple-400',
-    green: 'text-green-600 dark:text-green-400',
-    orange: 'text-orange-600 dark:text-orange-400',
-    pink: 'text-pink-600 dark:text-pink-400'
-  };
+            {stats.length > 0 && (
+              <div className="wp-dev-layout__stats">
+                {stats.map((stat, idx) => {
+                  const colorMod = stat.color || 'blue';
+                  return (
+                    <div key={idx} className="wp-dev-layout__stat">
+                      <span className={`wp-dev-layout__stat-value wp-dev-layout__stat-value--${colorMod}`}>{stat.value}</span>
+                      <span className="wp-dev-layout__stat-label">{stat.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </Container>
+      </div>
 
-  var statElements = stats.map(function(stat, idx) {
-    var colorClass = stat.color ? statColorMap[stat.color] : 'text-gray-600 dark:text-gray-400';
-    return React.createElement('div', {
-      key: idx,
-      className: 'flex flex-col'
-    },
-      React.createElement('span', {
-        className: 'text-2xl font-bold ' + colorClass
-      }, stat.value),
-      React.createElement('span', {
-        className: 'text-sm text-gray-600 dark:text-gray-400'
-      }, stat.label)
-    );
-  });
+      <div className="wp-dev-layout__content">
+        <Container variant="site">{children}</Container>
+      </div>
 
-  var statsBar = stats.length > 0 ? React.createElement('div', {
-    className: 'flex gap-8 mb-8 pb-6 border-b border-gray-200 dark:border-gray-700'
-  }, statElements) : null;
-
-  var badge = React.createElement('div', {
-    className: 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full ' + config.badgeColor + ' text-white text-sm font-medium mb-4'
-  },
-    badgeIcon,
-    React.createElement('span', null, finalBadgeText)
-  );
-
-  var heading = React.createElement('h1', {
-    className: 'text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4'
-  }, title);
-
-  var desc = React.createElement('p', {
-    className: 'text-lg text-gray-600 dark:text-gray-400 mb-8'
-  }, description);
-
-  var header = React.createElement('div', {
-    className: 'bg-gradient-to-br ' + config.gradient + ' border-b border-gray-200 dark:border-gray-700 py-12'
-  },
-    React.createElement(Container, { variant: 'site' },
-      badge,
-      heading,
-      desc,
-      statsBar
-    )
-  );
-
-  var main = React.createElement('div', {
-    className: 'py-12'
-  },
-    React.createElement(Container, { variant: 'site' }, children)
-  );
-
-  return React.createElement(Layout, null,
-    header,
-    main,
-    footer
+      {footer}
+    </Layout>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "@lightspeedwp/woocommerce-prototype",
-  "version": "0.1.0",
+  "version": "2.10.0",
   "publishConfig": {
     "registry": "https://registry.figma.com/npm/f156f2bc-d4a1-4d3b-8015-56069398e95c/registry/"
   },

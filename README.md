@@ -1,7 +1,7 @@
 
-  # WooCommerce Retro Prototype
+  # Retro Shop
 
-  This is a code bundle for WooCommerce Retro Prototype. The original project is available at https://www.figma.com/design/CfA4GyJoSgwocv1h4ruVmf/WooCommerce-Retro-Prototype.
+  This is a code bundle for Retro Shop. The original project is available at https://www.figma.com/design/CfA4GyJoSgwocv1h4ruVmf/Retro-Shop.
 
   ## Running the code
 

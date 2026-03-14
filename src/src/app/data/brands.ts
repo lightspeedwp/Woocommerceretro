@@ -5,11 +5,10 @@
  * Used in Brand Grid, Brand Listings, and Filtering.
  * 
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. ASCII characters only
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  */
-export var BRAND_DATA = [
+export const BRAND_DATA = [
   // Wines
   {
     id: 'kwv-wines-classic-collection',
@@ -237,23 +236,15 @@ export var BRAND_DATA = [
 ];
 
 /** Brand logos derived from BRAND_DATA */
-export var brandLogos = BRAND_DATA.map(function(b) {
-  return {
-    id: b.id,
-    name: b.name,
-    logo: b.image,
-    url: '/shop?brand=' + b.id
-  };
+export const brandLogos = BRAND_DATA.map((b) => {
+  return { name: b.name, logo: b.logo };
 });
 
-/** Unique brand categories */
-export var brandCategories = (function() {
-  var cats = [];
-  for (var i = 0; i < BRAND_DATA.length; i++) {
-    var cat = BRAND_DATA[i].category;
-    if (cats.indexOf(cat) === -1) {
-      cats.push(cat);
-    }
+export const brandCategories = (() => {
+  const cats = [];
+  for (let i = 0; i < BRAND_DATA.length; i++) {
+    const cat = BRAND_DATA[i].category;
+    if (cats.indexOf(cat) === -1) cats.push(cat);
   }
   return cats;
 })();

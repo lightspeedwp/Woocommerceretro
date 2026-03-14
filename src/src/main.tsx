@@ -1,27 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './styles/globals.css';
-import * as PerformanceModule from './app/utils/performance';
-var initPerformanceMonitoring = PerformanceModule.initPerformanceMonitoring;
+import { createRoot } from 'react-dom/client';
+import { StrictMode } from 'react';
+import App from '../App';
+// FIGMA MAKE FIX: Only 5 critical CSS imports to prevent IframeMessageAbortError
+// Full 280-import version preserved at /styles/globals.css for production
+import '../styles/globals-minimal.css';
 
 /**
  * Main Entry Point
+ * 
+ * StrictMode temporarily disabled to reduce initial render overhead
+ * and help with Figma Make iframe initialization timeout.
  */
 
-initPerformanceMonitoring({
-  enabled: true,
-  logToConsole: true
-});
-
-var rootElement = document.getElementById('root');
+const rootElement = document.getElementById('root');
 
 if (!rootElement) {
   throw new Error('Failed to find the root element.');
 }
 
-var root = ReactDOM.createRoot(rootElement);
-var appElement = React.createElement(App, null);
-var strictMode = React.createElement(React.StrictMode, null, appElement);
-
-root.render(strictMode);
+// Temporarily disable StrictMode to reduce initialization overhead
+createRoot(rootElement).render(<App />);

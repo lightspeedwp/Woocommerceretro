@@ -8,7 +8,7 @@
 // Brand identity
 // ---------------------------------------------------------------------------
 
-export var brand = {
+export const brand = {
   name: 'Woo Shop',
   tagline: 'Curated living, delivered to your door',
   description: 'Woo Shop curates beautifully crafted stationery, homewares, and lifestyle essentials from independent makers around the world.',
@@ -40,7 +40,7 @@ export var brand = {
  */
 
 /** @type {SocialLink[]} */
-export var socialLinks = [
+export const socialLinks = [
   { id: 'instagram', platform: 'Instagram', label: 'Follow us on Instagram', url: 'https://instagram.com/wooshop', icon: 'Instagram' },
   { id: 'facebook', platform: 'Facebook', label: 'Like us on Facebook', url: 'https://facebook.com/wooshop', icon: 'Facebook' },
   { id: 'twitter', platform: 'X (Twitter)', label: 'Follow us on X', url: 'https://x.com/wooshop', icon: 'Twitter' },
@@ -53,8 +53,8 @@ export var socialLinks = [
 // Copyright & legal
 // ---------------------------------------------------------------------------
 
-export var legal = {
-  copyrightNotice: function(year) {
+export const legal = {
+  copyrightNotice: (year) => {
     return '\u00A9 ' + year + ' ' + brand.legalEntity + ' All rights reserved.';
   },
   privacyPolicyUrl: '/privacy-policy',
@@ -67,7 +67,7 @@ export var legal = {
 // Payment methods accepted
 // ---------------------------------------------------------------------------
 
-export var paymentMethods = [
+export const paymentMethods = [
   { id: 'visa', name: 'Visa', icon: 'credit-card' },
   { id: 'mastercard', name: 'Mastercard', icon: 'credit-card' },
   { id: 'amex', name: 'American Express', icon: 'credit-card' },
@@ -80,7 +80,7 @@ export var paymentMethods = [
 // Brand voice & tone keywords (for reference)
 // ---------------------------------------------------------------------------
 
-export var voiceTone = {
+export const voiceTone = {
   adjectives: ['curated', 'crafted', 'thoughtful', 'artisan', 'timeless', 'modern'],
   avoidWords: ['cheap', 'bargain', 'buy now', 'limited time only', 'act fast', 'hurry'],
   toneExamples: {

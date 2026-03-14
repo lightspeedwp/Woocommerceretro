@@ -1,64 +1,68 @@
-import React from 'react';
-var useState = React.useState;
+import React, { useState, forwardRef } from 'react';
 
 /**
  * Toggle Component
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No arrow functions
- * 3. No destructuring in parameters
- * 4. No TypeScript syntax
+ *
+ * WordPress-aligned toggle button with pressed state.
+ *
+ * @example
+ * <Toggle pressed={bold} onPressedChange={setBold}>B</Toggle>
  */
-export var Toggle = React.forwardRef(function Toggle(props, ref) {
-  var className = props.className || '';
-  var variant = props.variant || 'default';
-  var size = props.size || 'default';
-  var controlledPressed = props.pressed;
-  var defaultPressed = props.defaultPressed || false;
-  var onPressedChange = props.onPressedChange;
-  var id = props.id;
-  var style = props.style;
-  var onClick = props.onClick;
-  var children = props.children;
 
-  var _ip = useState(defaultPressed);
-  var isPressed = _ip[0];
-  var setIsPressed = _ip[1];
-  var pressed = controlledPressed !== undefined ? controlledPressed : isPressed;
+interface ToggleProps {
+  className?: string;
+  variant?: string;
+  size?: string;
+  pressed?: boolean;
+  defaultPressed?: boolean;
+  onPressedChange?: (pressed: boolean) => void;
+  id?: string;
+  style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent) => void;
+  children?: React.ReactNode;
+}
 
-  var handleClick = function(e) {
-    var newPressed = !pressed;
-    if (controlledPressed === undefined) {
-      setIsPressed(newPressed);
-    }
-    if (onPressedChange) {
-      onPressedChange(newPressed);
-    }
-    if (onClick) {
-      onClick(e);
-    }
-  };
+export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
+  (
+    { className = '', variant = 'default', size = 'default', pressed: controlledPressed, defaultPressed = false, onPressedChange, id, style, onClick, children },
+    ref
+  ) => {
+    const [isPressed, setIsPressed] = useState(defaultPressed);
+    const pressed = controlledPressed !== undefined ? controlledPressed : isPressed;
 
-  var combinedClassName = [
-    'wp-block-toggle',
-    'wp-block-toggle--' + variant,
-    'wp-block-toggle--size-' + size,
-    pressed ? 'is-pressed funky-toggle--active' : '',
-    className,
-    'funky-toggle'
-  ].filter(function(c) { return !!c; }).join(' ');
+    const handleClick = (e: React.MouseEvent) => {
+      const newPressed = !pressed;
+      if (controlledPressed === undefined) {
+        setIsPressed(newPressed);
+      }
+      onPressedChange?.(newPressed);
+      onClick?.(e);
+    };
 
-  return React.createElement('button', {
-    id: id,
-    style: style,
-    ref: ref,
-    type: "button",
-    "aria-pressed": pressed,
-    "data-state": pressed ? "on" : "off",
-    className: combinedClassName,
-    onClick: handleClick
-  }, children);
-});
+    const combinedClassName = [
+      'wp-block-toggle',
+      `wp-block-toggle--${variant}`,
+      `wp-block-toggle--size-${size}`,
+      pressed ? 'is-pressed funky-toggle--active' : '',
+      className,
+      'funky-toggle'
+    ].filter(Boolean).join(' ');
+
+    return (
+      <button
+        id={id}
+        style={style}
+        ref={ref}
+        type="button"
+        aria-pressed={pressed}
+        data-state={pressed ? "on" : "off"}
+        className={combinedClassName}
+        onClick={handleClick}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 
 Toggle.displayName = "Toggle";

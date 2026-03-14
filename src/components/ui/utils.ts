@@ -8,6 +8,6 @@ import { clsx } from "clsx";
  * 2. No spread operators
  * 3. Uses arguments object for compatibility
  */
-export function cn() {
+export const cn = () => {
   return clsx(Array.prototype.slice.call(arguments));
 }

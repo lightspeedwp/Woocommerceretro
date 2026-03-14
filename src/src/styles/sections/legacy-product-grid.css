@@ -1,0 +1,20 @@
+/* ========================================
+   PRODUCT GRID
+   ======================================== */
+
+.wc-block-product-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: var(--wp--preset--spacing--40); width: 100%; }
+@media (min-width: 640px) { .wc-block-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wp--preset--spacing--50); } }
+@media (min-width: 1024px) { .wc-block-product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--wp--preset--spacing--60); } }
+
+.wc-block-product-grid--three-col { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: var(--wp--preset--spacing--40); width: 100%; }
+@media (min-width: 640px) { .wc-block-product-grid--three-col { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wp--preset--spacing--50); } }
+@media (min-width: 1024px) { .wc-block-product-grid--three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--wp--preset--spacing--60); } }
+
+.wc-block-product-grid--two-col { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: var(--wp--preset--spacing--40); width: 100%; }
+@media (min-width: 640px) { .wc-block-product-grid--two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wp--preset--spacing--50); } }
+
+@media (max-width: 639px) {
+  .wc-block-product-grid--scroll-mobile { display: flex; overflow-x: auto; gap: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--20); scroll-snap-type: x mandatory; -ms-overflow-style: none; scrollbar-width: none; }
+  .wc-block-product-grid--scroll-mobile::-webkit-scrollbar { display: none; }
+  .wc-block-product-grid--scroll-mobile > * { flex: 0 0 85%; min-width: 260px; scroll-snap-align: start; }
+}

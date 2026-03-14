@@ -28,7 +28,7 @@ import { SquaresFour as LayoutDashboard, ShoppingBag, Download, MapPin, User, Si
  * 
  * Primary navigation for account dashboard.
  */
-export var accountNavItems = [
+export const accountNavItems = [
   {
     id: 'dashboard',
     label: 'Dashboard',
@@ -109,7 +109,7 @@ export var accountNavItems = [
  * 
  * Sample user profile for development/testing.
  */
-export var mockUserProfile = {
+export const mockUserProfile = {
   id: 'user-001',
   firstName: 'Sarah',
   lastName: 'Johnson',
@@ -127,7 +127,7 @@ export var mockUserProfile = {
  * 
  * Sample recent orders for development/testing.
  */
-export var mockOrders = [
+export const mockOrders = [
   {
     id: '#1847',
     date: '2024-12-20T10:30:00Z',
@@ -209,7 +209,7 @@ export var mockOrders = [
  * 
  * Sample downloadable products for development/testing.
  */
-export var mockDownloads = [
+export const mockDownloads = [
   {
     id: 'dl-001',
     name: 'Design System UI Kit',
@@ -247,7 +247,7 @@ export var mockDownloads = [
  * 
  * Sample addresses for development/testing.
  */
-export var mockAddresses = [
+export const mockAddresses = [
   {
     id: 'addr-001',
     type: 'both',
@@ -283,7 +283,7 @@ export var mockAddresses = [
  * 
  * Sample account statistics for development/testing.
  */
-export var mockAccountStats = {
+export const mockAccountStats = {
   totalOrders: 24,
   totalSpent: 2847.50,
   memberSince: 'January 2023',
@@ -298,10 +298,8 @@ export var mockAccountStats = {
  * @param {string} orderId - Order identifier
  * @returns {Order | undefined}
  */
-export function getOrderById(orderId) {
-  return mockOrders.find(function(order) {
-    return order.id === orderId;
-  });
+export const getOrderById = (orderId) => {
+  return mockOrders.find((order) => order.id === orderId);
 }
 
 /**
@@ -310,10 +308,8 @@ export function getOrderById(orderId) {
  * @param {OrderStatus} status - Order status
  * @returns {Order[]}
  */
-export function getOrdersByStatus(status) {
-  return mockOrders.filter(function(order) {
-    return order.status === status;
-  });
+export const getOrdersByStatus = (status) => {
+  return mockOrders.filter((order) => order.status === status);
 }
 
 /**
@@ -322,8 +318,8 @@ export function getOrdersByStatus(status) {
  * @param {number} limit - Number of orders to return
  * @returns {Order[]}
  */
-export function getRecentOrders(limit) {
-  var limitVal = limit || 5;
+export const getRecentOrders = (limit) => {
+  const limitVal = limit || 5;
   return mockOrders.slice(0, limitVal);
 }
 
@@ -332,10 +328,8 @@ export function getRecentOrders(limit) {
  * 
  * @returns {Address | undefined}
  */
-export function getDefaultAddress() {
-  return mockAddresses.find(function(addr) {
-    return addr.isDefault;
-  });
+export const getDefaultAddress = () => {
+  return mockAddresses.find((addr) => addr.isDefault);
 }
 
 /**
@@ -344,10 +338,8 @@ export function getDefaultAddress() {
  * @param {'shipping' | 'billing' | 'both'} type - Address type
  * @returns {Address[]}
  */
-export function getAddressesByType(type) {
-  return mockAddresses.filter(function(addr) {
-    return addr.type === type || addr.type === 'both';
-  });
+export const getAddressesByType = (type) => {
+  return mockAddresses.filter((addr) => addr.type === type || addr.type === 'both');
 }
 
 /**
@@ -356,10 +348,8 @@ export function getAddressesByType(type) {
  * @param {string} id - Navigation item ID
  * @returns {AccountNavItem | undefined}
  */
-export function getNavItemById(id) {
-  return accountNavItems.find(function(item) {
-    return item.id === id;
-  });
+export const getNavItemById = (id) => {
+  return accountNavItems.find((item) => item.id === id);
 }
 
 /**
@@ -367,10 +357,8 @@ export function getNavItemById(id) {
  * 
  * @returns {number}
  */
-export function getTotalBadgeCount() {
-  return accountNavItems.reduce(function(total, item) {
-    return total + (item.badge || 0);
-  }, 0);
+export const getTotalBadgeCount = () => {
+  return accountNavItems.reduce((total, item) => total + (item.badge || 0), 0);
 }
 
 export default {

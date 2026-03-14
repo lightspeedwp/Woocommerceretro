@@ -1,89 +1,68 @@
-/**
- * ComparisonBar.tsx - Product Block
- * 
- * Floating sticky bar that shows products in comparison.
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. No template literals
- * 4. Named functions
- * 5. ASCII only
- */
-
 import React from 'react';
 import { X } from '@phosphor-icons/react';
-import * as ReactRouterModule from 'react-router';
-var Link = ReactRouterModule.Link;
-import * as ComparisonContextModule from '../../../contexts/ComparisonContext';
-var useComparison = ComparisonContextModule.useComparison;
-import * as CnModule from '../../../utils/cn';
-var cn = CnModule.cn;
+import { Link } from 'react-router';
+import { useComparison } from '../../../contexts/ComparisonContext';
 
-export function ComparisonBar() {
-  var context = useComparison();
-  var comparisonItems = context.comparisonItems;
-  var removeFromComparison = context.removeFromComparison;
-  var clearComparison = context.clearComparison;
-  var comparisonCount = context.comparisonCount;
-  
-  if (comparisonCount === 0) {
-    return null;
-  }
+/**
+ * ComparisonBar - Product Block
+ *
+ * Floating sticky bar that shows products in comparison.
+ */
+export const ComparisonBar = () => {
+  const { comparisonItems, removeFromComparison, clearComparison, comparisonCount } = useComparison();
 
-  var items = comparisonItems.map(function(product) {
-    var link = React.createElement(Link, {
-      to: "/product/" + product.id,
-      className: "wc-block-comparison-bar__link"
-    }, React.createElement('img', {
-      src: product.image,
-      alt: product.name,
-      className: "wc-block-comparison-bar__thumbnail-image"
-    }));
+  if (comparisonCount === 0) return null;
 
-    var removeBtn = React.createElement('button', {
-      onClick: function() { removeFromComparison(product.id); },
-      "aria-label": "Remove " + product.name + " from comparison",
-      className: "wc-block-comparison-bar__thumbnail-remove"
-    }, React.createElement(X, { size: 12 }));
+  return (
+    <div className="wc-block-comparison-bar" role="region" aria-label="Product comparison">
+      <div className="wc-block-comparison-bar__container">
+        <div className="wc-block-comparison-bar__content">
+          <div className="wc-block-comparison-bar__items">
+            <div className="wc-block-comparison-bar__thumbnails">
+              {comparisonItems.map((product) => (
+                <div key={product.id} className="wc-block-comparison-bar__thumbnail group">
+                  <Link to={`/product/${product.id}`} className="wc-block-comparison-bar__link">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="wc-block-comparison-bar__thumbnail-image"
+                    />
+                  </Link>
+                  <button
+                    onClick={() => removeFromComparison(product.id)}
+                    aria-label={`Remove ${product.name} from comparison`}
+                    className="wc-block-comparison-bar__thumbnail-remove"
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="wc-block-comparison-bar__info">
+              <div className="wc-block-comparison-bar__separator" />
+              <div className="wc-block-comparison-bar__count">
+                <span>{comparisonCount} {comparisonCount === 1 ? 'Product' : 'Products'}</span>
+              </div>
+            </div>
+          </div>
 
-    return React.createElement('div', {
-      key: product.id,
-      className: "wc-block-comparison-bar__thumbnail group"
-    }, [link, removeBtn]);
-  });
-
-  var infoElement = React.createElement('div', { className: "wc-block-comparison-bar__info" },
-    React.createElement('div', { className: "wc-block-comparison-bar__separator" }),
-    React.createElement('div', { className: "wc-block-comparison-bar__count" },
-      React.createElement('span', null, comparisonCount + " " + (comparisonCount === 1 ? 'Product' : 'Products'))
-    )
+          <div className="wc-block-comparison-bar__actions">
+            <button
+              onClick={clearComparison}
+              aria-label="Clear all products from comparison"
+              className="wc-block-comparison-bar__clear"
+            >
+              Clear All
+            </button>
+            <Link
+              to="/compare"
+              className="wc-block-compare-button wc-block-compare-button--primary wc-block-compare-button--md"
+            >
+              <span>Compare Products</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-
-  var leftSide = React.createElement('div', { className: "wc-block-comparison-bar__items" },
-    React.createElement('div', { className: "wc-block-comparison-bar__thumbnails" }, items),
-    infoElement
-  );
-
-  var compareBtn = React.createElement(Link, {
-    to: "/compare",
-    className: "wc-block-compare-button wc-block-compare-button--primary wc-block-compare-button--md"
-  }, React.createElement('span', null, 'Compare Products'));
-
-  var rightSide = React.createElement('div', { className: "wc-block-comparison-bar__actions" },
-    React.createElement('button', {
-      onClick: clearComparison,
-      "aria-label": "Clear all products from comparison",
-      className: "wc-block-comparison-bar__clear"
-    }, 'Clear All'),
-    compareBtn
-  );
-
-  var content = React.createElement('div', { className: "wc-block-comparison-bar__content" }, [leftSide, rightSide]);
-  var container = React.createElement('div', { className: "wc-block-comparison-bar__container" }, content);
-
-  return React.createElement('div', {
-    className: "wc-block-comparison-bar",
-    role: "region",
-    "aria-label": "Product comparison"
-  }, container);
-}
+};

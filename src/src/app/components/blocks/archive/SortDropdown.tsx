@@ -1,52 +1,48 @@
-import React from 'react';
 import { CaretDown as ChevronDown } from '@phosphor-icons/react';
+
+interface SortDropdownProps {
+  value: string;
+  onChange: (value: string) => void;
+  className?: string;
+}
+
+const OPTIONS = [
+  { value: 'featured', label: 'Featured' },
+  { value: 'newest', label: 'Newest' },
+  { value: 'price-asc', label: 'Price: Low to High' },
+  { value: 'price-desc', label: 'Price: High to Low' },
+  { value: 'rating', label: 'Rating' },
+  { value: 'popularity', label: 'Popularity' },
+];
 
 /**
  * SortDropdown Component
- * 
- * Optimized for Figma Make parser:
- * - Uses var instead of const/let
- * - Uses function declarations
- * - No TypeScript-specific syntax
+ *
+ * Dropdown for sorting product listings.
  */
-export function SortDropdown(props) {
-  var value = props.value;
-  var onChange = props.onChange;
-  var className = props.className || '';
-
-  var options = [
-    { value: 'featured', label: 'Featured' },
-    { value: 'newest', label: 'Newest' },
-    { value: 'price-asc', label: 'Price: Low to High' },
-    { value: 'price-desc', label: 'Price: High to Low' },
-    { value: 'rating', label: 'Rating' },
-    { value: 'popularity', label: 'Popularity' }
-  ];
-
-  var handleChange = function(e) {
-    onChange(e.target.value);
-  };
-
-  return React.createElement('div', { className: "wp-sort-dropdown funky-sort-dropdown " + className },
-    React.createElement('label', { 
-      htmlFor: "sort-select",
-      className: "wp-sort-dropdown__label"
-    }, "Sort by:"),
-    React.createElement('div', { className: "wp-sort-dropdown__wrapper" },
-      React.createElement('select', {
-        id: "sort-select",
-        value: value,
-        onChange: handleChange,
-        className: "wp-sort-dropdown__select funky-select"
-      }, options.map(function(option) {
-        return React.createElement('option', { 
-          key: option.value,
-          value: option.value
-        }, option.label);
-      })),
-      React.createElement(ChevronDown, { className: "wp-sort-dropdown__icon" })
-    )
+export const SortDropdown = ({ value, onChange, className = '' }: SortDropdownProps) => {
+  return (
+    <div className={`wp-sort-dropdown funky-sort-dropdown ${className}`}>
+      <label htmlFor="sort-select" className="wp-sort-dropdown__label">
+        Sort by:
+      </label>
+      <div className="wp-sort-dropdown__wrapper">
+        <select
+          id="sort-select"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="wp-sort-dropdown__select funky-select"
+        >
+          {OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="wp-sort-dropdown__icon" />
+      </div>
+    </div>
   );
-}
+};
 
 SortDropdown.displayName = 'SortDropdown';

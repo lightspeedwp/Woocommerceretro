@@ -16,7 +16,7 @@
 // @property {string} title
 // @property {string} link
 
-var helpCategories = [
+const helpCategories = [
   { icon: 'Package', title: 'Orders', description: 'Track orders, modify details, and check order status.', link: '/faq' },
   { icon: 'Truck', title: 'Shipping', description: 'Delivery options, estimated times, and tracking information.', link: '/shipping-returns' },
   { icon: 'RotateCcw', title: 'Returns & Exchanges', description: 'Return policy, how to start a return, and exchange process.', link: '/returns' },
@@ -25,7 +25,7 @@ var helpCategories = [
   { icon: 'HelpCircle', title: 'Product Info', description: 'Sizing, materials, care instructions, and product details.', link: '/size-guide' },
 ];
 
-var popularArticles = [
+const popularArticles = [
   { title: 'How do I track my order?', link: '/faq' },
   { title: 'What is your return policy?', link: '/shipping-returns' },
   { title: 'How do I find the right size?', link: '/size-guide' },
@@ -34,7 +34,7 @@ var popularArticles = [
   { title: 'Can I modify my order after placing it?', link: '/faq' },
 ];
 
-var helpCenterPageContent = {
+const helpCenterPageContent = {
   title: 'Help center',
   description: 'How can we help you? Browse topics below or contact our support team.',
   categoriesHeading: 'Browse topics',

@@ -1,35 +1,23 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { Link } from 'react-router';
+import { cn } from '../ui/utils';
 
-var Link = ReactRouterModule.Link;
-import * as UtilsModule from '../ui/utils';
+interface SiteTitleProps {
+  tag?: keyof JSX.IntrinsicElements;
+  children?: React.ReactNode;
+  linkHref?: string | null;
+  linkLabel?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
 
-var cn = UtilsModule.cn;
+export const SiteTitle = ({ tag: Tag = 'h1', children, linkHref = '/', linkLabel = 'Home', className = '', style }: SiteTitleProps) => {
+  const titleElement = <Tag className={cn('wp-block-site-title', className)} style={style}>{children}</Tag>;
 
-/**
- * Site Title component
- */
-export function SiteTitle(props) {
-  var Tag = props.tag || 'h1';
-  var children = props.children;
-  var linkHref = props.linkHref !== undefined ? props.linkHref : '/';
-  var linkLabel = props.linkLabel || 'Home';
-  var className = props.className || '';
-  var style = props.style;
-
-  var titleElement = React.createElement(Tag, {
-    className: cn('wp-block-site-title', className),
-    style: style
-  }, children);
-  
   if (linkHref) {
-    return React.createElement(Link, {
-      to: linkHref,
-      'aria-label': linkLabel,
-      className: "wp-block-site-title__link"
-    }, titleElement);
+    return <Link to={linkHref} aria-label={linkLabel} className="wp-block-site-title__link">{titleElement}</Link>;
   }
-  
+
   return titleElement;
 }
 

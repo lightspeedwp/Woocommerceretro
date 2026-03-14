@@ -4,22 +4,16 @@
  * Includes Standard, Audio, Video, Gallery, and Aside formats.
  * 
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. ASCII only
- * 4. No optional chaining
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  */
 // Type references (JSDoc only - no runtime import needed):
 // WPPost
-import * as CategoriesModule from './categories';
-import * as TagsModule from './tags';
-import * as UsersModule from './users';
+import { postCategories } from './categories';
+import { tags as allTags } from './tags';
+import { USERS } from './users';
 
-var postCategories = CategoriesModule.postCategories;
-var allTags = TagsModule.tags;
-var USERS = UsersModule.USERS;
-
-export var posts = [
+export const posts = [
   // 1. Audio Post (Podcast)
   {
     id: 1001,
@@ -197,7 +191,7 @@ export var posts = [
   }
 ];
 
-export var mediaItems = {
+export const mediaItems: Record<number, { source_url: string }> = {
   2001: { source_url: 'https://images.unsplash.com/photo-1709846485906-30b28e7ed651' },
   2002: { source_url: 'https://images.unsplash.com/photo-1567641091594-71640a68f847' },
   2003: { source_url: 'https://images.unsplash.com/photo-1718220216044-006f43e3a9b1' },
@@ -206,15 +200,12 @@ export var mediaItems = {
   2006: { source_url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c' }
 };
 
-export function getPostBySlug(slug) {
-  for (var i = 0; i < posts.length; i++) {
-    if (posts[i].slug === slug) return posts[i];
-  }
-  return undefined;
+export const getPostBySlug = (slug: string) => {
+  return posts.find((p) => p.slug === slug);
 }
 
-export function getMediaSource(mediaId) {
-  var item = mediaItems[mediaId];
+export const getMediaSource = (mediaId: number): string => {
+  const item = mediaItems[mediaId];
   return item ? item.source_url : '';
 }
 
@@ -236,56 +227,35 @@ export function getMediaSource(mediaId) {
  */
 
 /** Resolve category IDs to { name, slug } */
-function resolveCategories(ids) {
-  var result = [];
-  for (var i = 0; i < ids.length; i++) {
-    var id = ids[i];
-    for (var j = 0; j < postCategories.length; j++) {
-      if (postCategories[j].id === id) {
-        result.push({ name: postCategories[j].name, slug: postCategories[j].slug });
-        break;
-      }
-    }
-  }
-  return result;
+const resolveCategories = (ids: number[]) => {
+  return ids
+    .map((id) => postCategories.find((c) => c.id === id))
+    .filter(Boolean)
+    .map((c: any) => ({ name: c.name, slug: c.slug }));
 }
 
 /** Resolve tag IDs to { name, slug } */
-function resolveTags(ids) {
-  var result = [];
-  for (var i = 0; i < ids.length; i++) {
-    var id = ids[i];
-    for (var j = 0; j < allTags.length; j++) {
-      if (allTags[j].id === id) {
-        result.push({ name: allTags[j].name, slug: allTags[j].slug });
-        break;
-      }
-    }
-  }
-  return result;
+const resolveTags = (ids: number[]) => {
+  return ids
+    .map((id) => allTags.find((t) => t.id === id))
+    .filter(Boolean)
+    .map((t: any) => ({ name: t.name, slug: t.slug }));
 }
 
 /** Resolve author ID to display name */
-function resolveAuthor(id) {
-  for (var i = 0; i < USERS.length; i++) {
-    if (USERS[i].id === id) return USERS[i].name;
-  }
-  return 'Staff Writer';
+const resolveAuthor = (id: number): string => {
+  return USERS.find((u) => u.id === id)?.name ?? 'Staff Writer';
 }
 
-function resolveAuthorSlug(id) {
-  for (var i = 0; i < USERS.length; i++) {
-    if (USERS[i].id === id) return USERS[i].slug;
-  }
-  return 'staff-writer';
+const resolveAuthorSlug = (id: number): string => {
+  return USERS.find((u) => u.id === id)?.slug ?? 'staff-writer';
 }
 
 /** Format ISO date to readable string */
-function formatDate(iso) {
+const formatDate = (iso: string): string => {
   try {
-    var d = new Date(iso);
-    return d.toLocaleDateString('en-US', {
-      year: 'numeric', month: 'long', day: 'numeric'
+    return new Date(iso).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric',
     });
   } catch (e) {
     return iso;
@@ -293,7 +263,7 @@ function formatDate(iso) {
 }
 
 /** Mock comments keyed by post ID */
-var mockComments = {
+const mockComments: Record<number, any[]> = {
   1001: [
     { id: 'c1', author: 'Sarah J.', date: 'Nov 16, 2023', content: 'Loved this episode!' }
   ],
@@ -304,7 +274,7 @@ var mockComments = {
 };
 
 /** Convert a WPPost to the flat ResolvedPost shape */
-export function resolvePost(post) {
+export const resolvePost = (post) => {
   return {
     id: String(post.id),
     slug: post.slug,
@@ -322,12 +292,9 @@ export function resolvePost(post) {
 }
 
 /** Resolve all posts into flat shape */
-export var resolvedPosts = posts.map(resolvePost);
+export const resolvedPosts = posts.map(resolvePost);
 
 /** Find a resolved post by slug */
-export function getResolvedPostBySlug(slug) {
-  for (var i = 0; i < resolvedPosts.length; i++) {
-    if (resolvedPosts[i].slug === slug) return resolvedPosts[i];
-  }
-  return undefined;
+export const getResolvedPostBySlug = (slug: string) => {
+  return resolvedPosts.find((p) => p.slug === slug);
 }

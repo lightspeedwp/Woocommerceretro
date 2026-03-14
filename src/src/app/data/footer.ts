@@ -30,7 +30,7 @@
 // ---------------------------------------------------------------------------
 
 /** @type {FooterColumn[]} */
-export var footerColumns = [
+export const footerColumns = [
   {
     id: 'shop',
     heading: 'Shop',
@@ -84,7 +84,7 @@ export var footerColumns = [
 // Newsletter section
 // ---------------------------------------------------------------------------
 
-export var footerNewsletter = {
+export const footerNewsletter = {
   heading: 'Stay in the loop',
   description:
     'Subscribe for exclusive drops, maker stories, and 10% off your first order.',
@@ -96,7 +96,7 @@ export var footerNewsletter = {
 // Brand blurb (footer brand column)
 // ---------------------------------------------------------------------------
 
-export var footerBrandBlurb =
+export const footerBrandBlurb =
   'Curating beautifully crafted stationery, homewares, and lifestyle essentials since 2020. Curated living, delivered sustainably.';
 
 // ---------------------------------------------------------------------------
@@ -104,7 +104,7 @@ export var footerBrandBlurb =
 // ---------------------------------------------------------------------------
 
 /** @type {FooterLink[]} */
-export var footerLegalLinks = [
+export const footerLegalLinks = [
   { id: 'fl_privacy', label: 'Privacy', url: '/privacy-policy' },
   { id: 'fl_terms', label: 'Terms', url: '/terms-and-conditions' },
   { id: 'fl_sitemap', label: 'Sitemap', url: '/sitemap' },
@@ -115,7 +115,7 @@ export var footerLegalLinks = [
 // ---------------------------------------------------------------------------
 
 /** @type {FooterLink[]} */
-export var checkoutFooterLinks = [
+export const checkoutFooterLinks = [
   { id: 'cf_privacy', label: 'Privacy policy', url: '/privacy-policy' },
   { id: 'cf_terms', label: 'Terms & conditions', url: '/terms-and-conditions' },
   { id: 'cf_returns', label: 'Returns policy', url: '/shipping-returns' },

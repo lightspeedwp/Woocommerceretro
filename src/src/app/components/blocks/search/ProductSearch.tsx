@@ -1,56 +1,51 @@
-import React from 'react';
-import { MagnifyingGlass, X } from '@phosphor-icons/react';
-import * as ReactRouterModule from 'react-router';
-import * as CnModule from '../../../utils/cn';
-
-var useState = React.useState;
-var useNavigate = ReactRouterModule.useNavigate;
-var cn = CnModule.cn;
-
-/* ProductSearchProps: { placeholder, className, initialQuery } */
+import React, { useState } from 'react';
+import { MagnifyingGlass } from '@phosphor-icons/react';
+import { useNavigate } from 'react-router';
+import { cn } from '../../../utils/cn';
 
 /**
  * ProductSearch Block Component
- * 
+ *
  * Product search input with icon button and submit navigation.
  * Redirects to search results page with query parameter.
  */
-export function ProductSearch(props) {
-  var placeholder = props.placeholder || "Search for products...";
-  var className = props.className;
-  var initialQuery = props.initialQuery || '';
+export const ProductSearch = ({
+  placeholder = 'Search for products...',
+  className,
+  initialQuery = '',
+}: {
+  placeholder?: string;
+  className?: string;
+  initialQuery?: string;
+}) => {
+  const [query, setQuery] = useState(initialQuery);
+  const navigate = useNavigate();
 
-  var _q = useState(initialQuery);
-  var query = _q[0];
-  var setQuery = _q[1];
-  var navigate = useNavigate();
-
-  var handleSearch = function(e) {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
       navigate('/shop/search?q=' + encodeURIComponent(query));
     }
   };
 
-  return React.createElement('form', { 
-    onSubmit: handleSearch, 
-    className: cn("wp-block-product-search", className) 
-  },
-    React.createElement('div', { className: "wp-block-product-search__container" },
-      React.createElement('input', { 
-        type: "text", 
-        value: query,
-        onChange: function(e) { setQuery(e.target.value); },
-        placeholder: placeholder, 
-        className: "wp-block-product-search__input"
-      }),
-      React.createElement('button', { 
-        type: "submit",
-        className: "wp-block-product-search__submit",
-        'aria-label': "Search"
-      },
-        React.createElement(MagnifyingGlass, { size: 20 })
-      )
-    )
+  return (
+    <form onSubmit={handleSearch} className={cn('wp-block-product-search', className)}>
+      <div className="wp-block-product-search__container">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={placeholder}
+          className="wp-block-product-search__input"
+        />
+        <button
+          type="submit"
+          className="wp-block-product-search__submit"
+          aria-label="Search"
+        >
+          <MagnifyingGlass size={20} />
+        </button>
+      </div>
+    </form>
   );
-}
+};

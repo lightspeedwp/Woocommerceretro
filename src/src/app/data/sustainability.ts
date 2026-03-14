@@ -30,7 +30,7 @@
 /**
  * Sustainability Initiatives
  */
-export var sustainabilityInitiatives = [
+export const sustainabilityInitiatives = [
   {
     id: 'packaging',
     iconName: 'Recycle',
@@ -78,7 +78,7 @@ export var sustainabilityInitiatives = [
 /**
  * Environmental Impact Stats
  */
-export var sustainabilityStats = [
+export const sustainabilityStats = [
   { id: 'trees', value: '2M+', label: 'Trees Planted' },
   { id: 'water', value: '40%', label: 'Water Saved' },
   { id: 'plastics', value: '0', label: 'Single-Use Plastics' },
@@ -88,7 +88,7 @@ export var sustainabilityStats = [
 /**
  * 2030 Goals
  */
-export var sustainabilityGoals = [
+export const sustainabilityGoals = [
   {
     id: 'g1',
     text: 'Achieve 100% organic or recycled materials across all product lines',
@@ -114,7 +114,7 @@ export var sustainabilityGoals = [
 /**
  * Page-level content strings
  */
-export var sustainabilityPageContent = {
+export const sustainabilityPageContent = {
   title: 'Sustainability',
   description:
     'Our commitment to the planet is woven into everything we do - from sourcing to shipping.',

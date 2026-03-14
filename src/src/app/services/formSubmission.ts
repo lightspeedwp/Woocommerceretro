@@ -1,37 +1,34 @@
 /**
  * Form Submission Service
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. No async/await (uses Promises)
- * 4. ASCII only
+ *
+ * Handles form submissions with retry logic, UTM parameter enrichment,
+ * and timeout protection.
  */
 
-/**
- * @typedef FormSubmissionData
- * @property {string} name
- * @property {string} email
- * @property {string} message
- * @property {string} [formType]
- * @property {string} [sourceUrl]
- * @property {Object} [utmParams]
- * @property {string} [utmParams.source]
- * @property {string} [utmParams.medium]
- * @property {string} [utmParams.campaign]
- * @property {string} [utmParams.content]
- * @property {Object<string, any>} [metadata]
- */
+interface FormSubmissionData {
+  name: string;
+  email: string;
+  message: string;
+  formType?: string;
+  sourceUrl?: string;
+  utmParams?: {
+    source?: string;
+    medium?: string;
+    campaign?: string;
+    content?: string;
+  };
+  metadata?: Record<string, any>;
+  [key: string]: any;
+}
 
-/**
- * @typedef FormSubmissionResponse
- * @property {boolean} success
- * @property {string} message
- * @property {string} [submissionId]
- * @property {Array<string>} [errors]
- */
+interface FormSubmissionResponse {
+  success: boolean;
+  message: string;
+  submissionId?: string;
+  errors?: string[];
+}
 
-var API_CONFIG = {
+const API_CONFIG = {
   baseUrl: 'https://api.example.com',
   enquiryEndpoint: '/api/enquiry',
   newsletterEndpoint: '/api/newsletter',
@@ -40,39 +37,37 @@ var API_CONFIG = {
   retryDelay: 1000,
 };
 
-function extractUtmParams() {
+const extractUtmParams = () => {
   if (typeof window === 'undefined') return {};
-  var params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
   return {
     source: params.get('utm_source') || undefined,
     medium: params.get('utm_medium') || undefined,
     campaign: params.get('utm_campaign') || undefined,
     content: params.get('utm_content') || undefined,
   };
-}
+};
 
-function fetchWithTimeout(url, options, timeout) {
+const fetchWithTimeout = (url: string, options: RequestInit, timeout: number): Promise<Response> => {
   return Promise.race([
     fetch(url, options),
-    new Promise(function(_, reject) {
-      setTimeout(function() { reject(new Error('Request timeout')); }, timeout);
-    })
+    new Promise<never>((_, reject) => {
+      setTimeout(() => reject(new Error('Request timeout')), timeout);
+    }),
   ]);
-}
+};
 
-export function submitForm(data) {
-  var enrichedData = {};
-  var keys = Object.keys(data);
-  for (var i = 0; i < keys.length; i++) enrichedData[keys[i]] = data[keys[i]];
-  
+export const submitForm = (data: FormSubmissionData): Promise<FormSubmissionResponse> => {
+  const enrichedData: Record<string, any> = { ...data };
+
   if (typeof window !== 'undefined') {
     enrichedData.sourceUrl = window.location.href;
     enrichedData.utmParams = extractUtmParams();
   }
 
-  function attempt(retries) {
+  const attempt = (retries: number): Promise<FormSubmissionResponse> => {
     return fetchWithTimeout(
-      API_CONFIG.baseUrl + API_CONFIG.enquiryEndpoint,
+      `${API_CONFIG.baseUrl}${API_CONFIG.enquiryEndpoint}`,
       {
         method: 'POST',
         headers: {
@@ -82,47 +77,46 @@ export function submitForm(data) {
         body: JSON.stringify(enrichedData),
       },
       API_CONFIG.timeout
-    ).then(function(response) {
-      if (!response.ok) {
-        throw new Error('HTTP ' + response.status + ': ' + response.statusText);
-      }
-      return response.json();
-    }).then(function(result) {
-      return {
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((result) => ({
         success: true,
         message: result.message || 'Form submitted successfully',
         submissionId: result.id || result.submissionId,
-      };
-    }).catch(function(error) {
-      if (retries > 0 && !(error.message && error.message.indexOf('HTTP 4') !== -1)) {
-        return new Promise(function(resolve) {
-          setTimeout(function() { resolve(attempt(retries - 1)); }, API_CONFIG.retryDelay);
-        });
-      }
-      console.error('Form submission failed:', error);
-      return {
-        success: false,
-        message: 'Failed to submit form. Please try again later.',
-        errors: [error.message || 'Unknown error occurred'],
-      };
-    });
-  }
+      }))
+      .catch((error) => {
+        if (retries > 0 && !(error.message?.indexOf('HTTP 4') !== -1)) {
+          return new Promise<FormSubmissionResponse>((resolve) => {
+            setTimeout(() => resolve(attempt(retries - 1)), API_CONFIG.retryDelay);
+          });
+        }
+        console.error('Form submission failed:', error);
+        return {
+          success: false,
+          message: 'Failed to submit form. Please try again later.',
+          errors: [error.message || 'Unknown error occurred'],
+        };
+      });
+  };
 
   return attempt(API_CONFIG.retryAttempts);
-}
+};
 
-export function submitNewsletter(email, name) {
-  var body = {
-    email: email,
-    name: name,
-  };
+export const submitNewsletter = (email: string, name?: string): Promise<FormSubmissionResponse> => {
+  const body: Record<string, any> = { email, name };
+
   if (typeof window !== 'undefined') {
     body.sourceUrl = window.location.href;
     body.utmParams = extractUtmParams();
   }
 
   return fetchWithTimeout(
-    API_CONFIG.baseUrl + API_CONFIG.newsletterEndpoint,
+    `${API_CONFIG.baseUrl}${API_CONFIG.newsletterEndpoint}`,
     {
       method: 'POST',
       headers: {
@@ -132,32 +126,33 @@ export function submitNewsletter(email, name) {
       body: JSON.stringify(body),
     },
     API_CONFIG.timeout
-  ).then(function(response) {
-    if (!response.ok) {
-      throw new Error('HTTP ' + response.status + ': ' + response.statusText);
-    }
-    return response.json();
-  }).then(function(result) {
-    return {
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((result) => ({
       success: true,
       message: result.message || 'Successfully subscribed to newsletter',
       submissionId: result.id,
-    };
-  }).catch(function(error) {
-    console.error('Newsletter signup failed:', error);
-    return {
-      success: false,
-      message: 'Failed to subscribe. Please try again later.',
-      errors: [error.message],
-    };
-  });
-}
+    }))
+    .catch((error) => {
+      console.error('Newsletter signup failed:', error);
+      return {
+        success: false,
+        message: 'Failed to subscribe. Please try again later.',
+        errors: [error.message],
+      };
+    });
+};
 
-export function submitFormMock(data) {
+export const submitFormMock = (data: FormSubmissionData): Promise<FormSubmissionResponse> => {
   console.log('Mock Form Submission:', data);
-  
-  return new Promise(function(resolve) {
-    setTimeout(function() {
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
       if (Math.random() < 0.1) {
         resolve({
           success: false,
@@ -168,30 +163,30 @@ export function submitFormMock(data) {
         resolve({
           success: true,
           message: 'Form submitted successfully (mock)',
-          submissionId: 'mock-' + Date.now(),
+          submissionId: `mock-${Date.now()}`,
         });
       }
     }, 1500);
   });
-}
+};
 
-export function isValidEmail(email) {
-  var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+export const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
-}
+};
 
-export function sanitizeInput(input) {
+export const sanitizeInput = (input: string): string => {
   if (!input) return '';
   return input
     .trim()
     .replace(/[<>]/g, '')
     .substring(0, 5000);
-}
+};
 
 export default {
-  submitForm: submitForm,
-  submitNewsletter: submitNewsletter,
-  submitFormMock: submitFormMock,
-  isValidEmail: isValidEmail,
-  sanitizeInput: sanitizeInput,
+  submitForm,
+  submitNewsletter,
+  submitFormMock,
+  isValidEmail,
+  sanitizeInput,
 };

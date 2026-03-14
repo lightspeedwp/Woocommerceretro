@@ -1,0 +1,131 @@
+/**
+ * Help Center Retro - Page-Specific Styles
+ *
+ * Retro handheld gaming aesthetic for help center page.
+ *
+ * **Components:**
+ * - Help category link cards
+ * - Popular articles list
+ * - Contact cards
+ *
+ * **Dark Mode:** Automatic via CSS variable inheritance
+ * **WCAG:** All text meets AA contrast (4.5:1 minimum)
+ */
+
+/* ==========================================================================
+   HELP CATEGORY CARDS (Link Cards)
+   ========================================================================== */
+
+.retro-help-category-card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retro-help-category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 255, 249, 0.2);
+}
+
+.retro-help-category-card:focus-visible {
+  outline: 2px solid var(--retro-neon-cyan);
+  outline-offset: 2px;
+}
+
+.retro-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--retro-space-1);
+  color: var(--retro-neon-cyan);
+  font-size: var(--retro-text-xs);
+  margin-top: auto;
+  padding-top: var(--retro-space-4);
+  transition: gap 0.2s ease;
+}
+
+.retro-help-category-card:hover .retro-card-link {
+  gap: var(--retro-space-2);
+}
+
+/* ==========================================================================
+   POPULAR ARTICLES SECTION
+   ========================================================================== */
+
+.retro-section--articles {
+  padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
+}
+
+.retro-articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-2);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.retro-article-link {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-3);
+  padding: var(--retro-space-4);
+  background: var(--retro-bg-elevated);
+  border: 1px solid rgba(0, 255, 249, 0.15);
+  color: var(--retro-text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.retro-article-link:hover {
+  border-color: var(--retro-neon-cyan);
+  background: rgba(0, 255, 249, 0.05);
+}
+
+.retro-article-link:focus-visible {
+  outline: 2px solid var(--retro-neon-cyan);
+  outline-offset: 2px;
+}
+
+.retro-article-icon {
+  color: var(--retro-neon-cyan);
+  flex-shrink: 0;
+}
+
+.retro-article-arrow {
+  color: var(--retro-text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.retro-article-link:hover .retro-article-arrow {
+  color: var(--retro-neon-cyan);
+}
+
+/* ==========================================================================
+   CONTACT CARDS
+   ========================================================================== */
+
+.retro-contact-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.retro-contact-card .retro-button {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .retro-article-link {
+    padding: var(--retro-space-3);
+    font-size: var(--retro-text-sm);
+  }
+}

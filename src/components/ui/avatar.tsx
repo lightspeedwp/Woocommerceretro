@@ -6,9 +6,9 @@ import {
 } from "../../src/app/components/blocks/display/Avatar";
 
 // Re-export component
-var Avatar = NewAvatar;
-var AvatarImage = NewAvatarImage;
-var AvatarFallback = NewAvatarFallback;
+const Avatar = NewAvatar;
+const AvatarImage = NewAvatarImage;
+const AvatarFallback = NewAvatarFallback;
 
 /**
  * Legacy Avatar compatibility shim.

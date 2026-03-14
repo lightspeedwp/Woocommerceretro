@@ -1,114 +1,138 @@
 import React from 'react';
-import * as GroupModule from '../../blocks/design/Group';
-import * as ButtonsModule from '../../blocks/design/Buttons';
+import { Group } from '../../blocks/design/Group';
+import { Button } from '../../blocks/design/Buttons';
 
-var Group = GroupModule.Group;
-var Button = ButtonsModule.Button;
-
-// HeroSectionProps structure
-// - heading?: string
-// - headingLevel?: 1 | 2 | 3 | 4 | 5 | 6
-// - subheading?: string
-// - content?: React.ReactNode
-// - cta?: { label: string, href: string, variant?: string }
-// - secondaryCta?: { label: string, href: string, variant?: string }
-// - backgroundImage?: string
-// - backgroundAttachment?: 'scroll' | 'fixed'
-// - backgroundOverlay?: number
-// - textColor?: 'white' | 'black'
-// - minHeight?: '50vh' | '60vh' | '80vh' | '100vh'
-// - centered?: boolean
-// - id?: string
-// - className?: string
-// - ariaLabel?: string
-// - children?: React.ReactNode
+interface HeroSectionProps {
+  heading?: string;
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  subheading?: string;
+  content?: React.ReactNode;
+  cta?: { label: string; href: string; variant?: string };
+  secondaryCta?: { label: string; href: string; variant?: string };
+  backgroundImage?: string;
+  backgroundAttachment?: 'scroll' | 'fixed';
+  backgroundOverlay?: number;
+  textColor?: 'white' | 'black';
+  minHeight?: '50vh' | '60vh' | '80vh' | '100vh';
+  centered?: boolean;
+  id?: string;
+  className?: string;
+  ariaLabel?: string;
+  children?: React.ReactNode;
+}
 
 /**
  * Hero Section Pattern Component
  */
-export function HeroSection(props) {
-  var heading = props.heading;
-  var headingLevel = props.headingLevel === undefined ? 1 : props.headingLevel;
-  var subheading = props.subheading;
-  var content = props.content;
-  var cta = props.cta;
-  var secondaryCta = props.secondaryCta;
-  var backgroundImage = props.backgroundImage;
-  var backgroundAttachment = props.backgroundAttachment || 'scroll';
-  var backgroundOverlay = props.backgroundOverlay === undefined ? 0.5 : props.backgroundOverlay;
-  var textColor = props.textColor;
-  var minHeight = props.minHeight;
-  var centered = props.centered === undefined ? true : props.centered;
-  var id = props.id;
-  var className = props.className;
-  var ariaLabel = props.ariaLabel;
-  var children = props.children;
+export const HeroSection = ({
+  heading,
+  headingLevel = 1,
+  subheading,
+  content,
+  cta,
+  secondaryCta,
+  backgroundImage,
+  backgroundAttachment = 'scroll',
+  backgroundOverlay = 0.5,
+  textColor,
+  minHeight,
+  centered = true,
+  id,
+  className,
+  ariaLabel,
+  children,
+}: HeroSectionProps) => {
+  const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 
-  var HeadingTag = "h" + headingLevel;
-  
-  var minHeightClass = minHeight ? ("wp-hero-section--" + minHeight) : '';
-  var textColorClass = textColor === 'white' ? 'wp-hero-section--white' : textColor === 'black' ? 'wp-hero-section--black' : '';
-  var centeredClass = centered ? 'wp-hero-section--centered' : '';
-  var attachmentClass = backgroundAttachment === 'fixed' ? 'wp-hero-section--fixed-bg' : '';
-  
-  var groupClass = "wp-hero-section " + minHeightClass + " " + centeredClass + " " + textColorClass + " " + attachmentClass + " " + (className || "") + " " + (backgroundImage ? 'wp-hero-section--has-background' : '');
+  const minHeightClass = minHeight ? `wp-hero-section--${minHeight}` : '';
+  const textColorClass = textColor === 'white' ? 'wp-hero-section--white' : textColor === 'black' ? 'wp-hero-section--black' : '';
+  const centeredClass = centered ? 'wp-hero-section--centered' : '';
+  const attachmentClass = backgroundAttachment === 'fixed' ? 'wp-hero-section--fixed-bg' : '';
+  const bgClass = backgroundImage ? 'wp-hero-section--has-background' : '';
 
-  var renderBackground = function() {
+  const groupClass = `wp-hero-section ${minHeightClass} ${centeredClass} ${textColorClass} ${attachmentClass} ${className || ''} ${bgClass}`;
+
+  const renderBackground = () => {
     if (!backgroundImage) return null;
-    return React.createElement(React.Fragment, null,
-      React.createElement('div', { 
-        className: "wp-hero-section__background-image",
-        style: {
-          backgroundImage: "url(" + backgroundImage + ")",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }
-      }),
-      React.createElement('div', { 
-        className: "wp-hero-section__overlay",
-        style: { opacity: backgroundOverlay }
-      })
+    return (
+      <>
+        <div
+          className="wp-hero-section__background-image"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div
+          className="wp-hero-section__overlay"
+          style={{ opacity: backgroundOverlay }}
+        />
+      </>
     );
   };
 
-  var renderCTA = function() {
+  const renderCTA = () => {
     if (!cta && !secondaryCta) return null;
-    return React.createElement('div', { className: "wp-hero-section__cta-wrapper " + (centered ? 'wp-hero-section__cta-wrapper--centered' : '') },
-      cta ? React.createElement(Button, { 
-        variant: cta.variant || 'primary',
-        size: "lg",
-        to: cta.href && cta.href.indexOf('/') === 0 ? cta.href : undefined,
-        href: cta.href && cta.href.indexOf('/') !== 0 ? cta.href : undefined
-      }, cta.label) : null,
-      secondaryCta ? React.createElement(Button, { 
-        variant: secondaryCta.variant || 'outline',
-        size: "lg",
-        to: secondaryCta.href && secondaryCta.href.indexOf('/') === 0 ? secondaryCta.href : undefined,
-        href: secondaryCta.href && secondaryCta.href.indexOf('/') !== 0 ? secondaryCta.href : undefined
-      }, secondaryCta.label) : null
+    return (
+      <div className={`wp-hero-section__cta-wrapper ${centered ? 'wp-hero-section__cta-wrapper--centered' : ''}`}>
+        {cta && (
+          <Button
+            variant={cta.variant || 'primary'}
+            size="lg"
+            to={cta.href?.startsWith('/') ? cta.href : undefined}
+            href={cta.href && !cta.href.startsWith('/') ? cta.href : undefined}
+          >
+            {cta.label}
+          </Button>
+        )}
+        {secondaryCta && (
+          <Button
+            variant={secondaryCta.variant || 'outline'}
+            size="lg"
+            to={secondaryCta.href?.startsWith('/') ? secondaryCta.href : undefined}
+            href={secondaryCta.href && !secondaryCta.href.startsWith('/') ? secondaryCta.href : undefined}
+          >
+            {secondaryCta.label}
+          </Button>
+        )}
+      </div>
     );
   };
 
-  return React.createElement(Group, {
-    as: "section",
-    sectionStyle: "hero",
-    paddingPreset: "hero",
-    width: "full",
-    className: groupClass,
-    ariaLabel: ariaLabel,
-    id: id
-  },
-    renderBackground(),
-    React.createElement('div', { className: "wp-hero-section__container" },
-      React.createElement('div', { className: "wp-hero-section__content " + (backgroundImage ? 'wp-hero-section__content--relative' : '') + " " + (minHeight ? 'wp-hero-section__content--centered' : '') },
-        heading ? React.createElement(HeadingTag, { className: "wp-hero-section__heading " + (backgroundImage && textColor === 'white' ? 'wp-hero-section__heading--white' : '') }, heading) : null,
-        subheading ? React.createElement('p', { className: "wp-hero-section__subheading " + (centered ? 'wp-hero-section__subheading--centered' : '') + " " + (backgroundImage && textColor === 'white' ? 'wp-hero-section__subheading--white' : '') }, subheading) : null,
-        content ? React.createElement('div', { className: "wp-hero-section__content-block" }, content) : null,
-        children ? React.createElement('div', { className: "wp-hero-section__content-block" }, children) : null,
-        renderCTA()
-      )
-    )
+  const headingWhiteClass = backgroundImage && textColor === 'white' ? 'wp-hero-section__heading--white' : '';
+  const subheadingWhiteClass = backgroundImage && textColor === 'white' ? 'wp-hero-section__subheading--white' : '';
+
+  return (
+    <Group
+      as="section"
+      sectionStyle="hero"
+      paddingPreset="hero"
+      width="full"
+      className={groupClass}
+      ariaLabel={ariaLabel}
+      id={id}
+    >
+      {renderBackground()}
+      <div className="wp-hero-section__container">
+        <div className={`wp-hero-section__content ${backgroundImage ? 'wp-hero-section__content--relative' : ''} ${minHeight ? 'wp-hero-section__content--centered' : ''}`}>
+          {heading && (
+            <HeadingTag className={`wp-hero-section__heading ${headingWhiteClass}`}>
+              {heading}
+            </HeadingTag>
+          )}
+          {subheading && (
+            <p className={`wp-hero-section__subheading ${centered ? 'wp-hero-section__subheading--centered' : ''} ${subheadingWhiteClass}`}>
+              {subheading}
+            </p>
+          )}
+          {content && <div className="wp-hero-section__content-block">{content}</div>}
+          {children && <div className="wp-hero-section__content-block">{children}</div>}
+          {renderCTA()}
+        </div>
+      </div>
+    </Group>
   );
-}
+};
 
 HeroSection.displayName = 'HeroSection';

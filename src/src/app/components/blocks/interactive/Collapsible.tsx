@@ -1,101 +1,66 @@
 "use client";
 
-import * as React from "react";
-import * as cnModule from "@/utils/cn";
+import React, { createContext, useContext, useState } from "react";
+import { cn } from "@/utils/cn";
 
-var cn = cnModule.cn;
+interface CollapsibleContextValue {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
 
-var CollapsibleContext = React.createContext(undefined);
+const CollapsibleContext = createContext<CollapsibleContextValue | undefined>(undefined);
 
-var Collapsible = React.forwardRef(
-  function(props, ref) {
-    var controlledOpen = props.open;
-    var defaultOpen = props.defaultOpen === undefined ? false : props.defaultOpen;
-    var onOpenChange = props.onOpenChange;
-    var disabled = props.disabled;
-    var className = props.className;
-    var children = props.children;
-    var id = props.id;
-    var style = props.style;
+export const Collapsible = React.forwardRef<HTMLDivElement, any>(
+  ({ open: controlledOpen, defaultOpen = false, onOpenChange, disabled, className, children, id, style }, ref) => {
+    const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+    const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
 
-    var _uo = React.useState(defaultOpen);
-    var uncontrolledOpen = _uo[0];
-    var setUncontrolledOpen = _uo[1];
-    var open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
-
-    var handleOpenChange = function(newOpen) {
+    const handleOpenChange = (newOpen: boolean) => {
       if (disabled) return;
-      if (onOpenChange) {
-        onOpenChange(newOpen);
-      }
-      if (controlledOpen === undefined) {
-        setUncontrolledOpen(newOpen);
-      }
+      onOpenChange?.(newOpen);
+      if (controlledOpen === undefined) setUncontrolledOpen(newOpen);
     };
 
-    return React.createElement(CollapsibleContext.Provider, { value: { open: open, onOpenChange: handleOpenChange } },
-      React.createElement('div', {
-        ref: ref,
-        id: id,
-        style: style,
-        "data-state": open ? "open" : "closed",
-        className: cn("wp-block-collapsible", className)
-      }, children)
+    return (
+      <CollapsibleContext.Provider value={{ open, onOpenChange: handleOpenChange }}>
+        <div ref={ref} id={id} style={style} data-state={open ? "open" : "closed"} className={cn("wp-block-collapsible", className)}>
+          {children}
+        </div>
+      </CollapsibleContext.Provider>
     );
   }
 );
 Collapsible.displayName = "Collapsible";
 
-var CollapsibleTrigger = React.forwardRef(
-  function(props, ref) {
-    var className = props.className;
-    var children = props.children;
-    var onClick = props.onClick;
-    var id = props.id;
-    var style = props.style;
-
-    var context = React.useContext(CollapsibleContext);
+export const CollapsibleTrigger = React.forwardRef<HTMLButtonElement, any>(
+  ({ className, children, onClick, id, style }, ref) => {
+    const context = useContext(CollapsibleContext);
     if (!context) throw new Error("CollapsibleTrigger must be used within Collapsible");
 
-    return React.createElement('button', {
-      ref: ref,
-      id: id,
-      style: style,
-      type: "button",
-      "data-state": context.open ? "open" : "closed",
-      className: cn("wp-block-collapsible-trigger", className),
-      onClick: function(e) {
-        context.onOpenChange(!context.open);
-        if (onClick) {
-          onClick(e);
-        }
-      }
-    }, children);
+    return (
+      <button
+        ref={ref} id={id} style={style} type="button"
+        data-state={context.open ? "open" : "closed"}
+        className={cn("wp-block-collapsible-trigger", className)}
+        onClick={(e) => { context.onOpenChange(!context.open); onClick?.(e); }}
+      >
+        {children}
+      </button>
+    );
   }
 );
 CollapsibleTrigger.displayName = "CollapsibleTrigger";
 
-var CollapsibleContent = React.forwardRef(
-  function(props, ref) {
-    var className = props.className;
-    var children = props.children;
-    var id = props.id;
-    var style = props.style;
-
-    var context = React.useContext(CollapsibleContext);
+export const CollapsibleContent = React.forwardRef<HTMLDivElement, any>(
+  ({ className, children, id, style }, ref) => {
+    const context = useContext(CollapsibleContext);
     if (!context) throw new Error("CollapsibleContent must be used within Collapsible");
 
-    return React.createElement('div', {
-      ref: ref,
-      id: id,
-      style: style,
-      "data-state": context.open ? "open" : "closed",
-      className: cn("wp-block-collapsible-content", className)
-    },
-      React.createElement('div', { className: "wp-block-collapsible-content-inner" }, children)
+    return (
+      <div ref={ref} id={id} style={style} data-state={context.open ? "open" : "closed"} className={cn("wp-block-collapsible-content", className)}>
+        <div className="wp-block-collapsible-content-inner">{children}</div>
+      </div>
     );
   }
 );
 CollapsibleContent.displayName = "CollapsibleContent";
-
-export { Collapsible, CollapsibleTrigger, CollapsibleContent };

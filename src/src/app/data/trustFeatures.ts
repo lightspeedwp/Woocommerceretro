@@ -2,9 +2,8 @@
  * Trust Features Mock Data
  * 
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. ASCII characters only
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  * 
  * @typedef {Object} TrustFeature
  * @property {string} id
@@ -15,7 +14,7 @@
 
 import { ShieldCheck, Truck, CreditCard, Headphones, Medal as Award, ArrowsClockwise as RefreshCw, Lock, UserCircleCheck as UserCheck, Eye } from '@phosphor-icons/react';
 
-export var trustFeatures = [
+export const trustFeatures = [
   {
     id: 'secure',
     icon: ShieldCheck,
@@ -42,9 +41,9 @@ export var trustFeatures = [
   },
 ];
 
-export var extendedTrustFeatures = (function() {
-  var result = [];
-  for (var i = 0; i < trustFeatures.length; i++) {
+export const extendedTrustFeatures = (() => {
+  const result = [];
+  for (let i = 0; i < trustFeatures.length; i++) {
     result.push(trustFeatures[i]);
   }
   result.push({
@@ -62,7 +61,7 @@ export var extendedTrustFeatures = (function() {
   return result;
 })();
 
-export var loginTrustFeatures = [
+export const loginTrustFeatures = [
   {
     id: 'secure-account',
     icon: ShieldCheck,
@@ -93,9 +92,9 @@ export var loginTrustFeatures = [
  * @param {string[]} ids
  * @returns {Array}
  */
-export function getTrustFeaturesById(ids) {
-  var result = [];
-  for (var i = 0; i < extendedTrustFeatures.length; i++) {
+export const getTrustFeaturesById = (ids) => {
+  const result = [];
+  for (let i = 0; i < extendedTrustFeatures.length; i++) {
     if (ids.indexOf(extendedTrustFeatures[i].id) !== -1) {
       result.push(extendedTrustFeatures[i]);
     }
@@ -107,7 +106,7 @@ export function getTrustFeaturesById(ids) {
  * @param {string} context
  * @returns {Array}
  */
-export function getTrustFeaturesForContext(context) {
+export const getTrustFeaturesForContext = (context) => {
   if (context === 'checkout') {
     return getTrustFeaturesById(['secure', 'support', 'payment']);
   } else if (context === 'product') {

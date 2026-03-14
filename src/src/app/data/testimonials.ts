@@ -18,7 +18,7 @@
  */
 
 /** @type {Testimonial[]} */
-export var testimonials = [
+export const testimonials = [
   {
     id: 't-1',
     quote:
@@ -87,7 +87,7 @@ export var testimonials = [
  * @param {number} count Maximum testimonials to return (default 3).
  * @returns {Testimonial[]}
  */
-export function getTestimonials(count) {
+export const getTestimonials = (count) => {
   if (count === undefined) count = 3;
   return testimonials.slice(0, count);
 }

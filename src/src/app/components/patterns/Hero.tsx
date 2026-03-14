@@ -1,57 +1,51 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
-import * as TypographyModule from '../common/Typography';
-import * as ButtonsModule from '../blocks/design/Buttons';
-import * as BadgeModule from '../blocks/display/Badge';
-import * as HeroSectionModule from './sections/HeroSection';
-import * as ScrollDownArrowModule from '../common/ScrollDownArrow';
-import * as CnModule from '../../utils/cn';
+import { useNavigate } from 'react-router';
+import { Typography } from '../common/Typography';
+import { Button } from '../blocks/design/Buttons';
+import { Badge } from '../blocks/display/Badge';
+import { HeroSection } from './sections/HeroSection';
+import { ScrollDownArrow } from '../common/ScrollDownArrow';
+import { cn } from '../../utils/cn';
 
-var useNavigate = ReactRouterModule.useNavigate;
-var Typography = TypographyModule.Typography;
-var Button = ButtonsModule.Button;
-var Badge = BadgeModule.Badge;
-var HeroSection = HeroSectionModule.HeroSection;
-var ScrollDownArrow = ScrollDownArrowModule.ScrollDownArrow;
-var cn = CnModule.cn;
+interface HeroAction {
+  label: string;
+  onClick?: () => void;
+  href?: string;
+}
 
-// HeroProps structure
-// - title: string
-// - subtitle?: string
-// - badge?: { label: string, icon?: React.ComponentType }
-// - imageSrc?: string
-// - primaryAction?: { label: string, onClick?: () => void, href?: string }
-// - secondaryAction?: { label: string, onClick?: () => void, href?: string }
-// - overlayColor?: string
-// - align?: 'center' | 'left'
-// - height?: 'full' | 'large' | 'medium' | 'small'
-// - nextSectionId?: string
-// - className?: string
+interface HeroProps {
+  title: string;
+  subtitle?: string;
+  badge?: { label: string; icon?: React.ComponentType<{ size?: number }> };
+  imageSrc?: string;
+  primaryAction?: HeroAction;
+  secondaryAction?: HeroAction;
+  overlayColor?: string;
+  align?: 'center' | 'left';
+  height?: 'full' | 'large' | 'medium' | 'small';
+  nextSectionId?: string;
+  className?: string;
+}
 
 /**
  * Hero Block (Pattern)
- * Optimized for Figma Make parser:
- * 1. No JSX (Uses React.createElement)
- * 2. No spread operators
- * 3. No arrow functions
- * 4. No template literals
  */
-export function Hero(props) {
-  var title = props.title;
-  var subtitle = props.subtitle;
-  var badge = props.badge;
-  var imageSrc = props.imageSrc;
-  var primaryAction = props.primaryAction;
-  var secondaryAction = props.secondaryAction;
-  var overlayColor = props.overlayColor;
-  var align = props.align !== undefined ? props.align : 'center';
-  var height = props.height !== undefined ? props.height : 'large';
-  var nextSectionId = props.nextSectionId;
-  var className = props.className || '';
+export const Hero = ({
+  title,
+  subtitle,
+  badge,
+  imageSrc,
+  primaryAction,
+  secondaryAction,
+  overlayColor,
+  align = 'center',
+  height = 'large',
+  nextSectionId,
+  className = '',
+}: HeroProps) => {
+  const navigate = useNavigate();
 
-  var navigate = useNavigate();
-
-  function handlePrimaryClick() {
+  const handlePrimaryClick = () => {
     if (primaryAction) {
       if (primaryAction.onClick) {
         primaryAction.onClick();
@@ -59,9 +53,9 @@ export function Hero(props) {
         navigate(primaryAction.href);
       }
     }
-  }
+  };
 
-  function handleSecondaryClick() {
+  const handleSecondaryClick = () => {
     if (secondaryAction) {
       if (secondaryAction.onClick) {
         secondaryAction.onClick();
@@ -69,68 +63,59 @@ export function Hero(props) {
         navigate(secondaryAction.href);
       }
     }
-  }
+  };
 
-  var badgeElement = badge ? React.createElement(Badge, {
-    key: 'badge',
-    className: 'wp-hero__badge'
-  }, [
-    badge.icon ? React.createElement(badge.icon, { key: 'icon', size: 14 }) : null,
-    React.createElement('span', { key: 'label' }, badge.label)
-  ]) : null;
+  const BadgeIcon = badge?.icon;
 
-  var titleElement = React.createElement(Typography, {
-    key: 'title',
-    variant: 'h1',
-    className: 'wp-hero__title'
-  }, title);
-
-  var subtitleElement = subtitle ? React.createElement(Typography, {
-    key: 'subtitle',
-    variant: 'body',
-    className: 'wp-hero__subtitle'
-  }, subtitle) : null;
-
-  var primaryButton = primaryAction ? React.createElement(Button, {
-    key: 'primary',
-    variant: 'primary',
-    size: 'lg',
-    onClick: handlePrimaryClick,
-    className: 'wp-hero__cta-primary'
-  }, primaryAction.label) : null;
-
-  var secondaryButton = secondaryAction ? React.createElement(Button, {
-    key: 'secondary',
-    variant: 'outline',
-    size: 'lg',
-    onClick: handleSecondaryClick,
-    className: 'wp-hero__cta-secondary'
-  }, secondaryAction.label) : null;
-
-  var actions = (primaryAction || secondaryAction) ? React.createElement('div', {
-    key: 'actions',
-    className: 'wp-hero__actions'
-  }, [primaryButton, secondaryButton]) : null;
-
-  var scrollArrow = nextSectionId ? React.createElement(ScrollDownArrow, {
-    key: 'scroll',
-    targetId: nextSectionId,
-    className: 'wp-hero__scroll-indicator'
-  }) : null;
-
-  var content = React.createElement('div', {
-    className: cn('wp-hero__content', 'wp-hero__content--' + align)
-  }, [
-    badgeElement,
-    titleElement,
-    subtitleElement,
-    actions,
-    scrollArrow
-  ]);
-
-  return React.createElement(HeroSection, {
-    className: cn('wp-hero', 'wp-hero--' + height, className),
-    backgroundImage: imageSrc,
-    overlayColor: overlayColor
-  }, content);
+  return (
+    <HeroSection
+      className={cn('wp-hero', `wp-hero--${height}`, className)}
+      backgroundImage={imageSrc}
+      overlayColor={overlayColor}
+    >
+      <div className={cn('wp-hero__content', `wp-hero__content--${align}`)}>
+        {badge && (
+          <Badge className="wp-hero__badge">
+            {BadgeIcon && <BadgeIcon size={14} />}
+            <span>{badge.label}</span>
+          </Badge>
+        )}
+        <Typography variant="h1" className="wp-hero__title">
+          {title}
+        </Typography>
+        {subtitle && (
+          <Typography variant="body" className="wp-hero__subtitle">
+            {subtitle}
+          </Typography>
+        )}
+        {(primaryAction || secondaryAction) && (
+          <div className="wp-hero__actions">
+            {primaryAction && (
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={handlePrimaryClick}
+                className="wp-hero__cta-primary"
+              >
+                {primaryAction.label}
+              </Button>
+            )}
+            {secondaryAction && (
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={handleSecondaryClick}
+                className="wp-hero__cta-secondary"
+              >
+                {secondaryAction.label}
+              </Button>
+            )}
+          </div>
+        )}
+        {nextSectionId && (
+          <ScrollDownArrow targetId={nextSectionId} className="wp-hero__scroll-indicator" />
+        )}
+      </div>
+    </HeroSection>
+  );
 }

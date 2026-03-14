@@ -1,121 +1,38 @@
 import React from "react";
-import * as cnModule from "../../../utils/cn";
-var cn = cnModule.cn;
+import { cn } from "../../../utils/cn";
 
-/**
- * Card Components (Design Block)
- * 
- * Optimized for Figma Make parser:
- * 1. No spread operators
- * 2. No rest parameters
- * 3. Manual prop assignment
- * 4. No TypeScript syntax (no generics, no interfaces, no type annotations)
- */
-export function Card(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var onClick = props.onClick;
-  var style = props.style;
-
-  return React.createElement('div', {
-    'data-slot': 'card',
-    className: cn([
-      "wp-block-card",
-      className
-    ]),
-    id: id,
-    onClick: onClick,
-    style: style
-  }, children);
+interface CardPartProps {
+  className?: string;
+  children?: React.ReactNode;
+  id?: string;
+  onClick?: () => void;
+  style?: React.CSSProperties;
 }
 
-export function CardHeader(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
+export const Card = ({ className, children, id, onClick, style }: CardPartProps) => {
+  return <div data-slot="card" className={cn("wp-block-card", className)} id={id} onClick={onClick} style={style}>{children}</div>;
+};
 
-  return React.createElement('div', {
-    'data-slot': 'card-header',
-    className: cn([
-      "wp-block-card__header",
-      className
-    ]),
-    id: id,
-    style: style
-  }, children);
-}
+export const CardHeader = ({ className, children, id, style }: CardPartProps) => {
+  return <div data-slot="card-header" className={cn("wp-block-card__header", className)} id={id} style={style}>{children}</div>;
+};
 
-export function CardTitle(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
+export const CardTitle = ({ className, children, id, style }: CardPartProps) => {
+  return <h4 data-slot="card-title" className={cn("wp-block-card__title", className)} id={id} style={style}>{children}</h4>;
+};
 
-  return React.createElement('h4', {
-    'data-slot': 'card-title',
-    className: cn(["wp-block-card__title", className]),
-    id: id,
-    style: style
-  }, children);
-}
+export const CardDescription = ({ className, children, id, style }: CardPartProps) => {
+  return <p data-slot="card-description" className={cn("wp-block-card__description", className)} id={id} style={style}>{children}</p>;
+};
 
-export function CardDescription(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
+export const CardAction = ({ className, children, id, style }: CardPartProps) => {
+  return <div data-slot="card-action" className={cn("wp-block-card__action", className)} id={id} style={style}>{children}</div>;
+};
 
-  return React.createElement('p', {
-    'data-slot': 'card-description',
-    className: cn(["wp-block-card__description", className]),
-    id: id,
-    style: style
-  }, children);
-}
+export const CardContent = ({ className, children, id, style }: CardPartProps) => {
+  return <div data-slot="card-content" className={cn("wp-block-card__content", className)} id={id} style={style}>{children}</div>;
+};
 
-export function CardAction(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    'data-slot': 'card-action',
-    className: cn([
-      "wp-block-card__action",
-      className
-    ]),
-    id: id,
-    style: style
-  }, children);
-}
-
-export function CardContent(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    'data-slot': 'card-content',
-    className: cn(["wp-block-card__content", className]),
-    id: id,
-    style: style
-  }, children);
-}
-
-export function CardFooter(props) {
-  var className = props.className;
-  var children = props.children;
-  var id = props.id;
-  var style = props.style;
-
-  return React.createElement('div', {
-    'data-slot': 'card-footer',
-    className: cn(["wp-block-card__footer", className]),
-    id: id,
-    style: style
-  }, children);
-}
+export const CardFooter = ({ className, children, id, style }: CardPartProps) => {
+  return <div data-slot="card-footer" className={cn("wp-block-card__footer", className)} id={id} style={style}>{children}</div>;
+};

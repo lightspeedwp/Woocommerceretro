@@ -2,14 +2,13 @@
  * Checkout Data Mock Data
  * 
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No optional chaining
- * 3. ASCII only
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  */
 
 import { Truck, Lightning as Zap, Airplane as Plane, CreditCard, DeviceMobile as Smartphone, Wallet, Buildings as Building } from '@phosphor-icons/react';
 
-export var shippingMethods = [
+export const shippingMethods = [
   {
     id: 'standard',
     name: 'Standard shipping',
@@ -40,7 +39,7 @@ export var shippingMethods = [
   },
 ];
 
-export var paymentMethods = [
+export const paymentMethods = [
   {
     id: 'card',
     name: 'Credit/Debit card',
@@ -76,7 +75,7 @@ export var paymentMethods = [
   },
 ];
 
-export var countries = [
+export const countries = [
   {
     code: 'US',
     name: 'United States',
@@ -141,7 +140,7 @@ export var countries = [
   },
 ];
 
-export var billingFormFields = [
+export const billingFormFields = [
   {
     id: 'firstName',
     name: 'firstName',
@@ -245,55 +244,55 @@ export var billingFormFields = [
   },
 ];
 
-export function getShippingMethodById(id: string) {
-  for (var i = 0; i < shippingMethods.length; i++) {
+export const getShippingMethodById = (id) => {
+  for (let i = 0; i < shippingMethods.length; i++) {
     if (shippingMethods[i].id === id) return shippingMethods[i];
   }
   return undefined;
 }
 
-export function calculateShippingCost(methodId: string, orderTotal: number) {
-  var method = getShippingMethodById(methodId);
+export const calculateShippingCost = (methodId, orderTotal) => {
+  const method = getShippingMethodById(methodId);
   if (!method) return 0;
   return orderTotal >= method.freeThreshold ? 0 : method.cost;
 }
 
-export function getRecommendedShippingMethod() {
-  for (var i = 0; i < shippingMethods.length; i++) {
+export const getRecommendedShippingMethod = () => {
+  for (let i = 0; i < shippingMethods.length; i++) {
     if (shippingMethods[i].recommended) return shippingMethods[i];
   }
   return undefined;
 }
 
-export function getPaymentMethodById(id: string) {
-  for (var i = 0; i < paymentMethods.length; i++) {
+export const getPaymentMethodById = (id) => {
+  for (let i = 0; i < paymentMethods.length; i++) {
     if (paymentMethods[i].id === id) return paymentMethods[i];
   }
   return undefined;
 }
 
-export function getEnabledPaymentMethods() {
-  var result = [];
-  for (var i = 0; i < paymentMethods.length; i++) {
+export const getEnabledPaymentMethods = () => {
+  const result = [];
+  for (let i = 0; i < paymentMethods.length; i++) {
     if (paymentMethods[i].enabled) result.push(paymentMethods[i]);
   }
   return result;
 }
 
-export function getCountryByCode(code: string) {
-  for (var i = 0; i < countries.length; i++) {
+export const getCountryByCode = (code) => {
+  for (let i = 0; i < countries.length; i++) {
     if (countries[i].code === code) return countries[i];
   }
   return undefined;
 }
 
-export function getStatesForCountry(countryCode: string) {
-  var country = getCountryByCode(countryCode);
+export const getStatesForCountry = (countryCode) => {
+  const country = getCountryByCode(countryCode);
   return (country && (country as any).states) ? (country as any).states : [];
 }
 
-export function isShippingAvailable(countryCode: string) {
-  var country = getCountryByCode(countryCode);
+export const isShippingAvailable = (countryCode) => {
+  const country = getCountryByCode(countryCode);
   return (country && (country as any).shippingAvailable) ? true : false;
 }
 

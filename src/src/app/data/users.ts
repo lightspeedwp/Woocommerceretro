@@ -4,9 +4,8 @@
  * Mock user/author data for WordPress.
  * 
  * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No spread operators
- * 3. ASCII characters only
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  * 
  * @typedef {Object} User
  * @property {number} id
@@ -22,7 +21,7 @@
  * @property {string} [social.website]
  */
 
-export var USERS = [
+export const USERS = [
   {
     id: 1,
     name: 'Alex Morgan',
@@ -79,8 +78,8 @@ export var USERS = [
  * @param {number} id
  * @returns {Object|undefined}
  */
-export function getUserById(id) {
-  for (var i = 0; i < USERS.length; i++) {
+export const getUserById = (id) => {
+  for (let i = 0; i < USERS.length; i++) {
     if (USERS[i].id === id) return USERS[i];
   }
   return undefined;

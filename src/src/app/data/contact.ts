@@ -17,18 +17,16 @@
  * @property {string} answer
  */
 
-import * as SiteModule from './site';
+import { brand } from './site';
 
-var brand = SiteModule.brand;
-
-export var contactInfo = {
+export const contactInfo = {
   email: brand.supportEmail,
   phone: brand.phone,
-  address: brand.address.street + ', ' + brand.address.city + ' ' + brand.address.state + ' ' + brand.address.postcode + ' ' + brand.address.country,
+  address: `${brand.address.street}, ${brand.address.city} ${brand.address.state} ${brand.address.postcode} ${brand.address.country}`,
   hours: "Mon-Fri from 9am to 5pm EST"
 };
 
-export var contactFAQs = [
+export const contactFAQs = [
   {
     id: '1',
     question: 'What are your shipping options?',

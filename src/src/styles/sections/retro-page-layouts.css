@@ -1,0 +1,796 @@
+/**
+ * Retro Page Layouts CSS
+ * Styles for PlayPocket retro theme page layouts:
+ * - Wishlist, Search Results, Account, Compare, Not Found, Single Post
+ */
+
+/* ========================================
+   SHARED RETRO LAYOUT TOKENS
+   ======================================== */
+
+.retro-title-banner {
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* ========================================
+   WISHLIST LAYOUT
+   ======================================== */
+
+.retro-wishlist-layout {
+  padding: 2rem 1rem;
+  min-height: 60vh;
+}
+
+.retro-wishlist-layout__banner {
+  justify-content: center;
+}
+
+.retro-wishlist-layout__title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.retro-wishlist-layout__empty {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.retro-wishlist-layout__empty-text {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.retro-wishlist-layout__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.retro-wishlist-layout__card {
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0px var(--color-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.retro-wishlist-layout__card-image-link {
+  border-bottom: 2px solid var(--color-ink);
+  height: 250px;
+  overflow: hidden;
+  display: block;
+}
+
+.retro-wishlist-layout__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.retro-wishlist-layout__card-details {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.retro-wishlist-layout__card-name {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.retro-wishlist-layout__card-price {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.retro-wishlist-layout__card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.retro-wishlist-layout__add-btn {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.retro-wishlist-layout__remove-btn {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
+   SEARCH RESULTS LAYOUT
+   ======================================== */
+
+.retro-search-results-layout {
+  padding: 2rem 1rem;
+  min-height: 60vh;
+}
+
+.retro-search-results-layout__banner {
+  justify-content: flex-start;
+}
+
+.retro-search-results-layout__title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.retro-search-results-layout__count {
+  margin-left: auto;
+  font-size: 1.25rem;
+}
+
+.retro-search-results-layout__empty {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.retro-search-results-layout__empty-text {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.retro-search-results-layout__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.retro-search-results-layout__card {
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0px var(--color-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.retro-search-results-layout__card-image-link {
+  border-bottom: 2px solid var(--color-ink);
+  height: 250px;
+  overflow: hidden;
+  display: block;
+}
+
+.retro-search-results-layout__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.retro-search-results-layout__card-details {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.retro-search-results-layout__card-name {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.retro-search-results-layout__card-price {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.retro-search-results-layout__card-actions {
+  margin-top: auto;
+}
+
+.retro-search-results-layout__add-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* ========================================
+   ACCOUNT LAYOUT
+   ======================================== */
+
+.retro-account-layout {
+  padding: 4rem 1rem;
+  min-height: 70vh;
+}
+
+.retro-account-layout__header {
+  margin-bottom: 3rem;
+  border-bottom: 4px solid var(--color-ink);
+  padding-bottom: 1rem;
+}
+
+.retro-account-layout__title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.retro-account-layout__content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.retro-account-layout__sidebar {
+  flex: 1 1 250px;
+  max-width: 300px;
+  border: 4px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 6px 6px 0px var(--color-ink);
+  padding: 1.5rem;
+  align-self: flex-start;
+}
+
+.retro-account-layout__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.retro-account-layout__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  background: transparent;
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.retro-account-layout__nav-link:hover {
+  background: var(--color-panel);
+}
+
+.retro-account-layout__nav-link--active {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-account-layout__nav-link--active:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-account-layout__nav-link--logout {
+  border-color: transparent;
+}
+
+.retro-account-layout__nav-divider {
+  border: none;
+  border-top: 2px dashed var(--color-ink);
+  margin: 1rem 0;
+}
+
+.retro-account-layout__main {
+  flex: 3 1 500px;
+  background: var(--color-paper);
+  border: 4px solid var(--color-ink);
+  padding: 2rem;
+}
+
+/* ========================================
+   DASHBOARD RETRO — My Account Dashboard
+   BEM: .retro-dashboard__*
+   ======================================== */
+
+.retro-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.retro-dashboard__welcome {
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: 1.5rem;
+}
+
+.retro-dashboard__welcome-title {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.retro-dashboard__welcome-subtitle {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.retro-dashboard__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.retro-dashboard__stat-card {
+  border: 2px dashed var(--color-ink);
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--color-paper-dark, var(--color-panel));
+}
+
+.retro-dashboard__stat-icon {
+  margin-bottom: 0.5rem;
+}
+
+.retro-dashboard__stat-label {
+  margin: 0 0 0.5rem 0;
+}
+
+.retro-dashboard__stat-bar {
+  height: 24px;
+  border: 2px solid var(--color-ink);
+  background: transparent;
+  padding: 2px;
+}
+
+.retro-dashboard__stat-bar-fill {
+  height: 100%;
+  background: var(--color-ink);
+}
+
+.retro-dashboard__stat-value {
+  font-size: 2rem;
+}
+
+.retro-dashboard__activity-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-dashboard__activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.retro-dashboard__activity-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 2px solid var(--color-ink);
+  padding: 1rem;
+  background: var(--color-paper-dark, var(--color-panel));
+}
+
+.retro-dashboard__activity-icon {
+  padding: 0.5rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+}
+
+.retro-dashboard__activity-body {
+  flex: 1;
+}
+
+.retro-dashboard__activity-detail {
+  font-size: 0.875rem;
+}
+
+/* ========================================
+   ORDERS RETRO — My Account Orders List
+   BEM: .retro-orders__*
+   ======================================== */
+
+.retro-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.retro-orders__header {
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: 1.5rem;
+}
+
+.retro-orders__title {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.retro-orders__subtitle {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.retro-orders__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.retro-orders__card {
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper-dark, var(--color-panel));
+  padding: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.retro-orders__card-info {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.retro-orders__card-icon {
+  padding: 1rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+}
+
+.retro-orders__card-id {
+  font-size: 1.25rem;
+}
+
+.retro-orders__card-meta {
+  margin: 0.25rem 0;
+}
+
+.retro-orders__card-total {
+  font-size: 1.125rem;
+}
+
+.retro-orders__card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.retro-orders__status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  padding: 0.5rem 1rem;
+  border: 2px dashed var(--color-ink);
+}
+
+.retro-orders__track-link {
+  text-decoration: none;
+}
+
+/* ========================================
+   COMPARE LAYOUT
+   ======================================== */
+
+.retro-compare-layout {
+  padding: 4rem 1rem;
+  min-height: 60vh;
+}
+
+.retro-compare-layout__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.retro-compare-layout__header svg {
+  margin-bottom: 1rem;
+}
+
+.retro-compare-layout__title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.retro-compare-layout__subtitle {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.retro-compare-layout__table-wrapper {
+  overflow-x: auto;
+}
+
+.retro-compare-layout__table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  border: 4px solid var(--color-ink);
+  background: var(--color-paper);
+}
+
+.retro-compare-layout__th {
+  padding: 1.5rem;
+  border-bottom: 4px solid var(--color-ink);
+  text-align: center;
+  width: 40%;
+}
+
+.retro-compare-layout__th--label {
+  width: 20%;
+  border-right: 2px solid var(--color-ink);
+}
+
+.retro-compare-layout__th--bordered {
+  border-right: 2px solid var(--color-ink);
+}
+
+.retro-compare-layout__product-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.retro-compare-layout__product-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid var(--color-ink);
+}
+
+.retro-compare-layout__product-name {
+  font-size: 1.25rem;
+}
+
+.retro-compare-layout__product-price {
+  font-size: 1.25rem;
+}
+
+.retro-compare-layout__add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.retro-compare-layout__td {
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--color-ink);
+  text-align: center;
+  font-size: 1.125rem;
+}
+
+.retro-compare-layout__td--label {
+  border-right: 2px solid var(--color-ink);
+  background: var(--color-paper-deep);
+  text-align: left;
+}
+
+.retro-compare-layout__td--bordered {
+  border-right: 2px solid var(--color-ink);
+}
+
+.retro-compare-layout__td--last {
+  border-bottom: none;
+}
+
+/* Compare: empty state */
+.retro-compare-layout__empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 3px dashed var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-paper-deep);
+}
+
+.retro-compare-layout__empty-title {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+.retro-compare-layout__empty-desc {
+  margin: 0 0 2rem;
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.retro-compare-layout__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.retro-compare-layout__icon {
+  color: var(--color-ink);
+}
+
+.retro-compare-layout__icon--yes {
+  color: var(--color-success);
+}
+
+.retro-compare-layout__icon--no {
+  color: var(--color-alert);
+}
+
+.retro-compare-layout__product-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retro-compare-layout__remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-alert);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  padding: 0.25rem;
+}
+
+.retro-compare-layout__remove-btn:hover {
+  text-decoration: underline;
+}
+
+.retro-compare-layout__product-price--original {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+.retro-compare-layout__product-price--sale {
+  color: var(--color-alert);
+  font-weight: 700;
+}
+
+/* ========================================
+   NOT FOUND LAYOUT
+   ======================================== */
+
+.retro-not-found-layout {
+  padding: 6rem 1rem;
+  text-align: center;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.retro-not-found-layout__title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.retro-not-found-layout__desc {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* ========================================
+   SINGLE POST LAYOUT
+   ======================================== */
+
+.retro-single-post-layout {
+  padding: 2rem 0;
+  min-height: 60vh;
+}
+
+.retro-single-post-layout__back {
+  margin-bottom: 2rem;
+}
+
+.retro-single-post-layout__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.retro-single-post-layout__back-link:hover {
+  text-decoration: underline;
+}
+
+.retro-single-post-layout__header {
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.retro-single-post-layout__title {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.retro-single-post-layout__meta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.retro-single-post-layout__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+}
+
+.retro-single-post-layout__featured-image {
+  margin-bottom: 2rem;
+  border: 2px solid var(--color-ink);
+  overflow: hidden;
+  box-shadow: 4px 4px 0px var(--color-ink);
+}
+
+.retro-single-post-layout__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.retro-post-content {
+  line-height: 1.7;
+  font-size: 1.0625rem;
+  margin-bottom: 3rem;
+}
+
+.retro-post-content p {
+  margin-bottom: 1.5rem;
+}
+
+.retro-post-content h2,
+.retro-post-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.retro-single-post-layout__author-box {
+  border: 2px solid var(--color-ink);
+  background: var(--color-panel);
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  box-shadow: 4px 4px 0px var(--color-ink);
+  margin-bottom: 3rem;
+}
+
+.retro-single-post-layout__author-avatar {
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--color-paper);
+}
+
+.retro-single-post-layout__author-name {
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.retro-single-post-layout__author-bio {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--color-ink);
+}

@@ -1,0 +1,328 @@
+/* ============================================
+   RETRO THEME — PlayPocket Design System
+   
+   Single source of truth for all retro theme
+   color tokens, with automatic dark mode via
+   the .dark class on <html>.
+   
+   Light mode: warm paper/ink aesthetic
+   Dark mode: cool dark panel with soft text
+   
+   WCAG AA 2.2 contrast ratios enforced.
+   ============================================ */
+
+/* ========================================
+   LIGHT MODE (default)
+   ======================================== */
+
+:root,
+.theme-retro,
+.retro-home,
+.retro-shop {
+  /* Core surfaces */
+  --color-ink: #1E2630;
+  --color-paper: #F2EEE6;
+  --color-paper-deep: #E6E0D3;
+  --color-panel: #DDD6C8;
+  --color-panel-alt: #D4CCBC;
+  --color-inset: #CBC3B3;
+
+  /* Text */
+  --color-text: #1E2630;
+  --color-text-soft: #3D4A56;
+  --color-text-muted: #6B7A89;
+  --color-muted: #6B7A89;
+
+  /* Lines & borders */
+  --color-border: #C4BAA8;
+  --color-border-soft: #D4CCBC;
+  --color-border-strong: #1E2630;
+
+  /* Accent palette */
+  --color-screen: #6B8E7B;
+  --color-screen-strong: #4A7A5E;
+  --color-signal: #0055AA;
+  --color-signal-hover: #004499;
+  --color-alert: #C0533A;
+  --color-success: #2E7D32;
+  --color-warning: #E65100;
+  --color-coral: #C0533A;
+  --color-sky: #1565C0;
+  --color-berry: #7B1FA2;
+  --color-olive: #558B2F;
+
+  /* Interaction */
+  --color-focus: #0055AA;
+  --color-link: #0055AA;
+  --color-link-hover: #003D7A;
+  --shadow-retro: 3px 3px 0 var(--color-border);
+  --shadow-retro-sm: 2px 2px 0 var(--color-border);
+  --shadow-retro-lg: 6px 6px 0 var(--color-border);
+  --shadow-retro-hover: 1px 1px 0 var(--color-border);
+  --shadow-retro-active: 0 0 0 var(--color-border);
+
+  /* Typography */
+  --font-display: "Silkscreen", monospace;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout */
+  --retro-border-width: 3px;
+  --retro-radius: 0;
+
+  /* Apply base styles */
+  font-family: var(--font-body);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   DARK MODE
+   Triggered by .dark class on <html>
+   ======================================== */
+
+:root.dark,
+.dark,
+.dark .theme-retro,
+.dark .retro-home,
+.dark .retro-shop,
+.dark.theme-retro,
+.dark.retro-home,
+.dark.retro-shop {
+  /* Core surfaces */
+  --color-ink: #E8E2D8;
+  --color-paper: #151A1E;
+  --color-paper-deep: #1C2228;
+  --color-panel: #232A32;
+  --color-panel-alt: #2A333C;
+  --color-inset: #11161A;
+
+  /* Text */
+  --color-text: #E8E2D8;
+  --color-text-soft: #C4CBC3;
+  --color-text-muted: #8A9499;
+  --color-muted: #8A9499;
+
+  /* Lines & borders */
+  --color-border: #3E4A52;
+  --color-border-soft: #2E3840;
+  --color-border-strong: #C4CBC3;
+
+  /* Accent palette (lightened for dark bg) */
+  --color-screen: #8DA89D;
+  --color-screen-strong: #A7C0B6;
+  --color-signal: #5DA0E0;
+  --color-signal-hover: #7DB8F0;
+  --color-alert: #E08A72;
+  --color-success: #7EA17A;
+  --color-warning: #E4A84C;
+  --color-coral: #D08A72;
+  --color-sky: #8AAFC0;
+  --color-berry: #A083A6;
+  --color-olive: #A0AE73;
+
+  /* Interaction */
+  --color-focus: #5DA0E0;
+  --color-link: #5DA0E0;
+  --color-link-hover: #7DB8F0;
+  --shadow-retro: 3px 3px 0 rgba(0,0,0,0.4);
+  --shadow-retro-sm: 2px 2px 0 rgba(0,0,0,0.3);
+  --shadow-retro-lg: 6px 6px 0 rgba(0,0,0,0.5);
+  --shadow-retro-hover: 1px 1px 0 rgba(0,0,0,0.3);
+  --shadow-retro-active: 0 0 0 rgba(0,0,0,0.3);
+
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* ========================================
+   UTILITY CLASSES — retro typography
+   ======================================== */
+
+.retro-font-display { font-family: var(--font-display); }
+.retro-font-body { font-family: var(--font-body); }
+.retro-bold { font-weight: 700; }
+.retro-uppercase { text-transform: uppercase; }
+
+/* ========================================
+   RETRO LINKS — automatic dark mode
+   ======================================== */
+
+.theme-retro a,
+.retro-home a,
+.retro-shop a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.theme-retro a:hover,
+.retro-home a:hover,
+.retro-shop a:hover {
+  color: var(--color-link-hover);
+}
+
+.theme-retro a:focus-visible,
+.retro-home a:focus-visible,
+.retro-shop a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   RETRO CARD — reusable pattern
+   ======================================== */
+
+.retro-card {
+  background-color: var(--color-paper);
+  border: var(--retro-border-width) solid var(--color-ink);
+  box-shadow: var(--shadow-retro);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.retro-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-retro-lg);
+}
+
+.retro-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-retro-active);
+}
+
+/* ========================================
+   RETRO BUTTON — base pattern
+   ======================================== */
+
+.retro-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: var(--retro-border-width) solid var(--color-ink);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s, color 0.15s;
+}
+
+.retro-btn--primary {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.retro-btn--primary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro);
+}
+
+.retro-btn--secondary {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.retro-btn--secondary:hover {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-btn--signal {
+  background-color: var(--color-signal);
+  color: #fff;
+  border-color: var(--color-signal);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.retro-btn--signal:hover {
+  background-color: var(--color-signal-hover);
+}
+
+.retro-btn:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.retro-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================
+   RETRO INPUT — base pattern
+   ======================================== */
+
+.retro-input {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.retro-input::placeholder {
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.retro-input:focus {
+  outline: none;
+  border-color: var(--color-signal);
+  box-shadow: 0 0 0 2px var(--color-signal);
+}
+
+/* ========================================
+   RETRO BADGE — small label
+   ======================================== */
+
+.retro-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: var(--color-signal);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  padding: 2px 5px;
+  border: 2px solid var(--color-ink);
+  line-height: 1;
+  box-shadow: 1px 1px 0 var(--color-ink);
+}
+
+/* ========================================
+   SCROLLBAR — retro styled
+   ======================================== */
+
+.theme-retro ::-webkit-scrollbar,
+.retro-home ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.theme-retro ::-webkit-scrollbar-track,
+.retro-home ::-webkit-scrollbar-track {
+  background: var(--color-paper-deep);
+}
+
+.theme-retro ::-webkit-scrollbar-thumb,
+.retro-home ::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border: 1px solid var(--color-border-strong);
+}
+
+.theme-retro ::-webkit-scrollbar-thumb:hover,
+.retro-home ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}

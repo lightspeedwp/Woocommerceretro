@@ -6,7 +6,7 @@
  * @module data/chat
  */
 
-export var chatPopularTopics: string[] = [
+export const chatPopularTopics: string[] = [
   'Where is my order?',
   'How do I return an item?',
   'Help choosing the right size',
@@ -14,7 +14,7 @@ export var chatPopularTopics: string[] = [
   'Product availability',
 ];
 
-export var chatContactOptions = [
+export const chatContactOptions = [
   {
     type: 'email',
     icon: 'Mail',

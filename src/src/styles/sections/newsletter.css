@@ -131,3 +131,27 @@
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ========================================
+   NEWSLETTER BUTTON & PRIVACY
+   (Added Batch B1 - previously inline in globals.css)
+   ======================================== */
+
+.wp-newsletter-section__button {
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+  border-radius: 0 var(--wp--preset--border-radius--md) var(--wp--preset--border-radius--md) 0;
+  font-weight: var(--wp--preset--font-weight--semibold);
+  background: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.wp-newsletter-section__button:hover {
+  opacity: 0.9;
+}
+
+.wp-newsletter-section__privacy {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--muted-foreground);
+}

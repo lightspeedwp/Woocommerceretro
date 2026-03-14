@@ -1,50 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CreditCard, Truck } from '@phosphor-icons/react';
-import * as TypographyModule from '../common/Typography';
+import { Typography } from '../common/Typography';
 
-var useState = React.useState;
-var Typography = TypographyModule.Typography;
+interface CheckoutFormData {
+  billingFirstName: string;
+  billingLastName: string;
+  billingEmail: string;
+  billingPhone: string;
+  billingAddress: string;
+  billingCity: string;
+  billingState: string;
+  billingZip: string;
+  billingCountry: string;
+  shippingSameAsBilling: boolean;
+  shippingFirstName: string;
+  shippingLastName: string;
+  shippingAddress: string;
+  shippingCity: string;
+  shippingState: string;
+  shippingZip: string;
+  shippingCountry: string;
+  [key: string]: string | boolean;
+}
 
-// CheckoutFormData shape:
-// {
-//   billingFirstName: string;
-//   billingLastName: string;
-//   billingEmail: string;
-//   billingPhone: string;
-//   billingAddress: string;
-//   billingCity: string;
-//   billingState: string;
-//   billingZip: string;
-//   billingCountry: string;
-//   shippingSameAsBilling: boolean;
-//   shippingFirstName: string;
-//   shippingLastName: string;
-//   shippingAddress: string;
-//   shippingCity: string;
-//   shippingState: string;
-//   shippingZip: string;
-//   shippingCountry: string;
-// }
-
-// CheckoutFormSectionProps shape:
-// {
-//   onSubmit?: (data: CheckoutFormData) => void;
-//   showShippingSection?: boolean;
-//   className?: string;
-// }
+interface CheckoutFormSectionProps {
+  onSubmit?: (data: CheckoutFormData) => void;
+  showShippingSection?: boolean;
+  className?: string;
+}
 
 /**
  * CheckoutFormSection Pattern Component
  * 
  * Comprehensive checkout form with billing and shipping address collection.
- * Uses WordPress BEM classes from src/styles/checkout.css and src/styles/forms.css
  */
-export function CheckoutFormSection(props) {
-  var onSubmit = props.onSubmit;
-  var showShippingSection = props.showShippingSection === undefined ? true : props.showShippingSection;
-  var className = props.className === undefined ? '' : props.className;
-
-  var stateArray = useState({
+export const CheckoutFormSection = ({
+  onSubmit,
+  showShippingSection = true,
+  className = '',
+}: CheckoutFormSectionProps) => {
+  const [formData, setFormData] = useState<CheckoutFormData>({
     billingFirstName: '',
     billingLastName: '',
     billingEmail: '',
@@ -63,352 +58,242 @@ export function CheckoutFormSection(props) {
     shippingZip: '',
     shippingCountry: 'US',
   });
-  var formData = stateArray[0];
-  var setFormData = stateArray[1];
 
-  var handleChange = function(field, value) {
-    var newData = Object.assign({}, formData);
-    newData[field] = value;
-    setFormData(newData);
+  const handleChange = (field: string, value: string | boolean) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  var handleSubmit = function(e) {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (onSubmit) {
       onSubmit(formData);
     }
   };
 
-  // Billing section header
-  var billingHeader = React.createElement('div', { className: "wp-checkout-section__header" },
-    React.createElement(CreditCard, { size: 24, className: "wp-checkout-section__icon" }),
-    React.createElement(Typography, { variant: "h3" }, "Billing Address")
-  );
+  return (
+    <form onSubmit={handleSubmit} className={`wp-checkout-form ${className}`}>
+      {/* Billing Section */}
+      <div className="wp-checkout-section">
+        <div className="wp-checkout-section__header">
+          <CreditCard size={24} className="wp-checkout-section__icon" />
+          <Typography variant="h3">Billing Address</Typography>
+        </div>
 
-  // Billing name fields
-  var billingNameFields = React.createElement('div', { className: "wp-checkout-grid-2" },
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingFirstName", className: "wp-block-label" },
-        "First Name ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingFirstName",
-        type: "text",
-        value: formData.billingFirstName,
-        onChange: function(e) { handleChange('billingFirstName', e.target.value); },
-        required: true,
-        autoComplete: "given-name",
-        className: "wp-block-input"
-      })
-    ),
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingLastName", className: "wp-block-label" },
-        "Last Name ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingLastName",
-        type: "text",
-        value: formData.billingLastName,
-        onChange: function(e) { handleChange('billingLastName', e.target.value); },
-        required: true,
-        autoComplete: "family-name",
-        className: "wp-block-input"
-      })
-    )
-  );
+        <div className="wp-checkout-grid-2">
+          <div className="wp-checkout-field">
+            <label htmlFor="billingFirstName" className="wp-block-label">
+              First Name <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingFirstName" type="text" value={formData.billingFirstName}
+              onChange={(e) => handleChange('billingFirstName', e.target.value)}
+              required autoComplete="given-name" className="wp-block-input"
+            />
+          </div>
+          <div className="wp-checkout-field">
+            <label htmlFor="billingLastName" className="wp-block-label">
+              Last Name <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingLastName" type="text" value={formData.billingLastName}
+              onChange={(e) => handleChange('billingLastName', e.target.value)}
+              required autoComplete="family-name" className="wp-block-input"
+            />
+          </div>
+        </div>
 
-  // Billing contact fields
-  var billingContactFields = React.createElement('div', { className: "wp-checkout-grid-2" },
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingEmail", className: "wp-block-label" },
-        "Email ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingEmail",
-        type: "email",
-        value: formData.billingEmail,
-        onChange: function(e) { handleChange('billingEmail', e.target.value); },
-        required: true,
-        autoComplete: "email",
-        className: "wp-block-input"
-      })
-    ),
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingPhone", className: "wp-block-label" },
-        "Phone ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingPhone",
-        type: "tel",
-        value: formData.billingPhone,
-        onChange: function(e) { handleChange('billingPhone', e.target.value); },
-        required: true,
-        autoComplete: "tel",
-        className: "wp-block-input"
-      })
-    )
-  );
+        <div className="wp-checkout-grid-2">
+          <div className="wp-checkout-field">
+            <label htmlFor="billingEmail" className="wp-block-label">
+              Email <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingEmail" type="email" value={formData.billingEmail}
+              onChange={(e) => handleChange('billingEmail', e.target.value)}
+              required autoComplete="email" className="wp-block-input"
+            />
+          </div>
+          <div className="wp-checkout-field">
+            <label htmlFor="billingPhone" className="wp-block-label">
+              Phone <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingPhone" type="tel" value={formData.billingPhone}
+              onChange={(e) => handleChange('billingPhone', e.target.value)}
+              required autoComplete="tel" className="wp-block-input"
+            />
+          </div>
+        </div>
 
-  // Billing address field
-  var billingAddressField = React.createElement('div', { className: "wp-checkout-field" },
-    React.createElement('label', { htmlFor: "billingAddress", className: "wp-block-label" },
-      "Street Address ",
-      React.createElement('span', { className: "wp-checkout-required" }, "*")
-    ),
-    React.createElement('input', {
-      id: "billingAddress",
-      type: "text",
-      value: formData.billingAddress,
-      onChange: function(e) { handleChange('billingAddress', e.target.value); },
-      required: true,
-      autoComplete: "street-address",
-      className: "wp-block-input"
-    })
-  );
+        <div className="wp-checkout-field">
+          <label htmlFor="billingAddress" className="wp-block-label">
+            Street Address <span className="wp-checkout-required">*</span>
+          </label>
+          <input
+            id="billingAddress" type="text" value={formData.billingAddress}
+            onChange={(e) => handleChange('billingAddress', e.target.value)}
+            required autoComplete="street-address" className="wp-block-input"
+          />
+        </div>
 
-  // Billing city/state/zip fields
-  var billingLocationFields = React.createElement('div', { className: "wp-checkout-grid-3" },
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingCity", className: "wp-block-label" },
-        "City ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingCity",
-        type: "text",
-        value: formData.billingCity,
-        onChange: function(e) { handleChange('billingCity', e.target.value); },
-        required: true,
-        autoComplete: "address-level2",
-        className: "wp-block-input"
-      })
-    ),
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingState", className: "wp-block-label" },
-        "State ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingState",
-        type: "text",
-        value: formData.billingState,
-        onChange: function(e) { handleChange('billingState', e.target.value); },
-        required: true,
-        autoComplete: "address-level1",
-        className: "wp-block-input"
-      })
-    ),
-    React.createElement('div', { className: "wp-checkout-field" },
-      React.createElement('label', { htmlFor: "billingZip", className: "wp-block-label" },
-        "ZIP Code ",
-        React.createElement('span', { className: "wp-checkout-required" }, "*")
-      ),
-      React.createElement('input', {
-        id: "billingZip",
-        type: "text",
-        value: formData.billingZip,
-        onChange: function(e) { handleChange('billingZip', e.target.value); },
-        required: true,
-        autoComplete: "postal-code",
-        className: "wp-block-input"
-      })
-    )
-  );
+        <div className="wp-checkout-grid-3">
+          <div className="wp-checkout-field">
+            <label htmlFor="billingCity" className="wp-block-label">
+              City <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingCity" type="text" value={formData.billingCity}
+              onChange={(e) => handleChange('billingCity', e.target.value)}
+              required autoComplete="address-level2" className="wp-block-input"
+            />
+          </div>
+          <div className="wp-checkout-field">
+            <label htmlFor="billingState" className="wp-block-label">
+              State <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingState" type="text" value={formData.billingState}
+              onChange={(e) => handleChange('billingState', e.target.value)}
+              required autoComplete="address-level1" className="wp-block-input"
+            />
+          </div>
+          <div className="wp-checkout-field">
+            <label htmlFor="billingZip" className="wp-block-label">
+              ZIP Code <span className="wp-checkout-required">*</span>
+            </label>
+            <input
+              id="billingZip" type="text" value={formData.billingZip}
+              onChange={(e) => handleChange('billingZip', e.target.value)}
+              required autoComplete="postal-code" className="wp-block-input"
+            />
+          </div>
+        </div>
 
-  // Billing country field
-  var billingCountryField = React.createElement('div', { className: "wp-checkout-field" },
-    React.createElement('label', { htmlFor: "billingCountry", className: "wp-block-label" },
-      "Country ",
-      React.createElement('span', { className: "wp-checkout-required" }, "*")
-    ),
-    React.createElement('select', {
-      id: "billingCountry",
-      value: formData.billingCountry,
-      onChange: function(e) { handleChange('billingCountry', e.target.value); },
-      required: true,
-      autoComplete: "country",
-      className: "wp-block-input"
-    },
-      React.createElement('option', { value: "US" }, "United States"),
-      React.createElement('option', { value: "CA" }, "Canada"),
-      React.createElement('option', { value: "GB" }, "United Kingdom"),
-      React.createElement('option', { value: "AU" }, "Australia")
-    )
-  );
+        <div className="wp-checkout-field">
+          <label htmlFor="billingCountry" className="wp-block-label">
+            Country <span className="wp-checkout-required">*</span>
+          </label>
+          <select
+            id="billingCountry" value={formData.billingCountry}
+            onChange={(e) => handleChange('billingCountry', e.target.value)}
+            required autoComplete="country" className="wp-block-input"
+          >
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="GB">United Kingdom</option>
+            <option value="AU">Australia</option>
+          </select>
+        </div>
+      </div>
 
-  var billingSection = React.createElement('div', { className: "wp-checkout-section" },
-    billingHeader,
-    billingNameFields,
-    billingContactFields,
-    billingAddressField,
-    billingLocationFields,
-    billingCountryField
-  );
+      {/* Shipping Section */}
+      {showShippingSection && (
+        <div className="wp-checkout-section">
+          <div className="wp-checkout-section__header">
+            <Truck size={24} className="wp-checkout-section__icon" />
+            <Typography variant="h3">Shipping Address</Typography>
+          </div>
 
-  // Shipping section (conditional)
-  var shippingSection = null;
-  if (showShippingSection) {
-    var shippingHeader = React.createElement('div', { className: "wp-checkout-section__header" },
-      React.createElement(Truck, { size: 24, className: "wp-checkout-section__icon" }),
-      React.createElement(Typography, { variant: "h3" }, "Shipping Address")
-    );
+          <div className="wp-checkout-checkbox-group">
+            <input
+              id="shippingSameAsBilling" type="checkbox"
+              checked={formData.shippingSameAsBilling}
+              onChange={(e) => handleChange('shippingSameAsBilling', e.target.checked)}
+              className="wp-block-checkbox"
+            />
+            <label htmlFor="shippingSameAsBilling" className="wp-block-label">
+              Same as billing address
+            </label>
+          </div>
 
-    var shippingCheckbox = React.createElement('div', { className: "wp-checkout-checkbox-group" },
-      React.createElement('input', {
-        id: "shippingSameAsBilling",
-        type: "checkbox",
-        checked: formData.shippingSameAsBilling,
-        onChange: function(e) { handleChange('shippingSameAsBilling', e.target.checked); },
-        className: "wp-block-checkbox"
-      }),
-      React.createElement('label', { htmlFor: "shippingSameAsBilling", className: "wp-block-label" },
-        "Same as billing address"
-      )
-    );
+          {!formData.shippingSameAsBilling && (
+            <>
+              <div className="wp-checkout-grid-2">
+                <div className="wp-checkout-field">
+                  <label htmlFor="shippingFirstName" className="wp-block-label">
+                    First Name <span className="wp-checkout-required">*</span>
+                  </label>
+                  <input
+                    id="shippingFirstName" type="text" value={formData.shippingFirstName}
+                    onChange={(e) => handleChange('shippingFirstName', e.target.value)}
+                    required={!formData.shippingSameAsBilling} autoComplete="given-name" className="wp-block-input"
+                  />
+                </div>
+                <div className="wp-checkout-field">
+                  <label htmlFor="shippingLastName" className="wp-block-label">
+                    Last Name <span className="wp-checkout-required">*</span>
+                  </label>
+                  <input
+                    id="shippingLastName" type="text" value={formData.shippingLastName}
+                    onChange={(e) => handleChange('shippingLastName', e.target.value)}
+                    required={!formData.shippingSameAsBilling} autoComplete="family-name" className="wp-block-input"
+                  />
+                </div>
+              </div>
 
-    var shippingFields = null;
-    if (!formData.shippingSameAsBilling) {
-      var shippingNameFields = React.createElement('div', { className: "wp-checkout-grid-2" },
-        React.createElement('div', { className: "wp-checkout-field" },
-          React.createElement('label', { htmlFor: "shippingFirstName", className: "wp-block-label" },
-            "First Name ",
-            React.createElement('span', { className: "wp-checkout-required" }, "*")
-          ),
-          React.createElement('input', {
-            id: "shippingFirstName",
-            type: "text",
-            value: formData.shippingFirstName,
-            onChange: function(e) { handleChange('shippingFirstName', e.target.value); },
-            required: !formData.shippingSameAsBilling,
-            autoComplete: "given-name",
-            className: "wp-block-input"
-          })
-        ),
-        React.createElement('div', { className: "wp-checkout-field" },
-          React.createElement('label', { htmlFor: "shippingLastName", className: "wp-block-label" },
-            "Last Name ",
-            React.createElement('span', { className: "wp-checkout-required" }, "*")
-          ),
-          React.createElement('input', {
-            id: "shippingLastName",
-            type: "text",
-            value: formData.shippingLastName,
-            onChange: function(e) { handleChange('shippingLastName', e.target.value); },
-            required: !formData.shippingSameAsBilling,
-            autoComplete: "family-name",
-            className: "wp-block-input"
-          })
-        )
-      );
+              <div className="wp-checkout-field">
+                <label htmlFor="shippingAddress" className="wp-block-label">
+                  Street Address <span className="wp-checkout-required">*</span>
+                </label>
+                <input
+                  id="shippingAddress" type="text" value={formData.shippingAddress}
+                  onChange={(e) => handleChange('shippingAddress', e.target.value)}
+                  required={!formData.shippingSameAsBilling} autoComplete="street-address" className="wp-block-input"
+                />
+              </div>
 
-      var shippingAddressField = React.createElement('div', { className: "wp-checkout-field" },
-        React.createElement('label', { htmlFor: "shippingAddress", className: "wp-block-label" },
-          "Street Address ",
-          React.createElement('span', { className: "wp-checkout-required" }, "*")
-        ),
-        React.createElement('input', {
-          id: "shippingAddress",
-          type: "text",
-          value: formData.shippingAddress,
-          onChange: function(e) { handleChange('shippingAddress', e.target.value); },
-          required: !formData.shippingSameAsBilling,
-          autoComplete: "street-address",
-          className: "wp-block-input"
-        })
-      );
+              <div className="wp-checkout-grid-3">
+                <div className="wp-checkout-field">
+                  <label htmlFor="shippingCity" className="wp-block-label">
+                    City <span className="wp-checkout-required">*</span>
+                  </label>
+                  <input
+                    id="shippingCity" type="text" value={formData.shippingCity}
+                    onChange={(e) => handleChange('shippingCity', e.target.value)}
+                    required={!formData.shippingSameAsBilling} autoComplete="address-level2" className="wp-block-input"
+                  />
+                </div>
+                <div className="wp-checkout-field">
+                  <label htmlFor="shippingState" className="wp-block-label">
+                    State <span className="wp-checkout-required">*</span>
+                  </label>
+                  <input
+                    id="shippingState" type="text" value={formData.shippingState}
+                    onChange={(e) => handleChange('shippingState', e.target.value)}
+                    required={!formData.shippingSameAsBilling} autoComplete="address-level1" className="wp-block-input"
+                  />
+                </div>
+                <div className="wp-checkout-field">
+                  <label htmlFor="shippingZip" className="wp-block-label">
+                    ZIP Code <span className="wp-checkout-required">*</span>
+                  </label>
+                  <input
+                    id="shippingZip" type="text" value={formData.shippingZip}
+                    onChange={(e) => handleChange('shippingZip', e.target.value)}
+                    required={!formData.shippingSameAsBilling} autoComplete="postal-code" className="wp-block-input"
+                  />
+                </div>
+              </div>
 
-      var shippingLocationFields = React.createElement('div', { className: "wp-checkout-grid-3" },
-        React.createElement('div', { className: "wp-checkout-field" },
-          React.createElement('label', { htmlFor: "shippingCity", className: "wp-block-label" },
-            "City ",
-            React.createElement('span', { className: "wp-checkout-required" }, "*")
-          ),
-          React.createElement('input', {
-            id: "shippingCity",
-            type: "text",
-            value: formData.shippingCity,
-            onChange: function(e) { handleChange('shippingCity', e.target.value); },
-            required: !formData.shippingSameAsBilling,
-            autoComplete: "address-level2",
-            className: "wp-block-input"
-          })
-        ),
-        React.createElement('div', { className: "wp-checkout-field" },
-          React.createElement('label', { htmlFor: "shippingState", className: "wp-block-label" },
-            "State ",
-            React.createElement('span', { className: "wp-checkout-required" }, "*")
-          ),
-          React.createElement('input', {
-            id: "shippingState",
-            type: "text",
-            value: formData.shippingState,
-            onChange: function(e) { handleChange('shippingState', e.target.value); },
-            required: !formData.shippingSameAsBilling,
-            autoComplete: "address-level1",
-            className: "wp-block-input"
-          })
-        ),
-        React.createElement('div', { className: "wp-checkout-field" },
-          React.createElement('label', { htmlFor: "shippingZip", className: "wp-block-label" },
-            "ZIP Code ",
-            React.createElement('span', { className: "wp-checkout-required" }, "*")
-          ),
-          React.createElement('input', {
-            id: "shippingZip",
-            type: "text",
-            value: formData.shippingZip,
-            onChange: function(e) { handleChange('shippingZip', e.target.value); },
-            required: !formData.shippingSameAsBilling,
-            autoComplete: "postal-code",
-            className: "wp-block-input"
-          })
-        )
-      );
-
-      var shippingCountryField = React.createElement('div', { className: "wp-checkout-field" },
-        React.createElement('label', { htmlFor: "shippingCountry", className: "wp-block-label" },
-          "Country ",
-          React.createElement('span', { className: "wp-checkout-required" }, "*")
-        ),
-        React.createElement('select', {
-          id: "shippingCountry",
-          value: formData.shippingCountry,
-          onChange: function(e) { handleChange('shippingCountry', e.target.value); },
-          required: !formData.shippingSameAsBilling,
-          autoComplete: "country",
-          className: "wp-block-input"
-        },
-          React.createElement('option', { value: "US" }, "United States"),
-          React.createElement('option', { value: "CA" }, "Canada"),
-          React.createElement('option', { value: "GB" }, "United Kingdom"),
-          React.createElement('option', { value: "AU" }, "Australia")
-        )
-      );
-
-      shippingFields = React.createElement(React.Fragment, null,
-        shippingNameFields,
-        shippingAddressField,
-        shippingLocationFields,
-        shippingCountryField
-      );
-    }
-
-    shippingSection = React.createElement('div', { className: "wp-checkout-section" },
-      shippingHeader,
-      shippingCheckbox,
-      shippingFields
-    );
-  }
-
-  return React.createElement('form', {
-    onSubmit: handleSubmit,
-    className: "wp-checkout-form " + className
-  },
-    billingSection,
-    shippingSection
+              <div className="wp-checkout-field">
+                <label htmlFor="shippingCountry" className="wp-block-label">
+                  Country <span className="wp-checkout-required">*</span>
+                </label>
+                <select
+                  id="shippingCountry" value={formData.shippingCountry}
+                  onChange={(e) => handleChange('shippingCountry', e.target.value)}
+                  required={!formData.shippingSameAsBilling} autoComplete="country" className="wp-block-input"
+                >
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                </select>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+    </form>
   );
 }

@@ -1,126 +1,109 @@
-import React from 'react';
-var useState = React.useState;
-import * as ButtonsModule from '../design/Buttons';
-import * as FloatingLabelInputModule from './ui/FloatingLabelInput';
-import * as TypographyModule from '../../common/Typography';
-import * as CartContextModule from '../../../contexts/CartContext';
-
-var Button = ButtonsModule.Button;
-var FloatingLabelInput = FloatingLabelInputModule.FloatingLabelInput;
-var Typography = TypographyModule.Typography;
-var useCart = CartContextModule.useCart;
+import React, { useState } from 'react';
+import { Button } from '../design/Buttons';
+import { FloatingLabelInput } from './ui/FloatingLabelInput';
+import { Typography } from '../../common/Typography';
+import { useCart } from '../../../contexts/CartContext';
 
 /**
  * CouponInput Block Component
- * 
- * Optimized for Figma Make parser:
- * - Uses var instead of const/let
- * - Uses function declarations
- * - No TypeScript-specific syntax
+ *
+ * Expandable coupon code input with apply/remove functionality.
  */
-export function CouponInput(props) {
-  var className = props.className || '';
-  var cart = useCart();
-  var applyCoupon = cart.applyCoupon;
-  var appliedCoupon = cart.appliedCoupon;
-  var removeCoupon = cart.removeCoupon;
+export const CouponInput = ({
+  className = '',
+}: {
+  className?: string;
+}) => {
+  const { applyCoupon, appliedCoupon, removeCoupon } = useCart();
 
-  var _isOpen = useState(false);
-  var isOpen = _isOpen[0];
-  var setIsOpen = _isOpen[1];
-  var _code = useState('');
-  var code = _code[0];
-  var setCode = _code[1];
-  var _error = useState('');
-  var error = _error[0];
-  var setError = _error[1];
-  var _isLoading = useState(false);
-  var isLoading = _isLoading[0];
-  var setIsLoading = _isLoading[1];
+  const [isOpen, setIsOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  var handleApply = function() {
+  const handleApply = () => {
     if (!code.trim()) return;
-    
+
     setIsLoading(true);
     setError('');
 
-    setTimeout(function() {
-      var result = applyCoupon(code);
-      
+    setTimeout(() => {
+      const result = applyCoupon(code);
+
       if (result.success) {
         setCode('');
         setIsOpen(false);
       } else {
         setError(result.message || 'Invalid coupon code');
       }
-      
+
       setIsLoading(false);
     }, 600);
   };
 
-  var handleRemove = function() {
-    removeCoupon();
-  };
-
-  var handleOpen = function() {
-    setIsOpen(true);
-  };
-
-  var handleCodeChange = function(e) {
-    setCode(e.target.value);
-  };
-
   if (appliedCoupon) {
-    return React.createElement('div', { className: "wp-coupon-input wp-coupon-input--applied funky-coupon-applied " + className },
-      React.createElement('div', { className: "wp-coupon-input__success-message" },
-        React.createElement('span', { className: "wp-coupon-input__icon" }, "🏷️ "),
-        React.createElement(Typography, { variant: "body", className: "wp-coupon-input__text" }, 
-          "Coupon ",
-          React.createElement('strong', null, appliedCoupon.code),
-          " applied"
-        )
-      ),
-      React.createElement(Button, { 
-        variant: "text", 
-        size: "small", 
-        onClick: handleRemove,
-        className: "wp-coupon-input__remove-btn funky-link-btn"
-      }, "Remove")
+    return (
+      <div className={`wp-coupon-input wp-coupon-input--applied funky-coupon-applied ${className}`}>
+        <div className="wp-coupon-input__success-message">
+          <span className="wp-coupon-input__icon">&#127991;&#65039; </span>
+          <Typography variant="body" className="wp-coupon-input__text">
+            Coupon <strong>{appliedCoupon.code}</strong> applied
+          </Typography>
+        </div>
+        <Button
+          variant="text"
+          size="small"
+          onClick={() => removeCoupon()}
+          className="wp-coupon-input__remove-btn funky-link-btn"
+        >
+          Remove
+        </Button>
+      </div>
     );
   }
 
   if (!isOpen) {
-    return React.createElement('div', { className: "wp-coupon-input " + className },
-      React.createElement('button', { 
-        onClick: handleOpen,
-        className: "wp-coupon-input__toggle funky-toggle-btn"
-      }, 
-        "Have a coupon? ",
-        React.createElement('span', { className: "wp-coupon-input__toggle-link" }, "Click here to enter your code")
-      )
+    return (
+      <div className={`wp-coupon-input ${className}`}>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="wp-coupon-input__toggle funky-toggle-btn"
+        >
+          Have a coupon?{' '}
+          <span className="wp-coupon-input__toggle-link">Click here to enter your code</span>
+        </button>
+      </div>
     );
   }
 
-  return React.createElement('div', { className: "wp-coupon-input " + className },
-    React.createElement('div', { className: "wp-coupon-input__form animate-fade-in funky-coupon-form" },
-      React.createElement('div', { className: "wp-coupon-input__fields" },
-        React.createElement(FloatingLabelInput, {
-          label: "Coupon code",
-          value: code,
-          onChange: handleCodeChange,
-          className: "wp-coupon-input__field funky-input",
-          error: error
-        }),
-        React.createElement(Button, {
-          variant: "secondary",
-          onClick: handleApply,
-          disabled: !code.trim() || isLoading,
-          className: "wp-coupon-input__submit funky-secondary-btn"
-        }, isLoading ? 'Applying...' : 'Apply')
-      ),
-      error ? React.createElement(Typography, { variant: "caption", className: "wp-coupon-input__error funky-error-text" }, error) : null
-    )
+  return (
+    <div className={`wp-coupon-input ${className}`}>
+      <div className="wp-coupon-input__form animate-fade-in funky-coupon-form">
+        <div className="wp-coupon-input__fields">
+          <FloatingLabelInput
+            label="Coupon code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            className="wp-coupon-input__field funky-input"
+            error={error}
+          />
+          <Button
+            variant="secondary"
+            onClick={handleApply}
+            disabled={!code.trim() || isLoading}
+            className="wp-coupon-input__submit funky-secondary-btn"
+          >
+            {isLoading ? 'Applying...' : 'Apply'}
+          </Button>
+        </div>
+        {error && (
+          <Typography variant="caption" className="wp-coupon-input__error funky-error-text">
+            {error}
+          </Typography>
+        )}
+      </div>
+    </div>
   );
-}
+};
 
 CouponInput.displayName = 'CouponInput';

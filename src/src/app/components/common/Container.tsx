@@ -1,28 +1,28 @@
 import React from 'react';
-import * as ThemeConstantsModule from '../../constants/theme';
-
-var CONTAINER = ThemeConstantsModule.CONTAINER;
+import { CONTAINER } from '../../constants/theme';
 
 /**
  * Container Component
  */
-export function Container(props) {
-  var variant = props.variant || 'site';
-  var className = props.className || '';
-  var children = props.children;
-
-  var getContainerClass = function() {
+export const Container = ({ variant = 'site', className = '', children }: {
+  variant?: 'site' | 'wide' | 'full' | 'content' | 'narrow';
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  const getContainerClass = () => {
     if (!CONTAINER) return 'wp-container-fallback';
     if (variant === 'full') return 'alignfull';
     if (variant === 'wide') return 'alignwide';
     return CONTAINER[variant] || 'wp-container-fallback';
   };
 
-  var containerClass = getContainerClass();
+  const containerClass = getContainerClass();
 
-  return React.createElement('div', { 
-    className: containerClass + (className ? ' ' + className : '')
-  }, children);
-};
+  return (
+    <div className={`${containerClass}${className ? ` ${className}` : ''}`}>
+      {children}
+    </div>
+  );
+}
 
 Container.displayName = 'Container';

@@ -1,9 +1,6 @@
 import React from 'react';
-import * as ReactRouterModule from 'react-router';
+import { Link } from 'react-router';
 import { CaretRight as ChevronRight, House as Home } from '@phosphor-icons/react';
-
-var Link = ReactRouterModule.Link;
-var useLocation = ReactRouterModule.useLocation;
 
 /**
  * Breadcrumbs — Hierarchical navigation component (Template Part)
@@ -14,34 +11,46 @@ var useLocation = ReactRouterModule.useLocation;
  *
  * CSS: /src/styles/blocks/navigation/breadcrumb.css
  *      /src/styles/blocks/theme/parts-funky.css (funky overrides)
- *
- * @param {Object} props
- * @param {{ label: string, path: string }[]} props.items - Breadcrumb items (excluding Home)
  */
-export function Breadcrumbs(props) {
-  var items = props.items;
-  return React.createElement('div', { className: 'wp-breadcrumbs-bar wp-breadcrumbs-bar--funky' },
-    React.createElement('div', { className: 'wp-breadcrumbs-container' },
-      React.createElement('nav', { 'aria-label': 'Breadcrumb' },
-        React.createElement('ol', { className: 'wp-breadcrumbs-list' },
-          React.createElement('li', { className: 'wp-breadcrumbs-item' },
-            React.createElement(Link, { to: '/', className: 'wp-breadcrumbs-link' },
-              React.createElement(Home, { size: 16 }),
-              React.createElement('span', { className: 'sr-only' }, 'Home')
-            )
-          ),
-          items.map(function(item, index) { return (
-            React.createElement('li', { key: item.path, className: 'wp-breadcrumbs-item' },
-              React.createElement(ChevronRight, { size: 16, className: 'wp-breadcrumbs-separator' }),
-              index === items.length - 1 ? (
-                React.createElement('span', { className: 'wp-breadcrumbs-current', 'aria-current': 'page' }, item.label)
-              ) : (
-                React.createElement(Link, { to: item.path, className: 'wp-breadcrumbs-link' }, item.label)
-              )
-            )
-          ); })
-        )
-      )
-    )
+
+interface BreadcrumbItem {
+  label: string;
+  path: string;
+}
+
+interface BreadcrumbsProps {
+  items: BreadcrumbItem[];
+}
+
+export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
+  return (
+    <div className="wp-breadcrumbs-bar wp-breadcrumbs-bar--funky">
+      <div className="wp-breadcrumbs-container">
+        <nav aria-label="Breadcrumb">
+          <ol className="wp-breadcrumbs-list">
+            <li className="wp-breadcrumbs-item">
+              <Link to="/" className="wp-breadcrumbs-link">
+                <Home size={16} />
+                <span className="sr-only">Home</span>
+              </Link>
+            </li>
+            {items.map((item, index) => (
+              <li key={item.path} className="wp-breadcrumbs-item">
+                <ChevronRight size={16} className="wp-breadcrumbs-separator" />
+                {index === items.length - 1 ? (
+                  <span className="wp-breadcrumbs-current" aria-current="page">
+                    {item.label}
+                  </span>
+                ) : (
+                  <Link to={item.path} className="wp-breadcrumbs-link">
+                    {item.label}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </div>
+    </div>
   );
 }

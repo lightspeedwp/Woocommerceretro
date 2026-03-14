@@ -1,31 +1,36 @@
 /**
  * ComparisonContext.tsx
- * 
- * Optimized for Figma Make parser:
- * 1. No arrow functions
- * 2. No destructuring in parameters
- * 3. ASCII only
- * 4. No TypeScript interfaces or generics
+ *
+ * Product comparison state management (max 4 items).
  */
 
-import React from 'react';
-var createContext = React.createContext;
-var useContext = React.useContext;
-var useState = React.useState;
-var useEffect = React.useEffect;
-import * as SonnerModule from 'sonner@2.0.3';
-var toast = SonnerModule.toast;
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
+import { toast } from 'sonner@2.0.3';
 
-var ComparisonContext = createContext(undefined);
-var MAX_COMPARISON_ITEMS = 4;
+interface ComparisonProduct {
+  id: string;
+  name?: string;
+  [key: string]: any;
+}
 
-export function ComparisonProvider(props) {
-  var children = props.children;
+interface ComparisonContextValue {
+  comparisonItems: ComparisonProduct[];
+  addToComparison: (product: ComparisonProduct) => void;
+  removeFromComparison: (productId: string) => void;
+  clearComparison: () => void;
+  isInComparison: (productId: string) => boolean;
+  canAddMore: boolean;
+  comparisonCount: number;
+}
 
-  var _state = useState(function() {
+const ComparisonContext = createContext<ComparisonContextValue | undefined>(undefined);
+const MAX_COMPARISON_ITEMS = 4;
+
+export const ComparisonProvider = ({ children }: { children: ReactNode }) => {
+  const [comparisonItems, setComparisonItems] = useState<ComparisonProduct[]>(() => {
     if (typeof window !== 'undefined') {
       try {
-        var saved = localStorage.getItem('productComparison');
+        const saved = localStorage.getItem('productComparison');
         if (saved) {
           return JSON.parse(saved);
         }
@@ -35,10 +40,8 @@ export function ComparisonProvider(props) {
     }
     return [];
   });
-  var comparisonItems = _state[0];
-  var setComparisonItems = _state[1];
 
-  useEffect(function() {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       try {
         localStorage.setItem('productComparison', JSON.stringify(comparisonItems));
@@ -48,69 +51,51 @@ export function ComparisonProvider(props) {
     }
   }, [comparisonItems]);
 
-  function addToComparison(product) {
-    var exists = false;
-    for (var i = 0; i < comparisonItems.length; i++) {
-      if (comparisonItems[i].id === product.id) {
-        exists = true;
-        break;
+  const addToComparison = useCallback((product: ComparisonProduct) => {
+    setComparisonItems((prev) => {
+      const exists = prev.some((item) => item.id === product.id);
+      if (exists) {
+        toast.info('Product already in comparison');
+        return prev;
       }
-    }
-
-    if (exists) {
-      toast.info('Product already in comparison');
-      return;
-    }
-
-    if (comparisonItems.length >= MAX_COMPARISON_ITEMS) {
-      toast.error('Comparison limit reached');
-      return;
-    }
-
-    setComparisonItems(function(prev) {
-      return prev.concat([product]);
-    });
-    toast.success('Added to comparison');
-  }
-
-  function removeFromComparison(productId) {
-    setComparisonItems(function(prev) {
-      var result = [];
-      for (var i = 0; i < prev.length; i++) {
-        if (prev[i].id !== productId) result.push(prev[i]);
+      if (prev.length >= MAX_COMPARISON_ITEMS) {
+        toast.error('Comparison limit reached');
+        return prev;
       }
-      return result;
+      toast.success('Added to comparison');
+      return [...prev, product];
     });
+  }, []);
+
+  const removeFromComparison = useCallback((productId: string) => {
+    setComparisonItems((prev) => prev.filter((item) => item.id !== productId));
     toast.success('Removed from comparison');
-  }
+  }, []);
 
-  function clearComparison() {
+  const clearComparison = useCallback(() => {
     setComparisonItems([]);
     toast.success('Comparison cleared');
-  }
+  }, []);
 
-  function isInComparison(productId) {
-    for (var i = 0; i < comparisonItems.length; i++) {
-      if (comparisonItems[i].id === productId) return true;
-    }
-    return false;
-  }
+  const isInComparison = useCallback((productId: string): boolean => {
+    return comparisonItems.some((item) => item.id === productId);
+  }, [comparisonItems]);
 
-  var value = {
-    comparisonItems: comparisonItems,
-    addToComparison: addToComparison,
-    removeFromComparison: removeFromComparison,
-    clearComparison: clearComparison,
-    isInComparison: isInComparison,
+  const value = useMemo<ComparisonContextValue>(() => ({
+    comparisonItems,
+    addToComparison,
+    removeFromComparison,
+    clearComparison,
+    isInComparison,
     canAddMore: comparisonItems.length < MAX_COMPARISON_ITEMS,
     comparisonCount: comparisonItems.length
-  };
+  }), [comparisonItems, addToComparison, removeFromComparison, clearComparison, isInComparison]);
 
-  return React.createElement(ComparisonContext.Provider, { value: value }, children);
+  return <ComparisonContext.Provider value={value}>{children}</ComparisonContext.Provider>;
 }
 
-export function useComparison() {
-  var context = useContext(ComparisonContext);
+export const useComparison = (): ComparisonContextValue => {
+  const context = useContext(ComparisonContext);
   if (context === undefined) {
     throw new Error('useComparison must be used within a ComparisonProvider');
   }

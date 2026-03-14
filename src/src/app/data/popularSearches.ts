@@ -9,17 +9,14 @@
  * ## Usage
  * 
  * ```tsx
- * import * as PopularSearchesModule from './data/popularSearches';
- * var POPULAR_SEARCHES = PopularSearchesModule.POPULAR_SEARCHES;
+ * import { POPULAR_SEARCHES } from './data/popularSearches';
  * 
  * // Display popular searches
- * {POPULAR_SEARCHES.map(function(term) {
- *   return (
- *     <button onClick={function() { handleSearch(term); }}>
- *       {term}
- *     </button>
- *   );
- * })}
+ * {POPULAR_SEARCHES.map((term) => (
+ *   <button onClick={() => handleSearch(term)}>
+ *     {term}
+ *   </button>
+ * ))}
  * ```
  * 
  * ---
@@ -36,7 +33,7 @@
  * 
  * @constant
  */
-export var POPULAR_SEARCHES: string[] = [
+export const POPULAR_SEARCHES: string[] = [
   // Product Categories
   'Clothing',
   'Shoes',
@@ -84,13 +81,13 @@ export var POPULAR_SEARCHES: string[] = [
  * @param category - Category to filter by
  * @returns Array of popular search terms for that category
  */
-export function getPopularSearchesByCategory(category?: string): string[] {
+export const getPopularSearchesByCategory = (category) => {
   if (!category) {
     return POPULAR_SEARCHES;
   }
   
   // Return category-specific searches (can be expanded)
-  var categoryMap: Record<string, string[]> = {
+  const categoryMap: Record<string, string[]> = {
     clothing: ['T-Shirts', 'Jeans', 'Dresses', 'Jackets', 'Casual Wear', 'Formal Attire'],
     shoes: ['Sneakers', 'Boots', 'Sandals', 'Running Shoes', 'Dress Shoes'],
     accessories: ['Bags', 'Jewelry', 'Watches', 'Sunglasses', 'Belts', 'Hats'],

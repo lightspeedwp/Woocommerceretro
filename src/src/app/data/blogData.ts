@@ -16,7 +16,7 @@
 /**
  * @type {BlogPost[]}
  */
-export var BLOG_POSTS = [
+export const BLOG_POSTS = [
   {
     id: '1',
     slug: 'future-of-ecommerce-2024',

@@ -1,14 +1,8 @@
 import React from 'react';
-
-import * as LayoutModule from '../parts/Layout';
-import * as ContainerModule from '../common/Container';
-import * as NewsletterCTAModule from '../patterns/NewsletterCTA';
-import * as NewsletterDataModule from '../../data/newsletter';
-
-var Layout = LayoutModule.Layout;
-var Container = ContainerModule.Container;
-var NewsletterCTA = NewsletterCTAModule.NewsletterCTA;
-var newsletterPageContent = NewsletterDataModule.newsletterPageContent;
+import { Layout } from '../parts/Layout';
+import { Container } from '../common/Container';
+import { NewsletterCTA } from '../patterns/NewsletterCTA';
+import { newsletterPageContent } from '../../data/newsletter';
 
 /**
  * PageNewsletter Template — Funky Redesign
@@ -18,21 +12,23 @@ var newsletterPageContent = NewsletterDataModule.newsletterPageContent;
  * @route /newsletter
  * @template
  */
-export function PageNewsletter() {
-  return React.createElement(Layout, null,
-    React.createElement('div', { 
-      className: 'newsletter-page',
-      style: { minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }
-    },
-      React.createElement(Container, null,
-        React.createElement(NewsletterCTA, {
-          variant: 'full',
-          heading: newsletterPageContent.heading,
-          description: newsletterPageContent.subheading,
-          buttonText: newsletterPageContent.formButton,
-          placeholder: newsletterPageContent.formPlaceholder
-        })
-      )
-    )
+export const PageNewsletter = () => {
+  return (
+    <Layout>
+      <div
+        className="newsletter-page"
+        style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
+        <Container>
+          <NewsletterCTA
+            variant="full"
+            heading={newsletterPageContent.heading}
+            description={newsletterPageContent.subheading}
+            buttonText={newsletterPageContent.formButton}
+            placeholder={newsletterPageContent.formPlaceholder}
+          />
+        </Container>
+      </div>
+    </Layout>
   );
 }

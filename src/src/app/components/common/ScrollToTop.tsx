@@ -1,20 +1,15 @@
-import React from 'react';
-var useEffect = React.useEffect;
-import * as ReactRouterModule from 'react-router';
-var useLocation = ReactRouterModule.useLocation;
+import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 
 /**
  * ScrollToTop Component
- * 
- * Optimized for Figma Make parser:
- * 1. Standard function declaration
- * 2. No arrow functions
+ *
+ * Scrolls the window to the top on route changes.
  */
-export function ScrollToTop() {
-  var location = useLocation();
-  var pathname = location.pathname;
+export const ScrollToTop = () => {
+  const { pathname } = useLocation();
 
-  useEffect(function() {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
     }

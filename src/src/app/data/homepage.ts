@@ -2,8 +2,8 @@
  * Homepage Mock Data
  *
  * Optimized for Figma Make parser:
- * 1. ASCII characters only
- * 2. No modern JS
+ * 1. No optional chaining, nullish coalescing, or spread at module level
+ * 2. ASCII characters only
  */
 
 import { Truck, ArrowCounterClockwise as RotateCcw, Shield, Headphones } from '@phosphor-icons/react';
@@ -18,7 +18,7 @@ import { Truck, ArrowCounterClockwise as RotateCcw, Shield, Headphones } from '@
  */
 
 /** @type {HeroContent} */
-export var heroContent = {
+export const heroContent = {
   heading: 'Curated living, delivered to your door',
   subheading: 'Discover our curated collection of stationery, homewares, and lifestyle essentials - crafted with care, shipped sustainably.',
   primaryCta: { label: 'Explore the collection', href: '/shop' },
@@ -36,7 +36,7 @@ export var heroContent = {
  */
 
 /** @type {FeatureTile[]} */
-export var featureTiles = [
+export const featureTiles = [
   {
     id: 'shipping',
     icon: Truck,
@@ -78,22 +78,22 @@ export var featureTiles = [
  */
 
 /** @type {CategoryShowcase[]} */
-export var categoryShowcase = [
+export const categoryShowcase = [
   {
-    id: 'stationery',
-    name: 'Stationery',
-    slug: 'stationery',
-    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=800&auto=format&fit=crop',
-    description: 'Notebooks, pens & paper goods',
-    productCount: 186
+    id: 'electronics',
+    name: 'Electronics',
+    slug: 'electronics',
+    image: 'https://images.unsplash.com/photo-1761641466573-f240b6e446de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    description: 'Tech gadgets and devices',
+    productCount: 15
   },
   {
-    id: 'desk',
-    name: 'Desk & office',
-    slug: 'desk-office',
-    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=800&auto=format&fit=crop',
-    description: 'Organisers, accessories & tools',
-    productCount: 124
+    id: 'clothing',
+    name: 'Clothing',
+    slug: 'clothing',
+    image: 'https://images.unsplash.com/photo-1769107805465-bfd41863f1a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    description: 'Modern apparel & fashion',
+    productCount: 24
   },
   {
     id: 'home',
@@ -101,19 +101,27 @@ export var categoryShowcase = [
     slug: 'home-living',
     image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800&auto=format&fit=crop',
     description: 'Candles, prints & homewares',
-    productCount: 97
+    productCount: 32
   },
   {
-    id: 'gifts',
-    name: 'Gifts & wrapping',
-    slug: 'gifts',
-    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238f495?q=80&w=800&auto=format&fit=crop',
-    description: 'Thoughtful gifts for every occasion',
-    productCount: 142
+    id: 'accessories',
+    name: 'Accessories',
+    slug: 'accessories',
+    image: 'https://images.unsplash.com/photo-1589524405310-640b626b0abd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    description: 'Watches, bags & essentials',
+    productCount: 18
+  },
+  {
+    id: 'sports',
+    name: 'Sports & Fitness',
+    slug: 'sports-fitness',
+    image: 'https://images.unsplash.com/photo-1771586791190-97ed536c54af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    description: 'Gym gear & equipment',
+    productCount: 12
   }
 ];
 
-export var collectionRowContent = {
+export const collectionRowContent = {
   trending: {
     title: 'Trending now',
     description: 'The most popular picks this week',
@@ -136,7 +144,7 @@ export var collectionRowContent = {
  */
 
 /** @type {BrandStory} */
-export var brandStory = {
+export const brandStory = {
   heading: 'Crafted with care, built to last',
   body: 'Every item in our collection is thoughtfully curated, ethically sourced, and designed to stand the test of time. We believe quality should be accessible to everyone.',
   image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=1632&auto=format&fit=crop',
@@ -144,14 +152,14 @@ export var brandStory = {
   ctaHref: '/about'
 };
 
-export var newsletterContent = {
+export const newsletterContent = {
   heading: 'Join the Woo Shop community',
   subheading: 'Subscribe for early access to new arrivals, maker stories, and an exclusive 10% off your first order.',
   placeholder: 'Your email address',
   buttonText: 'Subscribe'
 };
 
-export var shopByCategoryHeading = {
+export const shopByCategoryHeading = {
   title: 'Shop by category',
   headingLevel: 2
 };
