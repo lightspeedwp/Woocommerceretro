@@ -2,7 +2,67 @@
 
 **Last Updated:** 2026-03-15  
 **Status:** Active  
-**Guidelines Version:** v2.12
+**Guidelines Version:** v2.13
+
+---
+
+## 🗂️ Latest Session — March 15, 2026 (Guidelines Restructure)
+
+### Guidelines.md Restructure v3.0 ✅ **COMPLETE**
+
+**Strategy:** Reduce Guidelines.md from ~4,200 lines to ~380 lines by distributing content to existing sub-guidelines
+
+- [x] **T18.1** — Rewrote `/guidelines/Guidelines.md` as slim hub file ✅ **COMPLETE**
+  - Reduced from ~4,200 lines to ~380 lines (-91%)
+  - 8 sections: Vision, Critical Rules, Protected Files, File Organization, Documentation Folders, Workflow Commands, Sub-Guidelines Directory, Decision Tree
+  - All detailed content distributed to existing sub-guidelines
+  - Version history moved to `/CHANGELOG.md`
+- [x] **T18.2** — Updated `/CHANGELOG.md` with v2.11, v2.12, v2.13 entries ✅ **COMPLETE**
+  - Migration timeline updated through v2.13
+- [x] **T18.3** — Created `/prompts/update-guidelines.md` trigger prompt ✅ **COMPLETE**
+  - Frontmatter update standards, template alignment, file size checks
+- [x] **T18.4** — Created `/prompts/cleanup-guidelines.md` trigger prompt ✅ **COMPLETE**
+  - Duplicate detection, outdated detection, merge rules, deletion rules
+- [x] **T18.5** — Updated PROMPT_TRIGGER_SYSTEM.md with 2 new triggers ✅ **COMPLETE**
+  - `update guidelines` and `cleanup guidelines` registered (8 total triggers)
+
+**GUIDELINES RESTRUCTURE STATUS:** ✅ **v3.0 Complete — Hub file under 400 lines**
+
+---
+
+## 🗂️ Latest Session — March 15, 2026 (Trigger System & Templates)
+
+### Trigger System v3.0 & Documentation Workflow ✅ **COMPLETE**
+
+**Strategy:** Establish repeatable trigger words, templates, and strict prompt→report→task workflow
+
+- [x] **T17.1** — Created 4 new trigger prompt files ✅ **COMPLETE**
+  - `/prompts/audit.md` — compliance audit trigger
+  - `/prompts/optimize.md` — performance and file size optimization trigger
+  - `/prompts/status.md` — project status summary trigger
+  - `/prompts/document.md` — guideline creation/update trigger
+- [x] **T17.2** — Created 7 new templates in `/guidelines/_templates/` ✅ **COMPLETE**
+  - `general-guideline.md`, `prompt-template.md`, `report-template.md`, `task-list-template.md`
+  - `CHANGELOG-template.md`, `README-template.md`, `ATTRIBUTIONS-template.md`
+- [x] **T17.3** — Rewrote `/guidelines/PROMPT_TRIGGER_SYSTEM.md` v2.0 → v3.0 ✅ **COMPLETE**
+  - 6 registered triggers (cleanup, continue, audit, optimize, status, document)
+  - Workflow rules: guidelines-first, reports-before-tasks, file size limits
+  - Prompt/report folder conventions (single vs orchestrator)
+- [x] **T17.4** — Updated `/guidelines/Guidelines.md` ✅ **COMPLETE**
+  - Quick Workflow Commands: 6 triggers in table format
+  - New section: Prompt, Report & Task Workflow (3-step sequence)
+  - File size limits table (tsx/css/ts/md)
+  - Root .md restriction (Attributions, README, CHANGELOG only)
+  - Master task list as single source of truth
+  - Prompt/orchestrator task list naming convention
+- [x] **T17.5** — Updated `/guidelines/_templates.md` index ✅ **COMPLETE**
+  - Lists all 9 templates with use-for and example output
+  - Decision tree for template selection
+- [x] **T17.6** — Deleted 3 forbidden root .md files ✅ **COMPLETE** (previous session)
+  - `/WHATS-NEXT.md`, `/COMPLETION-SUMMARY.md`, `/CONTINUE-GUIDE.md`
+  - Actionable items consolidated into task-list.md
+
+**TRIGGER SYSTEM STATUS:** ✅ **v3.0 Complete — 6 triggers, 9 templates, strict workflow**
 
 ---
 
@@ -409,3 +469,50 @@ Say: "continue" → Execute next task
 - ⏳ **T6.9** - ProductBreadcrumbs.md (navigation trail, needs relocation from woocommerce/utility/)
 
 **STATUS:** 6/9 complete (67%) — ProductGallery ✅, ProductTitle ✅, ProductSummary ✅, ProductRating ✅, RelatedProducts ✅, ProductMeta ✅
+
+---
+
+## 📋 Backlog: Performance & Infrastructure (P2)
+
+Tasks consolidated from deleted root files (`/WHATS-NEXT.md`, `/COMPLETION-SUMMARY.md`, `/CONTINUE-GUIDE.md`) on 2026-03-15.
+
+### CSS Bundling Optimization
+
+- [ ] **T14.1** — Create CSS bundling script (`/scripts/bundle-css.sh`) to consolidate 280 individual `@import` statements into ~10 category bundles (layout, design, forms, product, feedback, retro, text, media, widgets, legacy)
+- [ ] **T14.2** — Inline critical above-the-fold CSS (header, hero, product-card) directly into `/styles/globals-minimal.css` for faster first paint
+
+### Performance Monitoring
+
+- [ ] **T14.3** — Re-enable PerformanceMonitor component (disabled during iframe debugging) to track render times and identify slow components
+
+### Legacy CSS Cleanup
+
+- [ ] **T14.4** — Audit and remove unused legacy funky CSS files from Batch 10 (50+ files). Target: 5-10% smaller CSS bundle
+
+### Testing Infrastructure
+
+- [ ] **T14.5** — Create unit tests for critical e-commerce flows: cart operations, checkout validation, product filtering/sorting, dark mode toggle, context providers
+- [ ] **T14.6** — Create E2E tests for automated user flows: add-to-cart → checkout, registration → login, product search → purchase, dark mode persistence
+
+---
+
+## 📋 Backlog: Documentation Standards (P2)
+
+New documentation guidelines created 2026-03-15. Tasks to bring existing docs into compliance.
+
+### Repository Documentation Compliance
+
+- [ ] **T15.1** — Add YAML front matter to all `/guidelines/` files per `/guidelines/Core-Repository-Guidelines.md` standards (172+ files)
+- [ ] **T15.2** — Audit all guideline files for Markdown hierarchy violations (skipped heading levels, multiple H1 headings, H5/H6 usage)
+- [ ] **T15.3** — Create `/CHANGELOG.md` following Keep a Changelog format per `/guidelines/Changelog-Guidelines.md`
+- [ ] **T15.4** — Update `/README.md` to include Project Anchor with AI agent directive, Quick Start, and Repository Map per `/guidelines/Readme-Guidelines.md`
+- [ ] **T15.5** — Audit all existing README files (`/guidelines/README.md`, `/tasks/README.md`, `/reports/README.md`, `/prompts/README.md`, `/scripts/README.md`, `/docs/README.md`) for compliance with Readme-Guidelines.md
+
+---
+
+## 📋 Backlog: Feature Enhancements (P3)
+
+- [ ] **T16.1** — Search improvements: autocomplete with product images, recent searches persistence, search filters (price, category, rating)
+- [ ] **T16.2** — Wishlist enhancements: social sharing, email to friend, price drop notifications, restock alerts
+- [ ] **T16.3** — Product comparison: side-by-side table, highlight differences, add to cart from comparison, save to account
+- [ ] **T16.4** — Account features: order history filtering, saved addresses, payment methods management, subscription management, loyalty points tracking

@@ -511,6 +511,85 @@
   color: var(--color-text-soft);
 }
 
+/* Route-specific archive header variants */
+.retro-archive-header__top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.retro-archive-header__top h1 {
+  margin: 0;
+}
+
+.retro-archive-header__icon {
+  flex-shrink: 0;
+}
+
+.retro-archive-header__badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  border: 2px solid currentColor;
+  animation: retro-badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes retro-badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.retro-archive-header--flash-sale {
+  border-left: 4px solid #ff2d55;
+  padding-left: 1rem;
+}
+.retro-archive-header--flash-sale .retro-archive-header__icon { color: #ff2d55; }
+.retro-archive-header--flash-sale .retro-archive-header__badge { color: #ff2d55; border-color: #ff2d55; background: rgba(255, 45, 85, 0.1); }
+
+.retro-archive-header--deals {
+  border-left: 4px solid #ff9f0a;
+  padding-left: 1rem;
+}
+.retro-archive-header--deals .retro-archive-header__icon { color: #ff9f0a; }
+.retro-archive-header--deals .retro-archive-header__badge { color: #ff9f0a; border-color: #ff9f0a; background: rgba(255, 159, 10, 0.1); }
+
+.retro-archive-header--sale {
+  border-left: 4px solid #30d158;
+  padding-left: 1rem;
+}
+.retro-archive-header--sale .retro-archive-header__icon { color: #30d158; }
+.retro-archive-header--sale .retro-archive-header__badge { color: #30d158; border-color: #30d158; background: rgba(48, 209, 88, 0.1); }
+
+.retro-archive-header--new {
+  border-left: 4px solid #5e5ce6;
+  padding-left: 1rem;
+}
+.retro-archive-header--new .retro-archive-header__icon { color: #5e5ce6; }
+.retro-archive-header--new .retro-archive-header__badge { color: #5e5ce6; border-color: #5e5ce6; background: rgba(94, 92, 230, 0.1); }
+
+.retro-archive-header--best {
+  border-left: 4px solid #bf5af2;
+  padding-left: 1rem;
+}
+.retro-archive-header--best .retro-archive-header__icon { color: #bf5af2; }
+.retro-archive-header--best .retro-archive-header__badge { color: #bf5af2; border-color: #bf5af2; background: rgba(191, 90, 242, 0.1); }
+
+.retro-archive-header--promo {
+  border-left: 4px solid #ff375f;
+  padding-left: 1rem;
+}
+.retro-archive-header--promo .retro-archive-header__icon { color: #ff375f; }
+.retro-archive-header--promo .retro-archive-header__badge { color: #ff375f; border-color: #ff375f; background: rgba(255, 55, 95, 0.1); }
+
+.retro-archive-count__empty {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
 .retro-archive-count {
   margin-bottom: 1rem;
   font-size: 0.75rem;

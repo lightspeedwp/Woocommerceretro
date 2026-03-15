@@ -7,6 +7,67 @@ This project uses a custom versioning scheme aligned with the main guidelines do
 
 ---
 
+## [2.13] - 2026-03-15
+
+### RETRO DEMO PAGES, TRIGGER SYSTEM v3.0 & GUIDELINES RESTRUCTURE
+
+### Added
+- Retro Demo Hub template (`/retro-demo/`) with 6 demo destination cards and quick stats
+- Marketing Landing Page template (`/retro-demo/landing-page/`) showcasing 15+ retro patterns
+- SVG decorations: RetroGridSVG, NeonDividerSVG, PixelStarSVG, ScanlineOverlay, HexGridSVG
+- Canvas graphics: RetroCanvasBackground with floating neon particles and perspective grid
+- Demo data file: `/src/app/data/retroDemo.ts` with 10 exported data constants
+- 4 new trigger prompts: `audit`, `optimize`, `status`, `document`
+- 7 new templates in `/guidelines/_templates/`: general-guideline, prompt-template, report-template, task-list-template, CHANGELOG-template, README-template, ATTRIBUTIONS-template
+
+### Changed
+- Trigger system upgraded to v3.0 (6 triggers, 9 templates, strict workflow rules)
+- Guidelines.md restructured as slim hub file (~380 lines), content distributed to sub-guidelines
+- Sitemap updated with "Retro Demo Pages" section (17th section)
+- Dev Tools updated with "Retro Demo Hub" card (10th tool)
+- `routes.minimal.ts` expanded from 4 to 15+ routes
+- `ATTRIBUTIONS.md` renamed to uppercase
+
+### Fixed
+- Sitemap and header nav links falling through to 404 (routes.minimal.ts only had homepage + retro-demo)
+- Sitemap and DevTools import paths corrected in routes.ts
+
+---
+
+## [2.12] - 2026-03-13
+
+### CSS FULL RESTORATION & IFRAME FIX
+
+### Added
+- `/styles/globals-minimal.css` (5 critical imports, 98% reduction from 280)
+- Production verification script: `/scripts/verify-production.sh`
+
+### Changed
+- Full CSS restoration: ALL 280 imports now active and stable
+- Google Fonts consolidated: 16 duplicate template injections reduced to 1 RootLayout injection
+- QuickView and ComparisonBar re-enabled after hook pattern corrections
+
+### Fixed
+- IframeMessageAbortError resolved (CSS @import overload identified and fixed)
+- QuickView Rules of Hooks violation (`useVariantSelection` moved to unconditional top-level)
+
+### Removed
+- 56 stale reports deleted (Jan-early March 2026)
+
+---
+
+## [2.11] - 2026-03-13
+
+### CONTEXT MEMOIZATION & HOOK DEPENDENCY FIXES
+
+### Fixed
+- TestimonialCarousel stale closure (goToPrevious/goToNext wrapped in useCallback)
+- 5 context providers performance optimized with useMemo/useCallback (CartContext, ThemeContext, WishlistContext, ComparisonContext, QuickViewContext)
+- Sitemap module-level constants extracted (250-line array moved to module scope)
+- Full hook dependency audit completed (zero issues found)
+
+---
+
 ## [2.10] - 2026-03-12
 
 ### NAVIGATION STREAMLINING & PERFORMANCE OPTIMIZATION
@@ -443,9 +504,12 @@ Mar 2026   v2.7  CSS optimization system
 Mar 2026   v2.8  CSS import chain (170+ files)
 Mar 2026   v2.9  Modern React standards + Tailwind elimination 100% COMPLETE
 Mar 2026   v2.10 Navigation streamlining + performance optimization
+Mar 2026   v2.11 Context memoization + hook dependency fixes
+Mar 2026   v2.12 CSS full restoration + iframe fix
+Mar 2026   v2.13 Retro demo pages + trigger system v3.0 + guidelines restructure
 ```
 
-**Current State (v2.10):**
+**Current State (v2.13):**
 - ES5 Modernization: COMPLETE (~450+ conversions)
 - Tailwind CSS Elimination: COMPLETE (200+ instances, zero dependencies)
 - WordPress CSS Alignment: COMPLETE (130+ block CSS files, 42 section CSS files)
