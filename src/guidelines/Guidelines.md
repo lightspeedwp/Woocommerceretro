@@ -1,13 +1,53 @@
 # WooCommerce Prototype — Guidelines & Architecture
 
-**Version:** 2.12  
-**Updated:** March 13, 2026  
+**Version:** 2.13  
+**Updated:** March 15, 2026  
 **Scope:** Brand-agnostic, **WooCommerce-first** prototype built with **WordPress block theme templates**, **Patterns**, and **WooCommerce blocks**.  
 **Philosophy:** "Shop-first", neutral aesthetics, strict accessibility (WCAG 2.1 AA), and FSE (Full Site Editing) architecture parity.
 
 ---
 
-## 🆕 What's New in v2.12
+## 🆕 What's New in v2.13
+
+### **Retro Demo Pages & Pattern Showcase** (March 15, 2026)
+
+1. **🎮 Retro Demo Hub (`/retro-demo/`)**
+   - **New template:** `RetroDemoIndex.tsx` - Hub page with cards linking to all demo destinations
+   - **Route:** `/retro-demo/` - Overview of available pattern showcases
+   - **Features:** Quick stats (176+ components, 48+ patterns, 23 templates, 280 CSS files), WCAG badge, and 6 demo page cards with tag pills
+   - **SVG decorations:** Concentric hexagonal grid background pattern
+
+2. **🚀 Marketing Landing Page (`/retro-demo/landing-page/`)**
+   - **New template:** `RetroDemoLandingPage.tsx` - 15+ retro patterns on a single page
+   - **Route:** `/retro-demo/landing-page/` - Full marketing-style landing page
+   - **Patterns demonstrated:** HeroRetro, CategoryRowRetro, FeaturedProductsRetro, FlashSaleBanner, PricingTable, TestimonialCarousel, BottomGridRetro, SpinningCoin3D, SubscriptionBox3D
+   - **Custom sections:** RetroStatsRow, RetroHowItWorks, RetroValueProps, RetroFAQ, RetroNewsletterBand, Retro3DShowcase, PatternIndexBanner
+   - **SVG elements:** RetroGridSVG (perspective grid), NeonDividerSVG (neon line dividers), PixelStarSVG (pixel art star), ScanlineOverlay (CRT effect)
+   - **Canvas/WebGL:** RetroCanvasBackground with floating neon pixel particles, color-cycling hue animation, and perspective grid overlay
+   - **Accessibility:** WCAG AA 2.2 compliant, prefers-reduced-motion detection, aria-expanded on FAQ, aria-pressed on 3D step buttons
+
+3. **📁 Demo Data File (`/src/app/data/retroDemo.ts`)**
+   - **Centralized data:** All demo page content in one reusable data file
+   - **Exports:** DEMO_HERO, DEMO_STATS, DEMO_TESTIMONIALS, DEMO_FAQ, DEMO_PRICING_PLANS, DEMO_HOW_IT_WORKS, DEMO_FLASH_SALE, DEMO_VALUE_PROPS, DEMO_PRODUCTS, LANDING_PAGE_SECTIONS
+   - **Images:** 6 Unsplash images (arcade, controllers, neon, merchandise, portraits)
+
+4. **🗺️ Sitemap Updated (17 sections)**
+   - **New section:** "Retro Demo Pages" with Rocket icon
+   - **Routes added:** `/retro-demo/` (hub), `/retro-demo/landing-page/` (marketing landing page)
+   - **Stats auto-recalculated:** Total routes, static/dynamic counts updated
+
+5. **🛠️ Dev Tools Updated (10 tools)**
+   - **New card:** "Retro Demo Hub" with Rocket icon and NEW badge
+   - **Stats updated:** CSS IMPORTS corrected to 280, VERSION bumped to v2.13
+
+6. **🛤️ Routes Updated & Sitemap Fix**
+   - **`routes.minimal.ts` expanded:** From 4 routes to 15+ routes covering all header nav destinations
+   - **Bug fix:** Sitemap link (and all header nav links) previously fell through to 404 because `routes.minimal.ts` only had homepage + retro-demo routes
+   - **Routes added to minimal:** `/sitemap`, `/shop` (+ `/shop/all`, `/shop/all-products`, `/shop/category/:slug`, `/shop/filtered`), `/promotions/flash-sale`, `/deals`, `/sale`, `/community`, `/about`, `/dev-tools`, `/retro-demo/`, `/retro-demo/landing-page/`
+   - **`routes.ts` import fix:** Sitemap and DevToolsIndex imports corrected from `@/pages/` (non-existent) to `./src/app/components/pages/`
+   - **Lazy-loaded:** All templates use `React.lazy()` for code splitting
+
+### **Previous: v2.12 - CSS Full Restoration Complete** (March 13, 2026)
 
 ### **CSS Full Restoration Complete - IframeMessageAbortError Resolved** (March 13, 2026)
 
@@ -4065,6 +4105,19 @@ flowchart TD
 
 ## 16. Version History
 
+### Version 2.13 (March 15, 2026) - RETRO DEMO PAGES & PATTERN SHOWCASE
+- ✅ **Retro Demo Hub** (`/retro-demo/`): Index page with 6 demo destination cards, quick stats, WCAG badge
+- ✅ **Marketing Landing Page** (`/retro-demo/landing-page/`): 15+ retro patterns showcased on single page
+- ✅ **Patterns demonstrated**: HeroRetro, CategoryRowRetro, FeaturedProductsRetro, FlashSaleBanner, PricingTable, TestimonialCarousel, BottomGridRetro, SpinningCoin3D, SubscriptionBox3D, plus 6 custom retro sections
+- ✅ **SVG decorations**: RetroGridSVG, NeonDividerSVG, PixelStarSVG, ScanlineOverlay, HexGridSVG
+- ✅ **Canvas graphics**: RetroCanvasBackground with floating neon particles and perspective grid
+- ✅ **Demo data file**: `/src/app/data/retroDemo.ts` with 10 exported data constants
+- ✅ **Sitemap updated**: New "Retro Demo Pages" section (17th section) with 2 routes
+- ✅ **Dev Tools updated**: "Retro Demo Hub" card added (10th tool), stats corrected
+- ✅ **Routes updated**: Both `routes.ts` and `routes.minimal.ts` include retro-demo routes
+- ✅ **Routes fix**: `routes.minimal.ts` expanded from 4→15+ routes; Sitemap/DevTools import paths corrected in `routes.ts`
+- ✅ **WCAG AA 2.2**: prefers-reduced-motion, aria-expanded, aria-pressed, keyboard navigation
+
 ### Version 2.12 (March 13, 2026) - IFRAME FIX & CSS MINIMAL LOADING
 - ✅ **IframeMessageAbortError resolved**: CSS @import overload identified and fixed
   - Created `/styles/globals-minimal.css` (5 critical imports, 98% reduction from 280)
@@ -4224,11 +4277,12 @@ flowchart TD
 **STYLING:** ✅ **TAILWIND CSS ELIMINATION COMPLETE** -- WordPress/WooCommerce semantic CSS only  
 **JS/TS:** ✅ **ES5 MODERNIZATION COMPLETE** -- Modern React with ESLint regression prevention  
 **NAVIGATION:** ✅ **SITEMAP-CENTRIC ARCHITECTURE** -- Streamlined header, enhanced discovery, performance optimized  
-**CSS LOADING:** ⚠️ **MINIMAL MODE** -- 5 critical imports active, 270+ deferred for iframe stability
+**CSS LOADING:** ✅ **FULL RESTORATION** -- All 280 CSS imports active and stable  
+**DEMO:** ✅ **RETRO DEMO PAGES** -- 15+ patterns showcased at `/retro-demo/landing-page/`
 
 ---
 
-**Last Updated:** March 13, 2026 (v2.12)  
+**Last Updated:** March 15, 2026 (v2.13)  
 **Maintainer:** Development Team  
 **Review Schedule:** Monthly  
 **Next Review:** April 2026

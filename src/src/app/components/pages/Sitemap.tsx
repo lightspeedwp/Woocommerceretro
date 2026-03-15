@@ -15,7 +15,7 @@ import {
   House, Storefront, Bag as ShoppingBag, User, BookOpenText, Info,
   Tag, Question, Headphones, CreditCard, ShieldCheck, Warning, Wrench,
   MagnifyingGlass, CaretDown, ArrowSquareOut, MapTrifold,
-  GameController, Users, CheckCircle, Code, Palette, FileText
+  GameController, Users, CheckCircle, Code, Palette, FileText, Rocket
 } from '@phosphor-icons/react';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
@@ -189,6 +189,14 @@ const ROUTE_SECTIONS: RouteSection[] = [
         { path: '/community', label: 'Community Hub', description: 'Player lounge with social feed and contributors' },
         { path: '/referral', label: 'Referral Program', description: 'Invite friends and earn reward tiers' },
         { path: '/events', label: 'Events', description: 'Upcoming events with RSVP and capacity tracking' },
+      ],
+    },
+    {
+      title: 'Retro Demo Pages',
+      icon: <Rocket size={20} weight="bold" />,
+      routes: [
+        { path: '/retro-demo', label: 'Retro Demo Hub', description: 'Overview of all retro demo pages and pattern showcase index' },
+        { path: '/retro-demo/landing-page', label: 'Marketing Landing Page', description: '15+ retro patterns: Hero, Stats, Pricing, FAQ, 3D effects, Newsletter, and more' },
       ],
     },
     {

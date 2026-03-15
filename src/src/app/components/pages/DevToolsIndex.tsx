@@ -12,7 +12,7 @@ import {
   Palette, Code, BookOpen, Eye,
   Stack as Layers, MapTrifold as Map,
   AppWindow as LayoutIcon, Heartbeat as Activity,
-  TextAa as FormIcon
+  TextAa as FormIcon, Rocket
 } from '@phosphor-icons/react';
 
 interface DevTool {
@@ -79,14 +79,21 @@ const devTools: DevTool[] = [
     icon: <LayoutIcon size={28} weight="bold" />,
     link: '/template-tester',
   },
+  {
+    title: 'Retro Demo Hub',
+    description: 'Comprehensive showcase of 15+ retro patterns with Hero, Stats, Pricing, 3D effects, FAQ, and Canvas graphics.',
+    icon: <Rocket size={28} weight="bold" />,
+    link: '/retro-demo',
+    badge: 'NEW',
+  },
 ];
 
 const stats = [
   { value: devTools.length, label: 'TOOLS' },
-  { value: '150+', label: 'COMPONENTS' },
-  { value: '5', label: 'CSS IMPORTS' },
+  { value: '176+', label: 'COMPONENTS' },
+  { value: '280', label: 'CSS IMPORTS' },
   { value: '100', label: 'PRODUCTS' },
-  { value: 'v2.12', label: 'VERSION' },
+  { value: 'v2.13', label: 'VERSION' },
 ];
 
 export const DevToolsIndex = () => {

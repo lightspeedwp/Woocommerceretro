@@ -5,7 +5,8 @@ import path from 'path';
 export default defineConfig(({ mode }) => ({
   plugins: [
     react({
-      // Disable Fast Refresh in production for Figma Make compatibility
+      // Disable Fast Refresh for Figma Make compatibility
+      fastRefresh: false,
       devTarget: mode === 'development' ? 'esnext' : undefined,
     })
   ],

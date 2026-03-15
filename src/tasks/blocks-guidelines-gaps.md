@@ -527,6 +527,125 @@ ProductAddToCart
 
 ---
 
+## P2: Medium Priority (Single Product Blocks — Optional Enhancements)
+
+### Single Product Blocks
+
+#### T6.1 — `single-product/ProductGallery.tsx` ✅ **COMPLETE**
+
+**File:** `/src/app/components/blocks/single-product/ProductGallery.tsx`  
+**Guideline:** ✅ `/guidelines/blocks/single-product/ProductGallery.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Responsive image gallery with thumbnail navigation, main image preview, click-to-select thumbnails, retro neon glow on active state, glass panel backgrounds, vertical strip on desktop/horizontal on mobile, defensive null handling, ARIA labels, keyboard navigation, dark mode, accessibility (WCAG AA), responsive design, state management, testing, future enhancements (lightbox, zoom, video support)  
+**Features:** 2 required props (images array, productName string), internal selectedIndex state, ImageWithFallback integration, automatic active state tracking, thumbnail click handlers, conditional rendering (null if no images), responsive flex layout  
+**Retro Theme:** Glass panel backgrounds on thumbnails (purple/pink gradient tint), neon cyan active border in dark mode (#00d9ff with 8px box-shadow glow), primary black border in light mode, spring hover animation (funky-spring-hover 1.0→1.05→1.0), funky card glow on main image container, border color transitions on hover  
+**BEM:** `.wc-product-gallery__*`
+
+---
+
+#### T6.2 — `single-product/ProductTitle.tsx` ✅ **COMPLETE**
+
+**File:** `/src/app/components/blocks/single-product/ProductTitle.tsx`  
+**Guideline:** ✅ `/guidelines/blocks/ProductTitle.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Product name as semantic h1 heading with optional brand badge for SEO-critical page title and product identity. Uses Typography component for fluid responsive scaling (28px→48px), automatic dark mode support, proper heading hierarchy, screen reader support, and WCAG AAA contrast compliance.  
+**Features:** 2 props (title string required, brand string optional), renders h1 via Typography variant, displays brand badge above title (uppercase, small, muted), margin-bottom spacing for product header stack, no custom className support (pure semantic component)  
+**SEO Critical:** ONLY h1 on product pages, matches page title tag, paired with JSON-LD schema markup, descriptive product names (not "Product 123"), early in DOM structure  
+**Typography Integration:** Uses `<Typography variant="h1">` for fluid clamp() sizing, consistent site-wide h1 styling, automatic dark mode color switching, semantic HTML structure, accessibility ARIA  
+**BEM:** `.wc-product-title`, `.wc-product-title__brand`
+
+---
+
+#### T6.3 — `single-product/ProductSummary.tsx` ✅ **COMPLETE**
+
+**File:** `/src/app/components/blocks/single-product/ProductSummary.tsx`  
+**Guideline:** ✅ `/guidelines/blocks/ProductSummary.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Product short description/summary text displayed below title and price, providing key selling points in scannable format. Uses Typography body variant for consistent styling, relaxed line-height (1.6) for readability, muted foreground color, automatic dark mode support, and WCAG AA contrast compliance.  
+**Features:** 1 required prop (summary string), renders paragraph via Typography body variant, margin-bottom spacing (24px), no max-width constraint (relies on parent), conditional rendering pattern for empty summaries  
+**Content Guidelines:** Optimal 150-250 characters (2-3 sentences), front-load benefits, include use cases, avoid long paragraphs/specs/jargon, distinct from full product description (tabs)  
+**SEO Integration:** Used for meta descriptions, schema markup, OpenGraph tags, 150-160 character ideal for meta  
+**BEM:** `.wc-product-summary`
+
+---
+
+#### T6.4 — `single-product/ProductRating.tsx` ✅ **COMPLETE**
+
+**File:** `/src/app/components/blocks/single-product/ProductRating.tsx`  
+**Guideline:** ✅ `/guidelines/blocks/ProductRating.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** 5-star visual rating display with customer review count using Phosphor Icons Star component. Filled stars use amber color (luminous-vivid-amber), empty stars show gray outline. Interactive review count with hover states (purple light mode, cyan with neon glow dark mode). Includes accessibility improvements (ARIA role="img", keyboard support), SEO schema integration, and WooCommerce data mapping.  
+**Features:** 2 required props (rating 0-5 number, reviewCount number), Math.floor() rounding (4.9→4 stars), 16px star size (consistent all devices), flexbox layout with 4px gap, clickable review count linking to reviews section  
+**Star States:** Filled (amber color + fill), empty (gray outline, no fill), CSS custom properties (--wc-star-filled, --wc-star-empty), dark mode lighter empty stars (neutral-500)  
+**Interactive:** Review count hover (accent purple → neon cyan), underline border, smooth color transitions, cursor pointer, optional scroll-to-reviews onClick handler  
+**Accessibility Notes:** Current missing ARIA role/label on stars, missing tabIndex/keyboard handlers on review count, guideline provides improvement patterns  
+**BEM:** `.wc-product-rating`, `.wc-product-rating__stars`, `.wc-product-rating__star--filled`, `.wc-product-rating__star--empty`, `.wc-product-rating__count`
+
+---
+
+#### T6.5 — `single-product/RelatedProducts.tsx` ✅ **COMPLETE**
+
+**File:** `/src/app/components/blocks/single-product/RelatedProducts.tsx`  
+**Guideline:** ✅ `/guidelines/blocks/RelatedProducts.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Curated grid of related products using intelligent tag-based matching algorithm with category fallback. Displays ProductCard grid with Typography h2 heading ("You may also like"). Supports both dynamic matching (productId prop) and manual curation (products array prop). Responsive grid layout: 1 col mobile, 2 col tablet, 4 col desktop.  
+**Features:** 3 optional props (productId string for dynamic, products array for manual, limit number default 4), returns null if empty, ProductCard rendering, getRelatedProducts utility integration  
+**Algorithm:** Tag-based scoring (shared tags = higher relevance), category fallback if no tag overlap, excludes source product, returns top N matches sorted by score  
+**Props Priority:** products array overrides productId, empty array returns null, limit controls max display (1-8 recommended)  
+**Layout:** CSS Grid with responsive columns (mobile 1, tablet 2, desktop 4), 20px gap, full-width section container  
+**Enhancement Ideas:** Custom heading prop, description prop, carousel mode mobile, stock filter, price range filter  
+**CSS Status:** ⚠️ Incomplete - missing `.wc-related-products__grid` styles in `/src/styles/sections/related-products.css` (guideline provides recommended CSS)  
+**BEM:** `.wc-related-products`, `.wc-related-products__header`, `.wc-related-products__title`, `.wc-related-products__description`, `.wc-related-products__grid`
+
+---
+
+#### T6.6 — `single-product/ProductMeta.tsx` ✅ **COMPLETE**
+
+**File:** `/src/app/components/blocks/single-product/ProductMeta.tsx`  
+**Guideline:** ✅ `/guidelines/blocks/ProductMeta.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Technical product metadata display with label-value pairs for SKU, categories, and tags. Uses flexbox column layout with 8px gaps, small 14px font size, muted foreground color. Labels bold dark/light, values medium gray, interactive links with hover states.  
+**Features:** 1 required prop (sku string), 2 optional props (categories/tags string arrays), conditional rendering (only show rows with data), comma-separated lists, 80px fixed label width for alignment  
+**Layout:** Flex column container, individual flex rows for each metadata type, gap spacing, automatic text wrapping  
+**Interactive Links:** Categories and tags rendered as `.wc-product-meta__link` with cursor pointer, hover color transition (currently #8B0000 hardcoded, should use CSS variables)  
+**Enhancement Ideas:** Interactive category pills, tag cloud visualization, copy SKU button, show/hide toggle, stock status badge  
+**CSS Status:** ⚠️ Missing dark mode hover state, hardcoded hover color #8B0000 should be var(--wp--preset--color--accent) light mode + var(--wp--preset--color--neon-cyan) dark mode  
+**Accessibility Notes:** Could benefit from semantic `<dl>`, `<dt>`, `<dd>` structure, ARIA labels, proper React Router Links for navigation  
+**BEM:** `.wc-product-meta`, `.wc-product-meta__row`, `.wc-product-meta__label`, `.wc-product-meta__value`, `.wc-product-meta__link`
+
+---
+
+#### T6.7 — `single-product/ReviewsTab.tsx`
+
+**File:** `/src/app/components/blocks/single-product/ReviewsTab.tsx`  
+**Guideline:** ⏳ Pending  
+**Priority:** Medium — Customer reviews display  
+**Features:** Review cards, star ratings, verified badge, form integration, dark mode, pagination
+
+---
+
+#### T6.8 — `single-product/StoreNotices.tsx`
+
+**File:** `/src/app/components/blocks/single-product/StoreNotices.tsx`  
+**Guideline:** ⏳ Pending  
+**Priority:** Low — Store-wide notices (shipping, returns, etc.)  
+**Features:** Alert component, icon support, dismissible, dark mode
+
+---
+
+#### T6.9 — `single-product/ProductBreadcrumbs.tsx`
+
+**File:** `/src/app/components/blocks/single-product/ProductBreadcrumbs.tsx`  
+**Guideline:** ⚠️ Exists at `/guidelines/blocks/woocommerce/utility/breadcrumbs.md` but needs relocation to `/guidelines/blocks/single-product/ProductBreadcrumbs.md`  
+**Priority:** Medium — Navigation trail  
+**Features:** Structured data (breadcrumb schema), link chain, current page indicator, dark mode
+
+---
+
+**P2 STATUS:** 1/9 complete (11%) — ProductGallery ✅
+
+---
+
 ## Structural
 
 - [x] **T4.36** Delete duplicate text block guidelines (heading.md, list.md, paragraph.md lowercase variants) — verified: no lowercase duplicates exist, only PascalCase files
