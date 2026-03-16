@@ -96,7 +96,7 @@ export const PageLoginRetro = () => {
                 </div>
               )}
 
-              <button type="submit" className="retro-button retro-button--primary retro-font-display retro-bold retro-login-layout__submit">
+              <button type="submit" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-login-layout__submit">
                 {view === 'login' ? <SignIn size={24} weight="bold" /> : <UserPlus size={24} weight="bold" />}
                 {view === 'login' ? 'START' : 'CREATE ACCOUNT'}
               </button>

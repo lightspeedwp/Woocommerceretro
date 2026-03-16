@@ -1,9 +1,9 @@
 # Prompt Trigger System
 
-**Version:** 4.0  
-**Updated:** March 15, 2026  
-**Purpose:** Trigger words for workflow automation with audit/report/task separation  
-**Status:** Active  
+**Version:** 4.1
+**Updated:** March 16, 2026
+**Purpose:** Trigger words for workflow automation with audit/report/task separation
+**Status:** Active
 **Supersedes:** `/guidelines/PROMPT_TRIGGER_SYSTEM.md` (v3.1)
 
 ---
@@ -40,13 +40,23 @@ audit && process reports → both in sequence
 
 **Aliases:** `clean` = `cleanup`, `next` = `continue`, `routes` = `fix routes`
 
-### 1b. Audit Triggers
+### 1b. Code Quality Triggers
+
+| Trigger | Prompt File | Purpose | Duration |
+|---------|-------------|---------|----------|
+| `apply bem` | `/prompts/apply-bem.md` | Full BEM compliance audit + fix workflow across all `.tsx` files | 30-60 min |
+
+**Behaviour:** Scans all `.tsx` components for 6 violation types (missing BEM blocks, inline styles, Tailwind classes, inconsistent naming, orphan classes, missing dark mode). Applies fixes directly using 100% CSS variables. Performs a token gap analysis and recommends `audit tokens` and/or `audit css` when the design system needs expansion. Verifies WCAG 2.2 AA/AAA contrast ratios for all new colour pairings. See `/guidelines/development/bem-methodology.md` for the full BEM naming convention and retro design rules.
+
+**Aliases:** `bem` = `apply bem`, `fix bem` = `apply bem`
+
+### 1c. Audit Triggers
 
 **`audit`** (bare) runs ALL sub-audits in sequence. Each sub-audit can also be run individually.
 
 | Trigger | Prompt File | Report Output | Domain |
 |---------|-------------|---------------|--------|
-| `audit` | Orchestrator — runs all below | All 9 reports | All |
+| `audit` | Orchestrator -- runs all below | All 9 reports | All |
 | `audit routes` | `/prompts/audits/audit-routes.md` | `/reports/audits/YYYY-MM-DD_routes-audit.md` | Routes |
 | `audit sitemap` | `/prompts/audits/audit-sitemap.md` | `/reports/audits/YYYY-MM-DD_sitemap-audit.md` | Sitemap |
 | `audit tokens` | `/prompts/audits/audit-tokens.md` | `/reports/audits/YYYY-MM-DD_tokens-audit.md` | Tokens |
@@ -56,14 +66,15 @@ audit && process reports → both in sequence
 | `audit responsive` | `/prompts/audits/audit-responsive.md` | `/reports/audits/YYYY-MM-DD_responsive-audit.md` | Responsive |
 | `audit styles` | `/prompts/audits/audit-styles.md` | `/reports/audits/YYYY-MM-DD_styles-audit.md` | Styles |
 | `audit guidelines` | `/prompts/audits/audit-guidelines.md` | `/reports/audits/YYYY-MM-DD_guidelines-audit.md` | Guidelines |
+| `audit images` | `/prompts/audits/audit-images.md` | `/reports/audits/YYYY-MM-DD_images-audit.md` | Images |
 
-### 1c. Orchestrator Triggers
+### 1d. Orchestrator Triggers
 
 | Trigger | Prompt File | Report Output | Domain |
 |---------|-------------|---------------|--------|
 | `audit retro` | `/prompts/redesign/retro-shop-audit-v2/PROMPT_RETRO_AUDIT_ORCHESTRATOR.md` | 9 reports in `/reports/retro-shop-audit-v2/` | Retro Redesign |
 
-### 1d. Combo Triggers
+### 1e. Combo Triggers
 
 | Trigger | Expands To | Purpose |
 |---------|-----------|---------|
@@ -92,20 +103,20 @@ audit && process reports → both in sequence
 ### 3a. Separation of Concerns
 
 ```
-┌──────────────────────────────────────────────┐
-│  AUDIT PHASE (audit triggers)                │
-│  Input: codebase + guidelines                │
-│  Output: reports ONLY (never task lists)      │
-│  Location: /reports/audits/                   │
-└────────────────────┬─────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────┐
-│  PROCESS PHASE (process reports trigger)     │
-│  Input: unprocessed reports                  │
-│  Output: domain task lists + registry update │
-│  Location: /tasks/{domain}-task-list.md      │
-└──────────────────────────────────────────────┘
++----------------------------------------------+
+|  AUDIT PHASE (audit triggers)                |
+|  Input: codebase + guidelines                |
+|  Output: reports ONLY (never task lists)      |
+|  Location: /reports/audits/                   |
++----------------------+-----------------------+
+                       |
+                       v
++----------------------------------------------+
+|  PROCESS PHASE (process reports trigger)     |
+|  Input: unprocessed reports                  |
+|  Output: domain task lists + registry update |
+|  Location: /tasks/{domain}-task-list.md      |
++----------------------------------------------+
 ```
 
 **Why separate?**
@@ -119,15 +130,15 @@ audit && process reports → both in sequence
 
 When `audit` (bare) is triggered, sub-audits run in this fixed order:
 
-1. `audit routes` — route/template alignment
-2. `audit sitemap` — sitemap component vs routes.ts sync
-3. `audit tokens` — design token usage and consistency
-4. `audit css` — CSS architecture and file health
-5. `audit a11y` — WCAG AA 2.2 compliance
-6. `audit data` — data file sizes and types
-7. `audit responsive` — responsive pattern compliance
-8. `audit styles` — hardcoded style detection
-9. `audit guidelines` — guideline freshness and compliance
+1. `audit routes` -- route/template alignment
+2. `audit sitemap` -- sitemap component vs routes.ts sync
+3. `audit tokens` -- design token usage and consistency
+4. `audit css` -- CSS architecture and file health
+5. `audit a11y` -- WCAG AA 2.2 compliance
+6. `audit data` -- data file sizes and types
+7. `audit responsive` -- responsive pattern compliance
+8. `audit styles` -- hardcoded style detection
+9. `audit guidelines` -- guideline freshness and compliance
 
 Each writes one report. The `audit` orchestrator does NOT create task lists.
 
@@ -166,10 +177,10 @@ Every audit report follows this structure:
 [...]
 
 ## Recommendations
-[Prioritized action items — these become tasks during processing]
+[Prioritized action items -- these become tasks during processing]
 ```
 
-**Key field:** `Status: Unprocessed` — flipped to `Processed` by `process reports`.
+**Key field:** `Status: Unprocessed` -- flipped to `Processed` by `process reports`.
 
 ### 3d. Process Reports Execution
 
@@ -189,7 +200,7 @@ When `process reports` is triggered:
 
 ### audit routes
 
-**Scope:** Compare templates in `/src/app/components/templates/` against routes in `/routes.ts`  
+**Scope:** Compare templates in `/src/app/components/templates/` against routes in `/routes.ts`
 **Checks:**
 - Templates without routes (orphaned)
 - Routes pointing to missing components
@@ -197,14 +208,14 @@ When `process reports` is triggered:
 - Route naming convention compliance
 - Dynamic route parameter consistency
 
-**Report:** `/reports/audits/YYYY-MM-DD_routes-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_routes-audit.md`
 **Task Domain:** `routes`
 
 ---
 
 ### audit sitemap
 
-**Scope:** Compare `/src/app/components/pages/Sitemap.tsx` ROUTE_SECTIONS against `/routes.ts`  
+**Scope:** Compare `/src/app/components/pages/Sitemap.tsx` ROUTE_SECTIONS against `/routes.ts`
 **Checks:**
 - Routes in routes.ts missing from Sitemap
 - Routes in Sitemap not in routes.ts (stale entries)
@@ -213,14 +224,14 @@ When `process reports` is triggered:
 - Statistics accuracy (total/static/dynamic counts)
 - Navigation data (`/src/app/data/navigation.ts`) link validity
 
-**Report:** `/reports/audits/YYYY-MM-DD_sitemap-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_sitemap-audit.md`
 **Task Domain:** `routes`
 
 ---
 
 ### audit tokens
 
-**Scope:** Design token files in `/src/styles/theme-variables.css` and `/src/styles/retro-theme.css`  
+**Scope:** Design token files in `/src/styles/theme-variables.css` and `/src/styles/retro-theme.css`
 **Checks:**
 - Orphaned tokens (defined but never referenced)
 - Missing dark mode overrides
@@ -229,14 +240,14 @@ When `process reports` is triggered:
 - Typography scale consistency
 - Spacing scale gaps
 
-**Report:** `/reports/audits/YYYY-MM-DD_tokens-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_tokens-audit.md`
 **Task Domain:** `tokens`
 
 ---
 
 ### audit css
 
-**Scope:** All CSS files in `/src/styles/` and `/styles/globals.css`  
+**Scope:** All CSS files in `/src/styles/` and `/styles/globals.css`
 **Checks:**
 - Files exceeding 200-line limit
 - Broken @import paths in globals.css
@@ -246,34 +257,34 @@ When `process reports` is triggered:
 - Duplicate CSS rules across files
 - Missing `@import` entries for new CSS files
 
-**Report:** `/reports/audits/YYYY-MM-DD_css-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_css-audit.md`
 **Task Domain:** `css`
 
 ---
 
 ### audit a11y
 
-**Scope:** All interactive components in `/src/app/components/`  
+**Scope:** All interactive components in `/src/app/components/`
 **Checks:**
 - Missing `aria-label` on icon-only buttons
 - Touch targets below 44x44px
 - Color contrast violations (4.5:1 minimum)
 - Missing `aria-expanded` on toggles
-- Heading hierarchy skips (h1 → h3)
+- Heading hierarchy skips (h1 to h3)
 - Missing form label associations (`htmlFor`/`id`)
 - Focus management in modals/drawers
 - `prefers-reduced-motion` compliance
 - Missing `alt` text on images
 - Keyboard navigation gaps
 
-**Report:** `/reports/audits/YYYY-MM-DD_a11y-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_a11y-audit.md`
 **Task Domain:** `a11y`
 
 ---
 
 ### audit data
 
-**Scope:** All data files in `/src/app/data/`  
+**Scope:** All data files in `/src/app/data/`
 **Checks:**
 - Files exceeding 250-line limit
 - TypeScript interface compliance
@@ -282,14 +293,14 @@ When `process reports` is triggered:
 - Unused data exports
 - Consistent ID/slug naming conventions
 
-**Report:** `/reports/audits/YYYY-MM-DD_data-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_data-audit.md`
 **Task Domain:** `data`
 
 ---
 
 ### audit responsive
 
-**Scope:** Templates and patterns with responsive layout  
+**Scope:** Templates and patterns with responsive layout
 **Checks:**
 - Missing mobile breakpoint styles
 - Fixed pixel widths that should be fluid
@@ -298,14 +309,14 @@ When `process reports` is triggered:
 - Touch target sizes on mobile
 - Navigation patterns at mobile breakpoints
 
-**Report:** `/reports/audits/YYYY-MM-DD_responsive-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_responsive-audit.md`
 **Task Domain:** `responsive`
 
 ---
 
 ### audit styles
 
-**Scope:** All `.tsx` component files  
+**Scope:** All `.tsx` component files
 **Checks:**
 - Inline `style={{}}` attributes (except animation/dynamic)
 - Hardcoded hex/rgb color values in className or style
@@ -314,14 +325,14 @@ When `process reports` is triggered:
 - Missing BEM class names (unstyled elements)
 - `!important` usage
 
-**Report:** `/reports/audits/YYYY-MM-DD_styles-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_styles-audit.md`
 **Task Domain:** `css`
 
 ---
 
 ### audit guidelines
 
-**Scope:** All guideline files in `/guidelines/`  
+**Scope:** All guideline files in `/guidelines/`
 **Checks:**
 - Guideline files without valid frontmatter (version, date)
 - Guidelines older than 30 days without updates
@@ -330,8 +341,23 @@ When `process reports` is triggered:
 - Template compliance (uses correct template)
 - Coverage gaps (components without guidelines)
 
-**Report:** `/reports/audits/YYYY-MM-DD_guidelines-audit.md`  
+**Report:** `/reports/audits/YYYY-MM-DD_guidelines-audit.md`
 **Task Domain:** `guidelines`
+
+---
+
+### audit images
+
+**Scope:** All image files in `/src/app/assets/images/`
+**Checks:**
+- Missing alt text
+- Incorrect file format (should be webp)
+- Large file sizes (over 100KB)
+- Unused images
+- Incorrect file paths
+
+**Report:** `/reports/audits/YYYY-MM-DD_images-audit.md`
+**Task Domain:** `images`
 
 ---
 
@@ -341,6 +367,7 @@ When `process reports` is triggered:
 
 ```
 /prompts/cleanup.md                          (workflow trigger)
+/prompts/apply-bem.md                        (code quality trigger)
 /prompts/audits/audit-css.md                 (audit sub-trigger)
 /prompts/process-reports.md                  (report processor)
 ```
@@ -354,7 +381,7 @@ When `process reports` is triggered:
 
 ### Rule 3: Task Lists Go in /tasks/
 
-Created ONLY by `process reports` or workflow triggers — never by audit triggers.
+Created ONLY by `process reports` or workflow triggers -- never by audit triggers.
 
 | Domain | Task List File | Created By |
 |--------|---------------|-----------|
@@ -373,7 +400,7 @@ Created ONLY by `process reports` or workflow triggers — never by audit trigge
 | `blocks` | `/tasks/blocks-task-list.md` | `process reports`, `document` |
 | `guidelines` | `/tasks/guidelines-task-list.md` | `process reports` |
 
-These files are **protected** — never delete them. Mark as `Status: Complete` when done.
+These files are **protected** -- never delete them. Mark as `Status: Complete` when done.
 
 ### Rule 4: Guidelines Updated Before Auditing
 
@@ -419,6 +446,17 @@ Never create task lists during an audit trigger. The AI needs the complete pictu
 4. Update relevant task lists
 5. Register in /tasks/task-list.md
 6. Report summary to user
+```
+
+**Code quality triggers (apply bem):**
+```
+1. Read prompt file
+2. Read required guidelines (verify current)
+3. Scan CSS inventory and token definitions
+4. Scan all .tsx components for violations
+5. Apply fixes directly (CSS + TSX edits)
+6. Perform token gap analysis
+7. Report summary with follow-up trigger recommendations
 ```
 
 ### Rule 8: Master Task List Registration
@@ -486,6 +524,7 @@ AUDITING:
   audit responsive         → Responsive pattern audit (report only)
   audit styles             → Hardcoded styles audit (report only)
   audit guidelines         → Guideline compliance audit (report only)
+  audit images             → Image file audit (report only)
 
 PROCESSING:
   process reports          → Convert unprocessed reports → task lists
@@ -503,11 +542,15 @@ WORKFLOW:
   update guidelines        → Refresh guideline frontmatter
   cleanup guidelines       → Merge/delete outdated guidelines
   fix routes               → Validate and repair all routes, links, and nav data
+
+CODE QUALITY:
+  apply bem                → Full BEM compliance audit + fix (direct code fixes)
 ```
 
 ---
 
-**Version:** 4.0  
-**Last Updated:** March 15, 2026  
-**Lines:** ~350  
+**Version:** 4.1
+**Last Updated:** March 16, 2026
+**Total Triggers:** 13 (9 workflow + 1 code quality + 9 audit + 1 orchestrator + 2 combo = 22 including sub-audits)
+**Lines:** ~400
 **Supersedes:** `/guidelines/PROMPT_TRIGGER_SYSTEM.md` v3.1

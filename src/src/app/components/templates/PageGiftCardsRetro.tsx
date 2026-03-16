@@ -52,7 +52,7 @@ export const PageGiftCardsRetro = () => {
                         key={val}
                         type="button"
                         onClick={() => setAmount(val)}
-                        className={`retro-button retro-font-display ${amount === val ? 'retro-button--primary' : 'retro-button--secondary'} retro-gift-cards-layout__amount-btn`}
+                        className={`retro-btn retro-font-display ${amount === val ? 'retro-btn--primary' : 'retro-btn--secondary'} retro-gift-cards-layout__amount-btn`}
                       >
                         ${val}
                       </button>
@@ -70,7 +70,7 @@ export const PageGiftCardsRetro = () => {
                   <textarea id="giftMessage" rows={3} placeholder="It's dangerous to go alone! Take this." className="retro-font-body retro-gift-cards-layout__textarea" />
                 </div>
 
-                <button type="submit" className="retro-button retro-button--primary retro-font-display retro-bold retro-gift-cards-layout__submit">ADD TO CART</button>
+                <button type="submit" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-gift-cards-layout__submit">ADD TO CART</button>
               </form>
             </div>
           </div>

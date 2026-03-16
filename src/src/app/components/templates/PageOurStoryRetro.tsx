@@ -82,14 +82,14 @@ export const PageOurStoryRetro = () => {
               {storyValues.map((value: any, i: number) => {
                 const Icon = valueIcons[value.icon] || Heart;
                 return (
-                  <div key={i} className="retro-card retro-card-glow">
+                  <div key={i} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {value.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {value.description}
                     </p>
                   </div>
@@ -143,10 +143,10 @@ export const PageOurStoryRetro = () => {
                 {ourStoryPageContent.ctaText}
               </p>
               <div className="retro-cta-actions">
-                <Link to="/shop" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display">
                   {ourStoryPageContent.ctaButtonPrimary.toUpperCase()} <ArrowRight size={20} weight="bold" />
                 </Link>
-                <Link to="/about/team" className="retro-button retro-button--secondary retro-font-display">
+                <Link to="/about/team" className="retro-btn retro-btn--secondary retro-font-display">
                   {ourStoryPageContent.ctaButtonSecondary.toUpperCase()} <ArrowRight size={20} weight="bold" />
                 </Link>
               </div>

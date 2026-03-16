@@ -2,14 +2,18 @@
  * PageFAQRetro
  *
  * "PlayPocket" FSE theme - FAQ page with accordion.
+ * All content driven from /data/faq.ts.
  * WCAG AA 2.2 compliant.
+ *
+ * @route /faq
+ * @template
  */
 
 import { useState, type ComponentType } from 'react';
 import { CaretDown, ChatCircle, Question, ShieldCheck } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
-import { faqCategories } from '../../data/faq';
+import { faqCategories, faqPageContent } from '../../data/faq';
 
 export const PageFAQRetro = () => {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
@@ -33,9 +37,9 @@ export const PageFAQRetro = () => {
         <div className="retro-faq-layout">
           {/* Title Banner */}
           <div className="retro-title-banner retro-faq-layout__banner">
-            <h1 className="retro-font-display retro-bold retro-faq-layout__title">GAME GUIDE (FAQ)</h1>
+            <h1 className="retro-font-display retro-bold retro-faq-layout__title">{faqPageContent.heroTitle}</h1>
             <p className="retro-font-body retro-faq-layout__subtitle">
-              Stuck on a level? Check the manual below for answers to common questions.
+              {faqPageContent.heroSubtitle}
             </p>
           </div>
 
@@ -98,6 +102,6 @@ export const PageFAQRetro = () => {
       </div>
     </div>
   );
-}
+};
 
 PageFAQRetro.displayName = 'PageFAQRetro';

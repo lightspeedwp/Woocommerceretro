@@ -17,8 +17,8 @@ interface ShopLink {
 
 const browseLinks: ShopLink[] = [
   { title: 'All Products', href: '/shop', Icon: Storefront },
-  { title: 'New Arrivals', href: '/new-arrivals', Icon: Sparkle, badge: 'new' },
-  { title: 'Best Sellers', href: '/best-sellers', Icon: Star },
+  { title: 'New arrivals', href: '/new-arrivals', Icon: Sparkle, badge: 'new' },
+  { title: 'Best sellers', href: '/best-sellers', Icon: Star },
   { title: 'Deals', href: '/deals', Icon: Lightning },
   { title: 'Gift Cards', href: '/gift-cards', Icon: Gift },
   { title: 'Sale', href: '/sale', Icon: Percent, badge: 'hot' }
@@ -52,8 +52,8 @@ const featuredCards = [
 export const ShopMegaMenu = () => {
   const renderContent = (closeMenu: () => void) => (
     <div className="wp-mega-menu__content">
-      <div className="funky-mega__orb funky-mega__orb--pink" style={{ top: '-80px', right: '-60px' }} />
-      <div className="funky-mega__orb funky-mega__orb--cyan" style={{ bottom: '-40px', left: '-40px' }} />
+      <div className="funky-mega__orb funky-mega__orb--pink funky-mega__orb--shop-pink" />
+      <div className="funky-mega__orb funky-mega__orb--cyan funky-mega__orb--shop-cyan" />
       <div className="funky-mega__inner funky-mega__inner--shop">
         {/* Browse column */}
         <div className="funky-mega__column funky-mega__column--bordered">

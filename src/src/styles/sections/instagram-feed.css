@@ -10,7 +10,7 @@
 .wp-instagram-feed__content {
   display: flex;
   flex-direction: column;
-  gap: 48px; /* gap-12 */
+  gap: var(--wp--preset--spacing--70); /* 48px */
 }
 
 /* Header with inner spacing */
@@ -23,7 +23,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px; /* gap-4 */
+  gap: var(--wp--preset--spacing--40); /* 16px */
 }
 
 .wp-instagram-feed__title {
@@ -102,7 +102,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 .wp-instagram-feed__item:hover .wp-instagram-feed__overlay {
@@ -126,10 +126,10 @@
   top: 0.5rem;
   right: 0.5rem;
   background-color: rgba(0, 0, 0, 0.7);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   padding: 2px 6px;
   border-radius: var(--wp--preset--border-radius--sm);
-  font-size: 0.65rem;
+  font-size: var(--wp--preset--font-size--xs);
   font-weight: var(--wp--preset--font-weight--bold);
 }
 

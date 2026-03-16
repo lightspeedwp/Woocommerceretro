@@ -101,14 +101,14 @@ export const PageTeamRetro = () => {
                       {member.name.split(' ').map((n) => n[0]).join('')}
                     </span>
                   </div>
-                  <h3 className="retro-card-title retro-font-display retro-bold">
+                  <h3 className="retro-card__title retro-font-display retro-bold">
                     {member.name.toUpperCase()}
                   </h3>
                   <span className="retro-team-role retro-font-body">
                     {member.role}
                   </span>
                   {member.bio && (
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {member.bio}
                     </p>
                   )}
@@ -138,7 +138,7 @@ export const PageTeamRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {teamPageContent.ctaText}
               </p>
-              <Link to="/about/careers" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/about/careers" className="retro-btn retro-btn--primary retro-font-display">
                 {teamPageContent.ctaButton.toUpperCase()} <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

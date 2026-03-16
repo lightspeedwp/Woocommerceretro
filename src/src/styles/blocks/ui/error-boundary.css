@@ -1,0 +1,119 @@
+/**
+ * Error Boundary & Developer Tools / Live Preview Styles
+ */
+
+/* ========================================
+   DEVELOPER TOOLS / LIVE PREVIEW
+   ======================================== */
+
+.wp-live-preview {
+  min-height: 100vh;
+  background-color: var(--wp--preset--color--background);
+}
+
+.wp-live-preview__header {
+  padding: var(--wp--preset--spacing--40);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--surface);
+}
+
+.wp-live-preview__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100vh - 80px);
+}
+
+@media (min-width: 1024px) {
+  .wp-live-preview__layout {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+.wp-live-preview__sidebar {
+  border-right: 1px solid var(--wp--preset--color--border);
+  background-color: var(--wp--preset--color--surface);
+  padding: var(--wp--preset--spacing--50);
+}
+
+.wp-live-preview__main {
+  padding: var(--wp--preset--spacing--60);
+}
+
+/* ========================================
+   ERROR BOUNDARY
+   ======================================== */
+
+.wp-error-boundary {
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40);
+  text-align: center;
+}
+
+.wp-error-boundary__container {
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+.wp-error-boundary__icon {
+  margin-inline: auto;
+  margin-bottom: var(--wp--preset--spacing--50);
+  color: var(--wp--preset--color--error);
+}
+
+.wp-error-boundary__details-summary {
+  cursor: pointer;
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+  transition: color 0.2s ease;
+}
+
+.wp-error-boundary__details-summary:hover {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-error-boundary__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .wp-error-boundary__actions {
+    flex-direction: row;
+  }
+}
+
+.wp-error-boundary__btn--primary {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+.wp-error-boundary__btn--primary:hover {
+  opacity: 0.9;
+}
+
+.wp-error-boundary__btn--secondary {
+  background-color: var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--secondary-foreground);
+}
+
+.wp-error-boundary__btn--secondary:hover {
+  opacity: 0.8;
+}
+
+.wp-error-boundary__btn--text {
+  background: transparent;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-error-boundary__btn--text:hover {
+  color: var(--wp--preset--color--accent, #7c3aed);
+}
+
+.wp-error-inline {
+  padding: var(--wp--preset--spacing--40);
+  background-color: rgba(220, 38, 38, 0.06);
+  border: 1px solid var(--wp--preset--color--error);
+  border-radius: var(--wp--preset--border-radius--md);
+  color: var(--wp--preset--color--error);
+}

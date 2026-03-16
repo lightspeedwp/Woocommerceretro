@@ -25,7 +25,7 @@
 }
 
 .woocommerce-mobile-menu__inner {
-  max-width: var(--wp--preset--layout--content-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin: 0 auto;
   padding: var(--wp--preset--spacing--40);
   border-radius: var(--wp--preset--border-radius--lg);

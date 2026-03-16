@@ -1,0 +1,107 @@
+/* ========================================
+   FUNKY UTILITY CLASSES
+   Shared glow/animation helpers used across
+   multiple funky-themed components.
+   ======================================== */
+
+.wp-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.wp-glow:hover {
+  box-shadow: var(--wp--preset--shadow--glow);
+}
+
+.funky-card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.funky-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #00ff00);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.funky-card-glow:hover::before {
+  opacity: 1;
+}
+
+.funky-spring-hover {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.funky-spring-hover:hover {
+  transform: scale(1.05);
+}
+
+.funky-image-glow {
+  transition: filter 0.3s ease;
+}
+
+.funky-image-glow:hover {
+  filter: brightness(1.05);
+}
+
+.funky-btn-neon {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--retro-ink);
+  background: var(--retro-signal);
+  color: var(--retro-ink);
+  box-shadow: 2px 2px 0px var(--retro-ink);
+  font-family: "Silkscreen", monospace;
+  transition: all 0.2s ease;
+}
+
+.funky-btn-neon::after {
+  display: none;
+}
+
+.funky-btn-neon:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--retro-ink);
+}
+
+.funky-text-pink {
+  color: #be185d;
+}
+
+.dark .funky-text-pink {
+  color: #f472b6;
+}
+
+.funky-text-cyan {
+  color: #0e7490;
+}
+
+.dark .funky-text-cyan {
+  color: #22d3ee;
+}
+
+.funky-title {
+  transition: color 0.2s ease;
+}
+
+.funky-input-glow:focus {
+  box-shadow: 0 0 0 2px var(--wp--preset--color--ring);
+  border-color: transparent;
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funky-spring-hover {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .funky-card-glow::before {
+    transition: none;
+  }
+}

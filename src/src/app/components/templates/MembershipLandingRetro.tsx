@@ -75,14 +75,14 @@ export const MembershipLandingRetro = () => {
               {memberBenefits.map((benefit: any, index: number) => {
                 const Icon = benefit.icon;
                 return (
-                  <div key={index} className="retro-card retro-card-glow">
+                  <div key={index} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {benefit.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {benefit.description}
                     </p>
                   </div>
@@ -162,7 +162,7 @@ export const MembershipLandingRetro = () => {
 
                     <Link
                       to={`/membership/${plan.id}`}
-                      className={`retro-button retro-font-display ${isPopular ? 'retro-button--primary' : 'retro-button--secondary'}`}
+                      className={`retro-btn retro-font-display ${isPopular ? 'retro-btn--primary' : 'retro-btn--secondary'}`}
                     >
                       JOIN {plan.name.toUpperCase()} <ArrowRight size={20} weight="bold" />
                     </Link>
@@ -183,7 +183,7 @@ export const MembershipLandingRetro = () => {
         {/* ROI Calculator */}
         <section className="retro-section retro-section--roi" aria-labelledby="mem-roi-heading">
           <div className="retro-container">
-            <div className="retro-card retro-card-highlight retro-roi-card">
+            <div className="retro-card retro-card--highlight retro-roi-card">
               <div className="retro-roi-icon">
                 <Gift size={48} weight="bold" className="retro-neon-icon" aria-hidden="true" />
               </div>
@@ -218,7 +218,7 @@ export const MembershipLandingRetro = () => {
               <p className="retro-font-body retro-roi-summary">
                 Premium membership costs just £19.99/month. You save £20+ every month!
               </p>
-              <a href="#membership-tiers" className="retro-button retro-button--primary retro-font-display">
+              <a href="#membership-tiers" className="retro-btn retro-btn--primary retro-font-display">
                 START SAVING TODAY <ArrowRight size={20} weight="bold" />
               </a>
             </div>
@@ -254,7 +254,7 @@ export const MembershipLandingRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 Start saving today with up to 30% off every purchase. Cancel anytime, no commitment.
               </p>
-              <a href="#membership-tiers" className="retro-button retro-button--primary retro-font-display">
+              <a href="#membership-tiers" className="retro-btn retro-btn--primary retro-font-display">
                 BECOME A MEMBER <ArrowRight size={20} weight="bold" />
               </a>
             </div>
@@ -277,29 +277,29 @@ const FaqAccordionRetro = ({ items }: FaqAccordionRetroProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="retro-faq-list">
+    <div className="retro-faq__list">
       {items.map((item, index) => (
-        <div key={item.id} className="retro-faq-item">
+        <div key={item.id} className="retro-faq__item">
           <button
-            className="retro-faq-trigger"
+            className="retro-faq__trigger"
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
             aria-expanded={openIndex === index}
             aria-controls={`mem-faq-panel-${item.id}`}
           >
-            <span className="retro-faq-question retro-font-body retro-bold">
+            <span className="retro-faq__question retro-font-body retro-bold">
               {item.question}
             </span>
             <CaretDown
               size={20}
               weight="bold"
-              className={`retro-faq-chevron ${openIndex === index ? 'retro-faq-chevron--open' : ''}`}
+              className={`retro-faq__chevron ${openIndex === index ? 'retro-faq__chevron--open' : ''}`}
               aria-hidden="true"
             />
           </button>
           {openIndex === index && (
             <div
               id={`mem-faq-panel-${item.id}`}
-              className="retro-faq-answer"
+              className="retro-faq__answer"
               role="region"
             >
               <p className="retro-font-body">{item.answer}</p>

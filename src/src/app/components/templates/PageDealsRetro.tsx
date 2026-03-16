@@ -91,7 +91,7 @@ export const PageDealsRetro = () => {
                 <p className="retro-font-body retro-empty-desc">
                   Check back soon for great discounts!
                 </p>
-                <Link to="/shop" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display">
                   BROWSE ALL PRODUCTS <ArrowRight size={20} weight="bold" />
                 </Link>
               </div>
@@ -112,7 +112,7 @@ export const PageDealsRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 New deals drop every week. Browse our full collection to find your next favourite.
               </p>
-              <Link to="/shop" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display">
                 SHOP ALL PRODUCTS <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

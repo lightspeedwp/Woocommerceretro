@@ -15,7 +15,7 @@
 }
 
 .retro-container {
-  max-width: 1440px;
+  max-width: var(--wp--preset--layout--wide-size, 1440px);
   margin: 0 auto;
   padding-inline: clamp(1rem, 3vw, 2rem);
   display: flex;
@@ -61,190 +61,10 @@
   line-height: 1;
 }
 
-/* Hero */
-.retro-hero {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid var(--color-ink);
-  border-radius: 1rem;
-  background-color: transparent;
-  position: relative;
-  overflow: hidden;
-}
-@media (min-width: 768px) {
-  .retro-hero { flex-direction: row; align-items: center; }
-}
-.retro-hero-dots {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.25rem;
-  opacity: 0.5;
-  z-index: 10;
-}
-.retro-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: var(--color-ink);
-}
-.retro-dot:nth-child(2), .retro-dot:nth-child(3) {
-  background-color: transparent;
-  border: 1px solid var(--color-ink);
-}
-.retro-hero-left {
-  width: 100%;
-  padding: 2rem;
-  position: relative;
-  z-index: 10;
-}
-@media (min-width: 768px) {
-  .retro-hero-left { width: 50%; padding: 3rem; }
-}
-.retro-hero-title {
-  font-size: 3.5rem;
-  line-height: 1.1;
-  margin: 0 0 1.5rem 0;
-  color: var(--color-ink);
-}
-@media (min-width: 1024px) {
-  .retro-hero-title { font-size: 4rem; }
-}
-.retro-hero-highlight {
-  background-color: var(--color-signal);
-  color: var(--wp--preset--color--primary-foreground, #101417);
-  padding: 0 0.5rem;
-  display: inline-block;
-  margin-top: 0.5rem;
-}
-.retro-hero-desc {
-  font-size: 1.125rem;
-  color: var(--color-ink);
-  margin: 0 0 2rem 0;
-  max-width: 24rem;
-}
+/* Hero — DEPRECATED: active styles moved to pp-hero.css */
 
-.retro-button {
-  background-color: var(--color-ink);
-  color: var(--color-paper);
-  border: 2px solid var(--color-ink);
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-retro);
-  transition: all 0.2s ease;
-}
-.retro-button:hover {
-  transform: translate(2px, 2px);
-  box-shadow: var(--shadow-retro-hover);
-}
-.retro-button--secondary {
-  background-color: var(--color-signal);
-  color: var(--wp--preset--color--primary-foreground, #101417);
-}
-.retro-button--secondary:hover {
-  background-color: var(--wp--preset--color--cta-hover);
-}
-
-.retro-button--primary {
-  /* Same as base .retro-button — ink bg, paper text */
-  background-color: var(--color-ink);
-  color: var(--color-paper);
-}
-
-.retro-hero-right {
-  width: 100%;
-  background-color: var(--color-screen);
-  background-image: 
-    linear-gradient(rgba(30, 38, 48, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 38, 48, 0.1) 1px, transparent 1px);
-  background-size: 32px 32px;
-  background-position: center;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border-top: 2px solid var(--color-ink);
-  min-height: 400px;
-}
-.dark .retro-hero-right {
-  background-image: 
-    linear-gradient(rgba(242, 238, 230, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 238, 230, 0.05) 1px, transparent 1px);
-}
-@media (min-width: 768px) {
-  .retro-hero-right { width: 50%; border-top: none; border-left: 2px solid var(--color-ink); }
-}
-
-.retro-hero-stage {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1;
-}
-
-.retro-hero-stage-main {
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 65%;
-  height: 65%;
-  object-fit: cover;
-  border: 2px solid var(--color-ink);
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-retro);
-  z-index: 2;
-  background-color: var(--color-paper);
-}
-
-.retro-hero-stage-sub1 {
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
-  width: 50%;
-  height: 50%;
-  object-fit: cover;
-  border: 2px solid var(--color-ink);
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-retro);
-  z-index: 3;
-  background-color: var(--color-paper);
-}
-
-.retro-hero-stage-sub2 {
-  position: absolute;
-  top: 15%;
-  right: 0%;
-  width: 40%;
-  height: 40%;
-  object-fit: cover;
-  border: 2px solid var(--color-ink);
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-retro);
-  z-index: 1;
-  background-color: var(--color-paper);
-}
-
-.retro-hero-stage-main,
-.retro-hero-stage-sub1,
-.retro-hero-stage-sub2 {
-  mix-blend-mode: multiply;
-}
-
-.dark .retro-hero-stage-main,
-.dark .retro-hero-stage-sub1,
-.dark .retro-hero-stage-sub2 {
-  mix-blend-mode: normal;
-}
-
-/* Category Row */
-.retro-cat-header {
+/* Category Row — BEM: .retro-cat (see pp-categories.css for active styles) */
+.retro-cat__header {
   border: 2px solid var(--color-ink);
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -253,16 +73,16 @@
   padding: 0.25rem 1rem;
   font-size: 0.875rem;
 }
-.retro-cat-row {
+.retro-cat__list {
   display: flex;
   flex-wrap: wrap;
   border: 2px solid var(--color-ink);
-  border-radius: 0 0.5rem 0.5rem 0.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
   background-color: var(--color-paper);
   box-shadow: var(--shadow-retro);
   overflow: hidden;
 }
-.retro-cat-item {
+.retro-cat__item {
   flex: 1 1 20%;
   min-width: 120px;
   display: flex;
@@ -277,13 +97,13 @@
   gap: 0.75rem;
 }
 @media (min-width: 768px) {
-  .retro-cat-item { border-bottom: none; }
-  .retro-cat-item:last-child { border-right: none; }
+  .retro-cat__item { border-bottom: none; }
+  .retro-cat__item:last-child { border-right: none; }
 }
-.retro-cat-item:hover {
+.retro-cat__item:hover {
   background-color: var(--color-paper-deep);
 }
-.retro-cat-icon {
+.retro-cat__icon {
   color: var(--color-ink);
 }
 
@@ -307,7 +127,7 @@
   gap: 1.5rem;
   margin-bottom: 3rem;
 }
-@media (min-width: 640px) { .retro-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .retro-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .retro-grid { grid-template-columns: repeat(4, 1fr); } }
 
 .retro-card {
@@ -324,7 +144,7 @@
 .retro-card:hover {
   transform: translateY(-4px);
 }
-.retro-heart-btn {
+.retro-card__heart {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
@@ -341,11 +161,15 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.retro-heart-btn:hover {
+.retro-card__heart:hover {
   background-color: var(--color-signal);
   color: var(--wp--preset--color--primary-foreground, #101417);
 }
-.retro-card-img-wrap {
+.retro-card__heart--active {
+  background-color: var(--color-signal);
+  color: var(--wp--preset--color--primary-foreground, #101417);
+}
+.retro-card__img-wrap {
   aspect-ratio: 1;
   background-color: var(--color-paper);
   border: 2px solid var(--color-ink);
@@ -357,16 +181,16 @@
   justify-content: center;
   overflow: hidden;
 }
-.retro-card-img {
+.retro-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   mix-blend-mode: multiply;
 }
-.dark .retro-card-img {
+.dark .retro-card__img {
   mix-blend-mode: normal;
 }
-.retro-card-badge {
+.retro-card__badge {
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
@@ -377,17 +201,17 @@
   font-size: 0.625rem;
   z-index: 10;
 }
-.retro-card-title {
+.retro-card__title {
   font-size: 0.875rem;
   margin: 0 0 0.25rem 0;
   color: var(--color-ink);
 }
-.retro-card-price {
+.retro-card__price {
   font-size: 1.25rem;
   margin: 0 0 1rem 0;
   color: var(--color-ink);
 }
-.retro-card-btn {
+.retro-card__btn {
   margin-top: auto;
   width: 100%;
   background-color: var(--color-screen);
@@ -398,32 +222,36 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.retro-card-btn:hover {
+.retro-card__btn:hover {
   background-color: var(--color-signal);
   color: var(--wp--preset--color--primary-foreground, #101417);
 }
-.retro-card-btn--yellow { 
+.retro-card__btn--yellow { 
   background-color: var(--color-signal); 
   color: var(--wp--preset--color--primary-foreground, #101417);
 }
-.retro-card-btn--yellow:hover { 
+.retro-card__btn--yellow:hover { 
   background-color: var(--wp--preset--color--cta-hover); 
 }
-.retro-card-btn--white { 
+.retro-card__btn--white { 
   background-color: var(--color-paper); 
   color: var(--color-ink);
 }
-.retro-card-btn--white:hover { 
+.retro-card__btn--white:hover { 
   background-color: var(--wp--preset--color--cta); 
   color: var(--wp--preset--color--primary-foreground, #101417);
 }
+.retro-card__btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* Card: Hover Image Swap */
-.retro-card-img--primary {
+.retro-card__img--primary {
   transition: opacity 0.3s ease;
 }
 
-.retro-card-img--hover {
+.retro-card__img--hover {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -432,16 +260,16 @@
   transition: opacity 0.3s ease;
 }
 
-.retro-card:hover .retro-card-img--primary {
+.retro-card:hover .retro-card__img--primary {
   opacity: 0;
 }
 
-.retro-card:hover .retro-card-img--hover {
+.retro-card:hover .retro-card__img--hover {
   opacity: 1;
 }
 
 /* Card: Sale Price */
-.retro-card-sale-price {
+.retro-card__sale-price {
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
@@ -452,19 +280,19 @@
   z-index: 10;
 }
 
-.retro-card-price--original {
+.retro-card__price--original {
   text-decoration: line-through;
   color: var(--color-text-muted);
   font-size: 0.875rem;
   margin-right: 0.5rem;
 }
 
-.retro-card-price--sale {
+.retro-card__price--sale {
   color: var(--color-alert);
 }
 
 /* Card: Compare Button */
-.retro-compare-btn {
+.retro-card__compare {
   position: absolute;
   top: 3.75rem;
   right: 1.5rem;
@@ -483,23 +311,23 @@
   opacity: 0;
 }
 
-.retro-card:hover .retro-compare-btn {
+.retro-card:hover .retro-card__compare {
   opacity: 1;
 }
 
-.retro-compare-btn:hover {
+.retro-card__compare:hover {
   background-color: var(--color-signal);
   color: var(--wp--preset--color--primary-foreground, #101417);
 }
 
-.retro-compare-btn--active {
+.retro-card__compare--active {
   opacity: 1;
   background-color: var(--color-signal);
   color: var(--wp--preset--color--primary-foreground, #101417);
 }
 
 /* Card: Archive styles */
-.retro-sidebar-item--active {
+.retro-sidebar__item--active {
   background-color: var(--color-ink);
   color: var(--color-paper);
 }
@@ -767,18 +595,18 @@
   }
 }
 
-.retro-sidebar-filters {
+.retro-sidebar__filters {
   width: 100%;
   color: var(--color-ink);
 }
 @media (min-width: 768px) {
-  .retro-sidebar-filters {
+  .retro-sidebar__filters {
     width: 16rem;
     flex-shrink: 0;
   }
 }
 
-.retro-sidebar-title {
+.retro-sidebar__title {
   font-size: 1.125rem;
   border-bottom: 2px solid var(--color-ink);
   padding-bottom: 0.5rem;
@@ -786,14 +614,14 @@
   letter-spacing: 0.05em;
 }
 
-.retro-sidebar-group {
+.retro-sidebar__group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   font-size: 0.875rem;
 }
 
-.retro-sidebar-item {
+.retro-sidebar__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -804,7 +632,7 @@
   cursor: pointer;
   box-shadow: 2px 2px 0px var(--color-ink);
 }
-.retro-sidebar-item:hover {
+.retro-sidebar__item:hover {
   transform: translateY(-2px);
   box-shadow: 2px 4px 0px var(--color-ink);
 }
@@ -975,7 +803,7 @@
   background-color: var(--color-panel);
   box-shadow: 2px 2px 0px var(--color-ink);
 }
-.retro-qty-btn {
+.retro-qty__btn {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   font-weight: bold;
@@ -984,16 +812,16 @@
   background: transparent;
   border: none;
 }
-.retro-qty-btn:first-child {
+.retro-qty__btn:first-child {
   border-right: 2px solid var(--color-ink);
 }
-.retro-qty-btn:last-child {
+.retro-qty__btn:last-child {
   border-left: 2px solid var(--color-ink);
 }
-.retro-qty-btn:hover {
+.retro-qty__btn:hover {
   background-color: var(--wp--preset--color--primary-foreground, #fff);
 }
-.retro-qty-val {
+.retro-qty__val {
   padding: 0.5rem 1.5rem;
   background-color: var(--wp--preset--color--primary-foreground, #fff);
   display: flex;

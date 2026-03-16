@@ -4,7 +4,8 @@
  * Hero banner for the PlayPocket front page.
  * "EXPLORE. COLLECT. LEVEL UP." with product collage and grid background.
  *
- * **Styling:** BEM (.retro-hero__*) in /styles/globals.css
+ * **BEM block:** .retro-hero
+ * **Styling:** /src/styles/sections/pp-hero.css
  * **WCAG:** Semantic heading, alt text on images, adequate contrast
  */
 
@@ -34,44 +35,46 @@ export const HeroRetro = ({
 
   return (
     <section className="retro-hero" aria-label="Hero banner">
-      {/* Space Invader decorations */}
+      {/* Space Invader decorations — sized S/M for hero context */}
       <div className="retro-hero__invaders" aria-hidden="true">
-        <SpaceInvader variant="crab" size={20} color="var(--wp--preset--color--foreground, #1E2630)" className="retro-hero__invader retro-hero__invader--1" />
-        <PixelCursor size={22} className="retro-hero__invader retro-hero__invader--2" />
+        <SpaceInvader variant="crab" size={32} color="var(--color-ink)" className="retro-hero__invader retro-hero__invader--1" />
+        <PixelCursor size={24} className="retro-hero__invader retro-hero__invader--2" />
       </div>
 
       {/* Pixel dots decoration */}
-      <div className="retro-hero-dots" aria-hidden="true">
-        <span className="retro-dot" />
-        <span className="retro-dot" />
-        <span className="retro-dot" />
+      <div className="retro-hero__dots" aria-hidden="true">
+        <span className="retro-hero__dot" />
+        <span className="retro-hero__dot" />
+        <span className="retro-hero__dot" />
       </div>
 
-      <div className="retro-hero-left">
-        <h1 className="retro-hero-title retro-font-display">
-          {titleLines.map((line, i) => (
-            <span key={i} className="retro-hero-title__line">{line}</span>
-          ))}
-          {highlight && (
-            <span className="retro-hero-highlight">{highlight}</span>
-          )}
-        </h1>
-        <p className="retro-hero-desc">{description}</p>
-        <Link to="/shop" className="pp-pixel-btn pp-pixel-btn--primary retro-font-display">
-          SHOP NOW <ArrowRight size={18} strokeWidth={2.5} />
-        </Link>
+      <div className="retro-hero__container">
+        <div className="retro-hero__left">
+          <h1 className="retro-hero__title retro-font-display">
+            {titleLines.map((line, i) => (
+              <span key={i} className="retro-hero__title-line">{line}</span>
+            ))}
+            {highlight && (
+              <span className="retro-hero__highlight">{highlight}</span>
+            )}
+          </h1>
+          <p className="retro-hero__desc">{description}</p>
+          <Link to="/shop" className="pp-pixel-btn pp-pixel-btn--primary retro-font-display">
+            SHOP NOW <ArrowRight size={18} strokeWidth={2.5} />
+          </Link>
 
-        {/* Small pixel decoration */}
-        <div className="retro-hero__pixel-deco" aria-hidden="true">
-          <SpaceInvader variant="squid" size={24} color="var(--wp--preset--color--primary, #FFC533)" />
+          {/* Small pixel decoration */}
+          <div className="retro-hero__pixel-deco" aria-hidden="true">
+            <SpaceInvader variant="squid" size={48} color="var(--color-signal)" />
+          </div>
         </div>
-      </div>
 
-      <div className="retro-hero-right">
-        <div className="retro-hero-stage">
-          <img src={heroImages.main} alt="Featured product - hoodie" className="retro-hero-stage-main" />
-          <img src={heroImages.sub1} alt="Featured product - cap" className="retro-hero-stage-sub1" />
-          <img src={heroImages.sub2} alt="Featured product - keychain" className="retro-hero-stage-sub2" />
+        <div className="retro-hero__right">
+          <div className="retro-hero__stage">
+            <img src={heroImages.main} alt="Featured product - hoodie" className="retro-hero__stage-img retro-hero__stage-img--main" />
+            <img src={heroImages.sub1} alt="Featured product - cap" className="retro-hero__stage-img retro-hero__stage-img--sub1" />
+            <img src={heroImages.sub2} alt="Featured product - keychain" className="retro-hero__stage-img retro-hero__stage-img--sub2" />
+          </div>
         </div>
       </div>
     </section>

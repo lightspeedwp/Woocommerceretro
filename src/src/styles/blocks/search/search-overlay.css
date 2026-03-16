@@ -1,0 +1,66 @@
+/**
+ * Search Overlay Styles
+ * Full-screen search overlay with backdrop blur
+ */
+
+.wp-search-overlay__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.wp-search-overlay__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.wp-search-overlay__content {
+  max-width: var(--wp--preset--layout--wide-size);
+  margin-inline: auto;
+  padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+}
+
+.wp-search-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-search-overlay__title {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.wp-search-overlay__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--20);
+  border-radius: var(--wp--preset--border-radius--md);
+  color: var(--wp--preset--color--muted-foreground);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.wp-search-overlay__close:hover {
+  color: var(--wp--preset--color--foreground);
+  background-color: var(--wp--preset--color--muted);
+}
+
+.wp-search-overlay__body {
+  width: 100%;
+}

@@ -139,7 +139,7 @@ export const PageWarrantyRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {warrantyPageContent.ctaText}
               </p>
-              <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                 CONTACT SUPPORT <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

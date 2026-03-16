@@ -55,34 +55,6 @@ export const SingleMembership = () => {
     <>
       <HeaderRetro />
       <main className="retro-main">
-        {/* Breadcrumbs */}
-        <div className="retro-section" style={{ paddingBottom: 0 }}>
-          <div className="retro-container">
-            <nav className="retro-breadcrumbs" aria-label="Breadcrumb">
-              <ol className="retro-breadcrumbs__list">
-                <li>
-                  <Link to="/" className="retro-breadcrumbs__link retro-font-body">
-                    Home
-                  </Link>
-                </li>
-                <li className="retro-breadcrumbs__separator" aria-hidden="true">
-                  /
-                </li>
-                <li>
-                  <Link to="/memberships" className="retro-breadcrumbs__link retro-font-body">
-                    Memberships
-                  </Link>
-                </li>
-                <li className="retro-breadcrumbs__separator" aria-hidden="true">
-                  /
-                </li>
-                <li className="retro-breadcrumbs__current retro-font-body" aria-current="page">
-                  {currentPlan.name} Membership
-                </li>
-              </ol>
-            </nav>
-          </div>
-        </div>
 
         {/* Product Section */}
         <section className="retro-section" aria-labelledby="mem-product-heading">
@@ -190,7 +162,7 @@ export const SingleMembership = () => {
 
                 {/* CTA */}
                 <button
-                  className="retro-button retro-button--primary retro-font-display retro-button--full"
+                  className="retro-btn retro-btn--primary retro-font-display retro-btn--full"
                   type="button"
                 >
                   BECOME A {currentPlan.name.toUpperCase()} MEMBER{' '}
@@ -203,7 +175,7 @@ export const SingleMembership = () => {
                 </p>
 
                 {/* ROI Card */}
-                <div className="retro-card retro-card-highlight retro-roi-card">
+                <div className="retro-card retro-card--highlight retro-roi-card">
                   <div className="retro-roi-card__header">
                     <Gift size={24} weight="bold" className="retro-neon-icon" aria-hidden="true" />
                     <div>
@@ -267,7 +239,7 @@ export const SingleMembership = () => {
                 </div>
 
                 {/* Exclusive Perks Card */}
-                <div className="retro-card retro-card-glow retro-perks-card">
+                <div className="retro-card retro-card--glow retro-perks-card">
                   <div className="retro-perks-card__header">
                     <Crown size={24} weight="bold" className="retro-neon-icon" aria-hidden="true" />
                     <h3 className="retro-font-display retro-bold">EXCLUSIVE PERKS</h3>
@@ -290,7 +262,7 @@ export const SingleMembership = () => {
                 {/* 3D View Link */}
                 <Link
                   to={`/membership/3d/${currentPlan.id}`}
-                  className="retro-button retro-button--secondary retro-font-display retro-button--full"
+                  className="retro-btn retro-btn--secondary retro-font-display retro-btn--full"
                 >
                   VIEW IN 3D <ArrowRight size={20} weight="bold" />
                 </Link>
@@ -318,14 +290,14 @@ export const SingleMembership = () => {
               {memberBenefits.map((benefit: any, index: number) => {
                 const Icon = benefit.icon;
                 return (
-                  <div key={index} className="retro-card retro-card-glow">
+                  <div key={index} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {benefit.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">{benefit.description}</p>
+                    <p className="retro-card__desc retro-font-body">{benefit.description}</p>
                   </div>
                 );
               })}
@@ -422,7 +394,7 @@ export const SingleMembership = () => {
               </p>
               <Link
                 to="/memberships"
-                className="retro-button retro-button--primary retro-font-display"
+                className="retro-btn retro-btn--primary retro-font-display"
               >
                 VIEW ALL TIERS <ArrowRight size={20} weight="bold" />
               </Link>
@@ -445,27 +417,27 @@ const MemFaqAccordion = ({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="retro-faq-list">
+    <div className="retro-faq__list">
       {items.map((item, index) => (
-        <div key={item.id} className="retro-faq-item">
+        <div key={item.id} className="retro-faq__item">
           <button
-            className="retro-faq-trigger"
+            className="retro-faq__trigger"
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
             aria-expanded={openIndex === index}
             aria-controls={`mem-single-faq-panel-${item.id}`}
           >
-            <span className="retro-faq-question retro-font-body retro-bold">{item.question}</span>
+            <span className="retro-faq__question retro-font-body retro-bold">{item.question}</span>
             <CaretDown
               size={20}
               weight="bold"
-              className={`retro-faq-chevron ${openIndex === index ? 'retro-faq-chevron--open' : ''}`}
+              className={`retro-faq__chevron ${openIndex === index ? 'retro-faq__chevron--open' : ''}`}
               aria-hidden="true"
             />
           </button>
           {openIndex === index && (
             <div
               id={`mem-single-faq-panel-${item.id}`}
-              className="retro-faq-answer"
+              className="retro-faq__answer"
               role="region"
             >
               <p className="retro-font-body">{item.answer}</p>

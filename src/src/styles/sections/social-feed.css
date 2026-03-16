@@ -25,12 +25,12 @@
 
 .wp-social-feed__grid {
   display: grid;
-  gap: 4px;
+  gap: var(--wp--preset--spacing--10); /* 4px */
 }
 
 @media (min-width: 768px) {
   .wp-social-feed__grid {
-    gap: 8px;
+    gap: var(--wp--preset--spacing--20); /* 8px */
   }
 }
 
@@ -89,7 +89,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--wp--preset--spacing--40);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   text-align: center;
 }
 

@@ -28,11 +28,11 @@ export const PageNotFoundRetro = () => {
             </p>
 
             <div className="retro-not-found-layout__actions">
-              <Link to="/" className="retro-button retro-button--primary retro-font-display retro-bold retro-not-found-layout__link">
+              <Link to="/" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-not-found-layout__link">
                 <ArrowLeft />
                 RETURN TO START
               </Link>
-              <Link to="/shop" className="retro-button retro-button--secondary retro-font-display retro-bold retro-not-found-layout__link">
+              <Link to="/shop" className="retro-btn retro-btn--secondary retro-font-display retro-bold retro-not-found-layout__link">
                 BROWSE INVENTORY
               </Link>
             </div>
@@ -50,7 +50,7 @@ export const PageNotFoundRetro = () => {
                   Browse all 150+ pages organized by category. Use search to find exactly what you need.
                 </p>
               </div>
-              <Link to="/sitemap" className="retro-button retro-button--primary retro-font-display retro-bold retro-sitemap-cta__btn">
+              <Link to="/sitemap" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-sitemap-cta__btn">
                 VIEW SITEMAP <ArrowRight size={18} />
               </Link>
             </div>

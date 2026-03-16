@@ -49,34 +49,6 @@ export const SingleSubscription = () => {
     <>
       <HeaderRetro />
       <main className="retro-main">
-        {/* Breadcrumbs */}
-        <div className="retro-section" style={{ paddingBottom: 0 }}>
-          <div className="retro-container">
-            <nav className="retro-breadcrumbs" aria-label="Breadcrumb">
-              <ol className="retro-breadcrumbs__list">
-                <li>
-                  <Link to="/" className="retro-breadcrumbs__link retro-font-body">
-                    Home
-                  </Link>
-                </li>
-                <li className="retro-breadcrumbs__separator" aria-hidden="true">
-                  /
-                </li>
-                <li>
-                  <Link to="/subscriptions" className="retro-breadcrumbs__link retro-font-body">
-                    Subscriptions
-                  </Link>
-                </li>
-                <li className="retro-breadcrumbs__separator" aria-hidden="true">
-                  /
-                </li>
-                <li className="retro-breadcrumbs__current retro-font-body" aria-current="page">
-                  {currentInterval.name} Plan
-                </li>
-              </ol>
-            </nav>
-          </div>
-        </div>
 
         {/* Product Hero */}
         <section className="retro-section" aria-labelledby="sub-product-heading">
@@ -183,7 +155,7 @@ export const SingleSubscription = () => {
                 </div>
 
                 {/* CTA */}
-                <button className="retro-button retro-button--primary retro-font-display retro-button--full" type="button">
+                <button className="retro-btn retro-btn--primary retro-font-display retro-btn--full" type="button">
                   START {currentInterval.trialDays}-DAY FREE TRIAL{' '}
                   <ArrowRight size={20} weight="bold" />
                 </button>
@@ -226,7 +198,7 @@ export const SingleSubscription = () => {
         </section>
 
         {/* Benefits Section */}
-        <section className="retro-section" aria-labelledby="sub-benefits-heading">
+        <section className="retro-section retro-section--alt" aria-labelledby="sub-benefits-heading">
           <div className="retro-container">
             <div className="retro-section-header">
               <h2
@@ -244,14 +216,14 @@ export const SingleSubscription = () => {
               {subscriptionBenefits.map((benefit, index) => {
                 const Icon = benefit.icon;
                 return (
-                  <div key={index} className="retro-card retro-card-glow">
+                  <div key={index} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {benefit.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">{benefit.description}</p>
+                    <p className="retro-card__desc retro-font-body">{benefit.description}</p>
                   </div>
                 );
               })}
@@ -320,7 +292,7 @@ export const SingleSubscription = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="retro-section retro-section--faq" aria-labelledby="sub-single-faq-heading">
+        <section className="retro-section" aria-labelledby="sub-single-faq-heading">
           <div className="retro-container">
             <div className="retro-section-header">
               <h2
@@ -353,7 +325,7 @@ export const SingleSubscription = () => {
               </p>
               <Link
                 to="/subscriptions"
-                className="retro-button retro-button--primary retro-font-display"
+                className="retro-btn retro-btn--primary retro-font-display"
               >
                 VIEW ALL PLANS <ArrowRight size={20} weight="bold" />
               </Link>
@@ -378,27 +350,27 @@ const SubFaqAccordion = ({ items }: { items: FaqItem[] }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="retro-faq-list">
+    <div className="retro-faq__list">
       {items.map((item, index) => (
-        <div key={item.id} className="retro-faq-item">
+        <div key={item.id} className="retro-faq__item">
           <button
-            className="retro-faq-trigger"
+            className="retro-faq__trigger"
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
             aria-expanded={openIndex === index}
             aria-controls={`sub-single-faq-panel-${item.id}`}
           >
-            <span className="retro-faq-question retro-font-body retro-bold">{item.question}</span>
+            <span className="retro-faq__question retro-font-body retro-bold">{item.question}</span>
             <CaretDown
               size={20}
               weight="bold"
-              className={`retro-faq-chevron ${openIndex === index ? 'retro-faq-chevron--open' : ''}`}
+              className={`retro-faq__chevron ${openIndex === index ? 'retro-faq__chevron--open' : ''}`}
               aria-hidden="true"
             />
           </button>
           {openIndex === index && (
             <div
               id={`sub-single-faq-panel-${item.id}`}
-              className="retro-faq-answer"
+              className="retro-faq__answer"
               role="region"
             >
               <p className="retro-font-body">{item.answer}</p>

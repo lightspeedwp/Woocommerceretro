@@ -5,27 +5,43 @@
  * space invader decorations, and product showcase.
  *
  * BEM block: .retro-hero
+ * Elements:  __container, __invaders, __invader, __dots, __dot, __left, __title,
+ *            __title-line, __highlight, __desc, __pixel-deco,
+ *            __right, __stage, __stage-img
+ * Modifiers: __invader--1, __invader--2,
+ *            __stage-img--main, __stage-img--sub1, __stage-img--sub2
  */
 
 .retro-hero {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  padding: 2rem 0;
-  background: var(--wp--preset--color--background, #F2EEE6);
+  width: 100%;
+  background: var(--color-paper);
   /* Override old front-page-funky.css properties */
   border: none;
   border-radius: 0;
   box-shadow: none;
 }
 
+/* ── Content container (max-width + padding) ── */
+
+.retro-hero__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40, 1.5rem);
+  max-width: var(--wp--preset--layout--wide-size, 1440px);
+  margin-inline: auto;
+  padding: var(--wp--preset--spacing--40, 1.5rem) var(--wp--preset--spacing--50, 2rem);
+  width: 100%;
+}
+
 @media (min-width: 768px) {
-  .retro-hero {
+  .retro-hero__container {
     grid-template-columns: 1fr 1fr;
-    padding: 2rem 0;
+    padding: var(--wp--preset--spacing--60, 3rem) var(--wp--preset--spacing--50, 2rem);
   }
 }
+
+/* ── Invader decorations ── */
 
 .retro-hero__invaders {
   position: absolute;
@@ -39,44 +55,48 @@
 }
 
 .retro-hero__invader--1 {
-  top: 0.5rem;
+  top: var(--wp--preset--spacing--20);
   right: 50%;
 }
 
 .retro-hero__invader--2 {
-  top: 2rem;
+  top: var(--wp--preset--spacing--60);
   left: 45%;
 }
 
-.retro-hero-dots {
+/* ── Pixel dots ── */
+
+.retro-hero__dots {
   position: absolute;
-  top: 1rem;
+  top: var(--wp--preset--spacing--40);
   left: 50%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wp--preset--spacing--10);
   z-index: 1;
 }
 
-.retro-dot {
+.retro-hero__dot {
   width: 4px;
   height: 4px;
-  background: var(--wp--preset--color--foreground, #1E2630);
+  background: var(--color-ink);
   opacity: 0.3;
 }
 
-.retro-hero-left {
+/* ── Left column ── */
+
+.retro-hero__left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--wp--preset--spacing--40);
   z-index: 2;
   /* Override old front-page-funky.css width/padding */
   width: auto;
   padding: 0;
 }
 
-.retro-hero-title {
+.retro-hero__title {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
@@ -84,21 +104,21 @@
   margin: 0;
 }
 
-.retro-hero-title__line {
+.retro-hero__title-line {
   display: block;
 }
 
-.retro-hero-highlight {
-  color: var(--wp--preset--color--primary, #FFC533);
+.retro-hero__highlight {
+  color: var(--color-signal);
   display: block;
   /* Override old highlight background */
   background: none;
   padding: 0;
 }
 
-.retro-hero-desc {
+.retro-hero__desc {
   white-space: pre-line;
-  color: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--color-ink);
   opacity: 0.85;
   max-width: 280px;
   /* Override old desc margin */
@@ -106,10 +126,12 @@
 }
 
 .retro-hero__pixel-deco {
-  margin-top: 0.5rem;
+  margin-top: var(--wp--preset--spacing--20);
 }
 
-.retro-hero-right {
+/* ── Right column ── */
+
+.retro-hero__right {
   position: relative;
   z-index: 2;
   /* Override old front-page-funky.css */
@@ -121,27 +143,29 @@
   min-height: 0;
 }
 
-.retro-hero-stage {
+/* ── Stage (product collage) ── */
+
+.retro-hero__stage {
   position: relative;
   width: 100%;
   max-width: none;
   aspect-ratio: 1;
   background:
     repeating-linear-gradient(
-      var(--wp--preset--color--secondary, #6BBF59) 0,
-      var(--wp--preset--color--secondary, #6BBF59) 1px,
+      var(--color-screen) 0,
+      var(--color-screen) 1px,
       transparent 1px,
       transparent 20px
     ),
     repeating-linear-gradient(
       90deg,
-      var(--wp--preset--color--secondary, #6BBF59) 0,
-      var(--wp--preset--color--secondary, #6BBF59) 1px,
+      var(--color-screen) 0,
+      var(--color-screen) 1px,
       transparent 1px,
       transparent 20px
     );
   background-color: rgba(107, 142, 123, 0.15);
-  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
+  border: 2px solid var(--color-border);
   overflow: hidden;
   clip-path: polygon(
     0 4px, 4px 4px, 4px 0,
@@ -151,34 +175,31 @@
   );
 }
 
-.retro-hero-stage-main {
+.retro-hero__stage-img {
   position: absolute;
-  width: 70%;
-  height: 70%;
   object-fit: cover;
-  top: 15%;
-  left: 15%;
-  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
+  border: 2px solid var(--color-border);
 }
 
-.retro-hero-stage-sub1 {
-  position: absolute;
+.retro-hero__stage-img--main {
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+}
+
+.retro-hero__stage-img--sub1 {
   width: 30%;
   height: 30%;
-  object-fit: cover;
   bottom: 5%;
   left: 5%;
-  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
   z-index: 2;
 }
 
-.retro-hero-stage-sub2 {
-  position: absolute;
+.retro-hero__stage-img--sub2 {
   width: 28%;
   height: 28%;
-  object-fit: cover;
   top: 5%;
   right: 5%;
-  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
   z-index: 2;
 }

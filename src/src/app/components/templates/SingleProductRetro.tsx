@@ -85,56 +85,38 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
       <div className="retro-container">
         <HeaderRetro />
 
-        {/* Breadcrumb */}
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <Link to="/shop" className="retro-breadcrumb-link">SHOP</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          {product.categorySlug && (
-            <>
-              <Link to={`/category/${product.categorySlug}`} className="retro-breadcrumb-link">
-                {(product.category || 'CATEGORY').toUpperCase()}
-              </Link>
-              <span className="retro-breadcrumb-sep">/</span>
-            </>
-          )}
-          <span className="retro-breadcrumb-current">{product.name}</span>
-        </div>
-
         {/* Main Product Area */}
-        <div className="retro-sp-layout">
+        <div className="retro-sp__layout">
           {/* LEFT COLUMN: Gallery */}
-          <div className="retro-sp-gallery">
-            <div className="retro-sp-gallery-inner">
-              <div className="retro-sp-decal retro-sp-decal-1"><Plus size={40} weight="bold" /></div>
-              <div className="retro-sp-decal retro-sp-decal-2" />
-              <div className="retro-sp-decal retro-sp-decal-3" />
-              <div className="retro-sp-decal retro-sp-decal-4" />
+          <div className="retro-sp__gallery">
+            <div className="retro-sp__gallery-inner">
+              <div className="retro-sp__decal retro-sp__decal--1"><Plus size={40} weight="bold" /></div>
+              <div className="retro-sp__decal retro-sp__decal--2" />
+              <div className="retro-sp__decal retro-sp__decal--3" />
+              <div className="retro-sp__decal retro-sp__decal--4" />
               {product.onSale && (
-                <span className="retro-sp-sale-badge retro-font-display retro-bold">SALE</span>
+                <span className="retro-sp__sale-badge retro-font-display retro-bold">SALE</span>
               )}
               <img
                 src={galleryImages[activeImageIndex] || product.image}
-                className="retro-sp-img"
+                className="retro-sp__img"
                 alt={product.name}
               />
             </div>
 
             {/* Thumbnail Strip */}
             {galleryImages.length > 1 && (
-              <div className="retro-sp-thumbnails" role="listbox" aria-label="Product image gallery">
+              <div className="retro-sp__thumbnails" role="listbox" aria-label="Product image gallery">
                 {galleryImages.map((img, idx) => (
                   <button
                     key={idx}
-                    className={`retro-sp-thumb${idx === activeImageIndex ? ' retro-sp-thumb--active' : ''}`}
+                    className={`retro-sp__thumb${idx === activeImageIndex ? ' retro-sp__thumb--active' : ''}`}
                     onClick={() => setActiveImageIndex(idx)}
                     aria-label={`View image ${idx + 1} of ${galleryImages.length}`}
                     aria-selected={idx === activeImageIndex}
                     role="option"
                   >
-                    <img src={img} alt="" className="retro-sp-thumb__img" />
+                    <img src={img} alt="" className="retro-sp__thumb-img" />
                   </button>
                 ))}
               </div>
@@ -142,24 +124,24 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
           </div>
 
           {/* RIGHT COLUMN: Details & Actions */}
-          <div className="retro-sp-details">
+          <div className="retro-sp__details">
             {/* Badges */}
             {product.badges && product.badges.length > 0 && (
-              <div className="retro-sp-badges">
+              <div className="retro-sp__badges">
                 {product.badges.map((badge: string) => (
-                  <span key={badge} className="retro-sp-badge retro-font-display retro-bold">{badge}</span>
+                  <span key={badge} className="retro-sp__badge retro-font-display retro-bold">{badge}</span>
                 ))}
               </div>
             )}
 
-            <h1 className="retro-sp-title retro-font-body retro-bold">{product.name}</h1>
+            <h1 className="retro-sp__title retro-font-body retro-bold">{product.name}</h1>
 
             {product.brand && (
-              <span className="retro-sp-brand retro-font-body">{product.brand}</span>
+              <span className="retro-sp__brand retro-font-body">{product.brand}</span>
             )}
 
-            <div className="retro-sp-reviews">
-              <div className="retro-sp-stars">
+            <div className="retro-sp__reviews">
+              <div className="retro-sp__stars">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <Star
                     key={i}
@@ -168,39 +150,39 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                   />
                 ))}
               </div>
-              <span className="retro-sp-review-count retro-font-body retro-bold">
+              <span className="retro-sp__review-count retro-font-body retro-bold">
                 {product.rating || 0} ({product.reviewCount || 0} Reviews)
               </span>
             </div>
 
-            <div className="retro-sp-price-row">
+            <div className="retro-sp__price-row">
               {salePrice ? (
                 <>
-                  <span className="retro-sp-price retro-sp-price--sale retro-font-body retro-bold">{salePrice}</span>
-                  <span className="retro-sp-price retro-sp-price--original retro-font-body">{displayPrice}</span>
+                  <span className="retro-sp__price retro-sp__price--sale retro-font-body retro-bold">{salePrice}</span>
+                  <span className="retro-sp__price retro-sp__price--original retro-font-body">{displayPrice}</span>
                 </>
               ) : (
-                <span className="retro-sp-price retro-font-body retro-bold">{displayPrice}</span>
+                <span className="retro-sp__price retro-font-body retro-bold">{displayPrice}</span>
               )}
             </div>
 
             {product.shortDescription && (
-              <p className="retro-sp-short-desc retro-font-body">{product.shortDescription}</p>
+              <p className="retro-sp__short-desc retro-font-body">{product.shortDescription}</p>
             )}
 
             {/* Add to Cart Row */}
-            <div className="retro-sp-actions">
+            <div className="retro-sp__actions">
               <div className="retro-qty">
                 <button
-                  className="retro-qty-btn"
+                  className="retro-qty__btn"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   aria-label="Decrease quantity"
                 >
                   -
                 </button>
-                <div className="retro-qty-val retro-font-body retro-bold">{quantity}</div>
+                <div className="retro-qty__val retro-font-body retro-bold">{quantity}</div>
                 <button
-                  className="retro-qty-btn"
+                  className="retro-qty__btn"
                   onClick={() => setQuantity(quantity + 1)}
                   aria-label="Increase quantity"
                 >
@@ -208,7 +190,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                 </button>
               </div>
               <button
-                className="retro-button retro-button--secondary retro-font-display retro-bold retro-sp-add"
+                className="retro-btn retro-btn--secondary retro-font-display retro-bold retro-sp__add"
                 onClick={handleAddToCart}
               >
                 ADD TO CART <ArrowRight weight="bold" />
@@ -218,16 +200,16 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
             {/* Buy Now */}
             <Link
               to="/checkout"
-              className="retro-button retro-font-display retro-bold retro-sp-buy"
+              className="retro-btn retro-btn--primary retro-font-display retro-bold retro-sp__buy"
               onClick={() => cartContext.addToCart(product, quantity)}
             >
               BUY NOW
             </Link>
 
             {/* Secondary Actions */}
-            <div className="retro-sp-secondary-actions">
+            <div className="retro-sp__secondary-actions">
               <button
-                className={`retro-sp-action-link retro-font-body${inWishlist ? ' retro-sp-action-link--active' : ''}`}
+                className={`retro-sp__action-link retro-font-body${inWishlist ? ' retro-sp__action-link--active' : ''}`}
                 onClick={() => {
                   if (inWishlist) {
                     wishlist.removeFromWishlist(product.id);
@@ -242,7 +224,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                 {inWishlist ? 'In Wishlist' : 'Add to Wishlist'}
               </button>
               <button
-                className={`retro-sp-action-link retro-font-body${inComparison ? ' retro-sp-action-link--active' : ''}`}
+                className={`retro-sp__action-link retro-font-body${inComparison ? ' retro-sp__action-link--active' : ''}`}
                 onClick={() => {
                   if (inComparison) {
                     comparison.removeFromComparison(product.id);
@@ -257,24 +239,24 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
             </div>
 
             {/* Trust Signals */}
-            <div className="retro-sp-trust">
-              <div className="retro-sp-trust__item retro-font-body">
+            <div className="retro-sp__trust">
+              <div className="retro-sp__trust-item retro-font-body">
                 <Truck size={20} weight="bold" /> Free shipping over $75
               </div>
-              <div className="retro-sp-trust__item retro-font-body">
+              <div className="retro-sp__trust-item retro-font-body">
                 <ArrowsClockwise size={20} weight="bold" /> 30-day returns
               </div>
-              <div className="retro-sp-trust__item retro-font-body">
+              <div className="retro-sp__trust-item retro-font-body">
                 <ShieldCheck size={20} weight="bold" /> Secure checkout
               </div>
             </div>
 
             {/* Tabs */}
-            <div className="retro-sp-tabs retro-font-display retro-bold" role="tablist">
+            <div className="retro-sp__tabs retro-font-display retro-bold" role="tablist">
               {TAB_KEYS.map((key) => (
                 <button
                   key={key}
-                  className={`retro-sp-tab${activeTab === key ? ' active' : ''}`}
+                  className={`retro-sp__tab${activeTab === key ? ' active' : ''}`}
                   onClick={() => setActiveTab(key)}
                   role="tab"
                   aria-selected={activeTab === key}
@@ -287,7 +269,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
             </div>
 
             <div
-              className="retro-sp-tab-content"
+              className="retro-sp__tab-content"
               role="tabpanel"
               id={`panel-${activeTab}`}
               aria-labelledby={`tab-${activeTab}`}
@@ -302,39 +284,39 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
               {activeTab === 'details' && (
                 <>
                   <h3 className="retro-font-body retro-bold">Additional Information</h3>
-                  <table className="retro-sp-info-table retro-font-body">
+                  <table className="retro-sp__info-table retro-font-body">
                     <tbody>
                       {product.sku && (
                         <tr>
-                          <td className="retro-sp-info-table__label retro-bold">SKU</td>
+                          <td className="retro-sp__info-label retro-bold">SKU</td>
                           <td>{product.sku}</td>
                         </tr>
                       )}
                       {product.category && (
                         <tr>
-                          <td className="retro-sp-info-table__label retro-bold">Category</td>
+                          <td className="retro-sp__info-label retro-bold">Category</td>
                           <td>{product.category}</td>
                         </tr>
                       )}
                       {product.brand && (
                         <tr>
-                          <td className="retro-sp-info-table__label retro-bold">Brand</td>
+                          <td className="retro-sp__info-label retro-bold">Brand</td>
                           <td>{product.brand}</td>
                         </tr>
                       )}
                       {product.weight && (
                         <tr>
-                          <td className="retro-sp-info-table__label retro-bold">Weight</td>
+                          <td className="retro-sp__info-label retro-bold">Weight</td>
                           <td>{product.weight} kg</td>
                         </tr>
                       )}
                       {product.tags && product.tags.length > 0 && (
                         <tr>
-                          <td className="retro-sp-info-table__label retro-bold">Tags</td>
+                          <td className="retro-sp__info-label retro-bold">Tags</td>
                           <td>
-                            <div className="retro-sp-tag-list">
+                            <div className="retro-sp__tag-list">
                               {product.tags.map((tag: string) => (
-                                <Link key={tag} to={`/tag/${tag}`} className="retro-sp-tag retro-font-display">
+                                <Link key={tag} to={`/tag/${tag}`} className="retro-sp__tag retro-font-display">
                                   {tag}
                                 </Link>
                               ))}
@@ -366,8 +348,8 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="retro-sp-related">
-            <h2 className="retro-sp-related__heading retro-font-display retro-bold">
+          <div className="retro-sp__related">
+            <h2 className="retro-sp__related-heading retro-font-display retro-bold">
               YOU MAY ALSO LIKE
             </h2>
             <div className="retro-grid retro-grid--4">
@@ -380,23 +362,23 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                 return (
                   <Link key={item.id} to={`/product/${item.slug || item.id}`} className="retro-card">
                     {primaryBadge && (
-                      <span className="retro-card-badge retro-font-display">{primaryBadge}</span>
+                      <span className="retro-card__badge retro-font-display">{primaryBadge}</span>
                     )}
-                    <div className="retro-card-img-wrap">
-                      <img src={itemImg} className="retro-card-img retro-card-img--primary" alt={item.name} />
-                      <img src={hoverImg} className="retro-card-img retro-card-img--hover" alt={`${item.name} alternate view`} />
+                    <div className="retro-card__img-wrap">
+                      <img src={itemImg} className="retro-card__img retro-card__img--primary" alt={item.name} />
+                      <img src={hoverImg} className="retro-card__img retro-card__img--hover" alt={`${item.name} alternate view`} />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">{item.name}</h3>
-                    <p className="retro-card-price retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">{item.name}</h3>
+                    <p className="retro-card__price retro-font-display retro-bold">
                       {item.salePrice ? (
                         <>
-                          <span className="retro-card-price--original">{itemPrice}</span>
-                          <span className="retro-card-price--sale">${item.salePrice.toFixed(2)}</span>
+                          <span className="retro-card__price--original">{itemPrice}</span>
+                          <span className="retro-card__price--sale">${item.salePrice.toFixed(2)}</span>
                         </>
                       ) : itemPrice}
                     </p>
                     <button
-                      className="retro-card-btn retro-font-display retro-bold retro-card-btn--white"
+                      className="retro-card__btn retro-font-display retro-bold retro-card__btn--white"
                       onClick={(ev) => {
                         ev.preventDefault();
                         cartContext.addToCart(item, 1);

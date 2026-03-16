@@ -16,9 +16,9 @@ export const PickupLocationSelect = () => {
           <div className="wp-checkout-pickup-dot" />
         </div>
         <div>
-          <p className="wp-checkout-text-medium funky-bold-text">{defaultStore.name}</p>
-          <p className="wp-checkout-text-light">{defaultStore.address}</p>
-          <p className="wp-checkout-text-light funky-price-text">Free</p>
+          <p className="wp-checkout-pickup-location__name">{defaultStore.name}</p>
+          <p className="wp-checkout-pickup-location__address">{defaultStore.address}</p>
+          <p className="wp-checkout-pickup-location__price">Free</p>
         </div>
       </div>
       <button className="wp-checkout-btn-link funky-link-btn">Edit</button>

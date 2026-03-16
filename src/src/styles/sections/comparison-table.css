@@ -50,9 +50,9 @@
   margin-top: var(--wp--preset--spacing--10);
   padding: 2px 8px;
   background-color: var(--wp--preset--color--accent);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--xs);
 }
 
 .wp-comparison-table__row {
@@ -79,7 +79,7 @@
 }
 
 .wp-comparison-table__feature-desc {
-  font-size: var(--wp--preset--font-size--small);
+  font-size: var(--wp--preset--font-size--xs);
   color: var(--wp--preset--color--muted-foreground);
   margin-top: 4px;
 }

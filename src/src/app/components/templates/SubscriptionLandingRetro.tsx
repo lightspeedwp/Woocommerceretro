@@ -65,14 +65,14 @@ export const SubscriptionLandingRetro = () => {
               {subscriptionBenefits.map((benefit, index) => {
                 const Icon = benefit.icon;
                 return (
-                  <div key={index} className="retro-card retro-card-glow">
+                  <div key={index} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {benefit.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {benefit.description}
                     </p>
                   </div>
@@ -134,7 +134,7 @@ export const SubscriptionLandingRetro = () => {
 
                   <Link
                     to={`/product/${plan.id}-subscription`}
-                    className={`retro-button retro-font-display ${plan.popular ? 'retro-button--primary' : 'retro-button--secondary'}`}
+                    className={`retro-btn retro-font-display ${plan.popular ? 'retro-btn--primary' : 'retro-btn--secondary'}`}
                   >
                     SUBSCRIBE NOW <ArrowRight size={20} weight="bold" />
                   </Link>
@@ -153,7 +153,7 @@ export const SubscriptionLandingRetro = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="retro-section retro-section--faq" aria-labelledby="sub-faq-heading">
+        <section className="retro-section" aria-labelledby="sub-faq-heading">
           <div className="retro-container">
             <div className="retro-section-header">
               <h2 id="sub-faq-heading" className="retro-font-display retro-bold retro-section-title">
@@ -181,7 +181,7 @@ export const SubscriptionLandingRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {landing.ctaText}
               </p>
-              <a href="#pricing" className="retro-button retro-button--primary retro-font-display">
+              <a href="#pricing" className="retro-btn retro-btn--primary retro-font-display">
                 {landing.ctaButton.toUpperCase()} <ArrowRight size={20} weight="bold" />
               </a>
             </div>
@@ -214,29 +214,29 @@ const FaqAccordionRetro = ({ items }: FaqAccordionRetroProps) => {
   };
 
   return (
-    <div className="retro-faq-list">
+    <div className="retro-faq__list">
       {items.map((item, index) => (
-        <div key={item.id} className="retro-faq-item">
+        <div key={item.id} className="retro-faq__item">
           <button
-            className="retro-faq-trigger"
+            className="retro-faq__trigger"
             onClick={() => handleToggle(index)}
             aria-expanded={openIndex === index}
             aria-controls={`faq-panel-${item.id}`}
           >
-            <span className="retro-faq-question retro-font-body retro-bold">
+            <span className="retro-faq__question retro-font-body retro-bold">
               {item.question}
             </span>
             <CaretDown
               size={20}
               weight="bold"
-              className={`retro-faq-chevron ${openIndex === index ? 'retro-faq-chevron--open' : ''}`}
+              className={`retro-faq__chevron ${openIndex === index ? 'retro-faq__chevron--open' : ''}`}
               aria-hidden="true"
             />
           </button>
           {openIndex === index && (
             <div
               id={`faq-panel-${item.id}`}
-              className="retro-faq-answer"
+              className="retro-faq__answer"
               role="region"
             >
               <p className="retro-font-body">{item.answer}</p>

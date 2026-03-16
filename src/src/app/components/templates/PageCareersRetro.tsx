@@ -67,14 +67,14 @@ export const PageCareersRetro = () => {
               {careerBenefits.map((benefit: any) => {
                 const Icon = benefitIcons[benefit.id] || Heart;
                 return (
-                  <div key={benefit.id} className="retro-card retro-card-glow">
+                  <div key={benefit.id} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {benefit.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {benefit.description}
                     </p>
                   </div>
@@ -120,7 +120,7 @@ export const PageCareersRetro = () => {
                   </div>
                   <button
                     type="button"
-                    className="retro-button retro-button--secondary retro-font-display"
+                    className="retro-btn retro-btn--secondary retro-font-display"
                     aria-label={'Apply for ' + position.title}
                   >
                     APPLY <ArrowRight size={16} weight="bold" />
@@ -144,7 +144,7 @@ export const PageCareersRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {careersPageContent.ctaText}
               </p>
-              <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                 {careersPageContent.ctaButton.toUpperCase()} <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

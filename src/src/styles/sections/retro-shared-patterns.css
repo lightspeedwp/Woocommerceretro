@@ -1,0 +1,345 @@
+/**
+ * Retro Shared Patterns
+ *
+ * Common retro-styled patterns used across multiple page templates:
+ * subscriptions, memberships, careers, press, reviews, rewards, etc.
+ *
+ * BEM blocks:
+ *   .retro-section          — Full-width section container with vertical padding
+ *   .retro-section-header   — Centered heading block (scoped to .retro-main)
+ *   .retro-section-title    — Section heading text
+ *   .retro-section-desc     — Section description text
+ *   .retro-grid-3           — 3-column responsive grid
+ *   .retro-card--glow        — Card with accent border glow
+ *   .retro-feature-icon     — Circular icon badge
+ *   .retro-card__title       — Card heading
+ *   .retro-card__desc        — Card description text
+ *   .retro-cta-card         — Call-to-action card block
+ *   .retro-neon-icon        — Accent-colored decorative icon
+ *   .retro-stores-layout    — Store locator page layout
+ *
+ * Dark Mode: Automatic via retro-theme.css CSS variables
+ * WCAG AA 2.2: 4.5:1 contrast minimum
+ */
+
+/* ==========================================================================
+   SECTION BASE — used by retro-main pages
+   ========================================================================== */
+
+.retro-main .retro-section {
+  padding: var(--retro-space-16, 4rem) 0;
+  background: var(--retro-bg-primary, var(--color-paper));
+}
+
+/* Alternate section backgrounds — applied via modifier classes on individual sections.
+   See: .retro-section--stats, --pricing, --positions, --media-kit, --reviews, --faq, --cta, --roi */
+
+/* Generic alternate background for manual alternation */
+.retro-section--alt {
+  background: var(--retro-bg-secondary, var(--color-paper-deep));
+}
+
+/* ==========================================================================
+   SECTION HEADER — centered heading block (retro-main scope)
+   ========================================================================== */
+
+.retro-main .retro-section-header {
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--retro-space-8, 2rem);
+  gap: var(--retro-space-3, 0.75rem);
+}
+
+.retro-section-title {
+  color: var(--color-ink);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.retro-section-desc {
+  color: var(--color-muted);
+  margin: 0;
+  max-width: 600px;
+}
+
+/* ==========================================================================
+   GRIDS — 3 column responsive
+   ========================================================================== */
+
+.retro-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .retro-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .retro-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   CARD GLOW — accent border with hover glow
+   ========================================================================== */
+
+.retro-card--glow {
+  padding: var(--retro-space-6, 1.5rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-3, 0.75rem);
+}
+
+.retro-card--glow:hover {
+  border-color: var(--retro-neon-cyan, var(--color-screen-strong));
+}
+
+/* ==========================================================================
+   FEATURE ICON — circular icon badge
+   ========================================================================== */
+
+.retro-feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paper-deep);
+  border: 2px solid var(--color-ink);
+  color: var(--retro-neon-cyan, var(--color-screen-strong));
+  flex-shrink: 0;
+}
+
+.dark .retro-feature-icon {
+  background: var(--color-panel);
+  border-color: var(--color-border);
+}
+
+/* ==========================================================================
+   CARD CONTENT — shared card heading & description
+   ========================================================================== */
+
+.retro-card__title {
+  color: var(--color-ink);
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+.retro-card__desc {
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   CTA CARD — call-to-action block
+   ========================================================================== */
+
+.retro-cta-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--retro-space-4, 1rem);
+  padding: var(--retro-space-8, 2rem);
+  background: var(--color-paper);
+  border: var(--retro-border-width, 3px) solid var(--color-ink);
+  box-shadow: var(--shadow-retro);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dark .retro-cta-card {
+  background: var(--color-panel);
+  border-color: var(--color-border);
+}
+
+.retro-cta-icon {
+  color: var(--retro-neon-cyan, var(--color-screen-strong));
+}
+
+.retro-cta-title {
+  color: var(--color-ink);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.retro-cta-desc {
+  color: var(--color-muted);
+  margin: 0;
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.retro-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--retro-space-3, 0.75rem);
+  justify-content: center;
+}
+
+/* ==========================================================================
+   NEON ICON — accent-colored decorative icon
+   ========================================================================== */
+
+.retro-neon-icon {
+  color: var(--retro-neon-cyan, var(--color-screen-strong));
+}
+
+/* ==========================================================================
+   STORES LAYOUT — Store Locator page
+   ========================================================================== */
+
+.retro-stores-layout {
+  padding: var(--retro-space-8, 2rem) 0;
+  min-height: 60vh;
+}
+
+.retro-stores-layout__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.retro-stores-layout__header {
+  text-align: center;
+  padding-bottom: var(--retro-space-6, 1.5rem);
+  margin-bottom: var(--retro-space-8, 2rem);
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.dark .retro-stores-layout__header {
+  border-color: var(--color-border);
+}
+
+.retro-stores-layout__icon {
+  margin-bottom: var(--retro-space-3, 0.75rem);
+  color: var(--color-ink);
+}
+
+.retro-stores-layout__title {
+  margin: 0 0 var(--retro-space-2, 0.5rem);
+  color: var(--color-ink);
+  letter-spacing: 0.06em;
+}
+
+.retro-stores-layout__subtitle {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.retro-stores-layout__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--retro-space-6, 1.5rem);
+}
+
+@media (min-width: 768px) {
+  .retro-stores-layout__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .retro-stores-layout__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.retro-stores-layout__card {
+  background: var(--color-paper);
+  border: var(--retro-border-width, 3px) solid var(--color-ink);
+  box-shadow: var(--shadow-retro);
+  padding: var(--retro-space-6, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--retro-space-4, 1rem);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.dark .retro-stores-layout__card {
+  background: var(--color-panel);
+  border-color: var(--color-border);
+}
+
+.retro-stores-layout__card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-retro-lg);
+}
+
+.retro-stores-layout__card-name {
+  color: var(--color-ink);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.retro-stores-layout__card-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--retro-space-3, 0.75rem);
+}
+
+.retro-stores-layout__card-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-ink);
+}
+
+.retro-stores-layout__card-text {
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.retro-stores-layout__card-text--pre {
+  white-space: pre-line;
+}
+
+/* ==========================================================================
+   COMMUNITY FEED — 2-column grid at 768px
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .retro-community__feed {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .retro-main .retro-section {
+    padding: var(--retro-space-8, 2rem) 0;
+  }
+
+  .retro-cta-card {
+    padding: var(--retro-space-6, 1.5rem);
+  }
+
+  .retro-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .retro-cta-actions .retro-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

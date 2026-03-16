@@ -14,15 +14,20 @@
    ======================================== */
 
 .retro-header {
+  width: 100%;
+  border-bottom: 3px solid var(--color-ink);
+  background-color: var(--color-paper);
+  position: relative;
+  z-index: 100;
+}
+
+.retro-header__inner {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  border-bottom: 3px solid var(--color-ink);
-  background-color: var(--color-paper);
-  position: relative;
-  z-index: 100;
+  margin: 0 auto;
 }
 
 .retro-header__logo-img {
@@ -610,7 +615,7 @@
    ======================================== */
 
 @media (max-width: 1023px) {
-  .retro-header {
+  .retro-header__inner {
     padding: 0.625rem 1rem;
   }
 
@@ -628,7 +633,7 @@
 }
 
 @media (max-width: 480px) {
-  .retro-header {
+  .retro-header__inner {
     padding: 0.5rem 0.75rem;
   }
 

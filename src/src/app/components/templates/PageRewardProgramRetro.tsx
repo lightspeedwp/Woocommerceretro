@@ -202,10 +202,10 @@ export const PageRewardProgramRetro = () => {
                 {rewardProgramPageContent.ctaText}
               </p>
               <div className="retro-cta-actions">
-                <Link to="/account/login" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/account/login" className="retro-btn retro-btn--primary retro-font-display">
                   {rewardProgramPageContent.ctaButtonPrimary.toUpperCase()} <ArrowRight size={20} weight="bold" />
                 </Link>
-                <Link to="/shop" className="retro-button retro-button--secondary retro-font-display">
+                <Link to="/shop" className="retro-btn retro-btn--secondary retro-font-display">
                   {rewardProgramPageContent.ctaButtonSecondary.toUpperCase()} <ShoppingCart size={20} weight="bold" />
                 </Link>
               </div>

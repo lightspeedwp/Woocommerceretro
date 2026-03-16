@@ -20,17 +20,17 @@ export const Toaster = () => {
       richColors
       closeButton
       toastOptions={{
-        className: 'bg-white dark:bg-surface-panel border border-gray-200 dark:border-gray-700 funky-toast',
+        className: 'retro-toast',
         classNames: {
-          title: 'text-gray-900 dark:text-gray-50 font-medium',
-          description: 'text-gray-600 dark:text-gray-400',
-          actionButton: 'bg-purple-600 dark:bg-purple-500 text-white hover:bg-purple-700 dark:hover:bg-purple-600',
-          cancelButton: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
-          closeButton: 'bg-white dark:bg-surface-panel border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50',
-          success: 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950',
-          error: 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950',
-          warning: 'border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-950',
-          info: 'border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950',
+          title: 'retro-toast__title',
+          description: 'retro-toast__description',
+          actionButton: 'retro-toast__action-btn',
+          cancelButton: 'retro-toast__cancel-btn',
+          closeButton: 'retro-toast__close-btn',
+          success: 'retro-toast--success',
+          error: 'retro-toast--error',
+          warning: 'retro-toast--warning',
+          info: 'retro-toast--info',
         },
       }}
     />
@@ -45,25 +45,25 @@ Toaster.displayName = 'Toaster';
 export const toast = {
   success: (message: string, options?: any) =>
     sonnerToast.success(message, {
-      icon: <Check className="w-5 h-5 text-green-600 dark:text-green-400" />,
+      icon: <Check className="retro-toast__icon retro-toast__icon--success" />,
       ...options,
     }),
 
   error: (message: string, options?: any) =>
     sonnerToast.error(message, {
-      icon: <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />,
+      icon: <AlertCircle className="retro-toast__icon retro-toast__icon--error" />,
       ...options,
     }),
 
   warning: (message: string, options?: any) =>
     sonnerToast.warning(message, {
-      icon: <AlertTriangle className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />,
+      icon: <AlertTriangle className="retro-toast__icon retro-toast__icon--warning" />,
       ...options,
     }),
 
   info: (message: string, options?: any) =>
     sonnerToast.info(message, {
-      icon: <Info className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
+      icon: <Info className="retro-toast__icon retro-toast__icon--info" />,
       ...options,
     }),
 

@@ -1,7 +1,7 @@
 ---
 title: "WooCommerce Prototype — Guidelines Hub"
-version: "3.0.0"
-updated: "2026-03-15"
+version: "3.1.0"
+updated: "2026-03-16"
 scope: "Brand-agnostic, WooCommerce-first prototype with WordPress FSE architecture"
 philosophy: "Shop-first, neutral aesthetics, WCAG 2.1 AA, Full Site Editing parity"
 ---
@@ -67,6 +67,15 @@ All styling must use WordPress `--wp--preset--*` variables (70+ available):
 - **Layout:** `--wp--preset--layout--*`
 
 See: `/src/styles/theme-variables.css` for complete reference.
+
+### 2.6 Sentence case headings
+
+- All headings (`<h1>`–`<h6>`, `<Heading>`, `<Typography variant="hN">`) must use **sentence case**: capitalise only the first letter of the sentence and any proper nouns.
+- **Never** use title case (capitalising the first letter of every word).
+- Correct: `"Featured items"`, `"Power up your collection"`, `"Best sellers"`.
+- Incorrect: `"Featured Items"`, `"Power Up Your Collection"`, `"Best Sellers"`.
+- This applies to all headings across components, templates, patterns, and documentation page titles rendered in the UI.
+- ALL-CAPS display text (e.g. pixel-font labels like `"SHOP NOW"`) is exempt — these are stylistic UI labels, not semantic headings.
 
 ---
 
@@ -162,6 +171,12 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 | `process reports` | Convert audit reports to task lists | 15-30 min |
 | `fix routes` | Validate and repair all routes, links, and nav data | 20-40 min |
 
+### Code Quality Triggers
+
+| Trigger | Purpose | Duration |
+|---------|---------|----------|
+| `apply bem` | Full BEM compliance audit + fix workflow | 30-60 min |
+
 ### Audit Triggers
 
 | Trigger | Purpose | Duration |
@@ -240,6 +255,7 @@ All AI-generated work follows this strict order:
 |------|--------|
 | `development/modern-react-coding-standards.md` | React/TS standards, BEM naming, ESLint rules |
 | `development/modern-react-quick-reference.md` | Cheat sheet for daily development |
+| `development/bem-methodology.md` | BEM naming convention, retro design rules, dark mode, WCAG contrast |
 | `development/css-optimization-guidelines.md` | CSS performance, memory optimization |
 | `development/css-optimization-quick-reference.md` | Quick CSS optimization lookup |
 
@@ -327,7 +343,7 @@ All templates are in `/guidelines/_templates/`. See `/guidelines/_templates.md` 
 
 ---
 
-**Version:** 3.0.0
-**Last Updated:** March 15, 2026
+**Version:** 3.1.0
+**Last Updated:** March 16, 2026
 **Lines:** ~380 (reduced from ~4,200)
 **Full changelog:** `/CHANGELOG.md`

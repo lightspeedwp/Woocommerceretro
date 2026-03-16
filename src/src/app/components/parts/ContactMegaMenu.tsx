@@ -57,9 +57,9 @@ export const ContactMegaMenu = () => {
   const renderContent = (closeMenu: () => void) => {
     return (
       <div className="wp-mega-menu__content">
-        <div className="funky-mega__orb funky-mega__orb--cyan" style={{ top: '-80px', left: '30%' }} />
-        <div className="funky-mega__orb funky-mega__orb--pink" style={{ bottom: '-60px', right: '20%' }} />
-        <div className="funky-mega__inner funky-mega__inner--contact" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="funky-mega__orb funky-mega__orb--cyan funky-mega__orb--contact-cyan" />
+        <div className="funky-mega__orb funky-mega__orb--pink funky-mega__orb--contact-pink" />
+        <div className="funky-mega__inner funky-mega__inner--contact">
           {/* Contact method cards */}
           <div className="funky-mega__contact-row">
             {contactMethods.map((method) => (
@@ -72,8 +72,7 @@ export const ContactMegaMenu = () => {
                     <span>{method.title}</span>
                     {method.badge && (
                       <span
-                        className={`funky-mega__badge funky-mega__badge--${method.badge}`}
-                        style={{ marginLeft: '0.5rem', verticalAlign: 'middle' }}
+                        className={`funky-mega__badge funky-mega__badge--${method.badge} funky-mega__external-icon`}
                       >
                         Online
                       </span>
@@ -90,7 +89,7 @@ export const ContactMegaMenu = () => {
           </div>
 
           {/* Support links grid */}
-          <div style={{ padding: '0 1.5rem 1rem 1.5rem' }}>
+          <div className="funky-mega__contact-padding">
             <h4 className="funky-mega__title">Quick Links</h4>
             <div className="funky-mega__support-grid">
               {supportLinks.map((link) => (

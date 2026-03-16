@@ -8,7 +8,6 @@
  * @route /leaderboard
  */
 
-import { Link } from 'react-router';
 import { Trophy, Crown, Lightning as Zap, Fire } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
@@ -26,13 +25,6 @@ export const PageLeaderboardRetro = () => {
     <div className="retro-home theme-retro">
       <div className="retro-container">
         <HeaderRetro />
-
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">LEADERBOARD</span>
-        </div>
 
         <div className="retro-page-shell">
           <div className="retro-page-shell__header">

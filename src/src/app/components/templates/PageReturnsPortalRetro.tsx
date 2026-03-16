@@ -2,7 +2,11 @@
  * PageReturnsPortalRetro
  *
  * "PlayPocket" FSE theme - Returns Portal.
+ * All content driven from /data/returnsPage.ts.
  * WCAG AA 2.2 compliant.
+ *
+ * @route /returns
+ * @template
  */
 
 import { type FormEvent } from 'react';
@@ -10,11 +14,16 @@ import { Link } from 'react-router';
 import { ArrowUUpLeft, MagicWand, Warning } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
+import { returnsPageContent, returnsPolicies, returnsSteps } from '../../data/returnsPage';
+
+const policyIcons: Record<string, any> = { MagicWand, Warning };
 
 export const PageReturnsPortalRetro = () => {
+  const { heroTitle, heroSubtitle, formTitle, formLabels, successMessage, stepsTitle, policyLinkText, policyLinkUrl } = returnsPageContent;
+
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-    alert('Return request submitted! Please check your email for the return label.');
+    alert(successMessage);
   };
 
   return (
@@ -24,51 +33,67 @@ export const PageReturnsPortalRetro = () => {
 
         <div className="retro-legal-layout">
           <div className="retro-legal-layout__header">
-            <ArrowUUpLeft size={64} weight="fill" color="var(--color-ink)" className="retro-legal-layout__icon" />
-            <h1 className="retro-font-display retro-bold retro-legal-layout__title">RETURNS PORTAL</h1>
-            <p className="retro-font-body retro-legal-layout__subtitle">Need a mulligan? Initiate your return below.</p>
+            <ArrowUUpLeft size={64} weight="fill" className="retro-legal-layout__icon" />
+            <h1 className="retro-font-display retro-bold retro-legal-layout__title">{heroTitle}</h1>
+            <p className="retro-font-body retro-legal-layout__subtitle">{heroSubtitle}</p>
           </div>
 
           <div className="retro-returns-portal__grid">
             {/* Form Side */}
             <div className="retro-font-body retro-returns-portal__form-card">
-              <h2 className="retro-font-display retro-bold retro-returns-portal__form-title">LOOKUP ORDER</h2>
+              <h2 className="retro-font-display retro-bold retro-returns-portal__form-title">{formTitle}</h2>
 
               <form onSubmit={handleSubmit} className="retro-returns-portal__form">
                 <div>
-                  <label htmlFor="orderNumber" className="retro-bold retro-returns-portal__label">ORDER ID (#)</label>
-                  <input type="text" id="orderNumber" className="retro-input" placeholder="e.g. 987-6543-21" required />
+                  <label htmlFor="orderNumber" className="retro-bold retro-returns-portal__label">{formLabels.orderId}</label>
+                  <input type="text" id="orderNumber" className="retro-input" placeholder={formLabels.orderIdPlaceholder} required />
                 </div>
                 <div>
-                  <label htmlFor="email" className="retro-bold retro-returns-portal__label">EMAIL (PLAYER ID)</label>
-                  <input type="email" id="email" className="retro-input" placeholder="player1@example.com" required />
+                  <label htmlFor="email" className="retro-bold retro-returns-portal__label">{formLabels.email}</label>
+                  <input type="email" id="email" className="retro-input" placeholder={formLabels.emailPlaceholder} required />
                 </div>
-                <button type="submit" className="retro-button retro-font-display retro-bold retro-returns-portal__submit">START RETURN</button>
+                <button type="submit" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-returns-portal__submit">{formLabels.submit}</button>
               </form>
+
+              {/* Steps */}
+              <div className="retro-returns-portal__steps">
+                <h3 className="retro-font-display retro-bold retro-returns-portal__steps-title">{stepsTitle}</h3>
+                {returnsSteps.map((step) => (
+                  <div key={step.step} className="retro-returns-portal__step">
+                    <span className="retro-returns-portal__step-number retro-font-display retro-bold">{step.step}</span>
+                    <div>
+                      <span className="retro-font-display retro-bold retro-returns-portal__step-title">{step.title}</span>
+                      <p className="retro-font-body retro-returns-portal__step-text">{step.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Info Side */}
             <div className="retro-font-body retro-returns-portal__info-card">
-              <div>
-                <h3 className="retro-font-display retro-bold retro-returns-portal__info-title">
-                  <MagicWand size={24} /> 30-DAY WINDOW
-                </h3>
-                <p className="retro-returns-portal__info-text">
-                  You have 30 days from the date of delivery to return your items for a full refund.
-                </p>
-              </div>
-              <div>
-                <h3 className="retro-font-display retro-bold retro-returns-portal__info-title">
-                  <Warning size={24} /> CONDITIONS
-                </h3>
-                <ul className="retro-returns-portal__conditions-list">
-                  <li>Must be in original packaging</li>
-                  <li>No physical damage</li>
-                  <li>Include all cables and manuals</li>
-                </ul>
-              </div>
+              {returnsPolicies.map((policy, idx) => {
+                const Icon = policyIcons[policy.icon] || MagicWand;
+                return (
+                  <div key={idx}>
+                    <h3 className="retro-font-display retro-bold retro-returns-portal__info-title">
+                      <Icon size={24} /> {policy.title}
+                    </h3>
+                    {policy.text && (
+                      <p className="retro-returns-portal__info-text">{policy.text}</p>
+                    )}
+                    {policy.conditions && (
+                      <ul className="retro-returns-portal__conditions-list">
+                        {policy.conditions.map((c, i) => (
+                          <li key={i}>{c}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
               <div className="retro-returns-portal__info-link-wrapper">
-                <Link to="/faq" className="retro-returns-portal__info-link">Read Full Return Policy &rarr;</Link>
+                <Link to={policyLinkUrl} className="retro-returns-portal__info-link">{policyLinkText} &rarr;</Link>
               </div>
             </div>
           </div>
@@ -78,6 +103,6 @@ export const PageReturnsPortalRetro = () => {
       </div>
     </div>
   );
-}
+};
 
 PageReturnsPortalRetro.displayName = 'PageReturnsPortalRetro';

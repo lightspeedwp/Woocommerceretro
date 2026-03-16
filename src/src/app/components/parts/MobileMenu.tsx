@@ -90,8 +90,8 @@ export const MobileMenu = ({ isOpen, onOpenChange }: MobileMenuProps) => {
             {expandedSections['shop'] && (
               <div className="woocommerce-mobile-menu__submenu">
                 {renderLink('/shop', 'All Products', 'woocommerce-mobile-menu__submenu-link')}
-                {renderLink('/new-arrivals', 'New Arrivals', 'woocommerce-mobile-menu__submenu-link')}
-                {renderLink('/best-sellers', 'Best Sellers', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/new-arrivals', 'New arrivals', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/best-sellers', 'Best sellers', 'woocommerce-mobile-menu__submenu-link')}
                 {renderLink('/sale', 'Sale', 'woocommerce-mobile-menu__submenu-link')}
                 {renderLink('/shop/collections', 'Collections', 'woocommerce-mobile-menu__submenu-link')}
                 {renderLink('/subscriptions', 'Subscriptions', 'woocommerce-mobile-menu__submenu-link')}
@@ -152,7 +152,7 @@ export const MobileMenu = ({ isOpen, onOpenChange }: MobileMenuProps) => {
             {expandedSections['about'] && (
               <div className="woocommerce-mobile-menu__submenu">
                 {renderLink('/about', 'About Us', 'woocommerce-mobile-menu__submenu-link')}
-                {renderLink('/about/our-story', 'Our Story', 'woocommerce-mobile-menu__submenu-link')}
+                {renderLink('/about/our-story', 'Our story', 'woocommerce-mobile-menu__submenu-link')}
                 {renderLink('/about/team', 'Team', 'woocommerce-mobile-menu__submenu-link')}
                 {renderLink('/about/careers', 'Careers', 'woocommerce-mobile-menu__submenu-link')}
                 {renderLink('/stores', 'Store Locations', 'woocommerce-mobile-menu__submenu-link')}

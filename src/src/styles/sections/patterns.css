@@ -88,7 +88,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: #000;
+  background-color: var(--wp--preset--color--black);
 }
 
 .wp-full-width-section__content {
@@ -134,4 +134,9 @@
 .dark .wp-quick-entry-tile:hover {
   border-color: var(--wp--preset--color--primary);
   background-color: var(--wp--preset--color--surface);
+}
+
+/* Black Background Override */
+.wp-quick-entry-tile__overlay {
+  background-color: var(--wp--preset--color--black);
 }

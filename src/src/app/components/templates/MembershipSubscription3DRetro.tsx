@@ -105,7 +105,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
               {currentStep === 1 && !subscribed && (
                 <button
                   onClick={handleSubscribe}
-                  className="retro-button retro-font-display"
+                  className="retro-btn retro-btn--primary retro-font-display"
                 >
                   SUBSCRIBE NOW <ArrowRight size={20} weight="bold" />
                 </button>
@@ -124,7 +124,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                   <p className="retro-font-body" style={{ textAlign: 'center', marginBottom: '1rem' }}>
                     🎉 Your first box is ready! Check your email for tracking info.
                   </p>
-                  <Link to="/account/subscriptions" className="retro-button retro-font-display">
+                  <Link to="/account/subscriptions" className="retro-btn retro-btn--primary retro-font-display">
                     VIEW MY SUBSCRIPTIONS <ArrowRight size={20} weight="bold" />
                   </Link>
                 </div>
@@ -146,10 +146,10 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                 <div className="retro-card-icon">
                   <Star size={48} weight="fill" color="#00fff9" />
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
-                  EXCLUSIVE ITEMS
+                <h3 className="retro-card__title retro-font-display retro-bold">
+                  EXCLUSIVE MEMBER DROPS
                 </h3>
-                <p className="retro-card-desc retro-font-body">
+                <p className="retro-card__desc retro-font-body">
                   Get limited-edition retro gaming collectibles you won't find anywhere else.
                 </p>
               </div>
@@ -159,10 +159,10 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                 <div className="retro-card-icon">
                   <Gift size={48} weight="fill" color="#ff00ff" />
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
-                  SURPRISE & DELIGHT
+                <h3 className="retro-card__title retro-font-display retro-bold">
+                  MONTHLY LOOT BOXES
                 </h3>
-                <p className="retro-card-desc retro-font-body">
+                <p className="retro-card__desc retro-font-body">
                   Every month brings a new surprise. We curate each box with love.
                 </p>
               </div>
@@ -172,10 +172,10 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                 <div className="retro-card-icon">
                   <ArrowRight size={48} weight="bold" color="#ffff00" />
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
-                  CANCEL ANYTIME
+                <h3 className="retro-card__title retro-font-display retro-bold">
+                  VIP SUPPORT CHANNEL
                 </h3>
-                <p className="retro-card-desc retro-font-body">
+                <p className="retro-card__desc retro-font-body">
                   No long-term commitment. Skip or cancel your subscription whenever you want.
                 </p>
               </div>
@@ -193,7 +193,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
             <div className="retro-grid retro-grid-3">
               {/* Monthly */}
               <div className="retro-card">
-                <h3 className="retro-card-title retro-font-display retro-bold">
+                <h3 className="retro-card__title retro-font-display retro-bold">
                   MONTHLY
                 </h3>
                 <div className="retro-price retro-font-display">
@@ -204,17 +204,17 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                   <li><Check size={16} weight="bold" /> 4-6 curated items</li>
                   <li><Check size={16} weight="bold" /> Cancel anytime</li>
                 </ul>
-                <Link to="/subscribe?plan=monthly" className="retro-button-outline retro-font-display">
+                <Link to="/subscribe?plan=monthly" className="retro-btn retro-btn--secondary retro-font-display">
                   SELECT PLAN
                 </Link>
               </div>
 
               {/* Quarterly */}
-              <div className="retro-card retro-card-highlight">
+              <div className="retro-card retro-card--highlight">
                 <div className="retro-badge" style={{ position: 'absolute', top: '-12px', right: '12px' }}>
                   POPULAR
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
+                <h3 className="retro-card__title retro-font-display retro-bold">
                   QUARTERLY
                 </h3>
                 <div className="retro-price retro-font-display">
@@ -229,14 +229,14 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                   <li><Check size={16} weight="bold" /> Bonus exclusive item</li>
                   <li><Check size={16} weight="bold" /> Cancel anytime</li>
                 </ul>
-                <Link to="/subscribe?plan=quarterly" className="retro-button retro-font-display">
+                <Link to="/subscribe?plan=quarterly" className="retro-btn retro-btn--primary retro-font-display">
                   SELECT PLAN <ArrowRight size={20} weight="bold" />
                 </Link>
               </div>
 
               {/* Annual */}
               <div className="retro-card">
-                <h3 className="retro-card-title retro-font-display retro-bold">
+                <h3 className="retro-card__title retro-font-display retro-bold">
                   ANNUAL
                 </h3>
                 <div className="retro-price retro-font-display">
@@ -252,7 +252,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
                   <li><Check size={16} weight="bold" /> VIP early access</li>
                   <li><Check size={16} weight="bold" /> Free shipping</li>
                 </ul>
-                <Link to="/subscribe?plan=annual" className="retro-button-outline retro-font-display">
+                <Link to="/subscribe?plan=annual" className="retro-btn retro-btn--secondary retro-font-display">
                   SELECT PLAN
                 </Link>
               </div>
@@ -270,7 +270,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
               <p className="retro-cta-desc retro-font-body">
                 Join thousands of retro gaming fans and get your first mystery box today.
               </p>
-              <Link to="/subscribe" className="retro-button retro-font-display">
+              <Link to="/subscribe" className="retro-btn retro-btn--primary retro-font-display">
                 START SUBSCRIPTION <ArrowRight size={24} weight="bold" />
               </Link>
             </div>

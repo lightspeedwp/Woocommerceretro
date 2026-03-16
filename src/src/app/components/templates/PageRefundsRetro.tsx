@@ -96,15 +96,15 @@ export const PageRefundsRetro = () => {
               {refundTimelines.map((item, i) => {
                 const IconComp = timelineIcons[item.method] || CurrencyDollar;
                 return (
-                  <div key={i} className="retro-card retro-card-glow">
+                  <div key={i} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <IconComp size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {item.method.toUpperCase()}
                     </h3>
                     <span className="retro-refund-timeframe retro-font-display">{item.timeframe}</span>
-                    <p className="retro-card-desc retro-font-body">{item.description}</p>
+                    <p className="retro-card__desc retro-font-body">{item.description}</p>
                   </div>
                 );
               })}
@@ -202,32 +202,32 @@ export const PageRefundsRetro = () => {
               </p>
             </div>
 
-            <div className="retro-faq-list" role="list">
+            <div className="retro-faq__list" role="list">
               {refundFAQs.map((faq, i) => {
                 const isOpen = openFAQ === i;
                 return (
                   <div
                     key={i}
-                    className={'retro-faq-item' + (isOpen ? ' retro-faq-item--open' : '')}
+                    className={'retro-faq__item' + (isOpen ? ' retro-faq__item--open' : '')}
                     role="listitem"
                   >
                     <button
                       type="button"
-                      className="retro-faq-trigger"
+                      className="retro-faq__trigger"
                       aria-expanded={isOpen}
                       aria-controls={'refund-faq-panel-' + i}
                       onClick={toggleFAQ(i)}
                     >
-                      <span className="retro-faq-question retro-font-display">{faq.question}</span>
+                      <span className="retro-faq__question retro-font-display">{faq.question}</span>
                       <CaretDown
                         size={18}
                         weight="bold"
-                        className={'retro-faq-chevron' + (isOpen ? ' retro-faq-chevron--open' : '')}
+                        className={'retro-faq__chevron' + (isOpen ? ' retro-faq__chevron--open' : '')}
                         aria-hidden="true"
                       />
                     </button>
                     {isOpen && (
-                      <div id={'refund-faq-panel-' + i} className="retro-faq-answer" role="region">
+                      <div id={'refund-faq-panel-' + i} className="retro-faq__answer" role="region">
                         <p className="retro-font-body">{faq.answer}</p>
                       </div>
                     )}
@@ -252,10 +252,10 @@ export const PageRefundsRetro = () => {
                 {refundsPageContent.ctaText}
               </p>
               <div className="retro-cta-actions">
-                <Link to="/returns" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/returns" className="retro-btn retro-btn--primary retro-font-display">
                   {refundsPageContent.ctaPrimary.toUpperCase()} <ArrowRight size={20} weight="bold" />
                 </Link>
-                <Link to="/contact" className="retro-button retro-button--secondary retro-font-display">
+                <Link to="/contact" className="retro-btn retro-btn--secondary retro-font-display">
                   {refundsPageContent.ctaSecondary.toUpperCase()} <ArrowRight size={18} weight="bold" />
                 </Link>
               </div>

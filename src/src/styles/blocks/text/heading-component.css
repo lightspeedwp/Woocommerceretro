@@ -1,0 +1,136 @@
+/**
+ * Heading Component & Typography Variant Classes
+ * Used by <Heading> and <Typography> React components
+ */
+
+/* ========================================
+   HEADING COMPONENT CLASSES
+   ======================================== */
+
+.wp-heading {
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.wp-heading--1 {
+  font-size: var(--wp--preset--font-size--gigantic);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: var(--wp--preset--line-height--tight);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+}
+
+.wp-heading--2 {
+  font-size: var(--wp--preset--font-size--huge);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: var(--wp--preset--line-height--tight);
+}
+
+.wp-heading--3 {
+  font-size: var(--wp--preset--font-size--xxx-large);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: var(--wp--preset--line-height--snug);
+}
+
+.wp-heading--4 {
+  font-size: var(--wp--preset--font-size--xx-large);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: var(--wp--preset--line-height--snug);
+}
+
+/* ========================================
+   TYPOGRAPHY VARIANT CLASSES
+   ======================================== */
+
+.typography-h1 {
+  font-size: var(--wp--preset--font-size--gigantic);
+  font-weight: var(--wp--preset--font-weight--bold);
+  line-height: var(--wp--preset--line-height--tight);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-h2 {
+  font-size: var(--wp--preset--font-size--huge);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: var(--wp--preset--line-height--snug);
+  letter-spacing: var(--wp--preset--letter-spacing--tight);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-h3 {
+  font-size: var(--wp--preset--font-size--xxx-large);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  line-height: var(--wp--preset--line-height--snug);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-h4 {
+  font-size: var(--wp--preset--font-size--xx-large);
+  font-weight: var(--wp--preset--font-weight--medium);
+  line-height: var(--wp--preset--line-height--normal);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-h5 {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--medium);
+  line-height: var(--wp--preset--line-height--normal);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-h6 {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--medium);
+  line-height: var(--wp--preset--line-height--normal);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-body {
+  font-size: var(--wp--preset--font-size--normal);
+  font-weight: var(--wp--preset--font-weight--normal);
+  line-height: var(--wp--preset--line-height--relaxed);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-body-large {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: var(--wp--preset--font-weight--normal);
+  line-height: var(--wp--preset--line-height--relaxed);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.typography-caption {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--normal);
+  line-height: var(--wp--preset--line-height--normal);
+  color: var(--wp--preset--color--muted-foreground);
+  margin: 0;
+}
+
+.typography-small {
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--normal);
+  line-height: var(--wp--preset--line-height--normal);
+  color: var(--wp--preset--color--muted-foreground);
+  margin: 0;
+}
+
+.typography--stretchy {
+  white-space: normal;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .typography--stretchy {
+    white-space: nowrap;
+  }
+}

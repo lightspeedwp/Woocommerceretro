@@ -215,10 +215,10 @@ export const ArchiveProductRetro = () => {
         <HeaderRetro />
 
         <div className="retro-archive-layout">
-          <aside className="retro-sidebar-filters retro-font-display">
-            <h3 className="retro-sidebar-title retro-bold">BROWSE</h3>
-            <div className="retro-sidebar-group">
-              <Link to="/shop" className={'retro-sidebar-item' + (!categorySlug && !routeContext ? ' retro-sidebar-item--active' : '')}>
+          <aside className="retro-sidebar__filters retro-font-display">
+            <h3 className="retro-sidebar__title retro-bold">BROWSE</h3>
+            <div className="retro-sidebar__group">
+              <Link to="/shop" className={'retro-sidebar__item' + (!categorySlug && !routeContext ? ' retro-sidebar__item--active' : '')}>
                 <span>ALL ITEMS</span><span>{PRODUCTS.length}</span>
               </Link>
               {productCategories.map((cat) => {
@@ -226,7 +226,7 @@ export const ArchiveProductRetro = () => {
                   <Link
                     key={cat.id}
                     to={'/category/' + cat.slug}
-                    className={'retro-sidebar-item' + (categorySlug === cat.slug ? ' retro-sidebar-item--active' : '')}
+                    className={'retro-sidebar__item' + (categorySlug === cat.slug ? ' retro-sidebar__item--active' : '')}
                   >
                     <span>{cat.name.toUpperCase()}</span><span>{cat.count}</span>
                   </Link>
@@ -235,18 +235,18 @@ export const ArchiveProductRetro = () => {
             </div>
 
             {/* Quick Filters */}
-            <h3 className="retro-sidebar-title retro-bold" style={{ marginTop: 'var(--wp--preset--spacing--50)' }}>QUICK FILTERS</h3>
-            <div className="retro-sidebar-group">
-              <Link to="/sale" className={'retro-sidebar-item' + (location.pathname === '/sale' ? ' retro-sidebar-item--active' : '')}>
+            <h3 className="retro-sidebar__title retro-bold" style={{ marginTop: 'var(--wp--preset--spacing--50)' }}>QUICK FILTERS</h3>
+            <div className="retro-sidebar__group">
+              <Link to="/sale" className={'retro-sidebar__item' + (location.pathname === '/sale' ? ' retro-sidebar__item--active' : '')}>
                 <span>ON SALE</span><span>{getOnSaleProducts().length}</span>
               </Link>
-              <Link to="/new-arrivals" className={'retro-sidebar-item' + (location.pathname === '/new-arrivals' ? ' retro-sidebar-item--active' : '')}>
+              <Link to="/new-arrivals" className={'retro-sidebar__item' + (location.pathname === '/new-arrivals' ? ' retro-sidebar__item--active' : '')}>
                 <span>NEW ARRIVALS</span><span>{getNewArrivals(100).length}</span>
               </Link>
-              <Link to="/best-sellers" className={'retro-sidebar-item' + (location.pathname === '/best-sellers' ? ' retro-sidebar-item--active' : '')}>
+              <Link to="/best-sellers" className={'retro-sidebar__item' + (location.pathname === '/best-sellers' ? ' retro-sidebar__item--active' : '')}>
                 <span>BEST SELLERS</span><span>{getBestSellers(100).length}</span>
               </Link>
-              <Link to="/promotions/flash-sale" className={'retro-sidebar-item' + (location.pathname === '/promotions/flash-sale' ? ' retro-sidebar-item--active' : '')}>
+              <Link to="/promotions/flash-sale" className={'retro-sidebar__item' + (location.pathname === '/promotions/flash-sale' ? ' retro-sidebar__item--active' : '')}>
                 <span>FLASH SALE</span><span><Lightning size={14} weight="fill" /></span>
               </Link>
             </div>
@@ -305,7 +305,7 @@ export const ArchiveProductRetro = () => {
             <div className="retro-grid">
               {displayProducts.map((item, i) => {
                 const primaryBadge = item.badges && item.badges.length > 0 ? item.badges[0] : null;
-                const btnClass = primaryBadge ? 'retro-card-btn--yellow' : 'retro-card-btn--white';
+                const btnClass = primaryBadge ? 'retro-card__btn--yellow' : 'retro-card__btn--white';
                 const itemPrice = typeof item.price === 'number' ? '$' + item.price.toFixed(2) : item.price;
                 const itemImg = item.image || (item as any).img;
                 const hoverImg = item.hoverImage || itemImg;
@@ -314,9 +314,9 @@ export const ArchiveProductRetro = () => {
 
                 return (
                   <Link key={item.id || i} to={'/product/' + (item.slug || item.id)} className="retro-card">
-                    {primaryBadge && <span className="retro-card-badge retro-font-display">{primaryBadge}</span>}
+                    {primaryBadge && <span className="retro-card__badge retro-font-display">{primaryBadge}</span>}
                     <button
-                      className={'retro-heart-btn' + (inWishlist ? ' retro-heart-btn--active' : '')}
+                      className={'retro-card__heart' + (inWishlist ? ' retro-card__heart--active' : '')}
                       onClick={(ev: MouseEvent) => {
                         ev.preventDefault();
                         if (inWishlist) {
@@ -331,7 +331,7 @@ export const ArchiveProductRetro = () => {
                       <Heart size={16} weight={inWishlist ? 'fill' : 'bold'} />
                     </button>
                     <button
-                      className={'retro-compare-btn' + (inComparison ? ' retro-compare-btn--active' : '')}
+                      className={'retro-card__compare' + (inComparison ? ' retro-card__compare--active' : '')}
                       onClick={(ev: MouseEvent) => {
                         ev.preventDefault();
                         if (inComparison) {
@@ -344,26 +344,26 @@ export const ArchiveProductRetro = () => {
                     >
                       <Scales size={14} weight="bold" />
                     </button>
-                    <div className="retro-card-img-wrap">
-                      <img src={itemImg} className="retro-card-img retro-card-img--primary" alt={item.name} />
-                      <img src={hoverImg} className="retro-card-img retro-card-img--hover" alt={item.name + ' alternate view'} />
+                    <div className="retro-card__img-wrap">
+                      <img src={itemImg} className="retro-card__img retro-card__img--primary" alt={item.name} />
+                      <img src={hoverImg} className="retro-card__img retro-card__img--hover" alt={item.name + ' alternate view'} />
                     </div>
                     {item.salePrice && (
-                      <span className="retro-card-sale-price retro-font-display retro-bold">
+                      <span className="retro-card__sale-price retro-font-display retro-bold">
                         {'$' + item.salePrice.toFixed(2)}
                       </span>
                     )}
-                    <h3 className="retro-card-title retro-font-display retro-bold">{item.name}</h3>
-                    <p className="retro-card-price retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">{item.name}</h3>
+                    <p className="retro-card__price retro-font-display retro-bold">
                       {item.salePrice ? (
                         <>
-                          <span className="retro-card-price--original">{itemPrice}</span>
-                          <span className="retro-card-price--sale">{'$' + item.salePrice.toFixed(2)}</span>
+                          <span className="retro-card__price--original">{itemPrice}</span>
+                          <span className="retro-card__price--sale">{'$' + item.salePrice.toFixed(2)}</span>
                         </>
                       ) : itemPrice}
                     </p>
                     <button
-                      className={'retro-card-btn retro-font-display retro-bold ' + btnClass}
+                      className={'retro-card__btn retro-font-display retro-bold ' + btnClass}
                       onClick={(ev: MouseEvent) => {
                         ev.preventDefault();
                         cartContext.addToCart(item, 1);

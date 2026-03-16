@@ -100,6 +100,7 @@ export const HeaderRetroPattern = () => {
   return (
     <div className="retro-header-wrapper">
       <header className="retro-header">
+        <div className="retro-header__inner alignwide">
         {/* Logo */}
         <div className="retro-logo">
           <PlayPocketLogo />
@@ -217,6 +218,7 @@ export const HeaderRetroPattern = () => {
             <span className="retro-hamburger__line" />
             <span className="retro-hamburger__line" />
           </button>
+        </div>
         </div>
       </header>
 

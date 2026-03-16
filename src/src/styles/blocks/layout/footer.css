@@ -1,5 +1,11 @@
 /* ========================================
-   WORDPRESS SITE FOOTER
+   WORDPRESS SITE FOOTER — Canonical
+   
+   BEM block: .wp-site-footer
+   Merged from blocks/layout/footer.css + blocks/theme/footer.css
+   Source of truth for all footer styles.
+   
+   Dark mode: automatic via CSS variables.
    ======================================== */
 
 /* Main Footer Container */
@@ -11,8 +17,7 @@
 
 /* Main Footer Section */
 .wp-site-footer__main {
-  max-width: var(--wp--preset--layout--site-size);
-  margin: 0 auto;
+  width: 100%;
   padding: clamp(3rem, 6vw, 4rem) clamp(1rem, 3vw, 3rem);
 }
 
@@ -21,6 +26,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--wp--preset--spacing--80);
+  max-width: var(--wp--preset--layout--wide-size);
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
@@ -65,18 +72,36 @@
   color: var(--wp--preset--color--muted-foreground);
   line-height: var(--wp--preset--line-height--relaxed);
   max-width: 20rem;
+  margin: 0;
+}
+
+/* Footer Contact Info */
+.wp-site-footer__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-site-footer__contact-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--muted-foreground);
 }
 
 /* Footer Section (Shop, Support, Newsletter) */
 .wp-site-footer__section {
-  /* Default spacing - no specific styles needed */
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
 }
 
 .wp-site-footer__heading {
   color: var(--wp--preset--color--foreground);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: var(--wp--preset--spacing--60);
+  margin: 0;
   font-size: var(--wp--preset--font-size--small);
   font-weight: var(--wp--preset--font-weight--semibold);
 }
@@ -88,7 +113,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--wp--preset--spacing--20);
+  gap: var(--wp--preset--spacing--30);
 }
 
 .wp-site-footer__link {
@@ -111,13 +136,14 @@
 .wp-site-footer__newsletter-text {
   font-size: var(--wp--preset--font-size--small);
   color: var(--wp--preset--color--muted-foreground);
-  margin-bottom: var(--wp--preset--spacing--40);
+  margin: 0;
   font-weight: var(--wp--preset--font-weight--normal);
 }
 
 .wp-site-footer__newsletter-form {
   display: flex;
   gap: var(--wp--preset--spacing--20);
+  margin: 0;
 }
 
 .wp-site-footer__newsletter-input {
@@ -165,7 +191,7 @@
 }
 
 .wp-site-footer__bottom-inner {
-  max-width: var(--wp--preset--layout--site-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 3rem);
 }
@@ -270,7 +296,7 @@
 }
 
 .wp-footer-social-icon:focus-visible {
-  outline: 2px solid var(--funky-interactive-focus, var(--wp--preset--focus-ring--color));
+  outline: 2px solid var(--wp--preset--color--ring, var(--color-focus));
   outline-offset: 2px;
 }
 
@@ -289,15 +315,7 @@
   fill: var(--wp--preset--color--foreground);
 }
 
-.dark .wp-footer-social-icon__bg {
-  fill: var(--wp--preset--color--foreground);
-}
-
 .wp-footer-social-icon__path {
-  fill: var(--wp--preset--color--background);
-}
-
-.dark .wp-footer-social-icon__path {
   fill: var(--wp--preset--color--background);
 }
 
@@ -306,31 +324,37 @@
   font-weight: var(--wp--preset--font-weight--semibold);
 }
 
-/* Dark Mode Overrides */
-.dark .wp-site-footer { background: var(--wp--preset--color--surface); border-top-color: var(--wp--preset--color--border); }
+/* ── Dark Mode ── */
 
-.dark .wp-site-footer__bottom { background: var(--wp--preset--color--background); border-top-color: var(--wp--preset--color--border); }
+.dark .wp-site-footer {
+  background: var(--wp--preset--color--surface);
+  border-top-color: var(--wp--preset--color--border);
+}
 
-.dark .wp-site-footer__newsletter-input { background: var(--wp--preset--color--background); border-color: var(--wp--preset--color--border); }
+.dark .wp-site-footer__bottom {
+  background: var(--wp--preset--color--background);
+  border-top-color: var(--wp--preset--color--border);
+}
 
-.dark .wp-site-footer__link:hover { color: var(--wp--preset--color--foreground); }
+.dark .wp-site-footer__newsletter-input {
+  background: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--border);
+}
 
-.dark .wp-site-footer__legal-link:hover { color: var(--wp--preset--color--foreground); }
+.dark .wp-site-footer__link:hover {
+  color: var(--wp--preset--color--foreground);
+}
 
-.dark .wp-footer-social-icon:hover { color: var(--wp--preset--color--foreground); background-color: rgba(255, 255, 255, 0.08); }
+.dark .wp-site-footer__legal-link:hover {
+  color: var(--wp--preset--color--foreground);
+}
 
-/* ========================================
-   FOOTER SPACING FIX - CONSOLIDATED FROM footer-spacing-fix.css
-   NO MARGIN ENFORCEMENT
-   ======================================== */
+.dark .wp-footer-social-icon:hover {
+  color: var(--wp--preset--color--foreground);
+  background-color: rgba(255, 255, 255, 0.08);
+}
 
-/**
- * CRITICAL: This section enforces the "No Margin" guideline
- * All spacing uses gap in flex/grid containers
- * Only exception: margin: 0 auto for centering
- */
-
-/* FOOTER WIDGET - GAP ONLY */
+/* ── Footer Widget (gap-only spacing) ── */
 
 .wp-site-footer__widget {
   display: flex;
@@ -347,7 +371,7 @@
   margin: 0;
 }
 
-/* FOOTER NAV - GAP ONLY */
+/* ── Footer Nav (gap-only spacing) ── */
 
 .wp-site-footer__nav {
   list-style: none;

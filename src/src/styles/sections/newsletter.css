@@ -133,6 +133,19 @@
 }
 
 /* ========================================
+   NEWSLETTER PAGE TEMPLATE
+   Component: PageNewsletter.tsx
+   Route: /newsletter
+   ======================================== */
+
+.wp-newsletter-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
    NEWSLETTER BUTTON & PRIVACY
    (Added Batch B1 - previously inline in globals.css)
    ======================================== */

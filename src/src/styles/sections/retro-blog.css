@@ -1,0 +1,1157 @@
+/**
+ * Retro Blog — PlayPocket Theme
+ *
+ * BEM blocks: .retro-breadcrumb, .retro-blog-archive,
+ *             .retro-blog-card, .retro-single-post,
+ *             .retro-author-header, .retro-archive-header,
+ *             .retro-blog-404
+ *
+ * Uses CSS variables from retro-theme.css:
+ *   --color-ink, --color-paper, --color-signal,
+ *   --color-muted, --color-border, --color-panel,
+ *   --color-focus, --shadow-retro, --shadow-retro-lg
+ */
+
+/* ========================================
+   BREADCRUMB BAR (deprecated — now handled by pp-breadcrumb.css via SiteLayout)
+   ======================================== */
+
+/* ========================================
+   BLOG ARCHIVE — HERO BANNER
+   ======================================== */
+
+.retro-blog-archive {
+  padding: 0 1.5rem 3rem;
+  min-height: 60vh;
+}
+
+.retro-blog-archive__hero {
+  position: relative;
+  border: 3px solid var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 3rem 2rem;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  box-shadow: 6px 6px 0px var(--color-signal);
+}
+
+.retro-blog-archive__hero-scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255,255,255,0.03) 2px,
+    rgba(255,255,255,0.03) 4px
+  );
+  pointer-events: none;
+}
+
+.retro-blog-archive__hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.retro-blog-archive__hero-badge {
+  display: inline-block;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  border: 2px solid var(--color-signal);
+  color: var(--color-signal);
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.retro-blog-archive__hero-title {
+  font-size: 3rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.retro-blog-archive__hero-desc {
+  font-size: 1rem;
+  color: var(--color-paper-deep, #c0c0c0);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ========================================
+   BLOG ARCHIVE — FEATURED POST
+   ======================================== */
+
+.retro-blog-archive__featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 3px solid var(--color-ink);
+  box-shadow: 4px 4px 0px var(--color-ink);
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  background: var(--color-paper);
+}
+
+@media (min-width: 768px) {
+  .retro-blog-archive__featured {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.retro-blog-archive__featured-img-wrap {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+  border-bottom: 3px solid var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .retro-blog-archive__featured-img-wrap {
+    border-bottom: none;
+    border-right: 3px solid var(--color-ink);
+  }
+}
+
+.retro-blog-archive__featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.retro-blog-archive__featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,0.06) 3px,
+    rgba(0,0,0,0.06) 6px
+  );
+  pointer-events: none;
+}
+
+.retro-blog-archive__featured-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.retro-blog-archive__featured-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retro-blog-archive__cat-pill {
+  display: inline-block;
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  padding: 0.1875rem 0.5rem;
+  border: 2px solid var(--color-signal);
+  color: var(--color-signal);
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.retro-blog-archive__cat-pill:hover {
+  background: var(--color-signal);
+  color: #fff;
+}
+
+.retro-blog-archive__date {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.retro-blog-archive__featured-title {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.retro-blog-archive__featured-excerpt {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.retro-blog-archive__featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.retro-blog-archive__author {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+/* ========================================
+   BLOG ARCHIVE — CATEGORY BAR
+   ======================================== */
+
+.retro-blog-archive__cat-bar,
+.retro-blog-archive__tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-top: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 2rem;
+}
+
+.retro-blog-archive__cat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.retro-blog-archive__cat-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.retro-blog-archive__filter-pill {
+  display: inline-block;
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.625rem;
+  border: 2px solid var(--color-border);
+  color: var(--color-ink);
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.15s;
+}
+
+.retro-blog-archive__filter-pill:hover {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-blog-archive__filter-pill:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.retro-blog-archive__filter-pill--active {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+  color: #fff;
+}
+
+.retro-blog-archive__filter-pill--active:hover {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+}
+
+/* ========================================
+   BLOG ARCHIVE — POST GRID
+   ======================================== */
+
+.retro-blog-archive__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .retro-blog-archive__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================
+   BLOG CARD
+   ======================================== */
+
+.retro-blog-card {
+  border: 3px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0px var(--color-ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.retro-blog-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--color-ink);
+}
+
+.retro-blog-card__img-link {
+  display: block;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 3px solid var(--color-ink);
+  position: relative;
+}
+
+.retro-blog-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.retro-blog-card:hover .retro-blog-card__img {
+  transform: scale(1.05);
+}
+
+.retro-blog-card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.retro-blog-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retro-blog-card__cat {
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  padding: 0.125rem 0.375rem;
+  border: 2px solid var(--color-signal);
+  color: var(--color-signal);
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.retro-blog-card__cat:hover {
+  background: var(--color-signal);
+  color: #fff;
+}
+
+.retro-blog-card__date {
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+}
+
+.retro-blog-card__title {
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.retro-blog-card__title a {
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.retro-blog-card__title a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.retro-blog-card__excerpt {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  margin: 0;
+  flex: 1;
+}
+
+.retro-blog-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--color-border);
+  margin-top: auto;
+}
+
+.retro-blog-card__author {
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.retro-blog-card__author:hover {
+  color: var(--color-signal);
+}
+
+.retro-blog-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.retro-blog-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1875rem;
+  font-size: 0.5625rem;
+  color: var(--color-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  padding: 0.0625rem 0.25rem;
+  border: 1px solid var(--color-border);
+  transition: all 0.15s;
+}
+
+.retro-blog-card__tag:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.retro-blog-card__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: var(--color-signal);
+  text-decoration: none;
+}
+
+.retro-blog-card__read:hover {
+  text-decoration: underline;
+}
+
+/* Compact variant for related posts */
+.retro-blog-card--compact .retro-blog-card__img-link {
+  height: 150px;
+}
+
+.retro-blog-card--compact .retro-blog-card__body {
+  padding: 0.75rem;
+}
+
+/* ========================================
+   BLOG ARCHIVE — PAGINATION
+   ======================================== */
+
+.retro-blog-archive__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 2rem 0;
+  border-top: 2px solid var(--color-border);
+}
+
+.retro-blog-archive__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  border: 2px solid var(--color-border);
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.retro-blog-archive__page-btn:hover:not(:disabled) {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-blog-archive__page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.retro-blog-archive__page-btn:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.retro-blog-archive__page-btn--active {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+  color: #fff;
+}
+
+.retro-blog-archive__page-btn--active:hover {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+}
+
+/* ========================================
+   BLOG ARCHIVE — CONTENT HUB
+   ======================================== */
+
+.retro-blog-archive__hub {
+  margin-bottom: var(--wp--preset--spacing--50);
+  padding-top: var(--wp--preset--spacing--40);
+  border-top: 2px solid var(--color-border);
+}
+
+.retro-blog-archive__hub-title {
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin: 0 0 var(--wp--preset--spacing--30);
+}
+
+.dark .retro-blog-archive__hub-title {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-blog-archive__hub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+}
+
+@media (min-width: 768px) {
+  .retro-blog-archive__hub-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.retro-blog-archive__hub-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.retro-blog-archive__hub-link {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--30);
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  letter-spacing: 0.06em;
+  min-height: 44px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dark .retro-blog-archive__hub-link {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-blog-archive__hub-link:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-blog-archive__hub-link span {
+  flex: 1;
+}
+
+/* ========================================
+   BLOG ARCHIVE — EMPTY STATE
+   ======================================== */
+
+.retro-blog-archive__empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  border: 3px dashed var(--color-border);
+  margin-bottom: 3rem;
+}
+
+.retro-blog-archive__empty p {
+  font-size: 1.125rem;
+  margin: 0 0 1.5rem;
+}
+
+/* ========================================
+   SINGLE POST
+   ======================================== */
+
+.retro-single-post {
+  padding: 0 1.5rem 3rem;
+  min-height: 60vh;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.retro-single-post__header {
+  margin-bottom: 2rem;
+}
+
+.retro-single-post__cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.retro-single-post__cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  padding: 0.1875rem 0.5rem;
+  border: 2px solid var(--color-signal);
+  color: var(--color-signal);
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.retro-single-post__cat-pill:hover {
+  background: var(--color-signal);
+  color: #fff;
+}
+
+.retro-single-post__title {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+}
+
+.retro-single-post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.retro-single-post__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.retro-single-post__meta-item:hover {
+  color: var(--color-ink);
+}
+
+/* Featured Image */
+.retro-single-post__hero-img {
+  position: relative;
+  margin: 0 0 2.5rem;
+  border: 3px solid var(--color-ink);
+  box-shadow: 6px 6px 0px var(--color-ink);
+  overflow: hidden;
+}
+
+.retro-single-post__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 480px;
+  object-fit: cover;
+}
+
+.retro-single-post__img-scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+}
+
+/* Content */
+.retro-single-post__content {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.retro-single-post__content p {
+  margin-bottom: 1.5rem;
+}
+
+.retro-single-post__content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.retro-single-post__content h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.retro-single-post__content blockquote {
+  border-left: 4px solid var(--color-signal);
+  padding: 1rem 1.25rem;
+  margin: 2rem 0;
+  background: var(--color-panel);
+  font-style: italic;
+}
+
+.retro-single-post__content ul,
+.retro-single-post__content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-single-post__content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Tags */
+.retro-single-post__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-top: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 2.5rem;
+}
+
+.retro-single-post__tags-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.retro-single-post__tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.retro-single-post__tag {
+  display: inline-block;
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid var(--color-border);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.retro-single-post__tag:hover {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Author Card */
+.retro-single-post__author-card {
+  border: 3px solid var(--color-ink);
+  background: var(--color-panel);
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  box-shadow: 4px 4px 0px var(--color-ink);
+  margin-bottom: 2.5rem;
+}
+
+.retro-single-post__author-avatar {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  border: 3px solid var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paper);
+  color: var(--color-muted);
+}
+
+.retro-single-post__author-name {
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.375rem;
+}
+
+.retro-single-post__author-bio {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+  color: var(--color-ink);
+}
+
+.retro-single-post__author-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--color-signal);
+  text-decoration: none;
+}
+
+.retro-single-post__author-link:hover {
+  text-decoration: underline;
+}
+
+/* Post Navigation (prev/next) */
+.retro-single-post__nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding-top: 1.5rem;
+  border-top: 3px solid var(--color-ink);
+}
+
+.retro-single-post__nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  border: 2px solid var(--color-border);
+  text-decoration: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.retro-single-post__nav-link:hover {
+  border-color: var(--color-ink);
+  background: var(--color-panel);
+}
+
+.retro-single-post__nav-link--next {
+  text-align: right;
+}
+
+.retro-single-post__nav-dir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--color-signal);
+}
+
+.retro-single-post__nav-link--next .retro-single-post__nav-dir {
+  justify-content: flex-end;
+}
+
+.retro-single-post__nav-title {
+  font-size: 0.8125rem;
+  color: var(--color-ink);
+  line-height: 1.3;
+}
+
+/* Related Posts */
+.retro-single-post__related {
+  margin-bottom: 3rem;
+}
+
+.retro-single-post__related-heading {
+  font-size: 1.125rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.retro-single-post__related-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .retro-single-post__related-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================
+   AUTHOR HEADER (Author Archive)
+   ======================================== */
+
+.retro-author-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem;
+  border: 3px solid var(--color-ink);
+  background: var(--color-panel);
+  box-shadow: 4px 4px 0px var(--color-ink);
+  margin-bottom: 2.5rem;
+}
+
+.retro-author-header__avatar {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border: 3px solid var(--color-ink);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paper);
+  color: var(--color-muted);
+}
+
+.retro-author-header__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.retro-author-header__name {
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.retro-author-header__bio {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+  color: var(--color-ink);
+}
+
+.retro-author-header__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.retro-author-header__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.retro-author-header__stat--role {
+  padding: 0.125rem 0.5rem;
+  border: 2px solid var(--color-signal);
+  color: var(--color-signal);
+}
+
+/* ========================================
+   ARCHIVE HEADER (Category / Tag)
+   ======================================== */
+
+.retro-archive-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 2rem;
+  border: 3px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0px var(--color-ink);
+  margin-bottom: 2rem;
+}
+
+.retro-archive-header__icon {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border: 3px solid var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-signal);
+  color: #fff;
+}
+
+.retro-archive-header__icon--tag {
+  background: var(--color-ink);
+  color: var(--color-signal);
+}
+
+.retro-archive-header__label {
+  display: inline-block;
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  margin-bottom: 0.25rem;
+}
+
+.retro-archive-header__title {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0 0 0.375rem;
+  letter-spacing: 0.04em;
+}
+
+.retro-archive-header__count {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* ========================================
+   BLOG 404
+   ======================================== */
+
+.retro-blog-404 {
+  text-align: center;
+  padding: 5rem 1rem;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.retro-blog-404__icon {
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-signal);
+  box-shadow: 4px 4px 0px var(--color-ink);
+}
+
+.retro-blog-404__title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.retro-blog-404__desc {
+  font-size: 1rem;
+  color: var(--color-muted);
+  max-width: 420px;
+  margin: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+  .retro-blog-archive__hero {
+    padding: 2rem 1.25rem;
+  }
+
+  .retro-blog-archive__hero-title {
+    font-size: 2rem;
+  }
+
+  .retro-single-post__title {
+    font-size: 1.75rem;
+  }
+
+  .retro-author-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .retro-author-header__stats {
+    justify-content: center;
+  }
+
+  .retro-archive-header {
+    padding: 1.25rem;
+  }
+
+  .retro-archive-header__title {
+    font-size: 1.5rem;
+  }
+
+  .retro-single-post__nav {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-single-post__nav-link--next {
+    text-align: left;
+  }
+
+  .retro-single-post__nav-link--next .retro-single-post__nav-dir {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-blog-archive {
+    padding: 0 0.75rem 2rem;
+  }
+
+  .retro-single-post {
+    padding: 0 0.75rem 2rem;
+  }
+
+  .retro-blog-archive__hero-title {
+    font-size: 1.75rem;
+  }
+
+  .retro-single-post__author-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-blog-card {
+    transition: none;
+  }
+
+  .retro-blog-card:hover {
+    transform: none;
+  }
+
+  .retro-blog-card__img {
+    transition: none;
+  }
+
+  .retro-blog-card:hover .retro-blog-card__img {
+    transform: none;
+  }
+}

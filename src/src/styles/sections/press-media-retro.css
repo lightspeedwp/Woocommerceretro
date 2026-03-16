@@ -28,20 +28,21 @@
   align-items: flex-start;
   gap: var(--retro-space-4);
   padding: var(--retro-space-6);
-  background: var(--retro-bg-elevated);
-  border: 1px solid rgba(0, 255, 249, 0.2);
-  transition: all 0.3s ease;
+  background: var(--color-paper);
+  border: var(--retro-border-width, 3px) solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+  transition: transform 0.1s, box-shadow 0.1s;
   flex-wrap: wrap;
 }
 
 .retro-press-item:hover {
-  border-color: var(--retro-neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 255, 249, 0.1);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-retro);
 }
 
 .retro-press-date {
   font-size: 0.65rem;
-  color: var(--retro-neon-cyan);
+  color: var(--color-screen-strong);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -56,14 +57,14 @@
 
 .retro-press-title {
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-primary);
+  color: var(--color-ink);
   margin-bottom: var(--retro-space-2);
   word-break: break-word;
 }
 
 .retro-press-excerpt {
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
   line-height: 1.5;
 }
 
@@ -73,7 +74,7 @@
 
 .retro-section--media-kit {
   padding: var(--retro-space-16) 0;
-  background: var(--retro-bg-secondary);
+  background: var(--color-paper-deep);
 }
 
 .retro-media-kit-list {
@@ -90,15 +91,16 @@
   align-items: center;
   gap: var(--retro-space-4);
   padding: var(--retro-space-4) var(--retro-space-6);
-  background: var(--retro-bg-elevated);
-  border: 1px solid rgba(0, 255, 249, 0.15);
-  transition: all 0.3s ease;
+  background: var(--color-paper);
+  border: var(--retro-border-width, 3px) solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+  transition: transform 0.1s, box-shadow 0.1s;
   flex-wrap: wrap;
 }
 
 .retro-media-kit-item:hover {
-  border-color: var(--retro-neon-cyan);
-  box-shadow: 0 0 10px rgba(0, 255, 249, 0.1);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-retro);
 }
 
 .retro-media-kit-info {
@@ -110,7 +112,7 @@
 }
 
 .retro-media-kit-icon {
-  color: var(--retro-neon-cyan);
+  color: var(--color-ink);
   flex-shrink: 0;
 }
 
@@ -120,13 +122,13 @@
 
 .retro-media-kit-title {
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-primary);
+  color: var(--color-ink);
   margin-bottom: 2px;
 }
 
 .retro-media-kit-desc {
   font-size: 0.7rem;
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 /* ==========================================================================
@@ -143,7 +145,7 @@
     min-width: auto;
   }
 
-  .retro-press-item .retro-button {
+  .retro-press-item .retro-btn {
     width: 100%;
     justify-content: center;
   }
@@ -154,7 +156,7 @@
     padding: var(--retro-space-4);
   }
 
-  .retro-media-kit-item .retro-button {
+  .retro-media-kit-item .retro-btn {
     width: 100%;
     justify-content: center;
   }

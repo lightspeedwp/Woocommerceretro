@@ -17,7 +17,7 @@
 
 .retro-section--positions {
   padding: var(--retro-space-16) 0;
-  background: var(--retro-bg-secondary);
+  background: var(--color-paper-deep);
 }
 
 .retro-positions-list {
@@ -29,20 +29,21 @@
 }
 
 .retro-position-card {
-  background: var(--retro-bg-elevated);
-  border: 1px solid rgba(0, 255, 249, 0.2);
+  background: var(--color-paper);
+  border: var(--retro-border-width, 3px) solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
   padding: var(--retro-space-6);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--retro-space-4);
   flex-wrap: wrap;
-  transition: all 0.3s ease;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .retro-position-card:hover {
-  border-color: var(--retro-neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 255, 249, 0.15);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-retro);
 }
 
 .retro-position-info {
@@ -52,7 +53,7 @@
 
 .retro-position-title {
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-primary);
+  color: var(--color-ink);
   margin-bottom: var(--retro-space-2);
   word-break: break-word;
 }
@@ -68,11 +69,11 @@
   align-items: center;
   gap: 4px;
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 .retro-position-tag svg {
-  color: var(--retro-neon-cyan);
+  color: var(--color-screen-strong);
 }
 
 /* ==========================================================================
@@ -86,7 +87,7 @@
     padding: var(--retro-space-4);
   }
 
-  .retro-position-card .retro-button {
+  .retro-position-card .retro-btn {
     width: 100%;
     justify-content: center;
   }

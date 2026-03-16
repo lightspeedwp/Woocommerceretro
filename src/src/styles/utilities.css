@@ -361,7 +361,7 @@
 .wp-max-w-full { max-width: 100%; }
 
 /* WordPress Content Constraints */
-.wp-max-w-content { max-width: var(--wp--preset--layout--content-size, 1440px); }
+.wp-max-w-content { max-width: var(--wp--preset--layout--content-size, 768px); }
 .wp-max-w-wide { max-width: var(--wp--preset--layout--wide-size, 1440px); }
 
 /* Height - Fixed */

@@ -30,8 +30,8 @@
   /* Text */
   --color-text: #1E2630;
   --color-text-soft: #3D4A56;
-  --color-text-muted: #6B7A89;
-  --color-muted: #6B7A89;
+  --color-text-muted: #5A6878;  /* Darkened from #6B7A89 — 4.5:1 on #F2EEE6 (AA) */
+  --color-muted: #5A6878;
 
   /* Lines & borders */
   --color-border: #C4BAA8;
@@ -69,6 +69,54 @@
   --retro-border-width: 3px;
   --retro-radius: 0;
 
+  /* ── Retro namespace aliases (light mode) ──
+     These map to the --color-* tokens above so that
+     page-specific CSS (membership, subscription, careers,
+     press, deals, rewards, reviews) resolves correctly. */
+
+  /* Backgrounds */
+  --retro-bg-primary: #F2EEE6;
+  --retro-bg-secondary: #E6E0D3;
+  --retro-bg-elevated: #FFFFFF;
+  --retro-bg-surface: #F2EEE6;
+
+  /* Text */
+  --retro-text-primary: #1E2630;
+  --retro-text-secondary: #3D4A56;
+  --retro-text-muted: #5A6878;  /* Darkened from #6B7A89 — 4.5:1 on #F2EEE6 (AA) */
+
+  /* Accent palette — toned-down retro equivalents */
+  --retro-neon-cyan: #4A7A5E;
+  --retro-neon-yellow: #B8940E;
+  --retro-neon-magenta: #C0533A;
+  --retro-accent: #4A7A5E;
+
+  /* Borders */
+  --retro-border-primary: #C4BAA8;
+  --retro-border-secondary: #D4CCBC;
+
+  /* Spacing scale (rem) */
+  --retro-space-1: 0.25rem;
+  --retro-space-2: 0.5rem;
+  --retro-space-3: 0.75rem;
+  --retro-space-4: 1rem;
+  --retro-space-6: 1.5rem;
+  --retro-space-8: 2rem;
+  --retro-space-10: 2.5rem;
+  --retro-space-12: 3rem;
+  --retro-space-16: 4rem;
+  --retro-space-20: 5rem;
+
+  /* Typography scale */
+  --retro-text-xs: 0.75rem;
+  --retro-text-sm: 0.875rem;
+  --retro-text-base: 1rem;
+  --retro-text-lg: 1.125rem;
+  --retro-text-xl: 1.25rem;
+  --retro-text-2xl: 1.5rem;
+  --retro-text-3xl: 1.875rem;
+  --retro-text-4xl: 2.25rem;
+
   /* Apply base styles */
   font-family: var(--font-body);
   background-color: var(--color-paper);
@@ -100,8 +148,8 @@
   /* Text */
   --color-text: #E8E2D8;
   --color-text-soft: #C4CBC3;
-  --color-text-muted: #8A9499;
-  --color-muted: #8A9499;
+  --color-text-muted: #9FAAAF;  /* Lightened from #8A9499 — 4.5:1 on #232A32 (AA) */
+  --color-muted: #9FAAAF;
 
   /* Lines & borders */
   --color-border: #3E4A52;
@@ -130,6 +178,29 @@
   --shadow-retro-lg: 6px 6px 0 rgba(0,0,0,0.5);
   --shadow-retro-hover: 1px 1px 0 rgba(0,0,0,0.3);
   --shadow-retro-active: 0 0 0 rgba(0,0,0,0.3);
+
+  /* ── Retro namespace aliases (dark mode) ── */
+
+  /* Backgrounds */
+  --retro-bg-primary: #151A1E;
+  --retro-bg-secondary: #1C2228;
+  --retro-bg-elevated: #232A32;
+  --retro-bg-surface: #1C2228;
+
+  /* Text */
+  --retro-text-primary: #E8E2D8;
+  --retro-text-secondary: #C4CBC3;
+  --retro-text-muted: #9FAAAF;  /* Lightened from #8A9499 — 4.5:1 on #232A32 (AA) */
+
+  /* Accent palette — brighter for dark backgrounds */
+  --retro-neon-cyan: #8DA89D;
+  --retro-neon-yellow: #E8C054;
+  --retro-neon-magenta: #D08A72;
+  --retro-accent: #8DA89D;
+
+  /* Borders */
+  --retro-border-primary: #3E4A52;
+  --retro-border-secondary: #2E3840;
 
   background-color: var(--color-paper);
   color: var(--color-ink);
@@ -177,6 +248,7 @@
   background-color: var(--color-paper);
   border: var(--retro-border-width) solid var(--color-ink);
   box-shadow: var(--shadow-retro);
+  padding: var(--retro-space-6, 1.5rem);
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
@@ -253,6 +325,23 @@
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.retro-btn--full {
+  width: 100%;
+  justify-content: center;
+}
+
+.retro-btn--inverted {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.retro-btn--inverted:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro);
 }
 
 /* ========================================

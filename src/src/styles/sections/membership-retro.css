@@ -59,6 +59,7 @@
 
 .retro-section--pricing {
   padding: var(--retro-space-16) 0;
+  background: var(--retro-bg-secondary);
 }
 
 /* Billing Toggle */
@@ -273,7 +274,7 @@
   background: var(--retro-bg-secondary);
 }
 
-.retro-faq-list {
+.retro-faq__list {
   display: flex;
   flex-direction: column;
   gap: var(--retro-space-4);
@@ -281,18 +282,18 @@
   margin: 0 auto;
 }
 
-.retro-faq-item {
+.retro-faq__item {
   border: 2px solid var(--retro-border-primary);
   background: var(--retro-bg-primary);
   transition: all 0.3s ease;
 }
 
-.retro-faq-item:hover {
+.retro-faq__item:hover {
   border-color: var(--retro-neon-cyan);
   box-shadow: 0 0 10px var(--retro-neon-cyan);
 }
 
-.retro-faq-trigger {
+.retro-faq__trigger {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -306,38 +307,38 @@
   transition: all 0.3s ease;
 }
 
-.retro-faq-trigger:hover {
+.retro-faq__trigger:hover {
   background: rgba(0, 255, 249, 0.05);
 }
 
-.retro-faq-trigger:focus-visible {
+.retro-faq__trigger:focus-visible {
   outline: 2px solid var(--retro-neon-magenta);
   outline-offset: -2px;
 }
 
-.retro-faq-question {
+.retro-faq__question {
   font-size: var(--retro-text-base);
   color: var(--retro-text-primary);
   flex-grow: 1;
 }
 
-.retro-faq-chevron {
+.retro-faq__chevron {
   color: var(--retro-neon-cyan);
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
 
-.retro-faq-chevron--open {
+.retro-faq__chevron--open {
   transform: rotate(180deg);
 }
 
-.retro-faq-answer {
+.retro-faq__answer {
   padding: 0 var(--retro-space-6) var(--retro-space-6);
   border-top: 1px solid var(--retro-border-primary);
   animation: retro-fade-in 0.3s ease;
 }
 
-.retro-faq-answer p {
+.retro-faq__answer p {
   font-size: var(--retro-text-sm);
   color: var(--retro-text-secondary);
   line-height: 1.6;

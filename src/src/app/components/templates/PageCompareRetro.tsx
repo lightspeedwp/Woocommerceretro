@@ -70,7 +70,7 @@ export const PageCompareRetro = () => {
               </p>
               <Link
                 to="/shop"
-                className="retro-button retro-button--primary retro-font-display retro-bold"
+                className="retro-btn retro-btn--primary retro-font-display retro-bold"
               >
                 BROWSE SHOP <ArrowRight weight="bold" />
               </Link>
@@ -82,7 +82,7 @@ export const PageCompareRetro = () => {
             <>
               <div className="retro-compare-layout__actions">
                 <button
-                  className="retro-button retro-button--secondary retro-font-display retro-bold"
+                  className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                   onClick={clearComparison}
                 >
                   <Trash size={16} weight="bold" /> CLEAR ALL
@@ -130,7 +130,7 @@ export const PageCompareRetro = () => {
                             )}
                             <div className="retro-compare-layout__product-actions">
                               <button
-                                className="retro-button retro-button--primary retro-font-display retro-compare-layout__add-btn"
+                                className="retro-btn retro-btn--primary retro-font-display retro-compare-layout__add-btn"
                                 onClick={() => {
                                   cartContext.addToCart(p as any, 1);
                                   toast.success(`${p.name} added to cart!`, { duration: 2000 });
@@ -214,9 +214,9 @@ export const PageCompareRetro = () => {
                             }`}
                           >
                             {tags.length > 0 ? (
-                              <div className="retro-sp-tag-list">
+                              <div className="retro-sp__tag-list">
                                 {tags.map((tag) => (
-                                  <span key={tag} className="retro-sp-tag retro-font-display">{tag}</span>
+                                  <span key={tag} className="retro-sp__tag retro-font-display">{tag}</span>
                                 ))}
                               </div>
                             ) : '--'}

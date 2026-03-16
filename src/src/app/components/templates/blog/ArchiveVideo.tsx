@@ -1,103 +1,168 @@
-import React from 'react';
-import { Layout } from '../../parts/Layout';
-import { Container } from '../../common/Container';
-import { posts } from '../../../data/posts';
-import { Play, Clock, YoutubeLogo as Youtube } from '../../../utils/phosphor-compat';
-import { Link } from 'react-router';
+/**
+ * ArchiveVideo — Retro-Styled Video Archive
+ *
+ * YouTube-style video grid with retro handheld gaming aesthetic.
+ * Features a featured video hero, remaining videos in paginated grid.
+ *
+ * **CSS:** `/src/styles/sections/blog-archive-video.css`
+ * **Dark Mode:** Automatic via retro theme tokens
+ * **WCAG AA 2.2:** Alt text, semantic HTML, pagination
+ *
+ * @route /blog/format/video
+ */
+
+import { useState } from 'react';
+import { Play, Clock, CaretLeft, CaretRight } from '../../../utils/phosphor-compat';
+import { Eye } from 'lucide-react';
+import { HeaderRetro } from '../../parts/HeaderRetro';
+import { FooterRetro } from '../../parts/FooterRetro';
+import { HeroRetro } from '../../patterns/HeroRetro';
+import { VIDEO_POSTS, getFeaturedVideo, videoPageContent } from '../../../data/videos';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
 
-/**
- * ArchiveVideo — Video Archive Grid (YouTube-Style)
- *
- * Funky Phase 6 treatment: cinema gradient hero with orbs + gradient CTA,
- * glow video cards with neon play overlay, duration badge, spring hover.
- *
- * **CSS:** `/src/styles/sections/blog-format-archives-funky.css`
- */
+const VIDEOS_PER_PAGE = videoPageContent.videosPerPage;
+
+const formatViews = (views: number) => {
+  if (views >= 1000) return (views / 1000).toFixed(1) + 'K';
+  return String(views);
+};
+
 export const ArchiveVideo = () => {
-  const videoPosts = (posts || []).filter((post) => post.format === 'video');
+  const [currentPage, setCurrentPage] = useState(1);
+  const featuredVideo = getFeaturedVideo();
+  const remainingVideos = VIDEO_POSTS.filter((v) => v.id !== featuredVideo.id);
+  const totalPages = Math.ceil(remainingVideos.length / VIDEOS_PER_PAGE);
+  const startIdx = (currentPage - 1) * VIDEOS_PER_PAGE;
+  const paginatedVideos = remainingVideos.slice(startIdx, startIdx + VIDEOS_PER_PAGE);
 
   return (
-    <Layout>
-      <div className="archive-video">
+    <>
+      <HeaderRetro />
+      <main className="retro-main">
+
         {/* Hero */}
-        <section className="archive-video__hero">
-          <img
-            src="https://images.unsplash.com/photo-1705107958681-db6d591b57cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMHByb2R1Y3Rpb24lMjBjYW1lcmElMjBjaW5lbWF0aWMlMjBkYXJrfGVufDF8fHx8MTc3MTc5MzcxNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            alt=""
-            className="archive-video__hero-bg"
-          />
-          <div className="archive-video__hero-overlay" aria-hidden="true" />
-          <div className="archive-video__orb archive-video__orb--1 funky-animate-float" aria-hidden="true" />
-          <div className="archive-video__orb archive-video__orb--2 funky-animate-float" aria-hidden="true" />
-          <Container>
-            <div className="archive-video__hero-content">
-              <div className="archive-video__hero-text">
-                <div className="archive-video__hero-badge">
-                  <Youtube className="archive-video__hero-icon" size={32} aria-hidden="true" />
-                  <h1 className="archive-video__hero-title">LightSpeed WP Channel</h1>
-                </div>
-                <p className="archive-video__hero-subtitle">
-                  Tutorials, guides, and deep dives into modern WordPress development.
-                </p>
-              </div>
-              <a
-                href="https://www.youtube.com/@lightspeedwp/videos"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="archive-video__hero-cta"
-              >
-                Subscribe on YouTube
-              </a>
+        <HeroRetro
+          titleLines={['VIDEO', 'ARCHIVE']}
+          highlight={videoPageContent.heroTitle?.toUpperCase() || 'WATCH NOW'}
+          description={videoPageContent.heroSubtitle || 'Product reviews, tutorials, and community spotlights.'}
+        />
+
+        {/* Featured Video */}
+        <section className="retro-section" aria-labelledby="featured-video-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2 id="featured-video-heading" className="retro-font-display retro-bold retro-section-title">
+                {(videoPageContent.featuredLabel || 'FEATURED VIDEO').toUpperCase()}
+              </h2>
             </div>
-          </Container>
+
+            <article className="retro-video-featured">
+              <div className="retro-video-featured__thumb">
+                <ImageWithFallback
+                  src={featuredVideo.featuredImage}
+                  alt={featuredVideo.title}
+                  className="retro-video-featured__img"
+                />
+                <div className="retro-video-featured__play" aria-hidden="true">
+                  <Play size={48} weight="fill" />
+                </div>
+                <span className="retro-video-featured__duration retro-font-display">
+                  <Clock size={12} aria-hidden="true" /> {featuredVideo.duration}
+                </span>
+              </div>
+              <div className="retro-video-featured__info">
+                <h3 className="retro-font-display retro-bold retro-video-featured__title">
+                  {featuredVideo.title.toUpperCase()}
+                </h3>
+                <p className="retro-font-body retro-video-featured__excerpt">
+                  {featuredVideo.excerpt}
+                </p>
+                <div className="retro-video-featured__meta retro-font-body">
+                  <span><Eye size={14} aria-hidden="true" /> {formatViews(featuredVideo.views)} views</span>
+                  <span>{featuredVideo.date}</span>
+                  <span>By {featuredVideo.author}</span>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
 
-        <div className="archive-video__divider" aria-hidden="true" />
+        {/* Video Grid */}
+        <section className="retro-section" aria-labelledby="video-grid-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2 id="video-grid-heading" className="retro-font-display retro-bold retro-section-title">
+                ALL VIDEOS
+              </h2>
+            </div>
 
-        {/* Grid */}
-        <section className="archive-video__grid-section">
-          <Container>
-            <div className="archive-video__grid">
-              {videoPosts.map((post) => (
-                <article key={post.id} className="archive-video__card">
-                  <Link to={post.link} className="archive-video__card-link">
-                    <div className="archive-video__thumbnail">
-                      <ImageWithFallback
-                        src={`https://picsum.photos/seed/video-${post.id}/640/360`}
-                        alt={post.title.rendered}
-                        className="archive-video__thumbnail-img"
-                      />
-                      <div className="archive-video__play-icon" aria-hidden="true">
-                        <Play size={48} />
-                      </div>
-                      <span className="archive-video__duration">
-                        <Clock size={10} aria-hidden="true" />{' '}
-                        {(post.format_data && post.format_data.video_duration) || '10:00'}
-                      </span>
-                    </div>
-                  </Link>
-
-                  <div className="archive-video__card-info">
-                    <Link to={post.link}>
-                      <h3 className="archive-video__card-title">{post.title.rendered}</h3>
-                    </Link>
-                    <div className="archive-video__card-meta">
-                      <span>{new Date(post.date).toLocaleDateString()}</span>
-                      <span className="archive-video__card-meta-dot" aria-hidden="true">•</span>
-                      <span>{`${post.categories.length} ${post.categories.length === 1 ? 'Category' : 'Categories'}`}</span>
-                    </div>
-                    <p
-                      className="archive-video__card-excerpt"
-                      dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+            <div className="retro-video-grid">
+              {paginatedVideos.map((video) => (
+                <article key={video.id} className="retro-video-card">
+                  <div className="retro-video-card__thumb">
+                    <ImageWithFallback
+                      src={video.featuredImage}
+                      alt={video.title}
+                      className="retro-video-card__img"
                     />
+                    <div className="retro-video-card__play" aria-hidden="true">
+                      <Play size={36} weight="fill" />
+                    </div>
+                    <span className="retro-video-card__duration retro-font-display">
+                      <Clock size={10} aria-hidden="true" /> {video.duration}
+                    </span>
+                  </div>
+                  <div className="retro-video-card__info">
+                    <h3 className="retro-font-display retro-bold retro-video-card__title">
+                      {video.title.toUpperCase()}
+                    </h3>
+                    <div className="retro-video-card__meta retro-font-body">
+                      <span><Eye size={12} aria-hidden="true" /> {formatViews(video.views)}</span>
+                      <span>{video.date}</span>
+                    </div>
+                    <p className="retro-font-body retro-video-card__excerpt">{video.excerpt}</p>
                   </div>
                 </article>
               ))}
             </div>
-          </Container>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <nav className="retro-pagination" aria-label="Video pagination">
+                <button
+                  className="retro-btn retro-btn--secondary retro-font-display"
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                >
+                  <CaretLeft size={14} weight="bold" /> PREV
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    className={'retro-btn retro-font-display' + (page === currentPage ? ' retro-btn--primary' : ' retro-btn--secondary')}
+                    onClick={() => setCurrentPage(page)}
+                    aria-label={'Page ' + page}
+                    aria-current={page === currentPage ? 'page' : undefined}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  className="retro-btn retro-btn--secondary retro-font-display"
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                >
+                  NEXT <CaretRight size={14} weight="bold" />
+                </button>
+              </nav>
+            )}
+          </div>
         </section>
-      </div>
-    </Layout>
+
+      </main>
+      <FooterRetro />
+    </>
   );
-}
+};

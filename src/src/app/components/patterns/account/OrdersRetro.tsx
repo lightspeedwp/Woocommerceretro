@@ -60,7 +60,7 @@ export const OrdersRetro = () => {
                 </div>
                 <Link
                   to="/track-order"
-                  className="retro-button retro-button--secondary retro-font-display retro-orders__track-link"
+                  className="retro-btn retro-btn--secondary retro-font-display retro-orders__track-link"
                 >
                   TRACK / VIEW
                 </Link>

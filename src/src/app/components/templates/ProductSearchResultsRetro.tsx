@@ -47,7 +47,7 @@ export const ProductSearchResultsRetro = () => {
               </p>
               <Link
                 to="/shop"
-                className="retro-button retro-button--primary retro-font-display retro-bold"
+                className="retro-btn retro-btn--primary retro-font-display retro-bold"
               >
                 RETURN TO SHOP
               </Link>
@@ -79,7 +79,7 @@ export const ProductSearchResultsRetro = () => {
 
                     {/* Action */}
                     <div className="retro-search-results-layout__card-actions">
-                      <button className="retro-button retro-button--primary retro-font-display retro-bold retro-search-results-layout__add-btn">
+                      <button className="retro-btn retro-btn--primary retro-font-display retro-bold retro-search-results-layout__add-btn">
                         <ShoppingCart weight="bold" /> ADD TO CART
                       </button>
                     </div>

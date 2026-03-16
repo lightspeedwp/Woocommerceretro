@@ -26,17 +26,16 @@
 }
 
 .retro-star {
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 .retro-star--filled {
   color: var(--retro-neon-yellow);
-  filter: drop-shadow(0 0 3px var(--retro-neon-yellow));
 }
 
 .retro-stat-suffix {
   font-size: 0.6em;
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 /* ==========================================================================
@@ -57,7 +56,7 @@
 
 .retro-testimonial-text {
   font-size: var(--retro-text-base);
-  color: var(--retro-text-secondary);
+  color: var(--color-text-soft);
   line-height: 1.7;
   font-style: italic;
   flex: 1;
@@ -69,7 +68,7 @@
   justify-content: space-between;
   gap: var(--retro-space-3);
   flex-wrap: wrap;
-  border-top: 1px solid rgba(0, 255, 249, 0.15);
+  border-top: 1px solid var(--color-border-soft);
   padding-top: var(--retro-space-4);
   margin-top: auto;
 }
@@ -83,21 +82,21 @@
 .retro-testimonial-avatar {
   width: 40px;
   height: 40px;
-  border: 2px solid var(--retro-neon-magenta);
+  border: 2px solid var(--color-ink);
   object-fit: cover;
 }
 
 .retro-testimonial-author {
   display: block;
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-primary);
+  color: var(--color-ink);
   font-style: normal;
 }
 
 .retro-testimonial-role {
   display: block;
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 /* ==========================================================================
@@ -106,7 +105,7 @@
 
 .retro-section--reviews {
   padding: var(--retro-space-16) 0;
-  background: var(--retro-bg-secondary);
+  background: var(--color-paper-deep);
 }
 
 .retro-reviews-header {
@@ -131,31 +130,32 @@
 .retro-review-filter-btn {
   padding: var(--retro-space-2) var(--retro-space-3);
   background: transparent;
-  border: 1px solid rgba(0, 255, 249, 0.3);
-  color: var(--retro-text-secondary);
+  border: var(--retro-border-width, 3px) solid var(--color-border);
+  color: var(--color-muted);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s, color 0.15s;
   font-size: var(--retro-text-xs);
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  min-height: 44px;
 }
 
 .retro-review-filter-btn:hover {
-  border-color: var(--retro-neon-cyan);
-  color: var(--retro-neon-cyan);
+  border-color: var(--color-ink);
+  color: var(--color-ink);
 }
 
 .retro-review-filter-btn:focus-visible {
-  outline: 2px solid var(--retro-neon-cyan);
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
 
 .retro-review-filter-btn--active {
-  background: var(--retro-neon-cyan);
-  border-color: var(--retro-neon-cyan);
-  color: var(--retro-bg-primary);
-  box-shadow: 0 0 10px rgba(0, 255, 249, 0.3);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-paper);
+  box-shadow: var(--shadow-retro-sm);
 }
 
 /* ==========================================================================
@@ -190,7 +190,7 @@
 .retro-review-avatar {
   width: 40px;
   height: 40px;
-  border: 2px solid var(--retro-neon-cyan);
+  border: 2px solid var(--color-ink);
   object-fit: cover;
 }
 
@@ -200,16 +200,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--retro-bg-secondary);
-  border: 2px solid var(--retro-neon-cyan);
-  color: var(--retro-neon-cyan);
+  background: var(--color-paper-deep);
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
   font-size: var(--retro-text-sm);
 }
 
 .retro-review-author {
   display: block;
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-primary);
+  color: var(--color-ink);
 }
 
 .retro-review-verified {
@@ -217,18 +217,18 @@
   align-items: center;
   gap: 4px;
   font-size: var(--retro-text-xs);
-  color: var(--retro-neon-cyan);
+  color: var(--color-screen-strong);
 }
 
 .retro-review-title {
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-primary);
+  color: var(--color-ink);
   margin-bottom: var(--retro-space-2);
 }
 
 .retro-review-content {
   font-size: var(--retro-text-sm);
-  color: var(--retro-text-secondary);
+  color: var(--color-text-soft);
   line-height: 1.7;
   margin-bottom: var(--retro-space-4);
 }
@@ -241,12 +241,12 @@
   flex-wrap: wrap;
   margin-bottom: var(--retro-space-3);
   padding-bottom: var(--retro-space-3);
-  border-bottom: 1px solid rgba(0, 255, 249, 0.1);
+  border-bottom: 1px solid var(--color-border-soft);
 }
 
 .retro-review-date {
   font-size: var(--retro-text-xs);
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 .retro-review-actions {
@@ -260,20 +260,21 @@
   gap: var(--retro-space-1);
   padding: var(--retro-space-1) var(--retro-space-3);
   background: transparent;
-  border: 1px solid rgba(0, 255, 249, 0.2);
-  color: var(--retro-text-muted);
+  border: var(--retro-border-width, 3px) solid var(--color-border);
+  color: var(--color-muted);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.1s, box-shadow 0.1s, color 0.15s;
   font-size: var(--retro-text-xs);
+  min-height: 44px;
 }
 
 .retro-review-helpful-btn:hover {
-  border-color: var(--retro-neon-cyan);
-  color: var(--retro-neon-cyan);
+  border-color: var(--color-ink);
+  color: var(--color-ink);
 }
 
 .retro-review-helpful-btn:focus-visible {
-  outline: 2px solid var(--retro-neon-cyan);
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
 
@@ -281,7 +282,7 @@
 .retro-reviews-empty {
   text-align: center;
   padding: var(--retro-space-12);
-  color: var(--retro-text-muted);
+  color: var(--color-muted);
 }
 
 /* ==========================================================================

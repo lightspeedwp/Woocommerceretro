@@ -1,0 +1,40 @@
+/* ========================================
+   SR-ONLY (SCREEN READER ONLY)
+   Tailwind-compatible .sr-only for WCAG
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ========================================
+   SKIP NAVIGATION (ACCESSIBILITY)
+   ======================================== */
+
+.wp-skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  background: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.wp-skip-nav:focus {
+  top: var(--wp--preset--spacing--20);
+}

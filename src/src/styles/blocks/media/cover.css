@@ -56,5 +56,4 @@
 
 .wp-block-cover.alignwide {
   max-width: var(--wp--preset--layout--wide-size);
-  /* Margin removed */
 }

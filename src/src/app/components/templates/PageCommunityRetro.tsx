@@ -41,13 +41,6 @@ export const PageCommunityRetro = () => {
       <div className="retro-container">
         <HeaderRetro />
 
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">COMMUNITY</span>
-        </div>
-
         <div className="retro-page-shell">
           <div className="retro-page-shell__header">
             <Users size={32} weight="bold" aria-hidden="true" />

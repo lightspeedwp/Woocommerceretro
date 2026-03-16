@@ -9,7 +9,7 @@ import { Heart, UsersThree, Leaf, Briefcase, Question, FileText, ShieldCheck, Tr
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 
 const aboutLinks = [
-  { title: 'Our Story', href: '/about', Icon: Heart, desc: 'Learn about our journey' },
+  { title: 'Our story', href: '/about', Icon: Heart, desc: 'Learn about our journey' },
   { title: 'Our Team', href: '/about/team', Icon: UsersThree, desc: 'Meet the people behind the brand' },
   { title: 'Sustainability', href: '/about/sustainability', Icon: Leaf, desc: 'Our commitment to the planet' },
   { title: 'Careers', href: '/about/careers', Icon: Briefcase, desc: 'Join our growing team' }
@@ -25,7 +25,7 @@ const resourceLinks = [
 
 const featuredSections = [
   {
-    title: 'Our Story',
+    title: 'Our story',
     subtitle: 'A passion for quality since 2020',
     href: '/about',
     overlay: 'cyan',
@@ -50,8 +50,8 @@ const featuredSections = [
 export const AboutMegaMenu = () => {
   const renderContent = (closeMenu: () => void) => (
     <div className="wp-mega-menu__content">
-      <div className="funky-mega__orb funky-mega__orb--pink" style={{ top: '-90px', right: '20%' }} />
-      <div className="funky-mega__orb funky-mega__orb--cyan" style={{ bottom: '-50px', left: '10%' }} />
+      <div className="funky-mega__orb funky-mega__orb--pink funky-mega__orb--about-pink" />
+      <div className="funky-mega__orb funky-mega__orb--cyan funky-mega__orb--about-cyan" />
       <div className="funky-mega__inner funky-mega__inner--about">
         {/* Left column: About + Resources */}
         <div className="funky-mega__column funky-mega__column--bordered">
@@ -69,7 +69,7 @@ export const AboutMegaMenu = () => {
               </Link>
             ))}
           </div>
-          <div style={{ height: '1px', background: 'var(--funky-glass-border)', margin: '0.75rem 0' }} />
+          <div className="funky-mega__divider" />
           <h4 className="funky-mega__title">Resources</h4>
           <div>
             {resourceLinks.map((link) => (
@@ -88,7 +88,7 @@ export const AboutMegaMenu = () => {
           <h4 className="funky-mega__title">Featured</h4>
           <div className="funky-mega__cards-grid funky-mega__cards-grid--3col">
             {featuredSections.map((section) => (
-              <Link key={section.title} to={section.href} className="funky-mega__card" style={{ minHeight: '160px' }}>
+              <Link key={section.title} to={section.href} className="funky-mega__card funky-mega__card--tall">
                 <img
                   src={section.image}
                   alt={section.title}

@@ -54,7 +54,7 @@ export const DashboardRetro = () => {
               <div className="retro-font-display retro-bold">Equipped: Retro Handheld X</div>
               <div className="retro-font-body retro-dashboard__activity-detail">Order #9942 - Delivered Oct 12</div>
             </div>
-            <Link to="/account/orders" className="retro-button retro-button--secondary retro-font-display">
+            <Link to="/account/orders" className="retro-btn retro-btn--secondary retro-font-display">
               VIEW
             </Link>
           </div>

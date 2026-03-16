@@ -91,7 +91,7 @@ export const FilterSidebar = ({
       <FilterSection title="Availability">
         <label className="wp-filter-checkbox funky-filter-checkbox">
           <div className={filters.inStock ? 'wp-filter-checkbox__box wp-filter-checkbox__box--checked funky-checkbox--active' : 'wp-filter-checkbox__box'}>
-            {filters.inStock && <Check size={12} className="wp-color-text-inverse" />}
+            {filters.inStock && <Check size={12} className="wp-filter-checkbox__check-icon" />}
           </div>
           <input
             type="checkbox"
@@ -109,7 +109,7 @@ export const FilterSidebar = ({
           return (
             <label key={cat} className="wp-filter-checkbox funky-filter-checkbox">
               <div className={isChecked ? 'wp-filter-checkbox__box wp-filter-checkbox__box--checked funky-checkbox--active' : 'wp-filter-checkbox__box'}>
-                {isChecked && <Check size={10} className="wp-color-text-inverse" />}
+                {isChecked && <Check size={10} className="wp-filter-checkbox__check-icon" />}
               </div>
               <input
                 type="checkbox"

@@ -101,7 +101,7 @@
 /* Dark Mode Variants */
 .wp-stats-section--dark .wp-stats-header__title,
 .wp-stats-section--dark .wp-stat-item__value {
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 .wp-stats-section--dark .wp-stats-header__description,

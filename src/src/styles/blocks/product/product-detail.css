@@ -1,0 +1,159 @@
+/**
+ * WooCommerce Product Detail Blocks
+ * Tab navigation, variable product layout, gallery, quantity, actions, meta
+ */
+
+.woocommerce-product-tabs__tab {
+  cursor: pointer;
+  padding: var(--wp--preset--spacing--40);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.woocommerce-product-tabs__tab:hover {
+  color: var(--wp--preset--color--foreground);
+}
+
+.woocommerce-product-tabs__tab--active {
+  border-bottom-color: var(--wp--preset--color--primary);
+  font-weight: var(--wp--preset--font-weight--semibold);
+}
+
+.woocommerce-variable-product__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 1024px) {
+  .woocommerce-variable-product__layout {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--wp--preset--spacing--70);
+  }
+}
+
+.woocommerce-product-gallery__thumbnail {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: var(--wp--preset--border-radius--sm);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.woocommerce-product-gallery__thumbnail:hover {
+  border-color: var(--wp--preset--color--border);
+}
+
+.woocommerce-product-gallery__thumbnail--active {
+  border-color: var(--wp--preset--color--primary);
+}
+
+.woocommerce-product-info__rating-count {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--text-secondary);
+  text-decoration: none;
+}
+
+.woocommerce-product-info__rating-count:hover {
+  color: var(--wp--preset--color--primary);
+}
+
+.woocommerce-variation-selector__select {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--sm);
+  background-color: var(--wp--preset--color--background);
+  color: var(--wp--preset--color--foreground);
+}
+
+.woocommerce-variation-selector__select:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--primary);
+}
+
+.woocommerce-product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .woocommerce-product-actions {
+    flex-direction: row;
+  }
+}
+
+.woocommerce-quantity-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--sm);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.woocommerce-quantity-input__button {
+  background: transparent;
+  border: none;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.woocommerce-quantity-input__button:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--accent);
+}
+
+.woocommerce-quantity-input__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.woocommerce-quantity-input__field {
+  width: 3rem;
+  text-align: center;
+  border: none;
+  border-inline: 1px solid var(--wp--preset--color--border);
+  background: transparent;
+  color: var(--wp--preset--color--foreground);
+  font-weight: var(--wp--preset--font-weight--medium);
+  padding: var(--wp--preset--spacing--20) 0;
+}
+
+.woocommerce-add-to-cart-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--60);
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border: none;
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.woocommerce-add-to-cart-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.woocommerce-add-to-cart-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.woocommerce-product-meta__link {
+  color: var(--wp--preset--color--text-secondary);
+  text-decoration: none;
+}
+
+.woocommerce-product-meta__link:hover {
+  text-decoration: underline;
+}

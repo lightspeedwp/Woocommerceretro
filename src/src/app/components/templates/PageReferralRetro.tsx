@@ -37,13 +37,6 @@ export const PageReferralRetro = () => {
       <div className="retro-container">
         <HeaderRetro />
 
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">REFERRAL</span>
-        </div>
-
         <div className="retro-page-shell">
           <div className="retro-page-shell__header">
             <Gift size={32} weight="bold" aria-hidden="true" />

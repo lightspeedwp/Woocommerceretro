@@ -2,12 +2,18 @@
  * PageStoresRetro
  *
  * "PlayPocket" FSE theme - Store Locator page.
- * WCAG AA 2.2 compliant.
+ * Retro handheld gaming aesthetic.
+ *
+ * **CSS:** `/src/styles/sections/retro-shared-patterns.css`
+ * **Dark Mode:** Automatic via retro theme tokens
+ * **WCAG AA 2.2:** Semantic HTML, focus states, contrast
+ *
+ * @route /stores
+ * @template
  */
 
 import { MapPin, Phone, Clock } from '../../utils/phosphor-compat';
-import { HeaderRetro } from '../parts/HeaderRetro';
-import { FooterRetro } from '../parts/FooterRetro';
+import { HeroRetro } from '../patterns/HeroRetro';
 
 interface Store {
   id: number;
@@ -43,47 +49,53 @@ const stores: Store[] = [
 
 export const PageStoresRetro = () => {
   return (
-    <div className="retro-home theme-retro">
-      <div className="retro-container">
-        <HeaderRetro />
+    <>
+      <main className="retro-main">
 
-        <div className="retro-stores-layout">
-          <div className="retro-stores-layout__inner">
-            <div className="retro-stores-layout__header">
-              <MapPin size={64} weight="fill" color="var(--color-ink)" className="retro-stores-layout__icon" />
-              <h1 className="retro-font-display retro-bold retro-stores-layout__title">STORE LOCATOR</h1>
-              <p className="retro-font-body retro-stores-layout__subtitle">Find an item shop near you.</p>
+        {/* Hero */}
+        <HeroRetro
+          titleLines={['FIND A', 'STORE']}
+          highlight="NEAR YOU"
+          description="Visit one of our item shops for hands-on demos, exclusive merch, and in-store events."
+        />
+
+        {/* Store Cards */}
+        <section className="retro-section" aria-labelledby="stores-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2 id="stores-heading" className="retro-font-display retro-bold retro-section-title">
+                OUR LOCATIONS
+              </h2>
             </div>
 
             <div className="retro-stores-layout__grid">
               {stores.map((store) => (
                 <div key={store.id} className="retro-stores-layout__card">
-                  <h2 className="retro-font-display retro-bold retro-stores-layout__card-name">{store.name}</h2>
+                  <h3 className="retro-font-display retro-bold retro-stores-layout__card-name">{store.name}</h3>
 
                   <div className="retro-stores-layout__card-row">
-                    <MapPin size={24} weight="fill" color="var(--color-ink)" className="retro-stores-layout__card-icon" />
+                    <MapPin size={24} weight="fill" className="retro-stores-layout__card-icon" aria-hidden="true" />
                     <p className="retro-font-body retro-stores-layout__card-text retro-stores-layout__card-text--pre">{store.address}</p>
                   </div>
 
                   <div className="retro-stores-layout__card-row">
-                    <Phone size={24} weight="fill" color="var(--color-ink)" className="retro-stores-layout__card-icon" />
+                    <Phone size={24} weight="fill" className="retro-stores-layout__card-icon" aria-hidden="true" />
                     <p className="retro-font-body retro-stores-layout__card-text">{store.phone}</p>
                   </div>
 
                   <div className="retro-stores-layout__card-row">
-                    <Clock size={24} weight="fill" color="var(--color-ink)" className="retro-stores-layout__card-icon" />
+                    <Clock size={24} weight="fill" className="retro-stores-layout__card-icon" aria-hidden="true" />
                     <p className="retro-font-body retro-stores-layout__card-text retro-stores-layout__card-text--pre">{store.hours}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        <FooterRetro />
-      </div>
-    </div>
+      </main>
+    </>
   );
-}
+};
 
 PageStoresRetro.displayName = 'PageStoresRetro';

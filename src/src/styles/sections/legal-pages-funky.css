@@ -99,7 +99,7 @@
 }
 
 .legal-content__inner {
-  max-width: var(--wp--preset--layout--content-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin-inline: auto;
 }
 

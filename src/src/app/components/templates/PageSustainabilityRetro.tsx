@@ -90,14 +90,14 @@ export const PageSustainabilityRetro = () => {
               {sustainabilityInitiatives.map((initiative, i) => {
                 const Icon = initiativeIcons[initiative.iconName] || Leaf;
                 return (
-                  <div key={i} className="retro-card retro-card-glow">
+                  <div key={i} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {initiative.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {initiative.description}
                     </p>
                   </div>
@@ -142,7 +142,7 @@ export const PageSustainabilityRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {sustainabilityPageContent.ctaText}
               </p>
-              <Link to="/shop" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display">
                 SHOP ECO-FRIENDLY <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

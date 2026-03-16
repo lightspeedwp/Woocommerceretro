@@ -94,8 +94,12 @@
    SUBSCRIPTION BOX
    ======================================== */
 
-.retro-subscription-box-container {
+.retro-sub-box {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .retro-step {
@@ -103,7 +107,7 @@
   height: 100%;
 }
 
-.retro-step-label {
+.retro-sub-box__step-label {
   text-align: center;
 }
 

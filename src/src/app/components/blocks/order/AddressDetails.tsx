@@ -11,14 +11,14 @@ export const AddressDetails = () => {
       <h2 className="wp-block-heading funky-gradient-text">Billing address</h2>
       <div className="wp-order-address-box funky-glass-panel funky-glow-border">
         <div>
-          <p className="wp-text-bold">Ash Shaw</p>
+          <p className="wp-order-address-box__name">Ash Shaw</p>
           <p>LightSpeed</p>
           <p>46 Devon Street</p>
           <p>Woodstock, Cape Town</p>
           <p>Western Cape</p>
           <p>7925</p>
           <p>+27845656767</p>
-          <p className="wp-order-text--sky">ashley@lsdev.biz</p>
+          <p className="wp-order-address-box__email">ashley@lsdev.biz</p>
         </div>
       </div>
     </div>

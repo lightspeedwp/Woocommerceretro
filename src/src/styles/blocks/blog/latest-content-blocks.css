@@ -1,0 +1,264 @@
+/**
+ * Latest Content Blocks
+ *
+ * BEM blocks:
+ *   .retro-latest-post     — LatestBlogPost.tsx
+ *   .retro-latest-episode  — LatestPodcastEpisode.tsx
+ *   .retro-latest-video    — LatestVideoPost.tsx
+ *
+ * Retro card treatment: hard border, pixel shadow, paper bg.
+ */
+
+/* ========================================
+   SHARED CARD SHELL
+   ======================================== */
+
+.retro-latest-post,
+.retro-latest-episode,
+.retro-latest-video {
+  border: 2px solid var(--color-ink);
+  border-radius: 0;
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  overflow: hidden;
+}
+
+.dark .retro-latest-post,
+.dark .retro-latest-episode,
+.dark .retro-latest-video {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  box-shadow: 4px 4px 0 var(--wp--preset--color--border);
+}
+
+/* Label bar */
+.retro-latest-post__label,
+.retro-latest-episode__label,
+.retro-latest-video__label {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dark .retro-latest-post__label,
+.dark .retro-latest-episode__label,
+.dark .retro-latest-video__label {
+  background: var(--wp--preset--color--accent);
+  color: var(--color-ink);
+}
+
+/* Link wrapper */
+.retro-latest-post__link,
+.retro-latest-episode__link,
+.retro-latest-video__link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image */
+.retro-latest-post__image-wrap,
+.retro-latest-episode__image-wrap,
+.retro-latest-video__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.dark .retro-latest-post__image-wrap,
+.dark .retro-latest-episode__image-wrap,
+.dark .retro-latest-video__image-wrap {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-latest-post__image,
+.retro-latest-episode__image,
+.retro-latest-video__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.retro-latest-post__link:hover .retro-latest-post__image,
+.retro-latest-episode__link:hover .retro-latest-episode__image,
+.retro-latest-video__link:hover .retro-latest-video__image {
+  transform: scale(1.03);
+}
+
+/* Body */
+.retro-latest-post__body,
+.retro-latest-episode__body,
+.retro-latest-video__body {
+  padding: var(--wp--preset--spacing--30);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* Meta row */
+.retro-latest-post__meta,
+.retro-latest-episode__meta,
+.retro-latest-video__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.dark .retro-latest-post__meta,
+.dark .retro-latest-episode__meta,
+.dark .retro-latest-video__stats {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Category pill */
+.retro-latest-post__cat,
+.retro-latest-episode__ep {
+  padding: 1px var(--wp--preset--spacing--20);
+  border: 1px solid var(--color-signal);
+  color: var(--color-signal);
+  font-size: 10px;
+}
+
+/* Title */
+.retro-latest-post__title,
+.retro-latest-episode__title,
+.retro-latest-video__title {
+  color: var(--color-ink);
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.dark .retro-latest-post__title,
+.dark .retro-latest-episode__title,
+.dark .retro-latest-video__title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-latest-post__link:hover .retro-latest-post__title,
+.retro-latest-episode__link:hover .retro-latest-episode__title,
+.retro-latest-video__link:hover .retro-latest-video__title {
+  color: var(--color-signal);
+}
+
+/* Excerpt */
+.retro-latest-post__excerpt,
+.retro-latest-episode__excerpt,
+.retro-latest-video__excerpt {
+  color: var(--color-muted);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dark .retro-latest-post__excerpt,
+.dark .retro-latest-episode__excerpt,
+.dark .retro-latest-video__excerpt {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* CTA */
+.retro-latest-post__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--color-signal);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  text-transform: uppercase;
+  margin-top: var(--wp--preset--spacing--10);
+}
+
+/* ========================================
+   PODCAST-SPECIFIC
+   ======================================== */
+
+.retro-latest-episode__play-badge {
+  position: absolute;
+  bottom: var(--wp--preset--spacing--20);
+  right: var(--wp--preset--spacing--20);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  color: var(--color-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-ink);
+}
+
+.retro-latest-episode__duration {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.retro-latest-episode__guests {
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ========================================
+   VIDEO-SPECIFIC
+   ======================================== */
+
+.retro-latest-video__play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-paper);
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+.retro-latest-video__link:hover .retro-latest-video__play-overlay {
+  opacity: 1;
+}
+
+.retro-latest-video__duration {
+  position: absolute;
+  bottom: var(--wp--preset--spacing--10);
+  right: var(--wp--preset--spacing--10);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px var(--wp--preset--spacing--20);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: 10px;
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-latest-post__image,
+  .retro-latest-episode__image,
+  .retro-latest-video__image {
+    transition: none;
+  }
+
+  .retro-latest-post__link:hover .retro-latest-post__image,
+  .retro-latest-episode__link:hover .retro-latest-episode__image,
+  .retro-latest-video__link:hover .retro-latest-video__image {
+    transform: none;
+  }
+}

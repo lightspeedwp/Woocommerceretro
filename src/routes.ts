@@ -13,6 +13,9 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import React from 'react';
 import { RootLayout } from './src/app/RootLayout';
 
+// Shared site chrome (header + footer)
+const SiteLayout = React.lazy(() => import('./src/app/components/templates/SiteLayout').then((m) => ({ default: m.SiteLayout })));
+
 // --- Lazy-loaded Route Components ------------------------------------------
 // Each component is loaded on-demand to reduce initial parse/compile time.
 // Named exports are remapped to default exports for React.lazy compatibility.
@@ -52,6 +55,9 @@ const ArchiveBlogRetro = React.lazy(() => import('./src/app/components/templates
 const SinglePostRetro = React.lazy(() => import('./src/app/components/templates/SinglePostRetro').then((m) => ({ default: m.SinglePostRetro })));
 const SinglePostWithSidebar = React.lazy(() => import('./src/app/components/templates/SinglePostWithSidebar').then((m) => ({ default: m.SinglePostWithSidebar })));
 const SinglePostFullWidth = React.lazy(() => import('./src/app/components/templates/SinglePostFullWidth').then((m) => ({ default: m.SinglePostFullWidth })));
+const ArchiveBlogAuthorRetro = React.lazy(() => import('./src/app/components/templates/ArchiveBlogAuthorRetro').then((m) => ({ default: m.ArchiveBlogAuthorRetro })));
+const ArchiveBlogCategoryRetro = React.lazy(() => import('./src/app/components/templates/ArchiveBlogCategoryRetro').then((m) => ({ default: m.ArchiveBlogCategoryRetro })));
+const ArchiveBlogTagRetro = React.lazy(() => import('./src/app/components/templates/ArchiveBlogTagRetro').then((m) => ({ default: m.ArchiveBlogTagRetro })));
 const ArchiveAudio = React.lazy(() => import('./src/app/components/templates/blog/ArchiveAudio').then((m) => ({ default: m.ArchiveAudio })));
 const ArchiveVideo = React.lazy(() => import('./src/app/components/templates/blog/ArchiveVideo').then((m) => ({ default: m.ArchiveVideo })));
 const ArchiveGallery = React.lazy(() => import('./src/app/components/templates/blog/ArchiveGallery').then((m) => ({ default: m.ArchiveGallery })));
@@ -87,6 +93,14 @@ const PageAffiliateProgramRetro = React.lazy(() => import('./src/app/components/
 const PageReviewsRetro = React.lazy(() => import('./src/app/components/templates/PageReviewsRetro').then((m) => ({ default: m.PageReviewsRetro })));
 const PageRefundsRetro = React.lazy(() => import('./src/app/components/templates/PageRefundsRetro').then((m) => ({ default: m.PageRefundsRetro })));
 
+// 6b. Convenience Alias Redirects
+const RedirectPodcasts = () => React.createElement(Navigate, { to: '/blog/format/audio', replace: true });
+const RedirectVideos = () => React.createElement(Navigate, { to: '/blog/format/video', replace: true });
+const RedirectGallery = () => React.createElement(Navigate, { to: '/blog/format/gallery', replace: true });
+const RedirectAsides = () => React.createElement(Navigate, { to: '/blog/format/aside', replace: true });
+const RedirectSupport = () => React.createElement(Navigate, { to: '/help', replace: true });
+const RedirectFaqs = () => React.createElement(Navigate, { to: '/faq', replace: true });
+
 // Legal
 const PagePrivacyPolicyRetro = React.lazy(() => import('./src/app/components/templates/PagePrivacyPolicyRetro').then((m) => ({ default: m.PagePrivacyPolicyRetro })));
 const PageTermsConditionsRetro = React.lazy(() => import('./src/app/components/templates/PageTermsConditionsRetro').then((m) => ({ default: m.PageTermsConditionsRetro })));
@@ -99,6 +113,8 @@ const MembershipLandingRetro = React.lazy(() => import('./src/app/components/tem
 const MembershipSubscription3DRetro = React.lazy(() => import('./src/app/components/templates/MembershipSubscription3DRetro').then((m) => ({ default: m.MembershipSubscription3DRetro })));
 const SingleMembership = React.lazy(() => import('./src/app/components/templates/SingleMembership').then((m) => ({ default: m.SingleMembership })));
 const PageNewsletter = React.lazy(() => import('./src/app/components/templates/PageNewsletter').then((m) => ({ default: m.PageNewsletter })));
+const ArchiveNewsletterRetro = React.lazy(() => import('./src/app/components/templates/ArchiveNewsletterRetro').then((m) => ({ default: m.ArchiveNewsletterRetro })));
+const SingleNewsletterRetro = React.lazy(() => import('./src/app/components/templates/SingleNewsletterRetro').then((m) => ({ default: m.SingleNewsletterRetro })));
 const PageNotFoundRetro = React.lazy(() => import('./src/app/components/templates/PageNotFoundRetro').then((m) => ({ default: m.PageNotFoundRetro })));
 const LongFormSalesPage = React.lazy(() => import('./src/app/components/templates/LongFormSalesPage').then((m) => ({ default: m.LongFormSalesPage })));
 const SocialRedirect = React.lazy(() => import('./src/app/components/templates/SocialRedirect'));
@@ -170,169 +186,185 @@ export const router = createBrowserRouter([
     Component: RootLayout,
     HydrateFallback,
     children: [
-      // Home
-      { index: true, Component: FrontPageRetro },
-
-      // 1. Shop Routes
-      { path: 'shop', Component: ArchiveProductRetro },
-      { path: 'shop/all', Component: ArchiveProductRetro },
-      { path: 'shop/all-products', Component: ArchiveProductRetro },
-      { path: 'shop/collections', Component: FrontPageRetro },
-      { path: 'category/:slug', Component: ArchiveProductRetro },
-      { path: 'tag/:slug', Component: ArchiveProductRetro },
-      { path: 'shop/search', Component: ProductSearchResultsRetro },
-      { path: 'shop/filtered', Component: ArchiveProductRetro },
-      { path: 'search', Component: ProductSearchResultsRetro },
-      { path: 'product/:slug', Component: SingleProductRetro },
-      { path: 'product/:slug/sticky', Component: SingleProductSticky },
-      { path: 'deals', Component: ArchiveProductRetro },
-      { path: 'new-arrivals', Component: ArchiveProductRetro },
-      { path: 'best-sellers', Component: ArchiveProductRetro },
-      { path: 'sale', Component: ArchiveProductRetro },
-      { path: 'gift-cards', Component: PageGiftCardsRetro },
-      { path: 'compare', Component: PageCompareRetro },
-
-      // 2. Account Routes
-      { path: 'account/login', Component: PageLoginRetro },
-      { path: 'register', Component: PageRegisterRetro },
-      { path: 'reset-password', Component: PagePasswordResetRetro },
-      { path: 'account/reset-password', Component: PagePasswordResetRetro },
       {
-        path: 'account',
-        Component: AccountLayoutRetro,
+        /* SiteLayout — shared HeaderRetro + FooterRetro for all pages */
+        Component: SiteLayout,
         children: [
-          { index: true, Component: RedirectRetroDashboard },
-          { path: 'dashboard', Component: DashboardRetro },
-          { path: 'orders', Component: OrdersRetro },
-          { path: 'addresses', Component: AddressesRetro },
-          { path: 'loyalty', Component: LoyaltyRetro },
-          { path: '*', Component: RedirectRetroDashboard },
+          // Home
+          { index: true, Component: FrontPageRetro },
+
+          // 1. Shop Routes
+          { path: 'shop', Component: ArchiveProductRetro },
+          { path: 'shop/all', Component: ArchiveProductRetro },
+          { path: 'shop/all-products', Component: ArchiveProductRetro },
+          { path: 'shop/collections', Component: FrontPageRetro },
+          { path: 'category/:slug', Component: ArchiveProductRetro },
+          { path: 'tag/:slug', Component: ArchiveProductRetro },
+          { path: 'shop/search', Component: ProductSearchResultsRetro },
+          { path: 'shop/filtered', Component: ArchiveProductRetro },
+          { path: 'search', Component: ProductSearchResultsRetro },
+          { path: 'product/:slug', Component: SingleProductRetro },
+          { path: 'product/:slug/sticky', Component: SingleProductSticky },
+          { path: 'deals', Component: ArchiveProductRetro },
+          { path: 'new-arrivals', Component: ArchiveProductRetro },
+          { path: 'best-sellers', Component: ArchiveProductRetro },
+          { path: 'sale', Component: ArchiveProductRetro },
+          { path: 'gift-cards', Component: PageGiftCardsRetro },
+          { path: 'compare', Component: PageCompareRetro },
+
+          // 2. Account Routes
+          { path: 'account/login', Component: PageLoginRetro },
+          { path: 'register', Component: PageRegisterRetro },
+          { path: 'reset-password', Component: PagePasswordResetRetro },
+          { path: 'account/reset-password', Component: PagePasswordResetRetro },
+          {
+            path: 'account',
+            Component: AccountLayoutRetro,
+            children: [
+              { index: true, Component: RedirectRetroDashboard },
+              { path: 'dashboard', Component: DashboardRetro },
+              { path: 'orders', Component: OrdersRetro },
+              { path: 'addresses', Component: AddressesRetro },
+              { path: 'loyalty', Component: LoyaltyRetro },
+              { path: '*', Component: RedirectRetroDashboard },
+            ],
+          },
+          { path: 'my-account', Component: RedirectAccount },
+          { path: 'wishlist', Component: PageWishlistRetro },
+          { path: 'account/dashboard-widgets', Component: AccountDashboardWidgets },
+
+          // 3. Checkout Routes
+          { path: 'cart', Component: PageCartRetro },
+          { path: 'checkout', Component: PageCheckoutRetro },
+          { path: 'order-confirmation', Component: PageOrderConfirmationRetro },
+          { path: 'track-order', Component: PageTrackOrderRetro },
+
+          // 4. Blog Routes
+          { path: 'blog', Component: ArchiveBlogRetro },
+          { path: 'blog/category/:slug', Component: ArchiveBlogCategoryRetro },
+          { path: 'blog/author/:slug', Component: ArchiveBlogAuthorRetro },
+          { path: 'blog/tag/:slug', Component: ArchiveBlogTagRetro },
+          { path: 'blog/:slug', Component: SinglePostRetro },
+          { path: 'blog/:slug/sidebar', Component: SinglePostWithSidebar },
+          { path: 'blog/:slug/fullwidth', Component: SinglePostFullWidth },
+          { path: 'blog/format/audio', Component: ArchiveAudio },
+          { path: 'blog/format/video', Component: ArchiveVideo },
+          { path: 'blog/format/gallery', Component: ArchiveGallery },
+          { path: 'blog/format/aside', Component: ArchiveAside },
+          { path: 'blog/format/standard', Component: ArchiveBlogRetro },
+          { path: 'blog/:slug/standard', Component: TemplateSingleStandard },
+          { path: 'blog/:slug/audio', Component: TemplateSingleAudio },
+          { path: 'blog/:slug/video', Component: TemplateSingleVideo },
+          { path: 'blog/:slug/gallery', Component: TemplateSingleGallery },
+          { path: 'blog/:slug/aside', Component: TemplateSingleAside },
+
+          // 5. About & Company Routes
+          { path: 'about', Component: PageAboutRetro },
+          { path: 'about/our-story', Component: PageOurStoryRetro },
+          { path: 'about/team', Component: PageTeamRetro },
+          { path: 'about/sustainability', Component: PageSustainabilityRetro },
+          { path: 'about/careers', Component: PageCareersRetro },
+          { path: 'contact', Component: PageContactRetro },
+          { path: 'stores', Component: PageStoresRetro },
+          { path: 'press', Component: PagePressMediaRetro },
+
+          // 6. Support Routes
+          { path: 'faq', Component: PageFAQRetro },
+          { path: 'help', Component: PageHelpCenterRetro },
+          { path: 'chat', Component: PageChat },
+          { path: 'shipping-returns', Component: PageShippingReturnsRetro },
+          { path: 'shipping', Component: PageShippingReturnsRetro },
+          { path: 'size-guide', Component: PageSizeGuideRetro },
+          { path: 'returns', Component: PageReturnsPortalRetro },
+          { path: 'refunds', Component: PageRefundsRetro },
+          { path: 'buying-guide', Component: PageBuyingGuideRetro },
+          { path: 'care-instructions', Component: PageCareInstructionsRetro },
+          { path: 'warranty', Component: PageWarrantyRetro },
+          { path: 'accessibility', Component: PageAccessibilityStatementRetro },
+          { path: 'rewards', Component: PageRewardProgramRetro },
+          { path: 'affiliate', Component: PageAffiliateProgramRetro },
+          { path: 'reviews', Component: PageReviewsRetro },
+
+          // 6b. Convenience Aliases
+          { path: 'podcasts', Component: RedirectPodcasts },
+          { path: 'videos', Component: RedirectVideos },
+          { path: 'gallery', Component: RedirectGallery },
+          { path: 'asides', Component: RedirectAsides },
+          { path: 'support', Component: RedirectSupport },
+          { path: 'faqs', Component: RedirectFaqs },
+
+          // 7. Legal Routes
+          { path: 'privacy-policy', Component: PagePrivacyPolicyRetro },
+          { path: 'terms-and-conditions', Component: PageTermsConditionsRetro },
+          { path: 'privacy', Component: RedirectPrivacy },
+          { path: 'policies', Component: RedirectPrivacy },
+          { path: 'terms', Component: RedirectTerms },
+          { path: 'legal/privacy', Component: RedirectPrivacy },
+          { path: 'legal/terms', Component: RedirectTerms },
+          { path: 'legal/privacy-policy', Component: RedirectPrivacy },
+          { path: 'legal/terms-conditions', Component: RedirectTerms },
+
+          // 8. Promo & Misc Routes
+          { path: 'promotions', Component: ArchiveProductRetro },
+          { path: 'promotions/flash-sale', Component: ArchiveProductRetro },
+          { path: 'promotions/seasonal', Component: ArchiveProductRetro },
+          { path: 'promotions/bundles', Component: ArchiveProductRetro },
+          { path: 'promotions/clearance', Component: ArchiveProductRetro },
+          { path: 'promotions/winter-clearance', Component: ArchiveProductRetro },
+          { path: 'promotions/buy-2-get-1', Component: ArchiveProductRetro },
+          { path: 'loyalty', Component: PageLoyaltyRetro },
+          { path: 'subscriptions', Component: SubscriptionLandingRetro },
+          { path: 'subscription/:slug', Component: SingleSubscription },
+          { path: 'memberships', Component: MembershipLandingRetro },
+          { path: 'membership/3d/:slug', Component: MembershipSubscription3DRetro },
+          { path: 'membership/:slug', Component: SingleMembership },
+          { path: 'newsletter', Component: PageNewsletter },
+          { path: 'newsletter/archive', Component: ArchiveNewsletterRetro },
+          { path: 'newsletter/:slug', Component: SingleNewsletterRetro },
+          { path: 'campaign/product-launch', Component: LongFormSalesPage },
+          { path: 'social/:platform', Component: SocialRedirect },
+          { path: 'template-tester', Component: FrontPageRetro },
+          { path: 'sitemap', Component: Sitemap },
+
+          // 8b. Retro Demo Pages
+          { path: 'retro-demo', Component: RetroDemoIndex },
+          { path: 'retro-demo/landing-page', Component: RetroDemoLandingPage },
+
+          // 8c. Gaming & Community Pages
+          { path: 'achievements', Component: PageAchievementsRetro },
+          { path: 'leaderboard', Component: PageLeaderboardRetro },
+          { path: 'new-releases', Component: PageNewReleasesRetro },
+          { path: 'pre-orders', Component: PageNewReleasesRetro },
+          { path: 'bundle-builder', Component: PageBundleBuilderRetro },
+          { path: 'lookbook', Component: PageLookbookRetro },
+          { path: 'community', Component: PageCommunityRetro },
+          { path: 'referral', Component: PageReferralRetro },
+          { path: 'events', Component: PageEventsRetro },
+
+          // 9. Dev Tools Routes
+          {
+            path: 'dev-tools',
+            Component: DevToolsLayout,
+            children: [
+              { index: true, Component: DevToolsIndex },
+              { path: 'style-guide', Component: PageStyleGuide },
+              { path: 'showcase', Component: PageShowcase },
+              { path: 'forms', Component: PageFormShowcase },
+              { path: 'icons', Component: PageIconLibrary },
+              { path: 'api', Component: PageComponentAPI },
+              { path: 'live-preview', Component: PageLivePreview },
+              { path: 'performance', Component: PagePerformance },
+            ],
+          },
+
+          // 10. Error Routes
+          { path: 'error/404', Component: PageNotFoundRetro },
+          { path: 'error/500', Component: PageNotFoundRetro },
+          { path: 'error/503', Component: PageNotFoundRetro },
+          { path: 'error/network', Component: PageNotFoundRetro },
+          { path: '*', Component: PageNotFoundRetro },
         ],
       },
-      { path: 'my-account', Component: RedirectAccount },
-      { path: 'wishlist', Component: PageWishlistRetro },
-      { path: 'account/dashboard-widgets', Component: AccountDashboardWidgets },
-
-      // 3. Checkout Routes
-      { path: 'cart', Component: PageCartRetro },
-      { path: 'checkout', Component: PageCheckoutRetro },
-      { path: 'order-confirmation', Component: PageOrderConfirmationRetro },
-      { path: 'track-order', Component: PageTrackOrderRetro },
-
-      // 4. Blog Routes
-      { path: 'blog', Component: ArchiveBlogRetro },
-      { path: 'blog/category/:slug', Component: ArchiveBlogRetro },
-      { path: 'blog/author/:slug', Component: ArchiveBlogRetro },
-      { path: 'blog/tag/:slug', Component: ArchiveBlogRetro },
-      { path: 'blog/:slug', Component: SinglePostRetro },
-      { path: 'blog/:slug/sidebar', Component: SinglePostWithSidebar },
-      { path: 'blog/:slug/fullwidth', Component: SinglePostFullWidth },
-      { path: 'blog/format/audio', Component: ArchiveAudio },
-      { path: 'blog/format/video', Component: ArchiveVideo },
-      { path: 'blog/format/gallery', Component: ArchiveGallery },
-      { path: 'blog/format/aside', Component: ArchiveAside },
-      { path: 'blog/format/standard', Component: ArchiveBlogRetro },
-      { path: 'blog/:slug/standard', Component: TemplateSingleStandard },
-      { path: 'blog/:slug/audio', Component: TemplateSingleAudio },
-      { path: 'blog/:slug/video', Component: TemplateSingleVideo },
-      { path: 'blog/:slug/gallery', Component: TemplateSingleGallery },
-      { path: 'blog/:slug/aside', Component: TemplateSingleAside },
-
-      // 5. About & Company Routes
-      { path: 'about', Component: PageAboutRetro },
-      { path: 'about/our-story', Component: PageOurStoryRetro },
-      { path: 'about/team', Component: PageTeamRetro },
-      { path: 'about/sustainability', Component: PageSustainabilityRetro },
-      { path: 'about/careers', Component: PageCareersRetro },
-      { path: 'contact', Component: PageContactRetro },
-      { path: 'stores', Component: PageStoresRetro },
-      { path: 'press', Component: PagePressMediaRetro },
-
-      // 6. Support Routes
-      { path: 'faq', Component: PageFAQRetro },
-      { path: 'help', Component: PageHelpCenterRetro },
-      { path: 'chat', Component: PageChat },
-      { path: 'shipping-returns', Component: PageShippingReturnsRetro },
-      { path: 'shipping', Component: PageShippingReturnsRetro },
-      { path: 'size-guide', Component: PageSizeGuideRetro },
-      { path: 'returns', Component: PageReturnsPortalRetro },
-      { path: 'refunds', Component: PageRefundsRetro },
-      { path: 'buying-guide', Component: PageBuyingGuideRetro },
-      { path: 'care-instructions', Component: PageCareInstructionsRetro },
-      { path: 'warranty', Component: PageWarrantyRetro },
-      { path: 'accessibility', Component: PageAccessibilityStatementRetro },
-      { path: 'rewards', Component: PageRewardProgramRetro },
-      { path: 'affiliate', Component: PageAffiliateProgramRetro },
-      { path: 'reviews', Component: PageReviewsRetro },
-
-      // 7. Legal Routes
-      { path: 'privacy-policy', Component: PagePrivacyPolicyRetro },
-      { path: 'terms-and-conditions', Component: PageTermsConditionsRetro },
-      { path: 'privacy', Component: RedirectPrivacy },
-      { path: 'policies', Component: RedirectPrivacy },
-      { path: 'terms', Component: RedirectTerms },
-      { path: 'legal/privacy', Component: RedirectPrivacy },
-      { path: 'legal/terms', Component: RedirectTerms },
-      { path: 'legal/privacy-policy', Component: RedirectPrivacy },
-      { path: 'legal/terms-conditions', Component: RedirectTerms },
-
-      // 8. Promo & Misc Routes
-      { path: 'promotions', Component: ArchiveProductRetro },
-      { path: 'promotions/flash-sale', Component: ArchiveProductRetro },
-      { path: 'promotions/seasonal', Component: ArchiveProductRetro },
-      { path: 'promotions/bundles', Component: ArchiveProductRetro },
-      { path: 'promotions/clearance', Component: ArchiveProductRetro },
-      { path: 'promotions/winter-clearance', Component: ArchiveProductRetro },
-      { path: 'promotions/buy-2-get-1', Component: ArchiveProductRetro },
-      { path: 'loyalty', Component: PageLoyaltyRetro },
-      { path: 'subscriptions', Component: SubscriptionLandingRetro },
-      { path: 'subscription/:slug', Component: SingleSubscription },
-      { path: 'memberships', Component: MembershipLandingRetro },
-      { path: 'membership/3d/:slug', Component: MembershipSubscription3DRetro },
-      { path: 'membership/:slug', Component: SingleMembership },
-      { path: 'newsletter', Component: PageNewsletter },
-      { path: 'campaign/product-launch', Component: LongFormSalesPage },
-      { path: 'social/:platform', Component: SocialRedirect },
-      { path: 'template-tester', Component: FrontPageRetro },
-      { path: 'sitemap', Component: Sitemap },
-
-      // 8b. Retro Demo Pages
-      { path: 'retro-demo', Component: RetroDemoIndex },
-      { path: 'retro-demo/landing-page', Component: RetroDemoLandingPage },
-
-      // 8c. Gaming & Community Pages
-      { path: 'achievements', Component: PageAchievementsRetro },
-      { path: 'leaderboard', Component: PageLeaderboardRetro },
-      { path: 'new-releases', Component: PageNewReleasesRetro },
-      { path: 'pre-orders', Component: PageNewReleasesRetro },
-      { path: 'bundle-builder', Component: PageBundleBuilderRetro },
-      { path: 'lookbook', Component: PageLookbookRetro },
-      { path: 'community', Component: PageCommunityRetro },
-      { path: 'referral', Component: PageReferralRetro },
-      { path: 'events', Component: PageEventsRetro },
-
-      // 9. Dev Tools Routes
-      {
-        path: 'dev-tools',
-        Component: DevToolsLayout,
-        children: [
-          { index: true, Component: DevToolsIndex },
-          { path: 'style-guide', Component: PageStyleGuide },
-          { path: 'showcase', Component: PageShowcase },
-          { path: 'forms', Component: PageFormShowcase },
-          { path: 'icons', Component: PageIconLibrary },
-          { path: 'api', Component: PageComponentAPI },
-          { path: 'live-preview', Component: PageLivePreview },
-          { path: 'performance', Component: PagePerformance },
-        ],
-      },
-
-      // 10. Error Routes
-      { path: 'error/404', Component: PageNotFoundRetro },
-      { path: 'error/500', Component: PageNotFoundRetro },
-      { path: 'error/503', Component: PageNotFoundRetro },
-      { path: 'error/network', Component: PageNotFoundRetro },
-      { path: '*', Component: PageNotFoundRetro },
     ],
   },
 ]);

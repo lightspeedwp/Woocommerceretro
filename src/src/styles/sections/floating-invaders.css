@@ -1,0 +1,73 @@
+/* ============================================
+   FLOATING INVADERS — Site-wide decorative layer
+   
+   Scattered pixel-art Space Invader creatures that
+   float gently across all pages. Three size tiers:
+   S (16px), M (32px), L (48px).
+   
+   BEM block: .floating-invaders
+   ============================================ */
+
+.floating-invaders {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-invaders__item {
+  position: absolute;
+  will-change: transform;
+}
+
+/* ── Size modifiers ─────────────────────────── */
+
+.floating-invaders__item--sm {
+  /* 16px — subtle background texture */
+}
+
+.floating-invaders__item--md {
+  /* 32px — noticeable but not dominant */
+}
+
+.floating-invaders__item--lg {
+  /* 48px — statement pieces at edges */
+}
+
+/* ── Float animation ────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .floating-invaders__item--sm {
+    animation: floating-invader-drift 7s ease-in-out infinite alternate;
+  }
+
+  .floating-invaders__item--md {
+    animation: floating-invader-drift 9s ease-in-out infinite alternate;
+  }
+
+  .floating-invaders__item--lg {
+    animation: floating-invader-drift 12s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes floating-invader-drift {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(4px) rotate(-2deg);
+  }
+}
+
+/* ── Dark mode ──────────────────────────────── */
+
+.dark .floating-invaders__item {
+  /* Dark mode tokens auto-switch via --color-border;
+     increase opacity slightly so invaders remain visible
+     against darker backgrounds */
+  filter: brightness(1.2);
+}

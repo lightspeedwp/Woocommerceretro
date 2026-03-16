@@ -59,14 +59,14 @@ export const PageSizeGuideRetro = () => {
 
             <div className="retro-grid retro-grid-2">
               {measurementInstructions.map((item, i) => (
-                <div key={i} className="retro-card retro-card-glow">
+                <div key={i} className="retro-card retro-card--glow">
                   <div className="retro-feature-icon">
                     <Ruler size={32} weight="bold" aria-hidden="true" />
                   </div>
-                  <h3 className="retro-card-title retro-font-display retro-bold">
+                  <h3 className="retro-card__title retro-font-display retro-bold">
                     {item.title.toUpperCase()}
                   </h3>
-                  <p className="retro-card-desc retro-font-body">
+                  <p className="retro-card__desc retro-font-body">
                     {item.description}
                   </p>
                 </div>
@@ -139,7 +139,7 @@ export const PageSizeGuideRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {sizeGuidePageContent.ctaText}
               </p>
-              <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                 {sizeGuidePageContent.ctaButton.toUpperCase()} <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

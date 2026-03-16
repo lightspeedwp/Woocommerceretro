@@ -1,8 +1,9 @@
 /**
  * Sitemap Page - Visual Route Directory
  *
- * Full-page sitemap with HeaderRetro, FooterRetro, Breadcrumbs,
+ * Full-page sitemap with HeaderRetro, FooterRetro,
  * and clear accordion sections with strong visual affordance.
+ * Breadcrumbs are now handled sitewide by SiteLayout > SiteBreadcrumb.
  *
  * **Styling:** BEM (.retro-sitemap__*) in /src/styles/sections/sitemap-retro.css
  * **Dark Mode:** Inherits retro theme tokens from front-page-funky.css
@@ -19,7 +20,6 @@ import {
 } from 'lucide-react';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
-import { Breadcrumbs } from '../parts/Breadcrumbs';
 import { DevToolsStatsBar } from '../blocks/dev-tools/DevToolsStatsBar';
 
 interface RouteItem {
@@ -60,8 +60,8 @@ const ROUTE_SECTIONS: RouteSection[] = [
         { path: '/shop/collections', label: 'Collections', description: 'Product collections' },
         { path: '/shop/filtered', label: 'Shop with Sidebar', description: 'Shop with filter sidebar' },
         { path: '/shop/search', label: 'Product Search', description: 'Search products' },
-        { path: '/new-arrivals', label: 'New Arrivals', description: 'Latest products' },
-        { path: '/best-sellers', label: 'Best Sellers', description: 'Top selling products' },
+        { path: '/new-arrivals', label: 'New arrivals', description: 'Latest products' },
+        { path: '/best-sellers', label: 'Best sellers', description: 'Top selling products' },
         { path: '/sale', label: 'Sale', description: 'Products on sale' },
         { path: '/deals', label: 'Deals', description: 'Current deals and offers' },
         { path: '/gift-cards', label: 'Gift Cards', description: 'Gift card purchase' },
@@ -141,7 +141,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
       icon: <Info size={20} weight="bold" />,
       routes: [
         { path: '/about', label: 'About Us', description: 'Company information' },
-        { path: '/about/our-story', label: 'Our Story', description: 'Brand story' },
+        { path: '/about/our-story', label: 'Our story', description: 'Brand story' },
         { path: '/about/team', label: 'Team', description: 'Meet the team' },
         { path: '/about/sustainability', label: 'Sustainability', description: 'Environmental practices' },
         { path: '/about/careers', label: 'Careers', description: 'Job openings' },
@@ -341,18 +341,11 @@ export const Sitemap = () => {
 
   const isSearching = searchTerm.length > 0;
 
-  const breadcrumbItems = useMemo(
-    () => [{ label: 'Sitemap', path: '/sitemap' }],
-    []
-  );
-
   return (
     <div className="retro-home theme-retro">
       <div className="retro-container">
         <HeaderRetro />
       </div>
-
-      <Breadcrumbs items={breadcrumbItems} />
 
       <main className="retro-sitemap" id="main-content">
         {/* Hero Banner */}

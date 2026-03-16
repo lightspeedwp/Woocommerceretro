@@ -19,6 +19,12 @@
  * @property {FAQItem[]} items
  */
 
+/** Page-level content for the FAQ page template */
+export const faqPageContent = {
+  heroTitle: 'GAME GUIDE (FAQ)',
+  heroSubtitle: 'Stuck on a level? Check the manual below for answers to common questions.',
+};
+
 /** @type {FAQItem[]} */
 export const cartFAQs = [
   { question: "How do I use a promo code?", answer: "Click on 'Add coupons' in the Cart Totals section, enter your code, and click Apply." },
@@ -78,11 +84,3 @@ export const faqCategories = [
   },
 ];
 
-export const faqPageContent = {
-  title: 'Frequently asked questions',
-  description: 'Find answers to the most common questions about shopping, shipping, returns, and more.',
-  ctaHeading: 'Still have questions?',
-  ctaText: 'Our support team is ready to help you with anything you need.',
-  ctaButtonPrimary: 'Contact Support',
-  ctaButtonSecondary: 'Live Chat'
-};

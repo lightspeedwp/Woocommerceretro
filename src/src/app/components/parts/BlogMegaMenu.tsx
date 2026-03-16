@@ -60,8 +60,8 @@ export const BlogMegaMenu = () => {
 
   const renderContent = (closeMenu: () => void) => (
     <div className="wp-mega-menu__content">
-      <div className="funky-mega__orb funky-mega__orb--cyan" style={{ top: '-70px', right: '-50px' }} />
-      <div className="funky-mega__orb funky-mega__orb--pink" style={{ bottom: '-60px', left: '-40px' }} />
+      <div className="funky-mega__orb funky-mega__orb--cyan funky-mega__orb--blog-cyan" />
+      <div className="funky-mega__orb funky-mega__orb--pink funky-mega__orb--blog-pink" />
       <div className="funky-mega__inner funky-mega__inner--blog">
         {/* Formats column */}
         <div className="funky-mega__column funky-mega__column--bordered">
@@ -78,7 +78,7 @@ export const BlogMegaMenu = () => {
         {/* Latest posts column */}
         <div className="funky-mega__column">
           <h4 className="funky-mega__title">Latest</h4>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+          <div className="funky-mega__posts-grid">
             {recentPosts.map((post) => {
               const media = post.featured_media ? mediaItems[post.featured_media] : null;
               const imageUrl = media ? media.source_url : '';
@@ -89,7 +89,7 @@ export const BlogMegaMenu = () => {
                     {imageUrl ? (
                       <img src={imageUrl} alt={post.title.rendered} loading="lazy" />
                     ) : (
-                      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div className="funky-mega__post-placeholder">
                         <Article size={24} weight="duotone" />
                       </div>
                     )}

@@ -62,7 +62,7 @@ export const PageAboutRetro = () => {
                 So we started PlayPocket. A brand dedicated to creating high-quality, subtle, and beautifully
                 designed apparel and accessories for people who love the retro aesthetic as much as we do.
               </p>
-              <Link to="/shop" className="retro-button retro-button--primary retro-font-display retro-bold retro-about-story__cta">
+              <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-about-story__cta">
                 VIEW INVENTORY <ArrowRight weight="bold" />
               </Link>
             </div>

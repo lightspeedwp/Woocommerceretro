@@ -3,6 +3,7 @@
  * 
  * Wraps the router with essential context providers only.
  * Updated: March 2026 - Minimal providers for Figma Make stability
+ * Rebuilt: March 16, 2026 - Clean rebuild after CSS5 sweep split
  */
 
 import React from 'react';

@@ -82,14 +82,14 @@ export const PageAccessibilityStatementRetro = () => {
               {accessibilityFeatures.map((feature) => {
                 const Icon = featureIcons[feature.id] || Eye;
                 return (
-                  <div key={feature.id} className="retro-card retro-card-glow">
+                  <div key={feature.id} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {feature.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {feature.description}
                     </p>
                   </div>
@@ -150,10 +150,10 @@ export const PageAccessibilityStatementRetro = () => {
                 {accessibilityPageContent.ctaText}
               </p>
               <div className="retro-cta-actions">
-                <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                   {accessibilityPageContent.ctaButtonPrimary.toUpperCase()} <ArrowRight size={20} weight="bold" />
                 </Link>
-                <a href="mailto:accessibility@example.com" className="retro-button retro-button--secondary retro-font-display">
+                <a href="mailto:accessibility@example.com" className="retro-btn retro-btn--secondary retro-font-display">
                   {accessibilityPageContent.ctaButtonSecondary.toUpperCase()} <Envelope size={18} weight="bold" />
                 </a>
               </div>

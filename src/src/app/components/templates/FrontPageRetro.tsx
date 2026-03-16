@@ -9,36 +9,27 @@
  * **WCAG:** Semantic landmarks, heading hierarchy, adequate contrast
  */
 
-import { HeaderRetro } from '../parts/HeaderRetro';
-import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';
 import { CategoryRowRetro } from '../patterns/CategoryRowRetro';
 import { FeaturedProductsRetro } from '../patterns/FeaturedProductsRetro';
 import { BottomGridRetro } from '../patterns/BottomGridRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
-import { SpaceInvader } from '../patterns/SpaceInvaders';
+import { Link } from 'react-router';
 
 export const FrontPageRetro = () => {
   return (
-    <div className="pp-home">
-      {/* Background Space Invader decorations */}
-      <div className="pp-home__invaders" aria-hidden="true">
-        <SpaceInvader variant="crab" size={16} color="var(--wp--preset--color--border, #CBD5C9)" className="pp-home__inv pp-home__inv--1" />
-        <SpaceInvader variant="squid" size={14} color="var(--wp--preset--color--border, #CBD5C9)" className="pp-home__inv pp-home__inv--2" />
-        <SpaceInvader variant="octopus" size={18} color="var(--wp--preset--color--border, #CBD5C9)" className="pp-home__inv pp-home__inv--3" />
-        <SpaceInvader variant="crab" size={12} color="var(--wp--preset--color--border, #CBD5C9)" className="pp-home__inv pp-home__inv--4" />
-        <SpaceInvader variant="squid" size={16} color="var(--wp--preset--color--border, #CBD5C9)" className="pp-home__inv pp-home__inv--5" />
-      </div>
+    <div className="retro-home theme-retro">
+      <div className="retro-container">
+        {/* Space Invader decorations are now site-wide via FloatingInvaders in SiteLayout */}
 
-      <HeaderRetro />
-      <main className="pp-main">
         <HeroRetro />
-        <CategoryRowRetro />
-        <FeaturedProductsRetro title="FEATURED ITEMS" linkText="VIEW ALL" />
-        <BottomGridRetro />
-      </main>
-      <FooterRetro />
-      <MiniCartRetro />
+        <main className="pp-main">
+          <CategoryRowRetro />
+          <FeaturedProductsRetro title="FEATURED ITEMS" linkText="VIEW ALL" />
+          <BottomGridRetro />
+        </main>
+        <MiniCartRetro />
+      </div>
     </div>
   );
 };

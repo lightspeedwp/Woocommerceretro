@@ -1,0 +1,488 @@
+/**
+ * Retro Newsletter — Archive + Single Issue
+ *
+ * BEM blocks:
+ *   .retro-newsletter-archive   — ArchiveNewsletterRetro.tsx
+ *   .retro-newsletter-card      — Newsletter card in archive grid
+ *   .retro-newsletter-single    — SingleNewsletterRetro.tsx
+ */
+
+/* ========================================
+   ARCHIVE: HERO
+   ======================================== */
+
+.retro-newsletter-archive__hero {
+  text-align: center;
+  padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+  border: 2px solid var(--color-ink);
+  background: var(--color-panel);
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.dark .retro-newsletter-archive__hero {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-newsletter-archive__hero-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--wp--preset--spacing--30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-signal);
+  color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+}
+
+.retro-newsletter-archive__hero-title {
+  margin: 0 0 var(--wp--preset--spacing--20);
+  color: var(--color-ink);
+  letter-spacing: 0.08em;
+}
+
+.dark .retro-newsletter-archive__hero-title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-newsletter-archive__hero-desc {
+  color: var(--color-muted);
+  margin: 0;
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.dark .retro-newsletter-archive__hero-desc {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* ========================================
+   ARCHIVE: GRID
+   ======================================== */
+
+.retro-newsletter-archive__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .retro-newsletter-archive__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .retro-newsletter-archive__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ========================================
+   ARCHIVE: NEWSLETTER CARD
+   ======================================== */
+
+.retro-newsletter-card {
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark .retro-newsletter-card {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  box-shadow: 4px 4px 0 var(--wp--preset--color--border);
+}
+
+.retro-newsletter-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+
+.retro-newsletter-card__link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.retro-newsletter-card__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.dark .retro-newsletter-card__image-wrap {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-newsletter-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.retro-newsletter-card__issue-badge {
+  position: absolute;
+  top: var(--wp--preset--spacing--20);
+  right: var(--wp--preset--spacing--20);
+  padding: 2px var(--wp--preset--spacing--20);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.retro-newsletter-card__body {
+  padding: var(--wp--preset--spacing--30);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+  flex: 1;
+}
+
+.retro-newsletter-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.retro-newsletter-card__title {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.dark .retro-newsletter-card__title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-newsletter-card__preview {
+  color: var(--color-muted);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dark .retro-newsletter-card__preview {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-newsletter-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--color-signal);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+/* ========================================
+   ARCHIVE: PAGINATION
+   ======================================== */
+
+.retro-newsletter-archive__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+  margin-top: var(--wp--preset--spacing--60);
+}
+
+.retro-newsletter-archive__page-btn {
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  cursor: pointer;
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dark .retro-newsletter-archive__page-btn {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-newsletter-archive__page-btn:hover:not(:disabled) {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.retro-newsletter-archive__page-btn--active {
+  background: var(--color-signal);
+  color: var(--color-paper);
+  border-color: var(--color-signal);
+}
+
+.retro-newsletter-archive__page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   SINGLE: ENVELOPE WRAPPER
+   ======================================== */
+
+.retro-newsletter-single__envelope {
+  max-width: 680px;
+  margin: 0 auto;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+
+.dark .retro-newsletter-single__envelope {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  box-shadow: 6px 6px 0 var(--wp--preset--color--border);
+}
+
+.retro-newsletter-single__not-found {
+  text-align: center;
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40);
+}
+
+/* Web view header */
+.retro-newsletter-single__web-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--20);
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-ink);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  color: var(--color-muted);
+}
+
+.dark .retro-newsletter-single__web-header {
+  background: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-newsletter-single__home-link {
+  color: var(--color-signal);
+  text-decoration: underline;
+}
+
+/* Header */
+.retro-newsletter-single__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--wp--preset--spacing--40);
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.dark .retro-newsletter-single__header {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-newsletter-single__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  color: var(--color-ink);
+}
+
+.dark .retro-newsletter-single__logo {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-newsletter-single__issue-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.retro-newsletter-single__meta-dot {
+  color: var(--color-muted);
+}
+
+/* Hero image */
+.retro-newsletter-single__hero-image {
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.dark .retro-newsletter-single__hero-image {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-newsletter-single__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Subject */
+.retro-newsletter-single__subject {
+  padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
+}
+
+.retro-newsletter-single__subject-title {
+  margin: 0;
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+}
+
+.dark .retro-newsletter-single__subject-title {
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Content sections */
+.retro-newsletter-single__content {
+  padding: 0 var(--wp--preset--spacing--40) var(--wp--preset--spacing--40);
+}
+
+.retro-newsletter-single__section {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.retro-newsletter-single__section-heading {
+  color: var(--color-ink);
+  margin: 0 0 var(--wp--preset--spacing--20);
+}
+
+.dark .retro-newsletter-single__section-heading {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-newsletter-single__section-body {
+  color: var(--color-muted);
+  margin: 0 0 var(--wp--preset--spacing--30);
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+.dark .retro-newsletter-single__section-body {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-newsletter-single__section-image {
+  margin-bottom: var(--wp--preset--spacing--30);
+  border: 2px solid var(--color-ink);
+  overflow: hidden;
+}
+
+.dark .retro-newsletter-single__section-image {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-newsletter-single__section-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.retro-newsletter-single__cta {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.retro-newsletter-single__divider {
+  border: none;
+  border-top: 1px dashed var(--color-ink);
+  margin: var(--wp--preset--spacing--40) 0;
+  opacity: 0.3;
+}
+
+.dark .retro-newsletter-single__divider {
+  border-color: var(--wp--preset--color--border);
+}
+
+/* Footer */
+.retro-newsletter-single__footer {
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  background: var(--color-panel);
+  border-top: 2px solid var(--color-ink);
+  text-align: center;
+}
+
+.dark .retro-newsletter-single__footer {
+  background: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-newsletter-single__footer-text {
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  color: var(--color-muted);
+  margin: 0 0 var(--wp--preset--spacing--10);
+}
+
+.dark .retro-newsletter-single__footer-text {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-newsletter-single__footer-links {
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.retro-newsletter-single__footer-links a {
+  color: var(--color-signal);
+  text-decoration: underline;
+}
+
+/* Prev/Next nav */
+.retro-newsletter-single__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 680px;
+  margin: var(--wp--preset--spacing--40) auto 0;
+}
+
+.retro-newsletter-single__nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  text-transform: uppercase;
+  min-height: 44px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dark .retro-newsletter-single__nav-link {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-newsletter-single__nav-link:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-newsletter-card { transition: none; }
+  .retro-newsletter-card:hover { transform: none; }
+}

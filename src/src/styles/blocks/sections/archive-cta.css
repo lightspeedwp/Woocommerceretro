@@ -29,11 +29,11 @@
 
 /* Accent variants (AccentSection/DarkSection) */
 .wp-archive-cta__description--accent {
-  color: #e9d5ff; /* purple-100 */
+  color: var(--wp--preset--color--accent-foreground, var(--color-text-soft, #C4CBC3));
 }
 
 .dark .wp-archive-cta__description--accent {
-  color: #f3e8ff; /* purple-200 */
+  color: var(--color-text-soft, #C4CBC3);
 }
 
 /* ========================================
@@ -52,13 +52,13 @@
 
 /* Light button (for dark/gradient variants) */
 .wp-archive-cta__button--light {
-  background: #ffffff;
-  color: #111827;
+  background: var(--wp--preset--color--white, #ffffff);
+  color: var(--wp--preset--color--neutral-900, #111827);
   border: none;
   padding-left: var(--wp--preset--spacing--80);
   padding-right: var(--wp--preset--spacing--80);
 }
 
 .wp-archive-cta__button--light:hover {
-  background: #f9fafb;
+  background: var(--wp--preset--color--neutral-100, #f9fafb);
 }

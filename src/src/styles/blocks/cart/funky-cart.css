@@ -1,0 +1,111 @@
+/**
+ * Funky Cart Styles
+ * Brutalist/neo-pop cart design with dark mode support
+ */
+
+.funky-cart-item {
+  border: 3px solid #000;
+  padding: var(--wp--preset--spacing--40);
+  background: #fff;
+  box-shadow: 6px 6px 0px #000;
+  margin-bottom: var(--wp--preset--spacing--40);
+  transition: all 0.2s ease;
+}
+
+.funky-cart-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #0ff;
+}
+
+.funky-item-image {
+  border: 2px solid #000;
+}
+
+.funky-item-title {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.funky-item-title:hover {
+  color: #f0f;
+}
+
+.funky-cart-summary {
+  border: 4px solid #000;
+  padding: var(--wp--preset--spacing--50);
+  background: #fff;
+  box-shadow: 10px 10px 0px #000;
+}
+
+.funky-totals-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 4px solid #000;
+  padding-bottom: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.funky-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  border-bottom: 2px solid #000;
+  padding-block: var(--wp--preset--spacing--20);
+}
+
+.funky-total-row--grand {
+  font-size: 1.5rem;
+  border-bottom: 0;
+  color: #f0f;
+}
+
+.funky-checkout-btn {
+  width: 100%;
+  margin-top: var(--wp--preset--spacing--50);
+  padding: var(--wp--preset--spacing--40);
+  background: #0ff !important;
+  color: #000 !important;
+  border: 3px solid #000 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  box-shadow: 6px 6px 0px #000 !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.funky-checkout-btn:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px #f0f !important;
+}
+
+/* Dark Mode */
+.dark .funky-cart-item {
+  background: #111;
+  border-color: #fff;
+  box-shadow: 6px 6px 0px #fff;
+}
+
+.dark .funky-item-title {
+  color: #fff;
+}
+
+.dark .funky-cart-summary {
+  background: #222;
+  border-color: #fff;
+  box-shadow: 10px 10px 0px #fff;
+}
+
+.dark .funky-totals-title {
+  border-color: #fff;
+}
+
+.dark .funky-total-row {
+  border-color: #fff;
+}
+
+.dark .funky-checkout-btn {
+  background: #fff !important;
+  border-color: #fff !important;
+  box-shadow: 6px 6px 0px #ff0 !important;
+}

@@ -24,48 +24,104 @@
 }
 
 /* ========================================
-   POWER UP SECTION
+   POWER UP SECTION — Local token layer
+   Light mode: warm ink (#3D3229), cream paper (#F2EEE6)
+   Dark mode: light text (#E8E2D8), dark panel (#1E2328)
    ======================================== */
 
 .pp-powerup {
   position: relative;
+
+  /* Light mode local tokens */
+  --pp-powerup-ink: #3D3229;
+  --pp-powerup-ink-soft: #5A4E42;
+  --pp-powerup-ink-muted: #7A6E62;
+  --pp-powerup-paper: #F2EEE6;
+  --pp-powerup-border: #C4BAA8;
+  --pp-powerup-signal: #D8B548;
+  --pp-powerup-signal-dark: #C79A24;
+  --pp-powerup-signal-hover: #C09530;
+  --pp-powerup-btn-bg: #D8B548;
+  --pp-powerup-btn-text: #3D3229;
+  --pp-powerup-btn-border: #3D3229;
+  --pp-powerup-btn-hover-bg: #C79A24;
+}
+
+.dark .pp-powerup {
+  /* Dark mode local tokens */
+  --pp-powerup-ink: #E8E2D8;
+  --pp-powerup-ink-soft: #C4CBC3;
+  --pp-powerup-ink-muted: #9FAAAF;
+  --pp-powerup-paper: #1E2328;
+  --pp-powerup-border: #5A6470;
+  --pp-powerup-signal: #D8B548;
+  --pp-powerup-signal-dark: #C79A24;
+  --pp-powerup-signal-hover: #E4C96E;
+  --pp-powerup-btn-bg: #2A3038;
+  --pp-powerup-btn-text: #E8E2D8;
+  --pp-powerup-btn-border: #8A9499;
+  --pp-powerup-btn-hover-bg: #353D46;
 }
 
 .pp-powerup__card {
-  background: var(--wp--preset--color--surface, #FFFFFF);
-  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
-  padding: 1.25rem;
+  background: var(--pp-powerup-paper);
+  border: 3px solid var(--pp-powerup-border);
+  padding: var(--wp--preset--spacing--50, 1.5rem) var(--wp--preset--spacing--60, 2rem);
   position: relative;
+  color: var(--pp-powerup-ink);
+  /* Pixelated corners — 6px steps */
   clip-path: polygon(
-    0 4px, 4px 4px, 4px 0,
-    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
-    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
-    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
   );
 }
 
 .pp-powerup__heading {
-  margin: 0 0 1.25rem;
+  margin: 0;
   text-transform: uppercase;
+  font-size: var(--retro-text-lg, 1.125rem);
+  letter-spacing: 0.08em;
+  color: var(--pp-powerup-ink);
 }
 
+/* Dotted separator under heading */
+.pp-powerup__separator {
+  margin: var(--wp--preset--spacing--30, 0.75rem) 0 var(--wp--preset--spacing--40, 1rem);
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--pp-powerup-border) 0,
+    var(--pp-powerup-border) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  opacity: 0.6;
+}
+
+/* Steps row */
 .pp-powerup__steps {
   display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20, 0.5rem);
+  margin-bottom: var(--wp--preset--spacing--50, 1.5rem);
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.pp-powerup__step-group {
+  display: contents;
 }
 
 .pp-powerup__step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--wp--preset--spacing--20, 0.5rem);
   text-align: center;
-  flex: 1;
-  min-width: 80px;
+  flex: 0 1 auto;
+  min-width: 90px;
 }
 
 .pp-powerup__step-icon {
@@ -74,46 +130,208 @@
   justify-content: center;
 }
 
-.pp-powerup__step-dots {
+/* ── Inline SVG icon colour system ──
+   Colour classes used by StepIcon pixel-art SVGs.
+   Light mode: warm browns, gold, teal from retro palette.
+   Dark mode: brightened/adjusted for dark panel backgrounds. */
+
+.pp-powerup__step-svg {
+  image-rendering: pixelated;
+}
+
+/* Light mode icon fills */
+.pp-icon__outline { fill: #1B1F3C; }          /* Dark navy outlines */
+.pp-icon__warm    { fill: #C8A272; }           /* Warm tan body */
+.pp-icon__tan     { fill: #E9E3C6; }           /* Light cream/skin */
+.pp-icon__brown   { fill: #845939; }           /* Dark brown (shoes, pack) */
+.pp-icon__cream   { fill: #FEFEFE; }           /* White highlights */
+.pp-icon__teal    { fill: #678B8B; }           /* Teal accents */
+.pp-icon__gold    { fill: #D8A726; }           /* Gold (arrow, gift) */
+.pp-icon__gold-dark { fill: #C79A24; }         /* Darker gold (ribbon, tip) */
+
+/* Dark mode icon fills — brightened for visibility */
+.dark .pp-icon__outline { fill: #8A9AAF; }     /* Softened outlines */
+.dark .pp-icon__warm    { fill: #D4B888; }     /* Lighter warm */
+.dark .pp-icon__tan     { fill: #F0EBD8; }     /* Brighter cream */
+.dark .pp-icon__brown   { fill: #A87A55; }     /* Lighter brown */
+.dark .pp-icon__cream   { fill: #FFFFFF; }     /* White stays */
+.dark .pp-icon__teal    { fill: #8DB0B0; }     /* Brighter teal */
+.dark .pp-icon__gold    { fill: #E8C054; }     /* Brighter gold */
+.dark .pp-icon__gold-dark { fill: #D4A830; }   /* Brighter dark gold */
+
+/* Dotted arrow connector */
+.pp-powerup__arrow {
   display: flex;
-  gap: 4px;
-  margin-top: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: -1.5rem;
+  color: var(--pp-powerup-ink);
 }
 
-.pp-powerup__dot {
-  width: 4px;
-  height: 4px;
-  background: var(--wp--preset--color--foreground, #1E2630);
-  opacity: 0.3;
+.pp-powerup__arrow svg {
+  image-rendering: pixelated;
 }
 
+/* Step labels */
 .pp-powerup__step-label {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.0625rem;
   text-transform: uppercase;
+  font-size: var(--retro-text-xs, 0.75rem);
+  letter-spacing: 0.06em;
+  line-height: 1.3;
 }
 
 .pp-powerup__step-label strong {
-  color: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--pp-powerup-ink);
 }
 
 .pp-powerup__step-label span {
-  color: var(--wp--preset--color--muted-foreground, #4B5563);
+  color: var(--pp-powerup-ink-muted);
 }
+
+/* ── CTA Button — golden light / dark panel dark ── */
 
 .pp-powerup__actions {
   display: flex;
   gap: 1rem;
 }
 
+.pp-powerup__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  min-height: 44px;
+}
+
+/* Outer border layer with pixelated corners */
+.pp-powerup__cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--pp-powerup-btn-border);
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  );
+  z-index: 0;
+}
+
+/* Inner fill */
+.pp-powerup__cta-inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  margin: 3px;
+  background: var(--pp-powerup-btn-bg);
+  color: var(--pp-powerup-btn-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--retro-text-xs, 0.75rem);
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.pp-powerup__cta-arrow {
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.pp-powerup__cta-btn:hover .pp-powerup__cta-inner {
+  background: var(--pp-powerup-btn-hover-bg);
+}
+
+.pp-powerup__cta-btn:active {
+  transform: translateY(1px);
+}
+
+.pp-powerup__cta-btn:focus-visible {
+  outline: 3px solid var(--color-focus, var(--wp--preset--color--ring, #0055AA));
+  outline-offset: 2px;
+}
+
+/* ── Decorations ── */
+
 .pp-powerup__decor {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: var(--wp--preset--spacing--30, 0.75rem);
+  right: var(--wp--preset--spacing--40, 1rem);
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
   align-items: center;
+  gap: var(--wp--preset--spacing--30, 0.75rem);
+  color: var(--pp-powerup-ink);
+}
+
+.pp-powerup__decor-sparkle {
+  opacity: 0.6;
+}
+
+.pp-powerup__decor-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20, 0.5rem);
+}
+
+.pp-powerup__decor-icons svg {
+  image-rendering: pixelated;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+  .pp-powerup__card {
+    padding: var(--wp--preset--spacing--40, 1rem);
+  }
+
+  .pp-powerup__steps {
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--30, 0.75rem);
+  }
+
+  .pp-powerup__arrow {
+    transform: rotate(90deg);
+    margin-top: 0;
+  }
+
+  .pp-powerup__step {
+    flex-direction: row;
+    text-align: left;
+    gap: var(--wp--preset--spacing--30, 0.75rem);
+  }
+
+  .pp-powerup__step-label {
+    align-items: flex-start;
+  }
+
+  .pp-powerup__decor {
+    display: none;
+  }
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-powerup__cta-btn {
+    transition: none;
+  }
 }
 
 /* ========================================

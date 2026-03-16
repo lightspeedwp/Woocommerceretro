@@ -4,7 +4,8 @@
  * Category navigation row with pixel-style icons.
  * Matches the design reference with bordered cells and arrow button.
  *
- * **Styling:** BEM (.retro-cat__*) in /src/styles/sections/playpocket-home.css
+ * **BEM block:** .retro-cat
+ * **Styling:** /src/styles/sections/pp-categories.css
  * **WCAG:** Semantic nav, 44px touch targets, text labels
  */
 
@@ -33,20 +34,20 @@ const defaultCategories: Category[] = [
 
 export const CategoryRowRetro = ({ categories = defaultCategories }: CategoryRowRetroProps) => {
   return (
-    <nav aria-label="Product categories">
-      <div className="retro-cat-header retro-font-display">CATEGORIES +</div>
-      <div className="retro-cat-row">
+    <nav className="retro-cat" aria-label="Product categories">
+      <div className="retro-cat__header retro-font-display">CATEGORIES +</div>
+      <div className="retro-cat__list">
         {categories.map((cat) => {
           const Icon = cat.icon;
           return (
-            <Link key={cat.slug} to={`/category/${cat.slug}`} className="retro-cat-item">
-              <Icon size={32} className="retro-cat-icon" strokeWidth={1.5} />
+            <Link key={cat.slug} to={`/category/${cat.slug}`} className="retro-cat__item">
+              <Icon size={32} className="retro-cat__icon" strokeWidth={1.5} />
               <span className="retro-font-display">{cat.name}</span>
             </Link>
           );
         })}
-        <Link to="/shop" className="retro-cat-item retro-cat-item--arrow" aria-label="View all categories">
-          <ArrowRight size={24} strokeWidth={2.5} className="retro-cat-icon" />
+        <Link to="/shop" className="retro-cat__item retro-cat__item--arrow" aria-label="View all categories">
+          <ArrowRight size={24} strokeWidth={2.5} className="retro-cat__icon" />
         </Link>
       </div>
     </nav>

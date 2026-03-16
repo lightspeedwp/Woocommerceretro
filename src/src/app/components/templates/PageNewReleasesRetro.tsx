@@ -40,15 +40,6 @@ export const PageNewReleasesRetro = () => {
       <div className="retro-container">
         <HeaderRetro />
 
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <Link to="/shop" className="retro-breadcrumb-link">SHOP</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">NEW RELEASES</span>
-        </div>
-
         <div className="retro-page-shell">
           <div className="retro-page-shell__header">
             <Rocket size={32} weight="bold" aria-hidden="true" />

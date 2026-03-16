@@ -28,7 +28,7 @@ export const AccountCreation = ({
         <div className="wp-order-account-benefits">
           {benefitsList.map((benefit, index) => (
             <div key={index} className="wp-order-account-benefit-item funky-glass-panel">
-              <Check size={16} strokeWidth={2} className="wp-order-text--success" />
+              <Check size={16} strokeWidth={2} className="wp-order-account-benefit-item__icon" />
               <span>{benefit}</span>
             </div>
           ))}
@@ -40,11 +40,11 @@ export const AccountCreation = ({
           <span className="wp-block-button__link">Create account</span>
         </Link>
         <div className="wp-order-account-actions__footer">
-          <small className="wp-order-text--sky">
+          <small className="wp-order-account-actions__disclaimer">
             Check your email at {email} for the link to set up an account password. By creating an account you agree to our{' '}
-            <Link to="/terms" className="underline">Terms</Link>
+            <Link to="/terms" className="wp-order-account-actions__legal-link">Terms</Link>
             {' '}and{' '}
-            <Link to="/privacy" className="underline">Privacy Policy</Link>.
+            <Link to="/privacy" className="wp-order-account-actions__legal-link">Privacy policy</Link>.
           </small>
         </div>
       </div>

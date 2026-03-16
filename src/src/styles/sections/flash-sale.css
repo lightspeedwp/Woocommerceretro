@@ -1,41 +1,61 @@
 /* ========================================
    FLASH SALE BANNER
+   
+   BEM block: .wp-flash-sale
+   Variant gradients use CSS custom properties
+   for theme-aware color control.
    ======================================== */
 
+/* Variant gradient tokens (scoped to block) */
 .wp-flash-sale {
+  --flash-sale-gradient-start: var(--wp--preset--color--vivid-purple, #7c3aed);
+  --flash-sale-gradient-end: var(--wp--preset--color--deep-purple, #6d28d9);
+  --flash-sale-accent: var(--wp--preset--color--vivid-purple, #7c3aed);
+
   position: relative;
   overflow: hidden;
   padding-top: var(--wp--preset--spacing--80);
   padding-bottom: var(--wp--preset--spacing--80);
-  background-color: var(--wp--preset--color--accent); /* Fallback */
+  background: linear-gradient(to right, var(--flash-sale-gradient-start), var(--flash-sale-gradient-end));
 }
 
 /* Variants */
 .wp-flash-sale--purple {
-  background: linear-gradient(to right, #7c3aed, #6d28d9);
+  --flash-sale-gradient-start: #7c3aed;
+  --flash-sale-gradient-end: #6d28d9;
+  --flash-sale-accent: #7c3aed;
 }
 
 .dark .wp-flash-sale--purple {
-  background: linear-gradient(to right, #6d28d9, #5b21b6);
+  --flash-sale-gradient-start: #6d28d9;
+  --flash-sale-gradient-end: #5b21b6;
 }
 
 .wp-flash-sale--red {
-  background: linear-gradient(to right, #dc2626, #b91c1c);
+  --flash-sale-gradient-start: var(--wp--preset--color--error, #dc2626);
+  --flash-sale-gradient-end: #b91c1c;
+  --flash-sale-accent: var(--wp--preset--color--error, #dc2626);
 }
 
 .dark .wp-flash-sale--red {
-  background: linear-gradient(to right, #b91c1c, #991b1b);
+  --flash-sale-gradient-start: #b91c1c;
+  --flash-sale-gradient-end: #991b1b;
 }
 
 .wp-flash-sale--yellow {
-  background: linear-gradient(to right, #eab308, #f97316);
+  --flash-sale-gradient-start: #eab308;
+  --flash-sale-gradient-end: #f97316;
+  --flash-sale-accent: #eab308;
 }
 
 .dark .wp-flash-sale--yellow {
-  background: linear-gradient(to right, #ca8a04, #ea580c);
+  --flash-sale-gradient-start: #ca8a04;
+  --flash-sale-gradient-end: #ea580c;
 }
 
 .wp-flash-sale--gradient {
+  --flash-sale-gradient-start: #9333ea;
+  --flash-sale-gradient-end: #dc2626;
   background: linear-gradient(to right, #9333ea, #db2777, #dc2626);
 }
 
@@ -49,7 +69,7 @@
   position: relative;
   z-index: 10;
   text-align: center;
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   max-width: 56rem;
   margin-left: auto;
   margin-right: auto;
@@ -73,68 +93,59 @@
   height: 4rem;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: var(--wp--preset--border-radius--full);
-  /* Margin removed */
   margin: 0;
 }
 
 .wp-flash-sale__icon {
   width: 2rem;
   height: 2rem;
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 .wp-flash-sale__title {
-  font-size: 2.25rem;
+  font-size: var(--wp--preset--font-size--600);
   font-weight: var(--wp--preset--font-weight--bold);
-  /* Margin removed */
   margin: 0;
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 @media (min-width: 768px) {
   .wp-flash-sale__title {
-    font-size: 3rem;
+    font-size: var(--wp--preset--font-size--800);
   }
 }
 
 .wp-flash-sale__discount {
   display: inline-block;
-  background-color: #ffffff;
-  color: #7c3aed; /* Default text color, needs dynamic based on variant if strictly needed, but purple is safe accent */
-  font-size: 1.875rem;
+  background-color: var(--wp--preset--color--white);
+  color: var(--flash-sale-accent);
+  font-size: var(--wp--preset--font-size--500);
   font-weight: var(--wp--preset--font-weight--bold);
-  padding: 0.75rem 1.5rem;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
   border-radius: var(--wp--preset--border-radius--full);
-  /* Margin removed */
   margin: 0;
 }
 
 @media (min-width: 768px) {
   .wp-flash-sale__discount {
-    font-size: 2.25rem;
+    font-size: var(--wp--preset--font-size--600);
   }
 }
 
-/* Variant text colors overrides for discount badge */
-.wp-flash-sale--red .wp-flash-sale__discount { color: #dc2626; }
-.wp-flash-sale--yellow .wp-flash-sale__discount { color: #eab308; }
-
 .wp-flash-sale__description {
-  font-size: 1.125rem;
-  /* Margin removed */
+  font-size: var(--wp--preset--font-size--300);
   margin: 0;
   opacity: 0.9;
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 @media (min-width: 768px) {
   .wp-flash-sale__description {
-    font-size: 1.25rem;
+    font-size: var(--wp--preset--font-size--400);
   }
 }
 
 .wp-flash-sale__countdown {
-  /* Margin removed */
   margin: 0;
   justify-content: center;
   width: 100%;
@@ -142,21 +153,17 @@
 }
 
 .wp-flash-sale__cta {
-  /* Margin removed */
   margin: 0;
 }
 
 .wp-flash-sale .wp-flash-sale__button {
-  background-color: #ffffff;
-  color: #7c3aed;
+  background-color: var(--wp--preset--color--white);
+  color: var(--flash-sale-accent);
   font-weight: var(--wp--preset--font-weight--bold);
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
+  padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+  font-size: var(--wp--preset--font-size--300);
 }
 
 .wp-flash-sale .wp-flash-sale__button:hover {
-  background-color: #f3f4f6;
+  background-color: var(--wp--preset--color--neutral-200, #f3f4f6);
 }
-
-.wp-flash-sale--red .wp-flash-sale__button { color: #dc2626; }
-.wp-flash-sale--yellow .wp-flash-sale__button { color: #eab308; }

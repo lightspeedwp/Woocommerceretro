@@ -7,7 +7,7 @@
 .wc-collection-row__content {
   display: flex;
   flex-direction: column;
-  gap: 48px; /* gap-12 */
+  gap: var(--wp--preset--spacing--70); /* 48px */
 }
 
 .wc-collection-row__header {
@@ -22,7 +22,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px; /* gap-4 */
+  gap: var(--wp--preset--spacing--40); /* 16px */
 }
 
 .wc-collection-row__title {

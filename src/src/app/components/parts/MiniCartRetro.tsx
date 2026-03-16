@@ -66,11 +66,13 @@ export const MiniCartRetro = () => {
   return (
     <>
       {/* Overlay */}
-      <div
-        className={`retro-mini-cart__overlay${isOpen ? ' retro-mini-cart__overlay--open' : ''}`}
-        onClick={closeDrawer}
-        aria-hidden="true"
-      />
+      {isOpen && (
+        <div
+          className="retro-mini-cart__overlay retro-mini-cart__overlay--open"
+          onClick={closeDrawer}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Drawer */}
       <div
@@ -105,7 +107,7 @@ export const MiniCartRetro = () => {
               <p className="retro-font-body">Add some loot to get started.</p>
               <Link
                 to="/shop"
-                className="retro-button retro-button--primary retro-font-display retro-bold"
+                className="retro-btn retro-btn--primary retro-font-display retro-bold"
                 onClick={closeDrawer}
               >
                 BROWSE SHOP
@@ -137,15 +139,15 @@ export const MiniCartRetro = () => {
                     <div className="retro-mini-cart__item-actions">
                       <div className="retro-qty retro-qty--sm">
                         <button
-                          className="retro-qty-btn"
+                          className="retro-qty__btn"
                           onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                           aria-label={`Decrease quantity of ${item.product.name}`}
                         >
                           <Minus size={12} strokeWidth={2.5} />
                         </button>
-                        <div className="retro-qty-val retro-font-body retro-bold">{item.quantity}</div>
+                        <div className="retro-qty__val retro-font-body retro-bold">{item.quantity}</div>
                         <button
-                          className="retro-qty-btn"
+                          className="retro-qty__btn"
                           onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                           aria-label={`Increase quantity of ${item.product.name}`}
                         >
@@ -180,14 +182,14 @@ export const MiniCartRetro = () => {
             <div className="retro-mini-cart__footer-actions">
               <Link
                 to="/cart"
-                className="retro-button retro-button--secondary retro-font-display retro-bold"
+                className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                 onClick={closeDrawer}
               >
                 VIEW CART
               </Link>
               <Link
                 to="/checkout"
-                className="retro-button retro-button--primary retro-font-display retro-bold"
+                className="retro-btn retro-btn--primary retro-font-display retro-bold"
                 onClick={closeDrawer}
               >
                 CHECKOUT

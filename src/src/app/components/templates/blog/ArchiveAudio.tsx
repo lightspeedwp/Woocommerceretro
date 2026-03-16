@@ -1,105 +1,128 @@
-import React from 'react';
-import { Layout } from '../../parts/Layout';
-import { Container } from '../../common/Container';
-import { posts } from '../../../data/posts';
-import { Microphone as Mic, PlayCircle, Calendar, User } from '../../../utils/phosphor-compat';
-import { Link } from 'react-router';
+/**
+ * ArchiveAudio — Retro-Styled Podcast Archive
+ *
+ * Podcast episode grid with retro handheld gaming aesthetic.
+ * All content driven from /data/podcasts.ts.
+ *
+ * **CSS:** `/src/styles/sections/blog-archive-audio.css`
+ * **Dark Mode:** Automatic via retro theme tokens
+ * **WCAG AA 2.2:** Semantic HTML, pagination, alt text
+ *
+ * @route /blog/format/audio
+ * @alias /podcasts
+ */
+
+import { useState } from 'react';
+import { Microphone as Mic, PlayCircle, Calendar, User, CaretLeft, CaretRight } from '../../../utils/phosphor-compat';
+import { HeaderRetro } from '../../parts/HeaderRetro';
+import { FooterRetro } from '../../parts/FooterRetro';
+import { HeroRetro } from '../../patterns/HeroRetro';
+import { PODCAST_EPISODES, podcastPageContent } from '../../../data/podcasts';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
 
-/**
- * ArchiveAudio — Podcast Archive Grid
- *
- * Funky Phase 6 treatment: dark gradient hero with orbs + glassmorphism badge,
- * glow podcast cards with gradient episode badges, neon play overlay.
- *
- * **CSS:** `/src/styles/sections/blog-format-archives-funky.css`
- */
+const EPISODES_PER_PAGE = podcastPageContent.episodesPerPage;
+
 export const ArchiveAudio = () => {
-  const audioPosts = (posts || []).filter((post) => post.format === 'audio');
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(PODCAST_EPISODES.length / EPISODES_PER_PAGE);
+  const startIdx = (currentPage - 1) * EPISODES_PER_PAGE;
+  const paginatedEpisodes = PODCAST_EPISODES.slice(startIdx, startIdx + EPISODES_PER_PAGE);
 
   return (
-    <Layout>
-      <div className="archive-audio">
+    <>
+      <HeaderRetro />
+      <main className="retro-main">
+
         {/* Hero */}
-        <section className="archive-audio__hero">
-          <img
-            src="https://images.unsplash.com/photo-1648522168698-537da0654bb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb2RjYXN0JTIwc3R1ZGlvJTIwbWljcm9waG9uZSUyMGRhcmslMjBtb29keXxlbnwxfHx8fDE3NzE3NTY5MzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            alt=""
-            className="archive-audio__hero-bg"
-          />
-          <div className="archive-audio__hero-overlay" aria-hidden="true" />
-          <div className="archive-audio__orb archive-audio__orb--1 funky-animate-float" aria-hidden="true" />
-          <div className="archive-audio__orb archive-audio__orb--2 funky-animate-float" aria-hidden="true" />
-          <Container>
-            <div className="archive-audio__hero-content">
-              <span className="archive-audio__hero-badge">
-                <Mic size={14} aria-hidden="true" /> Podcast
-              </span>
-              <h1 className="archive-audio__hero-title">Open Channels Podcast</h1>
-              <p className="archive-audio__hero-subtitle">
-                Conversations about high-performance WordPress, headless architecture, and the future of the web.
-              </p>
+        <HeroRetro
+          titleLines={['PODCAST', 'ARCHIVE']}
+          highlight={podcastPageContent.heroTitle?.toUpperCase() || 'EPISODES'}
+          description={podcastPageContent.heroSubtitle || 'Listen to our latest episodes covering gaming culture, product drops, and community stories.'}
+        />
+
+        {/* Episode Grid */}
+        <section className="retro-section" aria-labelledby="podcast-grid-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2 id="podcast-grid-heading" className="retro-font-display retro-bold retro-section-title">
+                ALL EPISODES
+              </h2>
             </div>
-          </Container>
-        </section>
 
-        <div className="archive-audio__divider" aria-hidden="true" />
-
-        {/* Grid */}
-        <section className="archive-audio__grid-section">
-          <Container>
-            <div className="archive-audio__grid">
-              {audioPosts.map((post) => (
-                <article key={post.id} className="archive-audio__card">
-                  <div className="archive-audio__card-glow" aria-hidden="true" />
-                  <div className="archive-audio__card-inner">
-                    <div className="archive-audio__thumbnail">
-                      <ImageWithFallback
-                        src={`https://picsum.photos/seed/audio-${post.id}/600/380`}
-                        alt={post.title.rendered}
-                        className="archive-audio__thumbnail-img"
-                      />
-                      <div className="archive-audio__thumbnail-overlay" aria-hidden="true" />
-                      <div className="archive-audio__thumbnail-meta">
-                        <span className="archive-audio__episode-badge">
-                          EP {(post.format_data && post.format_data.podcast_episode_number) || '#'}
-                        </span>
-                        <span className="archive-audio__episode-date">
-                          <Calendar size={12} aria-hidden="true" />
-                          {new Date(post.date).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div className="archive-audio__play-overlay" aria-hidden="true">
-                        <div className="archive-audio__play-circle">
-                          <PlayCircle size={36} />
-                        </div>
-                      </div>
+            <div className="retro-podcast-grid">
+              {paginatedEpisodes.map((episode) => (
+                <article key={episode.id} className="retro-podcast-card">
+                  <div className="retro-podcast-card__thumb">
+                    <ImageWithFallback
+                      src={episode.featuredImage}
+                      alt={episode.title}
+                      className="retro-podcast-card__img"
+                    />
+                    <div className="retro-podcast-card__play" aria-hidden="true">
+                      <PlayCircle size={36} weight="fill" />
                     </div>
-
-                    <div className="archive-audio__card-body">
-                      <Link to={post.link}>
-                        <h3 className="archive-audio__card-title">{post.title.rendered}</h3>
-                      </Link>
-                      <p
-                        className="archive-audio__card-excerpt"
-                        dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                      />
-                      <div className="archive-audio__card-footer">
-                        <span className="archive-audio__card-author">
-                          <User size={14} aria-hidden="true" /> Ash Shaw
-                        </span>
-                        <Link to={post.link} className="archive-audio__card-link">
-                          Listen Now →
-                        </Link>
-                      </div>
+                    <span className="retro-podcast-card__badge retro-font-display">
+                      EP {episode.episodeNumber}
+                    </span>
+                  </div>
+                  <div className="retro-podcast-card__info">
+                    <h3 className="retro-font-display retro-bold retro-podcast-card__title">
+                      {episode.title.toUpperCase()}
+                    </h3>
+                    <p className="retro-font-body retro-podcast-card__excerpt">
+                      {episode.excerpt}
+                    </p>
+                    <div className="retro-podcast-card__meta retro-font-body">
+                      <span>
+                        <Calendar size={12} aria-hidden="true" /> {episode.date}
+                      </span>
+                      <span>
+                        <User size={12} aria-hidden="true" /> {episode.author}
+                      </span>
+                      <span>{episode.duration}</span>
                     </div>
                   </div>
                 </article>
               ))}
             </div>
-          </Container>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <nav className="retro-pagination" aria-label="Podcast pagination">
+                <button
+                  className="retro-btn retro-btn--secondary retro-font-display"
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                >
+                  <CaretLeft size={14} weight="bold" /> PREV
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    className={'retro-btn retro-font-display' + (page === currentPage ? ' retro-btn--primary' : ' retro-btn--secondary')}
+                    onClick={() => setCurrentPage(page)}
+                    aria-label={'Page ' + page}
+                    aria-current={page === currentPage ? 'page' : undefined}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  className="retro-btn retro-btn--secondary retro-font-display"
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                >
+                  NEXT <CaretRight size={14} weight="bold" />
+                </button>
+              </nav>
+            )}
+          </div>
         </section>
-      </div>
-    </Layout>
+
+      </main>
+      <FooterRetro />
+    </>
   );
-}
+};

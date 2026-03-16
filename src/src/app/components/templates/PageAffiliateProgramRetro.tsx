@@ -84,14 +84,14 @@ export const PageAffiliateProgramRetro = () => {
               {affiliateBenefits.map((benefit: any) => {
                 const Icon = benefitIcons[benefit.id] || CheckCircle;
                 return (
-                  <div key={benefit.id} className="retro-card retro-card-glow">
+                  <div key={benefit.id} className="retro-card retro-card--glow">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {benefit.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {benefit.description}
                     </p>
                   </div>
@@ -175,10 +175,10 @@ export const PageAffiliateProgramRetro = () => {
                 {affiliateProgramPageContent.ctaText}
               </p>
               <div className="retro-cta-actions">
-                <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                   {affiliateProgramPageContent.ctaButtonPrimary.toUpperCase()} <ArrowRight size={20} weight="bold" />
                 </Link>
-                <Link to="/faq" className="retro-button retro-button--secondary retro-font-display">
+                <Link to="/faq" className="retro-btn retro-btn--secondary retro-font-display">
                   {affiliateProgramPageContent.ctaButtonSecondary.toUpperCase()} <ArrowRight size={18} weight="bold" />
                 </Link>
               </div>

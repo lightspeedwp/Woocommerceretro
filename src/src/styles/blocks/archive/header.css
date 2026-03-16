@@ -4,7 +4,7 @@
 
 .wp-archive-header {
   text-align: center;
-  max-width: var(--wp--preset--layout--content-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin-left: auto;
   margin-right: auto;
   display: flex;

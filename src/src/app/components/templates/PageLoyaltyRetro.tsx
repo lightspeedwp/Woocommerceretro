@@ -177,7 +177,7 @@ export const PageLoyaltyRetro = () => {
                     .
                   </p>
                 </div>
-                <Link to="/shop" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display">
                   SHOP NOW <ArrowRight size={18} weight="bold" />
                 </Link>
               </div>
@@ -199,10 +199,10 @@ export const PageLoyaltyRetro = () => {
                 Explore the full rewards program with tiers, earning methods, and redemption options.
               </p>
               <div className="retro-cta-actions">
-                <Link to="/rewards" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/rewards" className="retro-btn retro-btn--primary retro-font-display">
                   VIEW FULL PROGRAM <ArrowRight size={20} weight="bold" />
                 </Link>
-                <Link to="/shop" className="retro-button retro-button--secondary retro-font-display">
+                <Link to="/shop" className="retro-btn retro-btn--secondary retro-font-display">
                   START EARNING <ShoppingCart size={20} weight="bold" />
                 </Link>
               </div>

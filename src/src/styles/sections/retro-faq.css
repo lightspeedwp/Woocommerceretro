@@ -1,0 +1,186 @@
+/**
+ * Retro FAQ Layout
+ *
+ * BEM blocks:
+ *   .retro-faq-layout   — Page wrapper
+ *   .retro-faq-content   — Accordion sections
+ *
+ * Component: PageFAQRetro.tsx
+ * Route: /faq
+ */
+
+.retro-faq-layout {
+  padding: 2rem 1rem 3rem;
+  min-height: 60vh;
+}
+
+.retro-faq-layout__banner {
+  flex-direction: column;
+  text-align: center;
+}
+
+.retro-faq-layout__title {
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.retro-faq-layout__subtitle {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.dark .retro-faq-layout__subtitle {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* ========================================
+   FAQ CONTENT
+   ======================================== */
+
+.retro-faq-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.retro-faq-content__category {
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.dark .retro-faq-content__category {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  box-shadow: 4px 4px 0 var(--wp--preset--color--border);
+}
+
+.retro-faq-content__category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--color-ink);
+  background: var(--color-panel);
+}
+
+.dark .retro-faq-content__category-header {
+  background: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-faq-content__category-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-signal);
+  color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+}
+
+.retro-faq-content__category-title {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+}
+
+.dark .retro-faq-content__category-title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-faq-content__items {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Accordion item */
+.retro-faq-content__item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dark .retro-faq-content__item {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-faq-content__item:last-child {
+  border-bottom: none;
+}
+
+/* Trigger button */
+.retro-faq-content__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  min-height: 44px;
+  transition: background 0.15s ease;
+}
+
+.retro-faq-content__trigger:hover {
+  background: var(--color-panel);
+}
+
+.dark .retro-faq-content__trigger:hover {
+  background: var(--wp--preset--color--background);
+}
+
+.retro-faq-content__trigger:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -3px;
+}
+
+/* Question text inside trigger */
+.retro-faq-content__question {
+  color: var(--color-ink);
+  font-size: 0.8125rem;
+}
+
+.dark .retro-faq-content__question {
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Caret icon */
+.retro-faq-content__caret {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  color: var(--color-muted);
+}
+
+.retro-faq-content__caret--open {
+  transform: rotate(180deg);
+}
+
+/* Answer panel */
+.retro-faq-content__answer {
+  padding: 0 1.25rem 1rem;
+  color: var(--color-muted);
+  line-height: var(--wp--preset--line-height--relaxed);
+  font-size: 0.8125rem;
+}
+
+.dark .retro-faq-content__answer {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-faq-content__answer p {
+  margin: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .retro-faq-content__caret {
+    transition: none;
+  }
+}

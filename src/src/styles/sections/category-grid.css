@@ -35,7 +35,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: var(--wp--preset--spacing--40);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   text-align: center;
   transition: background 0.3s ease;
 }
@@ -45,7 +45,7 @@
 }
 
 .wp-category-card__name {
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   margin-bottom: var(--wp--preset--spacing--10);
   font-size: var(--wp--preset--font-size--heading-4);
   font-weight: var(--wp--preset--font-weight--bold);
@@ -72,7 +72,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--wp--preset--spacing--10);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   font-weight: var(--wp--preset--font-weight--medium);
   opacity: 0;
   transform: translateY(10px);

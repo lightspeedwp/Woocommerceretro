@@ -25,13 +25,13 @@
 
 .wp-hero-dark {
   position: relative;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, var(--wp--preset--color--neutral-900, #1a1a1a) 0%, var(--wp--preset--color--neutral-800, #2d2d2d) 100%);
   padding: var(--wp--preset--spacing--80) 0;
   overflow: hidden;
 }
 
 .dark .wp-hero-dark {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background: linear-gradient(135deg, var(--wp--preset--color--black, #0a0a0a) 0%, var(--wp--preset--color--neutral-900, #1a1a1a) 100%);
 }
 
 .wp-hero-dark::before {
@@ -72,7 +72,7 @@
 }
 
 .wp-hero-dark .wp-hero-title {
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   /* Margin removed */
   margin: 0;
   font-size: var(--wp--preset--font-size--xxx-large);
@@ -89,14 +89,14 @@
 /* Light outline button for dark hero backgrounds */
 .wp-hero-dark .wp-button-outline-light {
   border-color: rgba(255, 255, 255, 0.5);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   background: transparent;
 }
 
 .wp-hero-dark .wp-button-outline-light:hover {
-  border-color: #ffffff;
+  border-color: var(--wp--preset--color--white);
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 /* ========================================
@@ -156,7 +156,7 @@
  */
 
 .wp-newsletter-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--wp--preset--color--vivid-purple, #667eea) 0%, var(--wp--preset--color--deep-purple, #764ba2) 100%);
   padding: var(--wp--preset--spacing--80) 0;
   display: flex;
   flex-direction: column;
@@ -164,17 +164,17 @@
 }
 
 .dark .wp-newsletter-gradient {
-  background: linear-gradient(135deg, #5568d3 0%, #6439a0 100%);
+  background: linear-gradient(135deg, var(--wp--preset--color--vivid-purple, #5568d3) 0%, var(--wp--preset--color--deep-purple, #6439a0) 100%);
 }
 
 .wp-newsletter-gradient *:not(input):not(button) {
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 .wp-newsletter-gradient input {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 .wp-newsletter-gradient input::placeholder {
@@ -182,8 +182,8 @@
 }
 
 .wp-newsletter-gradient button {
-  background: #ffffff;
-  color: #667eea;
+  background: var(--wp--preset--color--white);
+  color: var(--wp--preset--color--vivid-purple, #667eea);
 }
 
 .wp-newsletter-gradient button:hover {
@@ -211,7 +211,7 @@
 
 .wp-hero-section--has-background {
   /* Ensure text is visible on top of image */
-  color: #fff;
+  color: var(--wp--preset--color--white);
 }
 
 /* Fixed background modifier */
@@ -235,7 +235,7 @@
 .wp-hero-section__overlay {
   position: absolute;
   inset: 0;
-  background-color: #000;
+  background-color: var(--wp--preset--color--black);
   z-index: 1;
 }
 
@@ -243,7 +243,7 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: var(--wp--preset--layout--content-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -257,7 +257,7 @@
 }
 
 .wp-hero-section__heading {
-  font-size: clamp(2.5rem, 5vw, 4.5rem); /* Fluid typography */
+  font-size: var(--wp--preset--font-size--900);
   line-height: 1.1;
   font-weight: var(--wp--preset--font-weight--bold);
   letter-spacing: -0.02em;
@@ -266,7 +266,7 @@
 }
 
 .wp-hero-section__heading--white {
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
 }
 
 .wp-hero-section__subheading {
@@ -320,7 +320,7 @@
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .wp-hero-section__heading {
-    font-size: 2.5rem; /* Ensure readable on small screens */
+    font-size: var(--wp--preset--font-size--700); /* Scale down on mobile */
   }
   
   /* Make sure hero doesn't take up too much vertical space on landscape mobile */

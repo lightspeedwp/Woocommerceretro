@@ -54,8 +54,8 @@ const featuredDeals = [
 export const DealsMegaMenu = () => {
   const renderContent = (closeMenu: () => void) => (
     <div className="wp-mega-menu__content">
-      <div className="funky-mega__orb funky-mega__orb--pink" style={{ top: '-60px', left: '-80px' }} />
-      <div className="funky-mega__orb funky-mega__orb--cyan" style={{ bottom: '-50px', right: '-50px' }} />
+      <div className="funky-mega__orb funky-mega__orb--pink funky-mega__orb--deals-pink" />
+      <div className="funky-mega__orb funky-mega__orb--cyan funky-mega__orb--deals-cyan" />
       <div className="funky-mega__inner funky-mega__inner--deals">
         {/* Deals list column */}
         <div className="funky-mega__column funky-mega__column--bordered">
@@ -113,7 +113,7 @@ export const DealsMegaMenu = () => {
           </div>
           <span className="funky-mega__promo-label">Limited time</span>
           <span className="funky-mega__promo-value">Up to 70% Off</span>
-          <span className="funky-mega__link-desc" style={{ textAlign: 'center' }}>
+          <span className="funky-mega__link-desc funky-mega__link-desc--center">
             Seasonal clearance on hundreds of items. Don&apos;t miss out!
           </span>
           <Link to="/sale" className="funky-mega__promo-cta funky-spring-hover">

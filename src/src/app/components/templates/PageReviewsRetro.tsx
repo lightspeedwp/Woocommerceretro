@@ -230,7 +230,7 @@ export const PageReviewsRetro = () => {
         </section>
 
         {/* Trust Section */}
-        <section className="retro-section" aria-labelledby="reviews-trust-heading">
+        <section className="retro-section retro-section--alt" aria-labelledby="reviews-trust-heading">
           <div className="retro-container">
             <div className="retro-section-header">
               <h2 id="reviews-trust-heading" className="retro-font-display retro-bold retro-section-title">
@@ -242,33 +242,33 @@ export const PageReviewsRetro = () => {
             </div>
 
             <div className="retro-grid retro-grid-4">
-              <div className="retro-card retro-card-glow">
+              <div className="retro-card retro-card--glow">
                 <div className="retro-feature-icon">
                   <ShieldCheck size={28} weight="bold" aria-hidden="true" />
                 </div>
-                <h4 className="retro-card-title retro-font-display retro-bold">VERIFIED PURCHASES</h4>
-                <p className="retro-card-desc retro-font-body">Every review comes from a confirmed buyer.</p>
+                <h4 className="retro-card__title retro-font-display retro-bold">VERIFIED PURCHASES</h4>
+                <p className="retro-card__desc retro-font-body">Every review comes from a confirmed buyer.</p>
               </div>
-              <div className="retro-card retro-card-glow">
+              <div className="retro-card retro-card--glow">
                 <div className="retro-feature-icon">
                   <Medal size={28} weight="bold" aria-hidden="true" />
                 </div>
-                <h4 className="retro-card-title retro-font-display retro-bold">NO FAKE REVIEWS</h4>
-                <p className="retro-card-desc retro-font-body">We use automated detection to keep reviews honest.</p>
+                <h4 className="retro-card__title retro-font-display retro-bold">NO FAKE REVIEWS</h4>
+                <p className="retro-card__desc retro-font-body">We use automated detection to keep reviews honest.</p>
               </div>
-              <div className="retro-card retro-card-glow">
+              <div className="retro-card retro-card--glow">
                 <div className="retro-feature-icon">
                   <ChatCircle size={28} weight="bold" aria-hidden="true" />
                 </div>
-                <h4 className="retro-card-title retro-font-display retro-bold">WE RESPOND</h4>
-                <p className="retro-card-desc retro-font-body">Our team replies to every piece of constructive feedback.</p>
+                <h4 className="retro-card__title retro-font-display retro-bold">WE RESPOND</h4>
+                <p className="retro-card__desc retro-font-body">Our team replies to every piece of constructive feedback.</p>
               </div>
-              <div className="retro-card retro-card-glow">
+              <div className="retro-card retro-card--glow">
                 <div className="retro-feature-icon">
                   <ThumbsUp size={28} weight="bold" aria-hidden="true" />
                 </div>
-                <h4 className="retro-card-title retro-font-display retro-bold">COMMUNITY RATED</h4>
-                <p className="retro-card-desc retro-font-body">Helpful votes surface the most useful reviews first.</p>
+                <h4 className="retro-card__title retro-font-display retro-bold">COMMUNITY RATED</h4>
+                <p className="retro-card__desc retro-font-body">Helpful votes surface the most useful reviews first.</p>
               </div>
             </div>
           </div>
@@ -287,7 +287,7 @@ export const PageReviewsRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 Purchased from us recently? We would love to hear your thoughts. Leave a review on any product page.
               </p>
-              <Link to="/shop" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display">
                 BROWSE PRODUCTS <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

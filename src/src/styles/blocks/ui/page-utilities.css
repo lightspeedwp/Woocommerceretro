@@ -1,0 +1,243 @@
+/**
+ * Page Utilities
+ * Hover/lift effects, neon borders, flow spacing,
+ * page loading, app fallback, reduced motion, logo
+ */
+
+/* ========================================
+   HOVER/LIFT & BORDER NEON UTILITIES
+   ======================================== */
+
+.wp-hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.wp-hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.wp-border-neon-cyan {
+  border-color: var(--retro-accent-sky) !important;
+}
+
+.wp-border-neon-pink {
+  border-color: var(--retro-accent-coral) !important;
+}
+
+.wp-border-neon-lime {
+  border-color: var(--retro-success) !important;
+}
+
+/* ========================================
+   WORDPRESS COMPATIBILITY
+   ======================================== */
+
+.flow > *:not(:first-child) {
+  margin-top: var(--wp--style--block-gap, 1.5rem);
+}
+
+/* ========================================
+   FUNKY GLASS/ORB UTILITIES (non-duplicates)
+   ======================================== */
+
+/* NOTE: .funky-orb and .funky-glass-panel are defined in /src/styles/theme-funky.css */
+
+.funky-divider {
+  height: 2px;
+  border: none;
+  background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, transparent);
+  opacity: 0.3;
+  margin: 0;
+}
+
+.dark .funky-divider {
+  opacity: 0.5;
+}
+
+/* ========================================
+   PAGE LOADING FALLBACK
+   ======================================== */
+
+.wp-page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.wp-page-loading__spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--wp--preset--color--muted);
+  border-top-color: var(--wp--preset--color--primary);
+  border-radius: 9999px;
+  animation: spin 1s linear infinite;
+}
+
+.wp-page-loading__text {
+  color: var(--wp--preset--color--muted-foreground);
+  font-size: var(--wp--preset--font-size--small);
+}
+
+/* ========================================
+   APP FALLBACK (404/ERROR PAGES)
+   ======================================== */
+
+.wp-app-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: var(--wp--preset--spacing--60);
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-app-fallback--lg {
+  min-height: 80vh;
+}
+
+.wp-app-fallback__title--hero {
+  font-size: var(--wp--preset--font-size--900);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.wp-app-fallback__title {
+  font-size: var(--wp--preset--font-size--500);
+  color: var(--wp--preset--color--foreground);
+  margin: 0;
+}
+
+.wp-app-fallback__text {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--muted-foreground);
+  max-width: 36rem;
+}
+
+.wp-app-fallback__btn--primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--primary-foreground);
+  border-radius: var(--wp--preset--border-radius--md);
+  font-weight: var(--wp--preset--font-weight--medium);
+  text-decoration: none;
+  margin-top: var(--wp--preset--spacing--30);
+}
+
+.wp-app-fallback__btn--primary:hover {
+  opacity: 0.9;
+}
+
+/* ========================================
+   LAYOUT UTILITIES (wp-block-group modifiers)
+   ======================================== */
+
+.wp-block-group--vertical {
+  flex-direction: column;
+}
+
+.wp-block-group--spacing-md {
+  gap: var(--wp--preset--spacing--40);
+}
+
+.has-text-align-center {
+  text-align: center;
+}
+
+.has-text-align-left {
+  text-align: left;
+}
+
+.has-text-align-right {
+  text-align: right;
+}
+
+/* ========================================
+   LOGO COMPONENT
+   ======================================== */
+
+.wp-site-logo {
+  height: 48px;
+  object-fit: contain;
+}
+
+.wp-site-logo--responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.wp-site-logo--default {
+  height: 2rem;
+  width: auto;
+}
+
+/* ========================================
+   REDUCED MOTION (images)
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .wp-image-loading {
+    transition-duration: 0.01ms;
+    filter: none;
+  }
+
+  .wp-image-loaded {
+    transition-duration: 0.01ms;
+    filter: none;
+  }
+}
+
+/* ========================================
+   TAG ARCHIVE
+   ======================================== */
+
+.blog-tag-archive__empty {
+  text-align: center;
+}
+
+.blog-tag-archive__empty-text {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+/* ========================================
+   COMMERCE BENEFITS
+   ======================================== */
+
+.commerce-benefits__header p {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   WORDPRESS SPACING TOKEN UTILITIES
+   ======================================== */
+
+.wp-mb-20 { margin-bottom: var(--wp--preset--spacing--20); }
+.wp-mb-30 { margin-bottom: var(--wp--preset--spacing--30); }
+.wp-mb-40 { margin-bottom: var(--wp--preset--spacing--40); }
+.wp-mb-50 { margin-bottom: var(--wp--preset--spacing--50); }
+.wp-mb-60 { margin-bottom: var(--wp--preset--spacing--60); }
+.wp-mt-50 { margin-top: var(--wp--preset--spacing--50); }
+.wp-mt-60 { margin-top: var(--wp--preset--spacing--60); }
+.wp-ml-20 { margin-left: var(--wp--preset--spacing--20); }
+.wp-pt-50 { padding-top: var(--wp--preset--spacing--50); }
+
+/* Text Color Utilities */
+.wp-text-muted { color: var(--wp--preset--color--muted-foreground); }
+.wp-text-error { color: var(--wp--preset--color--error); }
+
+/* Text Size Utilities */
+.wp-text-small { font-size: var(--wp--preset--font-size--small); }
+.wp-text-micro { font-size: 0.625rem; }
+
+/* Border Utilities */
+.wp-border-t { border-top: 1px solid var(--wp--preset--color--border); }
+
+/* Overflow Utilities */
+.wp-overflow-y-auto { overflow-y: auto; }

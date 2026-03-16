@@ -167,7 +167,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--wp--preset--spacing--50);
-  max-width: var(--wp--preset--layout--content-size, 1440px);
+  max-width: var(--wp--preset--layout--wide-size, 1440px);
   margin: 0 auto;
 }
 

@@ -646,7 +646,7 @@ const RetroNewsletterBand = () => {
           />
           <button
             type="submit"
-            className="retro-button retro-font-display retro-bold"
+            className="retro-btn retro-btn--primary retro-font-display retro-bold"
             style={{ whiteSpace: 'nowrap', fontSize: '0.6rem' }}
           >
             SUBSCRIBE
@@ -953,14 +953,14 @@ export const RetroDemoLandingPage = () => {
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <Link
                   to="/shop"
-                  className="retro-button retro-font-display retro-bold"
+                  className="retro-btn retro-btn--primary retro-font-display retro-bold"
                   style={{ textDecoration: 'none', fontSize: '0.6rem' }}
                 >
                   EXPLORE SHOP <ArrowRight size={16} weight="bold" />
                 </Link>
                 <Link
                   to="/sitemap"
-                  className="retro-button retro-button--secondary retro-font-display retro-bold"
+                  className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                   style={{ textDecoration: 'none', fontSize: '0.6rem' }}
                 >
                   ALL 150+ PAGES <ArrowRight size={16} weight="bold" />

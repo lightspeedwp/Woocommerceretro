@@ -9,7 +9,6 @@
  */
 
 import { useState } from 'react';
-import { Link } from 'react-router';
 import { Trophy, Star, Lightning as Zap } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
@@ -37,14 +36,6 @@ export const PageAchievementsRetro = () => {
     <div className="retro-home theme-retro">
       <div className="retro-container">
         <HeaderRetro />
-
-        {/* Breadcrumb */}
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">ACHIEVEMENTS</span>
-        </div>
 
         <div className="retro-page-shell">
           {/* Header */}

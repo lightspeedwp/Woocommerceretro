@@ -1,0 +1,135 @@
+/**
+ * PlayPocket — Breadcrumb Bar
+ *
+ * Sitewide breadcrumb navigation bar with dashed separator.
+ * Auto-generated from URL path, rendered by SiteLayout.
+ *
+ * BEM block: .pp-breadcrumb-bar
+ *   .pp-breadcrumb-bar            — Full-width bar wrapper
+ *   .pp-breadcrumb-bar__inner     — Content-width (1440px) container
+ *   .pp-breadcrumb                — <nav> element
+ *   .pp-breadcrumb__list          — <ol> flex list
+ *   .pp-breadcrumb__item          — <li> inline-flex item
+ *   .pp-breadcrumb__link          — Clickable ancestor link
+ *   .pp-breadcrumb__separator     — Separator icon between items
+ *   .pp-breadcrumb__current       — Current page (non-linked)
+ *
+ * Dark Mode: Automatic via --color-* tokens
+ * WCAG AA 2.2: aria-label, aria-current, focus-visible, 44px touch targets
+ */
+
+/* ==========================================================================
+   BAR — full-width wrapper with dashed bottom border
+   ========================================================================== */
+
+.pp-breadcrumb-bar {
+  width: 100%;
+  background: var(--color-paper);
+}
+
+.pp-breadcrumb-bar__inner {
+  max-width: var(--wp--preset--layout--wide-size, 1440px);
+  margin: 0 auto;
+  padding: var(--retro-space-3, 0.75rem) clamp(1rem, 3vw, 2rem);
+  border-bottom: 2px dashed var(--color-border);
+}
+
+/* ==========================================================================
+   NAV — breadcrumb navigation element
+   ========================================================================== */
+
+.pp-breadcrumb {
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   LIST — horizontal flex list
+   ========================================================================== */
+
+.pp-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--retro-space-2, 0.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   ITEM — each breadcrumb segment
+   ========================================================================== */
+
+.pp-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--retro-space-2, 0.5rem);
+}
+
+/* ==========================================================================
+   LINK — ancestor page links
+   ========================================================================== */
+
+.pp-breadcrumb__link {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color 0.15s;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pp-breadcrumb__link:hover {
+  color: var(--color-signal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pp-breadcrumb__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   SEPARATOR — icon between items
+   ========================================================================== */
+
+.pp-breadcrumb__separator {
+  color: var(--color-border);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   CURRENT — non-linked current page
+   ========================================================================== */
+
+.pp-breadcrumb__current {
+  color: var(--color-ink);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .pp-breadcrumb-bar__inner {
+    padding: var(--retro-space-2, 0.5rem) clamp(1rem, 3vw, 2rem);
+  }
+
+  .pp-breadcrumb__link,
+  .pp-breadcrumb__current {
+    font-size: 0.625rem;
+  }
+}

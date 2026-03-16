@@ -81,7 +81,7 @@
   height: 5rem;
   border-radius: var(--wp--preset--border-radius--full);
   background-color: var(--wp--preset--color--accent);
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   font-size: var(--wp--preset--font-size--heading-3);
   font-weight: var(--wp--preset--font-weight--bold);
 }

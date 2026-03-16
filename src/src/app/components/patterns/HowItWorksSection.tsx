@@ -26,7 +26,7 @@ interface HowItWorksSectionProps {
  * HowItWorksSection Pattern Component
  */
 export const HowItWorksSection = ({
-  heading = 'How It Works',
+  heading = 'How it works',
   description,
   steps,
   columns = 3,

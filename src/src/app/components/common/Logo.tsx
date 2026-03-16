@@ -9,8 +9,7 @@ export const Logo = ({ className = 'wp-site-logo--default' }: { className?: stri
     <img
       src={logoImg}
       alt="PlayPocket Retro Gear & Apparel"
-      className={className}
-      style={{ height: '48px', objectFit: 'contain' }}
+      className={`wp-site-logo ${className}`}
     />
   );
 }

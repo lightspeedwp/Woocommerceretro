@@ -241,3 +241,207 @@
 .dark .wp-order-text--success {
   color: var(--retro-dark-success, #7EA17A);
 }
+
+/* ========================================
+   ORDER DETAILS — BEM ELEMENT CLASSES
+   Replaces wp-text-bold, wp-text-right, wp-flex, etc.
+   ======================================== */
+
+.wp-order-details__label {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-details__label--right {
+  text-align: right;
+}
+
+.wp-order-details__label--sky {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.wp-order-details__label--coral {
+  color: var(--retro-accent-coral, #D9795B);
+}
+
+.wp-order-details__label--success {
+  color: var(--retro-success, #647B61);
+}
+
+.wp-order-details__product-info {
+  display: flex;
+  align-items: center;
+}
+
+.wp-order-details__product-link {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.wp-order-details__quantity {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-details__price {
+  text-align: right;
+}
+
+.wp-order-details__total {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+/* Dark mode overrides */
+.dark .wp-order-details__label--sky,
+.dark .wp-order-details__product-link {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+.dark .wp-order-details__label--coral {
+  color: var(--retro-dark-coral, #D08A72);
+}
+
+.dark .wp-order-details__label--success {
+  color: var(--retro-dark-success, #7EA17A);
+}
+
+/* ========================================
+   ORDER DOWNLOADS — BEM ELEMENT CLASSES
+   ======================================== */
+
+.wp-order-downloads__label {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-downloads__label--sky {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.wp-order-downloads__label--right {
+  text-align: right;
+}
+
+.wp-order-downloads__product-name {
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.wp-order-downloads__action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wp-order-downloads__icon,
+.wp-order-downloads__filename {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.dark .wp-order-downloads__label--sky,
+.dark .wp-order-downloads__icon,
+.dark .wp-order-downloads__filename {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+/* ========================================
+   ORDER ADDITIONAL FIELD — BEM ELEMENTS
+   ======================================== */
+
+.wp-order-additional-field__label {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-additional-field__label--coral {
+  color: var(--retro-accent-coral, #D9795B);
+}
+
+.wp-order-additional-field__label--sky {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.dark .wp-order-additional-field__label--coral {
+  color: var(--retro-dark-coral, #D08A72);
+}
+
+.dark .wp-order-additional-field__label--sky {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+/* ========================================
+   ORDER ADDITIONAL INFO — BEM ELEMENTS
+   ======================================== */
+
+.wp-order-additional-info__label {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-additional-info__label--sky {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.wp-order-additional-info__empty {
+  font-style: italic;
+}
+
+.dark .wp-order-additional-info__label--sky {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+/* ========================================
+   ORDER ADDRESS BOX — BEM ELEMENTS
+   ======================================== */
+
+.wp-order-address-box__name {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-order-address-box__email {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.dark .wp-order-address-box__email {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+/* ========================================
+   ORDER ACCOUNT — BEM ELEMENTS
+   ======================================== */
+
+.wp-order-account-benefit-item__icon {
+  color: var(--retro-success, #647B61);
+}
+
+.wp-order-account-actions__disclaimer {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.wp-order-account-actions__legal-link {
+  text-decoration: underline;
+}
+
+.dark .wp-order-account-benefit-item__icon {
+  color: var(--retro-dark-success, #7EA17A);
+}
+
+.dark .wp-order-account-actions__disclaimer {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+/* ========================================
+   FILTER CHECKBOX — BEM ELEMENTS
+   ======================================== */
+
+.wp-filter-checkbox__check-icon {
+  color: var(--wp--preset--color--primary-foreground);
+}
+
+/* ========================================
+   CHECKOUT PICKUP LOCATION — BEM ELEMENTS
+   ======================================== */
+
+.wp-checkout-pickup-location__name {
+  font-weight: var(--wp--preset--font-weight--bold);
+}
+
+.wp-checkout-pickup-location__address {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-checkout-pickup-location__price {
+  color: var(--wp--preset--color--success);
+}

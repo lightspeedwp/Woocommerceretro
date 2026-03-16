@@ -139,20 +139,6 @@ a.retro-action-btn {
   gap: 0.5rem;
 }
 
-/* CTA button full width */
-.retro-button--fullwidth {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-/* Inverted CTA variant */
-.retro-button--inverted {
-  background-color: var(--color-ink);
-  color: var(--color-paper);
-  border: 2px solid var(--color-paper);
-}
-
 /* Sign-up email input */
 .retro-signup .retro-input {
   margin-bottom: 1rem;

@@ -86,14 +86,14 @@ export const PageHelpCenterRetro = () => {
               {helpCategories.map((category: any, i: number) => {
                 const Icon = categoryIcons[category.icon] || HelpCircle;
                 return (
-                  <Link key={i} to={category.link} className="retro-card retro-card-glow retro-help-category-card">
+                  <Link key={i} to={category.link} className="retro-card retro-card--glow retro-help-category-card">
                     <div className="retro-feature-icon">
                       <Icon size={32} weight="bold" aria-hidden="true" />
                     </div>
-                    <h3 className="retro-card-title retro-font-display retro-bold">
+                    <h3 className="retro-card__title retro-font-display retro-bold">
                       {category.title.toUpperCase()}
                     </h3>
-                    <p className="retro-card-desc retro-font-body">
+                    <p className="retro-card__desc retro-font-body">
                       {category.description}
                     </p>
                     <span className="retro-card-link retro-font-body">
@@ -145,13 +145,13 @@ export const PageHelpCenterRetro = () => {
                 <div className="retro-feature-icon">
                   <ChatCircle size={32} weight="bold" aria-hidden="true" />
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
-                  {helpCenterPageContent.chat.title.toUpperCase()}
+                <h3 className="retro-card__title retro-font-display retro-bold">
+                  LIVE CHAT
                 </h3>
-                <p className="retro-card-desc retro-font-body">
+                <p className="retro-card__desc retro-font-body">
                   {helpCenterPageContent.chat.desc}
                 </p>
-                <Link to="/chat" className="retro-button retro-button--primary retro-font-display">
+                <Link to="/chat" className="retro-btn retro-btn--primary retro-font-display">
                   {helpCenterPageContent.chat.action.toUpperCase()} <ArrowRight size={16} weight="bold" />
                 </Link>
               </div>
@@ -161,13 +161,13 @@ export const PageHelpCenterRetro = () => {
                 <div className="retro-feature-icon">
                   <Envelope size={32} weight="bold" aria-hidden="true" />
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
-                  {helpCenterPageContent.email.title.toUpperCase()}
+                <h3 className="retro-card__title retro-font-display retro-bold">
+                  EMAIL SUPPORT
                 </h3>
-                <p className="retro-card-desc retro-font-body">
+                <p className="retro-card__desc retro-font-body">
                   {helpCenterPageContent.email.desc}
                 </p>
-                <a href={'mailto:' + email} className="retro-button retro-button--secondary retro-font-display">
+                <a href={'mailto:' + email} className="retro-btn retro-btn--secondary retro-font-display">
                   {helpCenterPageContent.email.action.toUpperCase()} <ArrowRight size={16} weight="bold" />
                 </a>
               </div>
@@ -177,13 +177,13 @@ export const PageHelpCenterRetro = () => {
                 <div className="retro-feature-icon">
                   <Phone size={32} weight="bold" aria-hidden="true" />
                 </div>
-                <h3 className="retro-card-title retro-font-display retro-bold">
-                  {helpCenterPageContent.phone.title.toUpperCase()}
+                <h3 className="retro-card__title retro-font-display retro-bold">
+                  PHONE SUPPORT
                 </h3>
-                <p className="retro-card-desc retro-font-body">
+                <p className="retro-card__desc retro-font-body">
                   {phone}
                 </p>
-                <a href={'tel:' + phone.replace(/\D/g, '')} className="retro-button retro-button--secondary retro-font-display">
+                <a href={'tel:' + phone.replace(/\D/g, '')} className="retro-btn retro-btn--secondary retro-font-display">
                   {helpCenterPageContent.phone.desc.toUpperCase()} <ArrowRight size={16} weight="bold" />
                 </a>
               </div>

@@ -12,13 +12,13 @@ export const AdditionalFields = () => {
       <div className="wp-block-columns">
         <div className="wp-block-column funky-glass-panel funky-glow-border--pink">
           <div className="wp-order-additional-field">
-            <p className="wp-text-bold wp-order-text--coral">Gift Message</p>
+            <p className="wp-order-additional-field__label wp-order-additional-field__label--coral">Gift message</p>
             <p>Happy Birthday! Hope you enjoy the wine.</p>
           </div>
         </div>
         <div className="wp-block-column funky-glass-panel funky-glow-border">
           <div className="wp-order-additional-field">
-            <p className="wp-text-bold wp-order-text--sky">Delivery Instructions</p>
+            <p className="wp-order-additional-field__label wp-order-additional-field__label--sky">Delivery instructions</p>
             <p>Please leave at the front gate if no one is home.</p>
           </div>
         </div>

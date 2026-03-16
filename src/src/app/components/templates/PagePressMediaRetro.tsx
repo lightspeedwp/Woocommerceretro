@@ -21,7 +21,8 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { DownloadSimple as Download, Camera, Envelope, ArrowRight, Newspaper } from '../../utils/phosphor-compat';
+import { DownloadSimple as Download, Envelope, ArrowRight, Newspaper } from '../../utils/phosphor-compat';
+import { Camera } from 'lucide-react';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';
@@ -66,7 +67,7 @@ export const PagePressMediaRetro = () => {
                   </div>
                   <button
                     type="button"
-                    className="retro-button retro-button--secondary retro-font-display"
+                    className="retro-btn retro-btn--secondary retro-font-display"
                     aria-label={'Read full release: ' + release.title}
                   >
                     READ <ArrowRight size={14} weight="bold" />
@@ -93,7 +94,7 @@ export const PagePressMediaRetro = () => {
               {mediaKitItems.map((item, i) => (
                 <div key={i} className="retro-media-kit-item">
                   <div className="retro-media-kit-info">
-                    <Camera size={22} weight="bold" className="retro-media-kit-icon" aria-hidden="true" />
+                    <Camera size={22} className="retro-media-kit-icon" aria-hidden="true" />
                     <div className="retro-media-kit-body">
                       <h4 className="retro-media-kit-title retro-font-display retro-bold">
                         {item.title.toUpperCase()}
@@ -103,7 +104,7 @@ export const PagePressMediaRetro = () => {
                   </div>
                   <button
                     type="button"
-                    className="retro-button retro-button--secondary retro-font-display"
+                    className="retro-btn retro-btn--secondary retro-font-display"
                     aria-label={'Download ' + item.title}
                   >
                     <Download size={14} weight="bold" /> {item.type}
@@ -128,10 +129,10 @@ export const PagePressMediaRetro = () => {
                 {pressMediaPageContent.ctaText}
               </p>
               <div className="retro-cta-actions">
-                <a href="mailto:press@example.com" className="retro-button retro-button--primary retro-font-display">
+                <a href="mailto:press@example.com" className="retro-btn retro-btn--primary retro-font-display">
                   {pressMediaPageContent.ctaButtonPrimary.toUpperCase()} <Envelope size={18} weight="bold" />
                 </a>
-                <Link to="/contact" className="retro-button retro-button--secondary retro-font-display">
+                <Link to="/contact" className="retro-btn retro-btn--secondary retro-font-display">
                   {pressMediaPageContent.ctaButtonSecondary.toUpperCase()} <ArrowRight size={18} weight="bold" />
                 </Link>
               </div>

@@ -112,23 +112,12 @@ export const PlayPocketLogo = () => {
             fill="rgba(255,255,255,0.06)"
           />
 
-          {/* ── Green LED indicator ── */}
-          <circle
-            cx="47" cy="12" r="3.5"
-            fill="var(--pp-logo-led, #8EBFA8)"
-          />
-          {/* LED shine */}
-          <circle
-            cx="46" cy="11" r="1.5"
-            fill="rgba(255,255,255,0.35)"
-          />
         </g>
       </svg>
 
       {/* ── Wordmark ── */}
       <div className="pp-logo__wordmark">
         <span className="pp-logo__text">PLAYPOCKET</span>
-        <span className="pp-logo__subtitle">RETRO GEAR &amp; APPAREL</span>
         {/* Decorative underlines */}
         <svg
           className="pp-logo__underlines"
@@ -138,7 +127,6 @@ export const PlayPocketLogo = () => {
           aria-hidden="true"
         >
           <rect x="0" y="1" width="120" height="4" rx="2" fill="var(--pp-logo-mint-line, #B5CFC4)" />
-          <rect x="130" y="1" width="50" height="4" rx="2" fill="var(--pp-logo-gold-line, #DEAD4F)" />
         </svg>
       </div>
     </Link>

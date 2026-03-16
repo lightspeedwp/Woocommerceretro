@@ -6,7 +6,7 @@
 .wp-faq-section__content {
   display: flex;
   flex-direction: column;
-  gap: 40px; /* gap-10 */
+  gap: var(--wp--preset--spacing--70); /* 40px → 48px (nearest token) */
 }
 
 /* Header section */

@@ -1,0 +1,199 @@
+/**
+ * Retro Track Order Layout
+ *
+ * BEM block: .retro-track-order-layout
+ * Component: PageTrackOrderRetro.tsx
+ * Route: /track-order
+ */
+
+/* ========================================
+   TRACK ORDER LAYOUT
+   ======================================== */
+
+.retro-track-order-layout {
+  padding: 2rem 1rem 3rem;
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+}
+
+.retro-track-order-layout__inner {
+  width: 100%;
+  max-width: 560px;
+}
+
+.retro-track-order-layout__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.retro-track-order-layout__icon {
+  margin-bottom: 1rem;
+  color: var(--color-ink);
+}
+
+.dark .retro-track-order-layout__icon {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-track-order-layout__title {
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.dark .retro-track-order-layout__title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-track-order-layout__subtitle {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.dark .retro-track-order-layout__subtitle {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Form */
+.retro-track-order-layout__form {
+  padding: 1.5rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  margin-bottom: 2rem;
+}
+
+.dark .retro-track-order-layout__form {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+  box-shadow: 4px 4px 0 var(--wp--preset--color--border);
+}
+
+.retro-track-order-layout__form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.retro-track-order-layout__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.retro-track-order-layout__field label {
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+}
+
+.dark .retro-track-order-layout__field label {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-track-order-layout__input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 0.875rem;
+}
+
+.dark .retro-track-order-layout__input {
+  background: var(--wp--preset--color--background);
+  border-color: var(--wp--preset--color--border);
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-track-order-layout__input:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.retro-track-order-layout__submit {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Help section */
+.retro-track-order-layout__help {
+  border-top: 2px solid var(--color-border);
+  padding-top: 1.5rem;
+}
+
+.dark .retro-track-order-layout__help {
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-track-order-layout__help-title {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.dark .retro-track-order-layout__help-title {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-track-order-layout__help-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.retro-track-order-layout__help-card {
+  padding: 1rem;
+  border: 2px solid var(--color-border);
+  background: var(--color-panel);
+}
+
+.dark .retro-track-order-layout__help-card {
+  background: var(--wp--preset--color--surface);
+  border-color: var(--wp--preset--color--border);
+}
+
+.retro-track-order-layout__help-card-title {
+  margin: 0 0 0.375rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.dark .retro-track-order-layout__help-card-title {
+  color: var(--wp--preset--color--foreground);
+}
+
+.retro-track-order-layout__help-card-text {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  line-height: var(--wp--preset--line-height--relaxed);
+}
+
+.dark .retro-track-order-layout__help-card-text {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.retro-track-order-layout__help-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--color-signal);
+  text-decoration: none;
+}
+
+.retro-track-order-layout__help-link:hover {
+  text-decoration: underline;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .retro-track-order-layout__submit {
+    transition: none;
+  }
+}

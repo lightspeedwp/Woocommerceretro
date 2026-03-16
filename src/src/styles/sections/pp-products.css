@@ -30,6 +30,7 @@
 
 .pp-featured__title {
   margin: 0;
+  font-size: 1rem;
 }
 
 .pp-featured__viewall {
@@ -42,6 +43,16 @@
 
 .pp-featured__viewall:hover {
   text-decoration: underline;
+}
+
+/* ── Dark mode ── */
+.dark .pp-featured__header {
+  background: var(--wp--preset--color--surface, #232A32);
+  color: var(--wp--preset--color--foreground, #E8E2D8);
+}
+
+.dark .pp-featured__viewall {
+  color: var(--wp--preset--color--foreground, #E8E2D8);
 }
 
 .pp-featured__grid {

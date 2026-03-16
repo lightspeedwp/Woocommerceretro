@@ -553,7 +553,7 @@
 .single-post__header {
   position: relative;
   z-index: 2;
-  max-width: var(--wp--preset--layout--content-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin-inline: auto;
   padding-inline: var(--wp--preset--spacing--50);
   padding-block-start: var(--wp--preset--spacing--60);
@@ -1247,7 +1247,7 @@
 .blog-archive__header-inner {
   position: relative;
   z-index: 2;
-  max-width: var(--wp--preset--layout--content-size);
+  max-width: var(--wp--preset--layout--wide-size);
   margin-inline: auto;
   padding-inline: var(--wp--preset--spacing--50);
 }

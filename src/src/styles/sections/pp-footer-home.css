@@ -1,15 +1,20 @@
 /**
- * PlayPocket — Home Footer
- *
- * Footer with social links, newsletter signup, and copyright.
+ * PlayPocket Footer — Retro Theme
  *
  * BEM block: .pp-footer
+ * Component: /src/app/components/patterns/FooterRetroPattern.tsx
+ *
+ * Uses CSS variables from:
+ *   - /src/styles/retro-theme.css (--color-*)
+ *   - /src/styles/theme-variables.css (--wp--preset--layout--*)
+ *
+ * Dark mode: auto-switches via --color-* tokens.
  */
 
 .pp-footer {
   margin-top: 1.5rem;
-  background: var(--wp--preset--color--background, #F2EEE6);
-  border-top: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  background: var(--color-paper);
+  border-top: 2px solid var(--color-ink);
 }
 
 .pp-footer__inner {
@@ -19,7 +24,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem var(--wp--preset--spacing--40, 1rem);
-  max-width: var(--wp--preset--layout--content-size, 1440px);
+  max-width: var(--wp--preset--layout--wide-size, 1440px);
   margin: 0 auto;
 }
 
@@ -33,6 +38,7 @@
 .pp-footer__follow {
   text-transform: uppercase;
   white-space: nowrap;
+  color: var(--color-ink);
 }
 
 .pp-footer__socials {
@@ -41,7 +47,7 @@
 }
 
 .pp-footer__social-link {
-  color: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--color-ink);
   min-width: 44px;
   min-height: 44px;
   display: flex;
@@ -51,11 +57,11 @@
 }
 
 .pp-footer__social-link:hover {
-  color: var(--wp--preset--color--primary, #FFC533);
+  color: var(--color-signal);
 }
 
 .pp-footer__bookmark {
-  color: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--color-ink);
   opacity: 0.5;
 }
 
@@ -71,30 +77,43 @@
 
 .pp-footer__email-input {
   padding: 0.5rem 0.75rem;
-  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  border: 2px solid var(--color-ink);
   border-right: none;
-  background: var(--wp--preset--color--surface, #FFFFFF);
-  color: var(--wp--preset--color--foreground, #1E2630);
+  background: var(--color-panel);
+  color: var(--color-ink);
   min-width: 140px;
   min-height: 44px;
   outline: none;
+  border-radius: 0;
 }
 
 .pp-footer__email-input:focus {
-  border-color: var(--wp--preset--color--ring, #00FFF9);
-  box-shadow: 0 0 0 2px var(--wp--preset--color--ring, #00FFF9);
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 2px var(--color-focus);
 }
+
+/* ── Copyright bar ──
+   Light: light background (paper) + dark text (ink)
+   Dark:  dark background (ink) + light text (paper)
+   Contrast: ~11:1 in both modes — AAA pass */
 
 .pp-footer__copyright {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  background: var(--wp--preset--color--foreground, #1E2630);
-  color: var(--wp--preset--color--background, #F2EEE6);
+  background: var(--color-paper);
+  color: var(--color-ink);
   max-width: var(--wp--preset--layout--content-size, 1440px);
   margin: 0 auto;
+  border-top: 2px solid var(--color-ink);
+}
+
+.dark .pp-footer__copyright {
+  background: var(--color-ink);
+  color: var(--color-paper);
 }
 
 .pp-footer__legal {
@@ -103,10 +122,15 @@
 }
 
 .pp-footer__legal a {
-  color: var(--wp--preset--color--background, #F2EEE6);
+  color: var(--color-ink);
   text-decoration: underline;
 }
 
 .pp-footer__legal a:hover {
-  color: var(--wp--preset--color--primary, #FFC533);
+  color: var(--color-signal);
+}
+
+/* Match text in dark mode */
+.dark .pp-footer__legal a {
+  color: var(--color-paper);
 }

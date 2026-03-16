@@ -74,7 +74,7 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
 
   return (
     <div
-      className="retro-subscription-box-container"
+      className="retro-sub-box"
       role="img"
       aria-label={ariaLabel}
       style={{
@@ -94,7 +94,7 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
             label="JOIN"
           />
           <p 
-            className="retro-step-label retro-font-body"
+            className="retro-sub-box__step-label retro-font-body"
             style={{
               marginTop: size * 0.1,
               fontSize: size * 0.08,
@@ -164,7 +164,7 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           </div>
 
           <p 
-            className="retro-step-label retro-font-body"
+            className="retro-sub-box__step-label retro-font-body"
             style={{
               marginTop: size * 0.15,
               fontSize: size * 0.08,
@@ -263,7 +263,7 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           )}
 
           <p 
-            className="retro-step-label retro-font-body"
+            className="retro-sub-box__step-label retro-font-body"
             style={{
               marginTop: size * 0.15,
               fontSize: size * 0.08,

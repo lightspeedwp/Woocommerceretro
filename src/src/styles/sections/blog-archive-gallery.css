@@ -1,0 +1,247 @@
+/**
+ * Blog Archive Gallery — Instagram-Style Photo Grid
+ *
+ * BEM block: .wp-archive-gallery
+ * Component: /src/app/components/templates/blog/ArchiveGallery.tsx
+ * Route: /blog/format/gallery
+ *
+ * Funky Phase 6: pink-cyan gradient hero, orbs, glassmorphism icon,
+ * neon glow image tiles on hover, engagement stat overlay.
+ */
+
+/* ========================================
+   PAGE-LEVEL TOKENS
+   ======================================== */
+
+.wp-archive-gallery {
+  --page-primary: var(--wp--preset--color--deep-purple, #2d0059);
+  --page-secondary: var(--wp--preset--color--neon-pink, #ff00ff);
+  --page-accent: var(--wp--preset--color--neon-cyan, #00ffff);
+
+  position: relative;
+  overflow: hidden;
+  background: var(--wp--preset--color--background);
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.wp-archive-gallery__hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--wp--preset--spacing--100);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-archive-gallery__hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.wp-archive-gallery__hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.7) 0%, rgba(45, 0, 89, 0.85) 50%, rgba(0, 255, 255, 0.5) 100%);
+}
+
+.wp-archive-gallery__hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-archive-gallery__hero-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--wp--preset--color--white);
+}
+
+.wp-archive-gallery__hero-title {
+  color: var(--wp--preset--color--white);
+  margin: 0;
+}
+
+.wp-archive-gallery__hero-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--wp--preset--font-size--300, 1.25rem);
+  line-height: var(--wp--preset--line-height--relaxed);
+  max-width: 34rem;
+  margin: 0;
+}
+
+.wp-archive-gallery__hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+  border-radius: 999px;
+  font-weight: var(--wp--preset--font-weight--bold);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background: var(--wp--preset--color--white);
+  color: var(--page-primary);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.wp-archive-gallery__hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.25);
+}
+
+/* Orbs */
+.wp-archive-gallery__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wp-archive-gallery__orb--1 {
+  width: 300px;
+  height: 300px;
+  background: var(--wp--preset--color--neon-cyan);
+  opacity: 0.15;
+  top: 5%;
+  right: -8%;
+  animation: funky-float 6s ease-in-out infinite;
+}
+
+.wp-archive-gallery__orb--2 {
+  width: 220px;
+  height: 220px;
+  background: var(--wp--preset--color--neon-pink);
+  opacity: 0.12;
+  bottom: 10%;
+  left: -5%;
+  animation: funky-float 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+@media (max-width: 767px) {
+  .wp-archive-gallery__orb { opacity: 0.06; }
+  .wp-archive-gallery__hero { padding-block: var(--wp--preset--spacing--80); }
+}
+
+/* ========================================
+   GALLERY GRID
+   ======================================== */
+
+.wp-archive-gallery__grid-section {
+  padding-block: var(--wp--preset--spacing--60);
+  background: var(--wp--preset--color--background);
+}
+
+.wp-archive-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+@media (min-width: 640px) {
+  .wp-archive-gallery__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Gallery item */
+.wp-archive-gallery__item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--wp--preset--color--surface);
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .wp-archive-gallery__item { background: rgba(255, 255, 255, 0.03); }
+
+.wp-archive-gallery__item:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 24px rgba(255, 0, 255, 0.12);
+}
+
+.dark .wp-archive-gallery__item:hover {
+  box-shadow: 0 0 24px rgba(255, 0, 255, 0.25);
+}
+
+.wp-archive-gallery__item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.wp-archive-gallery__item:hover .wp-archive-gallery__item-img { transform: scale(1.06); }
+
+.wp-archive-gallery__item-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--50);
+  background: transparent;
+  color: var(--wp--preset--color--white);
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.3s ease;
+  z-index: 1;
+}
+
+.wp-archive-gallery__item:hover .wp-archive-gallery__item-overlay {
+  opacity: 1;
+  background: rgba(3, 2, 19, 0.45);
+}
+
+.wp-archive-gallery__item-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  font-weight: var(--wp--preset--font-weight--bold);
+  font-size: var(--wp--preset--font-size--200, 1rem);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Placeholder items (fill grid) */
+.wp-archive-gallery__placeholder {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--wp--preset--color--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--muted-foreground);
+  opacity: 0.4;
+}
+
+.dark .wp-archive-gallery__placeholder { background: rgba(255, 255, 255, 0.02); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wp-archive-gallery__orb { animation: none; }
+  .wp-archive-gallery__item { transition: none; }
+  .wp-archive-gallery__item-img { transition: none; }
+  .wp-archive-gallery__item:hover .wp-archive-gallery__item-img { transform: none; }
+  .wp-archive-gallery__hero-cta:hover { transform: none; }
+}

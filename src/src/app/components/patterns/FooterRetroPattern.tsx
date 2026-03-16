@@ -14,7 +14,7 @@ import { Twitter, Instagram, Youtube, Gamepad2, Bookmark } from 'lucide-react';
 
 export const FooterRetroPattern = () => {
   return (
-    <footer className="pp-footer" role="contentinfo">
+    <footer className="pp-footer">
       <div className="pp-footer__inner">
         {/* Left: Follow text + social icons + bookmark icon */}
         <div className="pp-footer__left">

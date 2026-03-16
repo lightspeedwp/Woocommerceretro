@@ -48,8 +48,8 @@ export const PageOrderConfirmationRetro = () => {
           </div>
 
           <div className="retro-order-confirm-layout__actions">
-            <Link to="/shop" className="retro-button retro-font-display retro-bold">CONTINUE SHOPPING</Link>
-            <Link to="/track-order" className="retro-button retro-button--secondary retro-font-display retro-bold">TRACK ORDER</Link>
+            <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display retro-bold">CONTINUE SHOPPING</Link>
+            <Link to="/track-order" className="retro-btn retro-btn--secondary retro-font-display retro-bold">TRACK ORDER</Link>
           </div>
         </div>
 

@@ -68,7 +68,7 @@
   --retro-accent-coral: #D9795B;
   --retro-accent-sky: #86AFC3;
   --retro-accent-berry: #8F6A8F;
-  --retro-accent-olive: #8A9A5B;
+  /* --retro-accent-olive removed: 0 usage refs (CSS7 audit 2026-03-16) */
 
   /* ========================================
      COLOR SYSTEM - WordPress Preset Format
@@ -77,6 +77,8 @@
   /* Map into WP preset system */
   --wp--preset--color--background: var(--retro-paper);
   --wp--preset--color--foreground: var(--retro-ink);
+  --wp--preset--color--primary: #111111;
+  --wp--preset--color--primary-foreground: #ffffff;
   --wp--preset--color--surface: var(--retro-panel);
   --wp--preset--color--surface-foreground: var(--retro-ink);
   --wp--preset--color--secondary: var(--retro-paper-deep);
@@ -109,10 +111,7 @@
   --wp--preset--color--neutral-800: #374151;
   --wp--preset--color--neutral-900: #111827;
 
-  /* Accent Ramp (from presets) */
-  --wp--preset--color--accent-100: #E0F2FE;
-  --wp--preset--color--accent-500: #0A84FF;
-  --wp--preset--color--accent-900: #0C4A6E;
+  /* Accent Ramp — removed: accent-100, accent-500, accent-900 had 0 usage refs (CSS7 audit 2026-03-16) */
 
   /* Component Specific (Overlays) */
   --wp--preset--color--popover: #ffffff;
@@ -125,6 +124,9 @@
   --wp--preset--color--warning-foreground: #ffffff;
   --wp--preset--color--error: #991b1b;   /* Enhanced for AAA: 7.1:1 contrast (was #dc2626) */
   --wp--preset--color--error-foreground: #ffffff;
+  --wp--preset--color--error-muted: rgba(153, 27, 27, 0.08); /* Light tint for error backgrounds */
+  --wp--preset--color--info: #1e40af;    /* Blue-800: 7.0:1 on white — AA */
+  --wp--preset--color--info-foreground: #ffffff;
   
   /* WordPress Core Color Presets (Fallbacks) */
   --wp--preset--color--black: #000000;
@@ -185,6 +187,7 @@
   
   /* Numeric Font Sizes (Maps to theme.json settings.typography.fontSizes) */
   /* Aligned with WordPress theme.json numeric scale */
+  --wp--preset--font-size--xs: clamp(0.6rem, 0.4vw + 0.5rem, 0.7rem);          /* 9.6px -> 11.2px - Extra small (keyboard shortcuts, captions) */
   --wp--preset--font-size--100: clamp(0.65rem, 0.5vw + 0.55rem, 0.75rem);      /* 10.4px -> 12px - Tiny (labels, badges, meta) */
   --wp--preset--font-size--200: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);        /* 14px -> 16px - Base (body text) */
   --wp--preset--font-size--300: clamp(1rem, 1vw + 0.75rem, 1.25rem);           /* 16px -> 20px - Small (emphasized body) */
@@ -231,7 +234,7 @@
      ======================================== */
   
   /* Layout sizes (Maps to theme.json settings.layout) */
-  --wp--preset--layout--content-size: 1440px;
+  --wp--preset--layout--content-size: 768px;
   --wp--preset--layout--wide-size: 1440px;
   --wp--preset--layout--site-size: 1440px;
 
@@ -247,7 +250,7 @@
   
   /* Custom shadows for Funky Redesign */
   --wp--preset--shadow--glow: 0 0 15px rgba(0, 255, 255, 0.3);
-  --wp--preset--shadow--lift: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* --wp--preset--shadow--lift removed: 0 usage refs (CSS7 audit 2026-03-16) */
   
   /* Transitions */
   --wp--preset--transition--fast: 150ms;
@@ -285,14 +288,11 @@
   --funky-interactive-color: #0e7490;           /* Teal-700: 5.4:1 on white - AA - OK */
   --funky-interactive-color-hover: #0c6075;     /* Teal-800: 7.1:1 on white - AAA - OK */
   --funky-interactive-bg: rgba(14, 116, 144, 0.08);
-  --funky-interactive-bg-hover: rgba(14, 116, 144, 0.12);
+  /* --funky-interactive-bg-hover removed: 0 usage refs (CSS7 audit 2026-03-16) */
   --funky-interactive-focus: #0369a1;           /* Sky-700: 6.0:1 on white - AA - OK */
   
-  /* Gradient endpoints for decorative use only (Gradients / Borders)
-   * These DON'T need to pass text contrast as they are non-textual or decorative elements */
-  --funky-pink-glow: #ff00ff;
-  --funky-cyan-glow: #00ffff;
-  --funky-lime-glow: #ccff00;
+  /* Gradient endpoints — removed: --funky-pink-glow, --funky-cyan-glow, --funky-lime-glow
+   * had 0 usage refs; redundant with --wp--preset--color--neon-* (CSS7 audit 2026-03-16) */
 }
 
 /* ========================================
@@ -306,24 +306,51 @@
 
 .dark,
 :root.dark {
-  --wp--preset--color--background: var(--color-inset, #11161A);
+  --wp--preset--color--background: var(--color-paper, #151A1E);
   --wp--preset--color--foreground: var(--color-text, #E8E2D8);
   --wp--preset--color--surface: var(--color-panel, #232A32);
   --wp--preset--color--surface-foreground: var(--color-text, #E8E2D8);
+
+  /* Brand — invert for dark backgrounds */
+  --wp--preset--color--primary: #f9fafb;
+  --wp--preset--color--primary-foreground: #111111;
   --wp--preset--color--secondary: var(--color-panel-alt, #2A333C);
   --wp--preset--color--secondary-foreground: var(--color-text, #E8E2D8);
+
   --wp--preset--color--accent: var(--color-screen, #8DA89D);
   --wp--preset--color--accent-foreground: var(--color-paper, #151A1E);
   --wp--preset--color--muted: var(--color-panel-alt, #2A333C);
-  --wp--preset--color--muted-foreground: var(--color-text-muted, #8A9499);
+  --wp--preset--color--muted-foreground: var(--color-text-muted, #9FAAAF);  /* Lightened from #8A9499 for AA on dark panels */
+
+  /* State colors — lightened for dark backgrounds */
+  --wp--preset--color--success: #4ade80;
+  --wp--preset--color--success-foreground: #0f0f0f;
+  --wp--preset--color--warning: #fbbf24;
+  --wp--preset--color--warning-foreground: #0f0f0f;
+  --wp--preset--color--error: #f87171;
+  --wp--preset--color--error-foreground: #fafafa;
+  --wp--preset--color--info: var(--color-sky, #8AAFC0);
+  --wp--preset--color--info-foreground: #fafafa;
+
+  /* Borders */
   --wp--preset--color--border: var(--color-border, #3E4A52);
   --wp--preset--color--border-light: var(--color-border-soft, #2E3840);
+  --wp--preset--color--border-strong: var(--color-border-strong, #C4CBC3);
   --wp--preset--color--text-secondary: var(--color-text-soft, #C4CBC3);
+
+  /* Interactive */
   --wp--preset--color--ring: var(--color-focus, #5DA0E0);
   --wp--preset--color--link: var(--color-link, #5DA0E0);
   --wp--preset--color--link-hover: var(--color-link-hover, #7DB8F0);
+  --wp--preset--color--cta: var(--color-signal, #D8B548);
+  --wp--preset--color--cta-hover: var(--color-signal-hover, #E4C96E);
+
+  /* Overlays */
   --wp--preset--color--popover: var(--color-panel, #232A32);
   --wp--preset--color--popover-foreground: var(--color-text, #E8E2D8);
+
+  /* Neutral ramp */
+  --wp--preset--color--neutral-100: #1a1a1a;
 
   /* Shadows — softer for dark backgrounds */
   --wp--preset--shadow--sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);

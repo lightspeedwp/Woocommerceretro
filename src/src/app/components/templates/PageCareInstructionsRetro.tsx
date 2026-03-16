@@ -123,7 +123,7 @@ export const PageCareInstructionsRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {careInstructionsPageContent.ctaText}
               </p>
-              <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                 {careInstructionsPageContent.ctaButton.toUpperCase()} <ArrowRight size={20} weight="bold" />
               </Link>
             </div>

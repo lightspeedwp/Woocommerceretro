@@ -1,8 +1,11 @@
 /**
- * Dark Mode Theme
+ * Dark Mode Theme — Raw Retro Tokens
  * 
- * This stylesheet provides dark mode color overrides using the .dark selector.
- * All color values are redefined to ensure proper contrast and WCAG 2.1 AA compliance.
+ * Provides --retro-dark-* raw tokens and funky glass/interactive tokens.
+ * 
+ * NOTE: --wp--preset--* dark mode overrides are in theme-variables.css
+ * (single source of truth for WP preset dark mode mapping).
+ * This file only defines raw retro dark tokens and accent mappings.
  */
 
 .dark {
@@ -40,59 +43,11 @@
   --retro-dark-shadow-md: 0 4px 12px rgba(0,0,0,0.28);
   --retro-dark-shadow-lg: 0 10px 24px rgba(0,0,0,0.32);
 
-  /* Primary Brand Colors */
-  --wp--preset--color--primary: #f9fafb;
-  --wp--preset--color--primary-foreground: #111111;
-  --wp--preset--color--secondary: var(--retro-dark-panel-alt);
-  --wp--preset--color--secondary-foreground: var(--retro-dark-text);
-  
-  /* Surface Colors */
-  --wp--preset--color--background: #0f0f0f;
-  --wp--preset--color--foreground: #f9fafb;
-  --wp--preset--color--surface: #1a1a1a;
-  --wp--preset--color--surface-foreground: #f9fafb;
-  
-  /* Semantic Colors */
-  --wp--preset--color--accent: #374151;
-  --wp--preset--color--accent-foreground: #f9fafb;
-  --wp--preset--color--muted: #374151;
-  --wp--preset--color--muted-foreground: #d1d5db;
-  
-  /* State Colors */
-  --wp--preset--color--success: #4ade80;
-  --wp--preset--color--success-foreground: #0f0f0f;
-  --wp--preset--color--warning: #fbbf24;
-  --wp--preset--color--warning-foreground: #0f0f0f;
-  --wp--preset--color--error: #f87171;
-  --wp--preset--color--error-foreground: #fafafa;
-  --wp--preset--color--info: var(--retro-dark-sky);
-  --wp--preset--color--info-foreground: #fafafa;
-  
-  /* Border & Divider Colors */
-  --wp--preset--color--border: #525252;
-  --wp--preset--color--border-light: #374151;
-  --wp--preset--color--border-strong: var(--retro-dark-line-strong);
-  --wp--preset--color--text-secondary: #d1d5db;
-
-  /* Popover & Overlays */
-  --wp--preset--color--popover: #1a1a1a;
-  --wp--preset--color--popover-foreground: #f9fafb;
-  
-  /* Brand & CTA (Dark Mode) */
-  --wp--preset--color--cta: var(--retro-dark-signal);
-  --wp--preset--color--cta-hover: var(--retro-dark-signal-strong);
-  --wp--preset--color--ring: var(--retro-dark-focus);
-  --wp--preset--color--link: #60a5fa;
-  --wp--preset--color--link-hover: #93c5fd;
-
   /* PlayPocket custom accents mapped to dark counterparts */
   --retro-accent-coral: var(--retro-dark-coral);
   --retro-accent-sky: var(--retro-dark-sky);
   --retro-accent-berry: var(--retro-dark-berry);
-  --retro-accent-olive: var(--retro-dark-olive);
-  
-  /* Neutral Ramp Overrides */
-  --wp--preset--color--neutral-100: #1a1a1a;
+  /* --retro-accent-olive removed: 0 usage refs (CSS7 audit 2026-03-16) */
 
   /* Funky Theme Additions */
   --funky-glass-bg: rgba(3, 2, 19, 0.95);
@@ -107,5 +62,5 @@
 }
 
 .dark .surface-elevated {
-  background-color: #1f1f1f;
+  background-color: var(--color-panel-alt, #2A333C);
 }

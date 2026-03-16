@@ -54,17 +54,7 @@ export const PageCheckoutRetro = () => {
       <div className="retro-container">
         <HeaderRetro />
 
-        {/* Breadcrumb */}
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <Link to="/cart" className="retro-breadcrumb-link">CART</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">CHECKOUT</span>
-        </div>
-
-        <div className="retro-cart-layout">
+        <div className="retro-cart__layout">
           <h1 className="retro-page-title retro-font-display retro-bold">
             <Lock size={24} weight="bold" aria-hidden="true" />
             SECURE CHECKOUT
@@ -74,13 +64,13 @@ export const PageCheckoutRetro = () => {
             <div className="retro-cart-empty">
               <h2 className="retro-font-display retro-bold">CANNOT PROCEED TO NEXT LEVEL</h2>
               <p className="retro-font-body">Your inventory is empty.</p>
-              <Link to="/shop" className="retro-button retro-button--secondary retro-font-display retro-bold retro-cart-empty__link">
+              <Link to="/shop" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-cart-empty__link">
                 GO TO SHOP <ArrowRight weight="bold" />
               </Link>
             </div>
           ) : (
-            <div className="retro-cart-grid retro-checkout-grid">
-              <div className="retro-cart-main">
+            <div className="retro-cart__grid retro-checkout__grid">
+              <div className="retro-cart__main">
                 {/* Step Indicator */}
                 <div className="retro-checkout-steps retro-font-display">
                   {STEP_KEYS.map((key, idx) => {
@@ -104,24 +94,24 @@ export const PageCheckoutRetro = () => {
                   })}
                 </div>
 
-                <form className="retro-checkout-form" onSubmit={handleCompleteOrder}>
+                <form className="retro-checkout__form" onSubmit={handleCompleteOrder}>
                   {/* Step 1: Player Info */}
                   {activeStep === 'info' && (
-                    <div className="retro-checkout-section">
-                      <h2 className="retro-font-display retro-bold retro-checkout-section-title">
+                    <div className="retro-checkout__section">
+                      <h2 className="retro-font-display retro-bold retro-checkout__section-title">
                         <MapPin size={20} weight="bold" aria-hidden="true" /> PLAYER INFO
                       </h2>
-                      <div className="retro-checkout-field-group">
-                        <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-email">EMAIL ADDRESS</label>
+                      <div className="retro-checkout__field-group">
+                        <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-email">EMAIL ADDRESS</label>
                         <input id="ck-email" type="email" required className="retro-input retro-font-body" placeholder="player@example.com" />
                       </div>
-                      <div className="retro-checkout-field-group">
-                        <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-phone">PHONE (OPTIONAL)</label>
+                      <div className="retro-checkout__field-group">
+                        <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-phone">PHONE (OPTIONAL)</label>
                         <input id="ck-phone" type="tel" className="retro-input retro-font-body" placeholder="+1 555 123 4567" />
                       </div>
                       <button
                         type="button"
-                        className="retro-button retro-button--secondary retro-font-display retro-bold"
+                        className="retro-btn retro-btn--primary retro-font-display retro-bold"
                         onClick={() => goToStep('shipping')}
                       >
                         NEXT: DELIVERY <ArrowRight weight="bold" />
@@ -131,49 +121,49 @@ export const PageCheckoutRetro = () => {
 
                   {/* Step 2: Shipping */}
                   {activeStep === 'shipping' && (
-                    <div className="retro-checkout-section">
-                      <h2 className="retro-font-display retro-bold retro-checkout-section-title">
+                    <div className="retro-checkout__section">
+                      <h2 className="retro-font-display retro-bold retro-checkout__section-title">
                         <Truck size={20} weight="bold" aria-hidden="true" /> DELIVERY ZONE
                       </h2>
-                      <div className="retro-checkout-grid-2">
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-fname">FIRST NAME</label>
+                      <div className="retro-checkout__grid-2">
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-fname">FIRST NAME</label>
                           <input id="ck-fname" type="text" required className="retro-input retro-font-body" placeholder="Mario" />
                         </div>
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-lname">LAST NAME</label>
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-lname">LAST NAME</label>
                           <input id="ck-lname" type="text" required className="retro-input retro-font-body" placeholder="Bros" />
                         </div>
                       </div>
-                      <div className="retro-checkout-field-group">
-                        <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-address">ADDRESS</label>
+                      <div className="retro-checkout__field-group">
+                        <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-address">ADDRESS</label>
                         <input id="ck-address" type="text" required className="retro-input retro-font-body" placeholder="123 Mushroom Kingdom" />
                       </div>
-                      <div className="retro-checkout-grid-3">
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-city">CITY</label>
+                      <div className="retro-checkout__grid-3">
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-city">CITY</label>
                           <input id="ck-city" type="text" required className="retro-input retro-font-body" placeholder="Toad Town" />
                         </div>
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-state">STATE/PROV</label>
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-state">STATE/PROV</label>
                           <input id="ck-state" type="text" required className="retro-input retro-font-body" placeholder="MK" />
                         </div>
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-postal">POSTAL CODE</label>
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-postal">POSTAL CODE</label>
                           <input id="ck-postal" type="text" required className="retro-input retro-font-body" placeholder="8500" />
                         </div>
                       </div>
-                      <div className="retro-checkout-nav-row">
+                      <div className="retro-checkout__nav-row">
                         <button
                           type="button"
-                          className="retro-button retro-button--secondary retro-font-display retro-bold"
+                          className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                           onClick={() => goToStep('info')}
                         >
                           BACK
                         </button>
                         <button
                           type="button"
-                          className="retro-button retro-button--secondary retro-font-display retro-bold"
+                          className="retro-btn retro-btn--primary retro-font-display retro-bold"
                           onClick={() => goToStep('payment')}
                         >
                           NEXT: PAYMENT <ArrowRight weight="bold" />
@@ -184,33 +174,33 @@ export const PageCheckoutRetro = () => {
 
                   {/* Step 3: Payment */}
                   {activeStep === 'payment' && (
-                    <div className="retro-checkout-section">
-                      <h2 className="retro-font-display retro-bold retro-checkout-section-title">
+                    <div className="retro-checkout__section">
+                      <h2 className="retro-font-display retro-bold retro-checkout__section-title">
                         <CreditCard size={20} weight="bold" aria-hidden="true" /> INSERT COIN
                       </h2>
-                      <div className="retro-checkout-field-group">
-                        <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-card">CARD NUMBER</label>
+                      <div className="retro-checkout__field-group">
+                        <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-card">CARD NUMBER</label>
                         <input id="ck-card" type="text" required className="retro-input retro-font-body" placeholder="0000 0000 0000 0000" />
                       </div>
-                      <div className="retro-checkout-grid-2">
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-exp">EXPIRY DATE</label>
+                      <div className="retro-checkout__grid-2">
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-exp">EXPIRY DATE</label>
                           <input id="ck-exp" type="text" required className="retro-input retro-font-body" placeholder="MM/YY" />
                         </div>
-                        <div className="retro-checkout-field-group">
-                          <label className="retro-font-body retro-bold retro-checkout-label" htmlFor="ck-cvc">CVC</label>
+                        <div className="retro-checkout__field-group">
+                          <label className="retro-font-body retro-bold retro-checkout__label" htmlFor="ck-cvc">CVC</label>
                           <input id="ck-cvc" type="text" required className="retro-input retro-font-body" placeholder="123" />
                         </div>
                       </div>
-                      <div className="retro-checkout-nav-row">
+                      <div className="retro-checkout__nav-row">
                         <button
                           type="button"
-                          className="retro-button retro-button--secondary retro-font-display retro-bold"
+                          className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                           onClick={() => goToStep('shipping')}
                         >
                           BACK
                         </button>
-                        <button type="submit" className="retro-button retro-font-display retro-bold retro-checkout-submit">
+                        <button type="submit" className="retro-btn retro-btn--primary retro-font-display retro-bold retro-checkout__submit">
                           COMPLETE ORDER <CheckCircle weight="bold" size={24} />
                         </button>
                       </div>
@@ -219,52 +209,52 @@ export const PageCheckoutRetro = () => {
                 </form>
               </div>
 
-              <aside className="retro-cart-sidebar">
+              <aside className="retro-cart__sidebar">
                 <div className="retro-cart-summary">
-                  <h2 className="retro-font-display retro-bold retro-cart-summary-title">LEVEL SUMMARY</h2>
+                  <h2 className="retro-font-display retro-bold retro-cart-summary__title">LEVEL SUMMARY</h2>
 
-                  <div className="retro-checkout-items">
+                  <div className="retro-checkout__items">
                     {cart.items.map((item) => {
                       const product = item.product;
                       const price = product.salePrice || product.price;
                       return (
-                        <div key={product.id} className="retro-checkout-item">
-                          <div className="retro-checkout-item-img-wrap">
-                            <img src={product.image} alt={product.name || 'Product'} className="retro-checkout-item-img" />
-                            <span className="retro-checkout-item-qty retro-font-display">{item.quantity}</span>
+                        <div key={product.id} className="retro-checkout__item">
+                          <div className="retro-checkout__item-img-wrap">
+                            <img src={product.image} alt={product.name || 'Product'} className="retro-checkout__item-img" />
+                            <span className="retro-checkout__item-qty retro-font-display">{item.quantity}</span>
                           </div>
-                          <div className="retro-checkout-item-details">
-                            <h4 className="retro-font-display retro-bold retro-checkout-item-title">{product.name}</h4>
-                            <div className="retro-font-body retro-bold retro-checkout-item-price">${(price * item.quantity).toFixed(2)}</div>
+                          <div className="retro-checkout__item-details">
+                            <h4 className="retro-font-display retro-bold retro-checkout__item-title">{product.name}</h4>
+                            <div className="retro-font-body retro-bold retro-checkout__item-price">${(price * item.quantity).toFixed(2)}</div>
                           </div>
                         </div>
                       );
                     })}
                   </div>
 
-                  <div className="retro-cart-summary-divider" />
-                  <div className="retro-cart-summary-row retro-font-body">
+                  <div className="retro-cart-summary__divider" />
+                  <div className="retro-cart-summary__row retro-font-body">
                     <span>SUBTOTAL:</span>
                     <span className="retro-bold">${subtotal.toFixed(2)}</span>
                   </div>
                   {discount > 0 && (
-                    <div className="retro-cart-summary-row retro-cart-summary-row--discount retro-font-body">
+                    <div className="retro-cart-summary__row retro-cart-summary__row--discount retro-font-body">
                       <span>DISCOUNT:</span>
                       <span className="retro-bold">-${discount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="retro-cart-summary-row retro-font-body">
+                  <div className="retro-cart-summary__row retro-font-body">
                     <span>SHIPPING:</span>
                     <span className="retro-bold">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
                   </div>
-                  <div className="retro-cart-summary-divider" />
-                  <div className="retro-cart-summary-row retro-cart-summary-total retro-font-display retro-bold">
+                  <div className="retro-cart-summary__divider" />
+                  <div className="retro-cart-summary__row retro-cart-summary__row--total retro-font-display retro-bold">
                     <span>TOTAL XP:</span>
                     <span>${finalTotal.toFixed(2)}</span>
                   </div>
 
                   {/* Secure checkout trust signal */}
-                  <div className="retro-checkout-trust retro-font-body">
+                  <div className="retro-checkout__trust retro-font-body">
                     <Lock size={14} weight="bold" /> 256-BIT ENCRYPTED
                   </div>
                 </div>

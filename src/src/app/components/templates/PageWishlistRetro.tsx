@@ -49,14 +49,6 @@ export const PageWishlistRetro = () => {
       <div className="retro-container">
         <HeaderRetro />
 
-        {/* Breadcrumb */}
-        <div className="retro-breadcrumb retro-font-display">
-          <div className="retro-breadcrumb-dot" />
-          <Link to="/" className="retro-breadcrumb-link">HOME</Link>
-          <span className="retro-breadcrumb-sep">/</span>
-          <span className="retro-breadcrumb-current">WISHLIST</span>
-        </div>
-
         <div className="retro-wishlist-layout">
           {/* Title Banner */}
           <div className="retro-title-banner retro-wishlist-layout__banner">
@@ -78,7 +70,7 @@ export const PageWishlistRetro = () => {
               </p>
               <Link
                 to="/shop"
-                className="retro-button retro-button--secondary retro-font-display retro-bold"
+                className="retro-btn retro-btn--primary retro-font-display retro-bold"
               >
                 EXPLORE SHOP <ArrowRight weight="bold" />
               </Link>
@@ -88,13 +80,13 @@ export const PageWishlistRetro = () => {
               {/* Action Bar */}
               <div className="retro-wishlist-layout__actions">
                 <button
-                  className="retro-button retro-button--secondary retro-font-display retro-bold"
+                  className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                   onClick={handleMoveAllToCart}
                 >
                   <ShoppingCart size={16} weight="bold" /> MOVE ALL TO CART
                 </button>
                 <button
-                  className="retro-button retro-button--secondary retro-font-display retro-bold"
+                  className="retro-btn retro-btn--secondary retro-font-display retro-bold"
                   onClick={() => {
                     wishlist.clearWishlist();
                     toast.success('Wishlist cleared', { duration: 2000 });
@@ -116,7 +108,7 @@ export const PageWishlistRetro = () => {
                     <div key={item.id} className="retro-card retro-wishlist-layout__card">
                       {/* Heart badge */}
                       <button
-                        className="retro-heart-btn retro-heart-btn--active"
+                        className="retro-card__heart retro-card__heart--active"
                         onClick={() => handleRemove(item)}
                         aria-label={`Remove ${item.name} from wishlist`}
                       >
@@ -124,30 +116,30 @@ export const PageWishlistRetro = () => {
                       </button>
 
                       {/* Image */}
-                      <Link to={`/product/${item.slug || item.id}`} className="retro-card-img-wrap">
+                      <Link to={`/product/${item.slug || item.id}`} className="retro-card__img-wrap">
                         <img
                           src={itemImg}
                           alt={item.name || 'Product'}
-                          className="retro-card-img retro-card-img--primary"
+                          className="retro-card__img retro-card__img--primary"
                         />
                         {hoverImg !== itemImg && (
                           <img
                             src={hoverImg}
                             alt={`${item.name} alternate view`}
-                            className="retro-card-img retro-card-img--hover"
+                            className="retro-card__img retro-card__img--hover"
                           />
                         )}
                       </Link>
 
                       {/* Details */}
                       <Link to={`/product/${item.slug || item.id}`}>
-                        <h3 className="retro-card-title retro-font-display retro-bold">{item.name}</h3>
+                        <h3 className="retro-card__title retro-font-display retro-bold">{item.name}</h3>
                       </Link>
-                      <p className="retro-card-price retro-font-display retro-bold">
+                      <p className="retro-card__price retro-font-display retro-bold">
                         {itemSalePrice ? (
                           <>
-                            <span className="retro-card-price--original">${itemPrice.toFixed(2)}</span>
-                            <span className="retro-card-price--sale">${itemSalePrice.toFixed(2)}</span>
+                            <span className="retro-card__price--original">${itemPrice.toFixed(2)}</span>
+                            <span className="retro-card__price--sale">${itemSalePrice.toFixed(2)}</span>
                           </>
                         ) : (
                           `$${itemPrice.toFixed(2)}`
@@ -157,7 +149,7 @@ export const PageWishlistRetro = () => {
                       {/* Actions */}
                       <div className="retro-wishlist-layout__card-actions">
                         <button
-                          className={`retro-card-btn retro-font-display retro-bold ${inCart ? 'retro-card-btn--disabled' : 'retro-card-btn--white'}`}
+                          className={`retro-card__btn retro-font-display retro-bold ${inCart ? 'retro-card__btn--disabled' : 'retro-card__btn--white'}`}
                           onClick={() => {
                             if (!inCart) handleAddToCart(item);
                           }}

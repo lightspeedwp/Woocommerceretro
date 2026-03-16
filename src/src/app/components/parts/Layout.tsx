@@ -1,6 +1,5 @@
 import React from 'react';
 import { Header } from './Header';
-import { BreadcrumbsBar } from './BreadcrumbsBar';
 import { Footer } from './Footer';
 import { BackToTopButton } from '../common/BackToTopButton';
 import { SkipNavigation } from '../common/SkipNavigation';
@@ -9,8 +8,9 @@ import { CookieConsent } from '../common/CookieConsent';
 /**
  * Layout Component (Main Template Part)
  *
- * Root layout wrapper providing global header, footer, breadcrumbs,
+ * Root layout wrapper providing global header, footer,
  * accessibility skip links, back-to-top button, and cookie consent.
+ * Breadcrumbs are now handled sitewide by SiteLayout > SiteBreadcrumb.
  */
 
 interface LayoutProps {
@@ -37,9 +37,6 @@ export const Layout = ({ children }: LayoutProps) => {
         role="main"
         aria-label="Main content"
       >
-        {/* Dynamic breadcrumb navigation */}
-        <BreadcrumbsBar />
-
         {/* Page content */}
         {children}
       </main>

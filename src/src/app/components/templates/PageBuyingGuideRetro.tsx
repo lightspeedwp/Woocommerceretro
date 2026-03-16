@@ -89,14 +89,14 @@ export const PageBuyingGuideRetro = () => {
 
             <div className="retro-grid retro-grid-3">
               {categoryGuides.map((cat: any) => (
-                <Link key={cat.id} to={cat.link} className="retro-card retro-card-glow retro-card--link">
+                <Link key={cat.id} to={cat.link} className="retro-card retro-card--glow retro-card--link">
                   <div className="retro-feature-icon">
                     <ShoppingBag size={32} weight="bold" aria-hidden="true" />
                   </div>
-                  <h3 className="retro-card-title retro-font-display retro-bold">
+                  <h3 className="retro-card__title retro-font-display retro-bold">
                     {cat.name.toUpperCase()}
                   </h3>
-                  <p className="retro-card-desc retro-font-body">
+                  <p className="retro-card__desc retro-font-body">
                     {cat.description}
                   </p>
                   <span className="retro-card-link retro-font-display">
@@ -121,7 +121,7 @@ export const PageBuyingGuideRetro = () => {
               <p className="retro-font-body retro-cta-desc">
                 {buyingGuidePageContent.ctaText}
               </p>
-              <Link to="/contact" className="retro-button retro-button--primary retro-font-display">
+              <Link to="/contact" className="retro-btn retro-btn--primary retro-font-display">
                 {buyingGuidePageContent.ctaButton.toUpperCase()} <ArrowRight size={20} weight="bold" />
               </Link>
             </div>
