@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp } from '@phosphor-icons/react';
+import { ArrowUp } from '../../utils/phosphor-compat';
 
 /**
  * BackToTopButton Component

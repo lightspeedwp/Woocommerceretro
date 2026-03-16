@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Heartbeat as Activity, Lightning as Zap, Image, Package, TrendUp as TrendingUp, Clock } from '@phosphor-icons/react';
+import { Heartbeat as Activity, Lightning as Zap, Image, Package, TrendUp as TrendingUp, Clock } from '../../utils/phosphor-compat';
 
 interface Metrics {
   fps: number;

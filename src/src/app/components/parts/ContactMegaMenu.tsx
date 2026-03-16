@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { Link } from 'react-router';
-import { EnvelopeSimple, Phone, ChatCircleDots, ArrowRight, Question, MapPin, Clock, Truck } from '@phosphor-icons/react';
+import { EnvelopeSimple, Phone, ChatCircleDots, ArrowRight, Question, MapPin, Clock, Truck } from '../../utils/phosphor-compat';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 
 interface ContactMethod {

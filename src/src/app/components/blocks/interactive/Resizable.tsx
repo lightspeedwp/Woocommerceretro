@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { DotsSixVertical as GripVerticalIcon } from '@phosphor-icons/react';
+import { DotsSixVertical as GripVerticalIcon } from '../../../utils/phosphor-compat';
 import * as ResizablePrimitive from "react-resizable-panels";
 import { cn } from "../../../utils/cn";
 

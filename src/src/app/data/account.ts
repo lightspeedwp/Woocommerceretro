@@ -21,7 +21,7 @@
  * @module data/account
  */
 
-import { SquaresFour as LayoutDashboard, ShoppingBag, Download, MapPin, User, SignOut as LogOut, Bell, Heart, Gear as Settings, Trophy } from '@phosphor-icons/react';
+import { SquaresFour as LayoutDashboard, ShoppingBag, Download, MapPin, User, SignOut as LogOut, Bell, Heart, Gear as Settings, Trophy } from '../utils/phosphor-compat';
 
 /**
  * Account Navigation Items

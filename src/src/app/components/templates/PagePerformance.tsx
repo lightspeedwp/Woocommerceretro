@@ -13,7 +13,7 @@
 import React from 'react';
 import { PerformanceDashboard } from '../dev-tools/PerformanceDashboard';
 import { DevToolsStatsBar } from '../blocks/dev-tools/DevToolsStatsBar';
-import { Heartbeat as Activity, Lightning, Target, TrendUp, Timer, ChartBar } from '@phosphor-icons/react';
+import { Heartbeat as Activity, Lightning, Target, TrendUp, Timer, ChartBar } from '../../utils/phosphor-compat';
 
 const tips = [
   {

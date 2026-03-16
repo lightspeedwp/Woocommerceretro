@@ -6,7 +6,7 @@
  */
 
 import { Link } from 'react-router';
-import { CheckCircle, Package, MapPin } from '@phosphor-icons/react';
+import { CheckCircle, Package, MapPin } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { BottomGridRetro } from '../patterns/BottomGridRetro';

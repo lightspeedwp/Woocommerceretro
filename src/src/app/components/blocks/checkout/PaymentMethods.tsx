@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Wallet, Bank as Banknote } from '@phosphor-icons/react';
+import { CreditCard, Wallet, Bank as Banknote } from '../../../utils/phosphor-compat';
 import { Typography } from '../../common/Typography';
 import { CheckoutInput } from './ui/CheckoutInput';
 import { Checkbox } from './ui/Checkbox';

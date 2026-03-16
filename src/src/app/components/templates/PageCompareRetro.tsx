@@ -7,7 +7,7 @@
  */
 
 import { Link } from 'react-router';
-import { Sword, CheckCircle, XCircle, ShoppingCart, Trash, ArrowRight } from '@phosphor-icons/react';
+import { Sword, CheckCircle, XCircle, ShoppingCart, Trash, ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

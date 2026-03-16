@@ -7,7 +7,7 @@
 
 import { type FormEvent } from 'react';
 import { Link } from 'react-router';
-import { ArrowUUpLeft, MagicWand, Warning } from '@phosphor-icons/react';
+import { ArrowUUpLeft, MagicWand, Warning } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

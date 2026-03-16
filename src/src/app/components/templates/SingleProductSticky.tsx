@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import { Star, Heart, ShareNetwork, Check, Truck, ArrowsClockwise, ShieldCheck, Plus, Minus } from '@phosphor-icons/react';
+import { Star, Heart, ShareNetwork, Check, Truck, ArrowsClockwise, ShieldCheck, Plus, Minus } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

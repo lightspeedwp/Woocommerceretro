@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { BookOpen, GitCommit } from '@phosphor-icons/react';
+import { BookOpen, GitCommit } from '../../utils/phosphor-compat';
 
 export const DevToolsSubFooter = () => {
   return (

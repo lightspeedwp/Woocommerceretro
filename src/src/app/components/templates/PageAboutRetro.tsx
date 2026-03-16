@@ -5,14 +5,13 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { type ComponentType } from 'react';
+import { Trophy, Users, ShieldCheck, Smiley, ArrowRight } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
-import { Trophy, Users, ShieldCheck, Smiley, ArrowRight } from '@phosphor-icons/react';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 
 interface Stat { label: string; value: string; }
-interface Value { icon: ComponentType<any>; title: string; desc: string; }
+interface Value { icon: any; title: string; desc: string; }
 
 const stats: Stat[] = [
   { label: 'PLAYERS WORLDWIDE', value: '2M+' },

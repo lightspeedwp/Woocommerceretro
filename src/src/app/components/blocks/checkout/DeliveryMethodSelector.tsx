@@ -1,5 +1,5 @@
 import React from 'react';
-import { Truck, Storefront as Store } from '@phosphor-icons/react';
+import { Truck, Storefront as Store } from '../../../utils/phosphor-compat';
 import { Typography } from '../../common/Typography';
 
 /**

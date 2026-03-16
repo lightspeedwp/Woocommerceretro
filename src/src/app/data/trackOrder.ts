@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { CheckCircle, Cube as Box, Truck, MapPin, Package, Question as HelpCircle, Clock } from '@phosphor-icons/react';
+import { CheckCircle, Cube as Box, Truck, MapPin, Package, Question as HelpCircle, Clock } from '../utils/phosphor-compat';
 
 /* ── Types ───────────────────────────────────────────────────────────────── */
 

@@ -1,0 +1,193 @@
+/**
+ * PlayPocket — Featured Products & Product Card
+ *
+ * Featured products header/grid and product card component.
+ *
+ * BEM blocks: .pp-featured, .pp-product-card
+ */
+
+/* ========================================
+   FEATURED PRODUCTS
+   ======================================== */
+
+.pp-featured {
+  padding: 0;
+}
+
+.pp-featured__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+  clip-path: polygon(
+    0 3px, 3px 3px, 3px 0,
+    calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px,
+    100% 100%, 0 100%
+  );
+}
+
+.pp-featured__title {
+  margin: 0;
+}
+
+.pp-featured__viewall {
+  color: var(--wp--preset--color--background, #F2EEE6);
+  text-decoration: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.pp-featured__viewall:hover {
+  text-decoration: underline;
+}
+
+.pp-featured__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  border: none;
+  border-top: none;
+  padding: 1rem 0;
+}
+
+@media (min-width: 640px) {
+  .pp-featured__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pp-featured__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ========================================
+   PRODUCT CARD
+   ======================================== */
+
+.pp-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--wp--preset--color--background, #F2EEE6);
+  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  padding: 0.875rem;
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pp-product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--wp--preset--color--foreground, #1E2630);
+}
+
+/* Remove old grid-border approach */
+.pp-product-card:nth-child(2n),
+.pp-product-card:nth-child(4n),
+.pp-product-card:last-child {
+  border-right: 2px solid var(--wp--preset--color--foreground, #1E2630);
+}
+
+.pp-product-card__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--wp--preset--color--primary, #FFC533);
+  color: var(--wp--preset--color--primary-foreground, #1E2630);
+  padding: 0.1875rem 0.5rem;
+  z-index: 3;
+  clip-path: polygon(
+    0 2px, 2px 2px, 2px 0,
+    calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px,
+    100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%,
+    2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px)
+  );
+}
+
+.pp-product-card__heart {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--wp--preset--color--foreground, #1E2630);
+  z-index: 3;
+  padding: 0.25rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.pp-product-card__heart:hover {
+  color: var(--wp--preset--color--accent, #D4143D);
+}
+
+.pp-product-card__img-link {
+  text-decoration: none;
+}
+
+.pp-product-card__img-wrap {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--wp--preset--color--muted, #E7E2D8);
+  margin-bottom: 0.625rem;
+}
+
+.pp-product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.pp-product-card:hover .pp-product-card__img {
+  transform: scale(1.05);
+}
+
+.pp-product-card__info {
+  margin-bottom: 0.5rem;
+}
+
+.pp-product-card__name {
+  margin: 0 0 0.25rem;
+  font-size: var(--wp--preset--font-size--small, 0.875rem);
+  text-transform: uppercase;
+  color: var(--wp--preset--color--foreground, #1E2630);
+}
+
+.pp-product-card__price {
+  margin: 0;
+  color: var(--wp--preset--color--foreground, #1E2630);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .pp-product-card {
+    transition: none;
+  }
+
+  .pp-product-card:hover {
+    transform: none;
+  }
+
+  .pp-product-card__img {
+    transition: none;
+  }
+
+  .pp-product-card:hover .pp-product-card__img {
+    transform: none;
+  }
+}

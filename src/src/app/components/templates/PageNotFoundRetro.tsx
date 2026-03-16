@@ -6,7 +6,7 @@
  */
 
 import { Link } from 'react-router';
-import { Ghost, ArrowLeft, MapTrifold, ArrowRight } from '@phosphor-icons/react';
+import { Ghost, ArrowLeft, Map, ArrowRight } from 'lucide-react';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
@@ -19,7 +19,7 @@ export const PageNotFoundRetro = () => {
 
         <main className="retro-main">
           <div className="retro-not-found-layout">
-            <Ghost size={120} weight="fill" className="retro-not-found-layout__icon" />
+            <Ghost size={120} className="retro-not-found-layout__icon" />
             <h1 className="retro-font-display retro-bold retro-not-found-layout__title">GAME OVER</h1>
             <h2 className="retro-font-display retro-bold retro-not-found-layout__subtitle">ERROR 404: LEVEL NOT FOUND</h2>
             <p className="retro-font-body retro-not-found-layout__desc">
@@ -29,7 +29,7 @@ export const PageNotFoundRetro = () => {
 
             <div className="retro-not-found-layout__actions">
               <Link to="/" className="retro-button retro-button--primary retro-font-display retro-bold retro-not-found-layout__link">
-                <ArrowLeft weight="bold" />
+                <ArrowLeft />
                 RETURN TO START
               </Link>
               <Link to="/shop" className="retro-button retro-button--secondary retro-font-display retro-bold retro-not-found-layout__link">
@@ -41,7 +41,7 @@ export const PageNotFoundRetro = () => {
           {/* Sitemap Discovery Banner */}
           <div className="retro-sitemap-cta">
             <div className="retro-sitemap-cta__card">
-              <MapTrifold size={40} weight="bold" className="retro-sitemap-cta__icon" />
+              <Map size={40} className="retro-sitemap-cta__icon" />
               <div className="retro-sitemap-cta__content">
                 <h2 className="retro-font-display retro-bold retro-sitemap-cta__title">
                   LOST? CHECK THE MAP!
@@ -51,7 +51,7 @@ export const PageNotFoundRetro = () => {
                 </p>
               </div>
               <Link to="/sitemap" className="retro-button retro-button--primary retro-font-display retro-bold retro-sitemap-cta__btn">
-                VIEW SITEMAP <ArrowRight size={18} weight="bold" />
+                VIEW SITEMAP <ArrowRight size={18} />
               </Link>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Lightning, TagSimple, Gift, Percent, Trophy, Ticket, ArrowRight, Fire, Timer, CreditCard } from '@phosphor-icons/react';
+import { Lightning, TagSimple, Gift, Percent, Trophy, Ticket, ArrowRight, Fire, Timer, CreditCard } from '../../utils/phosphor-compat';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 
 /**

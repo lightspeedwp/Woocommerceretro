@@ -136,7 +136,8 @@
 
 /* Wide variant for Shop */
 .retro-mega-menu--wide {
-  min-width: 560px;
+  min-width: 620px;
+  max-width: 720px;
   left: 50%;
   transform: translateX(-50%) translateY(-4px);
 }
@@ -157,6 +158,68 @@
 .retro-nav__item:hover > .retro-mega-menu--wide,
 .retro-nav__item--open > .retro-mega-menu--wide {
   transform: translateX(-50%) translateY(0);
+}
+
+/* Column wrapper */
+.retro-mega-menu__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Badges ── */
+.retro-mega-menu__badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.125rem 0.375rem;
+  border: 2px solid currentColor;
+  margin-left: auto;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.retro-mega-menu__badge--new {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
+}
+
+.retro-mega-menu__badge--hot {
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.retro-mega-menu__badge--sale {
+  color: #f39c12;
+  border-color: #f39c12;
+}
+
+.retro-mega-menu__badge--live {
+  color: #27ae60;
+  border-color: #27ae60;
+}
+
+.retro-mega-menu__link:hover .retro-mega-menu__badge {
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+}
+
+/* ── Pixel scanline decorative border on panel ── */
+.retro-mega-menu::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-signal) 0px,
+    var(--color-signal) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  margin: -1.25rem -1.25rem 1rem -1.25rem;
 }
 
 /* ========================================
@@ -475,6 +538,28 @@
 
 .retro-mobile-menu__panel--open {
   display: block;
+}
+
+/* Mobile subheading within accordion panel */
+.retro-mobile-menu__subheading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  padding: 0.5rem 0.5rem 0.25rem;
+  margin-top: 0.375rem;
+  border-bottom: 2px dashed var(--color-border);
+}
+
+.retro-mobile-menu__subheading:first-child {
+  margin-top: 0;
+}
+
+/* Badge in mobile link */
+.retro-mobile-menu__link .retro-mega-menu__badge {
+  font-size: 0.5rem;
 }
 
 .retro-mobile-menu__link {

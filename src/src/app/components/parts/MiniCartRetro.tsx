@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router';
-import { X, Minus, Plus, ShoppingCart, Trash } from '@phosphor-icons/react';
+import { X, Minus, Plus, ShoppingCart, Trash2 } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 
 export const MiniCartRetro = () => {
@@ -84,7 +84,7 @@ export const MiniCartRetro = () => {
         {/* Header */}
         <div className="retro-mini-cart__header">
           <h2 className="retro-mini-cart__title retro-font-display retro-bold">
-            <ShoppingCart size={20} weight="bold" aria-hidden="true" />
+            <ShoppingCart size={20} strokeWidth={2.5} aria-hidden="true" />
             CART ({itemCount})
           </h2>
           <button
@@ -92,7 +92,7 @@ export const MiniCartRetro = () => {
             onClick={closeDrawer}
             aria-label="Close cart"
           >
-            <X size={20} weight="bold" />
+            <X size={20} strokeWidth={2.5} />
           </button>
         </div>
 
@@ -100,7 +100,7 @@ export const MiniCartRetro = () => {
         <div className="retro-mini-cart__content">
           {items.length === 0 ? (
             <div className="retro-mini-cart__empty">
-              <ShoppingCart size={48} weight="thin" aria-hidden="true" />
+              <ShoppingCart size={48} strokeWidth={1} aria-hidden="true" />
               <p className="retro-font-display retro-bold">INVENTORY EMPTY</p>
               <p className="retro-font-body">Add some loot to get started.</p>
               <Link
@@ -141,7 +141,7 @@ export const MiniCartRetro = () => {
                           onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                           aria-label={`Decrease quantity of ${item.product.name}`}
                         >
-                          <Minus size={12} weight="bold" />
+                          <Minus size={12} strokeWidth={2.5} />
                         </button>
                         <div className="retro-qty-val retro-font-body retro-bold">{item.quantity}</div>
                         <button
@@ -149,7 +149,7 @@ export const MiniCartRetro = () => {
                           onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                           aria-label={`Increase quantity of ${item.product.name}`}
                         >
-                          <Plus size={12} weight="bold" />
+                          <Plus size={12} strokeWidth={2.5} />
                         </button>
                       </div>
                       <button
@@ -157,7 +157,7 @@ export const MiniCartRetro = () => {
                         onClick={() => removeFromCart(item.product.id)}
                         aria-label={`Remove ${item.product.name} from cart`}
                       >
-                        <Trash size={16} weight="bold" />
+                        <Trash2 size={16} strokeWidth={2.5} />
                       </button>
                     </div>
                   </div>

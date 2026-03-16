@@ -29,7 +29,7 @@ import {
   Rocket, Trophy, ShieldCheck, Sparkle, Crown, Heart,
   Package, TShirt, Ghost, Image as ImageIcon,
   CaretLeft, CaretRight,
-} from '@phosphor-icons/react';
+} from '../../utils/phosphor-compat';
 
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';

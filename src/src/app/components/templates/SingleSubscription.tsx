@@ -1,234 +1,411 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
-import { Package, Star, Check } from '@phosphor-icons/react';
+/**
+ * SingleSubscription Template — Retro Redesign
+ *
+ * Single product page for subscription products using WooCommerce Subscriptions.
+ * Reads the `:slug` route param to display the correct subscription plan.
+ *
+ * **Route:** /subscription/:slug (e.g. /subscription/monthly)
+ *
+ * **Features:**
+ * - Retro handheld gaming aesthetic (Game Boy inspired)
+ * - Route-param-driven plan selection
+ * - Plan comparison with feature list
+ * - FAQ accordion section
+ * - Full dark mode support
+ * - WCAG AA 2.2 compliant
+ * - Responsive layout (320px – 1920px)
+ *
+ * **Styling:** BEM classes (.retro-*) in /src/styles/sections/subscription-retro.css
+ * **Dark Mode:** Automatic via retro theme tokens
+ *
+ * @template
+ */
 
-import { Layout } from '../parts/Layout';
-import { Container } from '../common/Container';
-import { Typography } from '../common/Typography';
-import { Heading } from '../common/Heading';
-import { FAQSection } from '../patterns/FAQSection';
-import { TrustBand } from '../patterns/TrustBand';
-import { FeaturesComparisonTable } from '../patterns/FeaturesComparisonTable';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router';
+import { Package, Star, Check, ArrowRight, CaretDown } from '../../utils/phosphor-compat';
+import { HeaderRetro } from '../parts/HeaderRetro';
+import { FooterRetro } from '../parts/FooterRetro';
 import {
   subscriptionPlans,
   subscriptionFeatures,
   subscriptionBenefits,
   subscriptionFAQs,
-  subscriptionProductImages,
   subscriptionPageContent,
 } from '../../data/subscriptions';
 
-/**
- * SingleSubscription Template — Funky Redesign (Phase 9)
- * 
- * Single product page for subscription products using WooCommerce Subscriptions.
- * 
- * @template
- */
 export const SingleSubscription = () => {
-  const [selectedInterval, setSelectedInterval] = useState('quarterly');
+  const { slug } = useParams<{ slug: string }>();
+
+  // Find the plan matching the slug, fallback to quarterly
+  const initialPlan = subscriptionPlans.find((p) => p.id === slug) || subscriptionPlans[1];
+  const [selectedInterval, setSelectedInterval] = useState(initialPlan.id);
+
+  const currentInterval =
+    subscriptionPlans.find((p) => p.id === selectedInterval) || subscriptionPlans[1];
   const single = subscriptionPageContent.single;
-  
-  const currentInterval = subscriptionPlans.find((p) => p.id === selectedInterval) || subscriptionPlans[1];
-
-  const transformedFAQs = subscriptionFAQs.map((f) => ({
-    question: f.question,
-    answer: f.answer,
-  }));
-
-  const transformedFeatures = subscriptionFeatures.map((f) => ({
-    name: f.name,
-    description: f.description,
-    values: [
-      f.availability.monthly,
-      f.availability.quarterly,
-      f.availability.annual,
-    ],
-  }));
 
   return (
-    <Layout>
-      <Container className="wp-product-page">
+    <>
+      <HeaderRetro />
+      <main className="retro-main">
         {/* Breadcrumbs */}
-        <nav className="wp-breadcrumbs" aria-label="Breadcrumb">
-          <ol className="wp-breadcrumbs__list">
-            <li><Link to="/">Home</Link></li>
-            <li className="wp-breadcrumbs__separator">/</li>
-            <li><Link to="/subscriptions">Subscriptions</Link></li>
-            <li className="wp-breadcrumbs__separator">/</li>
-            <li className="wp-breadcrumbs__current">{single.title}</li>
-          </ol>
-        </nav>
-
-        <div className="wp-product-layout">
-          {/* Left: Product Image Gallery */}
-          <div className="wp-product-gallery">
-            <div className="wp-product-gallery__main">
-              <img
-                src={subscriptionProductImages.main}
-                alt={single.title}
-                className="wp-product-gallery__img"
-              />
-            </div>
-            
-            <div className="wp-product-gallery__thumbs">
-              {subscriptionProductImages.gallery.map((src, index) => (
-                <button
-                  key={index}
-                  className="wp-product-gallery__thumb-btn"
-                  aria-label={`View product image ${index + 1}`}
-                >
-                  <img src={src} alt="" className="wp-product-gallery__thumb-img" />
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: Product Info & Subscription Options */}
-          <div className="wp-product-info">
-            <div className="wp-badge-pill">
-              <Package size={14} aria-hidden="true" />
-              <Typography variant="caption" className="wp-badge-pill__text">{single.badge}</Typography>
-            </div>
-
-            <Heading level={1} className="wp-product-title">{single.title}</Heading>
-
-            <div className="wp-product-reviews">
-              <div className="wp-rating-stars" aria-label="5 out of 5 stars">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={16} fill="currentColor" className="wp-icon-star" aria-hidden="true" />
-                ))}
-              </div>
-              <Typography className="wp-review-count">{single.rating}</Typography>
-            </div>
-
-            <Typography className="wp-product-description">{single.description}</Typography>
-
-            {/* Billing Interval Selection */}
-            <div className="wp-plan-selector-container">
-              <label className="wp-field-label">
-                <Typography className="wp-label-text">Choose Your Delivery Frequency:</Typography>
-              </label>
-              
-              <div className="wp-plan-list">
-                {subscriptionPlans.map((interval) => (
-                  <button
-                    key={interval.id}
-                    onClick={() => setSelectedInterval(interval.id)}
-                    className={`wp-plan-option${selectedInterval === interval.id ? ' wp-plan-option--active' : ''}`}
-                    aria-pressed={selectedInterval === interval.id}
-                  >
-                    <div className="wp-plan-option__content">
-                      <div className={`wp-radio-indicator${selectedInterval === interval.id ? ' wp-radio-indicator--checked' : ''}`}>
-                        {selectedInterval === interval.id && <div className="wp-radio-indicator__dot" />}
-                      </div>
-                      
-                      <div className="wp-plan-option__details">
-                        <div className="wp-plan-option__header">
-                          <Typography className="wp-plan-option__name">{interval.name}</Typography>
-                          {interval.badge && (
-                            <span className="wp-plan-option__badge">{interval.badge}</span>
-                          )}
-                        </div>
-                        <Typography variant="caption" className="wp-plan-option__desc">
-                          {`${interval.trialDays || 7} day free trial - Cancel anytime`}
-                        </Typography>
-                      </div>
-                    </div>
-                    
-                    <div className="wp-plan-option__pricing">
-                      <Typography className="wp-plan-option__price">{`£${interval.price}`}</Typography>
-                      <Typography variant="caption" className="wp-plan-option__interval">{`/ ${interval.interval}`}</Typography>
-                      {interval.savings && (
-                        <Typography variant="caption" className="wp-plan-option__savings">{`Save £${interval.savings}`}</Typography>
-                      )}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA */}
-            <button className="wp-button-primary wp-button-full" type="button">
-              {`Start ${currentInterval.trialDays}-Day Free Trial`}
-            </button>
-
-            <Typography variant="caption" className="wp-guarantee-text">
-              Cancel anytime during trial period at no charge
-            </Typography>
-
-            {/* What's Included */}
-            <div className="wp-features-card">
-              <Heading level={3} className="wp-features-card__title">What's Included</Heading>
-              
-              <ul className="wp-features-card__list">
-                {currentInterval.features.map((item, index) => (
-                  <li key={index} className="wp-features-card__item">
-                    <Check size={20} className="wp-icon-success" aria-hidden="true" />
-                    <Typography className="wp-features-card__text">{item}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Auto-renewal Info */}
-            <div className="wp-info-box">
-              <Typography className="wp-info-box__text">
-                <strong>Auto-renewal:</strong>
-                {` After your free trial, your subscription will automatically renew at £${currentInterval.price} per ${currentInterval.interval}. You can cancel or modify anytime.`}
-              </Typography>
-            </div>
+        <div className="retro-section" style={{ paddingBottom: 0 }}>
+          <div className="retro-container">
+            <nav className="retro-breadcrumbs" aria-label="Breadcrumb">
+              <ol className="retro-breadcrumbs__list">
+                <li>
+                  <Link to="/" className="retro-breadcrumbs__link retro-font-body">
+                    Home
+                  </Link>
+                </li>
+                <li className="retro-breadcrumbs__separator" aria-hidden="true">
+                  /
+                </li>
+                <li>
+                  <Link to="/subscriptions" className="retro-breadcrumbs__link retro-font-body">
+                    Subscriptions
+                  </Link>
+                </li>
+                <li className="retro-breadcrumbs__separator" aria-hidden="true">
+                  /
+                </li>
+                <li className="retro-breadcrumbs__current retro-font-body" aria-current="page">
+                  {currentInterval.name} Plan
+                </li>
+              </ol>
+            </nav>
           </div>
         </div>
 
-        {/* Subscription Benefits */}
-        <section className="wp-section-benefits">
-          <div className="wp-section-header">
-            <Heading level={2} className="wp-section-title">{subscriptionPageContent.landing.benefitsHeading}</Heading>
-            <Typography className="wp-section-subtitle">{subscriptionPageContent.landing.benefitsText}</Typography>
-          </div>
-
-          <div className="wp-benefits-grid">
-            {subscriptionBenefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <div key={index} className="wp-benefit-card">
-                  <div className={`wp-benefit-icon-wrapper ${benefit.bg}`}>
-                    <Icon size={32} className={benefit.color} aria-hidden="true" />
-                  </div>
-                  <Heading level={3} className="wp-benefit-title">{benefit.title}</Heading>
-                  <Typography className="wp-benefit-desc">{benefit.description}</Typography>
+        {/* Product Hero */}
+        <section className="retro-section" aria-labelledby="sub-product-heading">
+          <div className="retro-container">
+            <div className="retro-product-layout">
+              {/* Left: Visual */}
+              <div className="retro-product-visual">
+                <div className="retro-product-badge-row">
+                  <span className="retro-badge">
+                    <Package size={14} weight="bold" aria-hidden="true" /> SUBSCRIPTION BOX
+                  </span>
+                  {currentInterval.popular && (
+                    <span className="retro-badge retro-badge--popular">MOST POPULAR</span>
+                  )}
                 </div>
-              );
-            })}
+
+                <div className="retro-subscription-preview">
+                  <div className="retro-subscription-preview__box">
+                    <Package size={80} weight="bold" className="retro-neon-icon" aria-hidden="true" />
+                  </div>
+                  <div className="retro-subscription-preview__label retro-font-display retro-bold">
+                    {currentInterval.name.toUpperCase()} BOX
+                  </div>
+                </div>
+
+                {/* Rating */}
+                <div className="retro-product-rating">
+                  <div className="retro-stars" aria-label="5 out of 5 stars">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        size={18}
+                        weight="fill"
+                        className="retro-star-icon"
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <span className="retro-font-body retro-rating-text">{single.rating}</span>
+                </div>
+              </div>
+
+              {/* Right: Info */}
+              <div className="retro-product-info-panel">
+                <h1 id="sub-product-heading" className="retro-font-display retro-bold retro-product-title">
+                  {single.title.toUpperCase()}
+                </h1>
+
+                <p className="retro-font-body retro-product-desc">{single.description}</p>
+
+                {/* Plan Selector */}
+                <div className="retro-plan-selector">
+                  <p className="retro-font-display retro-bold retro-plan-selector__label">
+                    CHOOSE YOUR DELIVERY FREQUENCY:
+                  </p>
+
+                  <div className="retro-plan-options">
+                    {subscriptionPlans.map((plan) => (
+                      <button
+                        key={plan.id}
+                        onClick={() => setSelectedInterval(plan.id)}
+                        className={`retro-plan-option ${selectedInterval === plan.id ? 'retro-plan-option--active' : ''}`}
+                        aria-pressed={selectedInterval === plan.id}
+                      >
+                        <div className="retro-plan-option__left">
+                          <div
+                            className={`retro-radio ${selectedInterval === plan.id ? 'retro-radio--checked' : ''}`}
+                          >
+                            {selectedInterval === plan.id && (
+                              <div className="retro-radio__dot" />
+                            )}
+                          </div>
+                          <div className="retro-plan-option__details">
+                            <span className="retro-font-display retro-bold retro-plan-option__name">
+                              {plan.name.toUpperCase()}
+                            </span>
+                            {plan.badge && (
+                              <span className="retro-badge retro-badge--small">
+                                {plan.badge.toUpperCase()}
+                              </span>
+                            )}
+                            <span className="retro-font-body retro-plan-option__trial">
+                              {plan.trialDays} day free trial – Cancel anytime
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="retro-plan-option__right">
+                          <span className="retro-font-display retro-plan-option__price">
+                            £{plan.price}
+                          </span>
+                          <span className="retro-font-body retro-plan-option__interval">
+                            {plan.intervalLabel}
+                          </span>
+                          {plan.savings > 0 && (
+                            <span className="retro-font-body retro-plan-option__savings">
+                              Save £{plan.savings}
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <button className="retro-button retro-button--primary retro-font-display retro-button--full" type="button">
+                  START {currentInterval.trialDays}-DAY FREE TRIAL{' '}
+                  <ArrowRight size={20} weight="bold" />
+                </button>
+
+                <p className="retro-font-body retro-guarantee-text">
+                  Cancel anytime during trial period at no charge
+                </p>
+
+                {/* What's Included */}
+                <div className="retro-card retro-features-card">
+                  <h3 className="retro-font-display retro-bold retro-features-card__title">
+                    WHAT'S INCLUDED
+                  </h3>
+                  <ul className="retro-features-list">
+                    {currentInterval.features.map((item, index) => (
+                      <li key={index} className="retro-feature-item">
+                        <Check
+                          size={18}
+                          weight="bold"
+                          className="retro-feature-check"
+                          aria-hidden="true"
+                        />
+                        <span className="retro-font-body">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Auto-renewal Info */}
+                <div className="retro-info-box">
+                  <p className="retro-font-body">
+                    <strong>Auto-renewal:</strong> After your free trial, your subscription will
+                    automatically renew at £{currentInterval.price} per {currentInterval.interval}.
+                    You can cancel or modify anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Features Comparison Table */}
-        <section className="wp-section-comparison">
-          <Heading level={2} className="wp-section-heading">Compare Plans</Heading>
+        {/* Benefits Section */}
+        <section className="retro-section" aria-labelledby="sub-benefits-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2
+                id="sub-benefits-heading"
+                className="retro-font-display retro-bold retro-section-title"
+              >
+                {subscriptionPageContent.landing.benefitsHeading.toUpperCase()}
+              </h2>
+              <p className="retro-font-body retro-section-desc">
+                {subscriptionPageContent.landing.benefitsText}
+              </p>
+            </div>
 
-          <FeaturesComparisonTable
-            features={transformedFeatures}
-            plans={[
-              { id: 'monthly', name: 'Monthly', price: subscriptionPlans[0].price },
-              { id: 'quarterly', name: 'Quarterly', price: subscriptionPlans[1].price },
-              { id: 'annual', name: 'Annual', price: subscriptionPlans[2].price },
-            ]}
-          />
+            <div className="retro-grid retro-grid-4">
+              {subscriptionBenefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                return (
+                  <div key={index} className="retro-card retro-card-glow">
+                    <div className="retro-feature-icon">
+                      <Icon size={32} weight="bold" aria-hidden="true" />
+                    </div>
+                    <h3 className="retro-card-title retro-font-display retro-bold">
+                      {benefit.title.toUpperCase()}
+                    </h3>
+                    <p className="retro-card-desc retro-font-body">{benefit.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
-        {/* FAQ */}
-        <section className="wp-section-faq">
-          <Heading level={2} className="wp-section-heading">Frequently Asked Questions</Heading>
-          <FAQSection items={transformedFAQs} />
+        {/* Compare Plans Section */}
+        <section className="retro-section retro-section--pricing" aria-labelledby="sub-compare-heading">
+          <div className="retro-container">
+            <h2
+              id="sub-compare-heading"
+              className="retro-font-display retro-bold retro-section-title"
+            >
+              COMPARE PLANS
+            </h2>
+
+            <div className="retro-comparison-table" role="table" aria-label="Subscription plan comparison">
+              {/* Header Row */}
+              <div className="retro-comparison-row retro-comparison-row--header" role="row">
+                <div className="retro-comparison-cell retro-comparison-cell--feature" role="columnheader">
+                  <span className="retro-font-display retro-bold">FEATURE</span>
+                </div>
+                {subscriptionPlans.map((plan) => (
+                  <div
+                    key={plan.id}
+                    className={`retro-comparison-cell ${plan.id === selectedInterval ? 'retro-comparison-cell--active' : ''}`}
+                    role="columnheader"
+                  >
+                    <span className="retro-font-display retro-bold">{plan.name.toUpperCase()}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Feature Rows */}
+              {subscriptionFeatures.map((feature) => (
+                <div key={feature.id} className="retro-comparison-row" role="row">
+                  <div className="retro-comparison-cell retro-comparison-cell--feature" role="cell">
+                    <span className="retro-font-body retro-bold">{feature.name}</span>
+                    <span className="retro-font-body retro-comparison-cell__desc">
+                      {feature.description}
+                    </span>
+                  </div>
+                  {(['monthly', 'quarterly', 'annual'] as const).map((planId) => {
+                    const value = feature.availability[planId];
+                    return (
+                      <div
+                        key={planId}
+                        className={`retro-comparison-cell ${planId === selectedInterval ? 'retro-comparison-cell--active' : ''}`}
+                        role="cell"
+                      >
+                        {value === true ? (
+                          <Check size={20} weight="bold" className="retro-feature-check" aria-label="Included" />
+                        ) : value === false ? (
+                          <span className="retro-comparison-dash" aria-label="Not included">—</span>
+                        ) : (
+                          <span className="retro-font-body">{value}</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* Trust Band */}
-        <section className="wp-section-trust">
-          <TrustBand />
+        {/* FAQ Section */}
+        <section className="retro-section retro-section--faq" aria-labelledby="sub-single-faq-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2
+                id="sub-single-faq-heading"
+                className="retro-font-display retro-bold retro-section-title"
+              >
+                FREQUENTLY ASKED QUESTIONS
+              </h2>
+              <p className="retro-font-body retro-section-desc">
+                Got questions? We've got answers.
+              </p>
+            </div>
+
+            <SubFaqAccordion items={subscriptionFAQs} />
+          </div>
         </section>
-      </Container>
-    </Layout>
+
+        {/* CTA Section */}
+        <section className="retro-section retro-section--cta" aria-label="Subscription call to action">
+          <div className="retro-container">
+            <div className="retro-cta-card">
+              <div className="retro-cta-icon">
+                <Package size={64} weight="bold" className="retro-neon-icon" aria-hidden="true" />
+              </div>
+              <h2 className="retro-font-display retro-bold retro-cta-title">
+                READY TO START YOUR SUBSCRIPTION?
+              </h2>
+              <p className="retro-font-body retro-cta-desc">
+                Join 12,000+ happy subscribers and get 50% off your first box with code WELCOME50.
+              </p>
+              <Link
+                to="/subscriptions"
+                className="retro-button retro-button--primary retro-font-display"
+              >
+                VIEW ALL PLANS <ArrowRight size={20} weight="bold" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+      <FooterRetro />
+    </>
   );
+};
+
+/* Private FAQ Accordion — Retro Styled */
+
+interface FaqItem {
+  id: string | number;
+  question: string;
+  answer: string;
 }
+
+const SubFaqAccordion = ({ items }: { items: FaqItem[] }) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <div className="retro-faq-list">
+      {items.map((item, index) => (
+        <div key={item.id} className="retro-faq-item">
+          <button
+            className="retro-faq-trigger"
+            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            aria-expanded={openIndex === index}
+            aria-controls={`sub-single-faq-panel-${item.id}`}
+          >
+            <span className="retro-faq-question retro-font-body retro-bold">{item.question}</span>
+            <CaretDown
+              size={20}
+              weight="bold"
+              className={`retro-faq-chevron ${openIndex === index ? 'retro-faq-chevron--open' : ''}`}
+              aria-hidden="true"
+            />
+          </button>
+          {openIndex === index && (
+            <div
+              id={`sub-single-faq-panel-${item.id}`}
+              className="retro-faq-answer"
+              role="region"
+            >
+              <p className="retro-font-body">{item.answer}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};

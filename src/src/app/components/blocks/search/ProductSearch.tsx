@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import { MagnifyingGlass } from '../../../utils/phosphor-compat';
 import { useNavigate } from 'react-router';
 import { cn } from '../../../utils/cn';
 

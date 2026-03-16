@@ -1,0 +1,209 @@
+/**
+ * PlayPocket — Power Up & Best Sellers
+ *
+ * Bottom grid layout, Power Up CTA card,
+ * and Best Sellers ranked list.
+ *
+ * BEM blocks: .pp-bottom-grid, .pp-powerup, .pp-bestsellers
+ */
+
+/* ========================================
+   BOTTOM GRID LAYOUT
+   ======================================== */
+
+.pp-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .pp-bottom-grid {
+    grid-template-columns: 1.6fr 1fr;
+  }
+}
+
+/* ========================================
+   POWER UP SECTION
+   ======================================== */
+
+.pp-powerup {
+  position: relative;
+}
+
+.pp-powerup__card {
+  background: var(--wp--preset--color--surface, #FFFFFF);
+  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  padding: 1.25rem;
+  position: relative;
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.pp-powerup__heading {
+  margin: 0 0 1.25rem;
+  text-transform: uppercase;
+}
+
+.pp-powerup__steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pp-powerup__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  flex: 1;
+  min-width: 80px;
+}
+
+.pp-powerup__step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pp-powerup__step-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.5rem;
+}
+
+.pp-powerup__dot {
+  width: 4px;
+  height: 4px;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  opacity: 0.3;
+}
+
+.pp-powerup__step-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  text-transform: uppercase;
+}
+
+.pp-powerup__step-label strong {
+  color: var(--wp--preset--color--foreground, #1E2630);
+}
+
+.pp-powerup__step-label span {
+  color: var(--wp--preset--color--muted-foreground, #4B5563);
+}
+
+.pp-powerup__actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.pp-powerup__decor {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ========================================
+   BEST SELLERS BOX
+   ======================================== */
+
+.pp-bestsellers {
+  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+  overflow: hidden;
+}
+
+.pp-bestsellers__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0.75rem;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+}
+
+.pp-bestsellers__title {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.pp-bestsellers__arrow {
+  color: var(--wp--preset--color--background, #F2EEE6);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pp-bestsellers__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pp-bestsellers__item {
+  border-bottom: 1px solid var(--wp--preset--color--border, #CBD5C9);
+}
+
+.pp-bestsellers__item:last-child {
+  border-bottom: none;
+}
+
+.pp-bestsellers__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  color: var(--wp--preset--color--foreground, #1E2630);
+  background: var(--wp--preset--color--surface, #FFFFFF);
+  min-height: 44px;
+  transition: background 0.15s ease;
+}
+
+.pp-bestsellers__link:hover {
+  background: var(--wp--preset--color--muted, #E7E2D8);
+}
+
+.pp-bestsellers__thumb {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--wp--preset--color--muted, #E7E2D8);
+  border: 1px solid var(--wp--preset--color--border, #CBD5C9);
+}
+
+.pp-bestsellers__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pp-bestsellers__name {
+  flex: 1;
+  text-transform: uppercase;
+}
+
+.pp-bestsellers__price {
+  flex-shrink: 0;
+}

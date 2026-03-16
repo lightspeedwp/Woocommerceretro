@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CaretDown, CaretUp, X } from '@phosphor-icons/react';
+import { CaretDown, CaretUp, X } from '../../utils/phosphor-compat';
 
 /**
  * ShopFilterSidebar Pattern

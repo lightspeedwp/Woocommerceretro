@@ -1,6 +1,6 @@
 import React from "react";
-import { CaretLeft as ChevronLeft, CaretRight as ChevronRight, DotsThree as MoreHorizontal } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight, DotsThree as MoreHorizontal } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
 
 export const Pagination = ({ className, id, style, children }: any) => {
   return <nav id={id} style={style} role="navigation" aria-label="pagination" className={cn("wp-block-pagination", className)}>{children}</nav>;

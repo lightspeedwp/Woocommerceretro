@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useCallback, forwardRef } from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../utils/cn";
 
 /**
  * Slider Component

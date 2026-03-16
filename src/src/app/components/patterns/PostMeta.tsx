@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Calendar, User, ChatCircle as MessageCircle } from '@phosphor-icons/react';
+import { Calendar, User, ChatCircle as MessageCircle } from '../../utils/phosphor-compat';
 
 interface PostMetaProps {
   author: string;

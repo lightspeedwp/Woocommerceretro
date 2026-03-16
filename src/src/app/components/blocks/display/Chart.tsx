@@ -2,7 +2,7 @@
 
 import React, { useContext, useId, useMemo, createContext } from "react";
 import * as RechartsPrimitive from "recharts";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../utils/cn";
 
 const THEMES: Record<string, string> = { light: "", dark: ".dark" };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../utils/cn";
 
 interface CollapsibleContextValue {
   open: boolean;

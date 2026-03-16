@@ -2,9 +2,9 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react@8.6.0";
-import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
-import { Button } from "@/components/blocks/design/Buttons";
+import { ArrowLeft, ArrowRight } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
+import { Button } from "../design/Buttons";
 
 const CarouselContext = createContext<any>(null);
 

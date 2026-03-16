@@ -57,15 +57,12 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
       style={{
         width: size,
         height: size,
-        margin: '0 auto',
       }}
     >
       {/* 3D Scene */}
       <div 
         className="retro-coin-scene"
         style={{
-          width: '100%',
-          height: '100%',
           perspective: `${size * 4}px`,
         }}
       >
@@ -73,10 +70,6 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
         <div
           className={`retro-coin ${shouldAnimate ? 'retro-coin--spinning' : ''}`}
           style={{
-            width: '100%',
-            height: '100%',
-            position: 'relative',
-            transformStyle: 'preserve-3d',
             animation: shouldAnimate 
               ? `coinRotate ${animationDuration}s linear infinite` 
               : 'none',
@@ -88,10 +81,6 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
           <div 
             className="retro-coin__face retro-coin__face--front"
             style={{
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              borderRadius: '50%',
               background: `radial-gradient(circle at 30% 30%, ${glowColor}, ${adjustBrightness(glowColor, -30)})`,
               border: `3px solid ${glowColor}`,
               boxShadow: `
@@ -99,11 +88,6 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
                 0 0 40px ${glowColor}80,
                 inset 0 0 20px ${glowColor}40
               `,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backfaceVisibility: 'hidden',
-              transform: 'translateZ(5px)',
             }}
           >
             {showLabel && (
@@ -125,10 +109,6 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
           <div 
             className="retro-coin__face retro-coin__face--back"
             style={{
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              borderRadius: '50%',
               background: `radial-gradient(circle at 70% 30%, ${glowColor}, ${adjustBrightness(glowColor, -40)})`,
               border: `3px solid ${glowColor}`,
               boxShadow: `
@@ -136,11 +116,6 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
                 0 0 40px ${glowColor}80,
                 inset 0 0 20px ${glowColor}40
               `,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backfaceVisibility: 'hidden',
-              transform: 'translateZ(-5px) rotateY(180deg)',
             }}
           >
             {showLabel && (
@@ -162,15 +137,9 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
           <div
             className="retro-coin__edge"
             style={{
-              position: 'absolute',
-              width: '100%',
               height: 10,
-              top: '50%',
-              left: 0,
               marginTop: -5,
               background: `linear-gradient(to right, ${adjustBrightness(glowColor, -50)}, ${glowColor}, ${adjustBrightness(glowColor, -50)})`,
-              transformStyle: 'preserve-3d',
-              transform: 'rotateX(90deg)',
             }}
           />
         </div>
@@ -181,47 +150,18 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
         <div
           className="retro-coin-glow"
           style={{
-            position: 'absolute',
             top: '50%',
             left: '50%',
             width: size * 1.3,
             height: size * 0.3,
             marginTop: size * 0.4,
             marginLeft: -size * 0.65,
-            borderRadius: '50%',
             background: `radial-gradient(ellipse, ${glowColor}40, transparent 70%)`,
             filter: 'blur(15px)',
             animation: `glowPulse ${animationDuration * 2}s ease-in-out infinite`,
           }}
         />
       )}
-
-      {/* Inline keyframes */}
-      <style>{`
-        @keyframes coinRotate {
-          from {
-            transform: rotateY(0deg);
-          }
-          to {
-            transform: rotateY(360deg);
-          }
-        }
-
-        @keyframes glowPulse {
-          0%, 100% {
-            opacity: 0.4;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.1);
-          }
-        }
-
-        .retro-coin--spinning {
-          transform-style: preserve-3d;
-        }
-      `}</style>
     </div>
   );
 };

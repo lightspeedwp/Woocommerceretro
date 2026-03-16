@@ -1,0 +1,39 @@
+/* File: src/src/styles/tokens/color.ref.dark.css
+   What this is: Dark mode literal values.
+*/
+
+.dark {
+  color-scheme: dark;
+
+  --wp--custom--color--background: #151A1E;
+  --wp--custom--color--foreground: #F2EEE6;
+
+  --wp--custom--color--surface-1: #1B2228;
+  --wp--custom--color--surface-2: #232D35;
+
+  --wp--custom--color--border: #2A3A46;
+  --wp--custom--color--muted: #232D35;
+  --wp--custom--color--muted-foreground: #B7C3CC;
+
+  /* Keep brand stable across modes */
+  --wp--custom--color--primary: #FFC533;
+  --wp--custom--color--primary-foreground: #1E2630;
+
+  --wp--custom--color--secondary: #6BBF59;
+  --wp--custom--color--secondary-foreground: #1E2630;
+
+  --wp--custom--color--accent: #D4143D;
+  --wp--custom--color--accent-foreground: #F2EEE6;
+
+  --wp--custom--color--link: #00FFF9;
+  --wp--custom--color--ring: #00FFF9;
+
+  --wp--custom--color--success: #86EFAC;
+  --wp--custom--color--warning: #FBBF24;
+  --wp--custom--color--error: #FCA5A5;
+
+  --wp--custom--color--neon-cyan: #00FFF9;
+  --wp--custom--color--neon-pink: #FF00FF;
+  --wp--custom--color--neon-lime: #CCFF00;
+  --wp--custom--color--neon-yellow: #FFC533;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckoutInput } from './ui/CheckoutInput';
-import { CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { CaretDown as ChevronDown } from '../../../utils/phosphor-compat';
 
 /**
  * BillingAddress Component

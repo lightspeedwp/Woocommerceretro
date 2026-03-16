@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../design/Buttons';
-import { ShoppingCart, Truck, ArrowsClockwise as RefreshCw, Lock } from '@phosphor-icons/react';
+import { ShoppingCart, Truck, ArrowsClockwise as RefreshCw, Lock } from '../../../utils/phosphor-compat';
 
 interface Variation {
   id: string;

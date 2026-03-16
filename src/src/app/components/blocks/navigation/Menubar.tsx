@@ -1,6 +1,6 @@
 import React from "react";
-import { Check, CaretRight as ChevronRight, Circle } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
+import { Check, CaretRight as ChevronRight, Circle } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
 
 export const Menubar = ({ className, children, id, style }: any) => {
   return <div id={id} style={style} className={cn("wp-block-menubar", className)}>{children}</div>;

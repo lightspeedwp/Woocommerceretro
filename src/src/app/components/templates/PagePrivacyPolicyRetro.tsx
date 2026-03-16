@@ -5,7 +5,7 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { Scroll } from '@phosphor-icons/react';
+import { Scroll } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

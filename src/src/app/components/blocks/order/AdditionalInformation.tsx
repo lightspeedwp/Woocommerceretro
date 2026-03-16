@@ -12,7 +12,7 @@ export const AdditionalInformation = () => {
       <h2 className="wp-block-heading funky-gradient-text">Additional information</h2>
       <div className="funky-glass-panel funky-glow-border--cyan wp-order-additional-info">
         <div>
-          <p className="wp-text-bold text-neon-cyan">Order notes</p>
+          <p className="wp-text-bold wp-order-text--sky">Order notes</p>
           <p className="wp-text-italic">No order notes were added.</p>
         </div>
       </div>

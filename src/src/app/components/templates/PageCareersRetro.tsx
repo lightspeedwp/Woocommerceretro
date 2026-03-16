@@ -21,7 +21,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { Heart, Coffee, GraduationCap, Globe, Users, Briefcase, MapPin, Clock, ArrowRight, Envelope } from '@phosphor-icons/react';
+import { Heart, Coffee, GraduationCap, Globe, Users, Briefcase, MapPin, Clock, ArrowRight, Envelope } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

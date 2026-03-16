@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container } from '../common/Container';
-import { X } from '@phosphor-icons/react';
+import { X } from '../../utils/phosphor-compat';
 
 /**
  * StoreNotices Component (Template Part)

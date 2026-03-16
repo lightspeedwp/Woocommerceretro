@@ -6,7 +6,7 @@
  * 2. ASCII characters only
  */
 
-import { Truck, ArrowCounterClockwise as RotateCcw, Shield, Headphones } from '@phosphor-icons/react';
+import { Truck, ArrowCounterClockwise as RotateCcw, Shield, Headphones } from '../utils/phosphor-compat';
 
 /**
  * @typedef {Object} HeroContent

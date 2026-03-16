@@ -7,7 +7,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { User, Key, Joystick as Gamepad, SignIn, UserPlus } from '@phosphor-icons/react';
+import { User, Key, Joystick as Gamepad, SignIn, UserPlus } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { ShareNetwork as Share2, Calendar, User } from '@phosphor-icons/react';
+import { ShareNetwork as Share2, Calendar, User } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

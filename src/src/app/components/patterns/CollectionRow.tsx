@@ -1,5 +1,5 @@
 import React from 'react';
-import { CaretRight as ChevronRight } from '@phosphor-icons/react';
+import { CaretRight as ChevronRight } from '../../utils/phosphor-compat';
 import { ContentSection } from './sections/ContentSection';
 import { MutedSection } from './sections/MutedSection';
 import { Typography } from '../common/Typography';

@@ -13,7 +13,7 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Button } from '../blocks/design/Buttons';
 import { VariantSelector } from '../blocks/product/VariantSelector';
 import { useVariantSelection } from '../../hooks/useVariantSelection';
-import { X, Heart, Star, ShoppingCart, ArrowSquareOut as ExternalLink, Minus, Plus, Check, WarningCircle as AlertCircle } from '@phosphor-icons/react';
+import { X, Heart, Star, ShoppingCart, ExternalLink, Minus, Plus, Check, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
 const EMPTY_VARIABLE_PRODUCT = { variations: [] as any[], attributes: [] as any[] };
@@ -149,9 +149,7 @@ export const QuickView = () => {
   };
 
   const handleViewFullProduct = () => {
-    const productUrl = product.type === 'variable'
-      ? '/variable-product/' + product.slug
-      : '/product/' + product.id;
+    const productUrl = '/product/' + (product.slug || product.id);
     closeQuickView();
     navigate(productUrl);
   };

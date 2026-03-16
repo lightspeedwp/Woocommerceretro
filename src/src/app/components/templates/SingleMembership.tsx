@@ -1,249 +1,478 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
-import { Crown, Lock, Gift, Check, Star } from '@phosphor-icons/react';
-import { Layout } from '../parts/Layout';
-import { Container } from '../common/Container';
-import { Typography } from '../common/Typography';
-import { Heading } from '../common/Heading';
-import { TestimonialCarousel } from '../patterns/TestimonialCarousel';
-import { FAQSection } from '../patterns/FAQSection';
-import { TrustBand } from '../patterns/TrustBand';
-import { membershipPlans, memberBenefits, memberTestimonials, membershipFAQs } from '../../data/memberships';
-
 /**
- * SingleMembership Template — Funky Redesign (Phase 9)
+ * SingleMembership Template — Retro Redesign
+ *
+ * Single product page for membership tiers using WooCommerce Memberships.
+ * Reads the `:slug` route param to display the correct membership plan.
+ *
+ * **Route:** /membership/:slug (e.g. /membership/premium)
+ *
+ * **Features:**
+ * - Retro handheld gaming aesthetic (Game Boy inspired)
+ * - Route-param-driven plan selection
+ * - Billing period toggle (monthly / annual)
+ * - ROI value calculator
+ * - Benefits showcase
+ * - FAQ accordion section
+ * - Full dark mode support
+ * - WCAG AA 2.2 compliant
+ * - Responsive layout (320px – 1920px)
+ *
+ * **Styling:** BEM classes (.retro-*) in /src/styles/sections/membership-retro.css
+ * **Dark Mode:** Automatic via retro theme tokens
+ *
+ * @template
  */
+
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router';
+import { Crown, Lock, Gift, Check, Star, ArrowRight, CaretDown } from '../../utils/phosphor-compat';
+import { HeaderRetro } from '../parts/HeaderRetro';
+import { FooterRetro } from '../parts/FooterRetro';
+import {
+  membershipPlans,
+  memberBenefits,
+  memberTestimonials,
+  membershipFAQs,
+} from '../../data/memberships';
+
 export const SingleMembership = () => {
-  const [selectedPlan, setSelectedPlan] = useState('premium');
+  const { slug } = useParams<{ slug: string }>();
+
+  // Find the plan matching the slug, fallback to premium
+  const initialPlan = membershipPlans.find((p) => p.id === slug) || membershipPlans[1];
+  const [selectedPlan, setSelectedPlan] = useState(initialPlan.id);
   const [billingPeriod, setBillingPeriod] = useState('annual');
 
   const currentPlan = membershipPlans.find((p) => p.id === selectedPlan) || membershipPlans[1];
   const currentPrice = billingPeriod === 'annual' ? currentPlan.annualPrice : currentPlan.monthlyPrice;
 
-  const transformedTestimonials = memberTestimonials.map((t) => ({
-    id: t.id,
-    quote: t.quote,
-    author: t.name,
-    role: `${t.tier} - Since ${t.memberSince}`,
-    avatar: t.image,
-    rating: t.rating,
-  }));
-
-  const transformedFAQs = membershipFAQs.map((f) => ({
-    question: f.question,
-    answer: f.answer,
-  }));
+  // ROI calculation
+  const discountRate = parseFloat(currentPlan.discount) / 100;
+  const monthlySavings = 200 * discountRate; // Based on £200 avg spend
+  const netSavings = monthlySavings - currentPlan.monthlyPrice;
 
   return (
-    <Layout>
-      <Container className="wp-product-page">
+    <>
+      <HeaderRetro />
+      <main className="retro-main">
         {/* Breadcrumbs */}
-        <nav className="wp-breadcrumbs" aria-label="Breadcrumb">
-          <ol className="wp-breadcrumbs__list">
-            <li><Link to="/">Home</Link></li>
-            <li className="wp-breadcrumbs__separator">/</li>
-            <li><Link to="/membership">Membership</Link></li>
-            <li className="wp-breadcrumbs__separator">/</li>
-            <li className="wp-breadcrumbs__current">{`${currentPlan.name} Membership`}</li>
-          </ol>
-        </nav>
-
-        <div className="wp-product-layout">
-          {/* Left: Plan Selection */}
-          <div className="wp-product-info">
-            <div className="wp-badge-pill">
-              <Crown size={14} aria-hidden="true" />
-              <Typography variant="caption" className="wp-badge-pill__text">Exclusive Membership</Typography>
-            </div>
-
-            <Heading level={1} className="wp-product-title">{`${currentPlan.name} Membership`}</Heading>
-
-            <Typography className="wp-product-description">
-              {`${currentPlan.description}. Get ${currentPlan.discount} off every purchase, exclusive products, and VIP perks that pay for themselves.`}
-            </Typography>
-
-            {/* Billing Period Toggle */}
-            <div className="wp-billing-toggle">
-              <div className="wp-billing-toggle__wrapper">
-                <button
-                  onClick={() => setBillingPeriod('monthly')}
-                  className={`wp-billing-toggle__btn${billingPeriod === 'monthly' ? ' wp-billing-toggle__btn--active' : ''}`}
-                >
-                  <Typography className="wp-billing-toggle__label">Monthly</Typography>
-                </button>
-                <button
-                  onClick={() => setBillingPeriod('annual')}
-                  className={`wp-billing-toggle__btn${billingPeriod === 'annual' ? ' wp-billing-toggle__btn--active' : ''}`}
-                >
-                  <Typography className="wp-billing-toggle__label">Annual</Typography>
-                  <span className="wp-billing-toggle__badge">Save 20%</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Plan Selection */}
-            <div className="wp-plan-selector">
-              {membershipPlans.map((plan) => {
-                const price = billingPeriod === 'annual' ? plan.annualPrice : plan.monthlyPrice;
-                return (
-                  <button
-                    key={plan.id}
-                    onClick={() => setSelectedPlan(plan.id)}
-                    className={`wp-plan-option${selectedPlan === plan.id ? ' wp-plan-option--active' : ''}`}
-                  >
-                    <div className="wp-plan-option__content">
-                      <div className={`wp-radio-indicator${selectedPlan === plan.id ? ' wp-radio-indicator--checked' : ''}`}>
-                        {selectedPlan === plan.id && <div className="wp-radio-indicator__dot" />}
-                      </div>
-
-                      <div className="wp-plan-option__details">
-                        <div className="wp-plan-option__header">
-                          <Typography className="wp-plan-option__name">{plan.name}</Typography>
-                          {plan.badge && (
-                            <span className="wp-plan-option__badge">{plan.badge}</span>
-                          )}
-                        </div>
-                        <Typography variant="caption" className="wp-plan-option__desc">{`${plan.discount} off everything`}</Typography>
-                      </div>
-                    </div>
-
-                    <div className="wp-plan-option__pricing">
-                      <Typography className="wp-plan-option__price">{`£${price}`}</Typography>
-                      <Typography variant="caption" className="wp-plan-option__interval">
-                        {`/${billingPeriod === 'annual' ? 'year' : 'month'}`}
-                      </Typography>
-                      {billingPeriod === 'annual' && (
-                        <Typography variant="caption" className="wp-plan-option__savings">
-                          {`Save £${plan.annualSavings}`}
-                        </Typography>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Add to Cart */}
-            <button className="wp-button-primary wp-button-full" type="button">
-              {`Become a ${currentPlan.name} Member`}
-            </button>
-
-            <Typography variant="caption" className="wp-guarantee-text">
-              <Lock size={14} className="wp-icon-inline" aria-hidden="true" />
-              30-day money-back guarantee • Cancel anytime
-            </Typography>
-
-            {/* Value Calculator */}
-            <div className="wp-roi-card">
-              <div className="wp-roi-card__header">
-                <div className="wp-roi-card__icon-wrapper">
-                  <Gift size={20} className="wp-icon-white" aria-hidden="true" />
-                </div>
-                <div>
-                  <Typography className="wp-roi-card__title">Your Membership Pays for Itself!</Typography>
-                  <Typography variant="caption" className="wp-roi-card__subtitle">Based on average monthly spend of £200</Typography>
-                </div>
-              </div>
-
-              <div className="wp-roi-card__content">
-                <div className="wp-roi-row">
-                  <span>{`Monthly savings (${currentPlan.discount} off):`}</span>
-                  <span className="wp-roi-value">{`£${(200 * parseFloat(currentPlan.discount) / 100).toFixed(2)}`}</span>
-                </div>
-                <div className="wp-roi-row">
-                  <span>Membership cost:</span>
-                  <span className="wp-roi-value">{`-£${currentPlan.monthlyPrice}`}</span>
-                </div>
-                <div className="wp-roi-row wp-roi-row--total">
-                  <span>Net monthly savings:</span>
-                  <span className="wp-roi-value--total">
-                    {`£${((200 * parseFloat(currentPlan.discount) / 100) - currentPlan.monthlyPrice).toFixed(2)}`}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Benefits & Features */}
-          <div className="wp-product-features">
-            <div className="wp-features-list-wrapper">
-              <Heading level={2} className="wp-section-heading">What's Included</Heading>
-
-              <div className="wp-features-list">
-                {currentPlan.features.map((feature: any, index: number) => (
-                  <div key={index} className="wp-feature-item">
-                    <div className="wp-feature-item__icon">
-                      <Check size={16} className="wp-icon-primary" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <Typography className="wp-feature-item__title">{feature.text}</Typography>
-                      {feature.description && (
-                        <Typography variant="caption" className="wp-feature-item__desc">{feature.description}</Typography>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="wp-perks-card">
-              <div className="wp-perks-card__header">
-                <Crown size={20} className="wp-icon-primary" aria-hidden="true" />
-                <Heading level={3}>Exclusive Perks</Heading>
-              </div>
-
-              <ul className="wp-perks-list">
-                {currentPlan.exclusivePerks.map((perk: string, index: number) => (
-                  <li key={index} className="wp-perks-item">
-                    <Star size={16} className="wp-icon-primary" aria-hidden="true" />
-                    <Typography className="wp-perks-text">{perk}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="retro-section" style={{ paddingBottom: 0 }}>
+          <div className="retro-container">
+            <nav className="retro-breadcrumbs" aria-label="Breadcrumb">
+              <ol className="retro-breadcrumbs__list">
+                <li>
+                  <Link to="/" className="retro-breadcrumbs__link retro-font-body">
+                    Home
+                  </Link>
+                </li>
+                <li className="retro-breadcrumbs__separator" aria-hidden="true">
+                  /
+                </li>
+                <li>
+                  <Link to="/memberships" className="retro-breadcrumbs__link retro-font-body">
+                    Memberships
+                  </Link>
+                </li>
+                <li className="retro-breadcrumbs__separator" aria-hidden="true">
+                  /
+                </li>
+                <li className="retro-breadcrumbs__current retro-font-body" aria-current="page">
+                  {currentPlan.name} Membership
+                </li>
+              </ol>
+            </nav>
           </div>
         </div>
 
-        {/* Member Benefits */}
-        <section className="wp-section-benefits">
-          <div className="wp-section-header">
-            <Heading level={2} className="wp-section-title">Why Members Love Us</Heading>
-            <Typography className="wp-section-subtitle">More than just discounts - it's a complete VIP experience.</Typography>
-          </div>
-
-          <div className="wp-grid-4">
-            {memberBenefits.map((benefit: any, index: number) => {
-              const Icon = benefit.icon;
-              return (
-                <div key={index} className="wp-benefit-item">
-                  <div className={`wp-benefit-icon ${benefit.bg}`}>
-                    <Icon size={32} className={benefit.color} aria-hidden="true" />
-                  </div>
-                  <Heading level={3} className="wp-benefit-title">{benefit.title}</Heading>
-                  <Typography className="wp-benefit-desc">{benefit.description}</Typography>
+        {/* Product Section */}
+        <section className="retro-section" aria-labelledby="mem-product-heading">
+          <div className="retro-container">
+            <div className="retro-product-layout">
+              {/* Left: Plan Info & Selection */}
+              <div className="retro-product-info-panel">
+                <div className="retro-product-badge-row">
+                  <span className="retro-badge">
+                    <Crown size={14} weight="bold" aria-hidden="true" /> EXCLUSIVE MEMBERSHIP
+                  </span>
+                  {currentPlan.badge && (
+                    <span className="retro-badge retro-badge--popular">
+                      {currentPlan.badge.toUpperCase()}
+                    </span>
+                  )}
                 </div>
-              );
-            })}
+
+                <h1
+                  id="mem-product-heading"
+                  className="retro-font-display retro-bold retro-product-title"
+                >
+                  {currentPlan.name.toUpperCase()} MEMBERSHIP
+                </h1>
+
+                <p className="retro-font-body retro-product-desc">
+                  {currentPlan.description}. Get {currentPlan.discount} off every purchase,
+                  exclusive products, and VIP perks that pay for themselves.
+                </p>
+
+                {/* Billing Toggle */}
+                <div className="retro-billing-toggle">
+                  <button
+                    onClick={() => setBillingPeriod('monthly')}
+                    className={`retro-toggle-btn retro-font-display ${billingPeriod === 'monthly' ? 'retro-toggle-btn--active' : ''}`}
+                    aria-pressed={billingPeriod === 'monthly'}
+                  >
+                    MONTHLY
+                  </button>
+                  <button
+                    onClick={() => setBillingPeriod('annual')}
+                    className={`retro-toggle-btn retro-font-display ${billingPeriod === 'annual' ? 'retro-toggle-btn--active' : ''}`}
+                    aria-pressed={billingPeriod === 'annual'}
+                  >
+                    ANNUAL (SAVE 20%)
+                  </button>
+                </div>
+
+                {/* Plan Selector */}
+                <div className="retro-plan-selector">
+                  <p className="retro-font-display retro-bold retro-plan-selector__label">
+                    SELECT YOUR TIER:
+                  </p>
+
+                  <div className="retro-plan-options">
+                    {membershipPlans.map((plan) => {
+                      const price =
+                        billingPeriod === 'annual' ? plan.annualPrice : plan.monthlyPrice;
+                      return (
+                        <button
+                          key={plan.id}
+                          onClick={() => setSelectedPlan(plan.id)}
+                          className={`retro-plan-option ${selectedPlan === plan.id ? 'retro-plan-option--active' : ''}`}
+                          aria-pressed={selectedPlan === plan.id}
+                        >
+                          <div className="retro-plan-option__left">
+                            <div
+                              className={`retro-radio ${selectedPlan === plan.id ? 'retro-radio--checked' : ''}`}
+                            >
+                              {selectedPlan === plan.id && <div className="retro-radio__dot" />}
+                            </div>
+                            <div className="retro-plan-option__details">
+                              <span className="retro-font-display retro-bold retro-plan-option__name">
+                                {plan.name.toUpperCase()}
+                              </span>
+                              {plan.badge && (
+                                <span className="retro-badge retro-badge--small">
+                                  {plan.badge.toUpperCase()}
+                                </span>
+                              )}
+                              <span className="retro-font-body retro-plan-option__trial">
+                                {plan.discount} off everything
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="retro-plan-option__right">
+                            <span className="retro-font-display retro-plan-option__price">
+                              £{price}
+                            </span>
+                            <span className="retro-font-body retro-plan-option__interval">
+                              /{billingPeriod === 'annual' ? 'year' : 'month'}
+                            </span>
+                            {billingPeriod === 'annual' && (
+                              <span className="retro-font-body retro-plan-option__savings">
+                                Save £{plan.annualSavings}
+                              </span>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <button
+                  className="retro-button retro-button--primary retro-font-display retro-button--full"
+                  type="button"
+                >
+                  BECOME A {currentPlan.name.toUpperCase()} MEMBER{' '}
+                  <ArrowRight size={20} weight="bold" />
+                </button>
+
+                <p className="retro-font-body retro-guarantee-text">
+                  <Lock size={14} weight="bold" aria-hidden="true" /> 30-day money-back guarantee •
+                  Cancel anytime
+                </p>
+
+                {/* ROI Card */}
+                <div className="retro-card retro-card-highlight retro-roi-card">
+                  <div className="retro-roi-card__header">
+                    <Gift size={24} weight="bold" className="retro-neon-icon" aria-hidden="true" />
+                    <div>
+                      <h3 className="retro-font-display retro-bold">
+                        YOUR MEMBERSHIP PAYS FOR ITSELF!
+                      </h3>
+                      <p className="retro-font-body">Based on average monthly spend of £200</p>
+                    </div>
+                  </div>
+
+                  <div className="retro-roi-stats retro-roi-stats--compact">
+                    <div className="retro-roi-row">
+                      <span className="retro-font-body">
+                        Monthly savings ({currentPlan.discount} off):
+                      </span>
+                      <span className="retro-font-display retro-bold retro-neon-text">
+                        £{monthlySavings.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="retro-roi-row">
+                      <span className="retro-font-body">Membership cost:</span>
+                      <span className="retro-font-display">-£{currentPlan.monthlyPrice}</span>
+                    </div>
+                    <div className="retro-roi-row retro-roi-row--total">
+                      <span className="retro-font-body retro-bold">Net monthly savings:</span>
+                      <span className="retro-font-display retro-bold retro-neon-text">
+                        £{netSavings.toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Features & Perks */}
+              <div className="retro-product-features-panel">
+                {/* Features Card */}
+                <div className="retro-card retro-features-card">
+                  <h3 className="retro-font-display retro-bold retro-features-card__title">
+                    WHAT'S INCLUDED
+                  </h3>
+                  <ul className="retro-features-list">
+                    {currentPlan.features.map((feature: any, index: number) => (
+                      <li key={index} className="retro-feature-item">
+                        <Check
+                          size={18}
+                          weight="bold"
+                          className="retro-feature-check"
+                          aria-hidden="true"
+                        />
+                        <div>
+                          <span className="retro-font-body retro-bold">{feature.text}</span>
+                          {feature.description && (
+                            <span className="retro-font-body retro-feature-desc">
+                              {feature.description}
+                            </span>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Exclusive Perks Card */}
+                <div className="retro-card retro-card-glow retro-perks-card">
+                  <div className="retro-perks-card__header">
+                    <Crown size={24} weight="bold" className="retro-neon-icon" aria-hidden="true" />
+                    <h3 className="retro-font-display retro-bold">EXCLUSIVE PERKS</h3>
+                  </div>
+                  <ul className="retro-perks-list">
+                    {currentPlan.exclusivePerks.map((perk: string, index: number) => (
+                      <li key={index} className="retro-perk-item">
+                        <Star
+                          size={16}
+                          weight="fill"
+                          className="retro-star-icon"
+                          aria-hidden="true"
+                        />
+                        <span className="retro-font-body">{perk}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* 3D View Link */}
+                <Link
+                  to={`/membership/3d/${currentPlan.id}`}
+                  className="retro-button retro-button--secondary retro-font-display retro-button--full"
+                >
+                  VIEW IN 3D <ArrowRight size={20} weight="bold" />
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="wp-section-testimonials">
-          <Heading level={2} className="wp-section-heading">Member Success Stories</Heading>
-          <TestimonialCarousel testimonials={transformedTestimonials} />
+        {/* Benefits Section */}
+        <section className="retro-section" aria-labelledby="mem-benefits-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2
+                id="mem-benefits-heading"
+                className="retro-font-display retro-bold retro-section-title"
+              >
+                WHY MEMBERS LOVE US
+              </h2>
+              <p className="retro-font-body retro-section-desc">
+                More than just discounts — it's a complete VIP experience.
+              </p>
+            </div>
+
+            <div className="retro-grid retro-grid-4">
+              {memberBenefits.map((benefit: any, index: number) => {
+                const Icon = benefit.icon;
+                return (
+                  <div key={index} className="retro-card retro-card-glow">
+                    <div className="retro-feature-icon">
+                      <Icon size={32} weight="bold" aria-hidden="true" />
+                    </div>
+                    <h3 className="retro-card-title retro-font-display retro-bold">
+                      {benefit.title.toUpperCase()}
+                    </h3>
+                    <p className="retro-card-desc retro-font-body">{benefit.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
-        {/* FAQ */}
-        <section className="wp-section-faq">
-          <Heading level={2} className="wp-section-heading">Membership Questions</Heading>
-          <FAQSection items={transformedFAQs} />
+        {/* Testimonials Section */}
+        <section
+          className="retro-section retro-section--testimonials"
+          aria-labelledby="mem-testimonials-heading"
+        >
+          <div className="retro-container">
+            <h2
+              id="mem-testimonials-heading"
+              className="retro-font-display retro-bold retro-section-title"
+            >
+              MEMBER SUCCESS STORIES
+            </h2>
+
+            <div className="retro-grid retro-grid-2">
+              {memberTestimonials.slice(0, 4).map((testimonial) => (
+                <div key={testimonial.id} className="retro-card retro-testimonial-card">
+                  <div className="retro-testimonial-header">
+                    <div className="retro-testimonial-avatar">
+                      <img
+                        src={testimonial.image}
+                        alt=""
+                        className="retro-testimonial-avatar__img"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div>
+                      <p className="retro-font-display retro-bold">{testimonial.name}</p>
+                      <p className="retro-font-body retro-testimonial-tier">
+                        {testimonial.tier} — Since {testimonial.memberSince}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="retro-stars retro-stars--small">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star
+                        key={s}
+                        size={14}
+                        weight={s <= testimonial.rating ? 'fill' : 'regular'}
+                        className="retro-star-icon"
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <blockquote className="retro-font-body retro-testimonial-quote">
+                    "{testimonial.quote}"
+                  </blockquote>
+                  <p className="retro-font-body retro-testimonial-savings">
+                    Total saved: <strong>{testimonial.savings}</strong>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* Trust Band */}
-        <section className="wp-section-trust">
-          <TrustBand />
+        {/* FAQ Section */}
+        <section className="retro-section retro-section--faq" aria-labelledby="mem-single-faq-heading">
+          <div className="retro-container">
+            <div className="retro-section-header">
+              <h2
+                id="mem-single-faq-heading"
+                className="retro-font-display retro-bold retro-section-title"
+              >
+                MEMBERSHIP QUESTIONS
+              </h2>
+              <p className="retro-font-body retro-section-desc">
+                Everything you need to know about becoming a member.
+              </p>
+            </div>
+
+            <MemFaqAccordion items={membershipFAQs} />
+          </div>
         </section>
-      </Container>
-    </Layout>
+
+        {/* CTA Section */}
+        <section className="retro-section retro-section--cta" aria-label="Membership call to action">
+          <div className="retro-container">
+            <div className="retro-cta-card">
+              <div className="retro-cta-icon">
+                <Crown size={64} weight="bold" className="retro-neon-icon" aria-hidden="true" />
+              </div>
+              <h2 className="retro-font-display retro-bold retro-cta-title">
+                READY TO JOIN OUR EXCLUSIVE COMMUNITY?
+              </h2>
+              <p className="retro-font-body retro-cta-desc">
+                Start saving today with up to 30% off every purchase. Cancel anytime, no commitment.
+              </p>
+              <Link
+                to="/memberships"
+                className="retro-button retro-button--primary retro-font-display"
+              >
+                VIEW ALL TIERS <ArrowRight size={20} weight="bold" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+      <FooterRetro />
+    </>
   );
-}
+};
+
+/* Private FAQ Accordion — Retro Styled */
+
+const MemFaqAccordion = ({
+  items,
+}: {
+  items: Array<{ id: string; question: string; answer: string }>;
+}) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className="retro-faq-list">
+      {items.map((item, index) => (
+        <div key={item.id} className="retro-faq-item">
+          <button
+            className="retro-faq-trigger"
+            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            aria-expanded={openIndex === index}
+            aria-controls={`mem-single-faq-panel-${item.id}`}
+          >
+            <span className="retro-faq-question retro-font-body retro-bold">{item.question}</span>
+            <CaretDown
+              size={20}
+              weight="bold"
+              className={`retro-faq-chevron ${openIndex === index ? 'retro-faq-chevron--open' : ''}`}
+              aria-hidden="true"
+            />
+          </button>
+          {openIndex === index && (
+            <div
+              id={`mem-single-faq-panel-${item.id}`}
+              className="retro-faq-answer"
+              role="region"
+            >
+              <p className="retro-font-body">{item.answer}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};

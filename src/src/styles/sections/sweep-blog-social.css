@@ -1,0 +1,228 @@
+/* ========================================
+   SWEEP — Related Posts Section
+   Source: sweep-cleanup.css lines 506-624
+   ======================================== */
+
+.wp-related-posts {
+  padding-block: var(--wp--preset--spacing--60);
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-related-posts__heading {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-related-posts__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--60);
+}
+
+@media (min-width: 768px) {
+  .wp-related-posts__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-related-posts__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.wp-related-posts__card {
+  background: var(--wp--preset--color--surface);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  border: 1px solid var(--wp--preset--color--border);
+  transition: border-color var(--wp--preset--transition--base) ease;
+}
+
+.wp-related-posts__card:hover {
+  border-color: var(--wp--preset--color--accent);
+}
+
+.wp-related-posts__image-wrapper {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.wp-related-posts__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.wp-related-posts__card:hover .wp-related-posts__image {
+  transform: scale(1.05);
+}
+
+.wp-related-posts__content {
+  padding: var(--wp--preset--spacing--50);
+}
+
+.wp-related-posts__category {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-related-posts__category-label {
+  color: var(--wp--preset--color--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wp-related-posts__title {
+  margin-bottom: var(--wp--preset--spacing--20);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-related-posts__card:hover .wp-related-posts__title {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-related-posts__excerpt {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-related-posts__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wp-related-posts__date {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-related-posts__read-more {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--wp--preset--color--accent);
+  transition: gap 200ms ease;
+}
+
+.wp-related-posts__card:hover .wp-related-posts__read-more {
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* ========================================
+   SWEEP — Social Media Feed Section
+   Source: sweep-cleanup.css lines 625-732
+   ======================================== */
+
+.wp-social-feed__header {
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-align: center;
+}
+
+.wp-social-feed__heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-social-feed__heading-icon {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-social-feed__description {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-social-feed__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--social-cols-mobile, 3), 1fr);
+  gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .wp-social-feed__grid {
+    grid-template-columns: repeat(var(--social-cols-tablet, 4), 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-social-feed__grid {
+    grid-template-columns: repeat(var(--social-cols-desktop, 6), 1fr);
+  }
+}
+
+.wp-social-feed__post {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--skeleton, #e5e7eb);
+}
+
+.wp-social-feed__post:focus-visible {
+  outline: 2px solid var(--wp--preset--color--accent);
+  outline-offset: 2px;
+}
+
+.wp-social-feed__post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.wp-social-feed__post:hover .wp-social-feed__post-image {
+  transform: scale(1.1);
+}
+
+.wp-social-feed__post-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--40);
+  padding: var(--wp--preset--spacing--40);
+  transition: opacity 300ms ease;
+}
+
+.wp-social-feed__post:hover .wp-social-feed__post-overlay {
+  opacity: 1;
+}
+
+.wp-social-feed__post-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+  color: #fff;
+}
+
+.wp-social-feed__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-social-feed__caption {
+  color: #fff;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

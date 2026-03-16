@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Bag as ShoppingBag } from '@phosphor-icons/react';
+import { Bag as ShoppingBag } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { MutedSection } from './sections/MutedSection';
 import { ContentSection } from './sections/ContentSection';

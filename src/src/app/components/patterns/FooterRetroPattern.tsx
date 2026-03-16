@@ -1,58 +1,68 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { TwitterLogo, InstagramLogo, YoutubeLogo, DiscordLogo, Truck, ArrowUUpLeft, ShieldCheck } from '@phosphor-icons/react';
-
 /**
  * FooterRetroPattern
  *
- * Retro-themed footer with trust banner, links, social icons, and newsletter.
+ * Retro-themed footer matching the design reference:
+ * "FOLLOW THE ADVENTURE" with social icons, email input, and SUBSCRIBE button.
  *
- * **Styling:** BEM (.retro-footer__*, .retro-copyright) in /src/styles/sections/retro-patterns.css
- * **Shared tokens:** /src/styles/sections/front-page-funky.css
+ * **Styling:** BEM (.pp-footer__*) 
+ * **WCAG:** Semantic footer, aria-labels, 44px touch targets
  */
+
+import React from 'react';
+import { Link } from 'react-router';
+import { Twitter, Instagram, Youtube, Gamepad2, Bookmark } from 'lucide-react';
+
 export const FooterRetroPattern = () => {
   return (
-    <footer className="retro-footer-container">
-      {/* Trust Banner */}
-      <div className="retro-trust-banner retro-font-display retro-bold">
-        <div className="retro-trust-item"><Truck size={20} /> FREE SHIPPING $50+</div>
-        <div className="retro-trust-item"><ArrowUUpLeft size={20} /> EASY RETURNS</div>
-        <div className="retro-trust-item"><ShieldCheck size={20} /> LEVEL UP REWARDS</div>
-      </div>
-
-      {/* Main Footer Box */}
-      <div className="retro-footer">
-        <div className="retro-footer-left">
-          <div className="retro-footer-links retro-font-display retro-bold">
-            <Link to="/contact" className="retro-footer-link">CONTACT</Link>
-            <Link to="/faq" className="retro-footer-link">FAQ</Link>
-            <Link to="/stores" className="retro-footer-link">STORES</Link>
-            <Link to="/shipping" className="retro-footer-link">SHIPPING</Link>
-            <Link to="/returns" className="retro-footer-link">RETURNS</Link>
-            <Link to="/compare" className="retro-footer-link">COMPARE</Link>
+    <footer className="pp-footer" role="contentinfo">
+      <div className="pp-footer__inner">
+        {/* Left: Follow text + social icons + bookmark icon */}
+        <div className="pp-footer__left">
+          <span className="pp-footer__follow retro-font-display">FOLLOW THE ADVENTURE</span>
+          <div className="pp-footer__socials">
+            <a href="https://twitter.com" className="pp-footer__social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+              <Twitter size={20} strokeWidth={2} />
+            </a>
+            <a href="https://instagram.com" className="pp-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <Instagram size={20} strokeWidth={2} />
+            </a>
+            <a href="https://youtube.com" className="pp-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <Youtube size={20} strokeWidth={2} />
+            </a>
+            <a href="https://discord.com" className="pp-footer__social-link" aria-label="Discord" target="_blank" rel="noopener noreferrer">
+              <Gamepad2 size={20} strokeWidth={2} />
+            </a>
           </div>
-          <div className="retro-footer-icons">
-            <TwitterLogo size={24} weight="fill" />
-            <InstagramLogo size={24} weight="fill" />
-            <YoutubeLogo size={24} weight="fill" />
-            <DiscordLogo size={24} weight="fill" />
+          <Bookmark size={20} className="pp-footer__bookmark" aria-hidden="true" />
+        </div>
+
+        {/* Right: Email + Subscribe */}
+        <div className="pp-footer__right">
+          <div className="pp-footer__email-group">
+            <input
+              type="email"
+              placeholder="EMAIL"
+              className="pp-footer__email-input retro-font-display"
+              aria-label="Email address for newsletter"
+            />
+            <button className="pp-pixel-btn pp-pixel-btn--subscribe retro-font-display">
+              SUBSCRIBE
+            </button>
           </div>
         </div>
-        <div className="retro-footer-right">
-          <input type="email" placeholder="ENTER EMAIL" className="retro-input retro-font-display retro-bold" />
-          <button className="retro-button retro-button--primary retro-font-display retro-bold retro-footer__signup-btn">SIGN UP -&gt;</button>
-        </div>
       </div>
 
-      {/* Copyright */}
-      <div className="retro-copyright retro-font-display">
+      {/* Copyright bar */}
+      <div className="pp-footer__copyright retro-font-display">
         <span>&copy; 2026 PLAYPOCKET. NO COINS REQUIRED.</span>
-        <Link to="/privacy-policy" className="retro-footer-link">PRIVACY POLICY</Link>
-        <Link to="/terms-and-conditions" className="retro-footer-link">TERMS &amp; CONDITIONS</Link>
-        <Link to="/sitemap" className="retro-footer-link">SITEMAP</Link>
+        <div className="pp-footer__legal">
+          <Link to="/privacy-policy">PRIVACY</Link>
+          <Link to="/terms-and-conditions">TERMS</Link>
+          <Link to="/sitemap">SITEMAP</Link>
+        </div>
       </div>
     </footer>
   );
-}
+};
 
 FooterRetroPattern.displayName = 'FooterRetroPattern';

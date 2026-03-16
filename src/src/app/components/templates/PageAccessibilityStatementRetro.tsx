@@ -24,7 +24,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { Keyboard, Eye, Monitor, SpeakerHigh as Volume2, CheckCircle, ArrowRight, Envelope, Lifebuoy } from '@phosphor-icons/react';
+import { Keyboard, Eye, Monitor, SpeakerHigh as Volume2, CheckCircle, ArrowRight, Envelope, Lifebuoy } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

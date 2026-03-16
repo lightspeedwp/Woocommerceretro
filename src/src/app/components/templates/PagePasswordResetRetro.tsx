@@ -10,7 +10,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
-import { Key, EnvelopeSimple, CheckCircle } from '@phosphor-icons/react';
+import { Key, EnvelopeSimple, CheckCircle } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

@@ -12,8 +12,8 @@ import {
   Palette, Code, BookOpen, Eye,
   Stack as Layers, MapTrifold as Map,
   AppWindow as LayoutIcon, Heartbeat as Activity,
-  TextAa as FormIcon, Rocket
-} from '@phosphor-icons/react';
+  TextAa as FormInput, Rocket
+} from '../../utils/phosphor-compat';
 
 interface DevTool {
   title: string;
@@ -46,7 +46,7 @@ const devTools: DevTool[] = [
   {
     title: 'Form Showcase',
     description: 'Complete form elements reference with all input types, validation states, and patterns.',
-    icon: <FormIcon size={28} weight="bold" />,
+    icon: <FormInput size={28} weight="bold" />,
     link: '/dev-tools/forms',
   },
   {

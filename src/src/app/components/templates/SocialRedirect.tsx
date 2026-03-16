@@ -7,7 +7,7 @@
 
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { InstagramLogo, TwitterLogo, FacebookLogo, LinkedinLogo, PinterestLogo, YoutubeLogo } from '@phosphor-icons/react';
+import { InstagramLogo, TwitterLogo, FacebookLogo, LinkedinLogo, PinterestLogo, YoutubeLogo } from '../../utils/phosphor-compat';
 
 import { socialLinks } from '../../data/site';
 

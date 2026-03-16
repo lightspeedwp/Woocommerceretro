@@ -4,13 +4,13 @@
  * "PlayPocket" FSE theme - Product Archive / Shop page.
  * Route-aware: dynamically filters and titles products based on current path.
  * Supports: /shop, /deals, /sale, /new-arrivals, /best-sellers,
- *           /promotions/*, /shop/category/:slug, /shop/tag/:slug
+ *           /promotions/*, /category/:slug, /tag/:slug
  * WCAG AA 2.2 compliant.
  */
 
 import { useMemo, type MouseEvent } from 'react';
 import { useParams, useLocation, Link } from 'react-router';
-import { Heart, Scales, Lightning, Tag, Clock, TrendUp, Fire, Gift, Percent, Star } from '@phosphor-icons/react';
+import { Heart, Scales, Lightning, Tag, Clock, TrendUp, Fire, Gift, Percent, Star } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
@@ -184,21 +184,27 @@ const getFilteredProducts = (pathname: string, categorySlug?: string, tagSlug?: 
 /* ─── Component ──────────────────────────────────────── */
 
 export const ArchiveProductRetro = () => {
-  const params = useParams<{ categorySlug?: string; tagSlug?: string }>();
+  const params = useParams<{ slug?: string }>();
   const location = useLocation();
   const cartContext = useCart();
   const comparison = useComparison();
   const wishlist = useWishlist();
 
+  // Determine if this is a category or tag route from the path
+  const isCategoryRoute = location.pathname.startsWith('/category/');
+  const isTagRoute = location.pathname.startsWith('/tag/');
+  const categorySlug = isCategoryRoute ? params.slug : undefined;
+  const tagSlug = isTagRoute ? params.slug : undefined;
+
   const displayProducts = useMemo(
-    () => getFilteredProducts(location.pathname, params.categorySlug, params.tagSlug),
-    [location.pathname, params.categorySlug, params.tagSlug]
+    () => getFilteredProducts(location.pathname, categorySlug, tagSlug),
+    [location.pathname, categorySlug, tagSlug]
   );
 
   const routeContext = useMemo(() => getRouteContext(location.pathname), [location.pathname]);
 
-  const currentCategory = params.categorySlug
-    ? productCategories.find((c) => c.slug === params.categorySlug)
+  const currentCategory = categorySlug
+    ? productCategories.find((c) => c.slug === categorySlug)
     : null;
 
   const IconComponent = routeContext ? routeContext.icon : null;
@@ -212,15 +218,15 @@ export const ArchiveProductRetro = () => {
           <aside className="retro-sidebar-filters retro-font-display">
             <h3 className="retro-sidebar-title retro-bold">BROWSE</h3>
             <div className="retro-sidebar-group">
-              <Link to="/shop" className={'retro-sidebar-item' + (!params.categorySlug && !routeContext ? ' retro-sidebar-item--active' : '')}>
+              <Link to="/shop" className={'retro-sidebar-item' + (!categorySlug && !routeContext ? ' retro-sidebar-item--active' : '')}>
                 <span>ALL ITEMS</span><span>{PRODUCTS.length}</span>
               </Link>
               {productCategories.map((cat) => {
                 return (
                   <Link
                     key={cat.id}
-                    to={'/shop/category/' + cat.slug}
-                    className={'retro-sidebar-item' + (params.categorySlug === cat.slug ? ' retro-sidebar-item--active' : '')}
+                    to={'/category/' + cat.slug}
+                    className={'retro-sidebar-item' + (categorySlug === cat.slug ? ' retro-sidebar-item--active' : '')}
                   >
                     <span>{cat.name.toUpperCase()}</span><span>{cat.count}</span>
                   </Link>
@@ -272,7 +278,7 @@ export const ArchiveProductRetro = () => {
             )}
 
             {/* Default shop header when no context */}
-            {!routeContext && !currentCategory && !params.tagSlug && (
+            {!routeContext && !currentCategory && !tagSlug && (
               <div className="retro-archive-header">
                 <h1 className="retro-font-display retro-bold">ALL PRODUCTS</h1>
                 <p className="retro-font-body">Browse the complete PlayPocket catalog.</p>
@@ -280,10 +286,10 @@ export const ArchiveProductRetro = () => {
             )}
 
             {/* Tag header */}
-            {params.tagSlug && !routeContext && (
+            {tagSlug && !routeContext && (
               <div className="retro-archive-header">
-                <h1 className="retro-font-display retro-bold">TAG: {params.tagSlug.toUpperCase().replace(/-/g, ' ')}</h1>
-                <p className="retro-font-body">Products tagged with "{params.tagSlug.replace(/-/g, ' ')}".</p>
+                <h1 className="retro-font-display retro-bold">TAG: {tagSlug.toUpperCase().replace(/-/g, ' ')}</h1>
+                <p className="retro-font-body">Products tagged with "{tagSlug.replace(/-/g, ' ')}".</p>
               </div>
             )}
 
@@ -307,7 +313,7 @@ export const ArchiveProductRetro = () => {
                 const inWishlist = wishlist.isInWishlist(item.id);
 
                 return (
-                  <Link key={item.id || i} to={'/product/' + item.id} className="retro-card">
+                  <Link key={item.id || i} to={'/product/' + (item.slug || item.id)} className="retro-card">
                     {primaryBadge && <span className="retro-card-badge retro-font-display">{primaryBadge}</span>}
                     <button
                       className={'retro-heart-btn' + (inWishlist ? ' retro-heart-btn--active' : '')}

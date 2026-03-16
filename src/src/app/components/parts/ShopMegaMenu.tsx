@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { Link } from 'react-router';
-import { Storefront, Tag, Star, Lightning, Sparkle, Gift, Percent, TShirt, Watch, Desktop, Package, Couch, ArrowRight } from '@phosphor-icons/react';
+import { Storefront, Tag, Star, Lightning, Sparkle, Gift, Percent, TShirt, Watch, Desktop, Package, Couch, ArrowRight } from '../../utils/phosphor-compat';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 
 interface ShopLink {
@@ -25,25 +25,25 @@ const browseLinks: ShopLink[] = [
 ];
 
 const categoryLinks: ShopLink[] = [
-  { title: 'Clothing', href: '/shop/category/clothing', Icon: TShirt },
-  { title: 'Accessories', href: '/shop/category/accessories', Icon: Watch },
-  { title: 'Computers', href: '/shop/category/computers', Icon: Desktop },
-  { title: 'Bundles', href: '/shop/category/bundles', Icon: Package },
-  { title: 'Home & Living', href: '/shop/category/home-living', Icon: Couch }
+  { title: 'Apparel', href: '/category/apparel', Icon: TShirt },
+  { title: 'Accessories', href: '/category/accessories', Icon: Watch },
+  { title: 'Games', href: '/category/games', Icon: Desktop },
+  { title: 'Posters', href: '/category/posters', Icon: Package },
+  { title: 'Collectibles', href: '/category/collectibles', Icon: Couch }
 ];
 
 const featuredCards = [
   {
-    title: 'Summer Collection',
-    subtitle: 'Fresh styles for the season',
-    href: '/shop/category/clothing',
+    title: 'Retro Apparel',
+    subtitle: 'Fresh pixel-perfect styles',
+    href: '/category/apparel',
     overlay: 'pink',
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=600&auto=format&fit=crop'
   },
   {
-    title: 'Home & Living',
-    subtitle: 'Transform your space',
-    href: '/shop/category/home-living',
+    title: 'Collectibles',
+    subtitle: 'Limited-run treasures',
+    href: '/category/collectibles',
     overlay: 'purple',
     image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=600&auto=format&fit=crop'
   }

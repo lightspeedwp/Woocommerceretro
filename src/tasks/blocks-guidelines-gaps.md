@@ -615,34 +615,42 @@ ProductAddToCart
 
 ---
 
-#### T6.7 — `single-product/ReviewsTab.tsx`
+#### T6.7 — `single-product/ReviewsTab.tsx` ✅ **COMPLETE**
 
 **File:** `/src/app/components/blocks/single-product/ReviewsTab.tsx`  
-**Guideline:** ⏳ Pending  
-**Priority:** Medium — Customer reviews display  
-**Features:** Review cards, star ratings, verified badge, form integration, dark mode, pagination
+**Guideline:** ✅ `/guidelines/blocks/single-product/ReviewsTab.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Customer reviews list with star ratings, verified purchase badges, review submission form with interactive star selector, BEM classes, dark mode, accessibility improvements needed (ARIA roles, label associations), responsive form grid, Typography/Button integration, enhancement roadmap (pagination, sorting, helpful votes, photo reviews)  
+**Features:** Internal rating state (useState), 5-star interactive selector with button elements, hardcoded sample review, form with textarea/name/email fields, form grid for desktop 2-column  
+**Retro Theme:** Amber star fills (luminous-vivid-amber), glass panel review cards, neon glow on star hover, form inputs with retro styling via global form CSS  
+**BEM:** `.wc-reviews__*`
 
 ---
 
 #### T6.8 — `single-product/StoreNotices.tsx`
 
 **File:** `/src/app/components/blocks/single-product/StoreNotices.tsx`  
-**Guideline:** ⏳ Pending  
-**Priority:** Low — Store-wide notices (shipping, returns, etc.)  
-**Features:** Alert component, icon support, dismissible, dark mode
+**Guideline:** ✅ `/guidelines/blocks/single-product/StoreNotices.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** Notice types (success/error/info), BEM classes, dark mode color mapping, CSS token usage, accessibility improvements needed (role="alert", aria-hidden), retro theme future enhancements, testing checklist  
+**BEM:** `.wc-store-notices`, `.wc-store-notice__*`
 
 ---
 
 #### T6.9 — `single-product/ProductBreadcrumbs.tsx`
 
 **File:** `/src/app/components/blocks/single-product/ProductBreadcrumbs.tsx`  
-**Guideline:** ⚠️ Exists at `/guidelines/blocks/woocommerce/utility/breadcrumbs.md` but needs relocation to `/guidelines/blocks/single-product/ProductBreadcrumbs.md`  
-**Priority:** Medium — Navigation trail  
-**Features:** Structured data (breadcrumb schema), link chain, current page indicator, dark mode
+**Guideline:** ✅ `/guidelines/blocks/single-product/ProductBreadcrumbs.md`  
+**Created:** 2026-03-15  
+**Comprehensive guideline:** BEM classes (.wc-product-breadcrumbs__*), CSS token usage, missing a11y attributes (aria-label, aria-current, aria-hidden), hardcoded #8B0000 color flagged for tokenization, dark mode incomplete, responsive flex-wrap, retro theme enhancements, testing checklist  
+**Replaces:** `/guidelines/blocks/woocommerce/utility/breadcrumbs.md` (outdated)  
+**BEM:** `.wc-product-breadcrumbs__*`
 
 ---
 
-**P2 STATUS:** 1/9 complete (11%) — ProductGallery ✅
+**P2 STATUS:** 9/9 complete (100%) — ProductGallery ✅, ProductTitle ✅, ProductSummary ✅, ProductRating ✅, RelatedProducts ✅, ProductMeta ✅, ReviewsTab ✅, StoreNotices ✅, ProductBreadcrumbs ✅
+
+🎉 **ALL P2 SINGLE PRODUCT BLOCKS COMPLETE**
 
 ---
 

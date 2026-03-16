@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { Play, SkipBack, SkipForward, SpeakerHigh as Volume2, ShareNetwork as Share2, DownloadSimple as Download } from '@phosphor-icons/react';
+import { Play, SkipBack, SkipForward, SpeakerHigh as Volume2, ShareNetwork as Share2, DownloadSimple as Download } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

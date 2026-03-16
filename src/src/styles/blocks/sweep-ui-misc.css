@@ -1,0 +1,158 @@
+/* ========================================
+   SWEEP — UI Miscellaneous Utilities
+   Context menus, nav icons, close icons,
+   checkboxes, calendar, breadcrumbs, etc.
+   Source: sweep-cleanup.css lines 330-505
+   ======================================== */
+
+/* --- Context Menu Additional Styles --- */
+.wp-context-menu-item--inset {
+  padding-left: 2rem;
+}
+
+.wp-context-menu-checkbox-item {
+  padding-left: 2rem;
+  padding-right: 0.5rem;
+}
+
+.wp-block-context-menu-label {
+  padding: 0.375rem 0.5rem;
+  font-size: var(--wp--preset--font-size--sm);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-context-menu-label--inset {
+  padding-left: 2rem;
+}
+
+.wp-block-context-menu-separator {
+  margin: 0.25rem -0.25rem;
+  height: 1px;
+  background-color: var(--wp--preset--color--border);
+}
+
+.wp-block-context-menu-shortcut {
+  margin-left: auto;
+  font-size: var(--wp--preset--font-size--xs);
+  letter-spacing: 0.1em;
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-context-menu-sub-trigger__icon {
+  margin-left: auto;
+  height: 1rem;
+  width: 1rem;
+}
+
+.wp-block-context-menu-item-indicator__icon--sm {
+  height: 0.5rem;
+  width: 0.5rem;
+  fill: currentColor;
+}
+
+/* --- Chart Legend Bottom Spacing --- */
+.wp-block-chart-legend--bottom {
+  padding-top: 0.75rem;
+}
+
+/* --- Hero Section Overlay --- */
+.wp-hero-section--relative {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- HowItWorks Step Card --- */
+.wp-how-it-works__step {
+  position: relative;
+}
+
+.wp-how-it-works__card-glow {
+  height: 100%;
+  width: 100%;
+}
+
+.wp-how-it-works__badge--animated {
+  transition: transform 500ms ease;
+}
+
+.wp-how-it-works__step:hover .wp-how-it-works__badge--animated {
+  transform: rotate(12deg);
+}
+
+/* --- Instagram Feed Follow Text --- */
+.wp-instagram-feed__follow-text {
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+/* --- Flash Sale Countdown Centered --- */
+.wp-flash-sale__countdown--centered {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- ArchiveCTA Text Center --- */
+.wp-archive-cta--centered {
+  text-align: center;
+}
+
+/* --- Site Title / Tagline Links --- */
+.wp-block-site-title__link,
+.wp-block-site-tagline__link {
+  text-decoration: none;
+  transition: opacity var(--wp--preset--transition--fast, 150ms) ease;
+}
+
+.wp-block-site-title__link:hover,
+.wp-block-site-tagline__link:hover {
+  opacity: 0.8;
+}
+
+/* --- Navigation Menu Icon --- */
+.wp-block-navigation-menu-icon {
+  height: 1rem;
+  width: 1rem;
+  transition: transform 200ms ease;
+}
+
+[data-state="open"] > .wp-block-navigation-menu-icon {
+  transform: rotate(180deg);
+}
+
+/* --- Sheet / Dialog Close Icons --- */
+.wp-sheet-close__icon,
+.wp-radix-close-button__icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* --- Checkbox Indicator States --- */
+.wp-block-checkbox__indicator--visible {
+  display: flex;
+}
+
+.wp-block-checkbox__indicator--hidden {
+  display: none;
+}
+
+/* --- Calendar Nav Icons --- */
+.wp-block-calendar__nav-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* --- Breadcrumb Ellipsis Icon --- */
+.wp-block-breadcrumb__ellipsis-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* --- Dropdown Menu Sub Content --- */
+.wp-block-dropdown-menu-sub-content {
+  display: none;
+}
+
+/* --- 404 Search Hint --- */
+.wp-404-search-hint {
+  font-weight: var(--wp--preset--font-weight--medium, 500);
+}

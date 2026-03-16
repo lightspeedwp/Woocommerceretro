@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
-import { Calendar, User, Tag, ChatCircle } from '@phosphor-icons/react';
+import { Calendar, User, Tag, ChatCircle } from '../../utils/phosphor-compat';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { BLOG_POSTS } from '../../data/blogData';

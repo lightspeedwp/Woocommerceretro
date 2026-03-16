@@ -1,0 +1,112 @@
+/**
+ * PlayPocket — Home Footer
+ *
+ * Footer with social links, newsletter signup, and copyright.
+ *
+ * BEM block: .pp-footer
+ */
+
+.pp-footer {
+  margin-top: 1.5rem;
+  background: var(--wp--preset--color--background, #F2EEE6);
+  border-top: 2px solid var(--wp--preset--color--foreground, #1E2630);
+}
+
+.pp-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem var(--wp--preset--spacing--40, 1rem);
+  max-width: var(--wp--preset--layout--content-size, 1440px);
+  margin: 0 auto;
+}
+
+.pp-footer__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pp-footer__follow {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pp-footer__socials {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pp-footer__social-link {
+  color: var(--wp--preset--color--foreground, #1E2630);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.pp-footer__social-link:hover {
+  color: var(--wp--preset--color--primary, #FFC533);
+}
+
+.pp-footer__bookmark {
+  color: var(--wp--preset--color--foreground, #1E2630);
+  opacity: 0.5;
+}
+
+.pp-footer__right {
+  display: flex;
+  align-items: center;
+}
+
+.pp-footer__email-group {
+  display: flex;
+  gap: 0;
+}
+
+.pp-footer__email-input {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  border-right: none;
+  background: var(--wp--preset--color--surface, #FFFFFF);
+  color: var(--wp--preset--color--foreground, #1E2630);
+  min-width: 140px;
+  min-height: 44px;
+  outline: none;
+}
+
+.pp-footer__email-input:focus {
+  border-color: var(--wp--preset--color--ring, #00FFF9);
+  box-shadow: 0 0 0 2px var(--wp--preset--color--ring, #00FFF9);
+}
+
+.pp-footer__copyright {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+  max-width: var(--wp--preset--layout--content-size, 1440px);
+  margin: 0 auto;
+}
+
+.pp-footer__legal {
+  display: flex;
+  gap: 1rem;
+}
+
+.pp-footer__legal a {
+  color: var(--wp--preset--color--background, #F2EEE6);
+  text-decoration: underline;
+}
+
+.pp-footer__legal a:hover {
+  color: var(--wp--preset--color--primary, #FFC533);
+}

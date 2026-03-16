@@ -4,7 +4,7 @@ import { Typography } from '../common/Typography';
 import { posts, getMediaSource } from '../../data/posts';
 import { postCategories } from '../../data/categories';
 import { tags } from '../../data/tags';
-import { Calendar, TrendUp as TrendingUp, Tag } from '@phosphor-icons/react';
+import { Calendar, TrendUp as TrendingUp, Tag } from '../../utils/phosphor-compat';
 
 interface BlogSidebarProps {
   currentPostSlug?: string;

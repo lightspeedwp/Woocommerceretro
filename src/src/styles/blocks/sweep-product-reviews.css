@@ -1,0 +1,107 @@
+/* ========================================
+   SWEEP — Product Tabs Review Styles
+   BEM classes for ProductTabs review UI.
+   Source: sweep-cleanup.css lines 193-294
+   ======================================== */
+
+.woocommerce-product-tabs__review-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.woocommerce-product-tabs__review-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--skeleton);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--wp--preset--font-size--sm);
+  color: var(--wp--preset--color--foreground);
+}
+
+.woocommerce-product-tabs__review-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.woocommerce-product-tabs__review-author-name {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  font-size: var(--wp--preset--font-size--sm);
+}
+
+.woocommerce-product-tabs__review-date-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.woocommerce-product-tabs__verified-badge {
+  font-size: var(--wp--preset--font-size--x-small);
+  color: var(--wp--preset--color--success);
+  font-weight: var(--wp--preset--font-weight--medium);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dark .woocommerce-product-tabs__verified-badge {
+  color: var(--wp--preset--color--success);
+}
+
+.woocommerce-product-tabs__no-reviews {
+  margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.woocommerce-product-tabs__review-form-wrapper {
+  border-top: 1px solid var(--wp--preset--color--border);
+  padding-top: var(--wp--preset--spacing--60);
+  margin-top: var(--wp--preset--spacing--60);
+}
+
+.woocommerce-product-tabs__review-form-heading {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.woocommerce-product-tabs__review-form-note {
+  margin-bottom: var(--wp--preset--spacing--50);
+  font-size: var(--wp--preset--font-size--sm);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.woocommerce-product-tabs__review-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--50);
+}
+
+.woocommerce-product-tabs__review-form-label {
+  display: block;
+  margin-bottom: var(--wp--preset--spacing--20);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+.woocommerce-product-tabs__review-textarea {
+  width: 100%;
+  padding: var(--wp--preset--spacing--30);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  background-color: transparent;
+  color: var(--wp--preset--color--foreground);
+  min-height: 120px;
+  font-size: var(--wp--preset--font-size--normal);
+  resize: vertical;
+}
+
+.woocommerce-product-tabs__review-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--wp--preset--color--primary);
+  border-color: transparent;
+}
+
+.woocommerce-product-tabs__review-item {
+  margin-bottom: var(--wp--preset--spacing--60);
+}

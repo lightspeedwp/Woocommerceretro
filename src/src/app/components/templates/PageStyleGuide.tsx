@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container } from '../common/Container';
 import { DarkModeToggle } from '../common/DarkModeToggle';
-import { Palette, TextT, Stack as Layers, GridFour, Check, Copy, Sparkle } from '@phosphor-icons/react';
+import { Palette, TextT, Stack as Layers, GridFour, Check, Copy, Sparkle } from '../../utils/phosphor-compat';
 
 /**
  * PageStyleGuide Template - Retro Redesign

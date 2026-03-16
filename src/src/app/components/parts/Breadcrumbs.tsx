@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { CaretRight as ChevronRight, House as Home } from '@phosphor-icons/react';
+import { ChevronRight, Home } from 'lucide-react';
 
 /**
  * Breadcrumbs — Hierarchical navigation component (Template Part)

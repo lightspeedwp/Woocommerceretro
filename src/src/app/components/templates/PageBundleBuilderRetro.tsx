@@ -10,7 +10,7 @@
 
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
-import { Package, X, ShoppingCart, Check } from '@phosphor-icons/react';
+import { Package, X, ShoppingCart, Check } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

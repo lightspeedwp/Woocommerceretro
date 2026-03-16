@@ -6,7 +6,7 @@
  * 2. ASCII characters only
  */
 
-import { Truck, Lightning as Zap, Airplane as Plane, CreditCard, DeviceMobile as Smartphone, Wallet, Buildings as Building } from '@phosphor-icons/react';
+import { Truck, Lightning as Zap, Airplane as Plane, CreditCard, DeviceMobile as Smartphone, Wallet, Buildings as Building } from '../utils/phosphor-compat';
 
 export const shippingMethods = [
   {

@@ -13,7 +13,7 @@ import {
   Rocket, GameController, Storefront, Palette, Layout,
   ArrowRight, Star, Lightning, Eye, Cube,
   ShieldCheck, Sparkle, PaintBrush, MonitorPlay,
-} from '@phosphor-icons/react';
+} from '../../utils/phosphor-compat';
 
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';

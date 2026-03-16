@@ -33,7 +33,7 @@
 
 /**
  * Product Archive CTA
- * Used on: /shop, /shop/category/:slug
+ * Used on: /shop, /category/:slug
  * @type {CTAContent}
  */
 export const productArchiveCTA = {
@@ -75,7 +75,7 @@ export const newArrivalsArchiveCTA = {
 
 /**
  * Category-Specific CTA
- * Used on: /shop/category/:slug with dynamic content
+ * Used on: /category/:slug with dynamic content
  * @type {CTAContent}
  */
 export const categoryArchiveCTA = {
@@ -103,7 +103,7 @@ export const blogArchiveCTA = {
 
 /**
  * Tag Archive CTA
- * Used on: /shop/tag/:slug, /blog/tag/:slug
+ * Used on: /tag/:slug, /blog/tag/:slug
  * @type {CTAContent}
  */
 export const tagArchiveCTA = {

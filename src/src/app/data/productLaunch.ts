@@ -7,7 +7,7 @@
  * @module data/productLaunch
  */
 
-import { Lightning as Zap, Shield, Users, TrendUp as TrendingUp } from '@phosphor-icons/react';
+import { Lightning as Zap, Shield, Users, TrendUp as TrendingUp } from '../utils/phosphor-compat';
 
 export const productLaunchContent = {
   hero: {

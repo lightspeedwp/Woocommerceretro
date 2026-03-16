@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { InstagramLogo as Instagram, Heart, ChatCircle as MessageCircle } from '@phosphor-icons/react';
+import { InstagramLogo as Instagram, Heart, ChatCircle as MessageCircle } from '../../utils/phosphor-compat';
 import { fetchInstagramFeed } from '../../services/instagram';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Container } from '../common/Container';

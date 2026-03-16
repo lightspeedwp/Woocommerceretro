@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { Link } from 'react-router';
-import { Heart, UsersThree, Leaf, Briefcase, Question, FileText, ShieldCheck, Truck } from '@phosphor-icons/react';
+import { Heart, UsersThree, Leaf, Briefcase, Question, FileText, ShieldCheck, Truck } from '../../utils/phosphor-compat';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 
 const aboutLinks = [

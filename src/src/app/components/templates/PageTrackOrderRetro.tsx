@@ -6,7 +6,7 @@
  */
 
 import { useState, type FormEvent } from 'react';
-import { Package, MagnifyingGlass } from '@phosphor-icons/react';
+import { Package, MagnifyingGlass } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

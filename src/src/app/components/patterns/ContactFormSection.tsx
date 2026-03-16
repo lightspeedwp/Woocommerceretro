@@ -10,7 +10,7 @@ import { Input } from '../blocks/forms/Input';
 import { Textarea } from '../blocks/forms/Textarea';
 import { Label } from '../blocks/forms/Label';
 import { Typography } from '../common/Typography';
-import { Envelope as Mail, Phone, MapPin } from '@phosphor-icons/react';
+import { Envelope as Mail, Phone, MapPin } from '../../utils/phosphor-compat';
 
 interface ContactInfo {
   email?: string;

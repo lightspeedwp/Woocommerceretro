@@ -5,7 +5,7 @@
  */
 
 import { useState, type ReactNode } from 'react';
-import { MagnifyingGlass as Search, Funnel as Filter, X, CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { MagnifyingGlass as Search, Funnel as Filter, X, CaretDown as ChevronDown } from '../../utils/phosphor-compat';
 import { Container } from '../common/Container';
 import { Drawer, DrawerContent, DrawerTrigger, DrawerHeader, DrawerTitle, DrawerClose } from '../blocks/layout/Drawer';
 import { Button } from '../blocks/design/Buttons';

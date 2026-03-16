@@ -5,7 +5,7 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { MapPin, Phone, Clock } from '@phosphor-icons/react';
+import { MapPin, Phone, Clock } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

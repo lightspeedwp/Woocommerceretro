@@ -212,3 +212,32 @@
 .wp-order-additional-field {
   padding: var(--wp--preset--spacing--40); /* Absorbs wp-p-4 */
 }
+
+/* ========================================
+   ORDER TEXT COLOR MODIFIERS (BEM)
+   Replaces legacy text-neon-* utility classes
+   ======================================== */
+
+.wp-order-text--coral {
+  color: var(--retro-accent-coral, #D9795B);
+}
+
+.wp-order-text--sky {
+  color: var(--retro-accent-sky, #86AFC3);
+}
+
+.wp-order-text--success {
+  color: var(--retro-success, #647B61);
+}
+
+.dark .wp-order-text--coral {
+  color: var(--retro-dark-coral, #D08A72);
+}
+
+.dark .wp-order-text--sky {
+  color: var(--retro-dark-sky, #8AAFC0);
+}
+
+.dark .wp-order-text--success {
+  color: var(--retro-dark-success, #7EA17A);
+}

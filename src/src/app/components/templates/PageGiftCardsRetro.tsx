@@ -5,8 +5,7 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { useState, type FormEvent } from 'react';
-import { Gift, Wallet } from '@phosphor-icons/react';
+import { Gift, Wallet } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

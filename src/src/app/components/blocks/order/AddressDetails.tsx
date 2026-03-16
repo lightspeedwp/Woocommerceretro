@@ -18,7 +18,7 @@ export const AddressDetails = () => {
           <p>Western Cape</p>
           <p>7925</p>
           <p>+27845656767</p>
-          <p className="text-neon-cyan">ashley@lsdev.biz</p>
+          <p className="wp-order-text--sky">ashley@lsdev.biz</p>
         </div>
       </div>
     </div>

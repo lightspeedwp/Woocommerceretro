@@ -1,0 +1,53 @@
+/**
+ * Funky Checkout Styles
+ *
+ * Bold, retro-styled checkout form elements.
+ * Extracted from globals.css inline styles.
+ *
+ * BEM block: .funky-checkout-form, .funky-input, .funky-submit-btn
+ */
+
+.funky-checkout-form {
+  border: 4px solid var(--wp--preset--color--foreground, #1E2630);
+  padding: 2rem;
+  background: var(--wp--preset--color--surface, #FFFFFF);
+  box-shadow: 10px 10px 0px var(--wp--preset--color--foreground, #1E2630);
+}
+
+.funky-input {
+  border: 3px solid var(--wp--preset--color--foreground, #1E2630);
+  padding: 0.75rem;
+  box-shadow: 4px 4px 0px var(--wp--preset--color--foreground, #1E2630);
+}
+
+.funky-submit-btn {
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--wp--preset--color--secondary, #6BBF59);
+  color: var(--wp--preset--color--foreground, #1E2630);
+  border: 4px solid var(--wp--preset--color--foreground, #1E2630);
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 8px 8px 0px var(--wp--preset--color--foreground, #1E2630);
+  cursor: pointer;
+}
+
+.funky-submit-btn:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0px var(--wp--preset--color--foreground, #1E2630);
+  background: var(--wp--preset--color--ring, #00FFF9);
+}
+
+/* ── Dark mode ── */
+.dark .funky-checkout-form {
+  background: var(--wp--preset--color--card, #111111);
+  border-color: var(--wp--preset--color--background, #F2EEE6);
+  box-shadow: 10px 10px 0px var(--wp--preset--color--background, #F2EEE6);
+}
+
+.dark .funky-input {
+  background: var(--wp--preset--color--muted, #222222);
+  color: var(--wp--preset--color--foreground, #F2EEE6);
+  border-color: var(--wp--preset--color--background, #F2EEE6);
+  box-shadow: 4px 4px 0px var(--wp--preset--color--background, #F2EEE6);
+}

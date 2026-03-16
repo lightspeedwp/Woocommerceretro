@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerClose, DrawerTrigger } from '../blocks/layout/Drawer';
 import { Button } from '../blocks/design/Buttons';
 import { Typography } from '../common/Typography';
-import { Bag as ShoppingBag, X, Minus, Plus } from '@phosphor-icons/react';
+import { Bag as ShoppingBag, X, Minus, Plus } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { useCart } from '../../contexts/CartContext';

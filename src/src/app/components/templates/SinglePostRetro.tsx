@@ -6,7 +6,7 @@
  */
 
 import { Link, useParams } from 'react-router';
-import { ArrowLeft, Clock, User } from '@phosphor-icons/react';
+import { ArrowLeft, Clock, User } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { posts } from '../../data/posts';

@@ -1,446 +1,384 @@
-# Complete Routing Guide - WooCommerce Prototype
+# Complete Routing Guide - PlayPocket WooCommerce Prototype
 
-**Last Updated:** January 13, 2026  
-**File:** `/src/app/App.tsx`  
+**Last Updated:** March 15, 2026
+**Route File:** `/routes.ts`
 **Total Routes:** 100+
+**Trigger:** `fix routes` (action) | `audit routes` (report only)
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-1. [Core Routes](#core-routes)
-2. [Shop Routes](#shop-routes)
-3. [Account Routes](#account-routes)
-4. [Blog Routes](#blog-routes)
-5. [About Routes](#about-routes)
-6. [Promotions Routes](#promotions-routes)
-7. [Support & Help Routes](#support--help-routes)
-8. [Legal & Compliance Routes](#legal--compliance-routes)
-9. [Error Pages](#error-pages)
-10. [Development Tools](#development-tools)
-11. [Route Validation](#route-validation)
+1. [URL Pattern Rules](#url-pattern-rules)
+2. [Core Routes](#core-routes)
+3. [Shop Routes](#shop-routes)
+4. [Account Routes](#account-routes)
+5. [Cart & Checkout Routes](#cart--checkout-routes)
+6. [Blog Routes](#blog-routes)
+7. [About & Company Routes](#about--company-routes)
+8. [Promotions Routes](#promotions-routes)
+9. [Support & Help Routes](#support--help-routes)
+10. [Legal & Compliance Routes](#legal--compliance-routes)
+11. [Gaming & Community Routes](#gaming--community-routes)
+12. [Subscriptions & Memberships Routes](#subscriptions--memberships-routes)
+13. [Dev Tools Routes](#dev-tools-routes)
+14. [Error Pages](#error-pages)
+15. [Navigation Data Files](#navigation-data-files)
+16. [Dynamic Route Validation](#dynamic-route-validation)
+
+---
+
+## URL Pattern Rules
+
+All dynamic routes use `:slug` as the parameter name. No `:id`, `:categorySlug`, or `:tagSlug`.
+
+| Content Type | Pattern | Example |
+|-------------|---------|---------|
+| Product | `/product/:slug` | `/product/pixel-power-tee` |
+| Product Category | `/category/:slug` | `/category/accessories` |
+| Product Tag | `/tag/:slug` | `/tag/retro` |
+| Blog Post | `/blog/:slug` | `/blog/open-channels-ash-shaw` |
+| Blog Category | `/blog/category/:slug` | `/blog/category/development` |
+| Blog Tag | `/blog/tag/:slug` | `/blog/tag/wordpress` |
+| Blog Author | `/blog/author/:slug` | `/blog/author/alex-morgan` |
+| Subscription | `/subscription/:slug` | `/subscription/monthly-box` |
+| Membership | `/membership/:slug` | `/membership/premium` |
+
+**Component pattern:**
+```tsx
+const { slug } = useParams<{ slug: string }>();
+const product = getProductBySlug(slug) || getProductById(slug);
+```
 
 ---
 
 ## Core Routes
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/` | FrontPage | `FrontPage.tsx` | Homepage |
-| `/newsletter` | PageNewsletter | `PageNewsletter.tsx` | Newsletter subscription |
-| `/search` | Search | `pages/shop/Search.tsx` | Global search |
-| `/contact` | PageContact | `PageContact.tsx` | Contact form |
-| `/faq` | FAQ | `pages/FAQ.tsx` | FAQ page |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/` | FrontPageRetro | Homepage |
+| `/search` | ProductSearchResultsRetro | Global search |
+| `/contact` | PageContactRetro | Contact form |
+| `/faq` | PageFAQRetro | FAQ page |
+| `/newsletter` | PageNewsletter | Newsletter subscription |
+| `/sitemap` | Sitemap | Visual route directory |
 
 ---
 
 ## Shop Routes
 
-### **Main Shop Pages**
+### Main Shop Pages
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/shop` | ArchiveProduct | `ArchiveProduct.tsx` | Main shop archive |
-| `/shop/all` | ArchiveProduct | `ArchiveProduct.tsx` | All products archive |
-| `/shop/all-products` | AllProducts | `pages/shop/AllProducts.tsx` | All products list |
-| `/shop/collections` | Collections | `pages/shop/Collections.tsx` | Product collections |
-| `/shop/filtered` | ShopWithSidebar | `ShopWithSidebar.tsx` | Shop with filter sidebar |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/shop` | ArchiveProductRetro | Main product archive |
+| `/shop/all` | ArchiveProductRetro | All products listing |
+| `/shop/all-products` | ArchiveProductRetro | All products (alias) |
+| `/shop/collections` | FrontPageRetro | Product collections |
+| `/shop/filtered` | ArchiveProductRetro | Shop with filter sidebar |
+| `/shop/search` | ProductSearchResultsRetro | Product search results |
 
-### **Category & Tag Archives**
+### Category & Tag Archives
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/shop/category/:categorySlug` | ArchiveProduct | `ArchiveProduct.tsx` | Category archive (dynamic) |
-| `/shop/category/clothing` | ArchiveProduct | `ArchiveProduct.tsx` | Clothing category |
-| `/shop/category/accessories` | ArchiveProduct | `ArchiveProduct.tsx` | Accessories category |
-| `/shop/category/home` | ArchiveProduct | `ArchiveProduct.tsx` | Home & Living category |
-| `/shop/tag/:tagSlug` | ArchiveProduct | `ArchiveProduct.tsx` | Tag archive (dynamic) |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/category/:slug` | ArchiveProductRetro | Category archive (dynamic) |
+| `/tag/:slug` | ArchiveProductRetro | Tag archive (dynamic) |
 
-### **Single Product Pages**
+**Available categories:** apparel, accessories, games, posters, collectibles
+**Available tags:** retro, gaming, streetwear, limited-edition, pixel-art, vintage, neon, arcade, cozy, unisex, handmade, eco-friendly, gift-idea, new-arrival, best-seller, tabletop, wall-art, nostalgia, premium, bundle-deal
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/product/:id` | SingleProduct | `SingleProduct.tsx` | Single product page |
-| `/product/:id/sticky` | SingleProductSticky | `SingleProductSticky.tsx` | Product with sticky buy panel |
-| `/variable-product/:id` | VariableProduct | `VariableProduct.tsx` | Variable product (sizes/colors) |
+### Single Product Pages
 
-### **Special Shop Pages**
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/product/:slug` | SingleProductRetro | Single product page |
+| `/product/:slug/sticky` | SingleProductSticky | Product with sticky buy panel |
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/new-arrivals` | NewArrivals | `pages/NewArrivals.tsx` | New arrivals page |
-| `/best-sellers` | BestSellers | `pages/shop/BestSellers.tsx` | Best selling products |
-| `/sale` | Sale | `pages/shop/Sale.tsx` | Sale products |
-| `/gift-cards` | GiftCards | `pages/shop/GiftCards.tsx` | Gift cards page |
-| `/compare` | Compare | `pages/shop/Compare.tsx` | Product comparison |
-| `/shop/search` | ProductSearchResults | `pages/shop/ProductSearchResults.tsx` | Product search results |
+**Example slugs:** `pixel-power-tee`, `neon-arcade-hoodie`, `bomber-jacket-alpha`
+
+### Special Shop Pages
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/new-arrivals` | ArchiveProductRetro | New arrivals |
+| `/best-sellers` | ArchiveProductRetro | Best selling products |
+| `/sale` | ArchiveProductRetro | Sale products |
+| `/deals` | ArchiveProductRetro | Current deals |
+| `/gift-cards` | PageGiftCardsRetro | Gift cards |
+| `/compare` | PageCompareRetro | Product comparison |
 
 ---
 
 ## Account Routes
 
-### **Authentication**
+### Authentication
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/account/login` | LoginRegister | `PageLogin.tsx` | Login/Register page |
-| `/account/reset-password` | ResetPassword | `pages/account/ResetPassword.tsx` | Password reset |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/account/login` | PageLoginRetro | Login page |
+| `/register` | PageRegisterRetro | Registration |
+| `/reset-password` | PagePasswordResetRetro | Password reset |
+| `/account/reset-password` | PagePasswordResetRetro | Password reset (alias) |
 
-### **Account Dashboard (Nested Routes)**
+### Account Dashboard (Nested)
 
-Base route: `/account`  
-Layout: `AccountLayout.tsx`
+Base route: `/account` — Layout: `AccountLayoutRetro`
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/account` | AccountLayout | `AccountLayout.tsx` | Base account layout (redirects to /dashboard) |
-| `/account/dashboard` | Dashboard | `patterns/account/Dashboard.tsx` | Account dashboard |
-| `/account/orders` | Orders | `patterns/account/Orders.tsx` | Order history |
-| `/account/orders/:orderId` | OrderViewPattern | `patterns/account/OrderView.tsx` | Single order view |
-| `/account/wishlist` | WishlistPattern | `patterns/account/Wishlist.tsx` | Account wishlist |
-| `/account/addresses` | Addresses | `patterns/account/Addresses.tsx` | Saved addresses |
-| `/account/details` | AccountDetails | `patterns/account/AccountDetails.tsx` | Account settings |
-| `/account/dashboard-widgets` | AccountDashboardWidgets | `AccountDashboardWidgets.tsx` | Enhanced dashboard |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/account` | Redirect | Redirects to `/account/dashboard` |
+| `/account/dashboard` | DashboardRetro | Account overview |
+| `/account/orders` | OrdersRetro | Order history |
+| `/account/addresses` | AddressesRetro | Saved addresses |
+| `/account/loyalty` | LoyaltyRetro | Loyalty points & XP |
+| `/account/dashboard-widgets` | AccountDashboardWidgets | Enhanced dashboard |
 
-### **Legacy Redirects**
+### Other Account Pages
 
-| Route | Redirects To | Description |
-|-------|--------------|-------------|
-| `/my-account` | `/account` | Legacy account URL |
-| `/account/*` (invalid) | `/account/dashboard` | Fallback for invalid account routes |
-
-### **Wishlist**
-
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/wishlist` | Wishlist | `PageWishlist.tsx` | Standalone wishlist page |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/wishlist` | PageWishlistRetro | Standalone wishlist |
+| `/my-account` | Redirect | Redirects to `/account` |
 
 ---
 
 ## Cart & Checkout Routes
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/cart` | Cart | `pages/shop/Cart.tsx` | Shopping cart |
-| `/checkout` | PageCheckout | `PageCheckout.tsx` | Checkout page |
-| `/order-confirmation` | OrderConfirmation | `pages/shop/OrderConfirmation.tsx` | Order confirmation |
-| `/track-order` | TrackOrder | `pages/shop/TrackOrder.tsx` | Order tracking |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/cart` | PageCartRetro | Shopping cart |
+| `/checkout` | PageCheckoutRetro | Checkout page |
+| `/order-confirmation` | PageOrderConfirmationRetro | Order success |
+| `/track-order` | PageTrackOrderRetro | Order tracking |
 
 ---
 
 ## Blog Routes
 
-### **Main Blog Pages**
+### Main Blog
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/blog` | BlogIndex | `BlogIndex.tsx` | Blog homepage |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/blog` | ArchiveBlogRetro | Blog index |
 
-### **Category & Tag Archives**
+### Category, Author & Tag Archives
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/blog/category/:categorySlug` | ArchiveCategory | `ArchiveCategory.tsx` | Blog category archive |
-| `/blog/author/:authorSlug` | ArchiveAuthor | `ArchiveAuthor.tsx` | Author archive |
-| `/blog/tag/:tagSlug` | TagArchive | `blog/TagArchive.tsx` | Tag archive |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/blog/category/:slug` | ArchiveBlogRetro | Blog category archive |
+| `/blog/author/:slug` | ArchiveBlogRetro | Author archive |
+| `/blog/tag/:slug` | ArchiveBlogRetro | Tag archive |
 
-### **Single Post Pages**
+**Available blog categories:** development, design, podcast, videos, gallery
+**Available authors:** alex-morgan, sarah-jenkins, david-chen
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/blog/:slug` | SinglePost | `SinglePost.tsx` | Single blog post (default) |
-| `/blog/:slug/sidebar` | SinglePostWithSidebar | `SinglePostWithSidebar.tsx` | Post with sidebar |
-| `/blog/:slug/fullwidth` | SinglePostFullWidth | `SinglePostFullWidth.tsx` | Full-width post |
+### Single Post Pages
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/blog/:slug` | SinglePostRetro | Default post layout |
+| `/blog/:slug/sidebar` | SinglePostWithSidebar | Post with sidebar |
+| `/blog/:slug/fullwidth` | SinglePostFullWidth | Full-width post |
+| `/blog/:slug/standard` | TemplateSingleStandard | Standard format |
+| `/blog/:slug/audio` | TemplateSingleAudio | Audio/podcast format |
+| `/blog/:slug/video` | TemplateSingleVideo | Video format |
+| `/blog/:slug/gallery` | TemplateSingleGallery | Gallery format |
+| `/blog/:slug/aside` | TemplateSingleAside | Aside/status format |
+
+**Available post slugs:** `open-channels-ash-shaw`, `lightspeed-dev-workflow`, `office-vibes-gallery`, `quick-update-november`, `getting-started-headless`
+
+### Format Archives
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/blog/format/audio` | ArchiveAudio | Podcast archive |
+| `/blog/format/video` | ArchiveVideo | Video archive |
+| `/blog/format/gallery` | ArchiveGallery | Gallery archive |
+| `/blog/format/aside` | ArchiveAside | Aside archive |
 
 ---
 
-## About Routes
+## About & Company Routes
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/about` | PageAbout | `PageAbout.tsx` | Main about page |
-| `/about/our-story` | OurStory | `pages/about/OurStory.tsx` | Brand story |
-| `/about/team` | Team | `pages/about/Team.tsx` | Team page |
-| `/about/sustainability` | Sustainability | `pages/about/Sustainability.tsx` | Sustainability practices |
-| `/about/careers` | Careers | `pages/about/Careers.tsx` | Careers page |
-| `/stores` | Stores | `pages/Stores.tsx` | Physical store locations |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/about` | PageAboutRetro | About us |
+| `/about/our-story` | PageOurStoryRetro | Brand story |
+| `/about/team` | PageTeamRetro | Meet the team |
+| `/about/sustainability` | PageSustainabilityRetro | Environmental practices |
+| `/about/careers` | PageCareersRetro | Careers |
+| `/stores` | PageStoresRetro | Store locations |
+| `/press` | PagePressMediaRetro | Press & media |
 
 ---
 
 ## Promotions Routes
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/promotions` | Promotions | `pages/Promotions.tsx` | Promotions hub |
-| `/promotions/flash-sale` | FlashSale | `pages/promotions/FlashSale.tsx` | Flash sale page |
-| `/promotions/seasonal` | SeasonalSale | `pages/promotions/SeasonalSale.tsx` | Seasonal sale |
-| `/promotions/bundles` | Bundles | `pages/promotions/Bundles.tsx` | Product bundles |
-| `/promotions/clearance` | Clearance | `pages/promotions/Clearance.tsx` | Clearance sale |
-| `/promotions/winter-clearance` | Clearance | `pages/promotions/Clearance.tsx` | Winter clearance (alias) |
-| `/promotions/buy-2-get-1` | Bundles | `pages/promotions/Bundles.tsx` | Buy 2 get 1 promotion |
-| `/loyalty` | Loyalty | `pages/promotions/Loyalty.tsx` | Loyalty program |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/promotions` | ArchiveProductRetro | Promotions hub |
+| `/promotions/flash-sale` | ArchiveProductRetro | Flash sale |
+| `/promotions/seasonal` | ArchiveProductRetro | Seasonal sale |
+| `/promotions/bundles` | ArchiveProductRetro | Product bundles |
+| `/promotions/clearance` | ArchiveProductRetro | Clearance |
+| `/promotions/winter-clearance` | ArchiveProductRetro | Winter clearance |
+| `/promotions/buy-2-get-1` | ArchiveProductRetro | Buy 2 get 1 |
+| `/loyalty` | PageLoyaltyRetro | Loyalty program |
 
 ---
 
 ## Support & Help Routes
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/help` | HelpCenter | `pages/content/HelpCenter.tsx` | Help center hub |
-| `/shipping-returns` | ShippingReturns | `pages/ShippingReturns.tsx` | Shipping & returns info |
-| `/returns` | ReturnsPortal | `pages/customer-service/ReturnsPortal.tsx` | Returns portal |
-| `/refunds` | ReturnsPortal | `pages/customer-service/ReturnsPortal.tsx` | Refunds portal (alias) |
-| `/size-guide` | SizeGuide | `pages/content/SizeGuide.tsx` | Size guide |
-| `/chat` | Chat | `pages/Chat.tsx` | Live chat support |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/help` | PageHelpCenterRetro | Help center |
+| `/chat` | PageChat | Live chat |
+| `/shipping-returns` | PageShippingReturnsRetro | Shipping & returns |
+| `/shipping` | PageShippingReturnsRetro | Shipping (alias) |
+| `/returns` | PageReturnsPortalRetro | Returns portal |
+| `/refunds` | PageRefundsRetro | Refunds |
+| `/size-guide` | PageSizeGuideRetro | Size guide |
+| `/buying-guide` | PageBuyingGuideRetro | Buying guide |
+| `/care-instructions` | PageCareInstructionsRetro | Care instructions |
+| `/warranty` | PageWarrantyRetro | Warranty |
+| `/accessibility` | PageAccessibilityStatementRetro | Accessibility statement |
+| `/rewards` | PageRewardProgramRetro | Rewards program |
+| `/affiliate` | PageAffiliateProgramRetro | Affiliate program |
+| `/reviews` | PageReviewsRetro | Customer reviews |
 
 ---
 
 ## Legal & Compliance Routes
 
-### **Primary Legal Pages**
+### Primary Pages
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/privacy-policy` | PrivacyPolicy | `pages/legal/PrivacyPolicy.tsx` | Privacy policy |
-| `/legal/privacy-policy` | PrivacyPolicy | `pages/legal/PrivacyPolicy.tsx` | Privacy policy (legal path) |
-| `/privacy` | Privacy | `pages/Legal.tsx` | Privacy (legacy) |
-| `/terms-and-conditions` | TermsConditions | `pages/legal/TermsConditions.tsx` | Terms & conditions |
-| `/legal/terms-conditions` | TermsConditions | `pages/legal/TermsConditions.tsx` | Terms (legal path) |
-| `/terms` | Terms | `pages/Legal.tsx` | Terms (legacy) |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/privacy-policy` | PagePrivacyPolicyRetro | Privacy policy |
+| `/terms-and-conditions` | PageTermsConditionsRetro | Terms & conditions |
 
-### **Other Legal**
+### Redirects
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/legal/privacy` | Privacy | `pages/Legal.tsx` | Privacy (legal path legacy) |
-| `/legal/terms` | Terms | `pages/Legal.tsx` | Terms (legal path legacy) |
-| `/policies` | Privacy | `pages/Legal.tsx` | Policies hub |
+| Route | Redirects To |
+|-------|-------------|
+| `/privacy` | `/privacy-policy` |
+| `/policies` | `/privacy-policy` |
+| `/terms` | `/terms-and-conditions` |
+| `/legal/privacy` | `/privacy-policy` |
+| `/legal/terms` | `/terms-and-conditions` |
+| `/legal/privacy-policy` | `/privacy-policy` |
+| `/legal/terms-conditions` | `/terms-and-conditions` |
+
+---
+
+## Gaming & Community Routes
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/achievements` | PageAchievementsRetro | Trophy room |
+| `/leaderboard` | PageLeaderboardRetro | Top players |
+| `/new-releases` | PageNewReleasesRetro | Upcoming drops |
+| `/pre-orders` | PageNewReleasesRetro | Pre-orders (alias) |
+| `/bundle-builder` | PageBundleBuilderRetro | Build your own bundle |
+| `/lookbook` | PageLookbookRetro | Editorial gallery |
+| `/community` | PageCommunityRetro | Community hub |
+| `/referral` | PageReferralRetro | Referral program |
+| `/events` | PageEventsRetro | Events calendar |
+
+---
+
+## Subscriptions & Memberships Routes
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/subscriptions` | SubscriptionLandingRetro | Subscription plans |
+| `/subscription/:id` | SingleSubscription | Single subscription |
+| `/memberships` | MembershipLandingRetro | Membership tiers |
+| `/membership/:id` | SingleMembership | Single membership |
+| `/membership/3d/:id` | MembershipSubscription3DRetro | 3D membership card |
+
+---
+
+## Dev Tools Routes
+
+Nested under `/dev-tools` with `DevToolsLayout`.
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/dev-tools` | DevToolsIndex | Dev tools hub |
+| `/dev-tools/style-guide` | PageStyleGuide | Design system reference |
+| `/dev-tools/showcase` | PageShowcase | Component gallery |
+| `/dev-tools/forms` | PageFormShowcase | Form elements reference |
+| `/dev-tools/icons` | PageIconLibrary | Icon browser |
+| `/dev-tools/api` | PageComponentAPI | Component API docs |
+| `/dev-tools/live-preview` | PageLivePreview | Live component preview |
+| `/dev-tools/performance` | PagePerformance | Web Vitals monitoring |
+
+### Other Dev/Demo Routes
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/template-tester` | FrontPageRetro | Template testing |
+| `/campaign/product-launch` | LongFormSalesPage | Sales page demo |
+| `/social/:platform` | SocialRedirect | Social redirect |
+| `/retro-demo` | RetroDemoIndex | Retro demo hub |
+| `/retro-demo/landing-page` | RetroDemoLandingPage | Marketing landing page |
 
 ---
 
 ## Error Pages
 
-### **Production Error Pages**
-
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `*` (fallback) | NotFound | `pages/NotFound.tsx` | 404 Not Found (catch-all) |
-
-### **Testing/Demo Error Pages**
-
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/error/404` | NotFound404 | `pages/errors/NotFound404.tsx` | 404 demonstration |
-| `/error/500` | ServerError500 | `pages/errors/ServerError500.tsx` | 500 Server Error demo |
-| `/error/503` | Maintenance503 | `pages/errors/Maintenance503.tsx` | 503 Maintenance demo |
-| `/error/network` | NetworkError | `pages/errors/NetworkError.tsx` | Network error demo |
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/error/404` | PageNotFoundRetro | 404 demo |
+| `/error/500` | PageNotFoundRetro | 500 demo |
+| `/error/503` | PageNotFoundRetro | 503 demo |
+| `/error/network` | PageNotFoundRetro | Network error demo |
+| `*` (catch-all) | PageNotFoundRetro | 404 fallback |
 
 ---
 
-## Development Tools
+## Navigation Data Files
 
-| Route | Component | Template | Description |
-|-------|-----------|----------|-------------|
-| `/template-tester` | TemplateTester | `pages/TemplateTester.tsx` | Template testing page |
-| `/campaign/product-launch` | LongFormSalesPage | `LongFormSalesPage.tsx` | Long-form sales page demo |
+All navigation menus are driven by centralized data files:
 
----
+| File | Exports | Used By |
+|------|---------|---------|
+| `/src/app/data/navigation.ts` | MAIN_MENU, FOOTER_MENU_SHOP, FOOTER_MENU_SUPPORT, FOOTER_MENU_COMPANY | HeaderRetro, mobile nav |
+| `/src/app/data/megaMenuData.ts` | shopMenu, dealsMenu, membershipsMenu, communityMenu, aboutMenu | MegaMenu panels |
+| `/src/app/data/footer.ts` | footerColumns, footerLegalLinks, checkoutFooterLinks | FooterRetro, CheckoutFooter |
 
-## Route Validation
-
-### **Dynamic Routes (With Parameters)**
-
-#### **Shop Routes:**
-- `/shop/category/:categorySlug` - Example: `/shop/category/clothing`
-- `/shop/tag/:tagSlug` - Example: `/shop/tag/summer`
-- `/product/:id` - Example: `/product/prod-001`
-- `/product/:id/sticky` - Example: `/product/prod-001/sticky`
-- `/variable-product/:id` - Example: `/variable-product/prod-002`
-
-#### **Blog Routes:**
-- `/blog/category/:categorySlug` - Example: `/blog/category/fashion`
-- `/blog/author/:authorSlug` - Example: `/blog/author/jane-smith`
-- `/blog/tag/:tagSlug` - Example: `/blog/tag/style-tips`
-- `/blog/:slug` - Example: `/blog/latest-trends-2026`
-- `/blog/:slug/sidebar` - Example: `/blog/latest-trends-2026/sidebar`
-- `/blog/:slug/fullwidth` - Example: `/blog/latest-trends-2026/fullwidth`
-
-#### **Account Routes:**
-- `/account/orders/:orderId` - Example: `/account/orders/ORD-12345`
-
-### **Redirects**
-
-| From | To | Type |
-|------|----|----|
-| `/my-account` | `/account` | Permanent redirect |
-| `/account` (index) | `/account/dashboard` | Navigate redirect |
-| `/account/*` (invalid paths) | `/account/dashboard` | Fallback redirect |
+When adding new routes, update ALL relevant data files to keep navigation in sync.
 
 ---
 
-## Navigation Menu Links
+## Dynamic Route Validation
 
-### **Primary Header Navigation (MainHeader.tsx)**
+### Product Routes
 
-Current menu items (lines 51-58):
-
-```typescript
-const navigationMenu: MenuItem[] = [
-  { id: 'shop', title: 'Shop', url: '/shop', megaMenu: 'shop' },
-  { id: 'blog', title: 'Blog', url: '/blog', megaMenu: 'blog' },
-  { id: 'about', title: 'About', url: '/about', megaMenu: 'about' },
-  { id: 'promotions', title: 'Promotions', url: '/promotions', megaMenu: 'promotions' },
-  { id: 'contact', title: 'Contact', url: '/contact', megaMenu: 'contact' },
-  { id: 'faq', title: 'FAQ', url: '/faq' },
-];
+```
+/product/:slug          → getProductBySlug(slug) || getProductById(slug)
+/category/:slug         → productCategories.find(c => c.slug === slug)
+/tag/:slug              → productTags.find(t => t.slug === slug)
 ```
 
-**Status:** ✅ All routes are valid
+### Blog Routes
 
----
-
-### **Shop Mega Menu (ShopMegaMenu.tsx)**
-
-**Categories Section:**
-
-| Link Text | Route | Status |
-|-----------|-------|--------|
-| All Products | `/shop` | ✅ Valid |
-| New Arrivals | `/new-arrivals` | ✅ Valid |
-| Best Sellers | `/best-sellers` | ✅ Valid |
-| Sale | `/sale` | ✅ Valid |
-| Gift Cards | `/gift-cards` | ✅ Valid |
-| Collections | `/shop/collections` | ✅ Valid |
-
-**Featured Categories:**
-
-| Link Text | Route | Status |
-|-----------|-------|--------|
-| Clothing | `/shop/category/clothing` | ✅ Valid (dynamic route) |
-| Accessories | `/shop/category/accessories` | ✅ Valid (dynamic route) |
-| Home & Living | `/shop/category/home` | ✅ Valid (dynamic route) |
-
----
-
-### **Blog Mega Menu (BlogMegaMenu.tsx)**
-
-To be audited in next section...
-
----
-
-### **About Mega Menu (AboutMegaMenu.tsx)**
-
-To be audited in next section...
-
----
-
-### **Promotions Mega Menu (PromotionsMegaMenu.tsx)**
-
-To be audited in next section...
-
----
-
-### **Contact Mega Menu (ContactMegaMenu.tsx)**
-
-To be audited in next section...
-
----
-
-## Common Navigation Patterns
-
-### **Footer Navigation (Typical Links)**
-
-**Common footer links that should be included:**
-
-**Shop:**
-- All Products → `/shop`
-- New Arrivals → `/new-arrivals`
-- Sale → `/sale`
-- Gift Cards → `/gift-cards`
-
-**About:**
-- Our Story → `/about/our-story`
-- Team → `/about/team`
-- Careers → `/about/careers`
-- Stores → `/stores`
-
-**Support:**
-- FAQ → `/faq`
-- Help Center → `/help`
-- Shipping & Returns → `/shipping-returns`
-- Size Guide → `/size-guide`
-- Contact → `/contact`
-
-**Legal:**
-- Privacy Policy → `/privacy-policy`
-- Terms & Conditions → `/terms-and-conditions`
-
-**Account:**
-- My Account → `/account`
-- Orders → `/account/orders`
-- Wishlist → `/wishlist`
-
----
-
-## Mobile Menu Structure
-
-**Recommended mobile menu structure:**
-
-```typescript
-const mobileMenuItems = [
-  { title: 'Home', url: '/' },
-  { 
-    title: 'Shop', 
-    url: '/shop',
-    submenu: [
-      { title: 'All Products', url: '/shop' },
-      { title: 'New Arrivals', url: '/new-arrivals' },
-      { title: 'Best Sellers', url: '/best-sellers' },
-      { title: 'Sale', url: '/sale' },
-    ]
-  },
-  { 
-    title: 'Blog', 
-    url: '/blog',
-    submenu: [
-      { title: 'All Posts', url: '/blog' },
-      { title: 'Fashion', url: '/blog/category/fashion' },
-      { title: 'Lifestyle', url: '/blog/category/lifestyle' },
-    ]
-  },
-  { title: 'About', url: '/about' },
-  { title: 'Contact', url: '/contact' },
-  { title: 'FAQ', url: '/faq' },
-];
+```
+/blog/:slug             → getPostBySlug(slug)
+/blog/category/:slug    → postCategories.find(c => c.slug === slug)
+/blog/author/:slug      → USERS.find(u => u.slug === slug)
+/blog/tag/:slug         → tags.find(t => t.slug === slug)
 ```
 
----
+### Data Requirements
 
-## Route Testing Checklist
-
-### **For Each Route:**
-
-- [ ] Route exists in `/src/app/App.tsx`
-- [ ] Component file exists
-- [ ] Template file exists
-- [ ] Link is used in navigation
-- [ ] Link is accessible via UI
-- [ ] Link has proper accessibility (aria-label if needed)
-- [ ] Link works in both light and dark mode
-- [ ] Link has hover state
-- [ ] Link has active/current state
-- [ ] Dynamic routes handle parameters correctly
+Every entry in every data file must have:
+- `id` — unique identifier (string or number)
+- `slug` — URL-safe, lowercase, hyphenated string
 
 ---
 
-## Next Steps
-
-1. **Audit all mega menus** - Verify all links in BlogMegaMenu, AboutMegaMenu, PromotionsMegaMenu, ContactMegaMenu
-2. **Audit footer navigation** - Verify all footer links
-3. **Audit mobile menu** - Verify mobile menu structure
-4. **Create sitemap page** - Visual sitemap for testing all routes
-5. **Add dev tools link** - Add sitemap to dev-tools landing page
-
----
-
-**END OF ROUTING GUIDE**
+**Version:** 2.0
+**Last Updated:** March 15, 2026

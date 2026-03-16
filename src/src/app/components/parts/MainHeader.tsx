@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
-import { List as Menu, MagnifyingGlass as Search, UserCircle as UserRound, X } from '@phosphor-icons/react';
+import { List as Menu, MagnifyingGlass as Search, UserCircle as UserRound, X } from '../../utils/phosphor-compat';
 import { Container } from '../common/Container';
 import { MiniCart } from './MiniCart';
 import { MobileMenu } from './MobileMenu';

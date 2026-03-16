@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, X } from '@phosphor-icons/react';
+import { Check, X } from '../../utils/phosphor-compat';
 import { Typography } from '../common/Typography';
 
 interface ComparisonPlan {

@@ -1,0 +1,88 @@
+/**
+ * PlayPocket — Pixel Buttons
+ *
+ * Pixelated border style buttons using clip-path polygon.
+ *
+ * BEM block: .pp-pixel-btn
+ */
+
+.pp-pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  text-decoration: none;
+  min-height: 44px;
+  /* Pixel-stepped border effect via clip-path */
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.pp-pixel-btn:hover {
+  transform: translateY(-1px);
+}
+
+.pp-pixel-btn:active {
+  transform: translateY(2px);
+}
+
+.pp-pixel-btn--primary {
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+}
+
+.pp-pixel-btn--accent {
+  background: var(--wp--preset--color--primary, #FFC533);
+  color: var(--wp--preset--color--primary-foreground, #1E2630);
+}
+
+.pp-pixel-btn--card {
+  width: 100%;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--wp--preset--color--surface, #FFFFFF);
+  color: var(--wp--preset--color--foreground, #1E2630);
+  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  clip-path: polygon(
+    0 3px, 3px 3px, 3px 0,
+    calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px,
+    100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%,
+    3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px)
+  );
+}
+
+.pp-pixel-btn--card.pp-pixel-btn--accent {
+  background: var(--wp--preset--color--primary, #FFC533);
+  color: var(--wp--preset--color--primary-foreground, #1E2630);
+  border-color: var(--wp--preset--color--foreground, #1E2630);
+}
+
+.pp-pixel-btn--subscribe {
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+  clip-path: polygon(
+    0 3px, 3px 3px, 3px 0,
+    calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px,
+    100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%,
+    3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px)
+  );
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .pp-pixel-btn {
+    transition: none;
+  }
+}

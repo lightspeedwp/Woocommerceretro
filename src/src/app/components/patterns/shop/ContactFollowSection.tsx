@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '../../common/Container';
 import { Typography } from '../../common/Typography';
-import { InstagramLogo as Instagram, FacebookLogo as Facebook, TwitterLogo as Twitter, Envelope as Mail, Phone } from '@phosphor-icons/react';
+import { InstagramLogo as Instagram, FacebookLogo as Facebook, TwitterLogo as Twitter, Envelope as Mail, Phone } from '../../../utils/phosphor-compat';
 
 /**
  * ContactFollowSection Component

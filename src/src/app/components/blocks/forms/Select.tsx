@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext, createContext, forwardRef, useCallback } from 'react';
-import { Check, CaretDown as ChevronDown, CaretUp as ChevronUp } from '@phosphor-icons/react';
+import { Check, CaretDown as ChevronDown, CaretUp as ChevronUp } from '../../../utils/phosphor-compat';
 
 /**
  * Select Component

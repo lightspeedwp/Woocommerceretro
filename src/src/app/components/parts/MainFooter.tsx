@@ -4,7 +4,7 @@ import { footerColumns, footerNewsletter, footerBrandBlurb, footerLegalLinks } f
 import { brand, socialLinks, legal, paymentMethods } from '../../data/site';
 import { ShopLogo } from '../common/Logo';
 import { NewsletterCTA } from '../patterns/NewsletterCTA';
-import { InstagramLogo, TwitterLogo, FacebookLogo, PinterestLogo, YoutubeLogo, TiktokLogo, LinkedinLogo, Link as LinkIcon } from '@phosphor-icons/react';
+import { InstagramLogo, TwitterLogo, FacebookLogo, PinterestLogo, YoutubeLogo, TiktokLogo, LinkedinLogo, Link as LinkIcon } from '../../utils/phosphor-compat';
 
 /**
  * MainFooter Component (Global Template Part)
@@ -57,7 +57,7 @@ export const MainFooter = ({ id, className = '' }: MainFooterProps) => {
         <div className="wp-site-footer__grid wp-site-footer__grid--5col">
           {/* Brand Column */}
           <div className="wp-site-footer__brand">
-            <Link to="/" className="wp-site-footer__logo-link" aria-label={`${brand.name} - home`} style={{ display: 'inline-block' }}>
+            <Link to="/" className="wp-site-footer__logo-link" aria-label={`${brand.name} - home`}>
               <ShopLogo className="wp-site-footer__logo" variant="current" />
             </Link>
             <p className="wp-site-footer__description">{footerBrandBlurb}</p>

@@ -6,7 +6,7 @@
  */
 
 import { Link, Outlet, useLocation } from 'react-router';
-import { UserCircle, Package, MapPin, SignOut, Star } from '@phosphor-icons/react';
+import { UserCircle, Package, MapPin, SignOut, Star } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

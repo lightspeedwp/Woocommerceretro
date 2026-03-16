@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scales as Scale, Check } from '@phosphor-icons/react';
+import { Scales as Scale, Check } from '../../../utils/phosphor-compat';
 import { useComparison } from '../../../contexts/ComparisonContext';
 import { cn } from '../../../utils/cn';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, X } from '@phosphor-icons/react';
+import { Check, X } from '../../utils/phosphor-compat';
 import { Button } from '../blocks/design/Buttons';
 import { Typography } from '../common/Typography';
 

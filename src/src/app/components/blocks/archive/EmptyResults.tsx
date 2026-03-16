@@ -1,4 +1,4 @@
-import { MagnifyingGlass as SearchX } from '@phosphor-icons/react';
+import { MagnifyingGlass as SearchX } from '../../../utils/phosphor-compat';
 import { Button } from '../design/Buttons';
 import { Typography } from '../../common/Typography';
 

@@ -20,7 +20,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { CheckCircle, Lightbulb, Bag as ShoppingBag, Star, ArrowRight } from '@phosphor-icons/react';
+import { CheckCircle, Lightbulb, Bag as ShoppingBag, Star, ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

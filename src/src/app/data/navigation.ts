@@ -4,19 +4,17 @@
  * Mock navigation menus for header and footer.
  */
 
-/**
- * @typedef {Object} NavItem
- * @property {string} id
- * @property {string} label
- * @property {string} url
- * @property {string} [badge]
- * @property {NavItem[]} [children]
- * @property {boolean} [megaMenu]
- * @property {NavItem[]} [columns]
- */
+export interface NavItem {
+  id: string;
+  label: string;
+  url: string;
+  badge?: string;
+  children?: NavItem[];
+  megaMenu?: boolean;
+  columns?: NavItem[];
+}
 
-/** @type {NavItem[]} */
-export const MAIN_MENU = [
+export const MAIN_MENU: NavItem[] = [
   {
     id: 'home',
     label: 'Home',
@@ -29,11 +27,11 @@ export const MAIN_MENU = [
     megaMenu: true,
     children: [
       { id: 'all', label: 'All products', url: '/shop' },
-      { id: 'electronics', label: 'Electronics', url: '/shop/category/electronics' },
-      { id: 'clothing', label: 'Clothing', url: '/shop/category/clothing' },
-      { id: 'home-living', label: 'Home & Living', url: '/shop/category/home-living' },
-      { id: 'accessories', label: 'Accessories', url: '/shop/category/accessories' },
-      { id: 'sports-fitness', label: 'Sports & Fitness', url: '/shop/category/sports-fitness' },
+      { id: 'apparel', label: 'Apparel', url: '/category/apparel' },
+      { id: 'accessories', label: 'Accessories', url: '/category/accessories' },
+      { id: 'games', label: 'Games', url: '/category/games' },
+      { id: 'posters', label: 'Posters', url: '/category/posters' },
+      { id: 'collectibles', label: 'Collectibles', url: '/category/collectibles' },
       { id: 'sale', label: 'Sale', url: '/sale', badge: 'Hot' }
     ]
   },
@@ -106,24 +104,21 @@ export const MAIN_MENU = [
   }
 ];
 
-/** @type {NavItem[]} */
-export const FOOTER_MENU_SHOP = [
+export const FOOTER_MENU_SHOP: NavItem[] = [
   { id: 'f_new', label: 'New arrivals', url: '/new-arrivals' },
   { id: 'f_best', label: 'Best sellers', url: '/best-sellers' },
   { id: 'f_sale', label: 'Sale', url: '/sale' },
   { id: 'f_gift', label: 'Gift cards', url: '/gift-cards' }
 ];
 
-/** @type {NavItem[]} */
-export const FOOTER_MENU_SUPPORT = [
+export const FOOTER_MENU_SUPPORT: NavItem[] = [
   { id: 'f_help', label: 'Help center', url: '/help' },
   { id: 'f_shipping', label: 'Shipping & returns', url: '/shipping-returns' },
   { id: 'f_size', label: 'Size guide', url: '/size-guide' },
   { id: 'f_track', label: 'Track order', url: '/track-order' }
 ];
 
-/** @type {NavItem[]} */
-export const FOOTER_MENU_COMPANY = [
+export const FOOTER_MENU_COMPANY: NavItem[] = [
   { id: 'f_about', label: 'About us', url: '/about' },
   { id: 'f_careers', label: 'Careers', url: '/about/careers' },
   { id: 'f_stores', label: 'Store locations', url: '/stores' },

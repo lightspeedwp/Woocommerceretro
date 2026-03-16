@@ -1,10 +1,21 @@
+/**
+ * CategoryRowRetro
+ *
+ * Category navigation row with pixel-style icons.
+ * Matches the design reference with bordered cells and arrow button.
+ *
+ * **Styling:** BEM (.retro-cat__*) in /src/styles/sections/playpocket-home.css
+ * **WCAG:** Semantic nav, 44px touch targets, text labels
+ */
+
 import React from 'react';
-import { ArrowRight, TShirt, GameController, Ghost, Image as ImageIcon, Package } from '@phosphor-icons/react';
+import { ArrowRight, Shirt, Gamepad2, Ghost, Image as ImageIcon, Package } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
 interface Category {
   name: string;
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
   slug: string;
 }
 
@@ -13,8 +24,8 @@ interface CategoryRowRetroProps {
 }
 
 const defaultCategories: Category[] = [
-  { name: 'APPAREL', icon: TShirt, slug: 'apparel' },
-  { name: 'ACCESSORIES', icon: GameController, slug: 'accessories' },
+  { name: 'APPAREL', icon: Shirt, slug: 'apparel' },
+  { name: 'ACCESSORIES', icon: Gamepad2, slug: 'accessories' },
   { name: 'GAMES', icon: Ghost, slug: 'games' },
   { name: 'POSTERS', icon: ImageIcon, slug: 'posters' },
   { name: 'COLLECTIBLES', icon: Package, slug: 'collectibles' },
@@ -22,24 +33,24 @@ const defaultCategories: Category[] = [
 
 export const CategoryRowRetro = ({ categories = defaultCategories }: CategoryRowRetroProps) => {
   return (
-    <section>
+    <nav aria-label="Product categories">
       <div className="retro-cat-header retro-font-display">CATEGORIES +</div>
       <div className="retro-cat-row">
-        {categories.map((cat, i) => {
+        {categories.map((cat) => {
           const Icon = cat.icon;
           return (
-            <Link key={i} to={`/shop/category/${cat.slug}`} className="retro-cat-item" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Icon size={36} weight="duotone" className="retro-cat-icon" />
-              <span className="retro-font-display retro-bold">{cat.name}</span>
+            <Link key={cat.slug} to={`/category/${cat.slug}`} className="retro-cat-item">
+              <Icon size={32} className="retro-cat-icon" strokeWidth={1.5} />
+              <span className="retro-font-display">{cat.name}</span>
             </Link>
           );
         })}
-        <Link to="/shop" className="retro-cat-item" style={{ textDecoration: 'none', backgroundColor: 'var(--color-signal)', color: 'var(--wp--preset--color--primary-foreground, #101417)', flex: '0 0 auto', minWidth: 'auto', padding: '1.5rem 1rem' }}>
-          <ArrowRight size={24} weight="bold" className="retro-cat-icon" color="var(--wp--preset--color--primary-foreground, #101417)" />
+        <Link to="/shop" className="retro-cat-item retro-cat-item--arrow" aria-label="View all categories">
+          <ArrowRight size={24} strokeWidth={2.5} className="retro-cat-icon" />
         </Link>
       </div>
-    </section>
+    </nav>
   );
-}
+};
 
 CategoryRowRetro.displayName = 'CategoryRowRetro';

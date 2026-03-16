@@ -1,0 +1,210 @@
+/* ========================================
+   SWEEP — Account Badges & Mobile Orders
+   Source: sweep-cleanup.css lines 1258-1462
+   ======================================== */
+
+/* Status badges */
+.wp-account-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+  border-radius: 9999px;
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--medium);
+  border: 1px solid;
+}
+
+.wp-account-badge--completed {
+  background: var(--wp--preset--color--success-muted, rgba(22, 163, 74, 0.1));
+  color: var(--wp--preset--color--success);
+  border-color: var(--wp--preset--color--success-border, rgba(22, 163, 74, 0.2));
+}
+
+.wp-account-badge--processing {
+  background: var(--wp--preset--color--info-muted, rgba(37, 99, 235, 0.1));
+  color: var(--wp--preset--color--info, #2563eb);
+  border-color: var(--wp--preset--color--info-border, rgba(37, 99, 235, 0.2));
+}
+
+.wp-account-badge--shipped {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.1));
+  color: var(--wp--preset--color--accent);
+  border-color: var(--wp--preset--color--accent-border, rgba(124, 58, 237, 0.2));
+}
+
+.wp-account-badge--pending {
+  background: var(--wp--preset--color--warning-muted, rgba(217, 119, 6, 0.1));
+  color: var(--wp--preset--color--warning);
+  border-color: var(--wp--preset--color--warning-border, rgba(217, 119, 6, 0.2));
+}
+
+.wp-account-badge--cancelled {
+  background: var(--wp--preset--color--error-muted, rgba(220, 38, 38, 0.1));
+  color: var(--wp--preset--color--error);
+  border-color: var(--wp--preset--color--error-border, rgba(220, 38, 38, 0.2));
+}
+
+.wp-account-badge--default {
+  background: var(--wp--preset--color--surface-alt, #f3f4f6);
+  color: var(--wp--preset--color--muted-foreground);
+  border-color: var(--wp--preset--color--border);
+}
+
+/* Mobile order cards */
+.wp-account-dashboard__mobile-order {
+  padding: var(--wp--preset--spacing--40);
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-dashboard__mobile-order + .wp-account-dashboard__mobile-order {
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-account-dashboard__mobile-order:hover {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+}
+
+.wp-account-dashboard__mobile-order-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__mobile-order-date {
+  color: var(--wp--preset--color--muted-foreground);
+  display: block;
+  margin-top: var(--wp--preset--spacing--10);
+}
+
+.wp-account-dashboard__mobile-order-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wp-account-dashboard__mobile-order-total {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Quick actions */
+.wp-account-dashboard__quick-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-account-dashboard__quick-actions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================
+   SWEEP — Account Sidebar Nav
+   Source: sweep-cleanup.css lines 1356-1462
+   ======================================== */
+
+.wp-account-nav {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  overflow: hidden;
+}
+
+.wp-account-nav__list {
+  padding: var(--wp--preset--spacing--20) 0;
+  list-style: none;
+  margin: 0;
+}
+
+.wp-account-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  text-decoration: none;
+  border-left: 4px solid transparent;
+  transition: all var(--wp--preset--transition--base) ease;
+  color: var(--wp--preset--color--secondary-foreground, #374151);
+}
+
+.wp-account-nav__link:hover {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+}
+
+.wp-account-nav__link--active {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.05));
+  color: var(--wp--preset--color--accent);
+  border-left-color: var(--wp--preset--color--accent);
+}
+
+.wp-account-nav__link--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-account-nav__link--logout:hover {
+  background: var(--wp--preset--color--error-muted, rgba(220, 38, 38, 0.05));
+}
+
+.wp-account-nav__link-content {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-account-nav__icon {
+  color: var(--wp--preset--color--muted-foreground);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-nav__link:hover .wp-account-nav__icon {
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-account-nav__icon--active {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-account-nav__icon--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-account-nav__label {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: inherit;
+}
+
+.wp-account-nav__label--active {
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-account-nav__label--logout {
+  color: var(--wp--preset--color--error);
+}
+
+.wp-account-nav__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 var(--wp--preset--spacing--20);
+  border-radius: 9999px;
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  background: var(--wp--preset--color--surface-alt, #e5e7eb);
+  color: var(--wp--preset--color--secondary-foreground, #374151);
+}
+
+.wp-account-nav__badge--active {
+  background: var(--wp--preset--color--accent);
+  color: #fff;
+}
+
+.wp-account-nav__separator {
+  margin: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  border-top: 1px solid var(--wp--preset--color--border);
+  list-style: none;
+}

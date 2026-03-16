@@ -24,3 +24,23 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Grid layout for related product cards */
+.wc-related-products__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wc-related-products__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wc-related-products__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--50);
+  }
+}

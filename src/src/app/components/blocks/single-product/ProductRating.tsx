@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star } from '@phosphor-icons/react';
+import { Star } from '../../../utils/phosphor-compat';
 
 /**
  * ProductRating Block Component

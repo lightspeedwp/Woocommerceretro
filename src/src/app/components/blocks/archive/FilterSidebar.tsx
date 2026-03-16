@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { X, Star, Check, CaretUp as ChevronUp, CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { X, Star, Check, CaretUp as ChevronUp, CaretDown as ChevronDown } from '../../../utils/phosphor-compat';
 import { ActiveFilters } from './ActiveFilters';
 import { Typography } from '../../common/Typography';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose, DrawerDescription } from '../layout/Drawer';

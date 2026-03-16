@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container } from '../common/Container';
-import { Play, Code, Eye, Gear, Copy, Check, ArrowsClockwise, CaretDown, CaretRight } from '@phosphor-icons/react';
+import { Play, Code, Eye, Gear, Copy, Check, ArrowsClockwise, CaretDown, CaretRight } from '../../utils/phosphor-compat';
 import { Button } from '../blocks/design/Buttons';
 import { Badge } from '../blocks/ui/badge';
 import { PageAlert } from '../blocks/feedback/PageAlert';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '../common/Typography';
 import { ProductGrid } from './ProductGrid';
-import { Clock } from '@phosphor-icons/react';
+import { Clock } from '../../utils/phosphor-compat';
 
 interface RecentlyViewedSectionProps {
   products: any[];

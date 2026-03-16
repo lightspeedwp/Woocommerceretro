@@ -9,7 +9,7 @@
  */
 
 import { useState, type FormEvent } from 'react';
-import { MapPin, Plus, PencilSimple, Trash, X } from '@phosphor-icons/react';
+import { MapPin, Plus, PencilSimple, Trash, X } from '../../../utils/phosphor-compat';
 import { SAVED_ADDRESSES } from '../../../data/newPages';
 import { toast } from 'sonner@2.0.3';
 

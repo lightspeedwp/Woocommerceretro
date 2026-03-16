@@ -22,7 +22,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { Drop as Droplets, Wind, Thermometer, ShieldCheck, TShirt as Shirt, ArrowRight, ChatCircle } from '@phosphor-icons/react';
+import { Drop as Droplets, Wind, Thermometer, ShieldCheck, TShirt as Shirt, ArrowRight, ChatCircle } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

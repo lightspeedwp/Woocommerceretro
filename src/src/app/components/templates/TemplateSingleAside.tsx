@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { Chat as MessageSquare, ThumbsUp, ShareNetwork as Share2 } from '@phosphor-icons/react';
+import { Chat as MessageSquare, ThumbsUp, ShareNetwork as Share2 } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

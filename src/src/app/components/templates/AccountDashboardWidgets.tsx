@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Package, Heart, Bag as ShoppingBag, Star, TrendUp as TrendingUp, Gift, MapPin, CreditCard, Bell, User, ArrowRight, Clock, CheckCircle } from '@phosphor-icons/react';
+import { Package, Heart, Bag as ShoppingBag, Star, TrendUp as TrendingUp, Gift, MapPin, CreditCard, Bell, User, ArrowRight, Clock, CheckCircle } from '../../utils/phosphor-compat';
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';

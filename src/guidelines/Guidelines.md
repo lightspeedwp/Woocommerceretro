@@ -76,6 +76,9 @@ These files and directories must NEVER be deleted:
 
 | Path | Reason |
 |------|--------|
+| `/ATTRIBUTIONS.md` | License attributions (root) |
+| `/README.md` | Project overview (root) |
+| `/CHANGELOG.md` | Version history (root) |
 | `/styles/globals-minimal.css` | Active CSS entry point |
 | `/styles/globals.css` | Full CSS entry point (280 @imports) |
 | `/src/styles/*.css` | 9 root CSS files (tokens, base styles) |
@@ -84,6 +87,7 @@ These files and directories must NEVER be deleted:
 | `/src/app/components/figma/` | Figma Make system components |
 | `/guidelines/Guidelines.md` | This file |
 | `/tasks/task-list.md` | Master task list |
+| `/tasks/*-task-list.md` | Domain task lists (14 protected — mark complete, never delete) |
 
 ---
 
@@ -144,18 +148,43 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 
 ## 6. Workflow Commands
 
+### Workflow Triggers
+
 | Trigger | Purpose | Duration |
 |---------|---------|----------|
 | `cleanup` | Project maintenance | 20-30 min |
 | `continue` | Execute next task | 10-20 min |
-| `audit` | Compliance audit | 30-60 min |
 | `optimize` | Performance scan | 20-40 min |
 | `status` | Status summary | 5-10 min |
 | `document` | Update guidelines | 15-30 min |
 | `update guidelines` | Refresh guidelines with current frontmatter | 15-30 min |
 | `cleanup guidelines` | Merge duplicates, delete outdated guidelines | 20-40 min |
+| `process reports` | Convert audit reports to task lists | 15-30 min |
+| `fix routes` | Validate and repair all routes, links, and nav data | 20-40 min |
 
-See: `/guidelines/PROMPT_TRIGGER_SYSTEM.md` for full details.
+### Audit Triggers
+
+| Trigger | Purpose | Duration |
+|---------|---------|----------|
+| `audit` | Run ALL 9 audits (reports only) | 30-60 min |
+| `audit routes` | Route/template alignment | 5-10 min |
+| `audit sitemap` | Sitemap vs routes sync | 5-10 min |
+| `audit tokens` | Design token consistency | 5-10 min |
+| `audit css` | CSS architecture health | 5-10 min |
+| `audit a11y` | WCAG AA accessibility | 10-20 min |
+| `audit data` | Data file sizes and types | 5-10 min |
+| `audit responsive` | Responsive patterns | 5-10 min |
+| `audit styles` | Hardcoded style detection | 5-10 min |
+| `audit guidelines` | Guideline compliance | 5-10 min |
+
+### Combo Triggers
+
+| Trigger | Purpose |
+|---------|---------|
+| `audit && process reports` | Full pipeline: audit everything, then create task lists |
+| `cleanup && continue` | Maintenance, then execute next task |
+
+See: `/guidelines/PROMPT-TRIGGERS.md` for full details.
 
 ### 6.1 Prompt-Report-Task Sequence
 
@@ -248,7 +277,7 @@ All AI-generated work follows this strict order:
 | `WRITING_GUIDELINES.md` | How to write guidelines |
 | `REPORTING_GUIDELINES.md` | Report structure standards |
 | `PROMPT_GENERATION_GUIDELINES.md` | AI prompt creation standards |
-| `PROMPT_TRIGGER_SYSTEM.md` | Trigger words and workflow automation |
+| `PROMPT-TRIGGERS.md` | Trigger words, audit system, workflow automation |
 | `PLANNING_GUIDELINES.md` | Task planning standards |
 | `IMPORTS_GUIDELINES.md` | Asset import standards |
 

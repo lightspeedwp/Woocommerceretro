@@ -18,15 +18,15 @@ import { BLOG_POSTS } from '../../data/blogData';
 import { Button } from '../blocks/design/Buttons';
 
 export const CategoryArchive = () => {
-  const { categorySlug } = useParams<{ categorySlug: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
   const posts = BLOG_POSTS.filter((post) =>
-    post.categories.some((cat: any) => cat.slug === categorySlug)
+    post.categories.some((cat: any) => cat.slug === slug)
   );
 
-  let categoryName = categorySlug ? categorySlug.replace(/-/g, ' ') : '';
+  let categoryName = slug ? slug.replace(/-/g, ' ') : '';
   if (posts.length > 0) {
-    const foundCat = posts[0].categories.find((cat: any) => cat.slug === categorySlug);
+    const foundCat = posts[0].categories.find((cat: any) => cat.slug === slug);
     if (foundCat) {
       categoryName = foundCat.name;
     }

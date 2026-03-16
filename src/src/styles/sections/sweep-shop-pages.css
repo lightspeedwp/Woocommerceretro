@@ -1,0 +1,205 @@
+/* ========================================
+   SWEEP — Shop Hero
+   Source: sweep-cleanup.css lines 1463-1575
+   ======================================== */
+
+.wp-shop-hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.wp-shop-hero__inner {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40);
+  padding-bottom: 8rem;
+}
+
+.wp-shop-hero__content {
+  max-width: 56rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wp-shop-hero__title {
+  color: #fff;
+  font-family: var(--wp--preset--font-family--serif, serif);
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.wp-shop-hero__subtitle {
+  color: #fff;
+  font-size: var(--wp--preset--font-size--large);
+  margin-bottom: var(--wp--preset--spacing--60);
+  max-width: 42rem;
+  margin-inline: auto;
+  line-height: var(--wp--preset--line-height--relaxed);
+  font-weight: var(--wp--preset--font-weight--medium);
+}
+
+@media (min-width: 768px) {
+  .wp-shop-hero__subtitle {
+    font-size: var(--wp--preset--font-size--x-large);
+  }
+}
+
+.wp-shop-hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wp-shop-hero__actions {
+    flex-direction: row;
+    width: auto;
+  }
+}
+
+.wp-shop-hero__btn {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wp-shop-hero__btn {
+    width: auto;
+  }
+}
+
+.wp-shop-hero__btn--outline {
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--wp--preset--font-weight--bold);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.wp-shop-hero .wp-shop-hero__btn--outline,
+.wp-shop-hero__btn--outline.wp-shop-hero__btn--outline {
+  color: #fff;
+  border-color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 640px) {
+  .wp-shop-hero__btn--outline {
+    width: auto;
+  }
+}
+
+.wp-shop-hero .wp-shop-hero__btn--outline:hover,
+.wp-shop-hero__btn--outline.wp-shop-hero__btn--outline:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.wp-shop-hero__scroll-arrow {
+  z-index: 30;
+}
+
+/* ========================================
+   SWEEP — Shop Newsletter
+   Source: sweep-cleanup.css lines 1576-1641
+   ======================================== */
+
+.wp-shop-newsletter {
+  position: relative;
+  padding-block: var(--wp--preset--spacing--100);
+  background-color: var(--wp--preset--color--surface-alt, #e5e7eb);
+}
+
+.wp-shop-newsletter__bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wp-shop-newsletter__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wp-shop-newsletter__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+.wp-shop-newsletter__inner {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.wp-shop-newsletter__heading {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--wp--preset--font-family--serif, serif);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--wp--preset--spacing--20);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.wp-shop-newsletter__description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--wp--preset--font-size--large);
+  margin-bottom: var(--wp--preset--spacing--60);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.wp-shop-newsletter__form {
+  max-width: 64rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .wp-shop-newsletter__form {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   SWEEP — Shop Category Slider
+   Source: sweep-cleanup.css lines 1642-1665
+   ======================================== */
+
+.wc-block-category-slider__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--70);
+}
+
+.wc-block-category-slider__heading {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wc-block-category-slider__divider {
+  height: 0.25rem;
+  width: 5rem;
+  margin-inline: auto;
+  margin-top: var(--wp--preset--spacing--40);
+}
+
+.wc-block-category-slider__slider-wrapper {
+  padding-inline: var(--wp--preset--spacing--60);
+}

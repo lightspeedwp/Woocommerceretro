@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router';
-import { Tag, TwitterLogo, FacebookLogo, LinkedinLogo, LinkBreak, Clock } from '@phosphor-icons/react';
+import { Tag, TwitterLogo, FacebookLogo, LinkedinLogo, LinkBreak, Clock } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

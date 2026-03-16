@@ -3,7 +3,7 @@
  */
 
 import { Suspense, Component, useState, type ReactNode } from 'react';
-import { Eye, WarningCircle as AlertCircle, SpinnerGap as Loader } from '@phosphor-icons/react';
+import { Eye, WarningCircle as AlertCircle, SpinnerGap as Loader } from '../../utils/phosphor-compat';
 
 /**
  * Error Boundary for Component Previews

@@ -1,5 +1,5 @@
 import React from 'react';
-import { WarningCircle, CheckCircle, Info } from '@phosphor-icons/react';
+import { WarningCircle, CheckCircle, Info } from '../../../utils/phosphor-compat';
 
 interface Notice {
   type: 'success' | 'error' | 'info';

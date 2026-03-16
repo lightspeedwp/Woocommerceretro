@@ -1,0 +1,178 @@
+/**
+ * PlayPocket — 3D Component Styles
+ *
+ * CSS for SpinningCoin3D and SubscriptionBox3D.
+ * Keyframe animations and static layout styles extracted
+ * from inline <style> tags and style={{}} attributes.
+ *
+ * NOTE: Many styles remain inline in the .tsx because they
+ * depend on dynamic props (size, glowColor). This is an
+ * accepted exception per guidelines §2.1 for animation/dynamic values.
+ *
+ * BEM blocks: .retro-coin, .retro-box, .retro-subscription-box-container
+ */
+
+/* ========================================
+   SPINNING COIN
+   ======================================== */
+
+.retro-coin-container {
+  position: relative;
+}
+
+.retro-coin-scene {
+  width: 100%;
+  height: 100%;
+}
+
+.retro-coin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.retro-coin--spinning {
+  transform-style: preserve-3d;
+}
+
+.retro-coin__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+}
+
+.retro-coin__face--front {
+  transform: translateZ(5px);
+}
+
+.retro-coin__face--back {
+  transform: translateZ(-5px) rotateY(180deg);
+}
+
+.retro-coin__edge {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(90deg);
+}
+
+.retro-coin-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@keyframes coinRotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* ========================================
+   SUBSCRIPTION BOX
+   ======================================== */
+
+.retro-subscription-box-container {
+  position: relative;
+}
+
+.retro-step {
+  width: 100%;
+  height: 100%;
+}
+
+.retro-step-label {
+  text-align: center;
+}
+
+.retro-box-scene {
+  width: 100%;
+  height: 100%;
+}
+
+.retro-box {
+  position: relative;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+}
+
+.retro-box__face {
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-box__logo {
+  letter-spacing: 0.1em;
+}
+
+@keyframes boxPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes boxRotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes lidOpen {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-120deg) translateY(-20px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .retro-coin,
+  .retro-box,
+  .retro-coin-glow {
+    animation: none !important;
+  }
+}

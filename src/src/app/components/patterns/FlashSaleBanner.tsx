@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { X } from '@phosphor-icons/react';
+import { X } from '../../utils/phosphor-compat';
 import { Countdown } from '../blocks/Countdown';
 import { Button } from '../blocks/design/Buttons';
 

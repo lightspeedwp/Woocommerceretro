@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container } from '../common/Container';
-import * as PhosphorIcons from '@phosphor-icons/react';
-import { MagnifyingGlass as Search, Copy, Check, Sparkle as Sparkles, ArrowSquareOut } from '@phosphor-icons/react';
+import { icons as lucideIcons } from 'lucide-react';
+import { Search, Copy, Check, Sparkles, ExternalLink } from 'lucide-react';
 import { copyToClipboard } from '../../utils/clipboard';
 
 /**
- * PageIconLibrary Template — Funky Redesign
+ * PageIconLibrary Template — Retro Redesign
  *
- * Comprehensive icon library browser for Phosphor Icons.
+ * Comprehensive icon library browser for Lucide React icons.
  * Searchable, copyable, with neon hover accents.
  *
  * @template
@@ -18,12 +18,8 @@ const PageIconLibrary = () => {
   const [copiedIcon, setCopiedIcon] = useState<string | null>(null);
   const [iconSize, setIconSize] = useState(24);
 
-  const allIcons = Object.keys(PhosphorIcons).filter(
-    (key) =>
-      key !== 'IconBase' &&
-      key !== 'IconContext' &&
-      key !== 'default' &&
-      typeof (PhosphorIcons as any)[key] === 'function'
+  const allIcons = Object.keys(lucideIcons).filter(
+    (key) => typeof (lucideIcons as any)[key] === 'object'
   );
 
   const filteredIcons = searchQuery
@@ -31,7 +27,7 @@ const PageIconLibrary = () => {
     : allIcons;
 
   const copyImportCode = (iconName: string) => {
-    const code = `import { ${iconName} } from '@phosphor-icons/react';`;
+    const code = `import { ${iconName} } from 'lucide-react';`;
     copyToClipboard(code);
     setCopiedIcon(iconName);
     setTimeout(() => {
@@ -40,15 +36,15 @@ const PageIconLibrary = () => {
   };
 
   const getIcon = (name: string): React.ComponentType<any> | undefined => {
-    return (PhosphorIcons as any)[name];
+    return (lucideIcons as any)[name];
   };
 
   const categories = [
-    { name: 'E-commerce', icons: ['ShoppingCart', 'ShoppingBag', 'CreditCard', 'Package', 'Truck', 'Tag', 'CurrencyDollar'] },
-    { name: 'Navigation', icons: ['List', 'X', 'House', 'MagnifyingGlass', 'User', 'Gear', 'CaretRight', 'CaretDown'] },
-    { name: 'Social', icons: ['FacebookLogo', 'TwitterLogo', 'InstagramLogo', 'LinkedinLogo', 'YoutubeLogo', 'GithubLogo'] },
-    { name: 'Actions', icons: ['Plus', 'Minus', 'PencilSimple', 'Trash', 'FloppyDisk', 'DownloadSimple', 'UploadSimple', 'ShareNetwork'] },
-    { name: 'Status', icons: ['Check', 'X', 'WarningCircle', 'Info', 'Question', 'CircleDashed'] },
+    { name: 'E-commerce', icons: ['ShoppingCart', 'ShoppingBag', 'CreditCard', 'Package', 'Truck', 'Tag', 'DollarSign'] },
+    { name: 'Navigation', icons: ['Menu', 'X', 'Home', 'Search', 'User', 'Settings', 'ChevronRight', 'ChevronDown'] },
+    { name: 'Social', icons: ['Facebook', 'Twitter', 'Instagram', 'Linkedin', 'Youtube', 'Github'] },
+    { name: 'Actions', icons: ['Plus', 'Minus', 'Pencil', 'Trash2', 'Save', 'Download', 'Upload', 'Share2'] },
+    { name: 'Status', icons: ['Check', 'X', 'AlertCircle', 'Info', 'HelpCircle', 'Circle'] },
   ];
 
   return (
@@ -58,12 +54,12 @@ const PageIconLibrary = () => {
         <Container>
           <div className="wp-page-intro-content">
             <div className="wp-badge-pill">
-              <Sparkles size={16} weight="duotone" />
-              <span className="wp-badge-pill__text">Phosphor Icons</span>
+              <Sparkles size={16} />
+              <span className="wp-badge-pill__text">Lucide React</span>
             </div>
             <h1>Icon Library</h1>
             <p className="wp-page-intro-text">
-              {`Browse and search through ${allIcons.length}+ icons from Phosphor React. Click any icon to copy its import code.`}
+              {`Browse and search through ${allIcons.length}+ icons from Lucide React. Click any icon to copy its import code.`}
             </p>
           </div>
         </Container>
@@ -74,7 +70,7 @@ const PageIconLibrary = () => {
         <Container>
           <div className="icon-lib__controls">
             <div className="icon-lib__search-wrap">
-              <Search className="icon-lib__search-icon" size={20} weight="duotone" />
+              <Search className="icon-lib__search-icon" size={20} />
               <input
                 type="text"
                 value={searchQuery}
@@ -125,7 +121,7 @@ const PageIconLibrary = () => {
                             className="icon-lib__category-btn"
                             title={iconName}
                           >
-                            <Ic size={24} weight="duotone" />
+                            <Ic size={24} />
                             {copiedIcon === iconName && (
                               <span className="icon-lib__copied-tooltip">Copied!</span>
                             )}
@@ -147,7 +143,7 @@ const PageIconLibrary = () => {
 
             {filteredIcons.length === 0 ? (
               <div className="icon-lib__empty">
-                <Search size={48} weight="duotone" className="icon-lib__empty-icon" />
+                <Search size={48} className="icon-lib__empty-icon" />
                 <p className="icon-lib__empty-text">
                   No icons found matching "<strong>{searchQuery}</strong>"
                 </p>
@@ -170,15 +166,15 @@ const PageIconLibrary = () => {
                       className="icon-lib__icon-btn"
                       title={iconName}
                     >
-                      <Ic size={iconSize} weight="duotone" className="icon-lib__icon-svg" />
+                      <Ic size={iconSize} className="icon-lib__icon-svg" />
                       <span className="icon-lib__icon-name">{iconName}</span>
                       {copiedIcon === iconName ? (
                         <span className="icon-lib__icon-badge icon-lib__icon-badge--done">
-                          <Check size={14} weight="bold" />
+                          <Check size={14} />
                         </span>
                       ) : (
                         <span className="icon-lib__icon-badge icon-lib__icon-badge--copy">
-                          <Copy size={14} weight="bold" />
+                          <Copy size={14} />
                         </span>
                       )}
                     </button>
@@ -194,17 +190,17 @@ const PageIconLibrary = () => {
             <ol className="icon-lib__usage-steps">
               <li><strong>Click any icon</strong> to copy its import code</li>
               <li><strong>Paste the import</strong> at the top of your component</li>
-              <li><strong>Use the icon</strong> in your JSX with size &amp; weight props</li>
+              <li><strong>Use the icon</strong> in your JSX with size props</li>
             </ol>
             <div className="icon-lib__usage-footer">
               <a
-                href="https://phosphoricons.com/"
+                href="https://lucide.dev/icons/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon-lib__docs-link"
               >
-                <ArrowSquareOut size={16} weight="duotone" />
-                View full Phosphor documentation
+                <ExternalLink size={16} />
+                View full Lucide documentation
               </a>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Cookie, GearSix as Settings } from '@phosphor-icons/react';
+import { X, Cookie, GearSix as Settings } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { Button } from '../blocks/design/Buttons';
 
@@ -115,7 +115,7 @@ export const CookieConsent = () => {
               {/* Essential */}
               <div className="wp-cookie-settings__section">
                 <div className="wp-cookie-settings__section-header">
-                  <div className="flex-1">
+                  <div className="wp-cookie-settings__section-content">
                     <h3 className="wp-cookie-settings__section-title">Essential Cookies</h3>
                     <p className="wp-cookie-settings__section-description">
                       These cookies are necessary for the website to function and cannot be disabled.
@@ -128,7 +128,7 @@ export const CookieConsent = () => {
               {/* Analytics */}
               <div className="wp-cookie-settings__section">
                 <div className="wp-cookie-settings__section-header">
-                  <div className="flex-1">
+                  <div className="wp-cookie-settings__section-content">
                     <h3 className="wp-cookie-settings__section-title">Analytics Cookies</h3>
                     <p className="wp-cookie-settings__section-description">
                       These cookies help us understand how visitors interact with our website.
@@ -144,7 +144,7 @@ export const CookieConsent = () => {
               {/* Marketing */}
               <div className="wp-cookie-settings__section">
                 <div className="wp-cookie-settings__section-header">
-                  <div className="flex-1">
+                  <div className="wp-cookie-settings__section-content">
                     <h3 className="wp-cookie-settings__section-title">Marketing Cookies</h3>
                     <p className="wp-cookie-settings__section-description">
                       These cookies track your online activity to help deliver more relevant advertising.

@@ -1,0 +1,39 @@
+/* File: src/src/styles/tokens/color.semantic.css
+   What this is: Semantic colour tokens mapped to WordPress preset variables.
+   Rule: NO literal colours in this file (no hex/rgb/hsl).
+*/
+
+:root {
+  /* Semantic (do not rename lightly) */
+  --wp--preset--color--background: var(--wp--custom--color--background);
+  --wp--preset--color--foreground: var(--wp--custom--color--foreground);
+
+  --wp--preset--color--surface: var(--wp--custom--color--surface-1);
+  --wp--preset--color--surface-2: var(--wp--custom--color--surface-2);
+
+  --wp--preset--color--border: var(--wp--custom--color--border);
+  --wp--preset--color--muted: var(--wp--custom--color--muted);
+  --wp--preset--color--muted-foreground: var(--wp--custom--color--muted-foreground);
+
+  --wp--preset--color--primary: var(--wp--custom--color--primary);
+  --wp--preset--color--primary-foreground: var(--wp--custom--color--primary-foreground);
+
+  --wp--preset--color--secondary: var(--wp--custom--color--secondary);
+  --wp--preset--color--secondary-foreground: var(--wp--custom--color--secondary-foreground);
+
+  --wp--preset--color--accent: var(--wp--custom--color--accent);
+  --wp--preset--color--accent-foreground: var(--wp--custom--color--accent-foreground);
+
+  --wp--preset--color--link: var(--wp--custom--color--link);
+  --wp--preset--color--ring: var(--wp--custom--color--ring);
+
+  --wp--preset--color--success: var(--wp--custom--color--success);
+  --wp--preset--color--warning: var(--wp--custom--color--warning);
+  --wp--preset--color--error: var(--wp--custom--color--error);
+
+  /* Decorative-only (still stable names; usage is constrained by guidelines) */
+  --wp--preset--color--neon-cyan: var(--wp--custom--color--neon-cyan);
+  --wp--preset--color--neon-pink: var(--wp--custom--color--neon-pink);
+  --wp--preset--color--neon-lime: var(--wp--custom--color--neon-lime);
+  --wp--preset--color--neon-yellow: var(--wp--custom--color--neon-yellow);
+}

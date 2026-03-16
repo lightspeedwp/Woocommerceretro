@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { X, FadersHorizontal as SlidersHorizontal } from '@phosphor-icons/react';
+import { X, FadersHorizontal as SlidersHorizontal } from '../../../utils/phosphor-compat';
 import { Button } from '../design/Buttons';
 import { Typography } from '../../common/Typography';
 import { FilterSidebar } from './FilterSidebar';

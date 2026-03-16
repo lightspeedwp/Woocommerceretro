@@ -2,8 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Check, CaretRight as ChevronRight, Circle } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
+import { Check, CaretRight as ChevronRight, Circle } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 
 interface ContextMenuContextValue {

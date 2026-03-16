@@ -6,7 +6,7 @@
  */
 
 import { useState, type ComponentType } from 'react';
-import { CaretDown, ChatCircle, Question, ShieldCheck } from '@phosphor-icons/react';
+import { CaretDown, ChatCircle, Question, ShieldCheck } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { faqCategories } from '../../data/faq';

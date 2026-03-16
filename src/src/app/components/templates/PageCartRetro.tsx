@@ -7,7 +7,7 @@
  */
 
 import { Link } from 'react-router';
-import { Trash, ArrowRight, Minus, Plus, ShoppingCart } from '@phosphor-icons/react';
+import { Trash, ArrowRight, Minus, Plus, ShoppingCart } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
@@ -68,12 +68,12 @@ export const PageCartRetro = () => {
                     return (
                       <div key={product.id} className="retro-cart-item">
                         <div className="retro-cart-item-img-wrap">
-                          <Link to={`/product/${product.id}`}>
+                          <Link to={`/product/${product.slug || product.id}`}>
                             <img src={product.image} alt={product.name || 'Product'} className="retro-cart-item-img" />
                           </Link>
                         </div>
                         <div className="retro-cart-item-details">
-                          <Link to={`/product/${product.id}`} className="retro-font-display retro-bold retro-cart-item-title">
+                          <Link to={`/product/${product.slug || product.id}`} className="retro-font-display retro-bold retro-cart-item-title">
                             {product.name}
                           </Link>
                           <div className="retro-cart-item-meta retro-font-body">

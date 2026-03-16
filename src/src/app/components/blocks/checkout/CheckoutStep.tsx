@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '../../common/Typography';
-import { CaretDown as ChevronDown, CheckCircle } from '@phosphor-icons/react';
+import { CaretDown as ChevronDown, CheckCircle } from '../../../utils/phosphor-compat';
 
 /**
  * CheckoutStep Component (Block)

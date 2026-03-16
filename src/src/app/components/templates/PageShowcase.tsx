@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container } from '../common/Container';
 import { DarkModeToggle } from '../common/DarkModeToggle';
-import { AppWindow, Package, Cube, Code, ShoppingBag, BookOpen, Info, Question, FileText, User, CreditCard, Megaphone, Wrench, MagnifyingGlass, Faders, Sparkle, TextT, GridFour, Check, ArrowSquareOut, ShoppingCart, CursorClick, Image as ImageIcon, Palette } from '@phosphor-icons/react';
+import { AppWindow, Package, Cube, Code, ShoppingBag, BookOpen, Info, Question, FileText, User, CreditCard, Megaphone, Wrench, MagnifyingGlass, Faders, Sparkle, TextT, GridFour, Check, ArrowSquareOut, ShoppingCart, CursorClick, Image as ImageIcon, Palette } from '../../utils/phosphor-compat';
 
 /**
  * PageShowcase Template — Retro Redesign

@@ -5,7 +5,7 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { Truck, Package, Globe } from '@phosphor-icons/react';
+import { Truck, Package, Globe } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

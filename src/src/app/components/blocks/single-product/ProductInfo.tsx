@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '../../common/Typography';
-import { Star } from '@phosphor-icons/react';
+import { Star } from '../../../utils/phosphor-compat';
 
 /**
  * ProductInfo Block

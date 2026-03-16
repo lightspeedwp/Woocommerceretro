@@ -10,7 +10,7 @@ import {
   Warning as AlertTriangle, CheckCircle, XCircle, Info, Eye,
   Keyboard, Cursor as MousePointer, SpeakerHigh as Volume2,
   CircleHalf as Contrast
-} from '@phosphor-icons/react';
+} from '../../utils/phosphor-compat';
 
 interface A11yIssue {
   type: 'error' | 'warning';

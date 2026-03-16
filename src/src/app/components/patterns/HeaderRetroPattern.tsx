@@ -1,127 +1,156 @@
 /**
  * HeaderRetroPattern
  *
- * Streamlined retro-themed header with essential navigation links.
- * Features: direct navigation, search, theme toggle, account, wishlist, cart.
- * Mobile: clean slide-out menu with 5 main links.
+ * Retro-themed header with full mega menu navigation for all top-level items.
+ * Desktop: hover/keyboard-triggered dropdown mega panels.
+ * Mobile: full-screen overlay with accordion sections.
  *
- * **Styling:** BEM (.retro-header__*, .retro-nav__*, .retro-mobile-menu__*)
+ * Menus: Shop, Deals, Memberships, Community, About
+ *
+ * **Styling:** BEM (.retro-header__*, .retro-nav__*, .retro-mega-menu__*)
  *   in /src/styles/sections/retro-mega-menu.css
- * **Theme tokens:** /src/styles/retro-theme.css
+ * **Data:** /src/app/data/megaMenuData.ts
  *
- * WCAG AA 2.2: keyboard navigation, ARIA labels, focus states
+ * WCAG AA 2.2: keyboard nav, ARIA, focus management, 44px touch targets
  */
 
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router';
 import {
-  MagnifyingGlass, Heart, ShoppingCart, Sun, Moon, X, User
-} from '@phosphor-icons/react';
-import logoImg from 'figma:asset/f367e8ff057e1239dc88f32619b6a1f694c7db8d.png';
+  Search, Heart, ShoppingCart, Sun, Moon, X, User, ChevronDown
+} from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useCart } from '../../contexts/CartContext';
+import { allMenus } from '../../data/megaMenuData';
+import { DesktopMegaPanel, MobileSection } from './MegaMenuPanel';
+import { PlayPocketLogo } from './PlayPocketLogo';
 
-/* ─── Navigation Data ────────────────────────────────── */
-
-interface NavItem {
-  id: string;
-  label: string;
-  to: string;
-}
-
-const navItems: NavItem[] = [
-  {
-    id: 'shop',
-    label: 'SHOP',
-    to: '/shop',
-  },
-  {
-    id: 'deals',
-    label: 'DEALS',
-    to: '/promotions/flash-sale',
-  },
-  {
-    id: 'community',
-    label: 'COMMUNITY',
-    to: '/community',
-  },
-  {
-    id: 'about',
-    label: 'ABOUT',
-    to: '/about',
-  },
-  {
-    id: 'sitemap',
-    label: 'ALL PAGES',
-    to: '/sitemap',
-  },
-];
-
-/* ─── Component ──────────────────────────────────────── */
+/* ─── Main Header Component ──────────────────────── */
 
 export const HeaderRetroPattern = () => {
   const themeContext = useTheme();
   const cartContext = useCart();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [openDesktopMenu, setOpenDesktopMenu] = useState<string | null>(null);
+  const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
 
-  const cartItemCount = cartContext.items.reduce((total, item) => total + item.quantity, 0);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /* Close mobile menu on Escape */
+  const cartItemCount = cartContext.items.reduce(
+    (total, item) => total + item.quantity, 0
+  );
+
+  /* ── Timer helpers ── */
+  const clearClose = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    clearClose();
+    closeTimerRef.current = setTimeout(() => setOpenDesktopMenu(null), 200);
+  }, [clearClose]);
+
+  /* ── Keyboard: Escape closes everything ── */
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setIsMobileOpen(false);
+        setOpenDesktopMenu(null);
       }
     };
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
   }, []);
 
-  /* Lock body scroll when mobile menu open */
+  /* ── Body scroll lock for mobile ── */
   useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isMobileOpen]);
 
-  const closeMobile = useCallback(() => {
-    setIsMobileOpen(false);
-  }, []);
+  /* ── Cleanup timers ── */
+  useEffect(() => () => clearClose(), [clearClose]);
+
+  const closeMobile = useCallback(() => setIsMobileOpen(false), []);
+
+  /* ── Desktop nav item handlers ── */
+  const handleItemEnter = (id: string) => {
+    clearClose();
+    setOpenDesktopMenu(id);
+  };
+
+  const handleItemLeave = () => {
+    scheduleClose();
+  };
+
+  const handleTriggerKeyDown = (e: React.KeyboardEvent, id: string) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      if (e.key !== 'Enter') e.preventDefault();
+      setOpenDesktopMenu(id);
+    }
+    if (e.key === 'Escape') {
+      setOpenDesktopMenu(null);
+    }
+  };
 
   return (
     <div className="retro-header-wrapper">
       <header className="retro-header">
         {/* Logo */}
         <div className="retro-logo">
-          <Link to="/">
-            <img src={logoImg} alt="PlayPocket" className="retro-header__logo-img" />
-          </Link>
+          <PlayPocketLogo />
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="retro-nav retro-font-display retro-bold" aria-label="Main navigation">
-          {navItems.map((item) => (
+        {/* Desktop Navigation with Mega Menus */}
+        <nav
+          className="retro-nav retro-font-display retro-bold"
+          aria-label="Main navigation"
+        >
+          {allMenus.map((menu) => (
             <div
-              key={item.id}
-              className="retro-nav__item"
+              key={menu.id}
+              className={`retro-nav__item${openDesktopMenu === menu.id ? ' retro-nav__item--open' : ''}`}
+              onMouseEnter={() => handleItemEnter(menu.id)}
+              onMouseLeave={handleItemLeave}
+              onFocus={() => handleItemEnter(menu.id)}
+              onBlur={(e) => {
+                const wrapper = e.currentTarget;
+                requestAnimationFrame(() => {
+                  if (!wrapper.contains(document.activeElement)) {
+                    setOpenDesktopMenu(null);
+                  }
+                });
+              }}
             >
-              <Link to={item.to} className="retro-nav__trigger">
-                {item.label}
+              <Link
+                to={menu.href}
+                className="retro-nav__trigger"
+                aria-expanded={openDesktopMenu === menu.id}
+                aria-haspopup="true"
+                onKeyDown={(e) => handleTriggerKeyDown(e, menu.id)}
+              >
+                {menu.label}
+                <ChevronDown size={12} className="retro-nav__caret" />
               </Link>
+              <DesktopMegaPanel menu={menu} />
             </div>
           ))}
+
+          {/* Sitemap standalone link */}
+          <div className="retro-nav__item">
+            <Link to="/sitemap" className="retro-nav__trigger">ALL PAGES</Link>
+          </div>
         </nav>
 
         {/* Actions */}
         <div className="retro-actions">
-          {/* Search */}
           {isSearchOpen ? (
             <div className="retro-search-pill">
-              <MagnifyingGlass size={16} weight="bold" className="retro-search-pill__icon" />
+              <Search size={16} strokeWidth={2.5} className="retro-search-pill__icon" />
               <input
                 type="text"
                 placeholder="SEARCH..."
@@ -134,7 +163,7 @@ export const HeaderRetroPattern = () => {
                 className="retro-search-pill__close"
                 aria-label="Close search"
               >
-                <X size={16} weight="bold" />
+                <X size={16} strokeWidth={2.5} />
               </button>
             </div>
           ) : (
@@ -143,42 +172,41 @@ export const HeaderRetroPattern = () => {
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search"
             >
-              <MagnifyingGlass size={22} weight="bold" />
+              <Search size={22} strokeWidth={2.5} />
             </button>
           )}
 
-          {/* Theme Toggle */}
           {themeContext && (
             <button
               className="retro-action-btn"
               onClick={() => themeContext.setMode(themeContext.mode === 'light' ? 'dark' : 'light')}
               aria-label={themeContext.mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
             >
-              {themeContext.mode === 'light' ? <Moon size={22} weight="bold" /> : <Sun size={22} weight="bold" />}
+              {themeContext.mode === 'light'
+                ? <Moon size={22} strokeWidth={2.5} />
+                : <Sun size={22} strokeWidth={2.5} />}
             </button>
           )}
 
-          {/* Account */}
           <Link to="/account" className="retro-action-btn" aria-label="My account">
-            <User size={22} weight="bold" />
+            <User size={22} strokeWidth={2.5} />
           </Link>
 
-          {/* Wishlist */}
           <Link to="/wishlist" className="retro-action-btn" aria-label="Wishlist">
-            <Heart size={22} weight="bold" />
+            <Heart size={22} strokeWidth={2.5} />
           </Link>
 
-          {/* Cart */}
           <button
             className="retro-action-btn retro-action-btn--cart"
             aria-label={`Cart, ${cartItemCount} items`}
             onClick={() => window.dispatchEvent(new Event('open-mini-cart'))}
           >
-            <ShoppingCart size={22} weight="bold" />
-            {cartItemCount > 0 && <span className="retro-badge retro-font-display">{cartItemCount}</span>}
+            <ShoppingCart size={22} strokeWidth={2.5} />
+            {cartItemCount > 0 && (
+              <span className="retro-badge retro-font-display">{cartItemCount}</span>
+            )}
           </button>
 
-          {/* Mobile Hamburger */}
           <button
             className={`retro-hamburger${isMobileOpen ? ' retro-hamburger--open' : ''}`}
             onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -192,21 +220,28 @@ export const HeaderRetroPattern = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`retro-mobile-menu${isMobileOpen ? ' retro-mobile-menu--open' : ''}`} aria-hidden={!isMobileOpen}>
-        {navItems.map((item) => (
-          <Link
-            key={item.id}
-            to={item.to || '/'}
-            className="retro-mobile-menu__standalone"
-            onClick={closeMobile}
-          >
-            {item.label}
-          </Link>
+      {/* ── Mobile Menu Overlay ── */}
+      <div
+        className={`retro-mobile-menu${isMobileOpen ? ' retro-mobile-menu--open' : ''}`}
+        aria-hidden={!isMobileOpen}
+      >
+        {allMenus.map((menu) => (
+          <MobileSection
+            key={menu.id}
+            menu={menu}
+            isOpen={openMobileSection === menu.id}
+            onToggle={() =>
+              setOpenMobileSection(openMobileSection === menu.id ? null : menu.id)
+            }
+            onLinkClick={closeMobile}
+          />
         ))}
+        <Link to="/sitemap" className="retro-mobile-menu__standalone" onClick={closeMobile}>
+          ALL PAGES
+        </Link>
       </div>
     </div>
   );
-}
+};
 
 HeaderRetroPattern.displayName = 'HeaderRetroPattern';

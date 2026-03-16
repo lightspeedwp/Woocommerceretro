@@ -1,0 +1,25 @@
+/**
+ * PlayPocket Home Page Styles — Import Hub
+ *
+ * Split into individual files per BEM block (200-line limit).
+ * Each file is self-contained with its own dark mode and reduced motion rules.
+ *
+ * Files:
+ *   pp-home-layout.css      — Home wrapper, main layout, space invaders, dark overrides
+ *   pp-pixel-btn.css        — Pixel button variants
+ *   pp-logo.css             — Interactive logo (3D keycap, dark mode, responsive)
+ *   pp-hero.css             — Hero section (two-column grid stage)
+ *   pp-categories.css       — Categories row
+ *   pp-products.css         — Featured products header/grid + product card
+ *   pp-bottom-sections.css  — Power Up + Best Sellers
+ *   pp-footer-home.css      — Home footer (socials, newsletter, copyright)
+ */
+
+@import "./pp-home-layout.css";
+@import "./pp-pixel-btn.css";
+@import "./pp-logo.css";
+@import "./pp-hero.css";
+@import "./pp-categories.css";
+@import "./pp-products.css";
+@import "./pp-bottom-sections.css";
+@import "./pp-footer-home.css";

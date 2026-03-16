@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router';
-import { CaretDown, List, X } from '@phosphor-icons/react';
+import { CaretDown, List, X } from '../../../utils/phosphor-compat';
 import { ShopMegaMenu } from '../../parts/ShopMegaMenu';
 import { BlogMegaMenu } from '../../parts/BlogMegaMenu';
 import { AboutMegaMenu } from '../../parts/AboutMegaMenu';

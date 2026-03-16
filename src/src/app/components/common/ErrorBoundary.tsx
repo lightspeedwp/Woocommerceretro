@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { Warning, ArrowsClockwise, House } from '@phosphor-icons/react';
+import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import { Link } from 'react-router';
 
 interface ErrorBoundaryProps {
@@ -66,7 +66,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         <div className="wp-error-boundary">
           <div className="wp-error-boundary__card">
             <div className="wp-error-boundary__icon-wrap">
-              <Warning className="wp-error-boundary__icon" />
+              <AlertTriangle className="wp-error-boundary__icon" />
             </div>
             <h2 className="wp-error-boundary__title">Oops! Something went wrong</h2>
             <p className="wp-error-boundary__message">
@@ -93,14 +93,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 onClick={this.handleReload}
                 className="wp-error-boundary__btn wp-error-boundary__btn--primary"
               >
-                <ArrowsClockwise size={18} />
+                <RefreshCw size={18} />
                 <span>Reload Page</span>
               </button>
               <Link
                 to="/"
                 className="wp-error-boundary__btn wp-error-boundary__btn--secondary"
               >
-                <House size={18} />
+                <Home size={18} />
                 <span>Go Home</span>
               </Link>
             </div>
@@ -129,7 +129,7 @@ export const ErrorFallback = ({ message, error, resetError }: ErrorFallbackProps
   return (
     <div className="wp-error-fallback">
       <div className="wp-error-fallback__icon-wrap">
-        <Warning className="wp-error-fallback__icon" />
+        <AlertTriangle className="wp-error-fallback__icon" />
       </div>
       <h3 className="wp-error-fallback__title">Something went wrong</h3>
       <p className="wp-error-fallback__message">
@@ -141,7 +141,7 @@ export const ErrorFallback = ({ message, error, resetError }: ErrorFallbackProps
           onClick={resetError}
           className="wp-error-boundary__btn wp-error-boundary__btn--primary"
         >
-          <ArrowsClockwise size={16} />
+          <RefreshCw size={16} />
           <span>Try Again</span>
         </button>
       )}
@@ -158,7 +158,7 @@ interface InlineErrorProps {
 export const InlineError = ({ message, onRetry, className = '' }: InlineErrorProps) => {
   return (
     <div className={`wp-error-inline ${className}`}>
-      <Warning className="wp-error-inline__icon" />
+      <AlertTriangle className="wp-error-inline__icon" />
       <p className="wp-error-inline__message">{message}</p>
       {onRetry && (
         <button onClick={onRetry} className="wp-error-inline__retry">

@@ -11,7 +11,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { CalendarBlank as Calendar, Bell, Clock, Rocket } from '@phosphor-icons/react';
+import { CalendarBlank as Calendar, Bell, Clock, Rocket } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

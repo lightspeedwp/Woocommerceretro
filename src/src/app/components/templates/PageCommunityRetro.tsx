@@ -10,7 +10,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { Users, ThumbsUp, ChatCircle, Fire } from '@phosphor-icons/react';
+import { Users, ThumbsUp, ChatCircle, Fire } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

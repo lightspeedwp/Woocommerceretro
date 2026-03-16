@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
-import { Check, Star, ArrowRight, Play, Quotes as Quote, Shield, Truck, ArrowsClockwise as RefreshCcw, Medal as Award, Users, TrendUp as TrendingUp, Lightning as Zap, CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { Check, Star, ArrowRight, Play, Quotes as Quote, Shield, Truck, ArrowsClockwise as RefreshCcw, Medal as Award, Users, TrendUp as TrendingUp, Lightning as Zap, CaretDown as ChevronDown } from '../../utils/phosphor-compat';
 import { productLaunchContent } from '../../data/productLaunch';
 
 /**

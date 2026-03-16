@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import { Button } from '../design/Buttons';
 import { Typography } from '../../common/Typography';
 import { NewsletterCTA } from '../../patterns/NewsletterCTA';
-import { Lock, Truck } from '@phosphor-icons/react';
+import { Lock, Truck } from '../../../utils/phosphor-compat';
 
 interface CartTotalsProps {
   subtotal: number;
@@ -63,7 +63,7 @@ export const CartTotals = ({
         </div>
       </div>
       <div className="woocommerce-cart-totals__actions">
-        <div style={{ marginBottom: 'var(--wp--preset--spacing--60)' }}>
+        <div className="woocommerce-cart-totals__newsletter-wrap">
           <NewsletterCTA variant="compact" heading="Save 10%" description="Subscribe to our newsletter and get 10% off your first order!" />
         </div>
         <Link to="/checkout" className="woocommerce-cart-totals__checkout-link">

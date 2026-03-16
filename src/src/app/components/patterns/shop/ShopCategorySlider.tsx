@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import { Link } from 'react-router';
 import { Container } from '../../common/Container';
 import { Typography } from '../../common/Typography';
-import { CaretRight as ChevronRight, CaretLeft as ChevronLeft } from '@phosphor-icons/react';
+import { CaretRight as ChevronRight, CaretLeft as ChevronLeft } from '../../../utils/phosphor-compat';
 
 const CATEGORIES = [
   { name: 'Red Wines', image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=800&auto=format&fit=crop', link: '/shop/wine/red' },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '../../common/Container';
-import { Truck, ShieldCheck, ArrowsClockwise as RefreshCw, Gift } from '@phosphor-icons/react';
+import { Truck, ShieldCheck, ArrowsClockwise as RefreshCw, Gift } from '../../../utils/phosphor-compat';
 
 /**
  * ServiceFeaturesSection Component

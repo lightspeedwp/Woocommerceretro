@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Play, Pause, SpeakerHigh as Volume2, SpeakerSlash as VolumeX } from '@phosphor-icons/react';
+import { Play, Pause, SpeakerHigh as Volume2, SpeakerSlash as VolumeX } from '../../../utils/phosphor-compat';
 
 interface VideoTestimonialProps {
   videoUrl: string;

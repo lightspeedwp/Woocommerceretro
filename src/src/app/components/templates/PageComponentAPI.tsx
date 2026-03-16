@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '../common/Container';
-import { Code } from '@phosphor-icons/react';
+import { Code } from '../../utils/phosphor-compat';
 
 /**
  * PageComponentAPI Template — Funky Redesign

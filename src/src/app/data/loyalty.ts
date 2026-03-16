@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { Star, Medal as Award, Crown, Lightning as Zap, Gift, ShoppingBag, ChatCircle as MessageSquare, Users } from '@phosphor-icons/react';
+import { Star, Medal as Award, Crown, Lightning as Zap, Gift, ShoppingBag, ChatCircle as MessageSquare, Users } from '../utils/phosphor-compat';
 
 /* ── Mock User ───────────────────────────────────────────────────────────── */
 

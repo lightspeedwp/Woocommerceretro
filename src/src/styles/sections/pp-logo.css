@@ -1,0 +1,139 @@
+/**
+ * PlayPocket — Interactive Logo
+ *
+ * 3D mechanical keycap logo with hover effects,
+ * dark mode overrides, reduced motion, and responsive.
+ *
+ * BEM block: .pp-logo
+ */
+
+/* Logo token overrides */
+.pp-logo {
+  --pp-logo-shell: #2C3A4A;
+  --pp-logo-gold: #DEAD4F;
+  --pp-logo-screen: #1E2630;
+  --pp-logo-button: #8EBFA8;
+  --pp-logo-mint-line: #B5CFC4;
+  --pp-logo-gold-line: #DEAD4F;
+  --pp-logo-well: #1A252F;
+  --pp-logo-depth-bottom: #9A7820;
+  --pp-logo-depth-right: #B08A28;
+  --pp-logo-led: #8EBFA8;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--wp--preset--color--foreground, #1E2630);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.pp-logo:hover {
+  text-decoration: none;
+}
+
+/* ── Device icon ── */
+.pp-logo__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+  transition: filter 0.2s ease;
+}
+
+.pp-logo:hover .pp-logo__icon {
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+/* ── 3D Mechanical Keycap ──
+   Default = RELEASE transition (springy bounce back).
+   Pressed class = PRESS transition (fast slam down).
+   The keycap face translates down, occluding the bottom
+   depth wall and revealing the dark well at the top. */
+
+.pp-logo__keycap {
+  transition: transform 0.15s cubic-bezier(0.34, 1.4, 0.64, 1);
+  will-change: transform;
+}
+
+/* Pressed — fast slam down like bottoming out a mech switch */
+.pp-logo__keycap--pressed {
+  transform: translateY(4px);
+  transition: transform 0.06s ease-in;
+}
+
+/* ── Wordmark ── */
+.pp-logo__wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.pp-logo__text {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--foreground, #1E2630);
+  line-height: 1.1;
+}
+
+.pp-logo__subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--muted-foreground, #6B7280);
+  line-height: 1.2;
+}
+
+.pp-logo__underlines {
+  margin-top: 0.125rem;
+  display: block;
+}
+
+/* ── Dark mode overrides ── */
+.dark .pp-logo {
+  --pp-logo-shell: #3A4A5A;
+  --pp-logo-gold: #E8C054;
+  --pp-logo-screen: #0F1520;
+  --pp-logo-button: #7AB89A;
+  --pp-logo-mint-line: #7AB89A;
+  --pp-logo-gold-line: #E8C054;
+  --pp-logo-well: #0F1520;
+  --pp-logo-depth-bottom: #8A6B18;
+  --pp-logo-depth-right: #A07A20;
+  --pp-logo-led: #7AB89A;
+}
+
+.dark .pp-logo__text {
+  color: var(--wp--preset--color--foreground, #F2EEE6);
+}
+
+.dark .pp-logo__subtitle {
+  color: var(--wp--preset--color--muted-foreground, #9CA3AF);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .pp-logo__keycap,
+  .pp-logo__icon {
+    transition: none;
+  }
+
+  .pp-logo__keycap--pressed {
+    transform: none;
+  }
+}
+
+/* ── Responsive: hide subtitle on very small screens ── */
+@media (max-width: 374px) {
+  .pp-logo__subtitle,
+  .pp-logo__underlines {
+    display: none;
+  }
+
+  .pp-logo__icon {
+    width: 36px;
+    height: 36px;
+  }
+}

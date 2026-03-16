@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Check } from '@phosphor-icons/react';
+import { Check } from '../../../utils/phosphor-compat';
 
 /**
  * AccountCreation Component
@@ -20,7 +20,7 @@ export const AccountCreation = ({
   ];
 
   return (
-    <div className="wp-order-account-creation wp-grid wp-grid-cols-1 md:wp-grid-cols-2 wp-gap-8">
+    <div className="wp-order-account-creation">
       <div className="wp-order-account-benefits">
         <h3 className="wp-block-heading funky-gradient-text">
           Create an account with WooCommerce Website
@@ -28,7 +28,7 @@ export const AccountCreation = ({
         <div className="wp-order-account-benefits">
           {benefitsList.map((benefit, index) => (
             <div key={index} className="wp-order-account-benefit-item funky-glass-panel">
-              <Check size={16} strokeWidth={2} className="text-neon-lime" />
+              <Check size={16} strokeWidth={2} className="wp-order-text--success" />
               <span>{benefit}</span>
             </div>
           ))}
@@ -40,7 +40,7 @@ export const AccountCreation = ({
           <span className="wp-block-button__link">Create account</span>
         </Link>
         <div className="wp-order-account-actions__footer">
-          <small className="text-neon-cyan">
+          <small className="wp-order-text--sky">
             Check your email at {email} for the link to set up an account password. By creating an account you agree to our{' '}
             <Link to="/terms" className="underline">Terms</Link>
             {' '}and{' '}

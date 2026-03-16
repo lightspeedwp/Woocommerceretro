@@ -32,7 +32,7 @@ import {
   Medal as Award,
   ArrowRight,
   ShoppingCart
-} from '@phosphor-icons/react';
+} from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

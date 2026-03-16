@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { Typography } from '../common/Typography';
 import { posts as allPostsData, getMediaSource } from '../../data/posts';

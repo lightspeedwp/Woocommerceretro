@@ -1,5 +1,5 @@
 import { type ChangeEvent, type FocusEvent } from 'react';
-import { WarningCircle as AlertCircle } from '@phosphor-icons/react';
+import { WarningCircle as AlertCircle } from '../../../../utils/phosphor-compat';
 
 interface CheckoutInputProps {
   label: string;

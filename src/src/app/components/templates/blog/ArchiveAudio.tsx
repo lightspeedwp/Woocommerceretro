@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from '../../parts/Layout';
 import { Container } from '../../common/Container';
 import { posts } from '../../../data/posts';
-import { Microphone as Mic, PlayCircle, Calendar, User } from '@phosphor-icons/react';
+import { Microphone as Mic, PlayCircle, Calendar, User } from '../../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
 

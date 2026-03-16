@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from '../../parts/Layout';
 import { Container } from '../../common/Container';
 import { posts } from '../../../data/posts';
-import { Play, Clock, YoutubeLogo as Youtube } from '@phosphor-icons/react';
+import { Play, Clock, YoutubeLogo as Youtube } from '../../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
 

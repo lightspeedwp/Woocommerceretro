@@ -49,9 +49,9 @@
 }
 
 .wp-site-footer__logo-link {
+  display: inline-block;
   text-decoration: none;
   color: var(--wp--preset--color--foreground);
-  display: inline-block;
 }
 
 .wp-site-footer__logo-text {

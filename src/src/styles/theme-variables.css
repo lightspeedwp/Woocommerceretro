@@ -231,8 +231,8 @@
      ======================================== */
   
   /* Layout sizes (Maps to theme.json settings.layout) */
-  --wp--preset--layout--content-size: 800px;
-  --wp--preset--layout--wide-size: 1200px;
+  --wp--preset--layout--content-size: 1440px;
+  --wp--preset--layout--wide-size: 1440px;
   --wp--preset--layout--site-size: 1440px;
 
   /* ========================================

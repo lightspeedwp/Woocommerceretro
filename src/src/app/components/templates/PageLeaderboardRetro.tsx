@@ -9,7 +9,7 @@
  */
 
 import { Link } from 'react-router';
-import { Trophy, Crown, Lightning as Zap, Fire } from '@phosphor-icons/react';
+import { Trophy, Crown, Lightning as Zap, Fire } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

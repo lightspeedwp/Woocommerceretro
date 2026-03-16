@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { CaretLeft as ChevronLeft, CaretRight as ChevronRight, Quotes as Quote } from '@phosphor-icons/react';
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight, Quotes as Quote } from '../../utils/phosphor-compat';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 interface Testimonial {

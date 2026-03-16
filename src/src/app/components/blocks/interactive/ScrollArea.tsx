@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../utils/cn";
 
 export const ScrollArea = React.forwardRef<HTMLDivElement, any>(
   ({ className, children, viewportClassName, orientation = "vertical", id, style }, ref) => (

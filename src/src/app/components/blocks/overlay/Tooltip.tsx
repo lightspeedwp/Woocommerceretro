@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useRef, useEffect, useImperativeHandle } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../utils/cn";
 
 interface TooltipContextValue {
   isOpen: boolean;

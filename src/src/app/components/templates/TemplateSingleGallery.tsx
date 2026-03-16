@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import { InstagramLogo as Instagram, GridFour as Grid, ArrowsOut as Maximize2, X } from '@phosphor-icons/react';
+import { InstagramLogo as Instagram, GridFour as Grid, ArrowsOut as Maximize2, X } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

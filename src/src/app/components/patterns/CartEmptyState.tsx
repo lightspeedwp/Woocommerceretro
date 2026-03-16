@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Bag as ShoppingBag } from '@phosphor-icons/react';
+import { Bag as ShoppingBag } from '../../utils/phosphor-compat';
 import { ContentSection } from './sections/ContentSection';
 import { Button } from '../blocks/design/Buttons';
 import { Typography } from '../common/Typography';

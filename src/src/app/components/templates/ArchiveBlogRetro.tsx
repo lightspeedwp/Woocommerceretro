@@ -5,8 +5,7 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { Link } from 'react-router';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { posts } from '../../data/posts';

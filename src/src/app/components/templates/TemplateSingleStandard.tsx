@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { Tag, Calendar as CalendarIcon, User, Chat as MessageSquare } from '@phosphor-icons/react';
+import { Tag, Calendar as CalendarIcon, User, Chat as MessageSquare } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';

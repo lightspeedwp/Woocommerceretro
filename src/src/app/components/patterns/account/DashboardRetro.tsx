@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Heart, ShieldChevron, Sword, Star } from '@phosphor-icons/react';
+import { Heart, ShieldChevron, Sword, Star } from '../../../utils/phosphor-compat';
 
 /**
  * DashboardRetro

@@ -18,7 +18,7 @@ export const CategoryTilesGrid = ({ categories }: CategoryTilesGridProps) => {
           {categories.map((cat) => (
             <Link
               key={cat}
-              to={`/shop/category/${cat.toLowerCase()}`}
+              to={`/category/${cat.toLowerCase()}`}
               className="wp-category-tiles__tile"
             >
               <span className="wp-category-tiles__label">

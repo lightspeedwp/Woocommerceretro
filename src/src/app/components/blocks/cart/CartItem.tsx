@@ -1,4 +1,4 @@
-import { Trash as Trash2, Heart } from '@phosphor-icons/react';
+import { Trash as Trash2, Heart } from '../../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
 import { QuantitySelector } from '../forms/QuantitySelector';

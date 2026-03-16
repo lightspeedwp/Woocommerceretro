@@ -1,0 +1,237 @@
+/* ========================================
+   SWEEP — Account Dashboard
+   Source: sweep-cleanup.css lines 1021-1355
+   ======================================== */
+
+.wp-account-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+.wp-account-dashboard__welcome-subtitle {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-account-dashboard__stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--50);
+}
+
+@media (min-width: 640px) {
+  .wp-account-dashboard__stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-account-dashboard__stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wp-account-stat-card {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  padding: var(--wp--preset--spacing--50);
+  transition: box-shadow var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-stat-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.wp-account-stat-card__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-account-stat-card__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wp-account-stat-card__icon--purple {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.1));
+  color: var(--wp--preset--color--accent);
+}
+
+.wp-account-stat-card__icon--green {
+  background: var(--wp--preset--color--success-muted, rgba(22, 163, 74, 0.1));
+  color: var(--wp--preset--color--success);
+}
+
+.wp-account-stat-card__icon--yellow {
+  background: var(--wp--preset--color--warning-muted, rgba(217, 119, 6, 0.1));
+  color: var(--wp--preset--color--warning);
+}
+
+.wp-account-stat-card__icon--blue {
+  background: var(--wp--preset--color--info-muted, rgba(37, 99, 235, 0.1));
+  color: var(--wp--preset--color--info, #2563eb);
+}
+
+.wp-account-stat-card__value {
+  font-size: var(--wp--preset--font-size--xx-large, 1.75rem);
+  font-weight: var(--wp--preset--font-weight--bold);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-account-stat-card__label {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+/* Membership bar */
+.wp-account-dashboard__membership-bar {
+  background: var(--wp--preset--color--accent-muted, rgba(124, 58, 237, 0.05));
+  border: 1px solid var(--wp--preset--color--accent-border, rgba(124, 58, 237, 0.2));
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  padding: var(--wp--preset--spacing--50);
+}
+
+.wp-account-dashboard__membership-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-account-dashboard__membership-label {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+.wp-account-dashboard__membership-value {
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--foreground);
+}
+
+/* Orders section */
+.wp-account-dashboard__orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.wp-account-dashboard__empty-orders {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  padding: var(--wp--preset--spacing--70);
+  text-align: center;
+}
+
+.wp-account-dashboard__empty-icon {
+  margin: 0 auto var(--wp--preset--spacing--40);
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-account-dashboard__empty-text {
+  color: var(--wp--preset--color--muted-foreground);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-account-dashboard__orders-table-wrapper {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--border);
+  border-radius: var(--wp--preset--border-radius--xl, 0.75rem);
+  overflow: hidden;
+}
+
+.wp-account-dashboard__orders-desktop {
+  display: none;
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  .wp-account-dashboard__orders-desktop {
+    display: block;
+  }
+}
+
+.wp-account-dashboard__orders-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .wp-account-dashboard__orders-mobile {
+    display: none;
+  }
+}
+
+.wp-account-dashboard__table {
+  width: 100%;
+}
+
+.wp-account-dashboard__table-head {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+  border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-account-dashboard__table-th {
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+  text-align: left;
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  font-weight: var(--wp--preset--font-weight--semibold);
+  color: var(--wp--preset--color--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wp-account-dashboard__table-th--right {
+  text-align: right;
+}
+
+.wp-account-dashboard__table-body > tr + tr {
+  border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-account-dashboard__table-row {
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-dashboard__table-row:hover {
+  background: var(--wp--preset--color--surface-alt, #f9fafb);
+}
+
+.wp-account-dashboard__table-td {
+  padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+}
+
+.wp-account-dashboard__table-td--muted {
+  color: var(--wp--preset--color--muted-foreground);
+}
+
+.wp-account-dashboard__table-td--bold {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--foreground);
+}
+
+.wp-account-dashboard__table-td--right {
+  text-align: right;
+}
+
+.wp-account-dashboard__order-link {
+  font-weight: var(--wp--preset--font-weight--medium);
+  color: var(--wp--preset--color--accent);
+  text-decoration: none;
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-account-dashboard__order-link:hover {
+  color: var(--wp--preset--color--accent-hover, #6d28d9);
+}
+
+.wp-account-dashboard__view-icon {
+  margin-right: var(--wp--preset--spacing--20);
+}

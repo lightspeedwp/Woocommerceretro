@@ -1,5 +1,5 @@
 import React from 'react';
-import { Minus, Plus } from '@phosphor-icons/react';
+import { Minus, Plus } from '../../../utils/phosphor-compat';
 
 /**
  * QuantitySelector Block Component

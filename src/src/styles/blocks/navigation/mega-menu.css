@@ -1236,5 +1236,5 @@
 
 .wp-mega-menu-wrapper__dropdown {
   left: 50%;
-  max-width: 1400px;
+  max-width: var(--wp--preset--layout--site-size, 1440px);
 }

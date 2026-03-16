@@ -4,7 +4,7 @@ import { Container } from '../../common/Container';
 import { Heading } from '../../common/Heading';
 import { Typography } from '../../common/Typography';
 import { posts } from '../../../data/posts';
-import { Chat as MessageSquare, ShareNetwork as Share2, Heart, DotsThree as MoreHorizontal } from '@phosphor-icons/react';
+import { Chat as MessageSquare, ShareNetwork as Share2, Heart, DotsThree as MoreHorizontal } from '../../../utils/phosphor-compat';
 
 /**
  * ArchiveAside Template — Funky Redesign (Phase 6)

@@ -31,15 +31,15 @@ export const OrderStatusHeader = ({
     <div className="wp-block-group wp-block-group--vertical">
       <div className="wp-block-group wp-block-group--vertical wp-order-status-header funky-glass-panel funky-glow-border">
         <Typography variant="h1" className="funky-gradient-text">Order received</Typography>
-        <p className="wp-text-medium text-neon-cyan">Thank you. Your order has been received.</p>
+        <p className="wp-text-medium wp-order-text--sky">Thank you. Your order has been received.</p>
       </div>
 
       <div className="wp-order-summary-header wp-order-status-header">
-        {createSummaryItem('order', 'Order #:', orderNumber, 'text-neon-pink')}
-        {createSummaryItem('date', 'Date:', date, 'text-neon-cyan')}
-        {createSummaryItem('total', 'Total:', total, 'text-neon-lime')}
-        {createSummaryItem('email', 'Email:', email, 'text-neon-cyan')}
-        {createSummaryItem('payment', 'Payment:', paymentMethod, 'text-neon-pink')}
+        {createSummaryItem('order', 'Order #:', orderNumber, 'wp-order-text--coral')}
+        {createSummaryItem('date', 'Date:', date, 'wp-order-text--sky')}
+        {createSummaryItem('total', 'Total:', total, 'wp-order-text--success')}
+        {createSummaryItem('email', 'Email:', email, 'wp-order-text--sky')}
+        {createSummaryItem('payment', 'Payment:', paymentMethod, 'wp-order-text--coral')}
       </div>
     </div>
   );

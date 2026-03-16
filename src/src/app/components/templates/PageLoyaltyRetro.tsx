@@ -24,7 +24,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { TrendUp as TrendingUp, ArrowRight, CheckCircle, Clock, ShoppingCart, Trophy } from '@phosphor-icons/react';
+import { TrendUp as TrendingUp, ArrowRight, CheckCircle, Clock, ShoppingCart, Trophy } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

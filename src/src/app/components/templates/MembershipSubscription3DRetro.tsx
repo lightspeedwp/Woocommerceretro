@@ -21,14 +21,17 @@
  */
 
 import React, { useState } from 'react';
-import { Link } from 'react-router';
-import { ArrowRight, Check, Gift, Star } from '@phosphor-icons/react';
+import { Link, useParams } from 'react-router';
+import { ArrowRight, Check, Gift, Star } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';
 import { SubscriptionBox3D } from '../blocks/display/SubscriptionBox3D';
+import { membershipPlans } from '../../data/memberships';
 
 export const MembershipSubscription3DRetro: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const currentPlan = membershipPlans.find((p) => p.id === slug) || membershipPlans[1];
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [subscribed, setSubscribed] = useState(false);
 

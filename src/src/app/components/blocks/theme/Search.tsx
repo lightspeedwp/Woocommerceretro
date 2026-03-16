@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { MagnifyingGlass as SearchIcon } from '@phosphor-icons/react';
+import { MagnifyingGlass as SearchIcon } from '../../../utils/phosphor-compat';
 import { cn } from '../ui/utils';
 
 interface SearchProps {

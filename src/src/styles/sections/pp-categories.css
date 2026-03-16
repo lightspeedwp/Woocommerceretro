@@ -1,0 +1,78 @@
+/**
+ * PlayPocket — Categories Row
+ *
+ * Horizontal scrolling category navigation with pixel borders.
+ *
+ * BEM block: .retro-cat
+ */
+
+.retro-cat-header {
+  padding: 0.5rem 0.75rem;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  color: var(--wp--preset--color--background, #F2EEE6);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  clip-path: polygon(
+    0 3px, 3px 3px, 3px 0,
+    calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px,
+    100% 100%, 0 100%
+  );
+}
+
+.retro-cat-row {
+  display: flex;
+  gap: 0;
+  border: 2px solid var(--wp--preset--color--foreground, #1E2630);
+  border-top: none;
+  overflow-x: auto;
+  clip-path: polygon(
+    0 0, 100% 0,
+    100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%,
+    3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px)
+  );
+}
+
+.retro-cat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  text-decoration: none;
+  color: var(--wp--preset--color--foreground, #1E2630);
+  background: var(--wp--preset--color--surface, #FFFFFF);
+  border-right: 1px solid var(--wp--preset--color--border, #CBD5C9);
+  min-width: 80px;
+  min-height: 44px;
+  transition: background 0.15s ease;
+}
+
+.retro-cat-item:last-child {
+  border-right: none;
+}
+
+.retro-cat-item:hover {
+  background: var(--wp--preset--color--muted, #E7E2D8);
+}
+
+.retro-cat-item--arrow {
+  background: var(--wp--preset--color--primary, #FFC533);
+  color: var(--wp--preset--color--primary-foreground, #1E2630);
+  flex: 0 0 auto;
+  min-width: auto;
+  padding: 1rem 1.25rem;
+}
+
+.retro-cat-item--arrow:hover {
+  background: #e6b02e;
+}
+
+.retro-cat-item--arrow .retro-cat-icon {
+  color: var(--wp--preset--color--primary-foreground, #1E2630);
+}
+
+.retro-cat-icon {
+  color: var(--wp--preset--color--foreground, #1E2630);
+}

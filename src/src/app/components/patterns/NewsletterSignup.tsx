@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Envelope as Mail, Check, WarningCircle as AlertCircle } from '@phosphor-icons/react';
+import { Envelope as Mail, Check, WarningCircle as AlertCircle } from '../../utils/phosphor-compat';
 import { Button } from '../blocks/design/Buttons';
 import { Typography } from '../common/Typography';
 

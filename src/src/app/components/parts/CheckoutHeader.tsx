@@ -8,7 +8,7 @@
 import React from 'react';
 import { Container } from '../common/Container';
 import { ShopLogo } from '../common/Logo';
-import { Lock, ArrowLeft } from '@phosphor-icons/react';
+import { Lock, ArrowLeft } from '../../utils/phosphor-compat';
 import { Link, useLocation } from 'react-router';
 
 interface CheckoutHeaderProps {

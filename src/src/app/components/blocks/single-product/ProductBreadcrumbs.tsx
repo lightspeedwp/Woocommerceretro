@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { CaretRight as ChevronRight } from '@phosphor-icons/react';
+import { CaretRight as ChevronRight } from '../../../utils/phosphor-compat';
 
 interface BreadcrumbItem {
   label: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from '@phosphor-icons/react';
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from '../../utils/phosphor-compat';
 
 interface ArchivePaginationProps {
   currentPage: number;

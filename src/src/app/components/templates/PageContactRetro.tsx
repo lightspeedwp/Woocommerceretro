@@ -6,7 +6,7 @@
  */
 
 import { type FormEvent } from 'react';
-import { EnvelopeSimple, MapPin, ChatText, ArrowRight } from '@phosphor-icons/react';
+import { EnvelopeSimple, MapPin, ChatText, ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

@@ -8,7 +8,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { ArrowRight, CheckCircle, Lock, CreditCard, Truck, MapPin } from '@phosphor-icons/react';
+import { ArrowRight, CheckCircle, Lock, CreditCard, Truck, MapPin } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { useCart } from '../../contexts/CartContext';

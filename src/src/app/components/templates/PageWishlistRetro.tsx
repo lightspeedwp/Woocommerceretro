@@ -7,7 +7,7 @@
  */
 
 import { Link } from 'react-router';
-import { Heart, Trash, ShoppingCart, ArrowRight } from '@phosphor-icons/react';
+import { Heart, Trash, ShoppingCart, ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
@@ -124,7 +124,7 @@ export const PageWishlistRetro = () => {
                       </button>
 
                       {/* Image */}
-                      <Link to={`/product/${item.id}`} className="retro-card-img-wrap">
+                      <Link to={`/product/${item.slug || item.id}`} className="retro-card-img-wrap">
                         <img
                           src={itemImg}
                           alt={item.name || 'Product'}
@@ -140,7 +140,7 @@ export const PageWishlistRetro = () => {
                       </Link>
 
                       {/* Details */}
-                      <Link to={`/product/${item.id}`}>
+                      <Link to={`/product/${item.slug || item.id}`}>
                         <h3 className="retro-card-title retro-font-display retro-bold">{item.name}</h3>
                       </Link>
                       <p className="retro-card-price retro-font-display retro-bold">

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, createContext, useCallback, useMemo, isValidElement, cloneElement } from "react";
-import { SidebarSimple as PanelLeftIcon } from '@phosphor-icons/react';
-import { useIsMobile } from "@/hooks/useMobile";
-import { Button } from "@/components/blocks/design/Buttons";
-import { Input } from "@/components/blocks/forms/Input";
-import { Separator } from "@/components/blocks/design/Separator";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/blocks/layout/Sheet";
-import { Skeleton } from "@/components/blocks/feedback/Skeleton";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/blocks/overlay/Tooltip";
+import { SidebarSimple as PanelLeftIcon } from '../../../utils/phosphor-compat';
+import { useIsMobile } from "../../../hooks/useMobile";
+import { Button } from "../design/Buttons";
+import { Input } from "../forms/Input";
+import { Separator } from "../design/Separator";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "./Sheet";
+import { Skeleton } from "../feedback/Skeleton";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../overlay/Tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;

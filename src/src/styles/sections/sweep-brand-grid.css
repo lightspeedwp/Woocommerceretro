@@ -1,0 +1,98 @@
+/* ========================================
+   SWEEP — Shop Brand Grid
+   Source: sweep-cleanup.css lines 923-1020
+   ======================================== */
+
+.wp-shop-brand-grid {
+  background: var(--wp--preset--color--background);
+  padding-block: var(--wp--preset--spacing--80);
+}
+
+.wp-shop-brand-grid__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--70);
+}
+
+.wp-shop-brand-grid__title {
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  text-transform: uppercase;
+  font-family: var(--wp--preset--font-family--serif, serif);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-shop-brand-grid__divider {
+  height: 0.25rem;
+  width: 5rem;
+  background: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+  margin: var(--wp--preset--spacing--40) auto 0;
+}
+
+.wp-shop-brand-grid__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 640px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--50);
+  }
+}
+
+@media (min-width: 1280px) {
+  .wp-shop-brand-grid__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.wp-brand-card__inner {
+  text-align: center;
+}
+
+.wp-brand-card__name {
+  font-family: var(--wp--preset--font-family--serif, serif);
+  color: var(--wp--preset--color--brand-brown, var(--wp--preset--color--foreground));
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-card:hover .wp-brand-card__name {
+  color: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+.wp-brand-card__divider {
+  height: 1px;
+  width: 2rem;
+  background: var(--wp--preset--color--border);
+  margin: var(--wp--preset--spacing--20) auto;
+  transition: background var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-card:hover .wp-brand-card__divider {
+  background: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}
+
+.wp-brand-card__established {
+  font-size: var(--wp--preset--font-size--xs, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wp--preset--color--muted-foreground);
+  transition: color var(--wp--preset--transition--base) ease;
+}
+
+.wp-brand-card:hover .wp-brand-card__established {
+  color: var(--wp--preset--color--brand-gold, var(--wp--preset--color--accent));
+}

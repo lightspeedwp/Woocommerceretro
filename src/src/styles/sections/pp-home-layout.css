@@ -1,0 +1,145 @@
+/**
+ * PlayPocket Home — Layout & Decorations
+ *
+ * Home page wrapper, main content area, responsive padding,
+ * space invader background decorations, and dark mode overrides.
+ *
+ * BEM blocks: .pp-home, .pp-main, .retro-header-wrapper,
+ *             .pp-home__inv, .space-invader
+ */
+
+/* ========================================
+   HOME WRAPPER
+   ======================================== */
+
+.pp-home {
+  position: relative;
+  background: var(--wp--preset--color--background, #F2EEE6);
+  color: var(--wp--preset--color--foreground, #1E2630);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Header wrapper — constrain header to content width */
+.retro-header-wrapper {
+  max-width: var(--wp--preset--layout--content-size, 1440px);
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.pp-main {
+  max-width: var(--wp--preset--layout--content-size, 1440px);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--40, 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 320px+ — Extra-small mobile */
+@media (min-width: 320px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--40, 1rem);
+  }
+}
+
+/* 480px+ — Large mobile */
+@media (min-width: 480px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--50, 1.5rem);
+  }
+}
+
+/* 640px+ — Small tablet */
+@media (min-width: 640px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--60, 2rem);
+  }
+}
+
+/* 768px+ — Tablet */
+@media (min-width: 768px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--60, 2rem);
+    gap: 2rem;
+  }
+}
+
+/* 1024px+ — Laptop */
+@media (min-width: 1024px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--70, 3rem);
+    gap: 2.5rem;
+  }
+}
+
+/* 1280px+ — Desktop */
+@media (min-width: 1280px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--80, 4rem);
+  }
+}
+
+/* 1440px+ — Full width */
+@media (min-width: 1440px) {
+  .pp-main {
+    padding: 0 var(--wp--preset--spacing--80, 4rem);
+  }
+}
+
+/* ========================================
+   SPACE INVADER BACKGROUND DECORATIONS
+   ======================================== */
+
+.pp-home__invaders {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pp-home__inv {
+  position: absolute;
+  opacity: 0.15;
+}
+
+.pp-home__inv--1 { top: 12%; left: 3%; }
+.pp-home__inv--2 { top: 28%; right: 4%; }
+.pp-home__inv--3 { top: 50%; left: 2%; }
+.pp-home__inv--4 { top: 72%; right: 3%; }
+.pp-home__inv--5 { top: 88%; left: 5%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pp-home__inv {
+    animation: pp-float 6s ease-in-out infinite alternate;
+  }
+  .pp-home__inv--2 { animation-delay: -1s; }
+  .pp-home__inv--3 { animation-delay: -2s; }
+  .pp-home__inv--4 { animation-delay: -3s; }
+  .pp-home__inv--5 { animation-delay: -4s; }
+}
+
+@keyframes pp-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ========================================
+   SPACE INVADER BASE
+   ======================================== */
+
+.space-invader {
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+/* ========================================
+   DARK MODE OVERRIDES
+   (Semantic tokens auto-switch, but a few need help)
+   ======================================== */
+
+.dark .retro-hero-stage {
+  background-color: rgba(107, 142, 123, 0.1);
+}

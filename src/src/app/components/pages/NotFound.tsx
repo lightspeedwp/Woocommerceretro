@@ -9,7 +9,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
-import { House as Home, MagnifyingGlass as Search, Bag as ShoppingBag } from '@phosphor-icons/react';
+import { House as Home, MagnifyingGlass as Search, Bag as ShoppingBag } from '../../utils/phosphor-compat';
 import { ProductCard } from '../blocks/product/ProductCard';
 import { products } from '../../data/products';
 

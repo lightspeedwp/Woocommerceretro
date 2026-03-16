@@ -100,7 +100,7 @@ body {
 }
 
 .wp-block-theme-header__container {
-  max-width: 1400px;
+  max-width: var(--wp--preset--layout--site-size, 1440px);
   margin: 0 auto;
   padding: var(--wp--preset--spacing--40);
   display: flex;
@@ -128,7 +128,7 @@ body {
 }
 
 .front-page-hero__container {
-  max-width: 1200px;
+  max-width: var(--wp--preset--layout--content-size, 1440px);
   margin: 0 auto;
   padding: var(--wp--preset--spacing--60);
   text-align: center;

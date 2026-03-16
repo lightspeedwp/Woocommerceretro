@@ -21,7 +21,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, Briefcase, Users } from '@phosphor-icons/react';
+import { ArrowRight, Briefcase, Users } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

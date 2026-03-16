@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { CaretDown as ChevronDown } from '../../../utils/phosphor-compat';
 import { CheckoutInput } from './ui/CheckoutInput';
 import { countries, getStatesForCountry } from '../../../data/checkout';
 import { mockUserProfile, mockAddresses } from '../../../data/account';

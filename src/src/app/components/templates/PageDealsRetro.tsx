@@ -22,7 +22,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { Fire, ArrowRight, Lightning } from '@phosphor-icons/react';
+import { Fire, ArrowRight, Lightning } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

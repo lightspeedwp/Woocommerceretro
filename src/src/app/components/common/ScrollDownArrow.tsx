@@ -1,5 +1,5 @@
 import React from 'react';
-import { CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { CaretDown as ChevronDown } from '../../utils/phosphor-compat';
 
 interface ScrollDownArrowProps {
   targetId?: string;

@@ -26,15 +26,15 @@ export const OrderDetails = ({
       <h2 className="wp-block-heading funky-gradient-text">Order details</h2>
       <div className="wp-order-details-table">
         <div className="wp-order-details-row wp-order-details-header funky-glass-panel">
-          <p className="wp-text-bold text-neon-cyan">Product</p>
-          <p className="wp-text-bold wp-text-right text-neon-pink">Total</p>
+          <p className="wp-text-bold wp-order-text--sky">Product</p>
+          <p className="wp-text-bold wp-text-right wp-order-text--coral">Total</p>
         </div>
 
         <div>
           {items.map((item) => (
             <div key={item.id} className="wp-order-details-row funky-glass-panel">
               <div className="wp-flex wp-items-center">
-                <Link to={item.link} className="text-neon-cyan">{item.name}</Link>
+                <Link to={item.link} className="wp-order-text--sky">{item.name}</Link>
                 <span className="wp-text-bold"> x {item.quantity}</span>
               </div>
               <div className="wp-text-right">
@@ -46,17 +46,17 @@ export const OrderDetails = ({
 
         <div className="wp-order-details-footer">
           <div className="wp-order-details-row funky-glass-panel">
-            <p className="wp-text-bold text-neon-cyan">Shipping:</p>
+            <p className="wp-text-bold wp-order-text--sky">Shipping:</p>
             <div className="wp-text-right">
               <p>{shipping.location}:</p>
               <p>{shipping.address}</p>
-              <p className="text-neon-pink">{shipping.method}</p>
+              <p className="wp-order-text--coral">{shipping.method}</p>
             </div>
           </div>
           <div className="wp-order-details-row funky-glass-panel funky-glow-border--lime">
-            <h4 className="wp-block-heading text-neon-lime">Total:</h4>
+            <h4 className="wp-block-heading wp-order-text--success">Total:</h4>
             <div className="wp-text-right">
-              <p className="wp-text-bold text-neon-lime has-large-font-size">{total}</p>
+              <p className="wp-text-bold wp-order-text--success has-large-font-size">{total}</p>
             </div>
           </div>
         </div>

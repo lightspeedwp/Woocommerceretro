@@ -1,0 +1,184 @@
+/**
+ * PlayPocket — Hero Section
+ *
+ * Two-column hero layout with retro grid stage,
+ * space invader decorations, and product showcase.
+ *
+ * BEM block: .retro-hero
+ */
+
+.retro-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  background: var(--wp--preset--color--background, #F2EEE6);
+  /* Override old front-page-funky.css properties */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 768px) {
+  .retro-hero {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 0;
+  }
+}
+
+.retro-hero__invaders {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.retro-hero__invader {
+  position: absolute;
+}
+
+.retro-hero__invader--1 {
+  top: 0.5rem;
+  right: 50%;
+}
+
+.retro-hero__invader--2 {
+  top: 2rem;
+  left: 45%;
+}
+
+.retro-hero-dots {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+
+.retro-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--wp--preset--color--foreground, #1E2630);
+  opacity: 0.3;
+}
+
+.retro-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 2;
+  /* Override old front-page-funky.css width/padding */
+  width: auto;
+  padding: 0;
+}
+
+.retro-hero-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  /* Override old title margin */
+  margin: 0;
+}
+
+.retro-hero-title__line {
+  display: block;
+}
+
+.retro-hero-highlight {
+  color: var(--wp--preset--color--primary, #FFC533);
+  display: block;
+  /* Override old highlight background */
+  background: none;
+  padding: 0;
+}
+
+.retro-hero-desc {
+  white-space: pre-line;
+  color: var(--wp--preset--color--foreground, #1E2630);
+  opacity: 0.85;
+  max-width: 280px;
+  /* Override old desc margin */
+  margin: 0;
+}
+
+.retro-hero__pixel-deco {
+  margin-top: 0.5rem;
+}
+
+.retro-hero-right {
+  position: relative;
+  z-index: 2;
+  /* Override old front-page-funky.css */
+  width: auto;
+  background-color: transparent;
+  background-image: none;
+  border-top: none;
+  border-left: none;
+  min-height: 0;
+}
+
+.retro-hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 1;
+  background:
+    repeating-linear-gradient(
+      var(--wp--preset--color--secondary, #6BBF59) 0,
+      var(--wp--preset--color--secondary, #6BBF59) 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--wp--preset--color--secondary, #6BBF59) 0,
+      var(--wp--preset--color--secondary, #6BBF59) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+  background-color: rgba(107, 142, 123, 0.15);
+  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
+  overflow: hidden;
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.retro-hero-stage-main {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  top: 15%;
+  left: 15%;
+  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
+}
+
+.retro-hero-stage-sub1 {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  object-fit: cover;
+  bottom: 5%;
+  left: 5%;
+  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
+  z-index: 2;
+}
+
+.retro-hero-stage-sub2 {
+  position: absolute;
+  width: 28%;
+  height: 28%;
+  object-fit: cover;
+  top: 5%;
+  right: 5%;
+  border: 2px solid var(--wp--preset--color--border, #CBD5C9);
+  z-index: 2;
+}

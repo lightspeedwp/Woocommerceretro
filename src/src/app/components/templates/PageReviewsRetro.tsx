@@ -24,7 +24,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { Star, Quotes, ArrowRight, ThumbsUp, ShieldCheck, Medal, ChatCircle } from '@phosphor-icons/react';
+import { Star, Quotes, ArrowRight, ThumbsUp, ShieldCheck, Medal, ChatCircle } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

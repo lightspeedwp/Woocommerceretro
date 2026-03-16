@@ -1,0 +1,39 @@
+/* File: src/src/styles/tokens/color.ref.light.css
+   What this is: Light mode literal values.
+   Rule: literals allowed ONLY here (and the dark equivalent).
+*/
+
+:root {
+  color-scheme: light;
+
+  --wp--custom--color--background: #F2EEE6;
+  --wp--custom--color--foreground: #1E2630;
+
+  --wp--custom--color--surface-1: #FFFFFF;
+  --wp--custom--color--surface-2: #E7E2D8;
+
+  --wp--custom--color--border: #CBD5C9;
+  --wp--custom--color--muted: #E7E2D8;
+  --wp--custom--color--muted-foreground: #4B5563;
+
+  --wp--custom--color--primary: #FFC533;
+  --wp--custom--color--primary-foreground: #1E2630;
+
+  --wp--custom--color--secondary: #6BBF59;
+  --wp--custom--color--secondary-foreground: #1E2630;
+
+  --wp--custom--color--accent: #D4143D;
+  --wp--custom--color--accent-foreground: #F2EEE6;
+
+  --wp--custom--color--link: #0F4C5C;
+  --wp--custom--color--ring: #00FFF9;
+
+  --wp--custom--color--success: #2ECC71;
+  --wp--custom--color--warning: #F59E0B;
+  --wp--custom--color--error: #DC2626;
+
+  --wp--custom--color--neon-cyan: #00FFF9;
+  --wp--custom--color--neon-pink: #FF00FF;
+  --wp--custom--color--neon-lime: #CCFF00;
+  --wp--custom--color--neon-yellow: #FFC533;
+}

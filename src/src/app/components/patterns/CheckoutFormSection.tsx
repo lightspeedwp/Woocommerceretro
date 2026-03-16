@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Truck } from '@phosphor-icons/react';
+import { CreditCard, Truck } from '../../utils/phosphor-compat';
 import { Typography } from '../common/Typography';
 
 interface CheckoutFormData {

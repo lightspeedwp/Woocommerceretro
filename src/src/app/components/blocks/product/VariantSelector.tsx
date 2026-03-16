@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check } from '@phosphor-icons/react';
+import { Check } from 'lucide-react';
 
 interface VariantOption {
   value: string;

@@ -1,6 +1,6 @@
+import { CaretRight as ChevronRight, House as Home } from '../../utils/phosphor-compat';
 import React from 'react';
 import { useLocation, Link } from 'react-router';
-import { CaretRight as ChevronRight, House as Home } from '@phosphor-icons/react';
 
 /** Helper to format path segments */
 const formatSegment = (segment: string): string =>

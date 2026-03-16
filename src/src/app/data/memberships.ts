@@ -19,7 +19,7 @@
  * @module data/memberships
  */
 
-import { Percent, Bag as ShoppingBag, Lightning as Zap, Users, Crown, Gift, Star, Check } from '@phosphor-icons/react';
+import { Percent, Bag as ShoppingBag, Lightning as Zap, Users, Crown, Gift, Star, Check } from '../utils/phosphor-compat';
 // Type references (JSDoc only - no runtime import needed):
 // PhosphorIcon (React.ComponentType)
 

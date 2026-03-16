@@ -1,4 +1,4 @@
-import { CaretDown as ChevronDown } from '@phosphor-icons/react';
+import { CaretDown as ChevronDown } from '../../../utils/phosphor-compat';
 
 interface SortDropdownProps {
   value: string;

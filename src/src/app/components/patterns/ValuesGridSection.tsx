@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Users, Globe, ShieldCheck } from '@phosphor-icons/react';
+import { Heart, Users, Globe, ShieldCheck } from '../../utils/phosphor-compat';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { Heading } from '../common/Heading';

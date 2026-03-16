@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router';
-import { Code, Palette, TextT, AppWindow, Star, Gauge } from '@phosphor-icons/react';
+import { Code, Palette, TextT, AppWindow, Star, Gauge } from '../../utils/phosphor-compat';
 
 const devToolsLinks = [
   { id: 'style-guide', label: 'Style Guide', path: '/dev-tools/style-guide', icon: Palette },

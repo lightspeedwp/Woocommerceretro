@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X } from '@phosphor-icons/react';
+import { X } from '../../utils/phosphor-compat';
 import { SearchAutocomplete } from '../blocks/search/SearchAutocomplete';
 
 /**

@@ -21,7 +21,7 @@ export const OrderStatus = ({
   return (
     <div className="wp-block-group wp-block-group--vertical funky-glass-panel funky-glow-border--lime wp-order-status">
       <h1 className="wp-block-heading funky-gradient-text has-x-large-font-size">Order received</h1>
-      <p className="text-neon-lime">{getStatusMessage()}</p>
+      <p className="wp-order-text--success">{getStatusMessage()}</p>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Star, Heart, Eye, Scales as Scale } from '@phosphor-icons/react';
+import { Star, Heart, Eye, Scales as Scale } from '../../../utils/phosphor-compat';
 import { useCart } from '../../../contexts/CartContext';
 import { useWishlist } from '../../../contexts/WishlistContext';
 import { useQuickView } from '../../../contexts/QuickViewContext';
@@ -73,7 +73,7 @@ export const ProductCard = React.memo(({ product }: { product: any }) => {
 
   return (
     <div className={`wc-block-product-card group funky-card-glow funky-spring-hover ${isOutOfStock ? 'wc-block-product-card--out-of-stock' : ''}`}>
-      <Link to={`/product/${product.id}`} className="wc-block-product-card__image-container">
+      <Link to={`/product/${product.slug || product.id}`} className="wc-block-product-card__image-container">
         <ImageWithFallback
           src={product.image}
           alt={product.name}
@@ -120,7 +120,7 @@ export const ProductCard = React.memo(({ product }: { product: any }) => {
         )}
 
         <h3 className="wc-block-product-card__title funky-title">
-          <Link to={`/product/${product.id}`} className="wc-block-product-card__title-link">
+          <Link to={`/product/${product.slug || product.id}`} className="wc-block-product-card__title-link">
             {product.name}
           </Link>
         </h3>

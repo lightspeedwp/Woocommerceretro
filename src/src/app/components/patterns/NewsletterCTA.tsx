@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PaperPlaneRight, EnvelopeSimple, CheckCircle, WarningCircle, Spinner } from '@phosphor-icons/react';
+import { PaperPlaneRight, EnvelopeSimple, CheckCircle, WarningCircle, Spinner } from '../../utils/phosphor-compat';
 import { Typography } from '../common/Typography';
 import { Button } from '../blocks/design/Buttons';
 

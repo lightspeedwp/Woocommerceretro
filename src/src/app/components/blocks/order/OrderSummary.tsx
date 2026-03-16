@@ -26,12 +26,12 @@ export const OrderSummary = ({
   );
 
   return (
-    <div className="wp-order-summary-header wp-grid wp-grid-cols-2 md:wp-grid-cols-5 wp-gap-4">
-      {createSummaryItem('order', 'Order #:', orderNumber, 'text-neon-pink')}
-      {createSummaryItem('date', 'Date:', date, 'text-neon-cyan')}
-      {createSummaryItem('total', 'Total:', total, 'text-neon-lime')}
-      {createSummaryItem('email', 'Email:', email, 'text-neon-cyan')}
-      {createSummaryItem('payment', 'Payment:', paymentMethod, 'text-neon-pink')}
+    <div className="wp-order-summary-header">
+      {createSummaryItem('order', 'Order #:', orderNumber, 'wp-order-text--coral')}
+      {createSummaryItem('date', 'Date:', date, 'wp-order-text--sky')}
+      {createSummaryItem('total', 'Total:', total, 'wp-order-text--success')}
+      {createSummaryItem('email', 'Email:', email, 'wp-order-text--sky')}
+      {createSummaryItem('payment', 'Payment:', paymentMethod, 'wp-order-text--coral')}
     </div>
   );
 };

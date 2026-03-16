@@ -23,7 +23,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { ShieldCheck, CheckCircle, XCircle, ArrowRight, Lifebuoy } from '@phosphor-icons/react';
+import { ShieldCheck, CheckCircle, XCircle, ArrowRight, Lifebuoy } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

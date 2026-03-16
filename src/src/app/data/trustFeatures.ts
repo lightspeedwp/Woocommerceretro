@@ -12,7 +12,7 @@
  * @property {string} description
  */
 
-import { ShieldCheck, Truck, CreditCard, Headphones, Medal as Award, ArrowsClockwise as RefreshCw, Lock, UserCircleCheck as UserCheck, Eye } from '@phosphor-icons/react';
+import { ShieldCheck, Truck, CreditCard, Headphones, Medal as Award, ArrowsClockwise as RefreshCw, Lock, UserCircleCheck as UserCheck, Eye } from '../utils/phosphor-compat';
 
 export const trustFeatures = [
   {

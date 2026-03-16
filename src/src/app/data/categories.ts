@@ -47,6 +47,13 @@ export const postCategories = [
     slug: 'gallery',
     description: 'Photo collections.',
     count: 4
+  },
+  {
+    id: 7,
+    name: 'News',
+    slug: 'news',
+    description: 'Industry news and announcements.',
+    count: 6
   }
 ];
 

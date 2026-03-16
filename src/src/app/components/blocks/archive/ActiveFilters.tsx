@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react';
+import { X } from '../../../utils/phosphor-compat';
 
 interface Filters {
   categories: string[];

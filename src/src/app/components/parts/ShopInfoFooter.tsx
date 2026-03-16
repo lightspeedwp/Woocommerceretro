@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '../common/Typography';
-import { FacebookLogo as Facebook, InstagramLogo as Instagram, TwitterLogo as Twitter } from '@phosphor-icons/react';
+import { FacebookLogo as Facebook, InstagramLogo as Instagram, TwitterLogo as Twitter } from '../../utils/phosphor-compat';
 import { KWVShopLogo } from '../common/Logo';
 
 /**

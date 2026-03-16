@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router';
-import { MagnifyingGlass, CaretDown, User, Tote, EnvelopeSimple, Phone, Heart, Lightning, Tag, Gift, Percent } from '@phosphor-icons/react';
+import { MagnifyingGlass, CaretDown, User, Tote, EnvelopeSimple, Phone, Heart, Lightning, Tag, Gift, Percent } from '../../utils/phosphor-compat';
 
 /**
  * MobileMenu Component (Template Part) — Funky Redesign (Phase 2)

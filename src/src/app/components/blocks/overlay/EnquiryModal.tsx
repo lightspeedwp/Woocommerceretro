@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, PaperPlaneTilt as Send, CheckCircle } from '@phosphor-icons/react';
+import { X, PaperPlaneTilt as Send, CheckCircle } from '../../../utils/phosphor-compat';
 import { Button } from '../design/Buttons';
 import { submitFormMock } from '../../../services/formSubmission';
 

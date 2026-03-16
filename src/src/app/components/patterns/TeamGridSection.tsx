@@ -1,5 +1,5 @@
 import React from 'react';
-import { Envelope as Mail, LinkedinLogo as Linkedin, TwitterLogo as Twitter } from '@phosphor-icons/react';
+import { Envelope as Mail, LinkedinLogo as Linkedin, TwitterLogo as Twitter } from '../../utils/phosphor-compat';
 import { Typography } from '../common/Typography';
 
 interface TeamMember {

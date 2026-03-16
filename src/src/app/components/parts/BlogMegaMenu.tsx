@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { Link } from 'react-router';
-import { Article, Microphone, VideoCamera, Images, ChatDots, TagSimple, ArrowRight } from '@phosphor-icons/react';
+import { Article, Microphone, VideoCamera, Images, ChatDots, TagSimple, ArrowRight } from '../../utils/phosphor-compat';
 import { posts, mediaItems } from '../../data/posts';
 import { MegaMenuWrapper } from './MegaMenuWrapper';
 

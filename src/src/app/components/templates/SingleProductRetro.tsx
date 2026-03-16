@@ -9,12 +9,12 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
-import { Star, Plus, ArrowRight, Heart, Scales, Truck, ShieldCheck, ArrowsClockwise } from '@phosphor-icons/react';
+import { Star, Plus, ArrowRight, Heart, Scales, Truck, ShieldCheck, ArrowsClockwise } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
 import { BottomGridRetro } from '../patterns/BottomGridRetro';
-import { getProductById, getRelatedProducts } from '../../data/products';
+import { getProductById, getRelatedProducts, getProductBySlug } from '../../data/products';
 import { useCart } from '../../contexts/CartContext';
 import { useComparison } from '../../contexts/ComparisonContext';
 import { useWishlist } from '../../contexts/WishlistContext';
@@ -44,7 +44,7 @@ const TAB_LABELS: Record<TabKey, string> = {
 };
 
 export const SingleProductRetro = (props: SingleProductRetroProps) => {
-  const params = useParams<{ id: string }>();
+  const params = useParams<{ slug: string }>();
   const cartContext = useCart();
   const comparison = useComparison();
   const wishlist = useWishlist();
@@ -52,7 +52,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>('description');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const foundProduct = getProductById(params.id || '');
+  const foundProduct = getProductById(params.slug || '') || getProductBySlug(params.slug || '');
   const product = props?.product || foundProduct || FALLBACK_PRODUCT;
   const displayPrice = typeof product.price === 'number' ? `$${product.price.toFixed(2)}` : product.price;
   const salePrice = product.salePrice ? `$${product.salePrice.toFixed(2)}` : null;
@@ -94,7 +94,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
           <span className="retro-breadcrumb-sep">/</span>
           {product.categorySlug && (
             <>
-              <Link to={`/shop/category/${product.categorySlug}`} className="retro-breadcrumb-link">
+              <Link to={`/category/${product.categorySlug}`} className="retro-breadcrumb-link">
                 {(product.category || 'CATEGORY').toUpperCase()}
               </Link>
               <span className="retro-breadcrumb-sep">/</span>
@@ -334,7 +334,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                           <td>
                             <div className="retro-sp-tag-list">
                               {product.tags.map((tag: string) => (
-                                <Link key={tag} to={`/shop/tag/${tag}`} className="retro-sp-tag retro-font-display">
+                                <Link key={tag} to={`/tag/${tag}`} className="retro-sp-tag retro-font-display">
                                   {tag}
                                 </Link>
                               ))}
@@ -378,7 +378,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                 const primaryBadge = item.badges && item.badges.length > 0 ? item.badges[0] : null;
 
                 return (
-                  <Link key={item.id} to={`/product/${item.id}`} className="retro-card">
+                  <Link key={item.id} to={`/product/${item.slug || item.id}`} className="retro-card">
                     {primaryBadge && (
                       <span className="retro-card-badge retro-font-display">{primaryBadge}</span>
                     )}

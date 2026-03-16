@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from '@phosphor-icons/react';
+import { X } from 'lucide-react';
 import { Link } from 'react-router';
 import { useComparison } from '../../../contexts/ComparisonContext';
 
@@ -21,7 +21,7 @@ export const ComparisonBar = () => {
             <div className="wc-block-comparison-bar__thumbnails">
               {comparisonItems.map((product) => (
                 <div key={product.id} className="wc-block-comparison-bar__thumbnail group">
-                  <Link to={`/product/${product.id}`} className="wc-block-comparison-bar__link">
+                  <Link to={`/product/${product.slug || product.id}`} className="wc-block-comparison-bar__link">
                     <img
                       src={product.image}
                       alt={product.name}

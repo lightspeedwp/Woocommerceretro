@@ -9,7 +9,7 @@
  */
 
 import { Link } from 'react-router';
-import { Trophy, Star, Lightning as Zap, Fire } from '@phosphor-icons/react';
+import { Trophy, Star, Lightning as Zap, Fire } from '../../../utils/phosphor-compat';
 import { loyaltyUser, recentActivity, getLoyaltyProgress } from '../../../data/loyalty';
 
 export const LoyaltyRetro = () => {

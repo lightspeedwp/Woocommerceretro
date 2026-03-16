@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download } from '@phosphor-icons/react';
+import { Download } from '../../../utils/phosphor-compat';
 
 /**
  * DownloadsSection Component
@@ -13,9 +13,9 @@ export const DownloadsSection = () => {
       <h2 className="wp-block-heading funky-gradient-text">Downloads</h2>
       <div className="wp-order-downloads">
         <div className="wp-order-downloads-header funky-glass-panel">
-          <p className="text-neon-cyan">Product</p>
-          <p className="text-neon-cyan">Expires</p>
-          <p className="wp-text-right text-neon-cyan">Download</p>
+          <p className="wp-order-text--sky">Product</p>
+          <p className="wp-order-text--sky">Expires</p>
+          <p className="wp-text-right wp-order-text--sky">Download</p>
         </div>
         <div className="wp-order-downloads-row funky-glass-panel">
           <p className="wp-text-medium">Album</p>
@@ -25,8 +25,8 @@ export const DownloadsSection = () => {
               className="wp-order-download-button funky-glass-panel funky-glow-border--cyan"
               aria-label="Download Album.mp3"
             >
-              <Download size={14} className="text-neon-cyan" aria-hidden="true" />
-              <span className="text-neon-cyan">Album.mp3</span>
+              <Download size={14} className="wp-order-text--sky" aria-hidden="true" />
+              <span className="wp-order-text--sky">Album.mp3</span>
             </button>
           </div>
         </div>

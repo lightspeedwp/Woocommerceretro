@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '../../common/Container';
 import { Typography } from '../../common/Typography';
-import { InstagramLogo as Instagram } from '@phosphor-icons/react';
+import { InstagramLogo as Instagram } from '../../../utils/phosphor-compat';
 
 /**
  * ShopSocialSection Component

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '../../utils/phosphor-compat';
 import { ResponsiveGrid } from '../blocks/design/Grid';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
@@ -45,7 +45,7 @@ export const CategoryShowcaseGrid = ({
       {categories.map((category) => (
         <Link
           key={category.id}
-          to={`/shop/category/${category.slug}`}
+          to={`/category/${category.slug}`}
           className="wp-category-card wp-block-card wp-block-card--interactive funky-spring-hover"
         >
           <div className="wp-category-card__image-container">

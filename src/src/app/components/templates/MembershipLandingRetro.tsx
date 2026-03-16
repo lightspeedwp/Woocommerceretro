@@ -22,7 +22,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { Crown, Lock, Gift, Check, ArrowRight, CaretDown } from '@phosphor-icons/react';
+import { Crown, Lock, Gift, Check, ArrowRight, CaretDown } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

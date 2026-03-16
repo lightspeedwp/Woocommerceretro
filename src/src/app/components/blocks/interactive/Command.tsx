@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { MagnifyingGlass as SearchIcon } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
+import { MagnifyingGlass as SearchIcon } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
 import { Modal, ModalContent, ModalDescription, ModalHeader, ModalTitle } from "../layout/Modal";
 
 export const Command = ({ className, children, id, style }: any) => {

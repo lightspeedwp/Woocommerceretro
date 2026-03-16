@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { MagnifyingGlass, Clock, TrendUp, X, ArrowRight } from '@phosphor-icons/react';
+import { MagnifyingGlass, Clock, TrendUp, X, ArrowRight } from '../../../utils/phosphor-compat';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { useRecentSearches } from '../../../hooks/useRecentSearches';
 import { POPULAR_SEARCHES } from '../../../data/popularSearches';

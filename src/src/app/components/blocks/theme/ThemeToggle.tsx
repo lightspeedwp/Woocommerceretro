@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon } from '@phosphor-icons/react';
+import { Sun, Moon } from '../../../utils/phosphor-compat';
 import { useTheme } from '../../../contexts/ThemeContext';
 
 /**

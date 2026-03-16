@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { X, ShoppingCart, Heart, Eye, Check, Minus, WarningCircle } from '@phosphor-icons/react';
+import { X, ShoppingCart, Heart, Eye, Check, Minus, WarningCircle } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { useComparison } from '../../contexts/ComparisonContext';
 import { useCart } from '../../contexts/CartContext';
@@ -75,10 +75,10 @@ export const ProductComparison = () => {
                 >
                   <X size={16} />
                 </button>
-                <Link to={`/product/${product.id}`} className="wc-block-product-comparison__image">
+                <Link to={`/product/${product.slug || product.id}`} className="wc-block-product-comparison__image">
                   <img src={product.image} alt={product.name} className="wc-block-product-comparison__img" />
                 </Link>
-                <Link to={`/product/${product.id}`} className="wc-block-product-comparison__title">
+                <Link to={`/product/${product.slug || product.id}`} className="wc-block-product-comparison__title">
                   {product.name}
                 </Link>
                 {product.brand && <p className="wc-block-product-comparison__brand">{product.brand}</p>}

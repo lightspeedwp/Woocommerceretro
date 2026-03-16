@@ -103,7 +103,7 @@ while read cssfile; do
 done < /tmp/css-files.txt
 ```
 
-**Action:** 
+**Action:**
 - Add missing CSS imports to `/styles/globals-minimal.css`
 - Document unused CSS files for deletion consideration
 
@@ -183,31 +183,36 @@ comm -23 /tmp/templates.txt /tmp/routes.txt
 
 **Files allowed in root:**
 - Configuration files (package.json, tsconfig.json, vite.config.ts, etc.)
-- README.md
-- CHANGELOG.md
+- `ATTRIBUTIONS.md` — License attributions (ROOT — PROTECTED)
+- `README.md` — Project overview (ROOT — PROTECTED)
+- `CHANGELOG.md` — Version history (ROOT — PROTECTED)
 - index.html
 - Build output (dist/, build/)
 
+**Only three `.md` files are allowed in root:** `ATTRIBUTIONS.md`, `README.md`, `CHANGELOG.md`. All three are PROTECTED and must never be deleted.
+
 **Files NOT allowed:**
-- Task lists (.md files except README/CHANGELOG)
+- Any other `.md` files (move guidelines to `/guidelines/`, docs to `/docs/`, tasks to `/tasks/`)
+- Task lists (.md files)
 - Reports (.md files)
 - Scripts (.sh files - should be in /scripts/)
 - Prompts (.md files - should be in /prompts/)
-- Documentation (.md files - should be in /docs/ or /guidelines/)
 
 **Scan root:**
 
 ```bash
-# Find prohibited files
-ls -1 / | grep -E "\.(md|sh)$" | grep -v "README.md" | grep -v "CHANGELOG.md"
+# Find prohibited .md files in root (anything other than the three protected files)
+ls -1 /*.md | grep -v "ATTRIBUTIONS.md" | grep -v "README.md" | grep -v "CHANGELOG.md"
 ```
 
 **Action:**
+- Move guideline files to `/guidelines/` (use templates from `/guidelines/_templates/`)
 - Move task files to `/tasks/`
 - Move reports to `/reports/`
 - Move scripts to `/scripts/`
 - Move docs to `/docs/` or `/guidelines/`
-- Delete obsolete files
+- Delete obsolete or duplicate `.md` files
+- **NEVER** create new guidelines in the project root — always create in `/guidelines/` or a subfolder
 
 ---
 
@@ -578,6 +583,9 @@ tsc --noEmit
 - `/src/app/components/figma/ImageWithFallback.tsx` - Figma-specific
 
 **Documentation:**
+- `/ATTRIBUTIONS.md` - License attributions (ROOT — PROTECTED)
+- `/README.md` - Project overview (ROOT — PROTECTED)
+- `/CHANGELOG.md` - Version history (ROOT — PROTECTED)
 - `/guidelines/Guidelines.md` - Main guidelines
 - `/guidelines/WRITING_GUIDELINES.md`
 - `/guidelines/REPORTING_GUIDELINES.md`

@@ -5,7 +5,7 @@
  * WCAG AA 2.2 compliant.
  */
 
-import { Handshake } from '@phosphor-icons/react';
+import { Handshake } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 

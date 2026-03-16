@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Toaster as SonnerToaster, toast as sonnerToast } from 'sonner@2.0.3';
-import { Check, Info, Warning as AlertTriangle, WarningCircle as AlertCircle } from '@phosphor-icons/react';
+import { Check, Info, Warning as AlertTriangle, WarningCircle as AlertCircle } from '../../utils/phosphor-compat';
 
 /**
  * Toaster Component - Renders the toast container.

@@ -64,10 +64,10 @@ const buyingGuides = [
 ];
 
 const categoryGuides = [
-  { id: 'apparel', name: 'Apparel', description: 'Find the perfect fit, fabric, and style.', link: '/shop/category/apparel', icon: 'ShoppingBag' },
-  { id: 'accessories', name: 'Accessories', description: 'Complete your look with the right pieces.', link: '/shop/category/accessories', icon: 'ShoppingBag' },
-  { id: 'home', name: 'Home & Living', description: 'Quality essentials for every room.', link: '/shop/category/home', icon: 'ShoppingBag' },
-  { id: 'electronics', name: 'Electronics', description: 'Choose the right tech for your needs.', link: '/shop/category/electronics', icon: 'ShoppingBag' },
+  { id: 'apparel', name: 'Apparel', description: 'Find the perfect fit, fabric, and style.', link: '/category/apparel', icon: 'ShoppingBag' },
+  { id: 'accessories', name: 'Accessories', description: 'Complete your look with the right pieces.', link: '/category/accessories', icon: 'ShoppingBag' },
+  { id: 'home', name: 'Home & Living', description: 'Quality essentials for every room.', link: '/category/home', icon: 'ShoppingBag' },
+  { id: 'electronics', name: 'Electronics', description: 'Choose the right tech for your needs.', link: '/category/electronics', icon: 'ShoppingBag' },
 ];
 
 const buyingGuidePageContent = {

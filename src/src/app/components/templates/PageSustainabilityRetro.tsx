@@ -22,7 +22,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { Leaf, Recycle, Drop as Droplets, Sun, Tree as TreePine, Medal as Award, Check, ArrowRight, ShoppingBag } from '@phosphor-icons/react';
+import { Leaf, Recycle, Drop as Droplets, Sun, Tree as TreePine, Medal as Award, Check, ArrowRight, ShoppingBag } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

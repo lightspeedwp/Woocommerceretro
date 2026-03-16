@@ -2,8 +2,8 @@
 
 import React, { createContext, useContext, useState, useRef, useCallback, useId } from "react";
 import { createPortal } from "react-dom";
-import { CaretDown as ChevronDown } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
+import { CaretDown as ChevronDown } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
 
 const NavigationMenuContext = createContext<any>(null);
 const NavigationMenuItemContext = createContext<any>(null);

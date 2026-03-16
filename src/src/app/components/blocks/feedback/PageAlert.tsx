@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, WarningCircle as AlertCircle, Info, X } from '@phosphor-icons/react';
+import { CheckCircle, WarningCircle as AlertCircle, Info, X } from '../../../utils/phosphor-compat';
 
 const iconClass = "wp-block-page-alert__icon";
 const icons: Record<string, React.ReactNode> = {

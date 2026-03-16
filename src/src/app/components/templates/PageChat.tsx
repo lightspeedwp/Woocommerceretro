@@ -11,7 +11,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { ChatCircle as MessageCircle, Clock, Phone, Envelope as Mail, ArrowRight } from '@phosphor-icons/react';
+import { ChatCircle as MessageCircle, Clock, Phone, Envelope as Mail, ArrowRight } from '../../utils/phosphor-compat';
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';

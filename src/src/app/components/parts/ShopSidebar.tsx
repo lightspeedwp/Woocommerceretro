@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography } from '../common/Typography';
-import { X, Star } from '@phosphor-icons/react';
+import { X, Star } from '../../utils/phosphor-compat';
 import { Checkbox } from '../blocks/forms/Checkbox';
 import { SHOP_FILTERS } from '../../data/filters';
 

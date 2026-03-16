@@ -1,6 +1,6 @@
 import React from "react";
-import { CaretRight as ChevronRight, DotsThree as MoreHorizontal } from '@phosphor-icons/react';
-import { cn } from "@/utils/cn";
+import { CaretRight as ChevronRight, DotsThree as MoreHorizontal } from '../../../utils/phosphor-compat';
+import { cn } from "../../../utils/cn";
 
 export const Breadcrumb = ({ className, id, style, children }: any) => {
   return <nav id={id} style={style} aria-label="breadcrumb" className={cn("wp-block-breadcrumb", className)}>{children}</nav>;

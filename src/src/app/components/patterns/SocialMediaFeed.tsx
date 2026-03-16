@@ -1,5 +1,5 @@
 import React from 'react';
-import { InstagramLogo as Instagram, Heart, ChatCircle as MessageCircle } from '@phosphor-icons/react';
+import { InstagramLogo as Instagram, Heart, ChatCircle as MessageCircle } from '../../utils/phosphor-compat';
 import { Button } from '../blocks/design/Buttons';
 import { Typography } from '../common/Typography';
 

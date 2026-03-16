@@ -9,7 +9,7 @@
  */
 
 import { Link } from 'react-router';
-import { ShareNetwork, Copy, Gift, CheckCircle } from '@phosphor-icons/react';
+import { ShareNetwork, Copy, Gift, CheckCircle } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

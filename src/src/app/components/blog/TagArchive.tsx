@@ -10,7 +10,7 @@
 
 import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router';
-import { Tag } from '@phosphor-icons/react';
+import { Tag } from '../../utils/phosphor-compat';
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
 import { ArchiveHeader } from '../patterns/ArchiveHeader';
@@ -20,11 +20,11 @@ import { tags } from '../../data/tags';
 import { Button } from '../blocks/design/Buttons';
 
 export const TagArchive = () => {
-  const { tagSlug } = useParams<{ tagSlug: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
   const tag = useMemo(
-    () => tags.find((t: any) => t.slug === tagSlug),
-    [tagSlug]
+    () => tags.find((t: any) => t.slug === slug),
+    [slug]
   );
 
   const tagPosts = useMemo(() => {
@@ -32,7 +32,7 @@ export const TagArchive = () => {
     return posts.filter((post: any) => post.tags.indexOf(tag.id) !== -1);
   }, [tag]);
 
-  const tagName = tag ? tag.name : (tagSlug ? tagSlug.replace(/-/g, ' ') : '');
+  const tagName = tag ? tag.name : (slug ? slug.replace(/-/g, ' ') : '');
   const metadataLabel = tagPosts.length > 0
     ? `${tagPosts.length} ${tagPosts.length === 1 ? 'article' : 'articles'}`
     : undefined;

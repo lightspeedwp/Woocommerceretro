@@ -6,7 +6,7 @@
  */
 
 import { Link, useLocation } from 'react-router';
-import { MagnifyingGlass, ShoppingCart } from '@phosphor-icons/react';
+import { MagnifyingGlass, ShoppingCart } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { products } from '../../data/products';
@@ -58,7 +58,7 @@ export const ProductSearchResultsRetro = () => {
                 <div key={item.id} className="retro-product-card retro-search-results-layout__card">
                   {/* Image */}
                   <Link
-                    to={`/product/${item.id}`}
+                    to={`/product/${item.slug || item.id}`}
                     className="retro-search-results-layout__card-image-link"
                   >
                     <img

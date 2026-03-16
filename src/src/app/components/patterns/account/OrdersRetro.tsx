@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Package, CheckCircle, Truck } from '@phosphor-icons/react';
+import { Package, CheckCircle, Truck } from '../../../utils/phosphor-compat';
 
 /**
  * OrdersRetro

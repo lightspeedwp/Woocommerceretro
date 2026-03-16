@@ -18,7 +18,7 @@
  * @module data/subscriptions
  */
 
-import { Cube as Box, Truck, ArrowClockwise as RotateCw, Gift, Star, Percent, Calendar, Users } from '@phosphor-icons/react';
+import { Cube as Box, Truck, ArrowClockwise as RotateCw, Gift, Star, Percent, Calendar, Users } from '../utils/phosphor-compat';
 
 /**
  * @typedef {Object} SubscriptionFeature

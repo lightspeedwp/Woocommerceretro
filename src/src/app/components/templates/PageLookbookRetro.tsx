@@ -9,7 +9,7 @@
  */
 
 import { Link } from 'react-router';
-import { Camera, ArrowRight } from '@phosphor-icons/react';
+import { Camera, ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';

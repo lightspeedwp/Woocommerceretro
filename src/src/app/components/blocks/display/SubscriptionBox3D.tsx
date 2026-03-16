@@ -80,8 +80,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
       style={{
         width: size,
         height: size,
-        margin: '0 auto',
-        position: 'relative',
       }}
     >
       {/* Step 1: Spinning Coin */}
@@ -98,7 +96,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           <p 
             className="retro-step-label retro-font-body"
             style={{
-              textAlign: 'center',
               marginTop: size * 0.1,
               fontSize: size * 0.08,
               color: 'var(--retro-text-secondary)',
@@ -115,8 +112,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           <div
             className="retro-box-scene"
             style={{
-              width: '100%',
-              height: '100%',
               perspective: `${size * 3}px`,
             }}
           >
@@ -125,9 +120,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
               style={{
                 width: size * 0.7,
                 height: size * 0.7,
-                margin: '0 auto',
-                position: 'relative',
-                transformStyle: 'preserve-3d',
                 animation: shouldAnimate 
                   ? `boxPulse 2s ease-in-out infinite, ${shouldAnimate ? 'boxRotate 8s linear infinite' : 'none'}` 
                   : 'none',
@@ -174,7 +166,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           <p 
             className="retro-step-label retro-font-body"
             style={{
-              textAlign: 'center',
               marginTop: size * 0.15,
               fontSize: size * 0.08,
               color: 'var(--retro-text-secondary)',
@@ -191,8 +182,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           <div
             className="retro-box-scene"
             style={{
-              width: '100%',
-              height: '100%',
               perspective: `${size * 3}px`,
             }}
           >
@@ -201,9 +190,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
               style={{
                 width: size * 0.7,
                 height: size * 0.7,
-                margin: '0 auto',
-                position: 'relative',
-                transformStyle: 'preserve-3d',
                 // @ts-ignore CSS custom property
                 '--box-glow-color': glowColor,
               }}
@@ -279,7 +265,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           <p 
             className="retro-step-label retro-font-body"
             style={{
-              textAlign: 'center',
               marginTop: size * 0.15,
               fontSize: size * 0.08,
               color: 'var(--retro-text-secondary)',
@@ -291,47 +276,6 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
           </p>
         </div>
       )}
-
-      {/* Inline keyframes */}
-      <style>{`
-        @keyframes boxPulse {
-          0%, 100% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.05);
-          }
-        }
-
-        @keyframes boxRotate {
-          from {
-            transform: rotateY(0deg);
-          }
-          to {
-            transform: rotateY(360deg);
-          }
-        }
-
-        @keyframes lidOpen {
-          from {
-            transform: rotateX(0deg);
-          }
-          to {
-            transform: rotateX(-120deg) translateY(-20px);
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };
@@ -371,7 +315,6 @@ const BoxFace: React.FC<BoxFaceProps> = ({
     <div
       className="retro-box__face"
       style={{
-        position: 'absolute',
         width: size,
         height: size,
         background: isLid
@@ -382,10 +325,6 @@ const BoxFace: React.FC<BoxFaceProps> = ({
           ? `0 0 20px ${glowColor}, inset 0 0 20px ${glowColor}20`
           : `inset 0 0 20px ${glowColor}10`,
         transform: transforms[position],
-        backfaceVisibility: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
       }}
     >
       {showLogo && (
@@ -394,7 +333,6 @@ const BoxFace: React.FC<BoxFaceProps> = ({
             fontSize: size * 0.12,
             color: glowColor,
             textShadow: `0 0 10px ${glowColor}`,
-            letterSpacing: '0.1em',
           }}
         >
           PLAY<br/>POCKET

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from '@phosphor-icons/react';
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from '../../../utils/phosphor-compat';
 import { DayPicker } from "react-day-picker";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../utils/cn";
 
 /**
  * Calendar Component

@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { Envelope as Mail, Heart, CreditCard, Bag as ShoppingBag } from '@phosphor-icons/react';
+import { Envelope as Mail, Heart, CreditCard, Bag as ShoppingBag } from '../utils/phosphor-compat';
 
 /* ── Hero Copy ───────────────────────────────────────────────────────────── */
 

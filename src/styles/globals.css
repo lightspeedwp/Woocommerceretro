@@ -82,7 +82,6 @@
 @import "../src/styles/blocks/checkout/checkout.css";
 
 /* @IMPORT: /src/styles/blocks/design/ */
-@import "../src/styles/blocks/design/accordion.css";
 @import "../src/styles/blocks/design/button.css";
 @import "../src/styles/blocks/design/card.css";
 @import "../src/styles/blocks/design/columns.css";
@@ -262,8 +261,10 @@
 @import "../src/styles/blocks/woocommerce/checkout.css";
 @import "../src/styles/blocks/woocommerce/order-confirmation.css";
 
-/* @IMPORT: /src/styles/blocks/ (root) */
-@import "../src/styles/blocks/sweep-cleanup.css";
+/* @IMPORT: /src/styles/blocks/ (root — sweep split) */
+@import "../src/styles/blocks/sweep-ui-components.css";
+@import "../src/styles/blocks/sweep-ui-misc.css";
+@import "../src/styles/blocks/sweep-product-reviews.css";
 
 /* @IMPORT: /src/styles/sections/ (42 files) */
 @import "../src/styles/sections/account-auth-funky.css";
@@ -293,6 +294,7 @@
 @import "../src/styles/sections/instagram-feed.css";
 @import "../src/styles/sections/legal-pages-funky.css";
 @import "../src/styles/sections/loyalty-funky.css";
+@import "../src/styles/sections/loyalty-retro.css";
 @import "../src/styles/sections/newsletter.css";
 @import "../src/styles/sections/page-performance.css";
 @import "../src/styles/sections/patterns.css";
@@ -310,6 +312,15 @@
 @import "../src/styles/sections/testimonials.css";
 @import "../src/styles/sections/trust-band.css";
 @import "../src/styles/sections/value-proposition.css";
+
+/* @IMPORT: Sweep cleanup split (March 16, 2026) */
+@import "../src/styles/sections/sweep-blog-social.css";
+@import "../src/styles/sections/sweep-shop-sections.css";
+@import "../src/styles/sections/sweep-brand-grid.css";
+@import "../src/styles/sections/sweep-account.css";
+@import "../src/styles/sections/sweep-account-badges.css";
+@import "../src/styles/sections/sweep-shop-pages.css";
+@import "../src/styles/sections/sweep-shop-misc.css";
 
 /* @IMPORT: Legacy extracted sections */
 @import "../src/styles/sections/legacy-base-resets.css";
@@ -353,16 +364,22 @@
 @import "../src/styles/sections/retro-mini-cart.css";
 @import "../src/styles/sections/retro-new-pages.css";
 
-/* ========================================
-   FUNKY CHECKOUT STYLES
-   ======================================== */
+/* @IMPORT: PlayPocket Home (redesigned front page) */
+@import "../src/styles/sections/playpocket-home.css";
+@import "../src/styles/sections/pp-home-layout.css";
+@import "../src/styles/sections/pp-hero.css";
+@import "../src/styles/sections/pp-logo.css";
+@import "../src/styles/sections/pp-pixel-btn.css";
+@import "../src/styles/sections/pp-categories.css";
+@import "../src/styles/sections/pp-products.css";
+@import "../src/styles/sections/pp-bottom-sections.css";
+@import "../src/styles/sections/pp-footer-home.css";
 
-.funky-checkout-form { border: 4px solid #000; padding: 2rem; background: #fff; box-shadow: 10px 10px 0px #000; }
-.funky-input { border: 3px solid #000 !important; padding: 0.75rem !important; box-shadow: 4px 4px 0px #000; }
-.funky-submit-btn { width: 100%; padding: 1.5rem; background: #0f0 !important; color: #000 !important; border: 4px solid #000 !important; font-weight: 900; text-transform: uppercase; box-shadow: 8px 8px 0px #000; cursor: pointer; }
-.funky-submit-btn:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px #000; background: #0ff !important; }
-.dark .funky-checkout-form { background: #111; border-color: #fff; box-shadow: 10px 10px 0px #fff; }
-.dark .funky-input { background: #222 !important; color: #fff !important; border-color: #fff !important; box-shadow: 4px 4px 0px #fff; }
+/* @IMPORT: 3D display components (SpinningCoin3D, SubscriptionBox3D) */
+@import "../src/styles/blocks/display/pp-3d-components.css";
+
+/* @IMPORT: Funky checkout styles (extracted from inline) */
+@import "../src/styles/blocks/checkout/funky-checkout.css";
 
 /* ========================================
    MOBILE MENU
@@ -804,22 +821,7 @@
 .wp-block-pagination__link--disabled { pointer-events: none; opacity: 0.5; }
 .wp-block-pagination__ellipsis { display: flex; height: 2.25rem; width: 2.25rem; align-items: center; justify-content: center; }
 
-/* ========================================
-   DISPLAY: ACCORDION
-   ======================================== */
-
-.wp-block-accordion { width: 100%; border-top: 1px solid var(--wp--preset--color--border); }
-.wp-block-accordion__item { border-bottom: 1px solid var(--wp--preset--color--border); }
-.wp-block-accordion__trigger { display: flex; flex: 1; align-items: center; justify-content: space-between; padding: var(--wp--preset--spacing--40) 0; font-weight: var(--wp--preset--font-weight--medium); background: none; border: none; cursor: pointer; color: var(--wp--preset--color--foreground); text-align: left; width: 100%; }
-.wp-block-accordion__trigger:hover { text-decoration: underline; }
-.wp-block-accordion__icon { height: 1rem; width: 1rem; flex-shrink: 0; transition: transform 0.2s; color: var(--wp--preset--color--muted-foreground); }
-.wp-block-accordion__trigger[data-state="open"] .wp-block-accordion__icon { transform: rotate(180deg); }
-.wp-block-accordion__content { overflow: hidden; font-size: var(--wp--preset--font-size--100); color: var(--wp--preset--color--muted-foreground); }
-.wp-block-accordion__content[data-state="open"] { animation: accordion-down 0.2s ease-out; }
-.wp-block-accordion__content[data-state="closed"] { animation: accordion-up 0.2s ease-in; }
-.wp-block-accordion__content-inner { padding-bottom: var(--wp--preset--spacing--40); }
-@keyframes accordion-down { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
-@keyframes accordion-up { from { height: var(--radix-accordion-content-height); } to { height: 0; } }
+/* NOTE: Accordion styles are imported via /src/styles/blocks/display/accordion.css */
 
 /* ========================================
    DISPLAY: BADGE
