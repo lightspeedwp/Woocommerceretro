@@ -99,3 +99,10 @@
 .retro-cat__icon {
   color: var(--wp--preset--color--foreground, #1E2630);
 }
+
+/* Dark mode — lighten internal borders to match outer border */
+
+.dark .retro-cat__item {
+  border-right-color: var(--wp--preset--color--foreground, #E8E2D8);
+  border-bottom-color: var(--wp--preset--color--foreground, #E8E2D8);
+}

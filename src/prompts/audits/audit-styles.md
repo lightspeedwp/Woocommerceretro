@@ -14,8 +14,9 @@ Detect hardcoded styling in component files that should use CSS variables, BEM c
 
 ## Files to Read
 
-- `/guidelines/Guidelines.md` Section 2.1 (No Tailwind), 2.5 (WordPress CSS Variables)
+- `/guidelines/Guidelines.md` Sections 2.1, 2.5
 - `/guidelines/development/modern-react-coding-standards.md` Section 9
+- `/guidelines/development/bem-methodology.md`
 - Sample 20-30 component files from `/src/app/components/`
 
 ## Checks

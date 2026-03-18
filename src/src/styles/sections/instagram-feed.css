@@ -152,3 +152,20 @@
   100% { opacity: 1; }
   50% { opacity: .5; }
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-instagram-feed__link,
+  .wp-instagram-feed__overlay,
+  .wp-instagram-feed__image {
+    transition: none;
+  }
+
+  .wp-instagram-feed__image:hover {
+    transform: none;
+  }
+
+  .wp-instagram-feed__loading-item {
+    animation: none;
+  }
+}

@@ -168,3 +168,15 @@
   font-size: var(--wp--preset--font-size--100);
   color: var(--wp--preset--color--muted-foreground);
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-newsletter-section__input,
+  .wp-newsletter-section__button {
+    transition: none;
+  }
+
+  .wp-newsletter-section__success {
+    animation: none;
+  }
+}

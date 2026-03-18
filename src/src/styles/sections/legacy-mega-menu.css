@@ -39,7 +39,7 @@
 .funky-mega__divider {
   height: 1px;
   background: var(--funky-glass-border, var(--color-border));
-  margin: 0.75rem 0;
+  margin: var(--wp--preset--spacing--30) 0;
 }
 
 .funky-mega__card--tall {

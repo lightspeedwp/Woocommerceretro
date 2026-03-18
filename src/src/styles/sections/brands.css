@@ -59,3 +59,15 @@
   filter: grayscale(0);
   opacity: 1;
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-brand-item,
+  .wp-brand-image {
+    transition: none;
+  }
+
+  .wp-brand-item:hover {
+    transform: none;
+  }
+}

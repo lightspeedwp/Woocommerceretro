@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sampleOrderItems, sampleShipping, sampleTotals } from '../../../data/orderSamples';
+import { Heading } from '../../common/Heading';
 
 /**
  * OrderDetails Component
@@ -54,7 +55,7 @@ export const OrderDetails = ({
             </div>
           </div>
           <div className="wp-order-details-row funky-glass-panel funky-glow-border--lime">
-            <h4 className="wp-block-heading wp-order-details__label--success">Total:</h4>
+            <Heading level={4} className="wp-block-heading wp-order-details__label--success">Total:</Heading>
             <div className="wp-order-details__price">
               <p className="wp-order-details__total wp-order-details__label--success has-large-font-size">{total}</p>
             </div>

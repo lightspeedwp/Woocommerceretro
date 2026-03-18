@@ -1,8 +1,8 @@
 # Complete Routing Guide - PlayPocket WooCommerce Prototype
 
-**Last Updated:** March 15, 2026
+**Last Updated:** March 17, 2026
 **Route File:** `/routes.ts`
-**Total Routes:** 100+
+**Total Routes:** 134 (112 page routes + 10 redirects + 5 error routes + 7 format routes)
 **Trigger:** `fix routes` (action) | `audit routes` (report only)
 
 ---
@@ -380,5 +380,43 @@ Every entry in every data file must have:
 
 ---
 
-**Version:** 2.0
-**Last Updated:** March 15, 2026
+## Route naming conventions
+
+### URL paths
+
+- **Lowercase kebab-case**: `/shipping-returns`, `/bundle-builder`, `/order-confirmation`
+- **No trailing slashes**: `/shop` not `/shop/`
+- **Singular for single items**: `/product/:slug`, `/membership/:id`
+- **Plural for archives/listings**: `/subscriptions`, `/memberships`, `/promotions`
+
+### Dynamic parameters
+
+- Use `:slug` for content lookups (products, posts, categories, tags, authors)
+- Use `:id` only for numeric/opaque identifiers (subscriptions, memberships)
+- Use `:platform` for external service routing (social redirects)
+- Never use `:categorySlug`, `:tagSlug`, or similar verbose names
+
+### Component naming
+
+- **Templates**: `Page[Name]Retro` for standalone pages, `Archive[Type]Retro` for listings
+- **Layouts**: `[Area]LayoutRetro` for nested layout wrappers (e.g. `AccountLayoutRetro`)
+- **Redirects**: Use `createRedirect('/target')` factory — no one-off redirect components
+
+### Lazy imports
+
+All route components use lazy loading with named exports:
+
+```tsx
+const MyPage = lazy(() =>
+  import('./src/app/templates/MyPage').then((m) => ({ default: m.MyPage }))
+);
+```
+
+### Alias routes
+
+When the same page serves multiple URLs, define each path separately pointing to the same component. Document aliases with `(alias)` in the description column.
+
+---
+
+**Version:** 3.0
+**Last Updated:** March 17, 2026

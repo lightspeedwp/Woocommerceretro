@@ -76,3 +76,14 @@
   color: var(--wp--preset--color--muted-foreground);
   line-height: var(--wp--preset--line-height--tight);
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-quick-entry-tile {
+    transition: none;
+  }
+
+  .wp-quick-entry-tile:hover {
+    transform: none;
+  }
+}

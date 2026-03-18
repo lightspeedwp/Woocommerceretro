@@ -1,138 +1,139 @@
 /* ========================================
-   FUNKY REDESIGN STYLES
+   FUNKY FILTER SIDEBAR — Scoped Overrides
+   All funky styles scoped under .funky-filter-sidebar
+   for higher specificity than base .wp-filter-* (0-2-0 > 0-1-0).
+   Zero !important declarations.
    ======================================== */
 
+/* --- Scoped custom properties ------------------------------------ */
 .funky-filter-sidebar {
+  --funky-border: var(--wp--preset--color--black);
+  --funky-surface: var(--wp--preset--color--white);
+  --funky-ink: var(--wp--preset--color--black);
+  --funky-surface-alt: var(--wp--preset--color--surface, #fafafa);
+  --funky-neon-magenta: var(--retro-neon-magenta, #ff00ff);
+  --funky-neon-cyan: var(--retro-neon-cyan, #00ffff);
+  --funky-neon-yellow: var(--retro-neon-yellow, #ffff00);
+  --funky-neon-lime: var(--retro-neon-lime, #00ff00);
+  --funky-shadow: var(--wp--preset--color--black);
+
   padding: var(--wp--preset--spacing--40);
   background: var(--wp--preset--color--background);
-  border: 4px solid #000;
-  box-shadow: 10px 10px 0px #000;
+  border: 4px solid var(--funky-border);
+  box-shadow: 10px 10px 0px var(--funky-shadow);
 }
 
-.funky-filter-section {
-  border-bottom: 4px solid #000 !important;
+/* --- Sections ---------------------------------------------------- */
+.funky-filter-sidebar .funky-filter-section {
+  border-bottom: 4px solid var(--funky-border);
   margin-bottom: var(--wp--preset--spacing--30);
 }
 
-.funky-filter-trigger {
-  padding-block: var(--wp--preset--spacing--30) !important;
-  background: #fff !important;
-  color: #000 !important;
+/* --- Trigger buttons --------------------------------------------- */
+.funky-filter-sidebar .funky-filter-trigger {
+  padding-block: var(--wp--preset--spacing--30);
+  background: var(--funky-surface);
+  color: var(--funky-ink);
   font-family: var(--wp--preset--font-family--heading);
   text-transform: uppercase;
-  font-weight: 900 !important;
+  font-weight: 900;
   letter-spacing: 1px;
 }
 
-.funky-filter-trigger:hover {
-  background: #f0f !important; /* Magenta */
-  color: #fff !important;
+.funky-filter-sidebar .funky-filter-trigger:hover {
+  background: var(--funky-neon-magenta);
+  color: var(--funky-surface);
 }
 
-.funky-filter-content {
-  padding: var(--wp--preset--spacing--40) !important;
-  background: #fafafa;
+/* --- Filter content ---------------------------------------------- */
+.funky-filter-sidebar .funky-filter-content {
+  padding: var(--wp--preset--spacing--40);
+  background: var(--funky-surface-alt);
 }
 
-.funky-filter-checkbox {
+/* --- Checkboxes -------------------------------------------------- */
+.funky-filter-sidebar .funky-filter-checkbox {
   position: relative;
   margin-bottom: var(--wp--preset--spacing--20);
 }
 
-.funky-checkbox--active {
-  background: #0ff !important; /* Cyan */
-  border-color: #000 !important;
+.funky-filter-sidebar .funky-checkbox--active {
+  background: var(--funky-neon-cyan);
+  border-color: var(--funky-border);
   transform: scale(1.1) rotate(-5deg);
 }
 
-.funky-color-swatch {
-  border: 3px solid #000 !important;
-  box-shadow: 3px 3px 0px #000;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+/* --- Color swatches ---------------------------------------------- */
+.funky-filter-sidebar .funky-color-swatch {
+  border: 3px solid var(--funky-border);
+  box-shadow: 3px 3px 0px var(--funky-shadow);
+  transition: transform var(--wp--preset--transition--fast) cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.funky-color-swatch:hover {
+.funky-filter-sidebar .funky-color-swatch:hover {
   transform: scale(1.2) rotate(10deg);
 }
 
-.funky-color-swatch--active {
-  transform: scale(1.3) rotate(-10deg) !important;
-  box-shadow: 5px 5px 0px #000 !important;
+.funky-filter-sidebar .funky-color-swatch--active {
+  transform: scale(1.3) rotate(-10deg);
+  box-shadow: 5px 5px 0px var(--funky-shadow);
 }
 
-.funky-size-btn {
-  border: 3px solid #000 !important;
-  border-radius: 0 !important;
-  font-weight: 900 !important;
-  background: #fff !important;
-  box-shadow: 3px 3px 0px #000;
-  transition: all 0.2s ease !important;
+/* --- Size buttons ------------------------------------------------ */
+.funky-filter-sidebar .funky-size-btn {
+  border: 3px solid var(--funky-border);
+  border-radius: 0;
+  font-weight: 900;
+  background: var(--funky-surface);
+  box-shadow: 3px 3px 0px var(--funky-shadow);
+  transition: all var(--wp--preset--transition--fast) ease;
 }
 
-.funky-size-btn:hover {
-  background: #ff0 !important; /* Yellow */
+.funky-filter-sidebar .funky-size-btn:hover {
+  background: var(--funky-neon-yellow);
   transform: translateY(-2px);
 }
 
-.funky-size-btn--active {
-  background: #0f0 !important; /* Neon Green */
-  color: #000 !important;
-  transform: translateY(2px) !important;
-  box-shadow: 1px 1px 0px #000 !important;
+.funky-filter-sidebar .funky-size-btn--active {
+  background: var(--funky-neon-lime);
+  color: var(--funky-ink);
+  transform: translateY(2px);
+  box-shadow: 1px 1px 0px var(--funky-shadow);
 }
 
-.funky-rating-btn {
-  padding: var(--wp--preset--spacing--20) !important;
+/* --- Rating buttons ---------------------------------------------- */
+.funky-filter-sidebar .funky-rating-btn {
+  padding: var(--wp--preset--spacing--20);
   border: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: all var(--wp--preset--transition--fast) ease;
 }
 
-.funky-rating-btn:hover {
-  background: #eee !important;
-  border-color: #000;
+.funky-filter-sidebar .funky-rating-btn:hover {
+  background: var(--wp--preset--color--muted);
+  border-color: var(--funky-border);
 }
 
-.funky-rating-btn--active {
-  background: #0ff !important;
-  border-color: #000 !important;
-  font-weight: 900 !important;
+.funky-filter-sidebar .funky-rating-btn--active {
+  background: var(--funky-neon-cyan);
+  border-color: var(--funky-border);
+  font-weight: 900;
 }
 
-/* Dark Mode Funky */
+/* --- Dark mode — scoped variables swap --------------------------- */
 .dark .funky-filter-sidebar {
-  border-color: #fff;
-  box-shadow: 10px 10px 0px #fff;
+  --funky-border: var(--wp--preset--color--white);
+  --funky-surface: var(--color-panel, #232A32);
+  --funky-ink: var(--wp--preset--color--white);
+  --funky-surface-alt: var(--color-inset, #1a1a1a);
+  --funky-shadow: var(--wp--preset--color--white);
 }
 
-.dark .funky-filter-section {
-  border-color: #fff !important;
-}
+/* =====================================================================
+   BASE FILTER SIDEBAR (wp-filter-*)
+   Semantic BEM styles used by FilterSidebar.tsx.
+   ===================================================================== */
 
-.dark .funky-filter-trigger {
-  background: #000 !important;
-  color: #fff !important;
-}
-
-.dark .funky-filter-trigger:hover {
-  background: #f0f !important;
-}
-
-.dark .funky-filter-content {
-  background: #1a1a1a;
-}
-
-.dark .funky-color-swatch {
-  border-color: #fff !important;
-  box-shadow: 3px 3px 0px #fff;
-}
-
-.dark .funky-size-btn {
-  border-color: #fff !important;
-  background: #222 !important;
-  color: #fff !important;
-  box-shadow: 3px 3px 0px #fff;
-}
-
+/* --- Active filters ---------------------------------------------- */
 .wp-active-filters__header {
   display: flex;
   justify-content: space-between;
@@ -162,6 +163,7 @@
   gap: var(--wp--preset--spacing--20);
 }
 
+/* --- Filter chips ------------------------------------------------ */
 .wp-filter-chip {
   display: inline-flex;
   align-items: center;
@@ -193,6 +195,7 @@
   color: var(--wp--preset--color--foreground);
 }
 
+/* --- Sidebar layout ---------------------------------------------- */
 .wp-filter-sidebar {
   display: none;
   width: 100%;
@@ -211,7 +214,6 @@
 }
 
 .wp-filter-sidebar__title {
-  /* Margin removed */
   font-weight: var(--wp--preset--font-weight--semibold);
   font-size: var(--wp--preset--font-size--heading-3);
   color: var(--wp--preset--color--foreground);
@@ -223,7 +225,7 @@
   gap: var(--wp--preset--spacing--60);
 }
 
-/* Section */
+/* --- Section ----------------------------------------------------- */
 .wp-filter-section {
   border-bottom: 1px solid var(--wp--preset--color--border);
   padding-bottom: var(--wp--preset--spacing--40);
@@ -264,7 +266,7 @@
   gap: var(--wp--preset--spacing--20);
 }
 
-/* Checkbox */
+/* --- Checkbox ---------------------------------------------------- */
 .wp-filter-checkbox {
   display: flex;
   align-items: center;
@@ -318,7 +320,7 @@
   color: var(--wp--preset--color--foreground);
 }
 
-/* Price */
+/* --- Price ------------------------------------------------------- */
 .wp-filter-price {
   padding-inline: var(--wp--preset--spacing--10);
   display: flex;
@@ -328,7 +330,6 @@
 
 .wp-filter-price__slider {
   width: 100%;
-  /* Margin removed */
   accent-color: var(--wp--preset--color--primary);
   height: 0.25rem;
   background-color: var(--wp--preset--color--border);
@@ -352,7 +353,7 @@
   font-size: var(--wp--preset--font-size--small);
 }
 
-/* Colors */
+/* --- Colors ------------------------------------------------------ */
 .wp-filter-colors {
   display: flex;
   flex-wrap: wrap;
@@ -377,6 +378,8 @@
   border: 2px solid var(--wp--preset--color--primary);
 }
 
+/* Product color literals — exempt from token system (they represent
+   real-world product colors, not theme tokens). */
 .wp-filter-color-swatch[data-color="Black"] { background-color: #000; }
 .wp-filter-color-swatch[data-color="White"] { background-color: #fff; }
 .wp-filter-color-swatch[data-color="Blue"] { background-color: #3b82f6; }
@@ -384,7 +387,7 @@
 .wp-filter-color-swatch[data-color="Green"] { background-color: #22c55e; }
 .wp-filter-color-swatch[data-color="Beige"] { background-color: #f5f5dc; }
 
-/* Sizes */
+/* --- Sizes ------------------------------------------------------- */
 .wp-filter-sizes {
   display: flex;
   flex-wrap: wrap;
@@ -416,7 +419,7 @@
   border-color: var(--wp--preset--color--primary);
 }
 
-/* Ratings */
+/* --- Ratings ----------------------------------------------------- */
 .wp-filter-ratings {
   display: flex;
   flex-direction: column;
@@ -450,13 +453,8 @@
   gap: 2px;
 }
 
-.wp-filter-rating-star {
-  color: #fbbf24;
-  fill: currentColor;
-}
-
 .wp-filter-rating__star--filled {
-  color: #fbbf24; /* Amber-400 */
+  color: var(--wp--preset--color--warning, #fbbf24);
   fill: currentColor;
 }
 
@@ -464,9 +462,24 @@
   color: var(--wp--preset--color--border);
 }
 
-/* Status filter list */
+/* --- Status filter list ------------------------------------------ */
 .wp-filter-status-list {
   display: flex;
   flex-direction: column;
   gap: var(--wp--preset--spacing--20);
+}
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .funky-filter-sidebar .funky-color-swatch,
+  .funky-filter-sidebar .funky-color-swatch:hover,
+  .funky-filter-sidebar .funky-color-swatch--active,
+  .funky-filter-sidebar .funky-size-btn,
+  .funky-filter-sidebar .funky-size-btn:hover,
+  .funky-filter-sidebar .funky-size-btn--active,
+  .funky-filter-sidebar .funky-checkbox--active,
+  .funky-filter-sidebar .funky-rating-btn {
+    transition: none;
+    transform: none;
+  }
 }

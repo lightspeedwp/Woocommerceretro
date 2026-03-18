@@ -1,5 +1,7 @@
 # Tailwind CSS Usage - Codebase Scan Report
 
+> **ARCHIVED:** Superseded by March 2026 codebase audits. Tailwind fully removed. Retained as historical reference.
+
 **Date:** January 13, 2026  
 **Version:** 1.0  
 **Status:** 📊 Complete Scan - Ready for Remediation  

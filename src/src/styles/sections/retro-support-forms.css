@@ -29,7 +29,7 @@
 }
 
 .retro-contact-layout__channel-note {
-  margin: 0.25rem 0 0;
+  margin: var(--wp--preset--spacing--10) 0 0;
   font-size: 0.75rem;
   color: var(--color-muted);
 }

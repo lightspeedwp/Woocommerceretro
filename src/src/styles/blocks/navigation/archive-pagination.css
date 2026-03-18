@@ -133,12 +133,3 @@
 .dark .wp-archive-pagination__page:hover {
   background: var(--wp--preset--color--background);
 }
-
-.dark .wp-archive-pagination__page--active {
-  background: var(--wp--preset--color--accent);
-  border-color: var(--wp--preset--color--accent);
-}
-
-.dark .wp-archive-pagination__page--active:hover {
-  background: var(--wp--preset--color--accent);
-}

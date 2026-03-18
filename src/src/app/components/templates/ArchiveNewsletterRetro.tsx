@@ -51,7 +51,7 @@ export const ArchiveNewsletterRetro = () => {
                   <div className="retro-newsletter-card__image-wrap">
                     <img
                       src={issue.heroImage}
-                      alt=""
+                      alt={issue.title}
                       className="retro-newsletter-card__image"
                       loading="lazy"
                     />

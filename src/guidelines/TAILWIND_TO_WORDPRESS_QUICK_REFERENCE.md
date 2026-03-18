@@ -1,7 +1,10 @@
 # Tailwind → WordPress CSS Quick Reference Guide
 
+> **ARCHIVED:** This file is retained as historical reference only. Tailwind CSS has been fully removed from the codebase as of March 2026. All components use WordPress/WooCommerce BEM classes with `--wp--preset--*` CSS variables.
+
 **Version:** 1.0  
 **Date:** January 13, 2026  
+**Status:** Archived  
 **Purpose:** Fast lookup for converting Tailwind utility classes to WordPress semantic CSS
 
 ---

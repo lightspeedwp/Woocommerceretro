@@ -67,3 +67,10 @@
     align-self: center; /* Vertically center with title on larger screens */
   }
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-collection-row__link {
+    transition: none;
+  }
+}

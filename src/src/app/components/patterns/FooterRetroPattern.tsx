@@ -10,27 +10,27 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { Twitter, Instagram, Youtube, Gamepad2, Bookmark } from 'lucide-react';
+import { TwitterLogo, InstagramLogo, YoutubeLogo, GameController, Bookmark } from '../../utils/phosphor-compat';
 
 export const FooterRetroPattern = () => {
   return (
-    <footer className="pp-footer">
+    <footer className="pp-footer" id="footer">
       <div className="pp-footer__inner">
         {/* Left: Follow text + social icons + bookmark icon */}
         <div className="pp-footer__left">
           <span className="pp-footer__follow retro-font-display">FOLLOW THE ADVENTURE</span>
           <div className="pp-footer__socials">
             <a href="https://twitter.com" className="pp-footer__social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-              <Twitter size={20} strokeWidth={2} />
+              <TwitterLogo size={20} strokeWidth={2} />
             </a>
             <a href="https://instagram.com" className="pp-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <Instagram size={20} strokeWidth={2} />
+              <InstagramLogo size={20} strokeWidth={2} />
             </a>
             <a href="https://youtube.com" className="pp-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-              <Youtube size={20} strokeWidth={2} />
+              <YoutubeLogo size={20} strokeWidth={2} />
             </a>
             <a href="https://discord.com" className="pp-footer__social-link" aria-label="Discord" target="_blank" rel="noopener noreferrer">
-              <Gamepad2 size={20} strokeWidth={2} />
+              <GameController size={20} strokeWidth={2} />
             </a>
           </div>
           <Bookmark size={20} className="pp-footer__bookmark" aria-hidden="true" />

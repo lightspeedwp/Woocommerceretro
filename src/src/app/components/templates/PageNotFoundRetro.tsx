@@ -6,7 +6,7 @@
  */
 
 import { Link } from 'react-router';
-import { Ghost, ArrowLeft, Map, ArrowRight } from 'lucide-react';
+import { Ghost, ArrowLeft, MapTrifold, ArrowRight } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
@@ -41,7 +41,7 @@ export const PageNotFoundRetro = () => {
           {/* Sitemap Discovery Banner */}
           <div className="retro-sitemap-cta">
             <div className="retro-sitemap-cta__card">
-              <Map size={40} className="retro-sitemap-cta__icon" />
+              <MapTrifold size={40} className="retro-sitemap-cta__icon" />
               <div className="retro-sitemap-cta__content">
                 <h2 className="retro-font-display retro-bold retro-sitemap-cta__title">
                   LOST? CHECK THE MAP!

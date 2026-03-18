@@ -35,12 +35,11 @@ This repo was duplicated from an earlier prototype and contains mixed brand syst
 
 Before running this orchestrator:
 
-1. Read: `/guidelines/Guidelines.md` (project rules)
+1. Read: `/guidelines/Guidelines.md` (project rules, including audit/report/task separation in Section 6.1)
 2. Read: `/guidelines/design-tokens/Playpocket-Tokens.md` (canonical token map)
 3. Read: `/guidelines/design-tokens/Dark-Mode.md` (mode switching rules)
-4. Read: `/guidelines/PROMPT-TRIGGERS.md` (audit/report/task separation)
-5. Verify: All design token guidelines are current and match implementation files
-6. Update: Any guidelines that have drifted from the actual codebase
+4. Verify: All design token guidelines are current and match implementation files
+5. Update: Any guidelines that have drifted from the actual codebase
 
 ---
 
@@ -125,7 +124,6 @@ This task list MUST:
 - `/guidelines/design-tokens/Dark-Mode.md`
 - `/guidelines/design-tokens/Typography.md`
 - `/guidelines/design-tokens/Spacing.md`
-- `/guidelines/PROMPT-TRIGGERS.md`
 - `/guidelines/ROUTING_GUIDE.md`
 - `/guidelines/REDUCED_MOTION_GUIDELINES.md`
 - `/guidelines/development/modern-react-coding-standards.md`

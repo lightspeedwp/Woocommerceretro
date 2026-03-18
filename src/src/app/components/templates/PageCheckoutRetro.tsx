@@ -224,7 +224,7 @@ export const PageCheckoutRetro = () => {
                             <span className="retro-checkout__item-qty retro-font-display">{item.quantity}</span>
                           </div>
                           <div className="retro-checkout__item-details">
-                            <h4 className="retro-font-display retro-bold retro-checkout__item-title">{product.name}</h4>
+                            <h3 className="retro-font-display retro-bold retro-checkout__item-title">{product.name}</h3>
                             <div className="retro-font-body retro-bold retro-checkout__item-price">${(price * item.quantity).toFixed(2)}</div>
                           </div>
                         </div>

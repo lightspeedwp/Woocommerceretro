@@ -10,7 +10,7 @@ import { Code } from '../../utils/phosphor-compat';
  * @template
  * @route /dev-tools/api
  */
-const PageComponentAPI = () => {
+export const PageComponentAPI = () => {
   return (
     <>
       <div className="page-rewards">

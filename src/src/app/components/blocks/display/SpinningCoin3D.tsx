@@ -19,6 +19,7 @@
 
 import React from 'react';
 import { prefersReducedMotion } from '../../../utils/webgl';
+import { RETRO_COLORS } from '../../../constants/theme';
 
 export interface SpinningCoin3DProps {
   /** Coin size in pixels */
@@ -39,7 +40,7 @@ export interface SpinningCoin3DProps {
 
 export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
   size = 120,
-  glowColor = '#FFD700', // Gold
+  glowColor = RETRO_COLORS.gold,
   speed = 1,
   autoRotate = true,
   showLabel = true,
@@ -95,7 +96,7 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
                 className="retro-coin__label retro-font-display retro-bold"
                 style={{
                   fontSize: size * 0.15,
-                  color: '#1a1a1a',
+                  color: 'var(--color-ink)',
                   textShadow: `0 0 4px ${glowColor}`,
                   letterSpacing: '0.05em',
                 }}
@@ -123,7 +124,7 @@ export const SpinningCoin3D: React.FC<SpinningCoin3DProps> = ({
                 className="retro-coin__label retro-font-display retro-bold"
                 style={{
                   fontSize: size * 0.12,
-                  color: '#1a1a1a',
+                  color: 'var(--color-ink)',
                   textShadow: `0 0 4px ${glowColor}`,
                   transform: 'scaleX(-1)', // Mirror text
                 }}

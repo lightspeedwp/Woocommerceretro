@@ -36,7 +36,7 @@ export const ProductGallery = ({
             >
               <ImageWithFallback
                 src={image}
-                alt=""
+                alt={`${productName} - thumbnail ${index + 1}`}
                 className="wc-product-gallery__thumbnail-image"
               />
             </button>

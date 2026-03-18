@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from '../../../utils/phosphor-compat';
+import { useFocusTrap } from '../../../hooks/useFocusTrap';
 
 interface DialogContextValue {
   open: boolean;
@@ -66,6 +67,8 @@ export const DialogContent = React.forwardRef<HTMLDivElement, any>(({ className 
   if (!context) return null;
   const { open, onOpenChange } = context;
 
+  const focusTrapRef = useFocusTrap<HTMLDivElement>(open);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -80,7 +83,19 @@ export const DialogContent = React.forwardRef<HTMLDivElement, any>(({ className 
   if (!open) return null;
 
   return (
-    <div ref={ref} id={id} style={style} className={`wp-block-dialog__content funky-dialog ${className}`} data-state={open ? "open" : "closed"}>
+    <div
+      ref={(node) => {
+        (focusTrapRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }}
+      id={id}
+      style={style}
+      role="dialog"
+      aria-modal="true"
+      className={`wp-block-dialog__content funky-dialog ${className}`}
+      data-state={open ? "open" : "closed"}
+    >
       {children}
       <DialogClose className="wp-radix-close-button funky-dialog-close">
         <X className="wp-radix-close-button__icon" size={18} />

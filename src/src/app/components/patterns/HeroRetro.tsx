@@ -11,7 +11,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from '../../utils/phosphor-compat';
 import { SpaceInvader, PixelCursor } from './SpaceInvaders';
 
 const imgHoodie = 'https://images.unsplash.com/photo-1604272490759-7c465473958a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWlnZSUyMGhvb2RpZSUyMHN0cmVldHdlYXIlMjBmYXNoaW9ufGVufDF8fHx8MTc3MzYwODAwMXww&ixlib=rb-4.1.0&q=80&w=1080';

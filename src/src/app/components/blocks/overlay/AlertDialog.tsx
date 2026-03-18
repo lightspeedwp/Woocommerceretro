@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../../utils/cn";
 import { Button } from "../design/Buttons";
+import { useFocusTrap } from '../../../hooks/useFocusTrap';
 
 interface AlertDialogContextValue {
   open: boolean;
@@ -57,6 +58,8 @@ export const AlertDialogContent = React.forwardRef<HTMLDivElement, any>(({ class
   if (!context) return null;
   const { open, onOpenChange } = context;
 
+  const focusTrapRef = useFocusTrap<HTMLDivElement>(open);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -69,7 +72,23 @@ export const AlertDialogContent = React.forwardRef<HTMLDivElement, any>(({ class
   }, [open, onOpenChange]);
 
   if (!open) return null;
-  return <div ref={ref} id={id} style={style} role="alertdialog" className={cn("wp-alert-dialog-content", className)} data-state={open ? "open" : "closed"}>{children}</div>;
+  return (
+    <div
+      ref={(node) => {
+        (focusTrapRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }}
+      id={id}
+      style={style}
+      role="alertdialog"
+      aria-modal="true"
+      className={cn("wp-alert-dialog-content", className)}
+      data-state={open ? "open" : "closed"}
+    >
+      {children}
+    </div>
+  );
 });
 AlertDialogContent.displayName = "AlertDialogContent";
 

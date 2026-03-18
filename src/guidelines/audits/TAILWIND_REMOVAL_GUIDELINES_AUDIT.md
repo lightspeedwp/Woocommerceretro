@@ -1,5 +1,7 @@
 # Tailwind CSS References - Guidelines Audit & Remediation Report
 
+> **ARCHIVED:** Superseded by March 2026 guideline remediation. Tailwind fully removed. Retained as historical reference.
+
 **Date:** January 13, 2026  
 **Version:** 1.0  
 **Status:** 🔄 In Progress  

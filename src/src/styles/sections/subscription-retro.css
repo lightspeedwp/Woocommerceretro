@@ -473,6 +473,20 @@
   letter-spacing: 0.1em;
 }
 
+.retro-subscription-message {
+  text-align: center;
+}
+
+.retro-subscription-message__text {
+  margin-bottom: 1rem;
+}
+
+.retro-badge--floating {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+}
+
 /* Product Rating */
 .retro-product-rating {
   display: flex;

@@ -202,7 +202,7 @@ export const SearchAutocomplete = ({
                   <Clock size={16} />
                   <span>{term}</span>
                 </button>
-                <button onClick={() => removeRecentSearch(term)} className="woocommerce-search-autocomplete__suggestion-remove">
+                <button onClick={() => removeRecentSearch(term)} className="woocommerce-search-autocomplete__suggestion-remove" aria-label={`Remove ${term} from recent searches`}>
                   <X size={14} />
                 </button>
               </div>
@@ -253,6 +253,7 @@ export const SearchAutocomplete = ({
               type="button"
               onClick={() => { setQuery(''); setHighlightedIndex(-1); inputRef.current?.focus(); }}
               className="woocommerce-search-autocomplete__clear"
+              aria-label="Clear search"
             >
               <X size={18} />
             </button>

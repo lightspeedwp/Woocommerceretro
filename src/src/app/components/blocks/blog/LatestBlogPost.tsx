@@ -25,7 +25,7 @@ export const LatestBlogPost = () => {
         <div className="retro-latest-post__image-wrap">
           <img
             src={post.featuredImage}
-            alt=""
+            alt={post.title}
             className="retro-latest-post__image"
             loading="lazy"
           />

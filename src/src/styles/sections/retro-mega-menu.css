@@ -336,7 +336,7 @@
   gap: 0.75rem;
   padding-top: 0.75rem;
   border-top: 2px solid var(--color-border);
-  margin-top: 0.5rem;
+  margin: var(--wp--preset--spacing--20) 0;
 }
 
 .retro-mega-menu__cta-link {

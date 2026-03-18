@@ -216,7 +216,7 @@ export const ArchiveProductRetro = () => {
 
         <div className="retro-archive-layout">
           <aside className="retro-sidebar__filters retro-font-display">
-            <h3 className="retro-sidebar__title retro-bold">BROWSE</h3>
+            <h2 className="retro-sidebar__title retro-bold">BROWSE</h2>
             <div className="retro-sidebar__group">
               <Link to="/shop" className={'retro-sidebar__item' + (!categorySlug && !routeContext ? ' retro-sidebar__item--active' : '')}>
                 <span>ALL ITEMS</span><span>{PRODUCTS.length}</span>
@@ -235,7 +235,7 @@ export const ArchiveProductRetro = () => {
             </div>
 
             {/* Quick Filters */}
-            <h3 className="retro-sidebar__title retro-bold" style={{ marginTop: 'var(--wp--preset--spacing--50)' }}>QUICK FILTERS</h3>
+            <h2 className="retro-sidebar__title retro-sidebar__title--spaced retro-bold">QUICK FILTERS</h2>
             <div className="retro-sidebar__group">
               <Link to="/sale" className={'retro-sidebar__item' + (location.pathname === '/sale' ? ' retro-sidebar__item--active' : '')}>
                 <span>ON SALE</span><span>{getOnSaleProducts().length}</span>

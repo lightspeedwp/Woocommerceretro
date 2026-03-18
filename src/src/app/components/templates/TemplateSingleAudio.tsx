@@ -4,6 +4,7 @@ import { Play, SkipBack, SkipForward, SpeakerHigh as Volume2, ShareNetwork as Sh
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 import { getPostBySlug, getMediaSource } from '../../data/posts';
 
 /**
@@ -107,7 +108,7 @@ export const TemplateSingleAudio = () => {
             </div>
 
             <div className="single-audio__body">
-              <h3>Show Notes</h3>
+              <Heading level="3">Show Notes</Heading>
               <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
             </div>
           </Container>

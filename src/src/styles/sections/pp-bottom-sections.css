@@ -192,55 +192,37 @@
   color: var(--pp-powerup-ink-muted);
 }
 
-/* ── CTA Button — golden light / dark panel dark ── */
+/* ── CTA button ── */
 
 .pp-powerup__actions {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--30, 0.75rem);
+}
+
+.pp-powerup__decor-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20, 0.5rem);
+  color: var(--pp-powerup-ink-muted);
 }
 
 .pp-powerup__cta-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 0;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  background: none;
-  min-height: 44px;
-}
-
-/* Outer border layer with pixelated corners */
-.pp-powerup__cta-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--pp-powerup-btn-border);
-  clip-path: polygon(
-    0 6px, 6px 6px, 6px 0,
-    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
-    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
-    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
-  );
-  z-index: 0;
-}
-
-/* Inner fill */
-.pp-powerup__cta-inner {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  margin: 3px;
+  display: inline-block;
   background: var(--pp-powerup-btn-bg);
   color: var(--pp-powerup-btn-text);
+  border: 3px solid var(--pp-powerup-btn-border);
+  padding: var(--wp--preset--spacing--30, 0.75rem) var(--wp--preset--spacing--60, 2rem);
+  text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: var(--retro-text-xs, 0.75rem);
+  letter-spacing: 0.1em;
+  font-size: var(--retro-text-sm, 0.875rem);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  transition: background 0.15s ease, transform 0.1s ease;
+  /* Pixelated corners — 4px steps */
   clip-path: polygon(
     0 4px, 4px 4px, 4px 0,
     calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
@@ -249,52 +231,62 @@
   );
 }
 
-.pp-powerup__cta-arrow {
-  image-rendering: pixelated;
-  flex-shrink: 0;
-}
-
-.pp-powerup__cta-btn:hover .pp-powerup__cta-inner {
+.pp-powerup__cta-btn:hover {
   background: var(--pp-powerup-btn-hover-bg);
+  transform: translateY(-1px);
 }
 
 .pp-powerup__cta-btn:active {
   transform: translateY(1px);
 }
 
-.pp-powerup__cta-btn:focus-visible {
-  outline: 3px solid var(--color-focus, var(--wp--preset--color--ring, #0055AA));
-  outline-offset: 2px;
-}
-
-/* ── Decorations ── */
-
-.pp-powerup__decor {
-  position: absolute;
-  bottom: var(--wp--preset--spacing--30, 0.75rem);
-  right: var(--wp--preset--spacing--40, 1rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--wp--preset--spacing--30, 0.75rem);
-  color: var(--pp-powerup-ink);
-}
-
-.pp-powerup__decor-sparkle {
-  opacity: 0.6;
-}
-
-.pp-powerup__decor-icons {
-  display: flex;
+.pp-powerup__cta-inner {
+  display: inline-flex;
   align-items: center;
   gap: var(--wp--preset--spacing--20, 0.5rem);
 }
 
-.pp-powerup__decor-icons svg {
+.pp-powerup__cta-arrow {
+  flex-shrink: 0;
   image-rendering: pixelated;
 }
 
 /* ── Responsive ── */
+
+@media (min-width: 1024px) {
+  .pp-powerup__step-icon svg {
+    width: 88px;
+    height: 88px;
+  }
+
+  .pp-powerup__step-label {
+    font-size: var(--retro-text-sm, 0.875rem);
+  }
+
+  .pp-powerup__steps {
+    gap: var(--wp--preset--spacing--40, 1rem);
+  }
+
+  .pp-powerup__arrow svg {
+    width: 40px;
+    height: 18px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .pp-powerup__step-icon svg {
+    width: 104px;
+    height: 104px;
+  }
+
+  .pp-powerup__step-label {
+    font-size: var(--retro-text-base, 1rem);
+  }
+
+  .pp-powerup__steps {
+    gap: var(--wp--preset--spacing--50, 1.5rem);
+  }
+}
 
 @media (max-width: 480px) {
   .pp-powerup__card {

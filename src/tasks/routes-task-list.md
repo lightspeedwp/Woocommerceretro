@@ -1,9 +1,9 @@
 # Routes Task List
 
 **Domain:** Routes / Sitemap  
-**Status:** ⏳ Active  
+**Status:** ✅ Complete  
 **Created:** 2026-03-15  
-**Last Updated:** 2026-03-15  
+**Last Updated:** 2026-03-17  
 **Source:** Sitemap trigger — route audit against routes.ts
 
 ---
@@ -20,21 +20,20 @@
 
 ### P1: Route Consistency
 
-- [ ] **R4** — Verify all navigation data (`/src/app/data/navigation.ts`) links resolve to valid routes
-  - `/shop/category/electronics`, `/shop/category/clothing`, `/shop/category/home-living`, `/shop/category/sports-fitness` — these categories exist in nav menu but may not have product data
-- [ ] **R5** — Verify blog mega menu links: `/blog/format/standard`, `/blog/category/development`, `/blog/category/design`, `/blog/category/news` — ensure these routes work (standard format archive not in routes.ts)
-- [ ] **R6** — Add featured blog post links from mega menu to routes validation: `/blog/open-channels-ash-shaw`, `/blog/lightspeed-dev-workflow`
+- [x] **R4** — Verified all navigation data (`/src/app/data/navigation.ts`) links resolve to valid routes. All 38 URLs (main menu + footer menus) validated against routes.ts. ✅ **COMPLETE** (March 17)
+- [x] **R5** — Verified blog mega menu links: `/blog/format/standard` (line 254), `/blog/category/*` (`:slug` route), featured post slugs — all resolve. ✅ **COMPLETE** (March 17)
+- [x] **R6** — Featured blog post links (`/blog/open-channels-ash-shaw`, `/blog/lightspeed-dev-workflow`) resolve via `blog/:slug` catch-all route. ✅ **COMPLETE** (March 17)
 
 ### P2: Route Optimization
 
-- [ ] **R7** — Consider consolidating legal redirect routes into a single redirect handler component
-- [ ] **R8** — Add route metadata (page titles, meta descriptions) for SEO
-- [ ] **R9** — Review promotion routes — 7 routes all use `ArchiveProductRetro` with no differentiation
+- [x] **R7** — Consolidated all redirect components into a `createRedirect()` factory function — reduced 10 one-off redirect components to single factory + declarations ✅ **COMPLETE** (March 17)
+- [x] **R8** — Added centralised route metadata via `RouteDocumentTitle` component in SiteLayout — 100+ static route titles + 14 dynamic slug patterns, automatic `document.title` on every navigation ✅ **COMPLETE** (March 17)
+- [x] **R9** — Verified: promo routes already differentiated in `ArchiveProductRetro` via `getRouteContext()` (unique title, subtitle, icon, accent class, badge per route) and `getFilteredProducts()` (different product sets per route). No further work needed. ✅ **COMPLETE** (March 17)
 
 ### P3: Documentation
 
-- [ ] **R10** — Update `/guidelines/ROUTING_GUIDE.md` with current route count (112 total routes including redirects)
-- [ ] **R11** — Document route naming conventions in routing guide
+- [x] **R10** — Updated `/guidelines/ROUTING_GUIDE.md` v3.0 with current route count (134 total: 112 page + 10 redirects + 5 error + 7 format routes). ✅ **COMPLETE** (March 17)
+- [x] **R11** — Added "Route naming conventions" section to ROUTING_GUIDE.md covering URL paths (kebab-case, singular/plural), dynamic parameters (`:slug` vs `:id`), component naming (`Page[Name]Retro`, `Archive[Type]Retro`), lazy imports, and alias routes. ✅ **COMPLETE** (March 17)
 
 ---
 
@@ -44,24 +43,33 @@
 
 ### P2: Route Issues
 
-- [ ] **R12** — Orphaned template: `PageDealsRetro.tsx` has no route in routes.ts
-  - File: `/src/app/components/templates/PageDealsRetro.tsx`
-  - The `/deals` route uses `ArchiveProductRetro` — either add a route or remove the template
-  - Source: `/reports/audits/2026-03-15_routes-audit.md`
+- [x] **R12** — Wired orphaned `PageDealsRetro.tsx` to `/deals` route (was using `ArchiveProductRetro`). ✅ **COMPLETE** (March 17)
 
-- [ ] **R13** — Sitemap component uses `@/utils/phosphor-compat` instead of `lucide-react`
-  - File: `/src/app/components/pages/Sitemap.tsx` line 19
-  - Migrate to direct lucide-react imports for icon consistency
-  - Source: `/reports/audits/2026-03-15_sitemap-audit.md`
+- [x] **R13** — Sitemap.tsx migrated from `lucide-react` to `@phosphor-icons/react` (24 icons, direct Phosphor names, no aliases). Icon Library description updated to "Phosphor icons browser". ✅ **COMPLETE** (March 17)
 
 ### P3: Consistency
 
-- [ ] **R14** — Inconsistent lazy import patterns in routes.ts
-  - Some use `.then((m) => ({ default: m.X }))`, others use bare `import()`
-  - Standardize all to named-export pattern
-  - Source: `/reports/audits/2026-03-15_routes-audit.md`
+- [x] **R14** — Standardized all lazy import patterns in routes.ts to named-export `.then((m) => ({ default: m.X }))` pattern. Added `export const` to 5 dev tools templates that only had `export default`. ✅ **COMPLETE** (March 17)
 
 ---
 
-**Total:** 14 tasks | 3 complete | 11 open  
-**Progress:** 21%
+**Total:** 14 tasks | 14 complete | 0 open  
+**Progress:** 100%
+
+---
+
+## Completed — March 17, 2026
+
+- [x] **R4** — Verified all navigation data (`/src/app/data/navigation.ts`) links resolve to valid routes. All 38 URLs (main menu + footer menus) validated against routes.ts. ✅ **COMPLETE** (March 17)
+- [x] **R5** — Verified blog mega menu links: `/blog/format/standard` (line 254), `/blog/category/*` (`:slug` route), featured post slugs — all resolve. ✅ **COMPLETE** (March 17)
+- [x] **R6** — Featured blog post links (`/blog/open-channels-ash-shaw`, `/blog/lightspeed-dev-workflow`) resolve via `blog/:slug` catch-all route. ✅ **COMPLETE** (March 17)
+- [x] **R12** — Wired orphaned `PageDealsRetro.tsx` to `/deals` route (was using `ArchiveProductRetro`). ✅ **COMPLETE** (March 17)
+- [x] **R13** — Sitemap.tsx migrated from `lucide-react` to `@phosphor-icons/react` (24 icons, direct Phosphor names, no aliases). Icon Library description updated to "Phosphor icons browser". ✅ **COMPLETE** (March 17)
+- [x] **R14** — Standardized all lazy import patterns in routes.ts to named-export `.then((m) => ({ default: m.X }))` pattern. Added `export const` to 5 dev tools templates that only had `export default`. ✅ **COMPLETE** (March 17)
+- [x] **R10** — Updated `/guidelines/ROUTING_GUIDE.md` v3.0 with current route count (134 total: 112 page + 10 redirects + 5 error + 7 format routes). ✅ **COMPLETE** (March 17)
+- [x] **R11** — Added "Route naming conventions" section to ROUTING_GUIDE.md covering URL paths (kebab-case, singular/plural), dynamic parameters (`:slug` vs `:id`), component naming (`Page[Name]Retro`, `Archive[Type]Retro`), lazy imports, and alias routes. ✅ **COMPLETE** (March 17)
+
+---
+
+**Total:** 14 tasks | 14 complete | 0 open  
+**Progress:** 100%

@@ -781,7 +781,8 @@
 .retro-single-post__author-card {
   border: 3px solid var(--color-ink);
   background: var(--color-panel);
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
+  margin: var(--wp--preset--spacing--60) 0;
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;

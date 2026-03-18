@@ -689,3 +689,20 @@ Before considering cleanup complete, verify:
 **Trigger Word:** `cleanup`  
 **Frequency:** Weekly recommended  
 **Duration:** 20-30 minutes per session
+
+## Suggested Follow-Up Triggers
+
+After cleanup, consider running:
+- `continue` — execute the next open task
+- `audit` — full audit if significant changes were made
+- `audit icons` — if icon import issues were noticed during cleanup
+- `audit header` — if header-related files were modified
+- `audit footer` — if footer-related files were modified
+
+## Guidelines Referenced
+
+- `/guidelines/Guidelines.md`
+- `/guidelines/Core-Repository-Guidelines.md`
+- `/guidelines/WRITING_GUIDELINES.md`
+- `/guidelines/REPORTING_GUIDELINES.md`
+- `/guidelines/development/modern-react-coding-standards.md`

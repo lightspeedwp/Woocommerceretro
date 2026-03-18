@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { Heart } from 'lucide-react';
+import { Heart } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { getFeaturedProducts, getNewArrivals } from '../../data/products';
 import { useCart } from '../../contexts/CartContext';

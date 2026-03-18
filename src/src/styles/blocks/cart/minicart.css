@@ -315,10 +315,6 @@
 }
 
 /* Dark Mode Overrides */
-.dark .woocommerce-mini-cart__trigger {
-  color: var(--wp--preset--color--foreground);
-}
-
 .dark .woocommerce-mini-cart {
   background: var(--wp--preset--color--surface);
   border-left-color: var(--wp--preset--color--border);

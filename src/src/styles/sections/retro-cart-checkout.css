@@ -483,6 +483,10 @@ a.retro-cart__item-title:hover {
   color: var(--color-signal);
 }
 
+.retro-cart__continue-arrow {
+  transform: rotate(180deg);
+}
+
 /* Cart summary discount row */
 .retro-cart-summary__row--discount {
   color: var(--color-signal-light, #00ff66);

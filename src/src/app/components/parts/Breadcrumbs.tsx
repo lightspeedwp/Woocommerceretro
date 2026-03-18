@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { ChevronRight, Home } from 'lucide-react';
+import { CaretRight, House } from '../../utils/phosphor-compat';
 
 /**
  * Breadcrumbs — Hierarchical navigation component (Template Part)
@@ -30,13 +30,13 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
           <ol className="wp-breadcrumbs-list">
             <li className="wp-breadcrumbs-item">
               <Link to="/" className="wp-breadcrumbs-link">
-                <Home size={16} />
+                <House size={16} />
                 <span className="sr-only">Home</span>
               </Link>
             </li>
             {items.map((item, index) => (
               <li key={item.path} className="wp-breadcrumbs-item">
-                <ChevronRight size={16} className="wp-breadcrumbs-separator" />
+                <CaretRight size={16} className="wp-breadcrumbs-separator" />
                 {index === items.length - 1 ? (
                   <span className="wp-breadcrumbs-current" aria-current="page">
                     {item.label}

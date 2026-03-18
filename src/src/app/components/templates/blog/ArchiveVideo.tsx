@@ -12,8 +12,7 @@
  */
 
 import { useState } from 'react';
-import { Play, Clock, CaretLeft, CaretRight } from '../../../utils/phosphor-compat';
-import { Eye } from 'lucide-react';
+import { Play, Clock, CaretLeft, CaretRight, Eye } from '../../../utils/phosphor-compat';
 import { HeaderRetro } from '../../parts/HeaderRetro';
 import { FooterRetro } from '../../parts/FooterRetro';
 import { HeroRetro } from '../../patterns/HeroRetro';

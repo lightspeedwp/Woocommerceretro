@@ -840,7 +840,7 @@ Before marking any CSS file or component as complete, verify:
 - [Animation Guidelines](/guidelines/interactions/animations.md) — Duration standards, easing functions, performance
 - [Mobile Animations](/guidelines/mobile/animations.md) — Mobile-specific animation patterns, `usePrefersReducedMotion` hook
 - [Focus Management](/guidelines/interactions/focus-management.md) — Focus ring behaviour during animations
-- [Dark Mode Styles](/guidelines/design-tokens/dark-mode-styles.md) — Dark mode animation considerations
+- [Dark Mode](/guidelines/design-tokens/Dark-Mode.md) — Dark mode animation considerations
 - [Funky Design System](/guidelines/design-tokens/funky-woocommerce-design-system.md) — Funky phase-specific guard requirements
 - [CSS Data Integrity](/guidelines/audits/CSS_DATA_INTEGRITY_GUIDELINES.md) — Acceptable `!important` usage for motion guards
 - [Performance Utilities](/src/app/utils/performance.ts) — `prefersReducedMotion()` utility

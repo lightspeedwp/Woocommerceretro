@@ -21,6 +21,8 @@ Audit design token definitions and usage for consistency, completeness, and dark
 - `/guidelines/design-tokens/Colors.md` — Color token documentation
 - `/guidelines/design-tokens/Typography.md` — Typography documentation
 - `/guidelines/design-tokens/Spacing.md` — Spacing documentation
+- `/guidelines/design-tokens/Dark-Mode.md` — Dark mode documentation
+- `/guidelines/Guidelines.md` Section 2.5
 
 ## Checks
 

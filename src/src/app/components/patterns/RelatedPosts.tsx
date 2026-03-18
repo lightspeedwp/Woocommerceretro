@@ -60,7 +60,7 @@ export const RelatedPosts = ({
             <article key={post.slug} className="wp-related-posts__card">
               <Link to={`/blog/${post.slug}`}>
                 <div className="wp-related-posts__image-wrapper">
-                  <img src={getMediaSource(post.featured_media)} alt="" className="wp-related-posts__image" />
+                  <img src={getMediaSource(post.featured_media)} alt={post.title.rendered.replace(/<[^>]*>/g, '')} className="wp-related-posts__image" />
                 </div>
                 <div className="wp-related-posts__content">
                   {categoryName && (

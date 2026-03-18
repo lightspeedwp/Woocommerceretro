@@ -82,7 +82,7 @@
 
 /* Card Badge */
 .wp-devtool-card__badge {
-  padding: 4px 12px;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
   font-size: var(--wp--preset--font-size--small);
   font-weight: var(--wp--preset--font-weight--semibold);
   color: var(--wp--preset--color--background);

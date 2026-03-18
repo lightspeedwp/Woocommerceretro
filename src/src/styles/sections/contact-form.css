@@ -153,3 +153,12 @@
 .wp-contact-info__link:hover {
   color: var(--wp--preset--color--accent);
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-contact-form__input,
+  .wp-contact-form__textarea,
+  .wp-contact-info__link {
+    transition: none;
+  }
+}

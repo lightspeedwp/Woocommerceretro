@@ -117,3 +117,15 @@
   overflow: hidden;
   margin: 0;
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-social-feed__image,
+  .wp-social-feed__overlay {
+    transition: none;
+  }
+
+  .wp-social-feed__image:hover {
+    transform: none;
+  }
+}

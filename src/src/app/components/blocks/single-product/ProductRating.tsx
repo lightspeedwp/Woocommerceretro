@@ -14,8 +14,12 @@ export const ProductRating = ({
   reviewCount: number;
 }) => {
   return (
-    <div className="wc-product-rating">
-      <div className="wc-product-rating__stars">
+    <div
+      className="wc-product-rating"
+      role="img"
+      aria-label={`Rating: ${rating} out of 5 stars (${reviewCount} customer reviews)`}
+    >
+      <div className="wc-product-rating__stars" aria-hidden="true">
         {[1, 2, 3, 4, 5].map((i) => (
           <Star
             key={i}

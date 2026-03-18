@@ -90,7 +90,7 @@ export const SinglePostRetro = () => {
           <figure className="retro-single-post__hero-img">
             <img
               src={post.featuredImage || FALLBACK_IMAGE}
-              alt=""
+              alt={post.title}
               className="retro-single-post__img"
               loading="eager"
             />
@@ -128,9 +128,9 @@ export const SinglePostRetro = () => {
               <User size={36} weight="fill" />
             </div>
             <div className="retro-single-post__author-info">
-              <h3 className="retro-font-display retro-bold retro-single-post__author-name">
+              <p className="retro-font-display retro-bold retro-single-post__author-name">
                 WRITTEN BY: {post.author.toUpperCase()}
-              </h3>
+              </p>
               <p className="retro-font-body retro-single-post__author-bio">
                 Contributing writer at PlayPocket. Covering the latest in retro gaming, culture, and community.
               </p>
@@ -177,7 +177,7 @@ export const SinglePostRetro = () => {
                 {relatedPosts.map((rp) => (
                   <article key={rp.id} className="retro-blog-card retro-blog-card--compact">
                     <Link to={'/blog/' + rp.slug} className="retro-blog-card__img-link">
-                      <img src={rp.featuredImage || FALLBACK_IMAGE} alt="" className="retro-blog-card__img" loading="lazy" />
+                      <img src={rp.featuredImage || FALLBACK_IMAGE} alt={rp.title} className="retro-blog-card__img" loading="lazy" />
                     </Link>
                     <div className="retro-blog-card__body">
                       <span className="retro-blog-card__date retro-font-display">{rp.date}</span>

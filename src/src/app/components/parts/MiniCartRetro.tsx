@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router';
-import { X, Minus, Plus, ShoppingCart, Trash2 } from 'lucide-react';
+import { X, Minus, Plus, ShoppingCart, Trash } from '../../utils/phosphor-compat';
 import { useCart } from '../../contexts/CartContext';
 
 export const MiniCartRetro = () => {
@@ -159,7 +159,7 @@ export const MiniCartRetro = () => {
                         onClick={() => removeFromCart(item.product.id)}
                         aria-label={`Remove ${item.product.name} from cart`}
                       >
-                        <Trash2 size={16} strokeWidth={2.5} />
+                        <Trash size={16} strokeWidth={2.5} />
                       </button>
                     </div>
                   </div>

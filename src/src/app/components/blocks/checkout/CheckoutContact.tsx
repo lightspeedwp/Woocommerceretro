@@ -72,7 +72,7 @@ export const CheckoutContact = ({
     <div className="wp-block-card funky-card">
       <div className="wp-block-card__header">
         <div className="wp-checkout-contact-header">
-          <h2 className="wp-block-card__title">Contact Information</h2>
+          <h2 className="wp-block-card__title">Contact information</h2>
           {!isLoggedIn && (
             <div className="wp-checkout-text-light">
               Already have an account?{' '}

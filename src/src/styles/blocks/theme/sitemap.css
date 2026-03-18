@@ -212,7 +212,7 @@
 .wp-page-sitemap__section-count {
   font-size: var(--wp--preset--font-size--small);
   color: var(--wp--preset--color--muted-foreground);
-  padding: 4px 12px;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
   background: var(--wp--preset--color--muted);
   border-radius: var(--wp--preset--border-radius--sm);
 }
@@ -276,7 +276,7 @@
   font-family: var(--wp--preset--font-family--mono);
   color: var(--wp--preset--color--accent);
   background: var(--wp--preset--color--accent-muted);
-  padding: 4px 8px;
+  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
   border-radius: var(--wp--preset--border-radius--sm);
   align-self: flex-start;
 }
@@ -289,8 +289,8 @@
 .wp-page-sitemap__route-badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
+  gap: var(--wp--preset--spacing--10);
+  padding: 2px var(--wp--preset--spacing--20);
   font-size: var(--wp--preset--font-size--small);
   font-weight: var(--wp--preset--font-weight--medium);
   border-radius: var(--wp--preset--border-radius--sm);

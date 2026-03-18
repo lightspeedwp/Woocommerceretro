@@ -25,7 +25,7 @@ export const LatestPodcastEpisode = () => {
         <div className="retro-latest-episode__image-wrap">
           <img
             src={episode.featuredImage}
-            alt=""
+            alt={episode.title}
             className="retro-latest-episode__image"
             loading="lazy"
           />

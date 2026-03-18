@@ -7,10 +7,6 @@
   border-top: 1px solid var(--wp--preset--color--border);
 }
 
-.dark .wp-section-divider {
-  border-top-color: var(--wp--preset--color--border);
-}
-
 /* ========================================
    QUICK ENTRY TILES GRID
    ======================================== */
@@ -56,6 +52,17 @@
 .wp-quick-entry-tile:hover {
   transform: translateY(-4px);
   box-shadow: var(--wp--preset--shadow--300);
+}
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-quick-entry-tile {
+    transition: none;
+  }
+
+  .wp-quick-entry-tile:hover {
+    transform: none;
+  }
 }
 
 /* ========================================

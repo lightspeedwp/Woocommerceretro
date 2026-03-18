@@ -18,7 +18,7 @@
   background-color: var(--wp--preset--color--surface);
   border: 1px solid var(--wp--preset--color--border);
   border-radius: var(--wp--preset--border-radius--sm);
-  padding: 2px 8px;
+  padding: 2px var(--wp--preset--spacing--20);
   transition: all var(--wp--preset--transition--base) ease;
 }
 

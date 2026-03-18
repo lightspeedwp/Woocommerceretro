@@ -1,9 +1,9 @@
 # CSS Task List
 
 **Domain:** CSS Architecture & Optimization  
-**Status:** ⏳ Active  
+**Status:** ✅ Complete  
 **Created:** 2026-03-15  
-**Last Updated:** 2026-03-16  
+**Last Updated:** 2026-03-17  
 **Source:** CSS audits (March 15 + March 16)
 
 ---
@@ -26,7 +26,7 @@
 - [x] **CSS8** — BEM naming consistency audit. 5 active conventions, all intentional. 92% BEM compliant. ✅ **COMPLETE**
 - [x] **CSS9** — Rewrote `/guidelines/development/css-optimization-guidelines.md` v2.0. Updated from generic LightSpeed scope to PlayPocket-specific. Added "Current Architecture Overview" section with actual file counts (280 @imports, 130+ block files, 97 section files, 20 block subdirectories), naming conventions table, token resolution chain, dark mode architecture, and file size limits. Condensed from 610+ lines to ~280 lines. ✅ **COMPLETE**
 - [x] **CSS10** — Dark mode `!important` audit complete. 60 instances across 8 files: 4 acceptable (prefers-reduced-motion), 3 acceptable (utility overrides with CSS variables), 53 deferred (funky-* files per CSS28/TK20). Zero non-funky `.dark` rules use `!important`. ✅ **COMPLETE**
-- [ ] **CSS11** — Create CSS file index documenting what each file in `/src/styles/blocks/` covers
+- [x] **CSS11** — Created CSS file index (`/src/styles/blocks/INDEX.md`) documenting all 22 subdirectories and 135 CSS files with BEM block names and coverage descriptions. ✅ **COMPLETE**
 
 ---
 
@@ -65,10 +65,10 @@
 
 ### P2: Open
 
-- [ ] **CSS25** — Split `account-dashboard-widgets.css` (471 lines → 200-line limit). Needs splitting by BEM block.
+- [x] **CSS25** — Split `account-dashboard-widgets.css` (471 lines) into 3 sub-files under 200 lines each: `account-dashboard-welcome.css` (~120 lines, welcome + stats), `account-dashboard-content.css` (~160 lines, layout + widgets + orders), `account-dashboard-sidebar.css` (~180 lines, actions + loyalty + notifications). Original file converted to index with 3 @imports. ✅ **COMPLETE**
   - Source: `/reports/css/2026-03-16_css-architecture-audit.md` F6
 
-- [ ] **CSS26** — Extract inline mobile menu CSS (lines 390-430 of globals.css) to block file. Verify no duplication with `blocks/navigation/mobile-menu.css`.
+- [x] **CSS26** — Verified: globals.css contains zero inline CSS (387 lines, all @imports). Mobile menu styles already live in `/src/styles/blocks/navigation/mobile-menu.css`. No extraction needed. ✅ **COMPLETE**
   - Source: `/reports/css/2026-03-16_css-architecture-audit.md` F4
 
 ### P3: Deferred
@@ -92,5 +92,7 @@
 
 ---
 
-**Total:** 34 tasks | 31 complete | 3 open  
-**Progress:** 91.2%
+**Total:** 34 tasks | 34 complete | 0 open  
+**Progress:** 100% ✅
+
+**Note:** Additional CSS issues found in 2026-03-17 audit are tracked in `/tasks/2026-03-17-audit-task-list.md` (CSS1: filter-sidebar !important rewrite, CSS2: pagination !important, CSS3: pp-3d-components import, STY1: PageLivePreview inline styles, RES1: max-width queries).

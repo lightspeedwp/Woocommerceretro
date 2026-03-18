@@ -1,31 +1,102 @@
-# Dark Mode Design Standards
+# Dark mode design standards
 
-**Type:** Design Tokens  
-**Category:** Dark Mode  
-**Version:** 6.0  
-**Status:** MANDATORY FOR ALL COMPONENTS  
-**WCAG Compliance:** AA (4.5:1 for text, 3:1 for UI)  
-**Last Updated:** 2026-02-22
+**Type:** Design Tokens
+**Category:** Dark Mode
+**Version:** 7.0
+**Status:** MANDATORY FOR ALL COMPONENTS
+**WCAG Compliance:** AA (4.5:1 for text, 3:1 for UI)
+**Last Updated:** 2026-03-17
 
 ---
 
 ## Philosophy
 
-Dark mode is a **first-class citizen**. Every component must support both light and dark modes using CSS variables. We do not use "dark mode classes" (like `dark:bg-black`) in markup. Instead, we use semantic variables that automatically adapt based on the theme context.
+Dark mode is a **first-class citizen**. Every component must support both light and dark modes using CSS variables. We do not use utility classes (like `dark:bg-black`) in markup. Instead, we use semantic variables that automatically adapt when the `.dark` class is applied to the `<html>` element.
 
-### Core Principles
+### Core principles
 
-1. **Semantic Variables**: Use `--wp--preset--color--*` variables. They automatically switch values when the `.dark` class (or `[data-theme="dark"]`) is applied to the document.
-2. **No Markup Changes**: Your React components should not need to know which mode is active.
-3. **True Dark**: We use `#0f0f0f` and `#1a1a1a` for backgrounds, not generic grays.
+1. **Semantic variables**: Use `--wp--preset--color--*` variables. They switch values automatically when `.dark` is on `<html>`.
+2. **No markup changes**: React components should not need to know which mode is active.
+3. **Dual-layer architecture**: Retro `--color-*` tokens (source of truth) map into `--wp--preset--color--*` tokens (consumed by components).
 
 ---
 
-## Implementation Standards
+## Architecture
 
-### Mandatory Pattern
+### Token flow
 
-**CORRECT: Semantic Variables**
+```
+retro-theme.css        theme-variables.css          Component CSS
+(--color-*)    --->    (--wp--preset--color--*)  --->  background-color: var(--wp--preset--color--surface)
+ .dark overrides        .dark overrides
+```
+
+### Source files
+
+| File | Role |
+|------|------|
+| `/src/styles/retro-theme.css` | Defines `--color-*` tokens with `.dark` overrides |
+| `/src/styles/theme-variables.css` | Maps `--wp--preset--color--*` tokens to `--color-*` values |
+| `/src/styles/theme-variables.css` (`.dark` block) | Dark mode overrides for WP preset tokens |
+
+---
+
+## Toggle mechanism
+
+The dark mode toggle:
+- Adds/removes `.dark` class on `<html>`
+- Persists preference via `localStorage`
+- Respects `prefers-color-scheme: dark` as initial default
+- Uses `ThemeContext` (`/src/app/contexts/ThemeContext.tsx`)
+
+```tsx
+// Components access theme via context
+const { isDark, toggleTheme } = useTheme();
+```
+
+---
+
+## Colour mapping: light vs dark
+
+### Surface tokens
+
+| Semantic Token | Light Value | Dark Value | CSS Variable |
+|---------------|-------------|------------|-------------|
+| Background | `#F2EEE6` (paper) | `#151A1E` (paper) | `--wp--preset--color--background` |
+| Surface | `#F7F3EB` (panel) | `#232A32` (panel) | `--wp--preset--color--surface` |
+| Secondary | `#E6E0D3` (paper-deep) | `#2A333C` (panel-alt) | `--wp--preset--color--secondary` |
+| Muted | `#DDD6C8` (panel-alt) | `#2A333C` (panel-alt) | `--wp--preset--color--muted` |
+
+### Text tokens
+
+| Semantic Token | Light Value | Dark Value | CSS Variable |
+|---------------|-------------|------------|-------------|
+| Foreground | `#1E2630` (ink) | `#E8E2D8` (text) | `--wp--preset--color--foreground` |
+| Muted foreground | `#495565` (ink-soft) | `#9FAAAF` (text-muted) | `--wp--preset--color--muted-foreground` |
+| Text secondary | `#495565` (ink-soft) | `#C4CBC3` (text-soft) | `--wp--preset--color--text-secondary` |
+
+### Border tokens
+
+| Semantic Token | Light Value | Dark Value | CSS Variable |
+|---------------|-------------|------------|-------------|
+| Border | `#8F998F` (line) | `#3E4A52` (border) | `--wp--preset--color--border` |
+| Border light | `#BCC3B5` (line-soft) | `#2E3840` (border-soft) | `--wp--preset--color--border-light` |
+
+### State tokens
+
+| Semantic Token | Light Value | Dark Value | CSS Variable |
+|---------------|-------------|------------|-------------|
+| Success | `#065f46` | `#4ade80` | `--wp--preset--color--success` |
+| Warning | `#92400e` | `#fbbf24` | `--wp--preset--color--warning` |
+| Error | `#991b1b` | `#f87171` | `--wp--preset--color--error` |
+| Info | `#1e40af` | `#8AAFC0` (sky) | `--wp--preset--color--info` |
+
+---
+
+## Implementation standards
+
+### Correct: semantic variables
+
 ```css
 .wp-block-card {
   background-color: var(--wp--preset--color--surface);
@@ -34,263 +105,85 @@ Dark mode is a **first-class citizen**. Every component must support both light 
 }
 ```
 
-**WRONG: Hardcoded Values or Utility Classes**
+### Wrong: hardcoded values
+
 ```css
+/* Never do this */
 .wp-block-card {
-  background-color: white; /* Breaks in dark mode */
+  background-color: white;
+  color: #333;
 }
 ```
 
+### Wrong: utility classes
+
 ```tsx
-/* DO NOT USE UTILITY CLASSES */
+/* Never do this */
 <div className="bg-white dark:bg-gray-900">...</div>
 ```
 
----
+### When `.dark` scoping is needed
 
-## Color System: Light vs Dark
-
-The system handles these mappings automatically via `src/styles/presets/colors.css`.
-
-| Semantic Role | Light Value | Dark Value | Usage |
-|---------------|-------------|------------|-------|
-| **Base** | `#ffffff` | `#0f0f0f` | Main Page Background |
-| **Surface** | *(variable)* | `#1a1a1a` | Cards, Panels |
-| **Foreground** | `#111111` | `#f9fafb` | Primary Text |
-| **Border** | `rgba(0,0,0,0.1)` | `#374151` | Default Borders |
-| **Muted** | `#ececf0` | `#1f2937` | Secondary Backgrounds |
-
----
-
-## Token Naming Conventions
-
-### 1. Semantic Colour Tokens (theme.json palette)
-
-Map to `--wp--preset--color--*`:
+For elements that need dark-mode-specific styling beyond variable swaps:
 
 ```css
-/* Light mode defaults */
---wp--preset--color--surface-1: #ffffff;
---wp--preset--color--surface-2: #f9fafb;
---wp--preset--color--text-1: #1a1a1a;
---wp--preset--color--text-2: #4b5563;
---wp--preset--color--text-3: #6b7280;
---wp--preset--color--border-1: #e5e7eb;
---wp--preset--color--border-2: #d1d5db;
---wp--preset--color--accent-1: #7c3aed;
-```
-
-### 2. Mode Switch Mapping Layer
-
-Active variables point to mode-specific sources:
-
-```css
-/* Light mode (default) */
-:root {
-  --wp--preset--color--surface-1: var(--wp--preset--color--surface-1--light, #ffffff);
-  --wp--preset--color--text-1: var(--wp--preset--color--text-1--light, #1a1a1a);
-  --wp--preset--color--border-1: var(--wp--preset--color--border-1--light, #e5e7eb);
-}
-
-/* Dark mode */
-.theme-dark, .dark {
-  --wp--preset--color--surface-1: var(--wp--preset--color--surface-1--dark, #0f0f0f);
-  --wp--preset--color--text-1: var(--wp--preset--color--text-1--dark, #f9fafb);
-  --wp--preset--color--border-1: var(--wp--preset--color--border-1--dark, #374151);
+.dark .wp-block-card {
+  box-shadow: 0 0 0 1px var(--wp--preset--color--border);
 }
 ```
 
 ---
 
-## Component Patterns
-
-### 1. Card Component
-```css
-.wp-block-card {
-  background-color: var(--wp--preset--color--surface);
-  border: 1px solid var(--wp--preset--color--border);
-  color: var(--wp--preset--color--foreground);
-}
-```
-
-### 2. Primary Button
-```css
-.wp-block-button {
-  background-color: var(--wp--preset--color--primary);
-  color: var(--wp--preset--color--primary-foreground);
-}
-```
-
-### 3. Inputs
-```css
-.wp-block-input {
-  background-color: var(--wp--preset--color--base);
-  color: var(--wp--preset--color--foreground);
-  border: 1px solid var(--wp--preset--color--border);
-}
-```
-
----
-
-## Dark Mode Toggle Block (Rich Tabor)
-
-### What the Toggle Does
-
-The Dark Mode Toggle block:
-- Adds/removes `.theme-dark` class on the `<html>` element (root)
-- Persists user preference (localStorage/session)
-- Provides accessible toggle UI with keyboard support
-- Swaps light/dark icons based on current mode
-
-### DOM Hierarchy
-
-```html
-<div class="wp-block-tabor-dark-mode-toggle [is-medium|is-large]">
-  <label class="wp-block-tabor-dark-mode-toggle__label">
-    <input type="checkbox" class="wp-block-tabor-dark-mode-toggle__input" />
-    <span class="wp-block-tabor-dark-mode-toggle__track [has-background]">
-      <span class="wp-block-tabor-dark-mode-toggle__selector">
-        <svg class="wp-block-tabor-dark-mode-toggle__icon wp-block-tabor-dark-mode-toggle__icon--light">...</svg>
-        <svg class="wp-block-tabor-dark-mode-toggle__icon wp-block-tabor-dark-mode-toggle__icon--dark">...</svg>
-      </span>
-    </span>
-  </label>
-</div>
-```
-
-### Toggle CSS (Complete)
-
-```css
-.wp-block-tabor-dark-mode-toggle {
-  --icon-size: 16px;
-  display: inline-block;
-}
-
-.wp-block-tabor-dark-mode-toggle.is-medium { --icon-size: 18px; }
-.wp-block-tabor-dark-mode-toggle.is-large { --icon-size: 20px; }
-
-.wp-block-tabor-dark-mode-toggle__track {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  width: calc(var(--icon-size) * 2.5);
-  height: calc(var(--icon-size) * 1.5);
-  border-radius: calc(var(--icon-size) * 0.75);
-  transition: background-color 0.2s ease;
-}
-
-.wp-block-tabor-dark-mode-toggle__track:not(.has-background) {
-  background-color: var(--wp--custom--dark-mode-toggle--track--background,
-                        var(--wp--preset--color--border-2, #d1d5db));
-}
-
-.wp-block-tabor-dark-mode-toggle__selector {
-  position: absolute;
-  left: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(var(--icon-size) * 1.25);
-  height: calc(var(--icon-size) * 1.25);
-  background-color: var(--wp--custom--dark-mode-toggle--selector--background,
-                        var(--wp--preset--color--surface-1, #ffffff));
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
-}
-
-.theme-dark .wp-block-tabor-dark-mode-toggle__selector {
-  transform: translateX(calc(var(--icon-size) * 1.25));
-}
-
-.wp-block-tabor-dark-mode-toggle__input:focus-visible + .wp-block-tabor-dark-mode-toggle__track {
-  outline: 2px solid var(--wp--preset--color--accent-1, #7c3aed);
-  outline-offset: 2px;
-}
-```
-
----
-
-## Do / Don't Rules
+## Do / don't rules
 
 ### DO
-- Use token-first styling — All colours from `--wp--preset--color--*`
-- Respect `.has-background` — Only apply default backgrounds when `:not(.has-background)`
-- Use `.theme-dark` or `.dark` scoping — All dark mode styles under these selectors
-- Provide safe fallbacks — Default values for all CSS variables
-- Use semantic token names — E.g., `surface-1`, `text-1`, `border-1`, `accent-1`
+
+- Use `--wp--preset--color--*` for all colours
+- Use `.dark` class scoping for dark-mode-specific overrides
+- Provide fallback values: `var(--wp--preset--color--surface, #F7F3EB)`
+- Test every component in both modes
+- Use the retro `--color-*` tokens only in `theme-variables.css` mapping layer
 
 ### DON'T
-- Hard-code hex values — Never `background: #ffffff` in component CSS
-- Use `!important` — Avoid unless absolutely necessary for override
-- Use Tailwind dark: utilities — e.g., `dark:bg-gray-900`
-- Duplicate CSS — Use CSS variable mapping instead of duplicate rulesets
+
+- Hardcode hex values in component CSS
+- Use `!important` for dark mode overrides
+- Use Tailwind `dark:` utility classes
+- Reference `--color-*` tokens directly in component CSS (use `--wp--preset--color--*` instead)
+- Assume light mode as default without variable fallback
 
 ---
 
-## Common Mistakes to Avoid
+## Accessibility requirements
 
-### Mistake 1: Hardcoded Hex Codes
-Never use hex codes in your component CSS. Always use variables.
+### Colour contrast (WCAG AA)
 
-### Mistake 2: Assuming Light Mode Default
-Don't write `background: white` and then try to override it. Start with `background: var(--wp--preset--color--background)`.
+| Element | Light Mode | Dark Mode | Ratio |
+|---------|-----------|-----------|-------|
+| Primary text | `#1E2630` on `#F2EEE6` | `#E8E2D8` on `#151A1E` | 12.1:1 / 11.8:1 (AAA) |
+| Muted text | `#495565` on `#F2EEE6` | `#9FAAAF` on `#151A1E` | 5.2:1 / 5.8:1 (AA) |
+| Success | `#065f46` on `#F2EEE6` | `#4ade80` on `#151A1E` | 7.1:1 / 8.2:1 (AAA) |
+| Error | `#991b1b` on `#F2EEE6` | `#f87171` on `#151A1E` | 7.1:1 / 5.1:1 (AA) |
 
-### Mistake 3: Inconsistent Hover States
-Ensure your hover states (`:hover`) use variables that provide visible contrast in both modes.
+### Focus ring
 
----
-
-## Accessibility Requirements
-
-### Colour Contrast (WCAG AA)
-
-All states must meet WCAG AA minimum:
-
-| Element | Light Mode | Dark Mode | Contrast |
-|---------|-----------|-----------|----------|
-| Primary text | #1a1a1a on #ffffff | #f9fafb on #0f0f0f | 15.8:1 (AAA) |
-| Secondary text | #4b5563 on #ffffff | #d1d5db on #0f0f0f | 11.4:1 (AAA) |
-| Muted text | #6b7280 on #ffffff | #9ca3af on #0f0f0f | 4.5:1 (AA) |
-| Accent | #7c3aed on #ffffff | #a78bfa on #0f0f0f | 5.2:1 (AAA) |
-| Focus outline | #7c3aed | #a78bfa | 3:1 (UI) |
-
-### Keyboard & Screen Reader Support
-- Toggle must be keyboard accessible (Tab, Space/Enter)
-- Focus ring must be visible (2px minimum)
-- Screen reader must announce toggle state
+```css
+--wp--preset--focus-ring--width: 2px;
+--wp--preset--focus-ring--color: var(--wp--preset--color--primary);
+--wp--preset--focus-ring--offset: 2px;
+```
 
 ---
 
-## Checklist: Dark Mode Completion
+## Related documentation
 
-### Site-Wide
-- [ ] All components respond to `.theme-dark` / `.dark` class
-- [ ] All backgrounds have dark mode variants
-- [ ] All text colours have dark mode variants
-- [ ] All borders have dark mode variants
-- [ ] All interactive states work in both modes
-- [ ] No white flashes or jarring transitions
-
-### Testing
-- [ ] Toggle switches between light/dark modes
-- [ ] Preference persists on page reload
-- [ ] All pages tested in both modes
-- [ ] Mobile responsive in both modes
-- [ ] Keyboard navigation works in both modes
-- [ ] No console errors when toggling
+- **Colour tokens:** `/guidelines/design-tokens/Colors.md`
+- **Theme variables:** `/src/styles/theme-variables.css`
+- **Retro theme:** `/src/styles/retro-theme.css`
+- **Typography:** `/guidelines/design-tokens/Typography.md`
 
 ---
 
-## Related Documentation
-
-- **Colour Tokens:** `/guidelines/design-tokens/colors.md`
-- **Funky Design System:** `/guidelines/design-tokens/funky-woocommerce-design-system.md`
-- **WordPress CSS Variables:** `/src/styles/theme-variables.css`
-- **Global Stylesheet:** `/src/styles/globals.css`
-
----
-
-**Status:** MANDATORY  
-**Maintained by:** Design System Team  
+**Status:** MANDATORY
+**Maintained by:** Design System Team
 **Review Schedule:** Quarterly

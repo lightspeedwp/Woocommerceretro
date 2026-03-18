@@ -1,0 +1,176 @@
+/* ========================================
+   Account Dashboard — Layout + Widgets + Orders
+   
+   BEM block: .wp-account-dashboard (partial)
+   Elements: __grid, __main, __sidebar, __widget-*, __order-*
+   Component: /src/app/components/templates/AccountDashboardWidgets.tsx
+   
+   Split from account-dashboard-widgets.css (CSS25).
+   ======================================== */
+
+/* ── Main grid ── */
+
+.wp-account-dashboard__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--40);
+}
+
+@media (min-width: 1024px) {
+  .wp-account-dashboard__grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.wp-account-dashboard__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+.wp-account-dashboard__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--40);
+}
+
+/* ── Widget (generic panel) ── */
+
+.wp-account-dashboard__widget {
+  padding: var(--wp--preset--spacing--40);
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.wp-account-dashboard__widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: var(--wp--preset--spacing--30);
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.wp-account-dashboard__widget-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-account-dashboard__widget-icon {
+  color: var(--color-signal);
+}
+
+.wp-account-dashboard__widget-title {
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.wp-account-dashboard__widget-title--spaced-sm {
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+.wp-account-dashboard__widget-title--spaced {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__widget-header-left--standalone {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__widget-link {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  color: var(--color-signal);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.wp-account-dashboard__widget-link:hover {
+  color: var(--color-signal-hover);
+}
+
+.wp-account-dashboard__widget-subtitle {
+  margin: 0 0 var(--wp--preset--spacing--30) 0;
+  color: var(--color-muted);
+}
+
+/* ── Orders list ── */
+
+.wp-account-dashboard__orders {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-account-dashboard__order {
+  display: block;
+  padding: var(--wp--preset--spacing--30);
+  text-decoration: none;
+  background: var(--color-panel);
+  border: 2px solid var(--color-border);
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.15s;
+}
+
+.wp-account-dashboard__order:hover {
+  border-color: var(--color-ink);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.wp-account-dashboard__order-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-account-dashboard__order-id {
+  margin: 0 0 var(--wp--preset--spacing--10) 0;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+}
+
+.wp-account-dashboard__order-meta {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+}
+
+.wp-account-dashboard__order-summary {
+  text-align: right;
+}
+
+.wp-account-dashboard__order-total {
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: var(--wp--preset--spacing--10);
+  font-family: var(--font-display);
+}
+
+.wp-account-dashboard__order-status {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  border: 2px solid var(--color-border);
+}
+
+.wp-account-dashboard__order-status--delivered {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background: transparent;
+}
+
+.wp-account-dashboard__order-status--transit {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
+  background: transparent;
+}

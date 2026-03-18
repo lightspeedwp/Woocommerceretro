@@ -13,7 +13,7 @@ export const CategoryTilesGrid = ({ categories }: CategoryTilesGridProps) => {
   return (
     <section className="wp-category-tiles">
       <Container>
-        <h2 className="wp-category-tiles__heading">Browse by Category</h2>
+        <h2 className="wp-category-tiles__heading">Browse by category</h2>
         <div className="wp-category-tiles__grid">
           {categories.map((cat) => (
             <Link

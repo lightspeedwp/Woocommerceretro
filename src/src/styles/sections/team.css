@@ -97,3 +97,15 @@
 .dark .wp-team-member__social-link:hover {
   background-color: var(--wp--preset--color--primary);
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-team-member__image,
+  .wp-team-member__social-link {
+    transition: none;
+  }
+
+  .wp-team-member__image:hover {
+    transform: none;
+  }
+}

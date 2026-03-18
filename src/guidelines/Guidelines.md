@@ -170,6 +170,7 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 | `cleanup guidelines` | Merge duplicates, delete outdated guidelines | 20-40 min |
 | `process reports` | Convert audit reports to task lists | 15-30 min |
 | `fix routes` | Validate and repair all routes, links, and nav data | 20-40 min |
+| `update triggers` | Sync trigger registry with prompt files on disk | 15-30 min |
 
 ### Code Quality Triggers
 
@@ -181,7 +182,7 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 
 | Trigger | Purpose | Duration |
 |---------|---------|----------|
-| `audit` | Run ALL 9 audits (reports only) | 30-60 min |
+| `audit` | Run ALL 16 audits (reports only) | 60-90 min |
 | `audit routes` | Route/template alignment | 5-10 min |
 | `audit sitemap` | Sitemap vs routes sync | 5-10 min |
 | `audit tokens` | Design token consistency | 5-10 min |
@@ -191,6 +192,11 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 | `audit responsive` | Responsive patterns | 5-10 min |
 | `audit styles` | Hardcoded style detection | 5-10 min |
 | `audit guidelines` | Guideline compliance | 5-10 min |
+| `audit phosphor` | Phosphor migration completeness | 10-20 min |
+| `audit icons` | Icon import runtime health | 10-15 min |
+| `audit header` | Header template part architecture | 10-15 min |
+| `audit footer` | Footer template part architecture | 10-15 min |
+| `audit hero` | Hero template part consistency | 15-25 min |
 
 ### Combo Triggers
 
@@ -327,7 +333,7 @@ All templates are in `/guidelines/_templates/`. See `/guidelines/_templates.md` 
 **Styling a component?**
 1. Read `development/modern-react-coding-standards.md` Section 9
 2. Read `styles/section-styles.md` and `components/SectionPresets.md`
-3. Reference `TAILWIND_TO_WORDPRESS_QUICK_REFERENCE.md` for migration
+3. Reference `TAILWIND_TO_WORDPRESS_QUICK_REFERENCE.md` for migration (archived — historical reference only)
 
 **Optimizing CSS?**
 1. Read `development/css-optimization-guidelines.md`

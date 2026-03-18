@@ -1,33 +1,35 @@
 /**
  * App.tsx - Main Application Entry Point
- * 
- * Wraps the router with essential context providers only.
- * Updated: March 2026 - Minimal providers for Figma Make stability
- * Rebuilt: March 16, 2026 - Clean rebuild after CSS5 sweep split
+ *
+ * The ENTIRE provider + router tree is lazy-loaded so that App.tsx
+ * renders instantly (just a Suspense shell). This gives the Figma Make
+ * iframe enough time to complete its message-port handshake before
+ * the browser starts evaluating routes.ts (100+ lazy imports) and
+ * the five context providers.
+ *
+ * Updated: March 17, 2026 - Lazy shell to fix IframeMessageAbortError
  */
 
-import React from 'react';
-import { RouterProvider } from 'react-router';
-import { router } from './routes';
-import { ThemeProvider } from './src/app/contexts/ThemeContext';
-import { CartProvider } from './src/app/contexts/CartContext';
-import { WishlistProvider } from './src/app/contexts/WishlistContext';
-import { QuickViewProvider } from './src/app/contexts/QuickViewContext';
-import { ComparisonProvider } from './src/app/contexts/ComparisonContext';
+import React, { Suspense } from 'react';
+
+const ProvidedApp = React.lazy(
+  () => import('./src/app/ProvidedApp')
+);
+
+const AppShellFallback = () => (
+  <div className="wp-page-loading">
+    <div className="wp-block-group wp-block-group--vertical wp-block-group--spacing-md has-text-align-center">
+      <div className="wp-page-loading__spinner" />
+      <small className="wp-page-loading__text">Loading...</small>
+    </div>
+  </div>
+);
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <QuickViewProvider>
-            <ComparisonProvider>
-              <RouterProvider router={router} />
-            </ComparisonProvider>
-          </QuickViewProvider>
-        </WishlistProvider>
-      </CartProvider>
-    </ThemeProvider>
+    <Suspense fallback={<AppShellFallback />}>
+      <ProvidedApp />
+    </Suspense>
   );
 };
 

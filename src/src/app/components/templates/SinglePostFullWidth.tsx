@@ -4,6 +4,7 @@ import { Tag, TwitterLogo, FacebookLogo, LinkedinLogo, LinkBreak, Clock } from '
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 import { PostMeta } from '../patterns/PostMeta';
 import { PostNavigation } from '../patterns/PostNavigation';
 import { RelatedPosts } from '../patterns/RelatedPosts';
@@ -101,7 +102,7 @@ export const SinglePostFullWidth = () => {
     return (
       <Layout>
         <div className="blog-archive__empty">
-          <h2>Post not found</h2>
+          <Heading level="2">Post not found</Heading>
           <p>The article you are looking for does not exist.</p>
           <Link to="/blog" className="blog-archive__empty-cta">Return to Blog</Link>
         </div>
@@ -165,7 +166,7 @@ export const SinglePostFullWidth = () => {
         </header>
         <div className="single-post-fw__featured">
           <div className="single-post-fw__featured-image">
-            <img src={post.featuredImage} alt="" loading="lazy" />
+            <img src={post.featuredImage} alt={post.title} loading="lazy" />
           </div>
         </div>
         <div className="single-post-fw__share-floating">

@@ -58,6 +58,17 @@ import {
   DEMO_PRODUCTS,
 } from '../../data/retroDemo';
 
+// ─── Neon Color Constants ────────────────────────────────────────────────────
+// Centralized palette — mirrors CSS custom properties in retro-demo-landing.css
+
+const NEON = {
+  cyan: '#00fff9',
+  magenta: '#ff00ff',
+  gold: '#FFD700',
+  green: '#39ff14',
+  red: '#ff4444',
+} as const;
+
 // ─── Inline SVG Decorations ──────────────────────────────────────────────────
 
 const RetroGridSVG = () => (
@@ -67,15 +78,6 @@ const RetroGridSVG = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      opacity: 0.06,
-      pointerEvents: 'none',
-    }}
   >
     {/* Horizontal grid lines */}
     {Array.from({ length: 11 }).map((_, i) => (
@@ -104,13 +106,13 @@ const RetroGridSVG = () => (
   </svg>
 );
 
-const NeonDividerSVG = ({ color = '#00fff9' }: { color?: string }) => (
+const NeonDividerSVG = ({ color = NEON.cyan }: { color?: string }) => (
   <svg
+    className="retro-demo-neon-divider"
     viewBox="0 0 1200 4"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
-    style={{ width: '100%', height: '4px', display: 'block' }}
   >
     <line x1="0" y1="2" x2="1200" y2="2" stroke={color} strokeWidth="1" opacity="0.4" />
     <line x1="200" y1="2" x2="1000" y2="2" stroke={color} strokeWidth="2" opacity="0.7" />
@@ -119,7 +121,7 @@ const NeonDividerSVG = ({ color = '#00fff9' }: { color?: string }) => (
   </svg>
 );
 
-const PixelStarSVG = ({ size = 24, color = '#FFD700' }: { size?: number; color?: string }) => (
+const PixelStarSVG = ({ size = 24, color = NEON.gold }: { size?: number; color?: string }) => (
   <svg
     width={size}
     height={size}
@@ -142,17 +144,7 @@ const PixelStarSVG = ({ size = 24, color = '#FFD700' }: { size?: number; color?:
 );
 
 const ScanlineOverlay = () => (
-  <div
-    aria-hidden="true"
-    style={{
-      position: 'absolute',
-      inset: 0,
-      backgroundImage:
-        'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)',
-      pointerEvents: 'none',
-      zIndex: 1,
-    }}
-  />
+  <div className="retro-demo-scanline" aria-hidden="true" />
 );
 
 // ─── WebGL Canvas Background ─────────────────────────────────────────────────
@@ -234,15 +226,8 @@ const RetroCanvasBackground = () => {
   return (
     <canvas
       ref={canvasRef}
+      className="retro-demo-canvas-bg"
       aria-hidden="true"
-      style={{
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 0,
-      }}
     />
   );
 };
@@ -267,41 +252,22 @@ const DemoSection = ({
   <section
     id={id}
     className={`retro-demo-section ${dark ? 'retro-demo-section--dark' : ''}`}
-    style={{
-      position: 'relative',
-      padding: 'var(--wp--preset--spacing--70, 3rem) 0',
-      overflow: 'hidden',
-    }}
   >
     <RetroGridSVG />
-    <div style={{ position: 'relative', zIndex: 2 }}>
-      <div style={{ textAlign: 'center', marginBottom: 'var(--wp--preset--spacing--60, 2rem)' }}>
+    <div className="retro-demo-section__content">
+      <div className="retro-demo-section__header">
         <div
-          className="retro-font-display retro-bold"
-          style={{
-            fontSize: 'clamp(0.6rem, 1.5vw, 0.85rem)',
-            color: neonColor,
-            textTransform: 'uppercase',
-            letterSpacing: '0.15em',
-            marginBottom: '0.5rem',
-            textShadow: `0 0 10px ${neonColor}40`,
-          }}
+          className="retro-font-display retro-bold retro-demo-section__subtitle"
+          style={{ color: neonColor, textShadow: `0 0 10px ${neonColor}40` }}
         >
           {subtitle || `// ${title}`}
         </div>
-        <h2
-          className="retro-font-display retro-bold"
-          style={{
-            fontSize: 'clamp(1.2rem, 3vw, 2rem)',
-            textTransform: 'uppercase',
-            margin: 0,
-          }}
-        >
+        <h2 className="retro-font-display retro-bold retro-demo-section__title">
           {title}
         </h2>
       </div>
       <NeonDividerSVG color={neonColor} />
-      <div style={{ marginTop: 'var(--wp--preset--spacing--50, 1.5rem)' }}>
+      <div className="retro-demo-section__body">
         {children}
       </div>
     </div>
@@ -311,47 +277,13 @@ const DemoSection = ({
 // ─── Stats Section (Retro Version) ──────────────────────────────────────────
 
 const RetroStatsRow = () => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-      gap: '1rem',
-      padding: '1.5rem',
-    }}
-  >
+  <div className="retro-demo-stats__grid">
     {DEMO_STATS.map((stat) => (
-      <div
-        key={stat.id}
-        className="retro-glass-panel"
-        style={{
-          textAlign: 'center',
-          padding: '1.5rem 1rem',
-          borderRadius: '8px',
-          border: '1px solid rgba(0, 255, 249, 0.2)',
-          background: 'rgba(0, 255, 249, 0.03)',
-        }}
-      >
-        <div
-          className="retro-font-display retro-bold"
-          style={{
-            fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-            color: 'var(--color-signal, #00fff9)',
-            textShadow: '0 0 15px rgba(0, 255, 249, 0.5)',
-            lineHeight: 1,
-          }}
-        >
+      <div key={stat.id} className="retro-glass-panel retro-demo-stats__card">
+        <div className="retro-font-display retro-bold retro-demo-stats__value">
           {stat.value}{stat.suffix || ''}
         </div>
-        <div
-          className="retro-font-body"
-          style={{
-            fontSize: '0.7rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            marginTop: '0.5rem',
-            opacity: 0.7,
-          }}
-        >
+        <div className="retro-font-body retro-demo-stats__label">
           {stat.label}
         </div>
       </div>
@@ -359,19 +291,12 @@ const RetroStatsRow = () => (
   </div>
 );
 
-// ─── How It Works (Retro Version) ────────────────────────────────────────────
+// ─── How It Works (Retro Version) ───────────��────────────────────────────────
 
 const RetroHowItWorks = () => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '2rem',
-      padding: '0 1rem',
-    }}
-  >
+  <div className="retro-demo-hiw__grid">
     {DEMO_HOW_IT_WORKS.map((item, idx) => {
-      const colors = ['#00fff9', '#ff00ff', '#FFD700'];
+      const colors = [NEON.cyan, NEON.magenta, NEON.gold];
       const icons = [Rocket, GameController, Trophy];
       const Icon = icons[idx];
       const color = colors[idx];
@@ -379,54 +304,26 @@ const RetroHowItWorks = () => (
       return (
         <div
           key={item.step}
-          style={{
-            textAlign: 'center',
-            padding: '2rem 1.5rem',
-            border: `1px solid ${color}30`,
-            borderRadius: '8px',
-            background: `${color}05`,
-            position: 'relative',
-          }}
+          className="retro-demo-hiw__card"
+          style={{ '--step-color': color } as React.CSSProperties}
         >
           {/* Step number LED */}
           <div
-            className="retro-font-display retro-bold"
-            style={{
-              position: 'absolute',
-              top: '-14px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              background: 'var(--color-bg, #0f0f0f)',
-              padding: '0.25rem 0.75rem',
-              fontSize: '0.6rem',
-              color: color,
-              border: `1px solid ${color}50`,
-              borderRadius: '4px',
-              textShadow: `0 0 8px ${color}60`,
-            }}
+            className="retro-font-display retro-bold retro-demo-hiw__step-badge"
+            style={{ color, textShadow: `0 0 8px ${color}60` }}
           >
             STEP {item.step}
           </div>
 
-          <div style={{ marginBottom: '1rem' }}>
+          <div className="retro-demo-hiw__icon">
             <Icon size={40} weight="duotone" style={{ color }} />
           </div>
 
-          <h3
-            className="retro-font-display retro-bold"
-            style={{
-              fontSize: '0.75rem',
-              textTransform: 'uppercase',
-              margin: '0 0 0.75rem 0',
-            }}
-          >
+          <h3 className="retro-font-display retro-bold retro-demo-hiw__title">
             {item.title}
           </h3>
 
-          <p
-            className="retro-font-body"
-            style={{ fontSize: '0.85rem', opacity: 0.8, margin: 0, lineHeight: 1.6 }}
-          >
+          <p className="retro-font-body retro-demo-hiw__desc">
             {item.description}
           </p>
         </div>
@@ -446,59 +343,25 @@ const RetroValueProps = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: '1.5rem',
-        padding: '0 1rem',
-      }}
-    >
+    <div className="retro-demo-vp__grid">
       {DEMO_VALUE_PROPS.map((prop, idx) => {
         const Icon = iconMap[prop.iconName] || Star;
-        const colors = ['#00fff9', '#ff00ff', '#FFD700', '#39ff14'];
+        const colors = [NEON.cyan, NEON.magenta, NEON.gold, NEON.green];
         const color = colors[idx % colors.length];
 
         return (
           <div
             key={prop.title}
-            style={{
-              padding: '1.5rem',
-              border: `1px solid ${color}25`,
-              borderRadius: '8px',
-              background: `${color}05`,
-              transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-            }}
+            className="retro-demo-vp__card"
+            style={{ '--vp-color': color } as React.CSSProperties}
           >
-            <div
-              style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: `${color}15`,
-                border: `1px solid ${color}30`,
-                marginBottom: '1rem',
-              }}
-            >
+            <div className="retro-demo-vp__icon-box">
               <Icon size={24} weight="duotone" style={{ color }} />
             </div>
-            <h4
-              className="retro-font-display retro-bold"
-              style={{
-                fontSize: '0.7rem',
-                textTransform: 'uppercase',
-                margin: '0 0 0.5rem 0',
-              }}
-            >
+            <h4 className="retro-font-display retro-bold retro-demo-vp__title">
               {prop.title}
             </h4>
-            <p
-              className="retro-font-body"
-              style={{ fontSize: '0.8rem', opacity: 0.75, margin: 0, lineHeight: 1.5 }}
-            >
+            <p className="retro-font-body retro-demo-vp__desc">
               {prop.description}
             </p>
           </div>
@@ -514,58 +377,23 @@ const RetroFAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 1rem' }}>
+    <div className="retro-demo-faq__list">
       {DEMO_FAQ.map((item, idx) => {
         const isOpen = openIndex === idx;
         return (
-          <div
-            key={idx}
-            style={{
-              borderBottom: '1px solid rgba(0, 255, 249, 0.15)',
-            }}
-          >
+          <div key={idx} className="retro-demo-faq__item">
             <button
               onClick={() => setOpenIndex(isOpen ? null : idx)}
-              className="retro-font-display retro-bold"
+              className="retro-font-display retro-bold retro-demo-faq__trigger"
               aria-expanded={isOpen}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%',
-                padding: '1rem 0',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '0.65rem',
-                textTransform: 'uppercase',
-                textAlign: 'left',
-                color: 'inherit',
-                gap: '1rem',
-              }}
             >
               <span>{item.question}</span>
-              <span
-                style={{
-                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.3s ease',
-                  flexShrink: 0,
-                  color: 'var(--color-signal, #00fff9)',
-                }}
-              >
+              <span className={`retro-demo-faq__chevron ${isOpen ? 'retro-demo-faq__chevron--open' : ''}`}>
                 <CaretRight size={14} weight="bold" />
               </span>
             </button>
             {isOpen && (
-              <div
-                className="retro-font-body"
-                style={{
-                  padding: '0 0 1rem 0',
-                  fontSize: '0.85rem',
-                  opacity: 0.8,
-                  lineHeight: 1.6,
-                }}
-              >
+              <div className="retro-font-body retro-demo-faq__answer">
                 {item.answer}
               </div>
             )}
@@ -591,63 +419,33 @@ const RetroNewsletterBand = () => {
   };
 
   return (
-    <div
-      style={{
-        textAlign: 'center',
-        padding: '2rem 1rem',
-        border: '1px solid rgba(255, 0, 255, 0.2)',
-        borderRadius: '8px',
-        background: 'rgba(255, 0, 255, 0.03)',
-        maxWidth: '600px',
-        margin: '0 auto',
-      }}
-    >
-      <Crown size={40} weight="duotone" style={{ color: '#ff00ff', marginBottom: '0.75rem' }} />
-      <h3
-        className="retro-font-display retro-bold"
-        style={{ fontSize: '0.85rem', textTransform: 'uppercase', margin: '0 0 0.5rem 0' }}
-      >
+    <div className="retro-demo-newsletter__box">
+      <Crown size={40} weight="duotone" style={{ color: NEON.magenta }} />
+      <h3 className="retro-font-display retro-bold retro-demo-newsletter__title">
         JOIN THE PLAYER CLUB
       </h3>
-      <p
-        className="retro-font-body"
-        style={{ fontSize: '0.8rem', opacity: 0.7, margin: '0 0 1.25rem 0' }}
-      >
+      <p className="retro-font-body retro-demo-newsletter__desc">
         Get exclusive retro drops, design tips, and early access to new patterns.
       </p>
 
       {submitted ? (
-        <div
-          className="retro-font-display retro-bold"
-          style={{ color: '#39ff14', fontSize: '0.7rem', textShadow: '0 0 10px rgba(57,255,20,0.5)' }}
-        >
+        <div className="retro-font-display retro-bold retro-demo-newsletter__success">
           ACHIEVEMENT UNLOCKED: SUBSCRIBED!
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.5rem', maxWidth: '400px', margin: '0 auto' }}>
+        <form onSubmit={handleSubmit} className="retro-demo-newsletter__form">
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.gg"
             required
-            className="retro-font-body"
-            style={{
-              flex: 1,
-              padding: '0.6rem 1rem',
-              border: '1px solid rgba(255, 0, 255, 0.3)',
-              borderRadius: '4px',
-              background: 'rgba(255, 0, 255, 0.05)',
-              color: 'inherit',
-              fontSize: '0.85rem',
-              outline: 'none',
-            }}
+            className="retro-font-body retro-demo-newsletter__input"
             aria-label="Email address"
           />
           <button
             type="submit"
-            className="retro-btn retro-btn--primary retro-font-display retro-bold"
-            style={{ whiteSpace: 'nowrap', fontSize: '0.6rem' }}
+            className="retro-btn retro-btn--primary retro-font-display retro-bold retro-demo-newsletter__submit"
           >
             SUBSCRIBE
           </button>
@@ -663,101 +461,55 @@ const Retro3DShowcase = () => {
   const [boxStep, setBoxStep] = useState<1 | 2 | 3>(1);
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '2rem',
-        padding: '0 1rem',
-        alignItems: 'center',
-      }}
-    >
+    <div className="retro-demo-3d__grid">
       {/* Spinning Coin */}
-      <div style={{ textAlign: 'center' }}>
-        <SpinningCoin3D size={100} glowColor="#FFD700" label="DEMO" speed={0.8} />
-        <p
-          className="retro-font-display retro-bold"
-          style={{ fontSize: '0.65rem', marginTop: '1rem', textTransform: 'uppercase' }}
-        >
+      <div className="retro-demo-3d__panel">
+        <SpinningCoin3D size={100} glowColor={NEON.gold} label="DEMO" speed={0.8} />
+        <p className="retro-font-display retro-bold retro-demo-3d__caption">
           CSS 3D Spinning Coin
         </p>
-        <p className="retro-font-body" style={{ fontSize: '0.75rem', opacity: 0.6, margin: '0.25rem 0 0 0' }}>
+        <p className="retro-font-body retro-demo-3d__subcaption">
           Pure CSS transforms, no WebGL needed. ~2KB.
         </p>
       </div>
 
       {/* Subscription Box */}
-      <div style={{ textAlign: 'center' }}>
+      <div className="retro-demo-3d__panel">
         <SubscriptionBox3D
           step={boxStep}
           size={140}
-          glowColor="#00fff9"
+          glowColor={NEON.cyan}
           autoRotate={boxStep === 2}
         />
-        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginTop: '1rem' }}>
+        <div className="retro-demo-3d__steps">
           {([1, 2, 3] as const).map((s) => (
             <button
               key={s}
               onClick={() => setBoxStep(s)}
-              className="retro-font-display retro-bold"
-              style={{
-                padding: '0.3rem 0.6rem',
-                fontSize: '0.5rem',
-                border: `1px solid ${boxStep === s ? '#00fff9' : 'rgba(255,255,255,0.2)'}`,
-                borderRadius: '4px',
-                background: boxStep === s ? 'rgba(0,255,249,0.15)' : 'transparent',
-                color: boxStep === s ? '#00fff9' : 'inherit',
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-              }}
+              className={`retro-font-display retro-bold retro-demo-3d__step-btn ${boxStep === s ? 'retro-demo-3d__step-btn--active' : ''}`}
               aria-pressed={boxStep === s}
             >
               Step {s}
             </button>
           ))}
         </div>
-        <p
-          className="retro-font-display retro-bold"
-          style={{ fontSize: '0.65rem', marginTop: '0.75rem', textTransform: 'uppercase' }}
-        >
+        <p className="retro-font-display retro-bold retro-demo-3d__caption">
           3D Subscription Box
         </p>
-        <p className="retro-font-body" style={{ fontSize: '0.75rem', opacity: 0.6, margin: '0.25rem 0 0 0' }}>
+        <p className="retro-font-body retro-demo-3d__subcaption">
           3-step flow with Canvas particle burst. ~8KB.
         </p>
       </div>
 
       {/* WebGL Canvas Preview */}
-      <div
-        style={{
-          textAlign: 'center',
-          position: 'relative',
-          height: '200px',
-          borderRadius: '8px',
-          overflow: 'hidden',
-          border: '1px solid rgba(0, 255, 249, 0.15)',
-        }}
-      >
+      <div className="retro-demo-3d__canvas-panel">
         <RetroCanvasBackground />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 2,
-          }}
-        >
-          <PixelStarSVG size={32} color="#FFD700" />
-          <p
-            className="retro-font-display retro-bold"
-            style={{ fontSize: '0.65rem', marginTop: '0.75rem', textTransform: 'uppercase' }}
-          >
+        <div className="retro-demo-3d__canvas-overlay">
+          <PixelStarSVG size={32} color={NEON.gold} />
+          <p className="retro-font-display retro-bold retro-demo-3d__caption">
             Canvas Particle System
           </p>
-          <p className="retro-font-body" style={{ fontSize: '0.75rem', opacity: 0.6, margin: '0.25rem 0 0 0' }}>
+          <p className="retro-font-body retro-demo-3d__subcaption">
             Floating pixel particles with neon grid.
           </p>
         </div>
@@ -777,37 +529,16 @@ const PatternIndexBanner = () => {
   ];
 
   return (
-    <div
-      style={{
-        padding: '1.5rem',
-        border: '1px solid rgba(57, 255, 20, 0.2)',
-        borderRadius: '8px',
-        background: 'rgba(57, 255, 20, 0.03)',
-        margin: '0 1rem',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-        <ShieldCheck size={24} weight="duotone" style={{ color: '#39ff14' }} />
-        <span
-          className="retro-font-display retro-bold"
-          style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: '#39ff14' }}
-        >
+    <div className="retro-demo-pattern-index">
+      <div className="retro-demo-pattern-index__header">
+        <ShieldCheck size={24} weight="duotone" style={{ color: NEON.green }} />
+        <span className="retro-font-display retro-bold retro-demo-pattern-index__title">
           {patterns.length} PATTERNS DEMONSTRATED ON THIS PAGE
         </span>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+      <div className="retro-demo-pattern-index__tags">
         {patterns.map((p) => (
-          <span
-            key={p}
-            className="retro-font-body"
-            style={{
-              padding: '0.2rem 0.5rem',
-              fontSize: '0.65rem',
-              border: '1px solid rgba(57, 255, 20, 0.2)',
-              borderRadius: '4px',
-              background: 'rgba(57, 255, 20, 0.05)',
-            }}
-          >
+          <span key={p} className="retro-font-body retro-demo-pattern-index__tag">
             {p}
           </span>
         ))}
@@ -839,17 +570,17 @@ export const RetroDemoLandingPage = () => {
           <PatternIndexBanner />
 
           {/* ─── Stats ─────────────────────────────────────── */}
-          <DemoSection id="stats" title="BY THE NUMBERS" subtitle="// SYSTEM STATS" neonColor="#00fff9">
+          <DemoSection id="stats" title="BY THE NUMBERS" subtitle="// SYSTEM STATS" neonColor={NEON.cyan}>
             <RetroStatsRow />
           </DemoSection>
 
           {/* ─── Categories ────────────────────────────────── */}
-          <DemoSection id="categories" title="CATEGORY ROW" subtitle="// BROWSE BY TYPE" neonColor="#ff00ff">
+          <DemoSection id="categories" title="CATEGORY ROW" subtitle="// BROWSE BY TYPE" neonColor={NEON.magenta}>
             <CategoryRowRetro />
           </DemoSection>
 
           {/* ─── Featured Products ─────────────────────────── */}
-          <DemoSection id="featured" title="FEATURED PRODUCTS" subtitle="// PRODUCT CARDS" neonColor="#FFD700">
+          <DemoSection id="featured" title="FEATURED PRODUCTS" subtitle="// PRODUCT CARDS" neonColor={NEON.gold}>
             <FeaturedProductsRetro
               title="DEMO COLLECTION <<"
               linkText="RETRO PICKS! >"
@@ -858,7 +589,7 @@ export const RetroDemoLandingPage = () => {
           </DemoSection>
 
           {/* ─── Flash Sale ────────────────────────────────── */}
-          <DemoSection id="flash-sale" title="FLASH SALE BANNER" subtitle="// URGENCY PATTERN" neonColor="#ff4444">
+          <DemoSection id="flash-sale" title="FLASH SALE BANNER" subtitle="// URGENCY PATTERN" neonColor={NEON.red}>
             <FlashSaleBanner
               title={DEMO_FLASH_SALE.title}
               discount={DEMO_FLASH_SALE.discount}
@@ -872,22 +603,22 @@ export const RetroDemoLandingPage = () => {
           </DemoSection>
 
           {/* ─── How It Works ──────────────────────────────── */}
-          <DemoSection id="how-it-works" title="HOW IT WORKS" subtitle="// 3-STEP PROCESS" neonColor="#00fff9">
+          <DemoSection id="how-it-works" title="HOW IT WORKS" subtitle="// 3-STEP PROCESS" neonColor={NEON.cyan}>
             <RetroHowItWorks />
           </DemoSection>
 
-          {/* ─── Value Propositions ────────────────────────── */}
-          <DemoSection id="value-props" title="WHY PLAYPOCKET?" subtitle="// VALUE PROPOSITIONS" neonColor="#39ff14">
+          {/* ─── Value Propositions ─────────────────────────── */}
+          <DemoSection id="value-props" title="WHY PLAYPOCKET?" subtitle="// VALUE PROPOSITIONS" neonColor={NEON.green}>
             <RetroValueProps />
           </DemoSection>
 
           {/* ─── 3D / WebGL Showcase ───────────────────────── */}
-          <DemoSection id="3d-showcase" title="3D & CANVAS EFFECTS" subtitle="// WEBGL + CSS 3D" neonColor="#FFD700">
+          <DemoSection id="3d-showcase" title="3D & CANVAS EFFECTS" subtitle="// WEBGL + CSS 3D" neonColor={NEON.gold}>
             <Retro3DShowcase />
           </DemoSection>
 
           {/* ─── Pricing ───────────────────────────────────── */}
-          <DemoSection id="pricing" title="PRICING TABLE" subtitle="// SUBSCRIPTION TIERS" neonColor="#ff00ff">
+          <DemoSection id="pricing" title="PRICING TABLE" subtitle="// SUBSCRIPTION TIERS" neonColor={NEON.magenta}>
             <PricingTable
               plans={DEMO_PRICING_PLANS}
               heading="CHOOSE YOUR LEVEL"
@@ -898,7 +629,7 @@ export const RetroDemoLandingPage = () => {
           </DemoSection>
 
           {/* ─── Testimonials ──────────────────────────────── */}
-          <DemoSection id="testimonials" title="TESTIMONIALS" subtitle="// SOCIAL PROOF" neonColor="#00fff9">
+          <DemoSection id="testimonials" title="TESTIMONIALS" subtitle="// SOCIAL PROOF" neonColor={NEON.cyan}>
             <TestimonialCarousel
               testimonials={DEMO_TESTIMONIALS}
               autoRotate={true}
@@ -908,60 +639,41 @@ export const RetroDemoLandingPage = () => {
           </DemoSection>
 
           {/* ─── FAQ ───────────────────────────────────────── */}
-          <DemoSection id="faq" title="FAQ ACCORDION" subtitle="// QUESTIONS & ANSWERS" neonColor="#FFD700">
+          <DemoSection id="faq" title="FAQ ACCORDION" subtitle="// QUESTIONS & ANSWERS" neonColor={NEON.gold}>
             <RetroFAQ />
           </DemoSection>
 
           {/* ─── Newsletter ────────────────────────────────── */}
-          <DemoSection id="newsletter" title="NEWSLETTER CTA" subtitle="// LEAD CAPTURE" neonColor="#ff00ff">
+          <DemoSection id="newsletter" title="NEWSLETTER CTA" subtitle="// LEAD CAPTURE" neonColor={NEON.magenta}>
             <RetroNewsletterBand />
           </DemoSection>
 
           {/* ─── Bottom Grid ───────────────────────────────── */}
-          <DemoSection id="bottom-grid" title="BOTTOM GRID" subtitle="// PRODUCTS + REWARDS" neonColor="#39ff14">
+          <DemoSection id="bottom-grid" title="BOTTOM GRID" subtitle="// PRODUCTS + REWARDS" neonColor={NEON.green}>
             <BottomGridRetro />
           </DemoSection>
 
           {/* ─── CTA Banner ────────────────────────────────── */}
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '3rem 1rem',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="retro-demo-cta">
             <ScanlineOverlay />
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <PixelStarSVG size={40} color="#FFD700" />
-              <h2
-                className="retro-font-display retro-bold"
-                style={{
-                  fontSize: 'clamp(1rem, 3vw, 1.8rem)',
-                  textTransform: 'uppercase',
-                  margin: '1rem 0 0.75rem 0',
-                }}
-              >
+            <div className="retro-demo-cta__content">
+              <PixelStarSVG size={40} color={NEON.gold} />
+              <h2 className="retro-font-display retro-bold retro-demo-cta__title">
                 READY TO BUILD?
               </h2>
-              <p
-                className="retro-font-body"
-                style={{ fontSize: '0.9rem', opacity: 0.7, margin: '0 0 1.5rem 0', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}
-              >
+              <p className="retro-font-body retro-demo-cta__desc">
                 Explore the full PlayPocket design system with 176+ components, 280 CSS imports, and complete dark mode support.
               </p>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <div className="retro-demo-cta__buttons">
                 <Link
                   to="/shop"
-                  className="retro-btn retro-btn--primary retro-font-display retro-bold"
-                  style={{ textDecoration: 'none', fontSize: '0.6rem' }}
+                  className="retro-btn retro-btn--primary retro-font-display retro-bold retro-demo-cta__link"
                 >
                   EXPLORE SHOP <ArrowRight size={16} weight="bold" />
                 </Link>
                 <Link
                   to="/sitemap"
-                  className="retro-btn retro-btn--secondary retro-font-display retro-bold"
-                  style={{ textDecoration: 'none', fontSize: '0.6rem' }}
+                  className="retro-btn retro-btn--secondary retro-font-display retro-bold retro-demo-cta__link"
                 >
                   ALL 150+ PAGES <ArrowRight size={16} weight="bold" />
                 </Link>
@@ -976,5 +688,3 @@ export const RetroDemoLandingPage = () => {
     </div>
   );
 };
-
-RetroDemoLandingPage.displayName = 'RetroDemoLandingPage';

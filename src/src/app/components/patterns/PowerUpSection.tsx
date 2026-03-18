@@ -276,16 +276,16 @@ export const PowerUpSection = () => {
               </svg>
             </span>
           </Link>
+          <div className="pp-powerup__decor-icons" aria-hidden="true">
+            <PixelFolder />
+            <PixelHeart size={20} className="pp-powerup__decor-heart" />
+          </div>
         </div>
 
         {/* Decorative elements */}
         <div className="pp-powerup__decor" aria-hidden="true">
           <div className="pp-powerup__decor-sparkle">
             <PixelSparkle />
-          </div>
-          <div className="pp-powerup__decor-icons">
-            <PixelFolder />
-            <PixelHeart size={20} className="pp-powerup__decor-heart" />
           </div>
         </div>
       </div>

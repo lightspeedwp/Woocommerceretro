@@ -9,6 +9,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 import { House as Home, MagnifyingGlass as Search, Bag as ShoppingBag } from '../../utils/phosphor-compat';
 import { ProductCard } from '../blocks/product/ProductCard';
 import { products } from '../../data/products';
@@ -42,7 +43,7 @@ export const NotFound = () => {
     <Layout>
       <Container variant="content" className="wp-404-container">
         <div className="wp-404-content">
-          <h1 className="wp-404-title">Page Not Found</h1>
+          <Heading level={1} className="wp-404-title">Page not found</Heading>
           <p className="wp-404-description">
             Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
           </p>
@@ -75,7 +76,7 @@ export const NotFound = () => {
         </div>
 
         <div className="wp-404-suggestions">
-          <h2 className="wp-404-suggestions-title">You Might Be Interested In</h2>
+          <Heading level={2} className="wp-404-suggestions-title">You might be interested in</Heading>
           <div className="wp-404-suggestions-grid">
             {suggestedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />

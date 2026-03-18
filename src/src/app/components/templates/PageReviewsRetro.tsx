@@ -119,7 +119,7 @@ export const PageReviewsRetro = () => {
                       {t.avatar && (
                         <img
                           src={t.avatar}
-                          alt=""
+                          alt={`${t.name} avatar`}
                           className="retro-testimonial-avatar"
                           loading="lazy"
                           width={40}
@@ -178,7 +178,7 @@ export const PageReviewsRetro = () => {
                         {review.avatar ? (
                           <img
                             src={review.avatar}
-                            alt=""
+                            alt={`${review.name} avatar`}
                             className="retro-review-avatar"
                             loading="lazy"
                             width={40}

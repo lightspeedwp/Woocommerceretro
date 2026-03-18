@@ -14,8 +14,7 @@
 
 import { type FormEvent, useState } from 'react';
 import { Link } from 'react-router';
-import { Envelope, PaperPlaneTilt, ArrowRight } from '../../utils/phosphor-compat';
-import { CheckCircle2 } from 'lucide-react';
+import { Envelope, PaperPlaneTilt, ArrowRight, CheckCircle } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';
@@ -58,7 +57,7 @@ export const PageNewsletter = () => {
               {submitted ? (
                 <>
                   <div className="retro-cta-icon">
-                    <CheckCircle2 size={48} aria-hidden="true" />
+                    <CheckCircle size={48} aria-hidden="true" />
                   </div>
                   <h2 id="newsletter-form-heading" className="retro-font-display retro-bold retro-cta-title">
                     {newsletterPageContent.successHeading?.toUpperCase() || 'SUBSCRIBED!'}

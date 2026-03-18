@@ -83,3 +83,21 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-category-card__image,
+  .wp-category-card__overlay,
+  .wp-category-card__action {
+    transition: none;
+  }
+
+  .wp-category-card:hover .wp-category-card__image {
+    transform: none;
+  }
+
+  .wp-category-card__action {
+    opacity: 1;
+    transform: none;
+  }
+}

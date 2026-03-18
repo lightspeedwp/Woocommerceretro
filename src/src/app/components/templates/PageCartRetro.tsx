@@ -114,7 +114,7 @@ export const PageCartRetro = () => {
 
                 {/* Continue Shopping */}
                 <Link to="/shop" className="retro-cart__continue retro-font-display retro-bold">
-                  <ArrowRight size={16} weight="bold" style={{ transform: 'rotate(180deg)' }} />
+                  <ArrowRight size={16} weight="bold" className="retro-cart__continue-arrow" />
                   CONTINUE SHOPPING
                 </Link>
               </div>

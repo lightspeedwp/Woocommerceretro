@@ -13,7 +13,7 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Button } from '../blocks/design/Buttons';
 import { VariantSelector } from '../blocks/product/VariantSelector';
 import { useVariantSelection } from '../../hooks/useVariantSelection';
-import { X, Heart, Star, ShoppingCart, ExternalLink, Minus, Plus, Check, AlertCircle } from 'lucide-react';
+import { X, Heart, Star, ShoppingCart, ArrowSquareOut, Minus, Plus, Check, WarningCircle } from '../../utils/phosphor-compat';
 import { toast } from 'sonner@2.0.3';
 
 const EMPTY_VARIABLE_PRODUCT = { variations: [] as any[], attributes: [] as any[] };
@@ -277,7 +277,7 @@ export const QuickView = () => {
                 <div className="qv-errors">
                   {variantSelection.errors.map((error: string, index: number) => (
                     <div key={index} className="qv-error-item">
-                      <AlertCircle size={16} className="qv-error-icon" />
+                      <WarningCircle size={16} className="qv-error-icon" />
                       <small>{error}</small>
                     </div>
                   ))}
@@ -287,7 +287,7 @@ export const QuickView = () => {
               <div className="qv-stock">
                 {isInStockStatus
                   ? <Check size={16} className="qv-stock-icon--in" />
-                  : <AlertCircle size={16} className="qv-stock-icon--out" />
+                  : <WarningCircle size={16} className="qv-stock-icon--out" />
                 }
                 <small className={isInStockStatus ? "qv-stock-text--in" : "qv-stock-text--out"}>
                   {stockStatus}
@@ -344,7 +344,7 @@ export const QuickView = () => {
                     onClick={handleViewFullProduct}
                     className="qv-action-btn funky-spring-hover"
                   >
-                    <ExternalLink size={18} />
+                    <ArrowSquareOut size={18} />
                     <small><strong>Full Details</strong></small>
                   </button>
                 </div>

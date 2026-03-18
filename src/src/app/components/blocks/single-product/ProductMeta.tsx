@@ -15,39 +15,39 @@ export const ProductMeta = ({
   tags?: string[];
 }) => {
   return (
-    <div className="wc-product-meta">
+    <dl className="wc-product-meta">
       <div className="wc-product-meta__row">
-        <span className="wc-product-meta__label">SKU:</span>
-        <span className="wc-product-meta__value">{sku}</span>
+        <dt className="wc-product-meta__label">SKU:</dt>
+        <dd className="wc-product-meta__value">{sku}</dd>
       </div>
 
       {categories && categories.length > 0 && (
         <div className="wc-product-meta__row">
-          <span className="wc-product-meta__label">Category:</span>
-          <span className="wc-product-meta__value">
+          <dt className="wc-product-meta__label">Category:</dt>
+          <dd className="wc-product-meta__value">
             {categories.map((cat, i) => (
               <React.Fragment key={cat}>
                 <span className="wc-product-meta__link">{cat}</span>
                 {i < categories.length - 1 ? ', ' : null}
               </React.Fragment>
             ))}
-          </span>
+          </dd>
         </div>
       )}
 
       {tags && tags.length > 0 && (
         <div className="wc-product-meta__row">
-          <span className="wc-product-meta__label">Tags:</span>
-          <span className="wc-product-meta__value">
+          <dt className="wc-product-meta__label">Tags:</dt>
+          <dd className="wc-product-meta__value">
             {tags.map((tag, i) => (
               <React.Fragment key={tag}>
                 <span className="wc-product-meta__link">{tag}</span>
                 {i < tags.length - 1 ? ', ' : null}
               </React.Fragment>
             ))}
-          </span>
+          </dd>
         </div>
       )}
-    </div>
+    </dl>
   );
 };

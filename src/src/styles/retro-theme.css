@@ -43,9 +43,9 @@
   --color-screen-strong: #4A7A5E;
   --color-signal: #0055AA;
   --color-signal-hover: #004499;
-  --color-alert: #C0533A;
-  --color-success: #2E7D32;
-  --color-warning: #E65100;
+  --color-alert: #991b1b;    /* AAA: 7.1:1 on cream — aligned with theme-variables */
+  --color-success: #065f46;  /* AAA: 7.1:1 on cream — aligned with theme-variables */
+  --color-warning: #92400e;  /* AAA: 7.3:1 on cream — aligned with theme-variables */
   --color-coral: #C0533A;
   --color-sky: #1565C0;
   --color-berry: #7B1FA2;
@@ -121,7 +121,7 @@
   font-family: var(--font-body);
   background-color: var(--color-paper);
   color: var(--color-ink);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--wp--preset--transition--slow) ease, color var(--wp--preset--transition--slow) ease;
 }
 
 /* ========================================
@@ -161,9 +161,9 @@
   --color-screen-strong: #A7C0B6;
   --color-signal: #5DA0E0;
   --color-signal-hover: #7DB8F0;
-  --color-alert: #E08A72;
-  --color-success: #7EA17A;
-  --color-warning: #E4A84C;
+  --color-alert: #f87171;    /* AAA on dark bg — aligned with theme-variables */
+  --color-success: #4ade80;  /* AAA on dark bg — aligned with theme-variables */
+  --color-warning: #fbbf24;  /* AAA on dark bg — aligned with theme-variables */
   --color-coral: #D08A72;
   --color-sky: #8AAFC0;
   --color-berry: #A083A6;
@@ -224,7 +224,7 @@
 .retro-shop a {
   color: var(--color-link);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--wp--preset--transition--fast) ease;
 }
 
 .theme-retro a:hover,
@@ -249,7 +249,7 @@
   border: var(--retro-border-width) solid var(--color-ink);
   box-shadow: var(--shadow-retro);
   padding: var(--retro-space-6, 1.5rem);
-  transition: transform 0.1s, box-shadow 0.1s;
+  transition: transform var(--wp--preset--transition--snap), box-shadow var(--wp--preset--transition--snap);
 }
 
 .retro-card:hover {
@@ -280,7 +280,7 @@
   text-decoration: none;
   border: var(--retro-border-width) solid var(--color-ink);
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s, color 0.15s;
+  transition: transform var(--wp--preset--transition--snap), box-shadow var(--wp--preset--transition--snap), background-color var(--wp--preset--transition--fast), color var(--wp--preset--transition--fast);
 }
 
 .retro-btn--primary {
@@ -355,7 +355,7 @@
   background-color: var(--color-paper);
   border: 2px solid var(--color-ink);
   color: var(--color-ink);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--wp--preset--transition--fast), box-shadow var(--wp--preset--transition--fast);
 }
 
 .retro-input::placeholder {

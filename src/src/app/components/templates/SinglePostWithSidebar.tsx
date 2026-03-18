@@ -4,6 +4,7 @@ import { Tag } from '../../utils/phosphor-compat';
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 import { PostMeta } from '../patterns/PostMeta';
 import { PostNavigation } from '../patterns/PostNavigation';
 import { BlogSidebar } from '../patterns/BlogSidebar';
@@ -51,7 +52,7 @@ export const SinglePostWithSidebar = () => {
     return (
       <Layout>
         <div className="blog-archive__empty">
-          <h2>Post not found</h2>
+          <Heading level="2">Post not found</Heading>
           <p>The article you are looking for does not exist.</p>
           <Link to="/blog" className="blog-archive__empty-cta">Return to Blog</Link>
         </div>
@@ -87,7 +88,7 @@ export const SinglePostWithSidebar = () => {
               />
             </header>
             <div className="single-post-sb__featured">
-              <img src={post.featuredImage} alt="" loading="lazy" />
+              <img src={post.featuredImage} alt={post.title} loading="lazy" />
             </div>
             <div className="single-post-sb__content">
               <div dangerouslySetInnerHTML={{ __html: post.content }} />

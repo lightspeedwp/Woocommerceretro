@@ -1,218 +1,101 @@
-# Reports Directory
+# Reports directory
 
 **Purpose:** Centralized location for all project reports, organized by category.
+**Last updated:** March 17, 2026
 
 ---
 
-## 📁 Directory Structure
+## Directory structure
 
 ```
 /reports/
 ├── README.md              # This file
-├── releases/              # Release notes and version announcements
-├── architecture/          # Architecture audits, refactoring reports
-├── testing/               # Test results, coverage reports, QA findings
-├── performance/           # Performance audits, optimization reports
 ├── accessibility/         # WCAG audits, a11y testing reports
+├── audits/                # Multi-domain audit reports
+├── archive/               # Archived/superseded reports
+├── bem/                   # BEM compliance audits
+├── css/                   # CSS architecture audits
+├── css-optimization/      # CSS performance reports
+├── css-stability/         # CSS stability testing
+├── development/           # Development standards audits
 ├── documentation/         # Documentation audits, coverage reports
-├── components/            # Component-specific reports and audits
-├── migration/             # Migration reports and status updates
-├── compliance/            # Standards compliance, guideline adherence
-└── planning/              # Project planning, roadmaps, proposals
+├── fixes/                 # Fix implementation reports
+├── maintenance/           # Cleanup and maintenance reports
+├── migration/             # Migration reports (Phosphor, Tailwind→WP)
+├── optimization/          # Performance optimization reports
+├── sessions/              # Session summary reports
+├── tokens/                # Design token audits
+└── verification/          # Verification and validation reports
 ```
 
 ---
 
-## 🏷️ Naming Convention
+## Naming convention
 
 All reports follow this format:
+
 ```
 YYYY-MM-DD_report-type_brief-description.md
 ```
 
-### Examples:
+### Examples
+
 ```
-2026-01-09_release-notes_v2.4.0.md
-2026-01-09_architecture-audit_component-compliance.md
-2026-01-08_test-results_jest-coverage-92-percent.md
+2026-03-16_design-token-audit.md
+2026-03-15_css-architecture-audit.md
+2026-03-11_phosphor-migration-complete.md
 ```
 
 ---
 
-## 📂 Category Descriptions
+## Category descriptions
 
-### **Releases** (`/releases/`)
-Version announcements, release notes, and changelog details.
-
-**Current Reports:**
-- `2026-01-09_release-notes_v2.4.0.md` - Version 2.4.0 release documentation
-
----
-
-### **Architecture** (`/architecture/`)
-Architecture audits, refactoring plans, FSE compliance checks.
-
-**Purpose:**
-- Document architectural decisions
-- Track refactoring progress
-- Monitor WordPress FSE alignment
-- Assess component structure compliance
-
----
-
-### **Testing** (`/testing/`)
-Test results, coverage reports, QA findings.
-
-**Purpose:**
-- Jest test results and coverage reports
-- Integration test findings
-- E2E test results
-- Quality assurance reports
+| Category | Purpose |
+|----------|---------|
+| `accessibility/` | WCAG 2.1 AA/AAA compliance audits, contrast checks, keyboard nav |
+| `audits/` | Multi-domain audit reports (9-domain sweeps) |
+| `bem/` | BEM naming convention compliance |
+| `css/` | CSS architecture health, hardcoded values, organization |
+| `css-optimization/` | CSS performance, memory, file size |
+| `css-stability/` | CSS re-enable testing, import chain validation |
+| `development/` | React/TypeScript coding standards |
+| `documentation/` | Guideline freshness, coverage, quality |
+| `fixes/` | Implementation reports for specific fixes |
+| `maintenance/` | Cleanup sessions, file organization |
+| `migration/` | Tailwind→WordPress, Lucide→Phosphor migrations |
+| `optimization/` | General performance optimization |
+| `sessions/` | Development session summaries |
+| `tokens/` | Design token consistency, naming, values |
+| `verification/` | Post-fix verification and validation |
 
 ---
 
-### **Performance** (`/performance/`)
-Performance audits, optimization results, benchmarks.
-
-**Purpose:**
-- Lighthouse audit scores
-- Bundle size analysis
-- Page load time benchmarks
-- Optimization impact reports
-
----
-
-### **Accessibility** (`/accessibility/`)
-WCAG audits, accessibility testing, a11y compliance.
-
-**Purpose:**
-- WCAG 2.1 AA/AAA compliance audits
-- Screen reader testing results
-- Keyboard navigation assessments
-- Color contrast checks
-
----
-
-### **Documentation** (`/documentation/`)
-Documentation audits, coverage reports, JSDoc analysis.
-
-**Purpose:**
-- JSDoc coverage reports
-- Component documentation audits
-- Guidelines compliance checks
-- README quality assessments
-
----
-
-### **Components** (`/components/`)
-Component-specific audits, refactoring reports.
-
-**Purpose:**
-- Individual component quality checks
-- Props interface audits
-- Component compliance reports
-- Refactoring documentation
-
----
-
-### **Migration** (`/migration/`)
-Migration status, refactoring progress, consolidation reports.
-
-**Purpose:**
-- Stylesheet migration status
-- File structure consolidation
-- Tailwind to WordPress CSS migration
-- TypeScript migration progress
-
----
-
-### **Compliance** (`/compliance/`)
-Standards compliance, guideline adherence, quality metrics.
-
-**Purpose:**
-- Guideline adherence checks
-- WordPress standards compliance
-- WooCommerce block compatibility
-- Quality scoring reports
-
----
-
-### **Planning** (`/planning/`)
-Project planning, roadmaps, proposals, sprint plans.
-
-**Purpose:**
-- Feature roadmaps
-- Sprint planning documents
-- Technical proposals
-- Project milestones
-
----
-
-## 📖 Guidelines
+## Guidelines
 
 For complete reporting guidelines, see:
-- [REPORTING_GUIDELINES.md](../REPORTING_GUIDELINES.md) - Full guidelines document
+- [REPORTING_GUIDELINES.md](/guidelines/REPORTING_GUIDELINES.md) — Full guidelines document
 
-### Quick Reference:
+### Quick reference
 
-**✅ DO:**
+**Do:**
 - Start filenames with date (`YYYY-MM-DD_`)
 - Use lowercase and hyphens
 - Place in correct category folder
 - Follow template structure
 - Use Markdown format (`.md`)
 
-**❌ DO NOT:**
+**Do not:**
 - Store reports in root directory
 - Use uppercase in filenames
 - Omit dates from filenames
-- Use spaces in filenames
-- Create ad-hoc locations
+- Create ad-hoc category folders
 
 ---
 
-## 📊 Current Status
+## Archive policy
 
-### **Reports by Category**
-
-| Category | Count | Latest Report |
-|----------|-------|---------------|
-| Releases | 1 | 2026-01-09_release-notes_v2.4.0.md |
-| Architecture | 0 | - |
-| Testing | 0 | - |
-| Performance | 0 | - |
-| Accessibility | 0 | - |
-| Documentation | 0 | - |
-| Components | 0 | - |
-| Migration | 0 | - |
-| Compliance | 0 | - |
-| Planning | 0 | - |
-
-**Total Reports:** 1
+Reports older than 30 days are moved to `/reports/archive/`. Active reports are retained in their category folders.
 
 ---
 
-## 🗂️ Archive Policy
-
-After reports reach their retention period, they are moved to:
-```
-/reports/[category]/archive/YYYY/
-```
-
-Example:
-```
-/reports/testing/archive/2025/2025-12-15_test-results_cart-tests.md
-```
-
----
-
-## 📞 Questions?
-
-If you're unsure about where to place a report or how to name it, refer to:
-- [REPORTING_GUIDELINES.md](../REPORTING_GUIDELINES.md) - Complete guidelines
-- [Guidelines.md](../Guidelines.md) - Project guidelines
-
----
-
-**Last Updated:** January 9, 2026  
-**Maintained By:** Project Team
+**Last updated:** March 17, 2026

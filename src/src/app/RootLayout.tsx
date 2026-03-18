@@ -26,7 +26,7 @@ const PageLoadingFallback = () => (
 );
 
 /* Inline lightweight error boundary — avoids importing ErrorBoundary.tsx
-   (which pulls in lucide-react + Link) during the critical startup path. */
+   (which pulls in @phosphor-icons/react + Link) during the critical startup path. */
 class LightErrorBoundary extends Component<
   { children: ReactNode },
   { hasError: boolean }

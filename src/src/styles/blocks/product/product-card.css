@@ -82,8 +82,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 44px; /* WCAG touch target */
+  min-height: 44px; /* WCAG touch target */
   border-radius: 50%;
   background-color: var(--wp--preset--color--background);
   color: var(--wp--preset--color--foreground);
@@ -114,7 +116,7 @@
 }
 
 .wc-block-product-card__action-button--quickview {
-  top: 3.5rem;
+  top: 3.25rem;
   transition-delay: 50ms;
 }
 

@@ -51,7 +51,7 @@
 .wp-quick-entry-tile:hover {
   border-color: var(--wp--preset--color--primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--wp--preset--shadow--md);
 }
 
 .wp-quick-entry-tile__icon {

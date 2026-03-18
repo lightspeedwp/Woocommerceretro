@@ -39,66 +39,27 @@ padding: clamp(1rem, 5vw, 3rem);
 
 ## Spacing Scale with clamp()
 
-### Base Spacing Tokens
+### Fluid spacing via CSS variables
 
 ```css
+/* /src/styles/theme-variables.css */
 :root {
-  /* Extra Small: 4px → 8px */
-  --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
-  
-  /* Small: 8px → 12px */
-  --space-sm: clamp(0.5rem, 1vw, 0.75rem);
-  
-  /* Medium: 12px → 16px */
-  --space-md: clamp(0.75rem, 1.5vw, 1rem);
-  
-  /* Base: 16px → 24px */
-  --space-base: clamp(1rem, 2vw, 1.5rem);
-  
-  /* Large: 24px → 32px */
-  --space-lg: clamp(1.5rem, 3vw, 2rem);
-  
-  /* Extra Large: 32px → 48px */
-  --space-xl: clamp(2rem, 4vw, 3rem);
-  
-  /* 2XL: 48px → 64px */
-  --space-2xl: clamp(3rem, 6vw, 4rem);
-  
-  /* 3XL: 64px → 96px */
-  --space-3xl: clamp(4rem, 8vw, 6rem);
-  
-  /* 4XL: 96px → 128px */
-  --space-4xl: clamp(6rem, 10vw, 8rem);
-}
-```
-
-### Tailwind CSS Custom Spacing
-
-```tsx
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      spacing: {
-        'fluid-xs': 'clamp(0.25rem, 0.5vw, 0.5rem)',
-        'fluid-sm': 'clamp(0.5rem, 1vw, 0.75rem)',
-        'fluid-md': 'clamp(0.75rem, 1.5vw, 1rem)',
-        'fluid-base': 'clamp(1rem, 2vw, 1.5rem)',
-        'fluid-lg': 'clamp(1.5rem, 3vw, 2rem)',
-        'fluid-xl': 'clamp(2rem, 4vw, 3rem)',
-        'fluid-2xl': 'clamp(3rem, 6vw, 4rem)',
-        'fluid-3xl': 'clamp(4rem, 8vw, 6rem)',
-        'fluid-4xl': 'clamp(6rem, 10vw, 8rem)',
-      }
-    }
-  }
+  --wp--preset--spacing--fluid-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --wp--preset--spacing--fluid-sm: clamp(0.5rem, 1vw, 0.75rem);
+  --wp--preset--spacing--fluid-md: clamp(0.75rem, 1.5vw, 1rem);
+  --wp--preset--spacing--fluid-base: clamp(1rem, 2vw, 1.5rem);
+  --wp--preset--spacing--fluid-lg: clamp(1.5rem, 3vw, 2rem);
+  --wp--preset--spacing--fluid-xl: clamp(2rem, 4vw, 3rem);
+  --wp--preset--spacing--fluid-2xl: clamp(3rem, 6vw, 4rem);
+  --wp--preset--spacing--fluid-3xl: clamp(4rem, 8vw, 6rem);
+  --wp--preset--spacing--fluid-4xl: clamp(6rem, 10vw, 8rem);
 }
 
-// Usage
-<div className="py-fluid-xl px-fluid-lg">
-  <h1 className="mb-fluid-md">Title</h1>
-  <p className="mb-fluid-base">Content</p>
-</div>
+/* Usage in BEM component CSS */
+.wc-section {
+  padding-block: var(--wp--preset--spacing--fluid-xl);
+  padding-inline: var(--wp--preset--spacing--fluid-lg);
+}
 ```
 
 ---
@@ -314,45 +275,16 @@ Use [Fluid Type Scale Calculator](https://www.fluid-type-scale.com/) or [Utopia]
 
 ---
 
-## Safe Area Insets (Mobile Notches)
-
-### iOS Safe Areas
+## CSS safe area support
 
 ```css
-/* Account for iPhone notch and home indicator */
-.page {
+/* /src/styles/base.css */
+.wp-page {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
-
-/* Combined with custom padding */
-.header {
-  padding: 
-    calc(env(safe-area-inset-top) + 1rem)
-    calc(env(safe-area-inset-right) + 1rem)
-    1rem
-    calc(env(safe-area-inset-left) + 1rem);
-}
-```
-
-### Tailwind Safe Area Plugin
-
-```tsx
-// Install: npm install tailwindcss-safe-area
-
-// tailwind.config.js
-module.exports = {
-  plugins: [
-    require('tailwindcss-safe-area'),
-  ],
-}
-
-// Usage
-<div className="pt-safe pb-safe px-safe">
-  <Content />
-</div>
 ```
 
 ---

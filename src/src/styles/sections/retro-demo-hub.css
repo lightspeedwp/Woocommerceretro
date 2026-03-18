@@ -1,0 +1,230 @@
+/**
+ * Retro Demo Hub Index Page
+ * BEM styles for /retro-demo route (RetroDemoIndex)
+ *
+ * @file retro-demo-hub.css
+ * @created 2026-03-18
+ * @source RetroDemoIndex.tsx inline styles refactoring
+ */
+
+/* ==========================================================================
+   Block: .retro-demo-hub (Hero area)
+   ========================================================================== */
+
+.retro-demo-hub__hero {
+  text-align: center;
+  padding: clamp(2rem, 6vw, 4rem) 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-demo-hub__hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.retro-demo-hub__stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.retro-demo-hub__title {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+}
+
+.retro-demo-hub__title-accent {
+  color: var(--color-signal, #00fff9);
+  text-shadow: 0 0 20px rgba(0, 255, 249, 0.4);
+}
+
+.retro-demo-hub__desc {
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  opacity: 0.7;
+  max-width: 550px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Quick Stats
+   ========================================================================== */
+
+.retro-demo-hub__quick-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.retro-demo-hub__stat {
+  text-align: center;
+}
+
+.retro-demo-hub__stat-value {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--color-signal, #00fff9);
+  text-shadow: 0 0 12px rgba(0, 255, 249, 0.4);
+  line-height: 1;
+}
+
+.retro-demo-hub__stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Hex Grid SVG Overlay
+   ========================================================================== */
+
+.retro-demo-hub__hex-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Demo Pages Grid
+   ========================================================================== */
+
+.retro-demo-hub__grid-section {
+  padding: 0 1rem 3rem 1rem;
+}
+
+.retro-demo-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Demo Card — uses CSS custom property --card-accent for dynamic color
+   ========================================================================== */
+
+.retro-demo-hub__card {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--card-accent) 15%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card-accent) 1%, transparent);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-demo-hub__card {
+    transition: none;
+  }
+}
+
+.retro-demo-hub__card:hover {
+  border-color: color-mix(in srgb, var(--card-accent) 38%, transparent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--card-accent) 8%, transparent);
+  transform: translateY(-2px);
+}
+
+.retro-demo-hub__card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.retro-demo-hub__card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--card-accent) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 15%, transparent);
+  flex-shrink: 0;
+}
+
+.retro-demo-hub__card-meta {
+  flex: 1;
+}
+
+.retro-demo-hub__card-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.retro-demo-hub__card-count {
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+
+.retro-demo-hub__card-arrow {
+  opacity: 0.5;
+}
+
+.retro-demo-hub__card-desc {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+}
+
+.retro-demo-hub__card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.retro-demo-hub__tag {
+  padding: 0.1rem 0.4rem;
+  font-size: 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--card-accent) 12%, transparent);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--card-accent) 3%, transparent);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   WCAG Compliance Badge
+   ========================================================================== */
+
+.retro-demo-hub__compliance {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid rgba(0, 255, 249, 0.1);
+}
+
+.retro-demo-hub__compliance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  border-radius: 8px;
+  background: rgba(57, 255, 20, 0.03);
+}
+
+.retro-demo-hub__compliance-title {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.retro-demo-hub__compliance-desc {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}

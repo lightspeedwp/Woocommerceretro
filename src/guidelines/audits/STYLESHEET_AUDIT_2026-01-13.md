@@ -1,5 +1,7 @@
 # Stylesheet Architecture Audit & Animation Enhancement
 
+> **ARCHIVED:** Superseded by March 2026 CSS architecture audits. Retained as historical reference.
+
 **Date:** January 13, 2026  
 **Version:** 1.0  
 **Auditor:** Development Team  

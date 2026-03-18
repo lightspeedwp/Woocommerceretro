@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 
 /**
  * PageFormShowcase Template
@@ -16,7 +17,7 @@ export const PageFormShowcase = () => {
     <>
       <Container className="wp-form-showcase">
         <div className="wp-form-showcase__header">
-          <h1>Form Components Showcase</h1>
+          <Heading level={1}>Form components showcase</Heading>
           <p>
             A comprehensive preview of all standardized form types using the global `.wp-block-*` design system.
           </p>
@@ -26,7 +27,7 @@ export const PageFormShowcase = () => {
 
           {/* 1. Product Review Form */}
           <section className="wp-form-showcase__section">
-            <h2>1. Product Review Form</h2>
+            <Heading level="2">1. Product review form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Rating *</label>
@@ -51,7 +52,7 @@ export const PageFormShowcase = () => {
 
           {/* 2. Blog Post Comments Form */}
           <section className="wp-form-showcase__section">
-            <h2>2. Blog Post Comments Form</h2>
+            <Heading level="2">2. Blog post comments form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Comment</label>
@@ -73,7 +74,7 @@ export const PageFormShowcase = () => {
 
           {/* 3. Contact Form */}
           <section className="wp-form-showcase__section">
-            <h2>3. Contact Form</h2>
+            <Heading level="2">3. Contact form</Heading>
             <form onSubmit={handleSubmit} className="wp-contact-form wp-block-form">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Subject</label>
@@ -89,7 +90,7 @@ export const PageFormShowcase = () => {
 
           {/* 4. Login Form */}
           <section className="wp-form-showcase__section">
-            <h2>4. Login Form</h2>
+            <Heading level="2">4. Login form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Username or email address *</label>
@@ -111,7 +112,7 @@ export const PageFormShowcase = () => {
 
           {/* 5. Registration Form */}
           <section className="wp-form-showcase__section">
-            <h2>5. Registration Form</h2>
+            <Heading level="2">5. Registration form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Email address *</label>
@@ -129,7 +130,7 @@ export const PageFormShowcase = () => {
 
           {/* 6. WooCommerce Checkout Form */}
           <section className="wp-form-showcase__section">
-            <h2>6. WooCommerce Checkout Form (Billing)</h2>
+            <Heading level="2">6. WooCommerce checkout form (billing)</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-form-showcase__grid-2col">
                 <div className="wp-block-form-item">
@@ -170,7 +171,7 @@ export const PageFormShowcase = () => {
 
           {/* 7. My Account - Password Reset */}
           <section className="wp-form-showcase__section">
-            <h2>7. My Account - Password Reset</h2>
+            <Heading level="2">7. My account - password reset</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
               <p>Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.</p>
               <div className="wp-block-form-item">
@@ -183,7 +184,7 @@ export const PageFormShowcase = () => {
 
           {/* 8. My Account - Update Profile */}
           <section className="wp-form-showcase__section">
-            <h2>8. My Account - Update Profile</h2>
+            <Heading level="2">8. My account - update profile</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-form-showcase__grid-2col">
                 <div className="wp-block-form-item">
@@ -227,7 +228,7 @@ export const PageFormShowcase = () => {
 
           {/* 9. My Account - Change Address */}
           <section className="wp-form-showcase__section">
-            <h2>9. My Account - Change Address</h2>
+            <Heading level="2">9. My account - change address</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Country / Region *</label>
@@ -247,7 +248,7 @@ export const PageFormShowcase = () => {
 
           {/* 10. Search Form with Autocomplete */}
           <section className="wp-form-showcase__section">
-            <h2>10. Search Form with Autocomplete</h2>
+            <Heading level="2">10. Search form with autocomplete</Heading>
             <form onSubmit={handleSubmit} className="wp-block-search__button-inside wp-block-search__icon-button wp-block-search">
               <div className="wp-block-search__inside-wrapper">
                 <input
@@ -265,7 +266,7 @@ export const PageFormShowcase = () => {
 
           {/* 11. Newsletter Subscription Form */}
           <section className="wp-form-showcase__section">
-            <h2>11. Newsletter Subscription Form</h2>
+            <Heading level="2">11. Newsletter subscription form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-form-showcase__inline-group">
                 <input type="email" className="wp-block-input funky-input-glow" placeholder="Email address" required />
@@ -282,7 +283,7 @@ export const PageFormShowcase = () => {
 
           {/* 12. Order Tracking Form */}
           <section className="wp-form-showcase__section">
-            <h2>12. Order Tracking Form</h2>
+            <Heading level="2">12. Order tracking form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
               <p>To track your order please enter your Order ID in the box below and press the "Track" button.</p>
               <div className="wp-block-form-item">
@@ -299,7 +300,7 @@ export const PageFormShowcase = () => {
 
           {/* 13. Gift Card Purchase Form */}
           <section className="wp-form-showcase__section">
-            <h2>13. Gift Card Purchase Form</h2>
+            <Heading level="2">13. Gift card purchase form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__narrow">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Amount</label>
@@ -323,7 +324,7 @@ export const PageFormShowcase = () => {
 
           {/* 14. Coupon / Promo Code Form */}
           <section className="wp-form-showcase__section">
-            <h2>14. Coupon / Promo Code Form</h2>
+            <Heading level="2">14. Coupon / promo code form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form wp-form-showcase__inline-group">
               <input type="text" className="wp-block-input funky-input-glow" placeholder="Coupon code" />
               <button type="submit" className="wp-block-button__link wp-element-button">Apply coupon</button>
@@ -332,7 +333,7 @@ export const PageFormShowcase = () => {
 
           {/* 15. Product Enquiry Form */}
           <section className="wp-form-showcase__section">
-            <h2>15. Product Enquiry Form</h2>
+            <Heading level="2">15. Product enquiry form</Heading>
             <form onSubmit={handleSubmit} className="wp-block-form">
               <div className="wp-block-form-item">
                 <label className="wp-block-form-label">Product</label>

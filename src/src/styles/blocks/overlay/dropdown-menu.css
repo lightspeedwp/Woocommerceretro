@@ -47,11 +47,11 @@
 }
 
 .wp-block-dropdown-item--inset {
-  padding-left: 2rem;
+  padding-left: var(--wp--preset--spacing--60);
 }
 
-.wp-block-dropdown-checkbox-item { position: relative; display: flex; cursor: default; user-select: none; align-items: center; border-radius: var(--wp--preset--border-radius--sm); padding: var(--wp--preset--spacing--15) var(--wp--preset--spacing--20); padding-left: 2rem; font-size: var(--wp--preset--font-size--sm); outline: none; transition: background-color var(--wp--preset--transition--base); }
-.wp-block-dropdown-radio-item { position: relative; display: flex; cursor: default; user-select: none; align-items: center; border-radius: var(--wp--preset--border-radius--sm); padding: var(--wp--preset--spacing--15) var(--wp--preset--spacing--20); padding-left: 2rem; font-size: var(--wp--preset--font-size--sm); outline: none; transition: background-color var(--wp--preset--transition--base); }
+.wp-block-dropdown-checkbox-item { position: relative; display: flex; cursor: default; user-select: none; align-items: center; border-radius: var(--wp--preset--border-radius--sm); padding: var(--wp--preset--spacing--15) var(--wp--preset--spacing--20); padding-left: var(--wp--preset--spacing--60); font-size: var(--wp--preset--font-size--sm); outline: none; transition: background-color var(--wp--preset--transition--base); }
+.wp-block-dropdown-radio-item { position: relative; display: flex; cursor: default; user-select: none; align-items: center; border-radius: var(--wp--preset--border-radius--sm); padding: var(--wp--preset--spacing--15) var(--wp--preset--spacing--20); padding-left: var(--wp--preset--spacing--60); font-size: var(--wp--preset--font-size--sm); outline: none; transition: background-color var(--wp--preset--transition--base); }
 
 .wp-block-dropdown-checkbox-item:focus { background-color: var(--wp--preset--color--accent); color: var(--wp--preset--color--accent-foreground); }
 .wp-block-dropdown-checkbox-item:hover { background-color: var(--wp--preset--color--accent); color: var(--wp--preset--color--accent-foreground); }
@@ -60,7 +60,7 @@
 
 .wp-block-dropdown-item-indicator {
   position: absolute;
-  left: 0.5rem;
+  left: var(--wp--preset--spacing--20);
   display: flex;
   height: 0.875rem;
   width: 0.875rem;
@@ -82,7 +82,7 @@
 }
 
 .wp-block-dropdown-label--inset {
-  padding-left: 2rem;
+  padding-left: var(--wp--preset--spacing--60);
 }
 
 .wp-block-dropdown-shortcut {
@@ -108,7 +108,7 @@
 .wp-block-dropdown-sub-trigger[data-state="open"] { background-color: var(--wp--preset--color--accent); color: var(--wp--preset--color--accent-foreground); }
 
 .wp-block-dropdown-sub-trigger--inset {
-  padding-left: 2rem;
+  padding-left: var(--wp--preset--spacing--60);
 }
 
 .wp-block-dropdown-sub-trigger-icon {

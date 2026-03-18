@@ -113,7 +113,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
 
               {currentStep === 2 && (
                 <div className="retro-subscription-message">
-                  <p className="retro-font-body" style={{ textAlign: 'center' }}>
+                  <p className="retro-font-body">
                     Thank you for subscribing! Your first mystery box is being prepared...
                   </p>
                 </div>
@@ -121,7 +121,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
 
               {currentStep === 3 && (
                 <div className="retro-subscription-message">
-                  <p className="retro-font-body" style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                  <p className="retro-font-body retro-subscription-message__text">
                     🎉 Your first box is ready! Check your email for tracking info.
                   </p>
                   <Link to="/account/subscriptions" className="retro-btn retro-btn--primary retro-font-display">
@@ -144,7 +144,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
               {/* Benefit 1 */}
               <div className="retro-card">
                 <div className="retro-card-icon">
-                  <Star size={48} weight="fill" color="#00fff9" />
+                  <Star size={48} weight="fill" color="var(--retro-neon-cyan, #00fff9)" />
                 </div>
                 <h3 className="retro-card__title retro-font-display retro-bold">
                   EXCLUSIVE MEMBER DROPS
@@ -157,7 +157,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
               {/* Benefit 2 */}
               <div className="retro-card">
                 <div className="retro-card-icon">
-                  <Gift size={48} weight="fill" color="#ff00ff" />
+                  <Gift size={48} weight="fill" color="var(--retro-neon-magenta, #ff00ff)" />
                 </div>
                 <h3 className="retro-card__title retro-font-display retro-bold">
                   MONTHLY LOOT BOXES
@@ -170,7 +170,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
               {/* Benefit 3 */}
               <div className="retro-card">
                 <div className="retro-card-icon">
-                  <ArrowRight size={48} weight="bold" color="#ffff00" />
+                  <ArrowRight size={48} weight="bold" color="var(--retro-neon-yellow, #ffff00)" />
                 </div>
                 <h3 className="retro-card__title retro-font-display retro-bold">
                   VIP SUPPORT CHANNEL
@@ -211,7 +211,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
 
               {/* Quarterly */}
               <div className="retro-card retro-card--highlight">
-                <div className="retro-badge" style={{ position: 'absolute', top: '-12px', right: '12px' }}>
+                <div className="retro-badge retro-badge--floating">
                   POPULAR
                 </div>
                 <h3 className="retro-card__title retro-font-display retro-bold">
@@ -328,7 +328,7 @@ export const MembershipSubscription3DRetro: React.FC = () => {
         .retro-step-dot--active {
           border-color: var(--retro-neon-cyan);
           background: var(--retro-neon-cyan);
-          color: #1a1a1a;
+          color: var(--retro-bg-primary, #1a1a1a);
           box-shadow: 0 0 20px var(--retro-neon-cyan);
         }
 

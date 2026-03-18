@@ -11,7 +11,7 @@ import { Palette, TextT, Stack as Layers, GridFour, Check, Copy, Sparkle } from 
  * @template
  * @route /dev-tools/style-guide
  */
-const PageStyleGuide = () => {
+export const PageStyleGuide = () => {
   const [activeTab, setActiveTab] = useState('colors');
 
   const handleCopyColor = (color: string) => {
@@ -20,40 +20,14 @@ const PageStyleGuide = () => {
 
   const ColorSwatch = ({ name, value, usage, bgColor }: { name: string; value: string; usage: string; bgColor: string }) => (
     <button
+      className="retro-color-card"
       onClick={() => handleCopyColor(value)}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'left',
-        border: '4px solid var(--color-ink)',
-        backgroundColor: 'var(--color-paper)',
-        cursor: 'pointer',
-        boxShadow: '4px 4px 0 var(--color-ink)',
-        padding: '0',
-        transition: 'transform 0.1s, box-shadow 0.1s'
-      }}
-      onMouseEnter={(ev) => {
-        ev.currentTarget.style.transform = 'translate(-2px, -2px)';
-        ev.currentTarget.style.boxShadow = '6px 6px 0 var(--color-ink)';
-      }}
-      onMouseLeave={(ev) => {
-        ev.currentTarget.style.transform = 'none';
-        ev.currentTarget.style.boxShadow = '4px 4px 0 var(--color-ink)';
-      }}
-      onMouseDown={(ev) => {
-        ev.currentTarget.style.transform = 'translate(4px, 4px)';
-        ev.currentTarget.style.boxShadow = '0px 0px 0 var(--color-ink)';
-      }}
-      onMouseUp={(ev) => {
-        ev.currentTarget.style.transform = 'translate(-2px, -2px)';
-        ev.currentTarget.style.boxShadow = '6px 6px 0 var(--color-ink)';
-      }}
     >
-      <div style={{ height: '100px', width: '100%', backgroundColor: bgColor, borderBottom: '4px solid var(--color-ink)' }} />
-      <div style={{ padding: '1rem' }}>
-        <div className="retro-font-display retro-bold" style={{ fontSize: '1.25rem', marginBottom: '0.25rem', color: 'var(--color-ink)' }}>{name}</div>
-        <div className="retro-font-body" style={{ fontSize: '0.875rem', marginBottom: '0.5rem', color: 'var(--color-signal)' }}>{value}</div>
-        <div className="retro-font-body" style={{ fontSize: '0.75rem', color: 'var(--color-ink)', opacity: 0.8 }}>{usage}</div>
+      <div className="retro-color-card__swatch" style={{ backgroundColor: bgColor }} />
+      <div className="retro-color-card__info">
+        <div className="retro-font-display retro-bold retro-color-card__name">{name}</div>
+        <div className="retro-font-body retro-color-card__value">{value}</div>
+        <div className="retro-font-body retro-color-card__usage">{usage}</div>
       </div>
     </button>
   );
@@ -92,27 +66,14 @@ const PageStyleGuide = () => {
   return (
     <>
       <DarkModeToggle />
-      <div className="retro-devtools-page" style={{ backgroundColor: 'var(--color-paper)', color: 'var(--color-ink)', minHeight: '100vh', paddingBottom: '4rem' }}>
+      <div className="retro-devtools-page retro-style-guide">
 
         {/* Header Section */}
-        <section style={{
-          padding: '3rem 0',
-          borderBottom: '4px solid var(--color-ink)',
-          backgroundColor: 'var(--color-signal)',
-          backgroundImage: 'radial-gradient(var(--color-ink) 2px, transparent 2px)',
-          backgroundSize: '16px 16px',
-        }}>
+        <section className="retro-style-guide__header">
           <Container>
-            <div style={{
-              backgroundColor: 'var(--color-ink)',
-              padding: '2rem',
-              border: '4px solid var(--color-ink)',
-              boxShadow: '8px 8px 0 rgba(0,0,0,0.2)',
-              display: 'inline-block',
-              color: 'var(--color-paper)'
-            }}>
-              <h1 className="retro-font-display retro-bold" style={{ fontSize: '3rem', margin: '0 0 1rem 0' }}>STYLE GUIDE</h1>
-              <p className="retro-font-body" style={{ fontSize: '1.125rem', margin: 0, opacity: 0.9 }}>
+            <div className="retro-style-guide__title-box">
+              <h1 className="retro-font-display retro-bold retro-style-guide__title">STYLE GUIDE</h1>
+              <p className="retro-font-body retro-style-guide__subtitle">
                 Interactive design system reference with colors, typography, spacing, and component examples.
               </p>
             </div>
@@ -120,22 +81,16 @@ const PageStyleGuide = () => {
         </section>
 
         {/* Overview Cards */}
-        <section style={{ padding: '4rem 0' }}>
+        <section className="retro-style-guide__overview">
           <Container>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+            <div className="retro-style-guide__overview-grid">
               {overviewCards.map((item, idx) => (
-                <div key={idx} style={{
-                  backgroundColor: 'var(--color-paper-deep)',
-                  border: '4px solid var(--color-ink)',
-                  padding: '2rem',
-                  textAlign: 'center',
-                  boxShadow: '4px 4px 0 var(--color-ink)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', color: 'var(--color-signal)' }}>
+                <div key={idx} className="retro-style-guide__overview-card">
+                  <div className="retro-style-guide__overview-icon">
                     <item.icon size={48} weight="bold" />
                   </div>
-                  <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{item.title}</h3>
-                  <p className="retro-font-body" style={{ margin: 0, fontSize: '0.875rem', opacity: 0.8 }}>{item.desc}</p>
+                  <h3 className="retro-font-display retro-bold retro-style-guide__overview-title">{item.title}</h3>
+                  <p className="retro-font-body retro-style-guide__overview-desc">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -143,18 +98,18 @@ const PageStyleGuide = () => {
         </section>
 
         {/* Colors Section */}
-        <section style={{ padding: '4rem 0', backgroundColor: 'var(--color-paper-deep)', borderTop: '4px solid var(--color-ink)', borderBottom: '4px solid var(--color-ink)' }}>
+        <section className="retro-style-guide__section retro-style-guide__section--alt">
           <Container>
-            <div style={{ marginBottom: '3rem' }}>
-              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>COLOR PALETTE</h2>
-              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>Click any color to copy its hex value to your clipboard</p>
+            <div className="retro-style-guide__section-header">
+              <h2 className="retro-font-display retro-bold retro-style-guide__section-title">COLOR PALETTE</h2>
+              <p className="retro-font-body retro-style-guide__section-desc">Click any color to copy its hex value to your clipboard</p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+            <div className="retro-style-guide__color-groups">
               {/* Brand Colors */}
               <div>
-                <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--color-signal)', textTransform: 'uppercase' }}>Base Theme Colors</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '2rem' }}>
+                <h3 className="retro-font-display retro-bold retro-style-guide__color-group-title">Base theme colors</h3>
+                <div className="retro-style-guide__color-grid">
                   <ColorSwatch name="Paper" value="var(--color-paper)" bgColor="var(--color-paper)" usage="Main background color" />
                   <ColorSwatch name="Paper Deep" value="var(--color-paper-deep)" bgColor="var(--color-paper-deep)" usage="Alt background / cards" />
                   <ColorSwatch name="Ink" value="var(--color-ink)" bgColor="var(--color-ink)" usage="Primary text & borders" />
@@ -164,8 +119,8 @@ const PageStyleGuide = () => {
 
               {/* Semantic Colors */}
               <div>
-                <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--color-signal)', textTransform: 'uppercase' }}>Semantic Colors</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '2rem' }}>
+                <h3 className="retro-font-display retro-bold retro-style-guide__color-group-title">Semantic colors</h3>
+                <div className="retro-style-guide__color-grid">
                   <ColorSwatch name="Success" value="var(--wp--preset--color--success)" bgColor="var(--wp--preset--color--success)" usage="Confirmations" />
                   <ColorSwatch name="Error" value="var(--wp--preset--color--error)" bgColor="var(--wp--preset--color--error)" usage="Warnings & destructive" />
                   <ColorSwatch name="Muted" value="var(--color-muted)" bgColor="var(--color-muted)" usage="Secondary text" />
@@ -176,43 +131,23 @@ const PageStyleGuide = () => {
         </section>
 
         {/* Typography Section */}
-        <section style={{ padding: '4rem 0' }}>
+        <section className="retro-style-guide__section">
           <Container>
-            <div style={{ marginBottom: '3rem' }}>
-              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>TYPOGRAPHY SCALE</h2>
-              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>Fluid typography system with responsive scaling across all device sizes</p>
+            <div className="retro-style-guide__section-header">
+              <h2 className="retro-font-display retro-bold retro-style-guide__section-title">TYPOGRAPHY SCALE</h2>
+              <p className="retro-font-body retro-style-guide__section-desc">Fluid typography system with responsive scaling across all device sizes</p>
             </div>
 
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem',
-              backgroundColor: 'var(--color-paper-deep)',
-              border: '4px solid var(--color-ink)',
-              padding: '2rem',
-              boxShadow: '4px 4px 0 var(--color-ink)'
-            }}>
+            <div className="retro-style-guide__type-panel">
               {typographyScale.map((item, idx) => (
-                <div key={idx} style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem',
-                  borderBottom: idx < 6 ? '2px dashed var(--color-ink)' : 'none',
-                  paddingBottom: idx < 6 ? '2rem' : '0'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <span className="retro-font-display retro-bold" style={{ color: 'var(--color-signal)' }}>{item.label}</span>
-                    <code style={{
-                      backgroundColor: 'var(--color-ink)',
-                      color: 'var(--color-paper)',
-                      padding: '0.25rem 0.5rem',
-                      borderRadius: '2px',
-                      fontSize: '0.75rem'
-                    }}>
+                <div key={idx} className={`retro-style-guide__type-row${idx < 6 ? ' retro-style-guide__type-row--border' : ''}`}>
+                  <div className="retro-style-guide__type-meta">
+                    <span className="retro-font-display retro-bold retro-style-guide__type-label">{item.label}</span>
+                    <code className="retro-style-guide__type-tag">
                       {item.tag}
                     </code>
                   </div>
-                  <div className={item.class} style={{ fontSize: item.size, margin: 0, lineHeight: 1.2 }}>{item.example}</div>
+                  <div className={`${item.class} retro-style-guide__type-sample`} style={{ fontSize: item.size }}>{item.example}</div>
                 </div>
               ))}
             </div>
@@ -220,41 +155,23 @@ const PageStyleGuide = () => {
         </section>
 
         {/* Spacing Section */}
-        <section style={{ padding: '4rem 0', backgroundColor: 'var(--color-paper-deep)', borderTop: '4px solid var(--color-ink)' }}>
+        <section className="retro-style-guide__section retro-style-guide__section--alt-top">
           <Container>
-            <div style={{ marginBottom: '3rem' }}>
-              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>SPACING SCALE</h2>
-              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>4px-based spacing system with CSS custom properties for consistent layouts</p>
+            <div className="retro-style-guide__section-header">
+              <h2 className="retro-font-display retro-bold retro-style-guide__section-title">SPACING SCALE</h2>
+              <p className="retro-font-body retro-style-guide__section-desc">4px-based spacing system with CSS custom properties for consistent layouts</p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="retro-style-guide__spacing-list">
               {spacingScale.map((item, idx) => (
-                <div key={idx} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2rem',
-                  backgroundColor: 'var(--color-paper)',
-                  border: '2px solid var(--color-ink)',
-                  padding: '1rem',
-                  boxShadow: '2px 2px 0 var(--color-ink)'
-                }}>
-                  <div style={{
-                    width: `${item.size}px`,
-                    height: '40px',
-                    backgroundColor: 'var(--color-signal)',
-                    border: '1px solid var(--color-ink)'
-                  }} />
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flex: 1, flexWrap: 'wrap' }}>
-                    <span className="retro-font-display retro-bold" style={{ width: '40px' }}>{item.name}</span>
-                    <code style={{
-                      backgroundColor: 'var(--color-paper-deep)',
-                      padding: '0.25rem 0.5rem',
-                      border: '1px solid var(--color-ink)',
-                      fontSize: '0.875rem'
-                    }}>
+                <div key={idx} className="retro-style-guide__spacing-row">
+                  <div className="retro-style-guide__spacing-bar" style={{ width: `${item.size}px` }} />
+                  <div className="retro-style-guide__spacing-info">
+                    <span className="retro-font-display retro-bold retro-style-guide__spacing-name">{item.name}</span>
+                    <code className="retro-style-guide__spacing-var">
                       {item.var}
                     </code>
-                    <span className="retro-font-body" style={{ marginLeft: 'auto', color: 'var(--color-signal)', fontWeight: 'bold' }}>{item.px}</span>
+                    <span className="retro-font-body retro-style-guide__spacing-px">{item.px}</span>
                   </div>
                 </div>
               ))}

@@ -92,7 +92,7 @@ export const ArchiveBlogAuthorRetro = () => {
                     <Link to={'/blog/' + post.slug} className="retro-blog-card__img-link">
                       <img
                         src={post.featuredImage || FALLBACK_IMAGE}
-                        alt=""
+                        alt={post.title}
                         className="retro-blog-card__img"
                         loading="lazy"
                       />

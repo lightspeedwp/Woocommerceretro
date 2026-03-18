@@ -179,3 +179,11 @@
 .dark .wc-block-product-comparison__icon-btn--wishlisted { background: rgba(255, 0, 255, 0.1); }
 
 .wc-block-product-comparison__heart--active { fill: currentColor; }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wc-block-product-comparison__card,
+  .wc-block-product-comparison__icon-btn {
+    transition: none;
+  }
+}

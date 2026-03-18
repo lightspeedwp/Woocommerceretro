@@ -270,6 +270,7 @@
 @import "../src/styles/sections/info-pages-funky.css";
 @import "../src/styles/sections/instagram-feed.css";
 @import "../src/styles/sections/legal-pages-funky.css";
+@import "../src/styles/sections/live-preview.css";
 @import "../src/styles/sections/loyalty-funky.css";
 @import "../src/styles/sections/loyalty-retro.css";
 @import "../src/styles/sections/newsletter.css";
@@ -284,6 +285,7 @@
 @import "../src/styles/sections/shop-funky.css";
 @import "../src/styles/sections/shop-info-footer.css";
 @import "../src/styles/sections/social-feed.css";
+@import "../src/styles/sections/social-redirect.css";
 @import "../src/styles/sections/stats.css";
 @import "../src/styles/sections/team.css";
 @import "../src/styles/sections/testimonials.css";
@@ -296,7 +298,9 @@
 @import "../src/styles/sections/sweep-brand-grid.css";
 @import "../src/styles/sections/sweep-account.css";
 @import "../src/styles/sections/sweep-account-badges.css";
-@import "../src/styles/sections/account-dashboard-widgets.css";
+@import "../src/styles/sections/account-dashboard-welcome.css";
+@import "../src/styles/sections/account-dashboard-content.css";
+@import "../src/styles/sections/account-dashboard-sidebar.css";
 @import "../src/styles/sections/sweep-shop-pages.css";
 @import "../src/styles/sections/sweep-shop-misc.css";
 
@@ -375,6 +379,16 @@
 
 /* @IMPORT: Funky utility classes */
 @import "../src/styles/blocks/ui/funky-utilities.css";
+
+/* @IMPORT: Dev Tools Showcase Page */
+@import "../src/styles/sections/devtools-showcase.css";
+
+/* @IMPORT: Dev Tools Style Guide Page */
+@import "../src/styles/sections/devtools-style-guide.css";
+
+/* @IMPORT: Retro Demo Pages */
+@import "../src/styles/sections/retro-demo-hub.css";
+@import "../src/styles/sections/retro-demo-landing.css";
 
 /* @IMPORT: Extracted from inline CSS (March 16, 2026) */
 @import "../src/styles/blocks/cart/funky-cart.css";

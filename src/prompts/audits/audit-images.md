@@ -104,8 +104,8 @@ Findings are classified by priority:
 
 ## Output
 
-**Report location:** `/reports/audits/YYYY-MM-DD_images-audit.md`
-**Task list location:** `/tasks/images-task-list.md` (created only after report is complete)
+**Report location:** `/reports/audits/YYYY-MM-DD_images-audit.md` with `Status: Unprocessed`.
+Do NOT create task lists.
 
 ---
 

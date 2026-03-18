@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Loader2 as SpinnerGap } from 'lucide-react';
+import { SpinnerGap } from '../../../utils/phosphor-compat';
 
 interface ButtonProps {
   variant?: string;

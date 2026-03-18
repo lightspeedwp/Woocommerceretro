@@ -2,8 +2,8 @@
 
 **Type:** Process  
 **Status:** Complete  
-**Version:** 1.0  
-**Last Updated:** January 9, 2026  
+**Version:** 1.1  
+**Last Updated:** March 18, 2026  
 **Purpose:** Standardize file import practices, naming conventions, and organization for the WooCommerce Prototype project.
 
 ---
@@ -453,28 +453,53 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 ---
 
-## 📊 Import Decision Tree
+## 📊 Import Method Summary
 
-```
-                    Need to import an asset?
-                              |
-                              v
-                    What type of asset?
-                              |
-        +--------------------+--------------------+
-        |                    |                    |
-        v                    v                    v
-    IMAGE?               SVG?                 OTHER?
-        |                    |                    |
-        v                    v                    v
-  From Figma?          From Figma?         What type?
-    /      \               |                /    |    \
-   /        \              v               /     |     \
-YES        NO      Use relative       FONT    DATA   CSS
-  |          |          path              |       |      |
-  v          v            |               v       v      v
-figma:     relative    import svg    @font-   import  @import
-asset      path        from path     face     .json   .css
+| Asset Type | Import Method | Example |
+|------------|---------------|---------|
+| Raster Images | `figma:asset` | `import heroImg from "figma:asset/76faf8f617b56e6f.png";` |
+| SVG Vectors | Relative Path | `import svgIconPaths from "../../../imports/vectors/svg-icon-cart-abc123";` |
+| Local Images | Relative Path | `import productImg from "../../../imports/images/products/tshirt-blue-500x500.png";` |
+| Fonts | CSS @font-face | `@font-face { font-family: 'Inter'; src: url('/src/app/imports/fonts/woff2/inter-400-normal.woff2') format('woff2'); }` |
+| Data Files | ES6 Import | `import productsData from "../../../imports/data/products/featured.json";` |
+
+---
+
+## 🎯 Figma Import Exemptions
+
+### **Scope**
+
+Figma-generated code in `/imports/` may contain Tailwind CSS utility classes from auto-generation. These files are **exempt** from BEM requirements while they remain in the imports directory.
+
+### **BEM conversion workflow**
+
+When extracting a Figma import for use as a project component:
+
+1. Copy the component to the appropriate `/src/app/components/` directory
+2. Replace all Tailwind utility classes with WordPress BEM class names
+3. Create a corresponding CSS file in `/src/styles/` (blocks or sections)
+4. Add the `@import` to `/styles/globals.css`
+5. Remove all static inline `style={{}}` objects — move to CSS
+6. Keep only genuinely dynamic inline styles (computed colors, CSS custom properties, data-driven dimensions)
+7. Follow standard BEM naming: `.block__element--modifier`
+
+### **Dynamic inline style exceptions**
+
+These patterns are acceptable as inline styles because they cannot be expressed in static CSS:
+
+```tsx
+// ✅ OK — Dynamic color from data
+style={{ backgroundColor: item.color }}
+
+// ✅ OK — CSS custom property for color-mix()
+style={{ '--card-accent': page.color } as React.CSSProperties}
+
+// ✅ OK — Computed value from props/state
+style={{ width: `${progress}%` }}
+
+// ❌ NOT OK — Static value (move to CSS)
+style={{ marginBottom: '2rem' }}
+style={{ display: 'flex', gap: '1rem' }}
 ```
 
 ---
@@ -763,19 +788,11 @@ import iconPaths from "../imports/vectors/svg-icon-abc123";
 
 ---
 
-## 📊 Import Method Summary
-
-| Asset Type | Import Method | Example |
-|------------|---------------|---------|
-| **Figma Raster Images** | `figma:asset` | `import img from "figma:asset/abc.png"` |
-| **SVG Vectors** | Relative path | `import svg from "../imports/vectors/svg-icon-abc"` |
-| **Local Images** | Relative path | `import img from "../imports/images/img.png"` |
-| **Custom Fonts** | CSS @font-face | `url('/src/app/imports/fonts/font.woff2')` |
-| **Data Files** | ES6 import | `import data from "../imports/data/data.json"` |
-
----
-
 ## 🔄 Changelog
+
+### v1.1 - 2026-03-18
+- Added Figma Import Exemptions section
+- Documented BEM conversion workflow for Figma imports
 
 ### v1.0 - 2026-01-09
 - Initial documentation
@@ -792,4 +809,4 @@ import iconPaths from "../imports/vectors/svg-icon-abc123";
 
 **Status:** ✅ Complete  
 **Maintainer:** Project Team  
-**Last Review:** January 9, 2026
+**Last Review:** March 18, 2026

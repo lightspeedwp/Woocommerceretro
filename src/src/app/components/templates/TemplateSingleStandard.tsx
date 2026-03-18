@@ -4,6 +4,7 @@ import { Tag, Calendar as CalendarIcon, User, Chat as MessageSquare } from '../.
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 import { getPostBySlug, getMediaSource } from '../../data/posts';
 import { postCategories } from '../../data/categories';
 import { tags } from '../../data/tags';
@@ -98,7 +99,7 @@ export const TemplateSingleStandard = () => {
             <div className="single-standard__discussion">
               <div className="single-standard__discussion-header">
                 <MessageSquare size={20} />
-                <h3>Discussion</h3>
+                <Heading level="3">Discussion</Heading>
               </div>
               <div className="single-standard__discussion-empty">
                 <p>Comments are closed for this post.</p>

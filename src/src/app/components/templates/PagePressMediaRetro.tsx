@@ -21,8 +21,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { DownloadSimple as Download, Envelope, ArrowRight, Newspaper } from '../../utils/phosphor-compat';
-import { Camera } from 'lucide-react';
+import { DownloadSimple as Download, Envelope, ArrowRight, Newspaper, Camera } from '../../utils/phosphor-compat';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';

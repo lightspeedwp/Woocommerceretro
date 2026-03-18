@@ -48,6 +48,13 @@ Audit WCAG AA 2.2 compliance across interactive components, forms, navigation, a
 13. **Skip navigation** — verify skip link target exists on all templates
 14. **Language attribute** — verify `<html lang="en">` is set
 
+## Guidelines Referenced
+
+- `/guidelines/Guidelines.md` Section 2.4
+- `/guidelines/REDUCED_MOTION_GUIDELINES.md`
+- `/guidelines/interactions/focus-management.md`
+- `/guidelines/mobile/buttons.md`
+
 ## Output
 
 Write report to `/reports/audits/YYYY-MM-DD_a11y-audit.md` with `Status: Unprocessed`.  

@@ -280,7 +280,7 @@
 .retro-account-layout__nav-divider {
   border: none;
   border-top: 2px dashed var(--color-ink);
-  margin: 1rem 0;
+  margin: var(--wp--preset--spacing--40) 0;
 }
 
 .retro-account-layout__main {
@@ -447,7 +447,7 @@
 }
 
 .retro-orders__card-meta {
-  margin: 0.25rem 0;
+  margin: var(--wp--preset--spacing--10) 0;
 }
 
 .retro-orders__card-total {

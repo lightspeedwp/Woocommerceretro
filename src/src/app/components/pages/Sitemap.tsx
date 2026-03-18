@@ -13,14 +13,15 @@
 import { useState, useMemo, useCallback, memo, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import {
-  Home as House, Store as Storefront, ShoppingBag, User, BookOpenText, Info,
-  Tag, HelpCircle as Question, Headphones, CreditCard, ShieldCheck, AlertTriangle as Warning, Wrench,
-  Search as MagnifyingGlass, ChevronDown as CaretDown, ExternalLink as ArrowSquareOut, Map as MapTrifold,
-  Gamepad2 as GameController, Users, CheckCircle, Code, Palette, FileText, Rocket
-} from 'lucide-react';
+  House, Storefront, ShoppingBag, User, BookOpenText, Info,
+  Tag, Question, Headphones, CreditCard, ShieldCheck, Warning, Wrench,
+  MagnifyingGlass, CaretDown, ArrowSquareOut, MapTrifold,
+  GameController, Users, CheckCircle, Code, Palette, FileText, Rocket
+} from '@phosphor-icons/react';
 import { HeaderRetro } from '../parts/HeaderRetro';
 import { FooterRetro } from '../parts/FooterRetro';
 import { DevToolsStatsBar } from '../blocks/dev-tools/DevToolsStatsBar';
+import { Heading } from '../common/Heading';
 
 interface RouteItem {
   path: string;
@@ -40,7 +41,7 @@ interface RouteSection {
 const ROUTE_SECTIONS: RouteSection[] = [
     {
       title: 'Core Pages',
-      icon: <House size={20} weight="bold" />,
+      icon: <House size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/', label: 'Homepage (PlayPocket)', description: 'Main retro FSE landing page' },
         { path: '/search', label: 'Search', description: 'Global product search' },
@@ -52,7 +53,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Shop & Products',
-      icon: <Storefront size={20} weight="bold" />,
+      icon: <Storefront size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/shop', label: 'Shop', description: 'Main product archive' },
         { path: '/shop/all', label: 'Shop - All', description: 'All products listing' },
@@ -80,7 +81,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Cart & Checkout',
-      icon: <ShoppingBag size={20} weight="bold" />,
+      icon: <ShoppingBag size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/cart', label: 'Shopping Cart', description: 'View cart' },
         { path: '/checkout', label: 'Checkout', description: 'Checkout page' },
@@ -90,7 +91,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Account & Profile',
-      icon: <User size={20} weight="bold" />,
+      icon: <User size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/account/login', label: 'Login / Register', description: 'Authentication page' },
         { path: '/register', label: 'Register (New Game)', description: 'New account registration' },
@@ -107,7 +108,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Blog & Content',
-      icon: <BookOpenText size={20} weight="bold" />,
+      icon: <BookOpenText size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/blog', label: 'Blog Index', description: 'All blog posts' },
         { path: '/blog/category/development', label: 'Category: Development', description: 'Coding and engineering topics', dynamic: true },
@@ -127,7 +128,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Blog Format Archives',
-      icon: <Headphones size={20} weight="bold" />,
+      icon: <Headphones size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/blog/format/standard', label: 'Articles (Standard)', description: 'Standard article archive' },
         { path: '/blog/format/audio', label: 'Podcasts (Audio)', description: 'Audio post archive' },
@@ -138,7 +139,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'About & Company',
-      icon: <Info size={20} weight="bold" />,
+      icon: <Info size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/about', label: 'About Us', description: 'Company information' },
         { path: '/about/our-story', label: 'Our story', description: 'Brand story' },
@@ -151,7 +152,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Subscriptions & Memberships',
-      icon: <CreditCard size={20} weight="bold" />,
+      icon: <CreditCard size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/subscriptions', label: 'Subscription Plans', description: 'Browse subscription products' },
         { path: '/subscription/monthly', label: 'Single Subscription', description: 'Example subscription page (Monthly)', dynamic: true },
@@ -162,7 +163,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Promotions & Sales',
-      icon: <Tag size={20} weight="bold" />,
+      icon: <Tag size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/promotions', label: 'Promotions Hub', description: 'All promotions' },
         { path: '/promotions/flash-sale', label: 'Flash Sale', description: 'Limited time sale' },
@@ -176,7 +177,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Gaming & Rewards',
-      icon: <GameController size={20} weight="bold" />,
+      icon: <GameController size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/achievements', label: 'Achievements', description: 'Trophy room with unlockable badges' },
         { path: '/leaderboard', label: 'Leaderboard', description: 'Top players by XP and loyalty points' },
@@ -187,7 +188,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Community & Engagement',
-      icon: <Users size={20} weight="bold" />,
+      icon: <Users size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/community', label: 'Community Hub', description: 'Player lounge with social feed and contributors' },
         { path: '/referral', label: 'Referral Program', description: 'Invite friends and earn reward tiers' },
@@ -196,7 +197,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Retro Demo Pages',
-      icon: <Rocket size={20} weight="bold" />,
+      icon: <Rocket size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/retro-demo', label: 'Retro Demo Hub', description: 'Overview of all retro demo pages and pattern showcase index' },
         { path: '/retro-demo/landing-page', label: 'Marketing Landing Page', description: '15+ retro patterns: Hero, Stats, Pricing, FAQ, 3D effects, Newsletter, and more' },
@@ -204,7 +205,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Help & Support',
-      icon: <Question size={20} weight="bold" />,
+      icon: <Question size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/help', label: 'Help Center', description: 'Support hub' },
         { path: '/shipping-returns', label: 'Shipping & Returns', description: 'Shipping info' },
@@ -224,7 +225,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Legal & Policies',
-      icon: <ShieldCheck size={20} weight="bold" />,
+      icon: <ShieldCheck size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/privacy-policy', label: 'Privacy Policy', description: 'Privacy information' },
         { path: '/terms-and-conditions', label: 'Terms & Conditions', description: 'Terms of service' },
@@ -239,7 +240,7 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Error Pages',
-      icon: <Warning size={20} weight="bold" />,
+      icon: <Warning size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/error/404', label: '404 Not Found (Demo)', description: 'Test 404 page' },
         { path: '/error/500', label: '500 Server Error (Demo)', description: 'Test 500 page' },
@@ -250,13 +251,13 @@ const ROUTE_SECTIONS: RouteSection[] = [
     },
     {
       title: 'Development Tools',
-      icon: <Wrench size={20} weight="bold" />,
+      icon: <Wrench size={20} weight="bold" aria-hidden="true" />,
       routes: [
         { path: '/dev-tools', label: 'Dev Tools Hub', description: 'Developer tools index' },
         { path: '/dev-tools/style-guide', label: 'Style Guide', description: 'Design system reference' },
         { path: '/dev-tools/showcase', label: 'Component Showcase', description: 'Component gallery' },
         { path: '/dev-tools/forms', label: 'Form Showcase', description: 'Form elements reference' },
-        { path: '/dev-tools/icons', label: 'Icon Library', description: 'Lucide icons browser' },
+        { path: '/dev-tools/icons', label: 'Icon Library', description: 'Phosphor icons browser' },
         { path: '/dev-tools/api', label: 'Component API', description: 'Component API docs' },
         { path: '/dev-tools/live-preview', label: 'Live Preview', description: 'Live component preview' },
         { path: '/dev-tools/performance', label: 'Performance', description: 'Web Vitals monitoring (temporarily disabled)' },
@@ -354,9 +355,9 @@ export const Sitemap = () => {
             <div className="retro-sitemap__hero-card">
               <MapTrifold size={48} weight="bold" className="retro-sitemap__hero-icon" />
               <div className="retro-sitemap__hero-text">
-                <h1 className="retro-font-display retro-bold retro-sitemap__hero-title">
+                <Heading level={1} className="retro-font-display retro-bold retro-sitemap__hero-title">
                   SITE NAVIGATION
-                </h1>
+                </Heading>
                 <p className="retro-font-body retro-sitemap__hero-desc">
                   Welcome to PlayPocket! Find any page quickly using the search below or browse by category.
                 </p>
@@ -421,15 +422,15 @@ export const Sitemap = () => {
           {/* Project Architecture Status */}
           {!isSearching && (
             <div className="retro-sitemap__architecture">
-              <h2 className="retro-font-display retro-bold retro-sitemap__architecture-title">
+              <Heading level={2} className="retro-font-display retro-bold retro-sitemap__architecture-title">
                 <Code size={24} weight="bold" />
                 PROJECT ARCHITECTURE
-              </h2>
+              </Heading>
               <div className="retro-sitemap__architecture-grid">
                 <div className="retro-sitemap__arch-card">
                   <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
                   <div className="retro-sitemap__arch-content">
-                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">Templates</h3>
+                    <Heading level={3} className="retro-font-display retro-bold retro-sitemap__arch-heading">Templates</Heading>
                     <p className="retro-font-body retro-sitemap__arch-stat">23/23 Complete</p>
                     <p className="retro-font-body retro-sitemap__arch-desc">All templates converted to retro theme</p>
                   </div>
@@ -438,7 +439,7 @@ export const Sitemap = () => {
                 <div className="retro-sitemap__arch-card">
                   <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
                   <div className="retro-sitemap__arch-content">
-                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">P0 Blocks</h3>
+                    <Heading level={3} className="retro-font-display retro-bold retro-sitemap__arch-heading">P0 Blocks</Heading>
                     <p className="retro-font-body retro-sitemap__arch-stat">13/13 Complete</p>
                     <p className="retro-font-body retro-sitemap__arch-desc">Critical block guidelines documented</p>
                   </div>
@@ -447,7 +448,7 @@ export const Sitemap = () => {
                 <div className="retro-sitemap__arch-card">
                   <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
                   <div className="retro-sitemap__arch-content">
-                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">P1 Blocks</h3>
+                    <Heading level={3} className="retro-font-display retro-bold retro-sitemap__arch-heading">P1 Blocks</Heading>
                     <p className="retro-font-body retro-sitemap__arch-stat">35/35 Complete 🎊</p>
                     <p className="retro-font-body retro-sitemap__arch-desc">High priority block guidelines complete</p>
                   </div>
@@ -456,7 +457,7 @@ export const Sitemap = () => {
                 <div className="retro-sitemap__arch-card">
                   <CheckCircle size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--complete" />
                   <div className="retro-sitemap__arch-content">
-                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">CSS System</h3>
+                    <Heading level={3} className="retro-font-display retro-bold retro-sitemap__arch-heading">CSS System</Heading>
                     <p className="retro-font-body retro-sitemap__arch-stat">280 imports active</p>
                     <p className="retro-font-body retro-sitemap__arch-desc">Full retro design system restored</p>
                   </div>
@@ -465,7 +466,7 @@ export const Sitemap = () => {
                 <div className="retro-sitemap__arch-card">
                   <Palette size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--design" />
                   <div className="retro-sitemap__arch-content">
-                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">Retro Theme</h3>
+                    <Heading level={3} className="retro-font-display retro-bold retro-sitemap__arch-heading">Retro Theme</Heading>
                     <p className="retro-font-body retro-sitemap__arch-stat">100% Applied</p>
                     <p className="retro-font-body retro-sitemap__arch-desc">Neon glows, CRT effects, pixel borders</p>
                   </div>
@@ -474,7 +475,7 @@ export const Sitemap = () => {
                 <div className="retro-sitemap__arch-card">
                   <FileText size={32} weight="fill" className="retro-sitemap__arch-icon retro-sitemap__arch-icon--docs" />
                   <div className="retro-sitemap__arch-content">
-                    <h3 className="retro-font-display retro-bold retro-sitemap__arch-heading">Guidelines</h3>
+                    <Heading level={3} className="retro-font-display retro-bold retro-sitemap__arch-heading">Guidelines</Heading>
                     <p className="retro-font-body retro-sitemap__arch-stat">48 total docs</p>
                     <p className="retro-font-body retro-sitemap__arch-desc">Complete component documentation</p>
                   </div>

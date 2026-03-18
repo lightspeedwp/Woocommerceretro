@@ -101,15 +101,7 @@
   --wp--preset--color--link-hover: #1d4ed8;
   
   /* Neutral Ramp (from presets) */
-  --wp--preset--color--neutral-100: #F9FAFB;
-  --wp--preset--color--neutral-200: #F3F4F6;
-  --wp--preset--color--neutral-300: #E5E7EB;
-  --wp--preset--color--neutral-400: #D1D5DB;
-  --wp--preset--color--neutral-500: #9CA3AF;
-  --wp--preset--color--neutral-600: #6B7280;
-  --wp--preset--color--neutral-700: #4B5563;
-  --wp--preset--color--neutral-800: #374151;
-  --wp--preset--color--neutral-900: #111827;
+  --wp--preset--color--neutral-100: #1a1a1a;
 
   /* Accent Ramp — removed: accent-100, accent-500, accent-900 had 0 usage refs (CSS7 audit 2026-03-16) */
 
@@ -250,12 +242,29 @@
   
   /* Custom shadows for Funky Redesign */
   --wp--preset--shadow--glow: 0 0 15px rgba(0, 255, 255, 0.3);
-  /* --wp--preset--shadow--lift removed: 0 usage refs (CSS7 audit 2026-03-16) */
   
   /* Transitions */
+  --wp--preset--transition--snap: 100ms;
   --wp--preset--transition--fast: 150ms;
   --wp--preset--transition--base: 200ms;
   --wp--preset--transition--slow: 350ms;
+
+  /* ========================================
+     FOCUS RING
+     ======================================== */
+  --wp--preset--focus-ring--width: 2px;
+  --wp--preset--focus-ring--color: var(--wp--preset--color--primary, #7C3AED);
+  --wp--preset--focus-ring--offset: 2px;
+
+  /* ========================================
+     Z-INDEX SCALE
+     ======================================== */
+  --wp--preset--z-index--base: 1;
+  --wp--preset--z-index--dropdown: 100;
+  --wp--preset--z-index--sticky: 200;
+  --wp--preset--z-index--overlay: 300;
+  --wp--preset--z-index--modal: 400;
+  --wp--preset--z-index--toast: 500;
 
   /* ========================================
      WP CORE PRESET BORDERS
@@ -349,8 +358,16 @@
   --wp--preset--color--popover: var(--color-panel, #232A32);
   --wp--preset--color--popover-foreground: var(--color-text, #E8E2D8);
 
-  /* Neutral ramp */
+  /* Neutral ramp — inverted for dark backgrounds */
   --wp--preset--color--neutral-100: #1a1a1a;
+  --wp--preset--color--neutral-200: #1f2937;
+  --wp--preset--color--neutral-300: #374151;
+  --wp--preset--color--neutral-400: #4B5563;
+  --wp--preset--color--neutral-500: #6B7280;
+  --wp--preset--color--neutral-600: #9CA3AF;
+  --wp--preset--color--neutral-700: #D1D5DB;
+  --wp--preset--color--neutral-800: #E5E7EB;
+  --wp--preset--color--neutral-900: #F9FAFB;
 
   /* Shadows — softer for dark backgrounds */
   --wp--preset--shadow--sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);

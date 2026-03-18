@@ -18,7 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.75rem;
+  padding: 0 0.75rem;
   background: var(--wp--preset--color--foreground, #1E2630);
   color: var(--wp--preset--color--background, #F2EEE6);
   clip-path: polygon(
@@ -48,11 +48,11 @@
 /* ── Dark mode ── */
 .dark .pp-featured__header {
   background: var(--wp--preset--color--surface, #232A32);
-  color: var(--wp--preset--color--foreground, #E8E2D8);
+  color: var(--wp--preset--color--primary-foreground, #111111);
 }
 
 .dark .pp-featured__viewall {
-  color: var(--wp--preset--color--foreground, #E8E2D8);
+  color: var(--wp--preset--color--primary-foreground, #111111);
 }
 
 .pp-featured__grid {

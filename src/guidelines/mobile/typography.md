@@ -76,34 +76,22 @@ font-size: clamp(1rem, 2.5vw, 2rem);
 }
 ```
 
-### Tailwind CSS Integration
+### WordPress CSS variable integration
 
-```tsx
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      fontSize: {
-        // Fluid font sizes
-        'fluid-xs': 'clamp(0.75rem, 0.5vw + 0.625rem, 0.875rem)',
-        'fluid-sm': 'clamp(0.875rem, 0.5vw + 0.75rem, 1rem)',
-        'fluid-base': 'clamp(1rem, 0.5vw + 0.875rem, 1.125rem)',
-        'fluid-lg': 'clamp(1.125rem, 0.5vw + 1rem, 1.25rem)',
-        'fluid-xl': 'clamp(1.25rem, 1vw + 0.875rem, 1.5rem)',
-        'fluid-2xl': 'clamp(1.5rem, 1.5vw + 1rem, 1.875rem)',
-        'fluid-3xl': 'clamp(1.875rem, 2vw + 1.25rem, 2.25rem)',
-        'fluid-4xl': 'clamp(2.25rem, 3vw + 1.5rem, 3rem)',
-        'fluid-5xl': 'clamp(3rem, 4vw + 2rem, 3.75rem)',
-        'fluid-6xl': 'clamp(3.5rem, 5vw + 2.5rem, 4.5rem)',
-      }
-    }
-  }
+```css
+/* /src/styles/theme-variables.css */
+:root {
+  --wp--preset--font-size--fluid-xs: clamp(0.75rem, 0.5vw + 0.625rem, 0.875rem);
+  --wp--preset--font-size--fluid-sm: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  --wp--preset--font-size--fluid-base: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  --wp--preset--font-size--fluid-lg: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
+  --wp--preset--font-size--fluid-xl: clamp(1.25rem, 1vw + 0.875rem, 1.5rem);
+  --wp--preset--font-size--fluid-2xl: clamp(1.5rem, 1.5vw + 1rem, 1.875rem);
+  --wp--preset--font-size--fluid-3xl: clamp(1.875rem, 2vw + 1.25rem, 2.25rem);
+  --wp--preset--font-size--fluid-4xl: clamp(2.25rem, 3vw + 1.5rem, 3rem);
+  --wp--preset--font-size--fluid-5xl: clamp(3rem, 4vw + 2rem, 3.75rem);
+  --wp--preset--font-size--fluid-6xl: clamp(3.5rem, 5vw + 2.5rem, 4.5rem);
 }
-
-// Usage in React
-<h1 className="text-fluid-5xl">Page Title</h1>
-<h2 className="text-fluid-4xl">Section Heading</h2>
-<p className="text-fluid-base">Body text that scales smoothly</p>
 ```
 
 ---

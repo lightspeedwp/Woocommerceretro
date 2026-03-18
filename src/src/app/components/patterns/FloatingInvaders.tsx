@@ -120,7 +120,7 @@ export const FloatingInvaders = () => {
           <SpaceInvader
             variant={inv.variant}
             size={SIZE_MAP[inv.size]}
-            color="var(--color-ink, var(--wp--preset--color--foreground, #1E2630))"
+            color="var(--color-paper, var(--wp--preset--color--background, #F2EEE6))"
           />
         </div>
       ))}

@@ -179,7 +179,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--wp--preset--spacing--20); /* Absorbs wp-ml-2 via gap */
-  padding: 6px 12px;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
   background-color: var(--wp--preset--color--primary);
   color: var(--wp--preset--color--primary-foreground);
   border: none;

@@ -8,7 +8,7 @@
  */
 
 import { Link } from 'react-router';
-import { ChevronDown } from 'lucide-react';
+import { CaretDown } from '../../utils/phosphor-compat';
 import type { MegaMenuData, MegaColumn, MegaLink } from '../../data/megaMenuData';
 
 /* ─── Badge ─────────────────────────────────────── */
@@ -93,7 +93,7 @@ export const MobileSection = ({
       aria-expanded={isOpen}
     >
       <span>{menu.label}</span>
-      <ChevronDown
+      <CaretDown
         size={16}
         strokeWidth={2.5}
         className="retro-mobile-menu__trigger-caret"

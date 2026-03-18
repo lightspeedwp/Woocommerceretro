@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { X } from '../../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { useComparison } from '../../../contexts/ComparisonContext';
 

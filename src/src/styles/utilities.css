@@ -1,8 +1,7 @@
 /**
  * WordPress Utilities CSS
  * 
- * Common utility classes following WordPress naming conventions
- * to replace Tailwind utility classes throughout the codebase.
+ * Common utility classes following WordPress naming conventions.
  * 
  * All classes support both light and dark modes automatically
  * through CSS variables and .dark selectors.
@@ -461,17 +460,13 @@
 .dark .wp-text-purple-300 { color: #d8b4fe; } /* Keep custom purple */
 
 /* State colors */
-.wp-text-green-600 { color: #16a34a; }
-.dark .wp-text-green-600 { color: var(--wp--preset--color--success); } /* was #4ade80 */
+.wp-text-green-600 { color: var(--wp--preset--color--success); }
 
-.wp-text-green-400 { color: #4ade80; }
-.dark .wp-text-green-400 { color: var(--wp--preset--color--success); } /* was #4ade80 */
+.wp-text-green-400 { color: var(--wp--preset--color--success); }
 
-.wp-text-red-600 { color: #dc2626; }
-.dark .wp-text-red-600 { color: var(--wp--preset--color--error); } /* was #f87171 */
+.wp-text-red-600 { color: var(--wp--preset--color--error); }
 
-.wp-text-red-400 { color: #f87171; }
-.dark .wp-text-red-400 { color: var(--wp--preset--color--error); } /* was #f87171 */
+.wp-text-red-400 { color: var(--wp--preset--color--error); }
 
 /* Text Colors - Semantic */
 .wp-color-text-inverse { color: var(--wp--preset--color--primary-foreground); }

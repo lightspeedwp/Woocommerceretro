@@ -1,0 +1,123 @@
+/* ========================================
+   Account Dashboard — Welcome + Stats
+   
+   BEM block: .wp-account-dashboard (partial)
+   Elements: __welcome-*, __edit-profile, __stat-*
+   Component: /src/app/components/templates/AccountDashboardWidgets.tsx
+   
+   Split from account-dashboard-widgets.css (CSS25).
+   ======================================== */
+
+/* ── Welcome section ── */
+
+.wp-account-dashboard__welcome-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__welcome-title {
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+.wp-account-dashboard__welcome-meta {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.wp-account-dashboard__edit-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--10);
+  padding: 0.5rem 1rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  text-decoration: none;
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.wp-account-dashboard__edit-profile:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro);
+}
+
+/* ── Stats grid ── */
+
+.wp-account-dashboard__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--30);
+  margin: var(--wp--preset--spacing--60) 0;
+}
+
+@media (min-width: 640px) {
+  .wp-account-dashboard__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wp-account-dashboard__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wp-account-dashboard__stat-card {
+  padding: var(--wp--preset--spacing--40);
+  position: relative;
+  overflow: hidden;
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.wp-account-dashboard__stat-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-retro);
+}
+
+.wp-account-dashboard__stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-account-dashboard__stat-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-panel);
+  color: var(--color-ink);
+  border: 2px solid var(--color-border);
+}
+
+.wp-account-dashboard__stat-value {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: var(--wp--preset--spacing--10);
+  color: var(--color-ink);
+}
+
+.wp-account-dashboard__stat-label {
+  color: var(--color-muted);
+  margin: 0;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+}

@@ -66,8 +66,8 @@
 /* ── Dark mode ──────────────────────────────── */
 
 .dark .floating-invaders__item {
-  /* Dark mode tokens auto-switch via --color-border;
-     increase opacity slightly so invaders remain visible
-     against darker backgrounds */
-  filter: brightness(1.2);
+  /* Dark mode: --color-paper switches to dark (#151A1E),
+     so invaders become dark shapes on dark backgrounds.
+     Reduce brightness slightly for subtlety */
+  filter: brightness(0.8);
 }

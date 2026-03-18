@@ -6,10 +6,17 @@
 .wp-shop-hero {
   position: relative;
   width: 100%;
+  min-height: clamp(28rem, 80vh, 56rem);
   display: flex;
   align-items: center;
   background-color: #000;
   overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  .wp-shop-hero {
+    min-height: clamp(24rem, 60vh, 36rem);
+  }
 }
 
 .wp-shop-hero__inner {

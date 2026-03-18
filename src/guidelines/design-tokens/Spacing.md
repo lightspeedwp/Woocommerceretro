@@ -3,7 +3,7 @@
 **Component Type:** Design System  
 **Scope:** WordPress theme.json Aligned Spacing Scale  
 **Related:** [/guidelines/design-tokens/Typography.md], [/guidelines/mobile/spacing.md]  
-**Last Updated:** 2026-03-11
+**Last Updated:** 2026-03-17
 
 ---
 
@@ -121,7 +121,71 @@ Minimum touch target size: **44px x 44px** (WCAG 2.2 Level AAA)
 
 ---
 
+## Retro theme spacing
+
+### Glass panel padding
+
+| Panel type | Padding | Variable |
+|------------|---------|----------|
+| **Compact card** | `--wp--preset--spacing--30` | 30px |
+| **Standard glass panel** | `--wp--preset--spacing--40` | 40px |
+| **Feature glass panel** | `--wp--preset--spacing--50` | 50px |
+| **Hero glass overlay** | `--wp--preset--spacing--60` | 60px |
+
+### Floating orb positioning
+
+Orbs use percentage-based positioning (`top`, `left`, `right`) — not spacing tokens. Orb sizes use `clamp()` for fluid scaling:
+
+```css
+.section__orb {
+  width: clamp(8rem, 20vw, 20rem);
+  height: clamp(8rem, 20vw, 20rem);
+  top: -10%;
+  right: -5%;
+}
+```
+
+### Neon glow offsets
+
+Box-shadow glow values are decorative and use raw pixel values (not spacing tokens):
+
+```css
+/* Acceptable — decorative glow, not layout spacing */
+box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+```
+
+---
+
+## Gap-first layout rule
+
+**Always prefer `gap` over `margin` for spacing between siblings.**
+
+```css
+/* Correct — gap on flex/grid parent */
+.card-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--40);
+}
+
+/* Incorrect — margin on children */
+.card-grid__item {
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+```
+
+Exceptions where margin is acceptable:
+- `margin-block` on `<body>`, `<main>`, or page-level wrappers
+- `margin: 0 auto` for centering
+- Negative margins for bleed/overlap effects
+
+---
+
 ## Changelog
+
+### v3.0 - 2026-03-17
+- Added retro theme spacing (glass panels, orbs, glow offsets)
+- Added gap-first layout rule with examples and exceptions
+- Updated to v3.0
 
 ### v2.2 - 2026-03-11
 - Added cross-reference to Margin Removal Guidelines

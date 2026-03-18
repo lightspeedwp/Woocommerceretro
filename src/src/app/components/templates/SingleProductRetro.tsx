@@ -116,7 +116,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
                     aria-selected={idx === activeImageIndex}
                     role="option"
                   >
-                    <img src={img} alt="" className="retro-sp__thumb-img" />
+                    <img src={img} alt={`${product.name} - thumbnail ${idx + 1}`} className="retro-sp__thumb-img" />
                   </button>
                 ))}
               </div>
@@ -276,14 +276,14 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
             >
               {activeTab === 'description' && (
                 <>
-                  <h3 className="retro-font-body retro-bold">Product Details</h3>
+                  <h2 className="retro-font-body retro-bold">Product details</h2>
                   <p className="retro-font-body">{product.description || product.desc}</p>
                 </>
               )}
 
               {activeTab === 'details' && (
                 <>
-                  <h3 className="retro-font-body retro-bold">Additional Information</h3>
+                  <h2 className="retro-font-body retro-bold">Additional information</h2>
                   <table className="retro-sp__info-table retro-font-body">
                     <tbody>
                       {product.sku && (
@@ -331,7 +331,7 @@ export const SingleProductRetro = (props: SingleProductRetroProps) => {
 
               {activeTab === 'shipping' && (
                 <>
-                  <h3 className="retro-font-body retro-bold">Shipping & Returns</h3>
+                  <h2 className="retro-font-body retro-bold">Shipping & returns</h2>
                   <p className="retro-font-body">
                     Free standard shipping on orders over $75. Express shipping available at checkout.
                     All items are shipped within 1-2 business days.

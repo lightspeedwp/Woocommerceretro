@@ -47,10 +47,6 @@
   color: var(--wp--preset--color--primary);
 }
 
-.dark .wp-testimonial-card__quote-icon {
-  color: var(--wp--preset--color--primary);
-}
-
 .wp-testimonial-card__quote {
   /* Margin removed */
   margin: 0;
@@ -159,4 +155,12 @@
 .wp-testimonial-carousel__dot--active {
   background-color: var(--wp--preset--color--primary);
   width: 2rem; /* Elongated active dot */
+}
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-testimonial-carousel__arrow,
+  .wp-testimonial-carousel__dot {
+    transition: none;
+  }
 }

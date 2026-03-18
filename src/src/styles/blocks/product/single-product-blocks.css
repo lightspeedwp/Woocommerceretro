@@ -1,7 +1,7 @@
 /**
- * Single Product Blocks - BEM CSS
+ * BEM classes for single product page blocks.
  *
- * Replaces all Tailwind utility classes in:
+ * Covers:
  *   - ProductPrice.tsx
  *   - ProductRating.tsx
  *   - ProductSummary.tsx

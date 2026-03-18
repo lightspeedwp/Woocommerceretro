@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from '../../utils/phosphor-compat';
 import { Link } from 'react-router';
 import { getBestSellers } from '../../data/products';
 
@@ -34,8 +34,8 @@ export const BestSellersBox = () => {
 
   return (
     <aside className="pp-bestsellers" aria-labelledby="bestsellers-heading">
-      <div className="pp-bestsellers__header">
-        <h2 id="bestsellers-heading" className="pp-bestsellers__title retro-font-display">
+      <div className="pp-bestsellers__header px-[12px] py-[0px]">
+        <h2 id="bestsellers-heading" className="pp-bestsellers__title retro-font-display text-[24px]">
           BEST SELLERS
         </h2>
         <Link to="/best-sellers" className="pp-bestsellers__arrow" aria-label="View all best sellers">

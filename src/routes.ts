@@ -28,6 +28,7 @@ const SingleProductSticky = React.lazy(() => import('./src/app/components/templa
 const SingleProductRetro = React.lazy(() => import('./src/app/components/templates/SingleProductRetro').then((m) => ({ default: m.SingleProductRetro })));
 const PageGiftCardsRetro = React.lazy(() => import('./src/app/components/templates/PageGiftCardsRetro').then((m) => ({ default: m.PageGiftCardsRetro })));
 const PageCompareRetro = React.lazy(() => import('./src/app/components/templates/PageCompareRetro').then((m) => ({ default: m.PageCompareRetro })));
+const PageDealsRetro = React.lazy(() => import('./src/app/components/templates/PageDealsRetro').then((m) => ({ default: m.PageDealsRetro })));
 
 // Account Patterns
 const DashboardRetro = React.lazy(() => import('./src/app/components/patterns/account/DashboardRetro').then((m) => ({ default: m.DashboardRetro })));
@@ -93,13 +94,16 @@ const PageAffiliateProgramRetro = React.lazy(() => import('./src/app/components/
 const PageReviewsRetro = React.lazy(() => import('./src/app/components/templates/PageReviewsRetro').then((m) => ({ default: m.PageReviewsRetro })));
 const PageRefundsRetro = React.lazy(() => import('./src/app/components/templates/PageRefundsRetro').then((m) => ({ default: m.PageRefundsRetro })));
 
+/** Generic redirect factory — avoids one-off redirect components */
+const createRedirect = (to: string) => () => React.createElement(Navigate, { to, replace: true });
+
 // 6b. Convenience Alias Redirects
-const RedirectPodcasts = () => React.createElement(Navigate, { to: '/blog/format/audio', replace: true });
-const RedirectVideos = () => React.createElement(Navigate, { to: '/blog/format/video', replace: true });
-const RedirectGallery = () => React.createElement(Navigate, { to: '/blog/format/gallery', replace: true });
-const RedirectAsides = () => React.createElement(Navigate, { to: '/blog/format/aside', replace: true });
-const RedirectSupport = () => React.createElement(Navigate, { to: '/help', replace: true });
-const RedirectFaqs = () => React.createElement(Navigate, { to: '/faq', replace: true });
+const RedirectPodcasts = createRedirect('/blog/format/audio');
+const RedirectVideos = createRedirect('/blog/format/video');
+const RedirectGallery = createRedirect('/blog/format/gallery');
+const RedirectAsides = createRedirect('/blog/format/aside');
+const RedirectSupport = createRedirect('/help');
+const RedirectFaqs = createRedirect('/faq');
 
 // Legal
 const PagePrivacyPolicyRetro = React.lazy(() => import('./src/app/components/templates/PagePrivacyPolicyRetro').then((m) => ({ default: m.PagePrivacyPolicyRetro })));
@@ -117,7 +121,7 @@ const ArchiveNewsletterRetro = React.lazy(() => import('./src/app/components/tem
 const SingleNewsletterRetro = React.lazy(() => import('./src/app/components/templates/SingleNewsletterRetro').then((m) => ({ default: m.SingleNewsletterRetro })));
 const PageNotFoundRetro = React.lazy(() => import('./src/app/components/templates/PageNotFoundRetro').then((m) => ({ default: m.PageNotFoundRetro })));
 const LongFormSalesPage = React.lazy(() => import('./src/app/components/templates/LongFormSalesPage').then((m) => ({ default: m.LongFormSalesPage })));
-const SocialRedirect = React.lazy(() => import('./src/app/components/templates/SocialRedirect'));
+const SocialRedirect = React.lazy(() => import('./src/app/components/templates/SocialRedirect').then((m) => ({ default: m.SocialRedirect })));
 const Sitemap = React.lazy(() => import('./src/app/components/pages/Sitemap').then((m) => ({ default: m.Sitemap })));
 
 // Retro Demo
@@ -137,31 +141,20 @@ const PageEventsRetro = React.lazy(() => import('./src/app/components/templates/
 // Dev Tools
 const DevToolsIndex = React.lazy(() => import('./src/app/components/pages/DevToolsIndex').then((m) => ({ default: m.DevToolsIndex })));
 const DevToolsLayout = React.lazy(() => import('./src/app/components/templates/DevToolsLayout').then((m) => ({ default: m.DevToolsLayout })));
-const PageStyleGuide = React.lazy(() => import('./src/app/components/templates/PageStyleGuide'));
-const PageShowcase = React.lazy(() => import('./src/app/components/templates/PageShowcase'));
-const PageIconLibrary = React.lazy(() => import('./src/app/components/templates/PageIconLibrary'));
-const PageComponentAPI = React.lazy(() => import('./src/app/components/templates/PageComponentAPI'));
-const PageLivePreview = React.lazy(() => import('./src/app/components/templates/PageLivePreview'));
-const PagePerformance = React.lazy(() => import('./src/app/components/templates/PagePerformance'));
+const PageStyleGuide = React.lazy(() => import('./src/app/components/templates/PageStyleGuide').then((m) => ({ default: m.PageStyleGuide })));
+const PageShowcase = React.lazy(() => import('./src/app/components/templates/PageShowcase').then((m) => ({ default: m.PageShowcase })));
+const PageIconLibrary = React.lazy(() => import('./src/app/components/templates/PageIconLibrary').then((m) => ({ default: m.PageIconLibrary })));
+const PageComponentAPI = React.lazy(() => import('./src/app/components/templates/PageComponentAPI').then((m) => ({ default: m.PageComponentAPI })));
+const PageLivePreview = React.lazy(() => import('./src/app/components/templates/PageLivePreview').then((m) => ({ default: m.PageLivePreview })));
+const PagePerformance = React.lazy(() => import('./src/app/components/templates/PagePerformance').then((m) => ({ default: m.PagePerformance })));
 const PageFormShowcase = React.lazy(() => import('./src/app/components/templates/PageFormShowcase').then((m) => ({ default: m.PageFormShowcase })));
 
 // --- Redirect Components ---------------------------------------------------
 
-const RedirectAccount = () => {
-  return React.createElement(Navigate, { to: '/account', replace: true });
-};
-
-const RedirectPrivacy = () => {
-  return React.createElement(Navigate, { to: '/privacy-policy', replace: true });
-};
-
-const RedirectTerms = () => {
-  return React.createElement(Navigate, { to: '/terms-and-conditions', replace: true });
-};
-
-const RedirectRetroDashboard = () => {
-  return React.createElement(Navigate, { to: 'dashboard', replace: true });
-};
+const RedirectAccount = createRedirect('/account');
+const RedirectPrivacy = createRedirect('/privacy-policy');
+const RedirectTerms = createRedirect('/terms-and-conditions');
+const RedirectRetroDashboard = createRedirect('dashboard');
 
 // --- HydrateFallback -------------------------------------------------------
 
@@ -205,7 +198,7 @@ export const router = createBrowserRouter([
           { path: 'search', Component: ProductSearchResultsRetro },
           { path: 'product/:slug', Component: SingleProductRetro },
           { path: 'product/:slug/sticky', Component: SingleProductSticky },
-          { path: 'deals', Component: ArchiveProductRetro },
+          { path: 'deals', Component: PageDealsRetro },
           { path: 'new-arrivals', Component: ArchiveProductRetro },
           { path: 'best-sellers', Component: ArchiveProductRetro },
           { path: 'sale', Component: ArchiveProductRetro },

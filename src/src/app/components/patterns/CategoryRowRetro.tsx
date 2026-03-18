@@ -10,13 +10,13 @@
  */
 
 import React from 'react';
-import { ArrowRight, Shirt, Gamepad2, Ghost, Image as ImageIcon, Package } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { ArrowRight, TShirt, GameController, Ghost, Image as ImageIcon, Package } from '../../utils/phosphor-compat';
+import type { Icon as PhosphorIcon } from '@phosphor-icons/react';
 import { Link } from 'react-router';
 
 interface Category {
   name: string;
-  icon: LucideIcon;
+  icon: PhosphorIcon;
   slug: string;
 }
 
@@ -25,8 +25,8 @@ interface CategoryRowRetroProps {
 }
 
 const defaultCategories: Category[] = [
-  { name: 'APPAREL', icon: Shirt, slug: 'apparel' },
-  { name: 'ACCESSORIES', icon: Gamepad2, slug: 'accessories' },
+  { name: 'APPAREL', icon: TShirt, slug: 'apparel' },
+  { name: 'ACCESSORIES', icon: GameController, slug: 'accessories' },
   { name: 'GAMES', icon: Ghost, slug: 'games' },
   { name: 'POSTERS', icon: ImageIcon, slug: 'posters' },
   { name: 'COLLECTIBLES', icon: Package, slug: 'collectibles' },

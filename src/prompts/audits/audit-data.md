@@ -29,10 +29,10 @@ Audit mock data files for size compliance, type safety, and content completeness
 7. **Content quality** — placeholder text ("Lorem ipsum", "TODO", "TBD") in user-facing data
 8. **Naming conventions** — SCREAMING_SNAKE for constants, camelCase for objects
 
-## Output
+## Guidelines Referenced
 
-Write report to `/reports/audits/YYYY-MM-DD_data-audit.md` with `Status: Unprocessed`.  
-Do NOT create task lists.
+- `/guidelines/Guidelines.md` Section 6.2 (file size limits)
+- `/guidelines/development/modern-react-coding-standards.md`
 
 ---
 

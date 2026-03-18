@@ -4,6 +4,7 @@ import { InstagramLogo as Instagram, GridFour as Grid, ArrowsOut as Maximize2, X
 
 import { Layout } from '../parts/Layout';
 import { Container } from '../common/Container';
+import { Heading } from '../common/Heading';
 import { getPostBySlug, getMediaSource } from '../../data/posts';
 
 /**
@@ -44,7 +45,7 @@ export const TemplateSingleGallery = () => {
             <div className="single-gallery__icon">
               <Grid size={24} />
             </div>
-            <h1>{post.title.rendered}</h1>
+            <Heading level="1">{post.title.rendered}</Heading>
             <div className="single-gallery__meta">
               <span>{new Date(post.date).toLocaleDateString()}</span>
               <span aria-hidden="true">&bull;</span>

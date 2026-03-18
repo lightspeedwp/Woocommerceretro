@@ -18,6 +18,8 @@ Verify guideline freshness, template compliance, cross-reference validity, and c
 - `/guidelines/Guidelines.md` — master hub
 - `/guidelines/_templates/` — all templates
 - `/guidelines/WRITING_GUIDELINES.md`
+- `/guidelines/Core-Repository-Guidelines.md`
+- `/guidelines/_templates.md`
 
 ## Checks
 

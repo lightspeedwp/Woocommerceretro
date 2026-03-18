@@ -51,6 +51,7 @@ interface CartContextValue {
   shippingCountry: string;
   getShippingCost: () => number;
   getFinalTotal: () => number;
+  cartAnnouncement: string;
 }
 
 const MOCK_COUPONS: Coupon[] = [
@@ -90,6 +91,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
   const [shippingCountry, setShippingCountry] = useState('GB');
+  const [cartAnnouncement, setCartAnnouncement] = useState('');
+
+  const announce = useCallback((message: string) => {
+    // Clear first to ensure re-announcement of same message
+    setCartAnnouncement('');
+    requestAnimationFrame(() => setCartAnnouncement(message));
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(items));
@@ -109,28 +117,46 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         return [...currentItems, { product, quantity }];
       }
     });
-  }, []);
+    announce(`${product.name || 'Item'} added to cart${quantity > 1 ? ` (×${quantity})` : ''}`);
+  }, [announce]);
 
   const removeFromCart = useCallback((productId: string) => {
-    setItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
-  }, []);
+    setItems((currentItems) => {
+      const item = currentItems.find((i) => i.product.id === productId);
+      if (item) {
+        announce(`${item.product.name || 'Item'} removed from cart`);
+      }
+      return currentItems.filter((i) => i.product.id !== productId);
+    });
+  }, [announce]);
 
   const updateQuantity = useCallback((productId: string, quantity: number) => {
     if (quantity <= 0) {
-      setItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
+      setItems((currentItems) => {
+        const item = currentItems.find((i) => i.product.id === productId);
+        if (item) {
+          announce(`${item.product.name || 'Item'} removed from cart`);
+        }
+        return currentItems.filter((i) => i.product.id !== productId);
+      });
       return;
     }
 
     setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.product.id === productId ? { product: item.product, quantity } : item
-      )
+      currentItems.map((item) => {
+        if (item.product.id === productId) {
+          announce(`${item.product.name || 'Item'} quantity updated to ${quantity}`);
+          return { product: item.product, quantity };
+        }
+        return item;
+      })
     );
-  }, []);
+  }, [announce]);
 
   const clearCart = useCallback(() => {
     setItems([]);
-  }, []);
+    announce('Cart cleared');
+  }, [announce]);
 
   const getCartTotal = useCallback((): number => {
     return items.reduce((total, item) => {
@@ -251,8 +277,21 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setShippingCountry,
     shippingCountry,
     getShippingCost,
-    getFinalTotal
-  }), [items, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, getCartCount, isInCart, applyCoupon, removeCoupon, appliedCoupon, getDiscount, shippingCountry, getShippingCost, getFinalTotal]);
+    getFinalTotal,
+    cartAnnouncement
+  }), [items, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, getCartCount, isInCart, applyCoupon, removeCoupon, appliedCoupon, getDiscount, shippingCountry, getShippingCost, getFinalTotal, cartAnnouncement]);
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {cartAnnouncement}
+      </div>
+    </CartContext.Provider>
+  );
 }

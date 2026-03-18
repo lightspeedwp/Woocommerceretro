@@ -154,15 +154,10 @@ npx webpack-bundle-analyzer dist/stats.json
 
 ### Remove Unused CSS
 
-```tsx
-// Use PurgeCSS with Tailwind
-// tailwind.config.js
-module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
-  // Tailwind automatically purges unused styles
-}
+```css
+/* CSS files are scoped to components via BEM naming convention.
+   Unused blocks can be removed by deleting the corresponding
+   CSS file from /src/styles/blocks/ or /src/styles/sections/. */
 ```
 
 ### CSS-in-JS Performance

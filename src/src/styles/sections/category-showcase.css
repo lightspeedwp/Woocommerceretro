@@ -127,3 +127,22 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-category-card__image,
+  .wp-category-card__overlay,
+  .wp-category-card__cta,
+  .wp-category-card__action {
+    transition: none;
+  }
+
+  .wp-category-card:hover .wp-category-card__image {
+    transform: none;
+  }
+
+  .wp-category-card__action {
+    opacity: 1;
+    transform: none;
+  }
+}

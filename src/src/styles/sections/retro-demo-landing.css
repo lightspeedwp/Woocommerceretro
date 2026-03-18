@@ -1,0 +1,510 @@
+/**
+ * Retro Demo Landing Page
+ * BEM styles for /retro-demo/landing-page route (RetroDemoLandingPage)
+ *
+ * @file retro-demo-landing.css
+ * @created 2026-03-18
+ * @source RetroDemoLandingPage.tsx inline styles refactoring
+ */
+
+/* ==========================================================================
+   Neon color tokens (demo page)
+   ========================================================================== */
+
+:root {
+  --retro-neon-cyan: #00fff9;
+  --retro-neon-magenta: #ff00ff;
+  --retro-neon-gold: #FFD700;
+  --retro-neon-green: #39ff14;
+  --retro-neon-red: #ff4444;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-section (shared section wrapper)
+   ========================================================================== */
+
+.retro-demo-section {
+  position: relative;
+  padding: var(--wp--preset--spacing--70, 3rem) 0;
+  overflow: hidden;
+}
+
+.retro-demo-section__content {
+  position: relative;
+  z-index: 2;
+}
+
+.retro-demo-section__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--60, 2rem);
+}
+
+.retro-demo-section__subtitle {
+  font-size: clamp(0.6rem, 1.5vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.retro-demo-section__title {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.retro-demo-section__body {
+  margin-top: var(--wp--preset--spacing--50, 1.5rem);
+}
+
+/* ==========================================================================
+   SVG Overlays
+   ========================================================================== */
+
+.retro-demo-grid-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.retro-demo-neon-divider {
+  width: 100%;
+  height: 4px;
+  display: block;
+}
+
+.retro-demo-scanline {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.retro-demo-canvas-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-stats
+   ========================================================================== */
+
+.retro-demo-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.retro-demo-stats__card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 249, 0.2);
+  background: rgba(0, 255, 249, 0.03);
+}
+
+.retro-demo-stats__value {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--color-signal, #00fff9);
+  text-shadow: 0 0 15px rgba(0, 255, 249, 0.5);
+  line-height: 1;
+}
+
+.retro-demo-stats__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-hiw (How It Works)
+   Uses --step-color CSS custom property for dynamic accent
+   ========================================================================== */
+
+.retro-demo-hiw__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.retro-demo-hiw__card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--step-color) 19%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--step-color) 2%, transparent);
+  position: relative;
+}
+
+.retro-demo-hiw__step-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg, #0f0f0f);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--step-color) 31%, transparent);
+  border-radius: 4px;
+}
+
+.retro-demo-hiw__icon {
+  margin-bottom: 1rem;
+}
+
+.retro-demo-hiw__title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem 0;
+}
+
+.retro-demo-hiw__desc {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-vp (Value Propositions)
+   Uses --vp-color CSS custom property for dynamic accent
+   ========================================================================== */
+
+.retro-demo-vp__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.retro-demo-vp__card {
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--vp-color) 15%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--vp-color) 2%, transparent);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-demo-vp__card {
+    transition: none;
+  }
+}
+
+.retro-demo-vp__icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--vp-color) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--vp-color) 19%, transparent);
+  margin-bottom: 1rem;
+}
+
+.retro-demo-vp__title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem 0;
+}
+
+.retro-demo-vp__desc {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-faq
+   ========================================================================== */
+
+.retro-demo-faq__list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.retro-demo-faq__item {
+  border-bottom: 1px solid rgba(0, 255, 249, 0.15);
+}
+
+.retro-demo-faq__trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  text-align: left;
+  color: inherit;
+  gap: 1rem;
+}
+
+.retro-demo-faq__chevron {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: var(--color-signal, #00fff9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-demo-faq__chevron {
+    transition: none;
+  }
+}
+
+.retro-demo-faq__chevron--open {
+  transform: rotate(180deg);
+}
+
+.retro-demo-faq__answer {
+  padding: 0 0 1rem 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-newsletter
+   ========================================================================== */
+
+.retro-demo-newsletter__box {
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 1px solid rgba(255, 0, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 0, 255, 0.03);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.retro-demo-newsletter__box > svg:first-child {
+  margin-bottom: 0.75rem;
+}
+
+.retro-demo-newsletter__title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem 0;
+}
+
+.retro-demo-newsletter__desc {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 0 0 1.25rem 0;
+}
+
+.retro-demo-newsletter__success {
+  color: #39ff14;
+  font-size: 0.7rem;
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+}
+
+.retro-demo-newsletter__form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.retro-demo-newsletter__input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  border-radius: 4px;
+  background: rgba(255, 0, 255, 0.05);
+  color: inherit;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.retro-demo-newsletter__input:focus {
+  border-color: rgba(255, 0, 255, 0.6);
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.2);
+}
+
+.retro-demo-newsletter__submit {
+  white-space: nowrap;
+  font-size: 0.6rem;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-3d (3D / Canvas showcase)
+   ========================================================================== */
+
+.retro-demo-3d__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.retro-demo-3d__panel {
+  text-align: center;
+}
+
+.retro-demo-3d__caption {
+  font-size: 0.65rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+.retro-demo-3d__subcaption {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin: 0.25rem 0 0 0;
+}
+
+.retro-demo-3d__steps {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.retro-demo-3d__step-btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retro-demo-3d__step-btn {
+    transition: none;
+  }
+}
+
+.retro-demo-3d__step-btn--active {
+  border-color: #00fff9;
+  background: rgba(0, 255, 249, 0.15);
+  color: #00fff9;
+}
+
+.retro-demo-3d__canvas-panel {
+  text-align: center;
+  position: relative;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 255, 249, 0.15);
+}
+
+.retro-demo-3d__canvas-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Block: .retro-demo-pattern-index
+   ========================================================================== */
+
+.retro-demo-pattern-index {
+  padding: 1.5rem;
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  border-radius: 8px;
+  background: rgba(57, 255, 20, 0.03);
+  margin: 0 1rem;
+}
+
+.retro-demo-pattern-index__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.retro-demo-pattern-index__title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #39ff14;
+}
+
+.retro-demo-pattern-index__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.retro-demo-pattern-index__tag {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.65rem;
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  border-radius: 4px;
+  background: rgba(57, 255, 20, 0.05);
+}
+
+/* ==========================================================================
+   Block: .retro-demo-cta (bottom CTA banner)
+   ========================================================================== */
+
+.retro-demo-cta {
+  text-align: center;
+  padding: 3rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-demo-cta__content {
+  position: relative;
+  z-index: 2;
+}
+
+.retro-demo-cta__title {
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  text-transform: uppercase;
+  margin: 1rem 0 0.75rem 0;
+}
+
+.retro-demo-cta__desc {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 0 auto 1.5rem auto;
+  max-width: 500px;
+}
+
+.retro-demo-cta__buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.retro-demo-cta__link {
+  text-decoration: none;
+  font-size: 0.6rem;
+}

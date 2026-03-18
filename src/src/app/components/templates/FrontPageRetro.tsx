@@ -14,7 +14,6 @@ import { CategoryRowRetro } from '../patterns/CategoryRowRetro';
 import { FeaturedProductsRetro } from '../patterns/FeaturedProductsRetro';
 import { BottomGridRetro } from '../patterns/BottomGridRetro';
 import { MiniCartRetro } from '../parts/MiniCartRetro';
-import { Link } from 'react-router';
 
 export const FrontPageRetro = () => {
   return (
@@ -23,7 +22,7 @@ export const FrontPageRetro = () => {
         {/* Space Invader decorations are now site-wide via FloatingInvaders in SiteLayout */}
 
         <HeroRetro />
-        <main className="pp-main">
+        <main className="pp-main" id="main-content" tabIndex={-1}>
           <CategoryRowRetro />
           <FeaturedProductsRetro title="FEATURED ITEMS" linkText="VIEW ALL" />
           <BottomGridRetro />

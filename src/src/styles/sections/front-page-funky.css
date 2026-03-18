@@ -614,6 +614,10 @@
   letter-spacing: 0.05em;
 }
 
+.retro-sidebar__title--spaced {
+  margin-top: var(--wp--preset--spacing--50);
+}
+
 .retro-sidebar__group {
   display: flex;
   flex-direction: column;
@@ -1298,4 +1302,35 @@
   gap: 0.5rem;
   flex-shrink: 0;
   white-space: nowrap;
+}
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .retro-cat__item,
+  .retro-card,
+  .retro-card__heart,
+  .retro-card__btn,
+  .retro-card__img--primary,
+  .retro-card__img--hover,
+  .retro-card__compare,
+  .retro-mini-img-wrap,
+  .retro-sp-img,
+  .retro-sp-tab,
+  .retro-sp-thumb,
+  .retro-sp-action-link,
+  .retro-sp-tag,
+  .retro-footer-icons svg {
+    transition: none;
+  }
+
+  .retro-archive-header__badge {
+    animation: none;
+  }
+
+  .retro-card:hover,
+  .retro-mini-card:hover .retro-mini-img-wrap,
+  .retro-sp-img:hover,
+  .retro-footer-icons svg:hover {
+    transform: none;
+  }
 }

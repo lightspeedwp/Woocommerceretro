@@ -65,3 +65,17 @@ export const TYPOGRAPHY = {
   body: 'typography-body',
   caption: 'typography-caption',
 };
+
+/**
+ * Retro Color Constants
+ * JS-accessible retro neon/accent colors for use in canvas, 3D components,
+ * and dynamic inline styles. CSS equivalents: --retro-neon-* custom properties.
+ */
+export const RETRO_COLORS = {
+  gold: '#FFD700',
+  cyan: '#00fff9',
+  magenta: '#ff00ff',
+  yellow: '#ffff00',
+  surfaceDark: '#1a1a1a',
+  surfaceLight: '#2a2a2a',
+};

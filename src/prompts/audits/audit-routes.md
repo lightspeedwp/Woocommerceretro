@@ -16,6 +16,8 @@ Compare template files against route definitions to find orphaned templates, mis
 
 - `/routes.ts` — all route definitions
 - `/src/app/components/templates/` — directory listing of all template files
+- `/guidelines/ROUTING_GUIDE.md` — route structure conventions
+- `/guidelines/NAVIGATION_QUICK_REFERENCE.md` — navigation architecture
 
 ## Checks
 
@@ -31,6 +33,11 @@ Compare template files against route definitions to find orphaned templates, mis
 
 Write report to `/reports/audits/YYYY-MM-DD_routes-audit.md` with `Status: Unprocessed`.  
 Do NOT create task lists.
+
+## Guidelines Referenced
+
+- `/guidelines/ROUTING_GUIDE.md`
+- `/guidelines/NAVIGATION_QUICK_REFERENCE.md`
 
 ---
 

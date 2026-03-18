@@ -71,10 +71,6 @@
   transform: rotate(180deg);
 }
 
-.dark .wp-mega-menu__trigger {
-  color: var(--wp--preset--color--foreground);
-}
-
 .dark .wp-mega-menu__trigger:hover {
   color: var(--funky-interactive-color, var(--wp--preset--color--foreground));
 }
@@ -223,10 +219,6 @@
 .wp-mega-menu__link:hover {
   color: var(--funky-interactive-color, var(--wp--preset--color--primary));
   background: var(--funky-interactive-bg, rgba(0, 0, 0, 0.04));
-}
-
-.dark .wp-mega-menu__link {
-  color: var(--wp--preset--color--foreground);
 }
 
 .dark .wp-mega-menu__link:hover {
@@ -407,14 +399,6 @@
   margin-top: 0.125rem;
 }
 
-.dark .wp-mega-menu__category-description {
-  color: var(--wp--preset--color--muted-foreground);
-}
-
-.dark .wp-mega-menu__category-link {
-  color: var(--wp--preset--color--muted-foreground);
-}
-
 .dark .wp-mega-menu__category-link:hover {
   color: var(--funky-interactive-color, var(--wp--preset--color--foreground));
   background: var(--funky-interactive-bg, rgba(255, 255, 255, 0.06));
@@ -428,10 +412,6 @@
 .wp-mega-menu__section--bordered {
   border-top: 1px solid var(--wp--preset--color--border);
   padding-top: var(--wp--preset--spacing--40);
-}
-
-.dark .wp-mega-menu__section--bordered {
-  border-color: var(--wp--preset--color--border);
 }
 
 /* Posts Grid (2 columns) */
@@ -507,10 +487,6 @@
   justify-content: center;
 }
 
-.dark .wp-mega-menu__post-image {
-  background: rgba(0, 0, 0, 0.5);
-}
-
 .wp-mega-menu__post-category {
   display: inline-block;
   font-size: var(--wp--preset--font-size--x-small);
@@ -558,10 +534,6 @@
   margin-top: var(--wp--preset--spacing--30);
   padding-top: var(--wp--preset--spacing--30);
   border-top: 1px solid var(--wp--preset--color--border);
-}
-
-.dark .wp-mega-menu__footer {
-  border-color: var(--wp--preset--color--border);
 }
 
 .wp-mega-menu__view-all {
@@ -612,10 +584,6 @@
   .wp-mega-menu__two-column-section {
     grid-template-columns: 1fr;
   }
-}
-
-.dark .wp-mega-menu__two-column-section {
-  border-color: var(--wp--preset--color--border);
 }
 
 .wp-mega-menu__column {

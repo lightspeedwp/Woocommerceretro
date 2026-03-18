@@ -71,7 +71,7 @@ export const BlogSidebar = ({ currentPostSlug }: BlogSidebarProps) => {
               <Link to={`/blog/${post.slug}`} className="wp-blog-sidebar__post">
                 <div className="wp-blog-sidebar__post-inner">
                   <div className="wp-blog-sidebar__post-image">
-                    <img src={getMediaSource(post.featured_media)} alt="" />
+                    <img src={getMediaSource(post.featured_media)} alt={post.title.rendered.replace(/<[^>]*>/g, '')} />
                   </div>
                   <div className="wp-blog-sidebar__post-content">
                     <h5

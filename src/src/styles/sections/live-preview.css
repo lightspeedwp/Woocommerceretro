@@ -1,0 +1,229 @@
+/* ========================================
+   LIVE PREVIEW — Dev Tools Playground
+   BEM: pp-live-preview
+   ======================================== */
+
+/* --- Page wrapper ------------------------------------------------ */
+.pp-live-preview {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  min-height: 100vh;
+  padding-bottom: var(--wp--preset--spacing--80);
+}
+
+/* --- Header ------------------------------------------------------ */
+.pp-live-preview__header {
+  padding: var(--wp--preset--spacing--70) 0;
+  border-bottom: 4px solid var(--color-ink);
+  background-color: var(--color-signal);
+  background-image: radial-gradient(var(--color-ink) 2px, transparent 2px);
+  background-size: 16px 16px;
+}
+
+.pp-live-preview__header-box {
+  background-color: var(--color-ink);
+  padding: var(--wp--preset--spacing--60);
+  border: 4px solid var(--color-ink);
+  box-shadow: 8px 8px 0 var(--wp--preset--color--shadow, rgba(0, 0, 0, 0.2));
+  display: inline-block;
+  color: var(--color-paper);
+}
+
+.pp-live-preview__header-title {
+  margin: 0 0 var(--wp--preset--spacing--40) 0;
+}
+
+.pp-live-preview__header-desc {
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* --- Body section ------------------------------------------------ */
+.pp-live-preview__body {
+  padding: var(--wp--preset--spacing--80) 0;
+}
+
+/* --- Layout (sidebar + main) ------------------------------------- */
+.pp-live-preview__layout {
+  display: flex;
+  gap: var(--wp--preset--spacing--60);
+  flex-wrap: wrap;
+}
+
+/* --- Sidebar ----------------------------------------------------- */
+.pp-live-preview__sidebar {
+  flex: 0 0 250px;
+  background-color: var(--color-paper-deep);
+  border: 4px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  padding: var(--wp--preset--spacing--50);
+  align-self: flex-start;
+}
+
+.pp-live-preview__sidebar-title {
+  margin-bottom: var(--wp--preset--spacing--50);
+  border-bottom: 2px dashed var(--color-ink);
+  padding-bottom: var(--wp--preset--spacing--20);
+}
+
+.pp-live-preview__sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* --- Sidebar button ---------------------------------------------- */
+.pp-live-preview__sidebar-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  color: var(--color-ink);
+  border: 2px solid transparent;
+  padding: var(--wp--preset--spacing--20);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--wp--preset--transition--fast) ease,
+              color var(--wp--preset--transition--fast) ease;
+}
+
+.pp-live-preview__sidebar-btn--active {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+/* --- Sidebar tag (category badge) -------------------------------- */
+.pp-live-preview__sidebar-tag {
+  padding: 0.125rem var(--wp--preset--spacing--10);
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.pp-live-preview__sidebar-btn--active .pp-live-preview__sidebar-tag {
+  background-color: var(--color-signal);
+}
+
+/* --- Main area --------------------------------------------------- */
+.pp-live-preview__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+/* --- Toolbar ----------------------------------------------------- */
+.pp-live-preview__toolbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-paper);
+  border: 4px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  padding: var(--wp--preset--spacing--40);
+  align-items: center;
+}
+
+.pp-live-preview__toolbar-group {
+  display: flex;
+  gap: var(--wp--preset--spacing--20);
+}
+
+/* --- View mode buttons ------------------------------------------- */
+.pp-live-preview__view-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  background-color: transparent;
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color var(--wp--preset--transition--fast) ease,
+              color var(--wp--preset--transition--fast) ease;
+}
+
+.pp-live-preview__view-btn--active {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* --- Reset button ------------------------------------------------ */
+.pp-live-preview__reset-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  background-color: transparent;
+  color: var(--color-ink);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+/* --- Workspace --------------------------------------------------- */
+.pp-live-preview__workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--60);
+}
+
+/* --- Preview pane ------------------------------------------------ */
+.pp-live-preview__preview-pane {
+  background-color: var(--color-paper);
+  border: 4px dashed var(--color-ink);
+  padding: var(--wp--preset--spacing--70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* --- Code pane --------------------------------------------------- */
+.pp-live-preview__code-pane {
+  background-color: var(--color-ink);
+  border: 4px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--wp--preset--color--shadow, rgba(0, 0, 0, 0.2));
+  color: var(--color-paper);
+  position: relative;
+}
+
+.pp-live-preview__code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed var(--color-paper);
+  padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  opacity: 0.8;
+}
+
+.pp-live-preview__copy-btn {
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+  display: flex;
+}
+
+.pp-live-preview__code-block {
+  margin: 0;
+  padding: var(--wp--preset--spacing--50);
+  overflow-x: auto;
+  font-family: monospace;
+  color: var(--color-signal);
+}
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .pp-live-preview__sidebar-btn,
+  .pp-live-preview__view-btn {
+    transition: none;
+  }
+}
+
+/* --- Responsive: stack sidebar below main on small screens ------- */
+@media (max-width: 767px) {
+  .pp-live-preview__sidebar {
+    flex: 1 1 100%;
+  }
+}

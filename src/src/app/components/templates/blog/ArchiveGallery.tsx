@@ -12,8 +12,7 @@
  */
 
 import { Link } from 'react-router';
-import { Heart, ChatCircle as MessageCircle } from '../../../utils/phosphor-compat';
-import { Camera } from 'lucide-react';
+import { Heart, ChatCircle as MessageCircle, Camera } from '../../../utils/phosphor-compat';
 import { HeaderRetro } from '../../parts/HeaderRetro';
 import { FooterRetro } from '../../parts/FooterRetro';
 import { HeroRetro } from '../../patterns/HeroRetro';

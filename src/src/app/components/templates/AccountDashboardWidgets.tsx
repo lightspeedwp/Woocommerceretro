@@ -161,7 +161,6 @@ export const AccountDashboardWidgets = () => {
                 <div className="wp-account-dashboard__progress-bar">
                   <div
                     className="wp-account-dashboard__progress-fill"
-                    style={{ width: '83%' }}
                   />
                 </div>
               </div>

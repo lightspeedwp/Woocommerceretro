@@ -1,124 +1,148 @@
-# Typography Design Tokens
+# Typography design tokens
 
-**Component Type:** Design System  
-**Scope:** WordPress theme.json Aligned Typography Scale  
-**Related:** [/guidelines/design-tokens/Spacing.md], [/guidelines/design-tokens/Colors.md]  
-**Last Updated:** 2026-02-22
+**Component Type:** Design System
+**Scope:** WordPress theme.json aligned typography scale
+**Related:** [Colors.md](./Colors.md), [Spacing.md](./Spacing.md), [Dark-Mode.md](./Dark-Mode.md)
+**Canonical Source:** `/src/styles/theme-variables.css`
+**Last Updated:** 2026-03-17
+**Version:** 3.0
 
 ---
 
 ## Overview
 
-This document defines the typography system for the WooCommerce prototype, aligned with WordPress theme.json standards using **numeric slugs (100-900)** with fluid scaling for responsive design.
-
-**Philosophy:** Fluid typography scales smoothly across viewports. Semantic hierarchy ensures proper document structure. Readability is optimized for all devices.
+Fluid typography using `clamp()` across a numeric 100-900 scale, aligned to WordPress theme.json conventions. All components must use `<Heading>` or `<Typography>` components for headings -- no bare `<h1>`-`<h6>` tags.
 
 ---
 
-## Font Families
+## Font families
 
-### Primary Font: Inter (Sans-Serif)
+| Token | Value | CSS Variable |
+|-------|-------|-------------|
+| Base | System sans-serif stack | `--wp--preset--font-family--base` |
+| Heading | System sans-serif stack | `--wp--preset--font-family--heading` |
+| Mono | System monospace stack | `--wp--preset--font-family--mono` |
 
-**Fallback Stack:**
 ```css
-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+--wp--preset--font-family--base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+--wp--preset--font-family--mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 ```
 
-### Secondary Font: Merriweather (Serif) [Optional]
+---
 
-**Usage**: Editorial headings, blog post titles. **DO NOT use for product UI.**
+## Numeric font size scale (100-900)
+
+| Slug | Fluid clamp() | Px Range | CSS Variable | Usage |
+|------|--------------|----------|-------------|-------|
+| `xs` | `clamp(0.6rem, 0.4vw + 0.5rem, 0.7rem)` | 9.6-11.2px | `--wp--preset--font-size--xs` | Keyboard shortcuts, captions |
+| `100` | `clamp(0.65rem, 0.5vw + 0.55rem, 0.75rem)` | 10.4-12px | `--wp--preset--font-size--100` | Labels, badges, meta |
+| `200` | `clamp(0.875rem, 0.5vw + 0.75rem, 1rem)` | 14-16px | `--wp--preset--font-size--200` | Body text (base) |
+| `300` | `clamp(1rem, 1vw + 0.75rem, 1.25rem)` | 16-20px | `--wp--preset--font-size--300` | Emphasized body |
+| `400` | `clamp(1.25rem, 1.5vw + 0.875rem, 1.5rem)` | 20-24px | `--wp--preset--font-size--400` | H6, minor headings |
+| `500` | `clamp(1.5rem, 2vw + 1rem, 2rem)` | 24-32px | `--wp--preset--font-size--500` | H5, sub-sections |
+| `600` | `clamp(2rem, 2.5vw + 1.25rem, 2.5rem)` | 32-40px | `--wp--preset--font-size--600` | H4, widget titles |
+| `700` | `clamp(2.5rem, 3vw + 1.5rem, 3rem)` | 40-48px | `--wp--preset--font-size--700` | H3, card titles |
+| `800` | `clamp(3rem, 4vw + 2rem, 4rem)` | 48-64px | `--wp--preset--font-size--800` | H2, section headings |
+| `900` | `clamp(3.5rem, 5vw + 2.5rem, 5rem)` | 56-80px | `--wp--preset--font-size--900` | H1, hero titles |
+
+### Named aliases
+
+These map to the numeric scale for backward compatibility:
+
+| Alias | Maps To | CSS Variable |
+|-------|---------|-------------|
+| `small` | `100` | `--wp--preset--font-size--small` |
+| `medium` | `200` | `--wp--preset--font-size--medium` |
+| `normal` | `200` | `--wp--preset--font-size--normal` |
+| `large` | `300` | `--wp--preset--font-size--large` |
+| `x-large` | `400` | `--wp--preset--font-size--x-large` |
+| `xx-large` | `500` | `--wp--preset--font-size--xx-large` |
+| `xxx-large` | `600` | `--wp--preset--font-size--xxx-large` |
+| `huge` | `800` | `--wp--preset--font-size--huge` |
+| `gigantic` | `900` | `--wp--preset--font-size--gigantic` |
 
 ---
 
-## WordPress Typography Scale
+## Font weights
 
-### Numeric Font Size Slugs (100-900)
-
-| Slug | Size (rem) | Size (px) | Fluid Min | Fluid Max | CSS Variable | Usage |
-|------|-----------|-----------|-----------|-----------|--------------|-------|
-| `100` | 0.75rem | 12px | 0.65rem | 0.75rem | `--wp--preset--font-size--100` | **Tiny** - Labels, badges, meta |
-| `200` | 1rem | 16px | 0.875rem | 1rem | `--wp--preset--font-size--200` | **Base** - Body text |
-| `300` | 1.25rem | 20px | 1rem | 1.25rem | `--wp--preset--font-size--300` | **Small** - Emphasized body |
-| `400` | 1.5rem | 24px | 1.25rem | 1.5rem | `--wp--preset--font-size--400` | **Medium** - H6 |
-| `500` | 2rem | 32px | 1.5rem | 2rem | `--wp--preset--font-size--500` | **Large** - H5 |
-| `600` | 2.5rem | 40px | 2rem | 2.5rem | `--wp--preset--font-size--600` | **X-Large** - H4 |
-| `700` | 3rem | 48px | 2.5rem | 3rem | `--wp--preset--font-size--700` | **XX-Large** - H3 |
-| `800` | 4rem | 64px | 3rem | 4rem | `--wp--preset--font-size--800` | **Huge** - H2 |
-| `900` | 5rem | 80px | 3.5rem | 5rem | `--wp--preset--font-size--900` | **Gigantic** - H1 |
+| Token | Value | CSS Variable | Usage |
+|-------|-------|-------------|-------|
+| Light | 300 | `--wp--preset--font-weight--light` | De-emphasized text |
+| Normal | 400 | `--wp--preset--font-weight--normal` | Body text |
+| Medium | 500 | `--wp--preset--font-weight--medium` | Labels, emphasized text |
+| Semibold | 600 | `--wp--preset--font-weight--semibold` | H2-H3, subheadings |
+| Bold | 700 | `--wp--preset--font-weight--bold` | H1, prices, CTAs |
+| Black | 900 | `--wp--preset--font-weight--black` | Display text, badges |
 
 ---
 
-## Element to Font Size Mapping
+## Line heights
 
-### Heading Elements
-
-| Element | Slug | CSS Variable | Size Range | Line Height |
-|---------|------|--------------|------------|-------------|
-| `<h1>` | `900` | `--wp--preset--font-size--900` | 56px to 80px | 1.1 |
-| `<h2>` | `800` | `--wp--preset--font-size--800` | 48px to 64px | 1.2 |
-| `<h3>` | `700` | `--wp--preset--font-size--700` | 40px to 48px | 1.3 |
-| `<h4>` | `600` | `--wp--preset--font-size--600` | 32px to 40px | 1.4 |
-| `<h5>` | `500` | `--wp--preset--font-size--500` | 24px to 32px | 1.4 |
-| `<h6>` | `400` | `--wp--preset--font-size--400` | 20px to 24px | 1.4 |
-
-### Body Elements
-
-| Element | Slug | CSS Variable | Size Range | Line Height |
-|---------|------|--------------|------------|-------------|
-| `<p>` | `200` | `--wp--preset--font-size--200` | 14px to 16px | 1.6 |
-| `<small>` | `100` | `--wp--preset--font-size--100` | 10.4px to 12px | 1.5 |
+| Token | Value | CSS Variable | Usage |
+|-------|-------|-------------|-------|
+| Tight | 1.15 | `--wp--preset--line-height--tight` | Large headings (H1-H2) |
+| Snug | 1.3 | `--wp--preset--line-height--snug` | Medium headings (H3-H4) |
+| Normal | 1.5 | `--wp--preset--line-height--normal` | Body text |
+| Relaxed | 1.625 | `--wp--preset--line-height--relaxed` | Long-form content |
+| Loose | 1.8 | `--wp--preset--line-height--loose` | Spaced text blocks |
 
 ---
 
-## Font Weight Guidelines
+## Letter spacing
 
-| Weight | CSS Value | Usage |
-|--------|-----------|-------|
-| **Normal** | 400 | Body text, standard paragraphs |
-| **Medium** | 500 | H4-H6, emphasized text, labels |
-| **Semibold** | 600 | H2-H3, subheadings |
-| **Bold** | 700 | H1, important headings, prices |
-
----
-
-## Typography Hierarchy Rules
-
-### Rule 1: Sentence Case for Headings (MANDATORY)
-
-Capitalize the first letter of the first word and proper nouns only.
-
-### Rule 2: Never Skip Heading Levels
-
-h1 to h2 to h3 -- never skip.
-
-### Rule 3: One H1 Per Page
-
-Each page should have exactly one `<h1>` element.
-
-### Rule 4: Use Semantic HTML
-
-Let the HTML tag define the hierarchy.
+| Token | Value | CSS Variable | Usage |
+|-------|-------|-------------|-------|
+| Tight | -0.02em | `--wp--preset--letter-spacing--tight` | Large headings |
+| Normal | 0 | `--wp--preset--letter-spacing--normal` | Body text |
+| Wide | 0.05em | `--wp--preset--letter-spacing--wide` | Labels, uppercase text |
 
 ---
 
-## Quick Reference
+## Heading component (mandatory)
 
-| Size | Slug | rem | px Range | Element | Use Case |
-|------|------|-----|----------|---------|----------|
-| **Tiny** | `100` | 0.75rem | 10.4px to 12px | `<small>` | Labels, badges |
-| **Base** | `200` | 1rem | 14px to 16px | `<p>` | Body text |
-| **Small** | `300` | 1.25rem | 16px to 20px | - | Emphasized body |
-| **Medium** | `400` | 1.5rem | 20px to 24px | `<h6>` | Minor headings |
-| **Large** | `500` | 2rem | 24px to 32px | `<h5>` | Sub-sections |
-| **X-Large** | `600` | 2.5rem | 32px to 40px | `<h4>` | Widget titles |
-| **XX-Large** | `700` | 3rem | 40px to 48px | `<h3>` | Card titles |
-| **Huge** | `800` | 4rem | 48px to 64px | `<h2>` | Section headings |
-| **Gigantic** | `900` | 5rem | 56px to 80px | `<h1>` | Hero titles |
+All headings **must** use the `<Heading>` component. No bare `<h1>`-`<h6>` tags.
+
+```tsx
+import { Heading } from '@/components/common/Heading';
+
+<Heading level={1}>Hero title</Heading>
+<Heading level={2}>Section heading</Heading>
+<Heading level={3}>Card title</Heading>
+```
+
+### Rules
+
+1. **Sentence case**: Capitalise only the first word and proper nouns
+2. **Never skip levels**: h1 to h2 to h3 (no h1 to h3)
+3. **One H1 per page**: Each template has exactly one `<h1>`
+4. **No manual sizing**: Do not override Heading sizes with CSS classes
 
 ---
 
-## Changelog
+## Hierarchy rules
 
-### v2.1 - 2026-02-22
-- Renamed from `typography.md` to `Typography.md` (naming convention enforcement)
-- Updated cross-references to use uppercase filenames
+| Element | Slug | Px Range | Weight | Line Height |
+|---------|------|----------|--------|------------|
+| `<h1>` | `900` | 56-80px | Bold (700) | Tight (1.15) |
+| `<h2>` | `800` | 48-64px | Semibold (600) | Tight (1.15) |
+| `<h3>` | `700` | 40-48px | Semibold (600) | Snug (1.3) |
+| `<h4>` | `600` | 32-40px | Medium (500) | Snug (1.3) |
+| `<h5>` | `500` | 24-32px | Medium (500) | Normal (1.5) |
+| `<h6>` | `400` | 20-24px | Medium (500) | Normal (1.5) |
+| `<p>` | `200` | 14-16px | Normal (400) | Normal (1.5) |
+| `<small>` | `100` | 10.4-12px | Normal (400) | Normal (1.5) |
+
+---
+
+## Related documentation
+
+- **Canonical source:** `/src/styles/theme-variables.css`
+- **Heading component:** `/src/app/components/common/Heading.tsx`
+- **Typography component:** `/src/app/components/common/Typography.tsx`
+- **Colours:** `/guidelines/design-tokens/Colors.md`
+- **Spacing:** `/guidelines/design-tokens/Spacing.md`
+
+---
+
+**Version:** 3.0
+**Last Updated:** 2026-03-17

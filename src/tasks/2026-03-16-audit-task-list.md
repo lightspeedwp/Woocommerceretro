@@ -2,7 +2,7 @@
 title: "Task list — 2026-03-16 combined audit"
 source: "/reports/audits/2026-03-16_theme-css-tokens-styles-data-audit.md"
 created: "2026-03-16"
-status: "in-progress"
+status: "complete"
 ---
 
 # Task list — 2026-03-16 combined audit
@@ -29,5 +29,5 @@ status: "in-progress"
 ## Low priority
 
 - [x] **T14** Remove orphaned --retro-accent-olive mapping from theme-dark-mode.css
-- [ ] **T15** Clean up Tailwind migration comments in CSS files
-- [ ] **T16** Define missing tokens: --wp--preset--focus-ring--*, --wp--preset--z-index--modal
+- [x] **T15** Clean up Tailwind migration comments in CSS files — Removed/updated 7 Tailwind references across utilities.css, layout-grid.css, carousel.css, sr-only.css, single-product-blocks.css, order-confirmation.css, sweep-ui-components.css. ✅ **COMPLETE**
+- [x] **T16** Define missing tokens: --wp--preset--focus-ring--*, --wp--preset--z-index--modal — Added focus-ring (width: 2px, color: primary, offset: 2px) and z-index scale (base: 1, dropdown: 100, sticky: 200, overlay: 300, modal: 400, toast: 500) to theme-variables.css. ✅ **COMPLETE**

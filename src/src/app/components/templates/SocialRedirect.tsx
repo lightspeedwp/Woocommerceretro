@@ -43,24 +43,24 @@ export const SocialRedirect = () => {
   }, [navigate, social.url]);
 
   return (
-    <div className="wp-redirect-page" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--wp--preset--color--base)' }}>
-      <div className="wp-redirect-card funky-glass-panel" style={{ textAlign: 'center', padding: 'var(--wp--preset--spacing--60)', maxWidth: '400px', margin: '0 auto' }}>
-        <div className="wp-redirect-icon-wrapper" style={{ marginBottom: 'var(--wp--preset--spacing--40)', color: 'var(--wp--preset--color--neon-pink)' }}>
+    <div className="wp-redirect-page">
+      <div className="wp-redirect-card funky-glass-panel">
+        <div className="wp-redirect-icon-wrapper">
           <Icon size={64} weight="duotone" className="wp-redirect-icon funky-animate-float" />
         </div>
         
-        <h1 className="wp-redirect-title funky-section__heading--gradient" style={{ marginBottom: 'var(--wp--preset--spacing--20)' }}>
+        <h1 className="wp-redirect-title funky-section__heading--gradient">
           {`Redirecting to ${social.platform}`}
         </h1>
         
-        <p className="wp-redirect-text" style={{ color: 'var(--wp--preset--color--muted-foreground)', marginBottom: 'var(--wp--preset--spacing--40)' }}>
+        <p className="wp-redirect-text">
           {`Taking you to our ${social.platform} page...`}
         </p>
         
-        <div className="wp-loading-dots" style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: 'var(--wp--preset--spacing--40)' }}>
-          <div className="wp-loading-dot" style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--wp--preset--color--neon-cyan)', animation: 'bounce 1.4s infinite ease-in-out both' }} />
-          <div className="wp-loading-dot" style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--wp--preset--color--neon-cyan)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '0.16s' }} />
-          <div className="wp-loading-dot" style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--wp--preset--color--neon-cyan)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '0.32s' }} />
+        <div className="wp-loading-dots">
+          <div className="wp-loading-dot" />
+          <div className="wp-loading-dot" />
+          <div className="wp-loading-dot" />
         </div>
 
         <div className="wp-redirect-actions">
@@ -68,7 +68,6 @@ export const SocialRedirect = () => {
             onClick={() => navigate('/')}
             className="wp-link-simple"
             aria-label="Cancel redirect and return to homepage"
-            style={{ color: 'var(--wp--preset--color--foreground)', textDecoration: 'underline' }}
           >
             <small>Cancel and return to homepage</small>
           </button>

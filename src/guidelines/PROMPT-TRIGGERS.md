@@ -1,7 +1,7 @@
 # Prompt Trigger System
 
-**Version:** 4.1
-**Updated:** March 16, 2026
+**Version:** 5.0
+**Updated:** March 18, 2026
 **Purpose:** Trigger words for workflow automation with audit/report/task separation
 **Status:** Active
 **Supersedes:** `/guidelines/PROMPT_TRIGGER_SYSTEM.md` (v3.1)
@@ -37,6 +37,7 @@ audit && process reports → both in sequence
 | `cleanup guidelines` | `/prompts/cleanup-guidelines.md` | Merge duplicates, delete outdated guidelines | 20-40 min |
 | `process reports` | `/prompts/process-reports.md` | Convert unprocessed reports to domain task lists | 15-30 min |
 | `fix routes` | `/prompts/routes.md` | Validate and repair all routes, links, and nav data | 20-40 min |
+| `update triggers` | `/prompts/update-triggers.md` | Sync trigger registry with prompt files on disk | 15-30 min |
 
 **Aliases:** `clean` = `cleanup`, `next` = `continue`, `routes` = `fix routes`
 
@@ -56,7 +57,7 @@ audit && process reports → both in sequence
 
 | Trigger | Prompt File | Report Output | Domain |
 |---------|-------------|---------------|--------|
-| `audit` | Orchestrator -- runs all below | All 9 reports | All |
+| `audit` | Orchestrator -- runs all below | All 16 reports | All |
 | `audit routes` | `/prompts/audits/audit-routes.md` | `/reports/audits/YYYY-MM-DD_routes-audit.md` | Routes |
 | `audit sitemap` | `/prompts/audits/audit-sitemap.md` | `/reports/audits/YYYY-MM-DD_sitemap-audit.md` | Sitemap |
 | `audit tokens` | `/prompts/audits/audit-tokens.md` | `/reports/audits/YYYY-MM-DD_tokens-audit.md` | Tokens |
@@ -67,6 +68,11 @@ audit && process reports → both in sequence
 | `audit styles` | `/prompts/audits/audit-styles.md` | `/reports/audits/YYYY-MM-DD_styles-audit.md` | Styles |
 | `audit guidelines` | `/prompts/audits/audit-guidelines.md` | `/reports/audits/YYYY-MM-DD_guidelines-audit.md` | Guidelines |
 | `audit images` | `/prompts/audits/audit-images.md` | `/reports/audits/YYYY-MM-DD_images-audit.md` | Images |
+| `audit phosphor` | `/prompts/audits/audit-phosphor.md` | `/reports/audits/YYYY-MM-DD_phosphor-audit.md` | Icons |
+| `audit icons` | `/prompts/audits/audit-icons.md` | `/reports/audits/YYYY-MM-DD_icons-audit.md` | Icons |
+| `audit header` | `/prompts/audits/audit-header.md` | `/reports/audits/YYYY-MM-DD_header-audit.md` | Parts |
+| `audit footer` | `/prompts/audits/audit-footer.md` | `/reports/audits/YYYY-MM-DD_footer-audit.md` | Parts |
+| `audit hero` | `/prompts/audits/audit-hero.md` | `/reports/audits/YYYY-MM-DD_hero-audit.md` | Parts |
 
 ### 1d. Orchestrator Triggers
 
@@ -134,13 +140,19 @@ When `audit` (bare) is triggered, sub-audits run in this fixed order:
 2. `audit sitemap` -- sitemap component vs routes.ts sync
 3. `audit tokens` -- design token usage and consistency
 4. `audit css` -- CSS architecture and file health
-5. `audit a11y` -- WCAG AA 2.2 compliance
-6. `audit data` -- data file sizes and types
-7. `audit responsive` -- responsive pattern compliance
-8. `audit styles` -- hardcoded style detection
-9. `audit guidelines` -- guideline freshness and compliance
+5. `audit styles` -- hardcoded style detection
+6. `audit a11y` -- WCAG AA 2.2 compliance
+7. `audit data` -- data file sizes and types
+8. `audit responsive` -- responsive pattern compliance
+9. `audit images` -- image health and accessibility
+10. `audit phosphor` -- Phosphor migration completeness
+11. `audit icons` -- icon import runtime health
+12. `audit header` -- header template part architecture
+13. `audit footer` -- footer template part architecture
+14. `audit hero` -- hero template part consistency
+15. `audit guidelines` -- guideline freshness and compliance
 
-Each writes one report. The `audit` orchestrator does NOT create task lists.
+Each writes one report (15 total; `audit phosphor` and `audit icons` each write their own). The `audit` orchestrator does NOT create task lists.
 
 ### 3c. Report Format
 
@@ -361,6 +373,84 @@ When `process reports` is triggered:
 
 ---
 
+### audit phosphor
+
+**Scope:** Phosphor Icons migration completeness and compliance
+**Checks:**
+- Legacy icon library imports (`lucide-react`, `react-icons`, `heroicons`)
+- Direct `@phosphor-icons/react` imports bypassing `phosphor-compat.ts`
+- Deprecated/renamed Phosphor icon names
+- Unused icon exports in barrel file
+- Weight and size consistency
+- Icon accessibility (`aria-label` on icon-only buttons)
+
+**Report:** `/reports/audits/YYYY-MM-DD_phosphor-audit.md`
+**Task Domain:** `icons`
+
+---
+
+### audit icons
+
+**Scope:** Phosphor icon import runtime health (post-upgrade validation)
+**Checks:**
+- Icon names that no longer exist in installed `@phosphor-icons/react` version
+- Consumer imports referencing non-existent barrel exports
+- Known Phosphor rename patterns (`TwitterLogo` → `XLogo`, etc.)
+- Typo detection in import names
+
+**Report:** `/reports/audits/YYYY-MM-DD_icons-audit.md`
+**Task Domain:** `icons`
+
+---
+
+### audit header
+
+**Scope:** Header template part architecture and pattern selection
+**Checks:**
+- Single header template part used across all routes
+- Context-aware pattern selection (homepage, dev tools, checkout, main site)
+- Legacy header components still imported
+- Direct pattern imports bypassing template part
+- Breadcrumb integration (homepage exempt, all others include)
+- SiteLayout integration correctness
+
+**Report:** `/reports/audits/YYYY-MM-DD_header-audit.md`
+**Task Domain:** `parts`
+
+---
+
+### audit footer
+
+**Scope:** Footer template part architecture and pattern selection
+**Checks:**
+- Single footer template part used across all routes
+- Context-aware pattern selection (main site, dev tools, checkout)
+- Legacy footer components still imported
+- Direct pattern imports bypassing template part
+- Content sourced from data files (social links, legal links, newsletter)
+- SiteLayout integration correctness
+
+**Report:** `/reports/audits/YYYY-MM-DD_footer-audit.md`
+**Task Domain:** `parts`
+
+---
+
+### audit hero
+
+**Scope:** Hero template part consistency across all templates and pages
+**Checks:**
+- Single hero template part used across all routes
+- Context-aware pattern selection with dedicated data files
+- Templates rendering inline hero markup (should use template part)
+- Templates importing hero patterns directly (should go through part)
+- Hero data files exist for each section (homepage, shop, blog, dev tools, info, account)
+- Dev tools pages sharing one data file with per-page entries
+
+**Report:** `/reports/audits/YYYY-MM-DD_hero-audit.md`
+**Task Domain:** `parts`
+
+---
+
 ## 5. Workflow Rules
 
 ### Rule 1: Prompts Go in /prompts/
@@ -399,8 +489,10 @@ Created ONLY by `process reports` or workflow triggers -- never by audit trigger
 | `patterns` | `/tasks/patterns-task-list.md` | `process reports`, `document` |
 | `blocks` | `/tasks/blocks-task-list.md` | `process reports`, `document` |
 | `guidelines` | `/tasks/guidelines-task-list.md` | `process reports` |
+| `icons` | `/tasks/icons-task-list.md` | `process reports` |
+| `parts` | `/tasks/parts-task-list.md` | `process reports` |
 
-These files are **protected** -- never delete them. Mark as `Status: Complete` when done.
+These files are **protected**
 
 ### Rule 4: Guidelines Updated Before Auditing
 
@@ -514,7 +606,7 @@ Never delete:
 
 ```
 AUDITING:
-  audit                    → Run all 9 audits (reports only)
+  audit                    → Run all 16 audits (reports only)
   audit css                → CSS architecture audit (report only)
   audit a11y               → Accessibility audit (report only)
   audit tokens             → Design token audit (report only)
@@ -525,6 +617,11 @@ AUDITING:
   audit styles             → Hardcoded styles audit (report only)
   audit guidelines         → Guideline compliance audit (report only)
   audit images             → Image file audit (report only)
+  audit phosphor           → Phosphor migration completeness (report only)
+  audit icons              → Icon import runtime health (report only)
+  audit header             → Header template part architecture (report only)
+  audit footer             → Footer template part architecture (report only)
+  audit hero               → Hero template part consistency (report only)
 
 PROCESSING:
   process reports          → Convert unprocessed reports → task lists
@@ -542,6 +639,7 @@ WORKFLOW:
   update guidelines        → Refresh guideline frontmatter
   cleanup guidelines       → Merge/delete outdated guidelines
   fix routes               → Validate and repair all routes, links, and nav data
+  update triggers          → Sync trigger registry with prompt files on disk
 
 CODE QUALITY:
   apply bem                → Full BEM compliance audit + fix (direct code fixes)
@@ -549,8 +647,8 @@ CODE QUALITY:
 
 ---
 
-**Version:** 4.1
-**Last Updated:** March 16, 2026
-**Total Triggers:** 13 (9 workflow + 1 code quality + 9 audit + 1 orchestrator + 2 combo = 22 including sub-audits)
-**Lines:** ~400
+**Version:** 5.0
+**Last Updated:** March 18, 2026
+**Total Triggers:** 19 (10 workflow + 1 code quality + 16 audit + 1 orchestrator + 2 combo = 30 including sub-audits)
+**Lines:** ~550
 **Supersedes:** `/guidelines/PROMPT_TRIGGER_SYSTEM.md` v3.1

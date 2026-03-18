@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Container } from '../common/Container';
 import { DarkModeToggle } from '../common/DarkModeToggle';
+import { Heading } from '../common/Heading';
 import { AppWindow, Package, Cube, Code, ShoppingBag, BookOpen, Info, Question, FileText, User, CreditCard, Megaphone, Wrench, MagnifyingGlass, Faders, Sparkle, TextT, GridFour, Check, ArrowSquareOut, ShoppingCart, CursorClick, Image as ImageIcon, Palette } from '../../utils/phosphor-compat';
+import { cn } from '../../utils/cn';
 
 /**
  * PageShowcase Template — Retro Redesign
@@ -11,7 +13,7 @@ import { AppWindow, Package, Cube, Code, ShoppingBag, BookOpen, Info, Question, 
  * @template
  * @route /showcase
  */
-const PageShowcase = () => {
+export const PageShowcase = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -86,27 +88,16 @@ const PageShowcase = () => {
   return (
     <>
       <DarkModeToggle />
-      <div className="retro-devtools-page" style={{ backgroundColor: 'var(--color-paper)', color: 'var(--color-ink)', minHeight: '100vh', paddingBottom: '4rem' }}>
+      <div className="retro-devtools-page">
 
         {/* Header Section */}
-        <section style={{
-          padding: '3rem 0',
-          borderBottom: '4px solid var(--color-ink)',
-          backgroundColor: 'var(--color-signal)',
-          backgroundImage: 'radial-gradient(var(--color-ink) 2px, transparent 2px)',
-          backgroundSize: '16px 16px',
-        }}>
+        <section className="retro-showcase__header retro-showcase__header--pattern">
           <Container>
-            <div style={{
-              backgroundColor: 'var(--color-ink)',
-              padding: '2rem',
-              border: '4px solid var(--color-ink)',
-              boxShadow: '8px 8px 0 rgba(0,0,0,0.2)',
-              display: 'inline-block',
-              color: 'var(--color-paper)'
-            }}>
-              <h1 className="retro-font-display retro-bold" style={{ fontSize: '3rem', margin: '0 0 1rem 0' }}>COMPONENT SHOWCASE</h1>
-              <p className="retro-font-body" style={{ fontSize: '1.125rem', margin: 0, opacity: 0.9 }}>
+            <div className="retro-showcase__title-box">
+              <Heading level={1} className="retro-showcase__title retro-font-display retro-bold">
+                COMPONENT SHOWCASE
+              </Heading>
+              <p className="retro-showcase__subtitle retro-font-body">
                 Explore the complete collection of templates, parts, patterns, and blocks.
               </p>
             </div>
@@ -114,22 +105,16 @@ const PageShowcase = () => {
         </section>
 
         {/* Stats */}
-        <section style={{ padding: '4rem 0' }}>
+        <section className="retro-showcase__stats-section">
           <Container>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+            <div className="retro-showcase__stats">
               {stats.map((stat, index) => (
-                <div key={index} style={{
-                  backgroundColor: 'var(--color-paper-deep)',
-                  border: '4px solid var(--color-ink)',
-                  padding: '2rem',
-                  textAlign: 'center',
-                  boxShadow: '4px 4px 0 var(--color-ink)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', color: 'var(--color-signal)' }}>
+                <div key={index} className="retro-showcase__stat-card">
+                  <div className="retro-showcase__stat-icon">
                     <stat.icon size={48} weight="bold" />
                   </div>
-                  <div className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', marginBottom: '0.25rem' }}>{stat.count}</div>
-                  <div className="retro-font-body" style={{ fontSize: '0.875rem', opacity: 0.8, fontWeight: 'bold' }}>{stat.label}</div>
+                  <div className="retro-showcase__stat-count retro-font-display retro-bold">{stat.count}</div>
+                  <div className="retro-showcase__stat-label retro-font-body">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -137,30 +122,31 @@ const PageShowcase = () => {
         </section>
 
         {/* Templates by Category */}
-        <section style={{ padding: '4rem 0', backgroundColor: 'var(--color-paper-deep)', borderTop: '4px solid var(--color-ink)' }}>
+        <section className="retro-showcase__categories-section">
           <Container>
-            <div style={{ marginBottom: '3rem' }}>
-              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>TEMPLATE CATEGORIES</h2>
-              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>63 templates organized into 9 semantic groups</p>
+            <div className="retro-showcase__section-header">
+              <Heading level={2} className="retro-showcase__section-title retro-font-display retro-bold">
+                TEMPLATE CATEGORIES
+              </Heading>
+              <p className="retro-showcase__section-description retro-font-body">
+                63 templates organized into 9 semantic groups
+              </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+            <div className="retro-showcase__category-grid">
               {templateCategories.map((category, index) => (
-                <div key={index} style={{
-                  backgroundColor: 'var(--color-paper)',
-                  border: '4px solid var(--color-ink)',
-                  padding: '1.5rem',
-                  boxShadow: '4px 4px 0 var(--color-ink)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                    <div style={{ color: 'var(--color-signal)' }}>
+                <div key={index} className="retro-showcase__category-card">
+                  <div className="retro-showcase__category-header">
+                    <div className="retro-showcase__category-icon">
                       <category.icon size={32} weight="bold" />
                     </div>
-                    <span className="retro-font-display retro-bold" style={{ backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', padding: '0.25rem 0.5rem', fontSize: '0.875rem' }}>
+                    <span className="retro-showcase__category-badge retro-font-display retro-bold">
                       {category.count}
                     </span>
                   </div>
-                  <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.25rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{category.name}</h3>
-                  <p className="retro-font-body" style={{ margin: 0, fontSize: '0.875rem', opacity: 0.8 }}>{category.desc}</p>
+                  <Heading level={3} className="retro-showcase__category-title retro-font-display retro-bold">
+                    {category.name}
+                  </Heading>
+                  <p className="retro-showcase__category-description retro-font-body">{category.desc}</p>
                 </div>
               ))}
             </div>
@@ -168,63 +154,43 @@ const PageShowcase = () => {
         </section>
 
         {/* Component Browser */}
-        <section style={{ padding: '4rem 0', borderTop: '4px solid var(--color-ink)' }}>
+        <section className="retro-showcase__directory-section">
           <Container>
-            <div style={{ marginBottom: '3rem' }}>
-              <h2 className="retro-font-display retro-bold" style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0' }}>COMPONENT DIRECTORY</h2>
-              <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>Search and filter all available React components</p>
+            <div className="retro-showcase__section-header">
+              <Heading level={2} className="retro-showcase__section-title retro-font-display retro-bold">
+                COMPONENT DIRECTORY
+              </Heading>
+              <p className="retro-showcase__section-description retro-font-body">
+                Search and filter all available React components
+              </p>
             </div>
 
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.5rem',
-              marginBottom: '3rem',
-              backgroundColor: 'var(--color-paper-deep)',
-              border: '4px solid var(--color-ink)',
-              padding: '2rem',
-              boxShadow: '4px 4px 0 var(--color-ink)'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div className="retro-showcase__search">
+              <div className="retro-showcase__search-input-wrapper">
                 <MagnifyingGlass size={24} weight="bold" color="var(--color-ink)" />
                 <input
                   type="text"
                   placeholder="SEARCH COMPONENTS..."
                   value={searchTerm}
                   onChange={(evt) => setSearchTerm(evt.target.value)}
-                  className="retro-font-display retro-bold"
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'var(--color-paper)',
-                    border: '2px solid var(--color-ink)',
-                    padding: '0.75rem 1rem',
-                    fontSize: '1rem',
-                    color: 'var(--color-ink)',
-                    outline: 'none'
-                  }}
+                  className="retro-showcase__search-input retro-font-display retro-bold"
                   aria-label="Search components"
                 />
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <div className="retro-showcase__filter-wrapper">
                 <Faders size={24} weight="bold" color="var(--color-ink)" />
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <div className="retro-showcase__filter-chips">
                   {categories.map((cat) => {
                     const isActive = selectedCategory === cat;
                     return (
                       <button
                         key={cat}
                         onClick={() => setSelectedCategory(cat)}
-                        className="retro-font-display retro-bold"
-                        style={{
-                          backgroundColor: isActive ? 'var(--color-ink)' : 'var(--color-paper)',
-                          color: isActive ? 'var(--color-paper)' : 'var(--color-ink)',
-                          border: '2px solid var(--color-ink)',
-                          padding: '0.5rem 1rem',
-                          fontSize: '0.875rem',
-                          cursor: 'pointer',
-                          textTransform: 'uppercase'
-                        }}
+                        className={cn(
+                          'retro-showcase__chip retro-font-display retro-bold',
+                          isActive && 'retro-showcase__chip--active'
+                        )}
                         aria-pressed={isActive}
                       >
                         {`${cat} (${cat === 'All' ? components.length : components.filter((c) => c.category === cat).length})`}
@@ -236,67 +202,43 @@ const PageShowcase = () => {
             </div>
 
             {/* Results Count */}
-            <div style={{ marginBottom: '2rem' }}>
-              <p className="retro-font-body" style={{ fontSize: '1rem' }}>
+            <div className="retro-showcase__results-count">
+              <p className="retro-font-body retro-showcase__results-count-text">
                 SHOWING <strong>{filteredComponents.length}</strong> OF <strong>{components.length}</strong> COMPONENTS
               </p>
             </div>
 
             {/* Component Grid */}
             {filteredComponents.length > 0 ? (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+              <div className="retro-showcase__results">
                 {filteredComponents.map((comp) => (
-                  <div key={comp.name} style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    backgroundColor: 'var(--color-paper)',
-                    border: '4px solid var(--color-ink)',
-                    padding: '1.5rem',
-                    boxShadow: '4px 4px 0 var(--color-ink)',
-                    transition: 'transform 0.1s, box-shadow 0.1s'
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                      <h3 className="retro-font-display retro-bold" style={{ margin: 0, fontSize: '1.25rem', wordBreak: 'break-all' }}>{comp.name}</h3>
-                      <span
-                        className="retro-font-display"
-                        style={{
-                          backgroundColor: 'var(--color-signal)',
-                          color: 'var(--color-paper)',
-                          padding: '0.25rem 0.5rem',
-                          fontSize: '0.75rem',
-                          fontWeight: 'bold',
-                          borderRadius: '2px',
-                          whiteSpace: 'nowrap',
-                          marginLeft: '0.5rem'
-                        }}
-                      >
-                        {comp.type}
-                      </span>
+                  <div key={comp.name} className="retro-showcase__component-card">
+                    <div className="retro-showcase__component-header">
+                      <Heading level={3} className="retro-showcase__component-name retro-font-display retro-bold">
+                        {comp.name}
+                      </Heading>
+                      <div className="retro-showcase__component-badges">
+                        <span className="retro-showcase__component-badge retro-font-display">
+                          {comp.type}
+                        </span>
+                      </div>
                     </div>
-                    <p className="retro-font-body" style={{ margin: '0 0 1.5rem 0', fontSize: '0.875rem', flex: 1, opacity: 0.8 }}>{comp.desc}</p>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '2px dashed var(--color-ink)', paddingTop: '1rem', marginTop: 'auto' }}>
-                      <code style={{ fontSize: '0.75rem', backgroundColor: 'var(--color-paper-deep)', padding: '0.25rem 0.5rem', border: '1px solid var(--color-ink)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{comp.path}</code>
-                      <a
-                        href={`#${comp.path}`}
-                        style={{ color: 'var(--color-ink)' }}
-                        aria-label={`View ${comp.name} source`}
-                      >
-                        <ArrowSquareOut size={20} weight="bold" />
-                      </a>
-                    </div>
+                    <p className="retro-showcase__component-description retro-font-body">{comp.desc}</p>
+                    <div className="retro-showcase__component-path">{comp.path}</div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div style={{
-                textAlign: 'center',
-                padding: '4rem 2rem',
-                backgroundColor: 'var(--color-paper-deep)',
-                border: '4px dashed var(--color-ink)'
-              }}>
-                <Cube size={48} weight="duotone" color="var(--color-ink)" style={{ marginBottom: '1rem' }} />
-                <h3 className="retro-font-display retro-bold" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>NO COMPONENTS FOUND</h3>
-                <p className="retro-font-body" style={{ margin: 0, opacity: 0.8 }}>Try adjusting your search or filter criteria</p>
+              <div className="retro-showcase__empty">
+                <div className="retro-showcase__empty-icon">
+                  <Cube size={48} weight="duotone" />
+                </div>
+                <Heading level={3} className="retro-showcase__empty-message retro-font-display retro-bold">
+                  NO COMPONENTS FOUND
+                </Heading>
+                <p className="retro-font-body retro-showcase__empty-hint">
+                  Try adjusting your search or filter criteria
+                </p>
               </div>
             )}
           </Container>

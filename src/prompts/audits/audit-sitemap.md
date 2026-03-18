@@ -17,6 +17,7 @@ Verify the Sitemap component's `ROUTE_SECTIONS` data matches the actual routes i
 - `/routes.ts` — source of truth for all routes
 - `/src/app/components/pages/Sitemap.tsx` — `ROUTE_SECTIONS` constant
 - `/src/app/data/navigation.ts` — header/footer navigation links
+- `/guidelines/NAVIGATION_QUICK_REFERENCE.md` — navigation architecture
 
 ## Checks
 
@@ -31,6 +32,13 @@ Verify the Sitemap component's `ROUTE_SECTIONS` data matches the actual routes i
 
 Write report to `/reports/audits/YYYY-MM-DD_sitemap-audit.md` with `Status: Unprocessed`.  
 Do NOT create task lists.
+
+---
+
+## Guidelines Referenced
+
+- `/guidelines/NAVIGATION_QUICK_REFERENCE.md`
+- `/guidelines/ROUTING_GUIDE.md`
 
 ---
 

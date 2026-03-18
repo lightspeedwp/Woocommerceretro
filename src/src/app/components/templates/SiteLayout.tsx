@@ -23,10 +23,14 @@ import { FooterRetroPattern } from '../patterns/FooterRetroPattern';
 import { SiteBreadcrumb } from '../common/SiteBreadcrumb';
 import { SiteLayoutContext } from '../../contexts/SiteLayoutContext';
 import { FloatingInvaders } from '../patterns/FloatingInvaders';
+import { RouteDocumentTitle } from '../common/RouteDocumentTitle';
+import { SkipNavigation } from '../common/SkipNavigation';
 
 export const SiteLayout = () => {
   return (
     <SiteLayoutContext.Provider value={{ hasSharedChrome: true }}>
+      <SkipNavigation />
+      <RouteDocumentTitle />
       <FloatingInvaders />
       <HeaderRetroPattern />
       <SiteBreadcrumb />

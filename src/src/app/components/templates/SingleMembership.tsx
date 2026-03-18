@@ -325,7 +325,7 @@ export const SingleMembership = () => {
                     <div className="retro-testimonial-avatar">
                       <img
                         src={testimonial.image}
-                        alt=""
+                        alt={`${testimonial.name} avatar`}
                         className="retro-testimonial-avatar__img"
                         loading="lazy"
                       />

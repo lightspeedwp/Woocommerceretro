@@ -203,3 +203,11 @@
   color: var(--wp--preset--color--muted-foreground);
   text-decoration: line-through;
 }
+
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-pricing-toggle__option,
+  .wp-pricing-card {
+    transition: none;
+  }
+}

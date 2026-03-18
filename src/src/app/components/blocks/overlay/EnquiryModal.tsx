@@ -119,7 +119,7 @@ export const EnquiryModal = ({ isOpen, onClose, title, description, successMessa
           ) : (
             <div className="enquiry-modal__success">
               <div className="enquiry-modal__success-icon"><CheckCircle size={32} /></div>
-              <h2 className="enquiry-modal__success-title">Message Sent!</h2>
+              <h2 className="enquiry-modal__success-title">Message sent!</h2>
               <p className="enquiry-modal__success-text">{successMessage}</p>
               <Button variant="outline" onClick={handleClose}>Close</Button>
             </div>

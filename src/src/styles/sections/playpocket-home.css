@@ -1,10 +1,11 @@
 /**
- * PlayPocket Home Page Styles — Import Hub
+ * PlayPocket Home Page Styles — Index (documentation only)
  *
- * Split into individual files per BEM block (200-line limit).
- * Each file is self-contained with its own dark mode and reduced motion rules.
+ * IMPORTANT: Do NOT add @import statements here.
+ * All sub-files are imported directly in /styles/globals.css
+ * to prevent nested @imports (which cause Figma iframe crashes).
  *
- * Files:
+ * Sub-files:
  *   pp-home-layout.css      — Home wrapper, main layout, space invaders, dark overrides
  *   pp-pixel-btn.css        — Pixel button variants
  *   pp-logo.css             — Interactive logo (3D keycap, dark mode, responsive)
@@ -14,12 +15,3 @@
  *   pp-bottom-sections.css  — Power Up + Best Sellers
  *   pp-footer-home.css      — Home footer (socials, newsletter, copyright)
  */
-
-@import "./pp-home-layout.css";
-@import "./pp-pixel-btn.css";
-@import "./pp-logo.css";
-@import "./pp-hero.css";
-@import "./pp-categories.css";
-@import "./pp-products.css";
-@import "./pp-bottom-sections.css";
-@import "./pp-footer-home.css";

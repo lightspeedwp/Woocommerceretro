@@ -1,0 +1,202 @@
+/* ========================================
+   Account Dashboard — Actions + Loyalty + Notifications
+   
+   BEM block: .wp-account-dashboard (partial)
+   Elements: __action-*, __loyalty-*, __progress-*, __notification-*, __recommendations-*
+   Component: /src/app/components/templates/AccountDashboardWidgets.tsx
+   
+   Split from account-dashboard-widgets.css (CSS25).
+   ======================================== */
+
+/* ── Actions grid ── */
+
+.wp-account-dashboard__actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--20);
+}
+
+@media (min-width: 640px) {
+  .wp-account-dashboard__actions-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wp-account-dashboard__action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--30);
+  background: var(--color-panel);
+  text-decoration: none;
+  color: var(--color-ink);
+  border: 2px solid var(--color-border);
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.15s;
+}
+
+.wp-account-dashboard__action-card:hover {
+  border-color: var(--color-ink);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro-sm);
+}
+
+.wp-account-dashboard__action-icon {
+  color: var(--color-signal);
+}
+
+.wp-account-dashboard__action-label {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+}
+
+/* ── Loyalty widget ── */
+
+.wp-account-dashboard__widget--loyalty {
+  border-color: var(--color-signal);
+}
+
+.wp-account-dashboard__loyalty-icon {
+  color: var(--color-signal);
+}
+
+.wp-account-dashboard__loyalty-points {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__loyalty-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: var(--wp--preset--spacing--10);
+  color: var(--color-ink);
+}
+
+.wp-account-dashboard__loyalty-label {
+  margin: 0;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+}
+
+.wp-account-dashboard__loyalty-progress {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.wp-account-dashboard__loyalty-progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--wp--preset--spacing--10);
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+.wp-account-dashboard__loyalty-progress-target {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.wp-account-dashboard__progress-bar {
+  height: 8px;
+  background: var(--color-panel);
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+}
+
+.wp-account-dashboard__progress-fill {
+  height: 100%;
+  background: var(--color-signal);
+  width: 83%;
+}
+
+.wp-account-dashboard__loyalty-cta {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-retro-sm);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.wp-account-dashboard__loyalty-cta:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro);
+}
+
+/* ── Notifications ── */
+
+.wp-account-dashboard__notifications {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-account-dashboard__notification {
+  display: flex;
+  gap: var(--wp--preset--spacing--20);
+  padding: var(--wp--preset--spacing--20);
+  background: var(--color-panel);
+  border: 2px solid var(--color-border);
+  transition: border-color 0.15s;
+}
+
+.wp-account-dashboard__notification:hover {
+  border-color: var(--color-ink);
+}
+
+.wp-account-dashboard__notification-icon {
+  color: var(--color-signal);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wp-account-dashboard__notification-title {
+  margin: 0 0 4px 0;
+  font-size: 0.8125rem;
+  color: var(--color-ink);
+}
+
+.wp-account-dashboard__notification-time {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+/* ── Recommendations CTA ── */
+
+.wp-account-dashboard__recommendations-cta {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: var(--color-paper);
+  box-shadow: var(--shadow-retro-sm);
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s;
+}
+
+.wp-account-dashboard__recommendations-cta:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-retro);
+}

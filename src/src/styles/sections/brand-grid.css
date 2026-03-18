@@ -43,6 +43,13 @@
   transition: opacity var(--wp--preset--transition--base) ease;
 }
 
+/* --- Reduced motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wp-brand-grid-item__image {
+    transition: none;
+  }
+}
+
 .wp-brand-image--grayscale {
   filter: grayscale(100%);
 }

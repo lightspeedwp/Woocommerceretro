@@ -22,6 +22,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { SpinningCoin3D } from './SpinningCoin3D';
+import { RETRO_COLORS } from '../../../constants/theme';
 import { prefersReducedMotion } from '../../../utils/webgl';
 
 export interface SubscriptionBox3DProps {
@@ -43,7 +44,7 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
   step,
   onComplete,
   autoRotate = true,
-  glowColor = '#00fff9', // Neon cyan
+  glowColor = RETRO_COLORS.cyan,
   size = 200,
   'aria-label': ariaLabel = '3D subscription box preview',
 }) => {
@@ -87,7 +88,7 @@ export const SubscriptionBox3D: React.FC<SubscriptionBox3DProps> = ({
         <div className="retro-step retro-step--coin">
           <SpinningCoin3D
             size={size * 0.6}
-            glowColor="#FFD700"
+            glowColor={RETRO_COLORS.gold}
             speed={1}
             autoRotate={shouldAnimate}
             showLabel={true}
@@ -308,7 +309,7 @@ const BoxFace: React.FC<BoxFaceProps> = ({
   };
 
   const isDark = document.documentElement.classList.contains('dark');
-  const baseColor = isDark ? '#1a1a1a' : '#2a2a2a';
+  const baseColor = isDark ? RETRO_COLORS.surfaceDark : RETRO_COLORS.surfaceLight;
   const borderColor = isLid ? glowColor : `${glowColor}60`;
 
   return (

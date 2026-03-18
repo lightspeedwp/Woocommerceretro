@@ -67,7 +67,7 @@ export const ArchiveBlogRetro = () => {
               <div className="retro-blog-archive__featured-img-wrap">
                 <img
                   src={featuredPost.featuredImage || FALLBACK_IMAGE}
-                  alt=""
+                  alt={featuredPost.title}
                   className="retro-blog-archive__featured-img"
                   loading="eager"
                 />
@@ -166,7 +166,7 @@ export const ArchiveBlogRetro = () => {
                 <Link to={'/blog/' + post.slug} className="retro-blog-card__img-link">
                   <img
                     src={post.featuredImage || FALLBACK_IMAGE}
-                    alt=""
+                    alt={post.title}
                     className="retro-blog-card__img"
                     loading="lazy"
                   />

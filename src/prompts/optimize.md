@@ -17,8 +17,9 @@ Identify and fix performance bottlenecks: oversized files, redundant CSS, large 
 ## Prerequisites
 
 1. Read `/guidelines/development/css-optimization-guidelines.md`
-2. Read `/guidelines/Guidelines.md` Section 4 (CSS Architecture)
-3. Verify design tokens are current in `/guidelines/design-tokens/`
+2. Read `/guidelines/development/css-optimization-quick-reference.md`
+3. Read `/guidelines/Guidelines.md` Section 4 (CSS Architecture), Section 6.2 (File Size Limits)
+4. Verify design tokens are current in `/guidelines/design-tokens/`
 
 ---
 
@@ -70,3 +71,19 @@ Identify and fix performance bottlenecks: oversized files, redundant CSS, large 
 - [ ] Report created with actionable items
 - [ ] Task list created (after report)
 - [ ] No new files created in root directory
+
+---
+
+## Suggested Follow-Up Triggers
+
+After optimization, consider running:
+- `audit css` — if CSS issues were found but not fully resolved
+- `audit styles` — if hardcoded values were detected
+- `audit responsive` — if layout issues were identified
+- `audit icons` — if icon import issues were noticed
+
+## Guidelines Referenced
+
+- `/guidelines/development/css-optimization-guidelines.md`
+- `/guidelines/development/css-optimization-quick-reference.md`
+- `/guidelines/Guidelines.md` Sections 4, 6.2

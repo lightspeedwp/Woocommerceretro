@@ -4,8 +4,8 @@
 
 .wp-back-to-top {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: var(--wp--preset--spacing--60);
+  right: var(--wp--preset--spacing--60);
   width: 3rem;
   height: 3rem;
   background-color: var(--wp--preset--color--primary);

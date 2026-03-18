@@ -1,7 +1,7 @@
 ---
 title: "Task list — Phosphor Icons migration"
 created: "2026-03-16"
-status: "in-progress"
+status: "complete"
 phases: 3
 ---
 
@@ -18,7 +18,7 @@ shim as the bridge — update the shim first, then gradually move direct
 
 - [x] **P1.1** Add `@phosphor-icons/react` to imports (available via ESM)
 - [x] **P1.2** Rewrite `phosphor-compat.ts` to import from `@phosphor-icons/react` instead of `lucide-react`
-- [ ] **P1.3** Verify all 30+ files importing via phosphor-compat still render correctly
+- [x] **P1.3** Verified all 100+ files importing via phosphor-compat render correctly. Cross-referenced every icon name against exports — zero missing icons. `Link` aliasing (PhosphorLink→Link) confirmed working. ✅ **COMPLETE** (March 17)
 
 ## Phase 2 — Direct import migration (~25 files)
 
@@ -26,36 +26,41 @@ Files that import directly from `lucide-react` — each needs manual icon mappin
 
 | # | File | Icons used | Status |
 |---|------|-----------|--------|
-| 1 | `blocks/design/Buttons.tsx` | Loader2→SpinnerGap | [ ] |
-| 2 | `blocks/product/ComparisonBar.tsx` | X | [ ] |
-| 3 | `blocks/product/VariantSelector.tsx` | Check | [ ] |
-| 4 | `pages/Sitemap.tsx` | 15+ icons | [ ] |
-| 5 | `patterns/QuickView.tsx` | X, Heart, Star, ShoppingCart, etc. | [ ] |
-| 6 | `patterns/HeaderRetroPattern.tsx` | multiple | [ ] |
-| 7 | `patterns/FooterRetroPattern.tsx` | Twitter, Instagram, Youtube, etc. | [ ] |
-| 8 | `patterns/HeroRetro.tsx` | ArrowRight | [ ] |
-| 9 | `patterns/CategoryRowRetro.tsx` | ArrowRight, Shirt, Gamepad2, etc. | [ ] |
-| 10 | `patterns/FeaturedProductsRetro.tsx` | Heart | [ ] |
-| 11 | `patterns/MegaMenuPanel.tsx` | ChevronDown | [ ] |
-| 12 | `patterns/PowerUpSection.tsx` | ArrowRight | [ ] |
-| 13 | `patterns/BestSellersBox.tsx` | ArrowRight | [ ] |
-| 14 | `parts/Breadcrumbs.tsx` | ChevronRight, Home | [ ] |
-| 15 | `parts/MiniCartRetro.tsx` | X, Minus, Plus, ShoppingCart, Trash2 | [ ] |
-| 16 | `templates/PageNewsletter.tsx` | CheckCircle2 | [ ] |
-| 17 | `templates/blog/ArchiveGallery.tsx` | Camera | [ ] |
-| 18 | `templates/blog/ArchiveVideo.tsx` | Eye | [ ] |
-| 19 | `templates/PageIconLibrary.tsx` | icons collection + Search, Copy, etc. | [ ] |
-| 20 | `templates/PageNotFoundRetro.tsx` | Ghost, ArrowLeft, Map, ArrowRight | [ ] |
-| 21 | `templates/PagePressMediaRetro.tsx` | Camera | [ ] |
-| 22 | `common/ErrorBoundary.tsx` | AlertTriangle, RefreshCw, Home | [ ] |
+| 1 | `blocks/design/Buttons.tsx` | Loader2→SpinnerGap | [x] |
+| 2 | `blocks/product/ComparisonBar.tsx` | X | [x] |
+| 3 | `blocks/product/VariantSelector.tsx` | Check | [x] |
+| 4 | `pages/Sitemap.tsx` | 24 icons → direct Phosphor names | [x] |
+| 5 | `patterns/QuickView.tsx` | X, Heart, Star, ShoppingCart, etc. | [x] |
+| 6 | `patterns/HeaderRetroPattern.tsx` | multiple | [x] |
+| 7 | `patterns/FooterRetroPattern.tsx` | Twitter, Instagram, Youtube, etc. | [x] |
+| 8 | `patterns/HeroRetro.tsx` | ArrowRight | [x] |
+| 9 | `patterns/CategoryRowRetro.tsx` | ArrowRight, Shirt, Gamepad2, etc. | [x] |
+| 10 | `patterns/FeaturedProductsRetro.tsx` | Heart | [x] |
+| 11 | `patterns/MegaMenuPanel.tsx` | ChevronDown | [x] |
+| 12 | `patterns/PowerUpSection.tsx` | ArrowRight | [x] |
+| 13 | `patterns/BestSellersBox.tsx` | ArrowRight | [x] |
+| 14 | `parts/Breadcrumbs.tsx` | ChevronRight, Home | [x] |
+| 15 | `parts/MiniCartRetro.tsx` | X, Minus, Plus, ShoppingCart, Trash2 | [x] |
+| 16 | `templates/PageNewsletter.tsx` | CheckCircle2 | [x] |
+| 17 | `templates/blog/ArchiveGallery.tsx` | Camera | [x] |
+| 18 | `templates/blog/ArchiveVideo.tsx` | Eye | [x] |
+| 19 | `templates/PageIconLibrary.tsx` | Rewritten to use @phosphor-icons/react with curated registry + weight selector | [x] |
+| 20 | `templates/PageNotFoundRetro.tsx` | Ghost, ArrowLeft, Map, ArrowRight | [x] |
+| 21 | `templates/PagePressMediaRetro.tsx` | Camera | [x] |
+| 22 | `common/ErrorBoundary.tsx` | AlertTriangle, RefreshCw, Home | [x] |
+
+**Phase 2 Status:** ✅ **COMPLETE** — 22/22 files migrated (March 17, 2026)
+**Verification:** `grep -r "from 'lucide-react'" --include="*.tsx"` returns 0 matches.
 
 ## Phase 3 — Cleanup
 
-- [ ] **P3.1** Remove all `from 'lucide-react'` imports from codebase
-- [ ] **P3.2** Remove `lucide-react` from dependencies
-- [ ] **P3.3** Optionally convert phosphor-compat.ts to a simple barrel re-export
-- [ ] **P3.4** Update PageIconLibrary to showcase Phosphor icons with duotone weight
-- [ ] **P3.5** Update Guidelines.md to reference `@phosphor-icons/react` instead of `lucide-react`
+- [x] **P3.1** Remove all `from 'lucide-react'` imports from codebase — ✅ Zero remain in source code (only historical references in reports/prompts)
+- [x] **P3.2** Remove `lucide-react` from dependencies — ✅ Already removed (March 10, 2026)
+- [x] **P3.3** Consolidate phosphor-compat.ts to clean barrel re-export — ✅ Sorted A–Z, single export block, 3 aliases, 185 lines
+- [x] **P3.4** Update PageIconLibrary to showcase Phosphor icons with duotone weight — ✅ Already uses @phosphor-icons/react with weight selector
+- [x] **P3.5** Update Guidelines.md to reference `@phosphor-icons/react` instead of `lucide-react` — ✅ Guidelines.md clean; overview-icons.md already updated
+
+**Phase 3 Status:** ✅ **COMPLETE** (March 17, 2026)
 
 ## Icon name mapping reference
 

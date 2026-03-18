@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from '../../../utils/phosphor-compat';
+import { useFocusTrap } from '../../../hooks/useFocusTrap';
 
 interface SheetContextValue {
   open: boolean;
@@ -49,6 +50,8 @@ export const SheetContent = React.forwardRef<HTMLDivElement, any>(({ side = 'rig
   const onOpenChange = context?.onOpenChange ?? (() => {});
   const [mounted, setMounted] = useState(false);
 
+  const focusTrapRef = useFocusTrap<HTMLDivElement>(open);
+
   useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
@@ -67,7 +70,18 @@ export const SheetContent = React.forwardRef<HTMLDivElement, any>(({ side = 'rig
   return createPortal(
     <div className="wp-sheet-portal">
       <div className="wp-sheet-overlay funky-overlay" onClick={() => onOpenChange(false)} />
-      <div ref={ref} className={`wp-sheet-content funky-sheet ${className}`} data-state={open ? "open" : "closed"} data-side={side}>
+      <div
+        ref={(node) => {
+          (focusTrapRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+          if (typeof ref === 'function') ref(node);
+          else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }}
+        role="dialog"
+        aria-modal="true"
+        className={`wp-sheet-content funky-sheet ${className}`}
+        data-state={open ? "open" : "closed"}
+        data-side={side}
+      >
         <button className="wp-sheet-close funky-sheet-close" onClick={() => onOpenChange(false)} aria-label="Close">
           <X className="wp-sheet-close__icon" size={18} />
         </button>

@@ -64,7 +64,7 @@ export const CategoryFilter = ({
           />
           <div className="wp-category-filter-mobile__drawer">
             <div className="wp-category-filter-mobile__header">
-              <h2 className="wp-category-filter-mobile__title">Filter by Category</h2>
+              <h2 className="wp-category-filter-mobile__title">Filter by category</h2>
               <button
                 onClick={onCloseMobile}
                 className="wp-category-filter-mobile__close"

@@ -418,15 +418,10 @@
 }
 
 .wp-cart-totals__table-row--discount {
-  color: #16a34a;
-}
-
-.dark .wp-cart-totals__table-row--discount {
-  color: #4ade80;
+  color: var(--wp--preset--color--success);
 }
 
 .wp-cart-totals__table-row--discount .wp-cart-totals__table-label { color: inherit; }
-.wp-cart-totals__table-row--discount .wp-cart-totals__table-value { color: inherit; }
 
 .wp-cart-totals__table-row--total {
   padding-top: var(--wp--preset--spacing--40);

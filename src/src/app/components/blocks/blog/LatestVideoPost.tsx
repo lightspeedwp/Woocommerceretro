@@ -29,7 +29,7 @@ export const LatestVideoPost = () => {
         <div className="retro-latest-video__image-wrap">
           <img
             src={video.featuredImage}
-            alt=""
+            alt={video.title}
             className="retro-latest-video__image"
             loading="lazy"
           />

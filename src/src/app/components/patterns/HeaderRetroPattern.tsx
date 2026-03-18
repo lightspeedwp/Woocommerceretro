@@ -17,8 +17,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router';
 import {
-  Search, Heart, ShoppingCart, Sun, Moon, X, User, ChevronDown
-} from 'lucide-react';
+  MagnifyingGlass, Heart, ShoppingCart, Sun, Moon, X, User, CaretDown
+} from '../../utils/phosphor-compat';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useCart } from '../../contexts/CartContext';
 import { allMenus } from '../../data/megaMenuData';
@@ -135,7 +135,7 @@ export const HeaderRetroPattern = () => {
                 onKeyDown={(e) => handleTriggerKeyDown(e, menu.id)}
               >
                 {menu.label}
-                <ChevronDown size={12} className="retro-nav__caret" />
+                <CaretDown size={12} className="retro-nav__caret" />
               </Link>
               <DesktopMegaPanel menu={menu} />
             </div>
@@ -151,7 +151,7 @@ export const HeaderRetroPattern = () => {
         <div className="retro-actions">
           {isSearchOpen ? (
             <div className="retro-search-pill">
-              <Search size={16} strokeWidth={2.5} className="retro-search-pill__icon" />
+              <MagnifyingGlass size={16} strokeWidth={2.5} className="retro-search-pill__icon" />
               <input
                 type="text"
                 placeholder="SEARCH..."
@@ -169,11 +169,12 @@ export const HeaderRetroPattern = () => {
             </div>
           ) : (
             <button
+              id="search"
               className="retro-action-btn"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search"
             >
-              <Search size={22} strokeWidth={2.5} />
+              <MagnifyingGlass size={22} strokeWidth={2.5} />
             </button>
           )}
 

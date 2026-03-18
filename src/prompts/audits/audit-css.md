@@ -18,6 +18,8 @@ Audit CSS architecture, file health, import chains, and naming conventions.
 - `/src/styles/` — directory listing of all CSS source files
 - `/guidelines/development/css-optimization-guidelines.md`
 - `/guidelines/development/css-optimization-quick-reference.md`
+- `/guidelines/development/bem-methodology.md` — BEM naming rules
+- `/guidelines/Guidelines.md` Section 2.1 (No Tailwind)
 
 ## Checks
 
@@ -35,6 +37,17 @@ Audit CSS architecture, file health, import chains, and naming conventions.
 
 Write report to `/reports/audits/YYYY-MM-DD_css-audit.md` with `Status: Unprocessed`.  
 Do NOT create task lists.
+
+---
+
+**Trigger:** `audit css`
+
+## Guidelines Referenced
+
+- `/guidelines/development/css-optimization-guidelines.md`
+- `/guidelines/development/css-optimization-quick-reference.md`
+- `/guidelines/development/bem-methodology.md`
+- `/guidelines/Guidelines.md` Section 2.1
 
 ---
 

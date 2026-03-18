@@ -23,8 +23,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Fire, ArrowRight, Lightning } from '../../utils/phosphor-compat';
-import { HeaderRetro } from '../parts/HeaderRetro';
-import { FooterRetro } from '../parts/FooterRetro';
 import { HeroRetro } from '../patterns/HeroRetro';
 import { ProductCard } from '../blocks/product/ProductCard';
 import { products } from '../../data/products';
@@ -38,25 +36,23 @@ export const PageDealsRetro = () => {
 
   return (
     <>
-      <HeaderRetro />
+      {/* Flash Sale Banner */}
+      <div className="retro-flash-banner" role="status" aria-live="polite">
+        <Fire size={18} weight="fill" className="retro-flash-icon" aria-hidden="true" />
+        <span className="retro-flash-text retro-font-display">
+          FLASH SALE - UP TO 50% OFF - ENDS SUNDAY!
+        </span>
+        <Fire size={18} weight="fill" className="retro-flash-icon" aria-hidden="true" />
+      </div>
+
+      {/* Hero Section */}
+      <HeroRetro
+        titleLines={['EXCLUSIVE', 'DEALS!']}
+        highlight="LIMITED TIME"
+        description="Shop our best offers and limited-time discounts on premium stationery, homewares, and lifestyle essentials."
+      />
+
       <main className="retro-main">
-        
-        {/* Flash Sale Banner */}
-        <div className="retro-flash-banner" role="status" aria-live="polite">
-          <Fire size={18} weight="fill" className="retro-flash-icon" aria-hidden="true" />
-          <span className="retro-flash-text retro-font-display">
-            FLASH SALE - UP TO 50% OFF - ENDS SUNDAY!
-          </span>
-          <Fire size={18} weight="fill" className="retro-flash-icon" aria-hidden="true" />
-        </div>
-
-        {/* Hero Section */}
-        <HeroRetro
-          titleLines={['EXCLUSIVE', 'DEALS!']}
-          highlight="LIMITED TIME"
-          description="Shop our best offers and limited-time discounts on premium stationery, homewares, and lifestyle essentials."
-        />
-
         {/* Deals Grid Section */}
         <section id="deals-grid" className="retro-section retro-section--deals" aria-label="Current deals">
           <div className="retro-container">
@@ -118,9 +114,7 @@ export const PageDealsRetro = () => {
             </div>
           </div>
         </section>
-
       </main>
-      <FooterRetro />
     </>
   );
 };

@@ -15,7 +15,7 @@ export const ShopHero = () => {
   const handleViewOffers = () => { navigate('/promotions'); };
 
   return (
-    <div className="wp-shop-hero wp-min-h-full-page wp-min-h-80vh">
+    <div className="wp-shop-hero">
       <Container variant="site" className="wp-shop-hero__inner">
         <div className="wp-shop-hero__content">
           <Typography variant="h1" className="wp-shop-hero__title" stretchy>

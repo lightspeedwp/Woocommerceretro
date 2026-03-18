@@ -31,10 +31,14 @@ Audit responsive design patterns across templates, patterns, and key blocks.
 8. **Font scaling** — fixed font sizes that should use fluid `clamp()` or relative units
 9. **Horizontal scroll** — elements causing horizontal scrollbar on mobile
 
-## Output
+## Guidelines Referenced
 
-Write report to `/reports/audits/YYYY-MM-DD_responsive-audit.md` with `Status: Unprocessed`.  
-Do NOT create task lists.
+- `/guidelines/responsive/breakpoints.md`
+- `/guidelines/responsive/navigation.md`
+- `/guidelines/mobile/buttons.md`
+- `/guidelines/mobile/spacing.md`
+- `/guidelines/mobile/typography.md`
+- `/guidelines/mobile/images.md`
 
 ---
 
