@@ -1,6 +1,6 @@
 # Prompt Trigger System
 
-**Version:** 5.0
+**Version:** 7.0
 **Updated:** March 18, 2026
 **Purpose:** Trigger words for workflow automation with audit/report/task separation
 **Status:** Active
@@ -38,8 +38,28 @@ audit && process reports → both in sequence
 | `process reports` | `/prompts/process-reports.md` | Convert unprocessed reports to domain task lists | 15-30 min |
 | `fix routes` | `/prompts/routes.md` | Validate and repair all routes, links, and nav data | 20-40 min |
 | `update triggers` | `/prompts/update-triggers.md` | Sync trigger registry with prompt files on disk | 15-30 min |
+| `archive prompts` | `/prompts/archive-prompts.md` | Review, generalize, and archive prompt files | 20-40 min |
+| `archive reports` | `/prompts/archive-reports.md` | Archive resolved/superseded reports | 15-30 min |
+| `archive tasks` | `/prompts/archive-tasks.md` | Archive 100% complete task lists | 15-30 min |
+| `archive guidelines` | `/prompts/archive-guidelines.md` | Archive superseded/orphaned guidelines | 15-30 min |
+| `update routes` | `/prompts/update-routes.md` | Validate and repair all routes, links, and nav data | 20-40 min |
+| `update sitemap` | `/prompts/update-sitemap.md` | Sync sitemap component with current routes | 10-20 min |
+| `update prompts` | `/prompts/update-prompts.md` | Refresh prompt frontmatter and guideline references | 15-30 min |
+| `update reports` | `/prompts/update-reports.md` | Update report statuses against current codebase | 10-20 min |
+| `update tasks` | `/prompts/update-tasks.md` | Recalculate task completion, update master registry | 10-20 min |
+| `update status` | `/prompts/update-status.md` | Update project metrics across all status displays | 10-15 min |
+| `update data` | `/prompts/update-data.md` | Migrate hardcoded content to data files | 30-60 min |
+| `expand prompts` | `/prompts/expand-prompts.md` | Analyse session history, recommend new/updated triggers | 20-40 min |
+| `expand guidelines` | `/prompts/expand-guidelines.md` | Analyse session history, recommend guideline additions | 20-40 min |
+| `expand functionality` | `/prompts/expand-functionality.md` | Identify missing WooCommerce features and user flows | 20-40 min |
+| `expand pages` | `/prompts/expand-pages.md` | Identify missing pages for a complete store | 15-30 min |
+| `expand templates` | `/prompts/expand-templates.md` | Identify missing WordPress FSE template equivalents | 15-30 min |
+| `expand patterns` | `/prompts/expand-patterns.md` | Identify missing reusable section patterns | 15-30 min |
+| `new pages` | `/prompts/new-pages.md` | Scaffold and build a new page template | 20-40 min |
+| `new templates` | `/prompts/new-templates.md` | Scaffold and build a new WordPress FSE template | 20-40 min |
+| `new patterns` | `/prompts/new-patterns.md` | Scaffold and build a new reusable section pattern | 15-30 min |
 
-**Aliases:** `clean` = `cleanup`, `next` = `continue`, `routes` = `fix routes`
+**Aliases:** `clean` = `cleanup`, `next` = `continue`, `routes` = `fix routes` = `update routes`
 
 ### 1b. Code Quality Triggers
 
@@ -57,7 +77,7 @@ audit && process reports → both in sequence
 
 | Trigger | Prompt File | Report Output | Domain |
 |---------|-------------|---------------|--------|
-| `audit` | Orchestrator -- runs all below | All 16 reports | All |
+| `audit` | Orchestrator -- runs all below | All 15 reports | All |
 | `audit routes` | `/prompts/audits/audit-routes.md` | `/reports/audits/YYYY-MM-DD_routes-audit.md` | Routes |
 | `audit sitemap` | `/prompts/audits/audit-sitemap.md` | `/reports/audits/YYYY-MM-DD_sitemap-audit.md` | Sitemap |
 | `audit tokens` | `/prompts/audits/audit-tokens.md` | `/reports/audits/YYYY-MM-DD_tokens-audit.md` | Tokens |
@@ -79,12 +99,15 @@ audit && process reports → both in sequence
 | Trigger | Prompt File | Report Output | Domain |
 |---------|-------------|---------------|--------|
 | `audit retro` | `/prompts/redesign/retro-shop-audit-v2/PROMPT_RETRO_AUDIT_ORCHESTRATOR.md` | 9 reports in `/reports/retro-shop-audit-v2/` | Retro Redesign |
+| `archive` | `/prompts/archive.md` | No reports — runs 4 archive sub-triggers | Maintenance |
+| `update` | `/prompts/update.md` | No reports — runs 9 update sub-triggers | Maintenance |
+| `expand` | `/prompts/expand.md` | No reports — runs 6 expand sub-triggers + recommends builds | Expansion |
 
 ### 1e. Combo Triggers
 
 | Trigger | Expands To | Purpose |
 |---------|-----------|---------|
-| `audit && process reports` | Run all 9 audits, then convert reports to task lists | Full audit-to-task pipeline |
+| `audit && process reports` | Run all 15 audits, then convert reports to task lists | Full audit-to-task pipeline |
 | `cleanup && continue` | Run cleanup, then execute next task | Maintenance + progress |
 
 ---
@@ -606,7 +629,7 @@ Never delete:
 
 ```
 AUDITING:
-  audit                    → Run all 16 audits (reports only)
+  audit                    → Run all 15 sub-audits (reports only)
   audit css                → CSS architecture audit (report only)
   audit a11y               → Accessibility audit (report only)
   audit tokens             → Design token audit (report only)
@@ -640,15 +663,41 @@ WORKFLOW:
   cleanup guidelines       → Merge/delete outdated guidelines
   fix routes               → Validate and repair all routes, links, and nav data
   update triggers          → Sync trigger registry with prompt files on disk
+  archive prompts          → Review, generalize, and archive prompt files
+  archive reports          → Archive resolved/superseded reports
+  archive tasks            → Archive 100% complete task lists
+  archive guidelines       → Archive superseded/orphaned guidelines
+  update routes            → Validate and repair all routes, links, and nav data
+  update sitemap           → Sync sitemap component with current routes
+  update prompts           → Refresh prompt frontmatter and guideline references
+  update reports           → Update report statuses against current codebase
+  update tasks             → Recalculate task completion, update master registry
+  update status            → Update project metrics across all status displays
+  update data              → Migrate hardcoded content to data files
+  expand prompts           → Analyse session history, recommend new/updated triggers
+  expand guidelines        → Analyse session history, recommend guideline additions
+  expand functionality     → Identify missing WooCommerce features and user flows
+  expand pages             → Identify missing pages for a complete store
+  expand templates         → Identify missing WordPress FSE template equivalents
+  expand patterns          → Identify missing reusable section patterns
+  new pages                → Scaffold and build a new page template
+  new templates            → Scaffold and build a new WordPress FSE template
+  new patterns             → Scaffold and build a new reusable section pattern
 
 CODE QUALITY:
   apply bem                → Full BEM compliance audit + fix (direct code fixes)
+
+ORCHESTRATORS:
+  archive                  → Run all 4 archive sub-triggers
+  update                   → Run all 9 update sub-triggers
+  expand                   → Run all 6 expand sub-triggers + recommends builds
+  audit retro              → Run 9 retro redesign audits
 ```
 
 ---
 
-**Version:** 5.0
+**Version:** 7.0
 **Last Updated:** March 18, 2026
-**Total Triggers:** 19 (10 workflow + 1 code quality + 16 audit + 1 orchestrator + 2 combo = 30 including sub-audits)
+**Total Triggers:** 54 (30 workflow + 1 code quality + 16 audit + 4 orchestrator + 2 combo + 1 alias)
 **Lines:** ~550
 **Supersedes:** `/guidelines/PROMPT_TRIGGER_SYSTEM.md` v3.1

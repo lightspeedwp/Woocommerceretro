@@ -11,7 +11,7 @@
 
 ## Objective
 
-Run all 16 audit sub-triggers in sequence. Each audit reads the codebase, compares against guidelines, and writes a report. **No task lists are created during auditing** — use `process reports` afterward.
+Run all 15 audit sub-triggers in sequence. Each audit reads the codebase, compares against guidelines, and writes a report. **No task lists are created during auditing** — use `process reports` afterward.
 
 ---
 
@@ -71,7 +71,7 @@ When the user says `audit` with no qualifier, run ALL sub-audits in this order:
 
 ### Phase 7: Summary (2 min)
 
-- List all 15 reports created with file paths (icons audit produces 2 reports from 2 sub-audits)
+- List all 15 reports created with file paths
 - Show total findings by priority (P0/P1/P2/P3)
 - Suggest `process reports` as next step
 

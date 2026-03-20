@@ -693,7 +693,9 @@ Before considering cleanup complete, verify:
 ## Suggested Follow-Up Triggers
 
 After cleanup, consider running:
+- `archive` — run all 4 archive sub-triggers to clear completed/superseded items
 - `continue` — execute the next open task
+- `update` — full synchronisation pass across all project domains
 - `audit` — full audit if significant changes were made
 - `audit icons` — if icon import issues were noticed during cleanup
 - `audit header` — if header-related files were modified

@@ -171,6 +171,26 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 | `process reports` | Convert audit reports to task lists | 15-30 min |
 | `fix routes` | Validate and repair all routes, links, and nav data | 20-40 min |
 | `update triggers` | Sync trigger registry with prompt files on disk | 15-30 min |
+| `archive prompts` | Review, generalize, and archive prompt files | 20-40 min |
+| `archive reports` | Archive resolved/superseded reports | 15-30 min |
+| `archive tasks` | Archive 100% complete task lists | 15-30 min |
+| `archive guidelines` | Archive superseded/orphaned guidelines | 15-30 min |
+| `update routes` | Validate and repair all routes, links, and nav data | 20-40 min |
+| `update sitemap` | Sync sitemap component with current routes | 10-20 min |
+| `update prompts` | Refresh prompt frontmatter and guideline references | 15-30 min |
+| `update reports` | Update report statuses against current codebase | 10-20 min |
+| `update tasks` | Recalculate task completion, update master registry | 10-20 min |
+| `update status` | Update project metrics across all status displays | 10-15 min |
+| `update data` | Migrate hardcoded content to data files | 30-60 min |
+| `expand prompts` | Analyse session history, recommend new/updated triggers | 20-40 min |
+| `expand guidelines` | Analyse session history, recommend guideline additions | 20-40 min |
+| `expand functionality` | Identify missing WooCommerce features and user flows | 20-40 min |
+| `expand pages` | Identify missing pages for a complete store | 15-30 min |
+| `expand templates` | Identify missing WordPress FSE template equivalents | 15-30 min |
+| `expand patterns` | Identify missing reusable section patterns | 15-30 min |
+| `new pages` | Scaffold and build a new page template | 20-40 min |
+| `new templates` | Scaffold and build a new WordPress FSE template | 20-40 min |
+| `new patterns` | Scaffold and build a new reusable section pattern | 15-30 min |
 
 ### Code Quality Triggers
 
@@ -178,11 +198,20 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 |---------|---------|----------|
 | `apply bem` | Full BEM compliance audit + fix workflow | 30-60 min |
 
+### Orchestrator Triggers
+
+| Trigger | Purpose | Duration |
+|---------|---------|----------|
+| `archive` | Run all 4 archive sub-triggers | 45-90 min |
+| `update` | Run all 9 update sub-triggers | 60-120 min |
+| `expand` | Run all 6 expand sub-triggers, recommend builds | 90-180 min |
+| `audit retro` | Run 9 retro redesign audits | 60-90 min |
+
 ### Audit Triggers
 
 | Trigger | Purpose | Duration |
 |---------|---------|----------|
-| `audit` | Run ALL 16 audits (reports only) | 60-90 min |
+| `audit` | Run all 15 sub-audits (reports only) | 60-90 min |
 | `audit routes` | Route/template alignment | 5-10 min |
 | `audit sitemap` | Sitemap vs routes sync | 5-10 min |
 | `audit tokens` | Design token consistency | 5-10 min |
@@ -192,6 +221,7 @@ See: `/guidelines/Core-Repository-Guidelines.md` for complete rules.
 | `audit responsive` | Responsive patterns | 5-10 min |
 | `audit styles` | Hardcoded style detection | 5-10 min |
 | `audit guidelines` | Guideline compliance | 5-10 min |
+| `audit images` | Image health and accessibility | 5-10 min |
 | `audit phosphor` | Phosphor migration completeness | 10-20 min |
 | `audit icons` | Icon import runtime health | 10-15 min |
 | `audit header` | Header template part architecture | 10-15 min |
